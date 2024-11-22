@@ -1,0 +1,19 @@
+---
+home:
+  title: TODO
+  description: TODO
+
+figure:
+  fig.ext: svg
+
+template:
+  bootstrap: 5
+  light-switch: true
+  opengraph:
+    image:
+      src: man/figures/logo.svg
+      alt: "SAPID"
+    twitter:
+      creator: "@adafede"
+
+url: https://adafede.github.io/sapid

@@ -1,0 +1,11 @@
+citHeader("To cite sapid in publications use:")
+
+bibentry(
+  bibtype  = "Manual",
+  title    = "sapid: TODO",
+  author   = c(
+    person(given = "Adriano", family = "Rutz", email = "adafede@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0443-9902"))
+    ),
+  year     = "2024",
+  note     = "R package, version 0.0.9000",
+)

@@ -14,7 +14,6 @@ export_chasselas <-
            product_name = PRODUCTNAME,
            cluster = CLUSTER,
            date = DATE) {
-    setwd(dir = here())
     plotly::orca(
       p = chasselas_boxplots,
       file = file.path(path, paste0(

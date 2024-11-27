@@ -11,7 +11,8 @@ clean_terms <-
   function(dictionary = dictionary_path, x) {
     dictionary <- dictionary |>
       tidytable::fread() |>
-      tidytable::mutate(n = stringi::stri_count(original)) |>
+      tidytable::mutate(n = original |>
+        stringi::stri_length()) |>
       tidytable::arrange(tidytable::desc(n))
 
     string <- toupper(x)
@@ -45,7 +46,8 @@ clean_terms_2 <-
   function(dictionary = dictionary_path, x) {
     dictionary <- dictionary |>
       tidytable::fread() |>
-      tidytable::mutate(n = stringi::stri_count(original)) |>
+      tidytable::mutate(n = original |>
+        stringi::stri_length()) |>
       tidytable::arrange(tidytable::desc(n))
 
     string <- toupper(x)

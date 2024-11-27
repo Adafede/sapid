@@ -121,7 +121,7 @@ dataset_autophased <- dataset_corrected |>
 
 ppm_res <- AlpsNMR::nmr_ppm_resolution(dataset_autophased)[[1]]
 
-cat(
+message(
   "The ppm resolution is: ",
   format(ppm_res, digits = 2),
   " ppm. \n",

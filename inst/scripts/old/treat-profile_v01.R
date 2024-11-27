@@ -1,14 +1,11 @@
-cat("This script is made to treat FLASH PROFILE results. \n")
+message("This script is made to treat FLASH PROFILE results. \n")
 
 start <- Sys.time()
 
-cat("Loading ... \n")
-cat("... packages (and installing them if needed) \n")
+message("Loading ... \n")
+message("... packages (and installing them if needed) \n")
 if (!require(conflicted)) {
   install.packages("conflicted")
-}
-if (!require(here)) {
-  install.packages("here")
 }
 if (!require(readxl)) {
   install.packages("readxl")
@@ -23,14 +20,14 @@ if (!require(SensoMineR)) {
   install.packages("SensoMineR")
 }
 
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
 
-cat("... functions \n")
-source(file = here("r/clean_terms.R"))
+message("... functions \n")
+source(file = "r/clean_terms.R")
 
-cat("... files ... \n")
+message("... files ... \n")
 xls <- list.files(
   path = file.path(
     data_inhouse_sensory_path,
@@ -41,7 +38,7 @@ xls <- list.files(
   full.names = TRUE
 )
 
-cat("... profile \n")
+message("... profile \n")
 cluster_profile <- read_xlsx(
   path = xls,
   sheet = 4

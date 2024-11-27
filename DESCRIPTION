@@ -14,11 +14,15 @@ BugReports: https://github.com/adafede/sapid/issues
 Depends:
     R (>= 4.3.0)
 Imports:
+    AlpsNMR,
     furrr (>= 0.3.1),
+    plotly,
+    stringi,
     tidytable (>= 0.11.1)
 Suggests: 
     BiocManager,
     knitr,
+    NMRphasing,
     R.utils,
     spelling,
     testthat
@@ -28,10 +32,10 @@ LazyData: true
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Collate: 
+    'sapid-package.R'
 VignetteBuilder:
     knitr
 biocViews: TODO, TODO
 X-schema.org-keywords: TODO, TODO
 Language: en-US
-Collate: 
-    'sapid-package.R'

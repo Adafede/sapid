@@ -98,7 +98,7 @@ profiles_consistent <- profiles |>
   dplyr::mutate(value = if_else(
     condition = ProductName > 63 &
       ProductName < 72,
-    true = 0.5  * value,
+    true = 0.5 * value,
     false = value
   )) |>
   dplyr::group_by(ProductName, taste) |>
@@ -161,8 +161,10 @@ test_basis <- ggplot2::ggplot(
       as.character(),
     guide = ggplot2::guide_legend(reverse = TRUE, ncol = 1)
   ) +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = .05),
-                       alpha = 0.5) +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
   ggplot2::labs(fill = "taste") +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -172,19 +174,19 @@ test_basis <- ggplot2::ggplot(
   ggplot2::xlab("sample") +
   ggplot2::ylab("absolute")
 
-test_zoom <- test_basis + 
-  ggplot2::ylim(0,10) +
-  ggplot2::facet_wrap(facets = ~ taste)
+test_zoom <- test_basis +
+  ggplot2::ylim(0, 10) +
+  ggplot2::facet_wrap(facets = ~taste)
 test_zoom
 
-test_zoom2 <- test_basis + 
-  ggplot2::ylim(0,500) +
-  ggplot2::facet_wrap(facets = ~ taste)
+test_zoom2 <- test_basis +
+  ggplot2::ylim(0, 500) +
+  ggplot2::facet_wrap(facets = ~taste)
 test_zoom2
 
-test_zoom <- test_basis + 
-  ggplot2::ylim(0,10) +
-  ggplot2::facet_wrap(facets = ~ taste)
+test_zoom <- test_basis +
+  ggplot2::ylim(0, 10) +
+  ggplot2::facet_wrap(facets = ~taste)
 test_zoom
 
 test_2 <- ggplot2::ggplot(
@@ -216,7 +218,7 @@ test_2 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks=c(35, 760), which=c(1, 3), scales=c(0, 1)) 
+  ggbreak::scale_y_cut(breaks = c(35, 760), which = c(1, 3), scales = c(0, 1))
 
 test_2
 
@@ -224,9 +226,9 @@ test_3 <- ggplot2::ggplot(
   profiles_consistent |>
     dplyr::distinct(ProductName, median, taste, color) |>
     dplyr::filter(taste == "MOUTHFILLING" |
-                    taste == "VOLUME" |
-                    # taste == "FATTY" |
-                    taste == "ASTRINGENT"),
+      taste == "VOLUME" |
+      # taste == "FATTY" |
+      taste == "ASTRINGENT"),
   ggplot2::aes(
     x = ProductName,
     y = median,
@@ -253,14 +255,14 @@ test_3 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks=c(20, 245), which=c(1, 3), scales=c(0, 1)) 
+  ggbreak::scale_y_cut(breaks = c(20, 245), which = c(1, 3), scales = c(0, 1))
 
 test_3
 
 test_4 <- ggplot2::ggplot(
   profiles_consistent |>
     dplyr::distinct(ProductName, median, taste, color) |>
-    dplyr::filter(taste != "BITTER") |> 
+    dplyr::filter(taste != "BITTER") |>
     dplyr::filter(taste != "MOUTHFILLING"),
   ggplot2::aes(
     x = ProductName,
@@ -288,7 +290,7 @@ test_4 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks=c(30, 360), which=c(1, 3), scales=c(0, 1))
+  ggbreak::scale_y_cut(breaks = c(30, 360), which = c(1, 3), scales = c(0, 1))
 
 test_4
 
@@ -298,9 +300,9 @@ test_5 <- ggplot2::ggplot(
     # dplyr::filter(taste == "ASTRINGENT"),
     # dplyr::filter(taste == "VOLUME"),
     # dplyr::filter(taste == "SWEET"),
-   dplyr::filter(taste == "SALTY"),
-   # dplyr::filter(taste == "WOODY"),
-   # dplyr::filter(taste == "UMAMI"),
+    dplyr::filter(taste == "SALTY"),
+  # dplyr::filter(taste == "WOODY"),
+  # dplyr::filter(taste == "UMAMI"),
   ggplot2::aes(
     x = ProductName,
     y = median,

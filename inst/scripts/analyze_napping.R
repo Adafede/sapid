@@ -1,14 +1,11 @@
-cat("This script is made to treat NAPPING results. \n")
+message("This script is made to treat NAPPING results. \n")
 
 start <- Sys.time()
 
-cat("Loading ... \n")
-cat("... packages (and installing them if needed) \n")
+message("Loading ... \n")
+message("... packages (and installing them if needed) \n")
 if (!require(conflicted)) {
   install.packages("conflicted")
-}
-if (!require(here)) {
-  install.packages("here")
 }
 if (!require(readxl)) {
   install.packages("readxl")
@@ -23,15 +20,15 @@ if (!require(SensoMineR)) {
   install.packages("SensoMineR")
 }
 
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
 
-cat("... functions \n")
-source(file = here("r/clean_terms.R"))
-source(file = here("r/y_as_na.R"))
+message("... functions \n")
+source(file = "r/clean_terms.R")
+source(file = "r/y_as_na.R")
 
-cat("... files ... \n")
+message("... files ... \n")
 xls <- list.files(
   path = file.path(
     data_inhouse_sensory_path,
@@ -42,7 +39,7 @@ xls <- list.files(
   full.names = TRUE
 )
 
-cat("... text \n")
+message("... text \n")
 file_text <- readxl::read_xlsx(
   path = xls,
   sheet = 3

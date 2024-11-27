@@ -1,9 +1,9 @@
-cat("This script is a first trial with sensorial analysis. \n")
+message("This script is a first trial with sensorial analysis. \n")
 
 start <- Sys.time()
 
-cat("Loading ... \n")
-cat("... packages (and installing them if needed) \n")
+message("Loading ... \n")
+message("... packages (and installing them if needed) \n")
 if (!require(conflicted)) {
   install.packages("conflicted")
 }
@@ -12,9 +12,6 @@ if (!require(dendextend)) {
 }
 if (!require(ggplot2)) {
   install.packages("ggplot2")
-}
-if (!require(here)) {
-  install.packages("here")
 }
 if (!require(plotly)) {
   install.packages("plotly")
@@ -29,19 +26,19 @@ if (!require(tidyverse)) {
   install.packages("tidyverse")
 }
 
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
 
-cat("... functions \n")
+message("... functions \n")
 
-cat("... files ... \n")
+message("... files ... \n")
 
-cat("... Pipol \n") ## Where does this funny names come from?
+message("... Pipol \n") ## Where does this funny names come from?
 Pipol <- read_xlsx(
-  path = here(file.path(
+  path = file.path(
     data_inhouse_sensory_20210329_files_excel_path
-  )),
+  ),
   sheet = 4
 ) %>%
   mutate(concentration = factor(format(
@@ -53,9 +50,9 @@ Pipol <- read_xlsx(
   ))) %>%
   data.frame()
 
-cat("... AFC Pipol \n")
+message("... AFC Pipol \n")
 AFC_Pipol <- read_xlsx(
-  path = here(data_inhouse_sensory_20210329_files_excel_path),
+  path = data_inhouse_sensory_20210329_files_excel_path,
   sheet = 3
 ) %>%
   mutate(concentration = format(round(
@@ -64,14 +61,14 @@ AFC_Pipol <- read_xlsx(
   ), nsmall = 2)) %>%
   data.frame()
 
-cat(
+message(
   "... version with cleaned terms (manually for now), \n",
   "will probably be done automatically later on. \n"
 )
 
-cat("... AFC Pipol \n")
+message("... AFC Pipol \n")
 AFC_Pipol_cleaned <- read_xlsx(
-  path = here(data_inhouse_sensory_20210329_files_excel_path),
+  path = data_inhouse_sensory_20210329_files_excel_path,
   sheet = 6
 ) %>%
   mutate(concentration = format(round(
@@ -81,17 +78,17 @@ AFC_Pipol_cleaned <- read_xlsx(
   data.frame()
 
 cleaned <- read_xlsx(
-  path = here(data_inhouse_sensory_20210329_files_excel_path),
+  path = data_inhouse_sensory_20210329_files_excel_path,
   sheet = 5
 ) %>%
   data.frame()
 
-cat("starting manipulation ... \n")
-cat("... joining data together \n")
+message("starting manipulation ... \n")
+message("... joining data together \n")
 joined <- left_join(Pipol, AFC_Pipol) %>%
   mutate(correct_percent = correct.responses / Total.responses)
 
-cat("... counting terms \n")
+message("... counting terms \n")
 counted <- cleaned %>%
   pivot_longer(cols = colnames(.)[grepl(
     pattern = "attribut",
@@ -129,31 +126,32 @@ counted <- cleaned %>%
 
 groups <- nrow(counted %>% distinct(concentration))
 
-cat("visualizing ... \n")
-cat("... intensity and p-value per concentration \n")
+message("visualizing ... \n")
+message("... intensity and p-value per concentration \n")
 boxes <-
   ggplot2::ggplot(
     data = joined,
-    mapping = ggplot2::aes(x = concentration, y = intensity)
+    mapping = ggplot2::aes(x = concentration, y = intensity, color = as.numeric(concentration))
   ) +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
     alpha = 0.5
   ) +
+  ggplot2::scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
   ggplot2::xlab(label = "Concentration [mg/L]") +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::theme(
-    legend.position = "right",
+    legend.position = "none",
     panel.grid = element_blank(),
     text = ggplot2::element_text(face = "bold")
   )
 boxes
 
 scurve <-
-  ggplot2::ggplot(joined, ggplot2::aes(as.numeric(concentration), correct_percent)) +
+  ggplot2::ggplot(joined, ggplot2::aes(x = as.numeric(concentration), y = correct_percent, color = as.numeric(concentration))) +
   ggplot2::geom_point() +
   ggplot2::scale_x_log10() +
   ggbump::geom_sigmoid(data = joined, ggplot2::aes(
@@ -162,6 +160,7 @@ scurve <-
     y = min(correct_percent),
     yend = max(correct_percent)
   )) +
+  ggplot2::scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
   ggplot2::xlab(label = "Concentration [mg/L]") +
   ggplot2::ylab("Correct answers [%]") +
   ggplot2::ylim(c(0, 1)) +
@@ -177,10 +176,13 @@ scurve <-
     linetype = "dashed",
     color = "grey"
   ) +
-  ggplot2::theme(text = ggplot2::element_text(face = "bold"))
+  ggplot2::theme(
+    legend.position = "none",
+    text = ggplot2::element_text(face = "bold")
+  )
 scurve
 
-cat("... terms per concentration \n")
+message("... terms per concentration \n")
 dots <- ggplot(counted) +
   geom_segment(aes(
     x = value,
@@ -208,7 +210,7 @@ dots <- ggplot(counted) +
 
 dots
 
-cat("... terms multiplied by mean intensity per concentration \n")
+message("... terms multiplied by mean intensity per concentration \n")
 my7greens <- c(
   "#edf8e9",
   "#c7e9c0",
@@ -228,7 +230,7 @@ dots_corrected <- ggplot(counted) +
   geom_point(
     aes(
       x = value,
-      # color = concentration,
+      color = concentration,
       y = m
     ),
     size = 3
@@ -265,10 +267,9 @@ ggpubr::ggarrange(
   heights = c(1, 2)
 )
 
-cat("exporting figures \n")
+message("exporting figures \n")
 
 ## needs orca to be installed
-# setwd(dir = here())
 # orca(
 #   p = boxes,
 #   file = figures_boxes_raw_extract_path,
@@ -284,17 +285,17 @@ cat("exporting figures \n")
 # )
 #
 # ggsave(
-#   filename = here(figures_lollipop_raw_extract_path),
+#   filename = figures_lollipop_raw_extract_path,
 #   plot = dots,
 #   limitsize = FALSE
 # )
 #
 # ggsave(
-#   filename = here(figures_lollipop_corrected_raw_extract_path),
+#   filename = figures_lollipop_corrected_raw_extract_path,
 #   plot = dots_corrected,
 #   limitsize = FALSE
 # )
 
 end <- Sys.time()
 
-cat("Script finished in", format(end - start), "\n")
+message("Script finished in ", format(end - start), "\n")

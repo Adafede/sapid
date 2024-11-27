@@ -2,9 +2,3 @@
 
 export(clean_terms)
 export(clean_terms_2)
-export(export_chasselas)
-export(fitToNmr)
-export(treat_chasselas)
-export(violin_chasselas)
-export(violin_deltas_chasselas)
-export(y_as_na)

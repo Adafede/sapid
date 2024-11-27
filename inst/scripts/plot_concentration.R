@@ -1,6 +1,10 @@
-message("This script is a first trial with sensorial analysis. \n")
-
 start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program TODO.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
 
 message("Loading ... \n")
 message("... packages (and installing them if needed) \n")
@@ -269,21 +273,6 @@ ggpubr::ggarrange(
 
 message("exporting figures \n")
 
-## needs orca to be installed
-# orca(
-#   p = boxes,
-#   file = figures_boxes_raw_extract_path,
-#   width = 800,
-#   height = 450
-# )
-#
-# orca(
-#   p = bars,
-#   file = figures_bars_raw_extract_path,
-#   width = 800,
-#   height = 450
-# )
-#
 # ggsave(
 #   filename = figures_lollipop_raw_extract_path,
 #   plot = dots,
@@ -298,4 +287,4 @@ message("exporting figures \n")
 
 end <- Sys.time()
 
-message("Script finished in ", format(end - start), "\n")
+message("Script finished in ", format(end - start))

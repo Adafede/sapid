@@ -4,7 +4,7 @@
 \alias{clean_terms_2}
 \title{Clean terms 2}
 \usage{
-clean_terms_2(dictionary = dictionary_path, x)
+clean_terms_2(dictionary, x)
 }
 \arguments{
 \item{dictionary}{Dictionary}

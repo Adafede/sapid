@@ -1,111 +1,85 @@
-cat("This script is made to treat FLASH PROFILE results. \n")
+message("This script is made to treat FLASH PROFILE results. \n")
 
 start <- Sys.time()
 
-cat("Loading ... \n")
-cat("... packages (and installing them if needed) \n")
-if (!require(conflicted)) {
-  install.packages("conflicted")
-}
-if (!require(data.table)) {
-  install.packages("data.table")
-}
-if (!require(here)) {
-  install.packages("here")
-}
-if (!require(microshades)) {
-  install.packages("microshades")
-}
-if (!require(plotly)) {
-  install.packages("plotly")
-}
+message("Loading ... \n")
+message("... packages (and installing them if needed) \n")
 if (!require(tidyverse)) {
   install.packages("tidyverse")
 }
 
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
-source(file = here("r/colors.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
+source(file = "r/colors.R")
 
-cat("... functions \n")
+message("... functions \n")
 
-cat("... files ... \n")
-files <- list.files(
-  path = analysis_path_04_output,
-  pattern = "^profile.*.tsv",
-  full.names = TRUE
-)
+message("... files ... \n")
+files <- analysis_path_04_output |>
+  list.files(pattern = "^profile.*.tsv", full.names = TRUE)
 
-cat("... profile \n")
-filesList <- lapply(files, read_tsv)
+message("... profile \n")
+filesList <- files |>
+  furrr::future_map(tidytable::fread)
 
-profiles <-
-  data.table::rbindlist(l = filesList, fill = TRUE, idcol = FALSE)
+profiles <- filesList |>
+  data.table::rbindlist(fill = TRUE, idcol = FALSE)
 
 n_panelists <- profiles |>
-  dplyr::distinct(ProductName, J) |>
-  dplyr::group_by(ProductName) |>
-  dplyr::count()
+  tidytable::distinct(ProductName, J) |>
+  tidytable::group_by(ProductName) |>
+  tidytable::count()
 
 presence <- profiles |>
-  dplyr::distinct(ProductName, CJ) |>
-  dplyr::group_by(CJ) |>
-  dplyr::count(sort = TRUE)
+  tidytable::distinct(ProductName, CJ) |>
+  tidytable::group_by(CJ) |>
+  tidytable::count(sort = TRUE)
 
-consistent_descriptors <- profiles %>%
-  dplyr::distinct(J, taste = newName) %>%
-  dplyr::group_by(taste) %>%
-  dplyr::count() %>%
-  dplyr::filter(n >= MIN_PANELISTS) %>%
-  dplyr::filter(!is.na(taste))
-
-nice_colors <- rev(
-  list(
-    microshades_palette("micro_cvd_green", lightest = FALSE),
-    microshades_palette("micro_cvd_orange", lightest = FALSE),
-    microshades_palette("micro_cvd_blue", lightest = FALSE),
-    microshades_palette("micro_cvd_turquoise", lightest = FALSE),
-    microshades_palette("micro_cvd_purple", lightest = FALSE),
-    microshades_palette("micro_cvd_gray", lightest = FALSE),
-    microshades_palette("micro_brown", lightest = FALSE),
-    microshades_palette("micro_purple", lightest = FALSE),
-    microshades_palette("micro_orange", lightest = FALSE)
-  )
-)
+consistent_descriptors <- profiles |>
+  tidytable::distinct(J, taste = newName) |>
+  tidytable::group_by(taste) |>
+  tidytable::count() |>
+  tidytable::filter(n >= MIN_PANELISTS) |>
+  tidytable::filter(!is.na(taste))
 
 profiles_consistent <- profiles |>
-  dplyr::left_join(n_panelists) |>
-  dplyr::select(ProductName, J, descriptors, name, value, newName, n) |>
-  dplyr::rename(taste = newName) |>
-  dplyr::filter(taste %in% consistent_descriptors$taste) |>
-  # dplyr::filter(value > 0) |>
-  dplyr::group_by(ProductName, taste) |>
+  tidytable::left_join(n_panelists) |>
+  tidytable::select(ProductName, J, descriptors, name, value, newName, n) |>
+  tidytable::rename(taste = newName) |>
+  tidytable::filter(taste %in% consistent_descriptors$taste) |>
+  # tidytable::filter(value > 0) |>
+  tidytable::group_by(ProductName, taste) |>
   ## problem due to FIZZ export
-  dplyr::mutate(median = median(value[value <= 10])) |>
-  dplyr::ungroup() |>
-  dplyr::mutate(value = if_else(
+  tidytable::mutate(median = median(value[value <= 10])) |>
+  tidytable::ungroup() |>
+  tidytable::mutate(value = tidytable::if_else(
     condition = value > 10,
     true = median,
     false = value
   )) |>
-  dplyr::mutate(value = if_else(
-    condition = ProductName > 31 &
-      ProductName < 40,
-    true = 50 * value,
-    false = value
-  )) |>
-  dplyr::mutate(value = if_else(
-    condition = ProductName > 63 &
-      ProductName < 72,
-    true = 0.5 * value,
-    false = value
-  )) |>
-  dplyr::group_by(ProductName, taste) |>
-  dplyr::mutate(median = median(value)) |>
+  tidytable::mutate(
+    value = tidytable::if_else(
+      condition = ProductName > 31 &
+        ProductName < 40,
+      true = 50 * value,
+      false = value
+    )
+  ) |>
+  tidytable::mutate(
+    value = tidytable::if_else(
+      condition = ProductName > 63 &
+        ProductName < 72,
+      true = 0.5 * value,
+      false = value
+    )
+  ) |>
+  tidytable::group_by(ProductName, taste) |>
+  tidytable::mutate(median = value |>
+    median()) |>
   ## problem due to FIZZ export
-  # dplyr::mutate(
-  #   value = dplyr::if_else(
+  # tidytable::mutate(
+  #   value = tidytable::if_else(
   #     condition = as.numeric(ProductName) >= min_diluted_fraction &
   #       as.numeric(ProductName) <= max_diluted_fraction,
   #     true = dilution_factor * value / n,
@@ -113,18 +87,19 @@ profiles_consistent <- profiles |>
   #   )
   # ) |>
   ## diluted
-  dplyr::select(-descriptors, -name, -n) |>
-  dplyr::group_by(taste) |>
-  dplyr::mutate(sum_taste = sum(value)) |>
-  dplyr::group_by(desc(sum_taste)) |>
-  dplyr::mutate(group = dplyr::cur_group_id()) |>
-  dplyr::group_by(ProductName) |>
-  dplyr::mutate(sum_name = sum(value)) |>
-  dplyr::rowwise() |>
-  dplyr::mutate(
-    color = paired[[group]],
-    relative = value / sum_name
-  )
+  tidytable::select(-descriptors, -name, -n) |>
+  tidytable::group_by(taste) |>
+  tidytable::mutate(sum_taste = value |>
+    sum()) |>
+  tidytable::arrange(tidytable::desc(sum_taste)) |>
+  tidytable::group_by(sum_taste) |>
+  tidytable::mutate(group = tidytable::cur_group_id()) |>
+  tidytable::group_by(ProductName) |>
+  tidytable::mutate(sum_name = value |>
+    sum()) |>
+  tidytable::ungroup() |>
+  tidytable::mutate_rowwise(color = paired[[group]], relative = value / sum_name) |>
+  tidytable::ungroup()
 
 profiles_consistent$taste <-
   forcats::fct_reorder(
@@ -191,7 +166,7 @@ test_zoom
 
 test_2 <- ggplot2::ggplot(
   profiles_consistent |>
-    dplyr::distinct(ProductName, median, taste, color),
+    tidytable::distinct(ProductName, median, taste, color),
   ggplot2::aes(
     x = ProductName,
     y = median,
@@ -218,14 +193,18 @@ test_2 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks = c(35, 760), which = c(1, 3), scales = c(0, 1))
+  ggbreak::scale_y_cut(
+    breaks = c(35, 760),
+    which = c(1, 3),
+    scales = c(0, 1)
+  )
 
 test_2
 
 test_3 <- ggplot2::ggplot(
   profiles_consistent |>
-    dplyr::distinct(ProductName, median, taste, color) |>
-    dplyr::filter(taste == "MOUTHFILLING" |
+    tidytable::distinct(ProductName, median, taste, color) |>
+    tidytable::filter(taste == "MOUTHFILLING" |
       taste == "VOLUME" |
       # taste == "FATTY" |
       taste == "ASTRINGENT"),
@@ -255,15 +234,19 @@ test_3 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks = c(20, 245), which = c(1, 3), scales = c(0, 1))
+  ggbreak::scale_y_cut(
+    breaks = c(20, 245),
+    which = c(1, 3),
+    scales = c(0, 1)
+  )
 
 test_3
 
 test_4 <- ggplot2::ggplot(
   profiles_consistent |>
-    dplyr::distinct(ProductName, median, taste, color) |>
-    dplyr::filter(taste != "BITTER") |>
-    dplyr::filter(taste != "MOUTHFILLING"),
+    tidytable::distinct(ProductName, median, taste, color) |>
+    tidytable::filter(taste != "BITTER") |>
+    tidytable::filter(taste != "MOUTHFILLING"),
   ggplot2::aes(
     x = ProductName,
     y = median,
@@ -290,19 +273,23 @@ test_4 <- ggplot2::ggplot(
   ) +
   ggplot2::xlab("sample") +
   ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(breaks = c(30, 360), which = c(1, 3), scales = c(0, 1))
+  ggbreak::scale_y_cut(
+    breaks = c(30, 360),
+    which = c(1, 3),
+    scales = c(0, 1)
+  )
 
 test_4
 
 test_5 <- ggplot2::ggplot(
   profiles_consistent |>
-    dplyr::distinct(ProductName, median, taste, color) |>
-    # dplyr::filter(taste == "ASTRINGENT"),
-    # dplyr::filter(taste == "VOLUME"),
-    # dplyr::filter(taste == "SWEET"),
-    dplyr::filter(taste == "SALTY"),
-  # dplyr::filter(taste == "WOODY"),
-  # dplyr::filter(taste == "UMAMI"),
+    tidytable::distinct(ProductName, median, taste, color) |>
+    # tidytable::filter(taste == "ASTRINGENT"),
+    # tidytable::filter(taste == "VOLUME"),
+    # tidytable::filter(taste == "SWEET"),
+    tidytable::filter(taste == "SALTY"),
+  # tidytable::filter(taste == "WOODY"),
+  # tidytable::filter(taste == "UMAMI"),
   ggplot2::aes(
     x = ProductName,
     y = median,

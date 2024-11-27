@@ -13,7 +13,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
 <!-- badges: end -->
 
-Repository to TODO.
+A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth.
+
+⚠️ This repository is not maintained and will not be except for extreme
+interest. It has just been opened for the sake of transparency.
 
 ## Requirements
 

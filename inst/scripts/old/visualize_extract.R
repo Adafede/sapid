@@ -1,6 +1,6 @@
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
 
 library(plotly)
 library(tidyverse)

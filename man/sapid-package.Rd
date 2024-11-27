@@ -4,9 +4,9 @@
 \name{sapid-package}
 \alias{sapid}
 \alias{sapid-package}
-\title{sapid: TODO}
+\title{sapid: A Strategy to Analyze Plant Extracts Taste In Depth}
 \description{
-SAPID: TODO
+This package provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth.
 }
 \seealso{
 Useful links:

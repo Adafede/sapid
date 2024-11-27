@@ -1,9 +1,9 @@
-cat("This script performs clustering of samples based on H1 NMR data. \n")
+message("This script performs clustering of samples based on H1 NMR data. \n")
 
 start <- Sys.time()
 
-cat("Loading ... \n")
-cat("... packages (and installing them if needed) \n")
+message("Loading ... \n")
+message("... packages (and installing them if needed) \n")
 if (!require(remotes)) {
   install.packages("remotes")
 }
@@ -16,9 +16,7 @@ if (!require("conflicted")) {
 if (!require(dendextend)) {
   install.packages("dendextend")
 }
-if (!require(here)) {
-  install.packages("here")
-}
+
 if (!require(plotly)) {
   install.packages("plotly")
 }
@@ -26,21 +24,21 @@ if (!require(tidyverse)) {
   install.packages("tidyverse")
 }
 
-cat("... paths and parameters \n")
-source(file = here("paths.R"))
-source(file = here("params.R"))
+message("... paths and parameters \n")
+source(file = "paths.R")
+source(file = "params.R")
 
-cat("... functions \n")
-source(file = here(functions, "fitToNmr.R"))
+message("... functions \n")
+source(file = "fitToNmr.R")
 
-cat("Enabling parallelization \n")
+message("Enabling parallelization \n")
 future::plan(strategy = future::multisession(workers = availableCores() - 2))
 
-cat("NMR data was pre-treated with MestreNova, leading to the matrix below")
+message("NMR data was pre-treated with MestreNova, leading to the matrix below")
 
 mestreNova_sample_matrix <-
   read_delim(
-    file = here(data_inhouse_nmr_20210324_files_matrix_path),
+    file = data_inhouse_nmr_20210324_files_matrix_path,
     delim = "\t"
   ) %>%
   select(ppm = `...1`, everything(), -ncol(.)) %>%
@@ -71,12 +69,12 @@ mestreNova_sample_matrix <-
   ungroup() %>%
   data.frame()
 
-cat("manipulating to fit to NMR package format \n")
+message("manipulating to fit to NMR package format \n")
 dataset <- fitToNmr(dataFrame = mestreNova_sample_matrix)
 
 ppm_res <- AlpsNMR::nmr_ppm_resolution(dataset)[[1]]
 
-cat(
+message(
   "The ppm resolution is: ",
   format(ppm_res, digits = 2),
   " ppm. \n",
@@ -96,7 +94,7 @@ if (ENABLEDATAVIZ == TRUE) {
   plot(dataset_interpolated, chemshift_range = c(2, 7))
 }
 
-cat("Strange first column, dirty fix \n")
+message("Strange first column, dirty fix \n")
 dataset_corrected <- dataset_interpolated
 
 dataset_corrected$data_1r <-
@@ -112,7 +110,7 @@ if (ENABLEDATAVIZ == TRUE) {
   )
 }
 
-cat("Detecting peaks \n")
+message("Detecting peaks \n")
 peak_table <- AlpsNMR::nmr_detect_peaks(
   nmr_dataset = dataset_corrected,
   nDivRange_ppm = 0.1,
@@ -121,7 +119,7 @@ peak_table <- AlpsNMR::nmr_detect_peaks(
   SNR.Th = 3
 )
 
-cat("Integrating peaks \n")
+message("Integrating peaks \n")
 peak_table_integration <- AlpsNMR::nmr_integrate_peak_positions(
   samples = dataset_corrected,
   peak_pos_ppm = peak_table$ppm,
@@ -131,19 +129,19 @@ peak_table_integration <- AlpsNMR::nmr_integrate_peak_positions(
 peak_table_integration <-
   AlpsNMR::get_integration_with_metadata(peak_table_integration)
 
-cat("Keeping non-null peaks \n")
+message("Keeping non-null peaks \n")
 peak_table_integration_full <-
   peak_table_integration$peak_table[, colSums(is.na(peak_table_integration$peak_table)) != nrow(peak_table_integration$peak_table)] |>
   data.frame()
 
-cat("Quick Principal Component Analysis (PCA) \n")
+message("Quick Principal Component Analysis (PCA) \n")
 samplesPCA <-
   stats::prcomp(peak_table_integration_full[, c(2:ncol(peak_table_integration_full))],
     center = TRUE,
     scale. = TRUE
   )
 
-cat("creating scree plot \n")
+message("creating scree plot \n")
 plotly::plot_ly(
   x = seq(1:length(samplesPCA$sdev)),
   y = samplesPCA$sdev,
@@ -155,7 +153,7 @@ plotly::plot_ly(
     yaxis = list(title = "Explained variance")
   )
 
-cat("creating PCA plot \n")
+message("creating PCA plot \n")
 plotly::plot_ly(
   x = samplesPCA$x[, 1],
   y = samplesPCA$x[, 2],
@@ -168,7 +166,7 @@ plotly::plot_ly(
     yaxis = list(title = "PC 2")
   )
 
-cat("creating clustered dendrogram on full set \n")
+message("creating clustered dendrogram on full set \n")
 dend_pos_full <-
   peak_table_integration_full[1:69, c(2:ncol(peak_table_integration_full))] |>
   stats::dist(method = "canberra") |>
@@ -182,7 +180,7 @@ rownames(peak_table_integration_full) <-
 
 source("r/colors.R")
 
-cat("creating clustered dendrogram on restricted set \n")
+message("creating clustered dendrogram on restricted set \n")
 dend_pos <-
   peak_table_integration_full[5:58, c(2:ncol(peak_table_integration_full))] |>
   stats::dist(method = "canberra") |>
@@ -194,23 +192,23 @@ dend_pos <-
   dendextend::set("branches_lwd", 3) |>
   sort()
 
-cat("exporting figures \n")
+message("exporting figures \n")
 # pdf(
-#   file = here(figures_nmr_clusters_full_path),
+#   file = figures_nmr_clusters_full_path,
 #   width = 16,
 #   height = 9
 # )
 # plot(dend_pos_full)
 # dev.off()
 # pdf(
-#   file = here(figures_nmr_clusters_restricted_path),
+#   file = figures_nmr_clusters_restricted_path,
 #   width = 16,
 #   height = 9
 # )
 plot(dend_pos, horiz = TRUE)
 # dev.off()
 
-# cat("additional figure (2D NMR map) \n")
+# message("additional figure (2D NMR map) \n")
 #
 # dataset_plot <-
 #   nmr_interpolate_1D(samples = dataset,
@@ -299,12 +297,12 @@ p
 
 orca(p, file = "test.pdf")
 
-cat("exporting matrix \n")
+message("exporting matrix \n")
 write_tsv(
   x = peak_table_integration_full,
-  file = here("../03_analysis/nmr_peaks.tsv")
+  file = "../03_analysis/nmr_peaks.tsv"
 )
 
 end <- Sys.time()
 
-cat("Script finished in", format(end - start), "\n")
+message("Script finished in", format(end - start), "\n")

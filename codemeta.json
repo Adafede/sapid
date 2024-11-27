@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "sapid",
-  "description": "SAPID: TODO",
-  "name": "sapid: TODO",
+  "description": "This package provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth.",
+  "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
   "relatedLink": "https://adafede.github.io/sapid",
   "codeRepository": "https://github.com/adafede/sapid",
   "issueTracker": "https://github.com/adafede/sapid/issues",
@@ -60,15 +60,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "NMRphasing",
-      "name": "NMRphasing",
+      "identifier": "lifecycle",
+      "name": "lifecycle",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
+      "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
     {
       "@type": "SoftwareApplication",
@@ -98,6 +98,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
+      "version": ">= 3.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -128,6 +129,18 @@
     },
     "3": {
       "@type": "SoftwareApplication",
+      "identifier": "data.table",
+      "name": "data.table",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=data.table"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
       "identifier": "furrr",
       "name": "furrr",
       "version": ">= 0.3.1",
@@ -139,7 +152,43 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=furrr"
     },
-    "4": {
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggpubr",
+      "name": "ggpubr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggpubr"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "NMRphasing",
+      "name": "NMRphasing",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
+    },
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "plotly",
       "name": "plotly",
@@ -151,7 +200,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plotly"
     },
-    "5": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -163,7 +212,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "6": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",

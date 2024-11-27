@@ -1,19 +1,18 @@
-library(stringi)
-
-#' Title
+#' Clean terms
 #'
-#' @param dictionary
-#' @param x
+#' @param dictionary Dictionary
+#' @param x X
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 clean_terms <-
   function(dictionary = dictionary_path, x) {
-    dictionary <- read_tsv(file = dictionary) %>%
-      mutate(n = str_count(original)) %>%
-      arrange(desc(n))
+    dictionary <- dictionary |>
+      tidytable::fread() |>
+      tidytable::mutate(n = stringi::stri_count(original)) |>
+      tidytable::arrange(tidytable::desc(n))
 
     string <- toupper(x)
     pattern <- paste0("\\b", dictionary$original, "\\b")
@@ -22,7 +21,7 @@ clean_terms <-
       replacement <- dictionary$translated_simple
     }
 
-    replaced <- stri_replace_all_regex(
+    replaced <- stringi::stri_replace_all_regex(
       str = string,
       pattern = pattern,
       replacement = replacement,
@@ -33,20 +32,21 @@ clean_terms <-
     return(replaced)
   }
 
-#' Title
+#' Clean terms 2
 #'
-#' @param dictionary
-#' @param x
+#' @param dictionary Dictionary
+#' @param x X
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 clean_terms_2 <-
   function(dictionary = dictionary_path, x) {
-    dictionary <- read_tsv(file = dictionary) %>%
-      mutate(n = str_count(original)) %>%
-      arrange(desc(n))
+    dictionary <- dictionary |>
+      tidytable::fread() |>
+      tidytable::mutate(n = stringi::stri_count(original)) |>
+      tidytable::arrange(tidytable::desc(n))
 
     string <- toupper(x)
     pattern <- dictionary$original
@@ -55,7 +55,7 @@ clean_terms_2 <-
       replacement <- dictionary$translated_simple
     }
 
-    replaced_NA <- stri_replace_all_regex(
+    replaced_NA <- stringi::stri_replace_all_regex(
       str = string,
       pattern = pattern,
       replacement = replacement,
@@ -63,9 +63,9 @@ clean_terms_2 <-
       vectorize_all = FALSE
     )
 
-    replaced_final <- cbind(string, replaced_NA) %>%
-      data.frame() %>%
-      mutate(final = if_else(
+    replaced_final <- cbind(string, replaced_NA) |>
+      data.frame() |>
+      tidytable::mutate(final = tidytable::if_else(
         condition = !is.na(replaced_NA),
         true = replaced_NA,
         false = string

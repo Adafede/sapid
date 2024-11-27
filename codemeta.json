@@ -60,6 +60,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "NMRphasing",
+      "name": "NMRphasing",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "R.utils",
       "name": "R.utils",
       "provider": {
@@ -104,6 +116,18 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "AlpsNMR",
+      "name": "AlpsNMR",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/AlpsNMR.html"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "furrr",
       "name": "furrr",
       "version": ">= 0.3.1",
@@ -115,7 +139,31 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=furrr"
     },
-    "3": {
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "plotly",
+      "name": "plotly",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=plotly"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "stringi",
+      "name": "stringi",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringi"
+    },
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -130,7 +178,7 @@
     },
     "SystemRequirements": null
   },
-  "keywords": ["TODO", "TODO"],
+  "keywords": "TODO",
   "fileSize": "0KB",
   "citation": [
     {
@@ -149,6 +197,8 @@
       "description": "R package, version 0.0.9000"
     }
   ],
-  "contIntegration": ["https://github.com/spectra-to-knowledge/SpectraToQueries/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/spectra-to-knowledge/SpectraToQueries"],
+  "releaseNotes": "https://github.com/adafede/sapid/blob/master/NEWS.md",
+  "readme": "https://github.com/Adafede/sapid/blob/main/README.md",
+  "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/adafede/sapid"],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

@@ -28,9 +28,11 @@ source(file = here("r/colors.R"))
 cat("... functions \n")
 
 cat("... files ... \n")
-files <- list.files(path = analysis_path_04_output,
-                    pattern = "^chasselas.*.tsv",
-                    full.names = TRUE)
+files <- list.files(
+  path = analysis_path_04_output,
+  pattern = "^chasselas.*.tsv",
+  full.names = TRUE
+)
 
 cat("... profile \n")
 filesList <- lapply(files, read_tsv)
@@ -90,9 +92,9 @@ deltas_après <- deltas |>
 
 deltas_1 <- deltas_avant |>
   dplyr::filter(name == "sourness" |
-                  name == "bitterness" |
-                  name == "sweetness" |
-                  name == "saltiness")
+    name == "bitterness" |
+    name == "sweetness" |
+    name == "saltiness")
 
 deltas_2 <- deltas_avant |>
   dplyr::filter(
@@ -445,13 +447,15 @@ deltas_3 <- deltas_1 |>
   dplyr::ungroup()
 
 p <-
-  ggplot2::ggplot(deltas_3, ggplot2::aes(x = CJ,  y = value, colour = CJ)) +
+  ggplot2::ggplot(deltas_3, ggplot2::aes(x = CJ, y = value, colour = CJ)) +
   ggplot2::scale_x_discrete() +
   ggthemes::scale_color_tableau(palette = "Tableau 20") +
   ggplot2::geom_violin() +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = .05),
-                       alpha = 0.5) +
-  ggplot2::facet_wrap(facets = ~ as.character(name), nrow = 3)  +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~ as.character(name), nrow = 3) +
   ggthemes::theme_clean() +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::ylim(c(0, 10)) +

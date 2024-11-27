@@ -38,13 +38,18 @@ cat("... functions \n")
 cat("... files ... \n")
 
 cat("... Pipol \n") ## Where does this funny names come from?
-Pipol <- read_xlsx(path = here(file.path(
-  data_inhouse_sensory_20210329_files_excel_path
-)),
-sheet = 4) %>%
+Pipol <- read_xlsx(
+  path = here(file.path(
+    data_inhouse_sensory_20210329_files_excel_path
+  )),
+  sheet = 4
+) %>%
   mutate(concentration = factor(format(
-    round(x = concentration,
-          digits = 2), nsmall = 2
+    round(
+      x = concentration,
+      digits = 2
+    ),
+    nsmall = 2
   ))) %>%
   data.frame()
 
@@ -53,8 +58,10 @@ AFC_Pipol <- read_xlsx(
   path = here(data_inhouse_sensory_20210329_files_excel_path),
   sheet = 3
 ) %>%
-  mutate(concentration = format(round(x = concentration,
-                                      digits = 2), nsmall = 2)) %>%
+  mutate(concentration = format(round(
+    x = concentration,
+    digits = 2
+  ), nsmall = 2)) %>%
   data.frame()
 
 cat(
@@ -67,8 +74,10 @@ AFC_Pipol_cleaned <- read_xlsx(
   path = here(data_inhouse_sensory_20210329_files_excel_path),
   sheet = 6
 ) %>%
-  mutate(concentration = format(round(x = concentration,
-                                      digits = 2), nsmall = 2)) %>%
+  mutate(concentration = format(round(
+    x = concentration,
+    digits = 2
+  ), nsmall = 2)) %>%
   data.frame()
 
 cleaned <- read_xlsx(
@@ -84,40 +93,54 @@ joined <- left_join(Pipol, AFC_Pipol) %>%
 
 cat("... counting terms \n")
 counted <- cleaned %>%
-  pivot_longer(cols = colnames(.)[grepl(pattern = "attribut",
-                                        x = colnames(.),
-                                        fixed = TRUE)]) %>%
+  pivot_longer(cols = colnames(.)[grepl(
+    pattern = "attribut",
+    x = colnames(.),
+    fixed = TRUE
+  )]) %>%
   mutate(value = gsub(
     pattern = "_.*$",
     replacement = "",
     x = value
   )) %>%
-  group_by(concentration,
-           value) %>%
+  group_by(
+    concentration,
+    value
+  ) %>%
   add_count() %>%
   mutate(intensity = mean(intensity)) %>%
   mutate(m = n * intensity) %>%
-  distinct(concentration,
-           value,
-           n,
-           m) %>%
+  distinct(
+    concentration,
+    value,
+    n,
+    m
+  ) %>%
   dplyr::filter(!is.na(value)) %>%
   group_by(concentration) %>%
-  arrange(m,
-          n) %>%
-  mutate(value = factor(x = value,
-                        levels = value))
+  arrange(
+    m,
+    n
+  ) %>%
+  mutate(value = factor(
+    x = value,
+    levels = value
+  ))
 
 groups <- nrow(counted %>% distinct(concentration))
 
 cat("visualizing ... \n")
 cat("... intensity and p-value per concentration \n")
 boxes <-
-  ggplot2::ggplot(data = joined,
-                  mapping = ggplot2::aes(x = concentration,  y = intensity)) +
+  ggplot2::ggplot(
+    data = joined,
+    mapping = ggplot2::aes(x = concentration, y = intensity)
+  ) +
   ggplot2::geom_violin() +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = .05),
-                       alpha = 0.5) +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
   ggplot2::xlab(label = "Concentration [mg/L]") +
@@ -144,12 +167,16 @@ scurve <-
   ggplot2::ylim(c(0, 1)) +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
-  ggplot2::geom_hline(yintercept = 0.5,
-                      linetype = "dashed",
-                      color = "grey") +
-  ggplot2::geom_vline(xintercept = 0.12,
-                      linetype = "dashed",
-                      color = "grey") +
+  ggplot2::geom_hline(
+    yintercept = 0.5,
+    linetype = "dashed",
+    color = "grey"
+  ) +
+  ggplot2::geom_vline(
+    xintercept = 0.12,
+    linetype = "dashed",
+    color = "grey"
+  ) +
   ggplot2::theme(text = ggplot2::element_text(face = "bold"))
 scurve
 
@@ -182,13 +209,15 @@ dots <- ggplot(counted) +
 dots
 
 cat("... terms multiplied by mean intensity per concentration \n")
-my7greens <- c("#edf8e9",
-               "#c7e9c0",
-               "#a1d99b",
-               "#74c476",
-               "#41ab5d",
-               "#238b45",
-               "#005a32")
+my7greens <- c(
+  "#edf8e9",
+  "#c7e9c0",
+  "#a1d99b",
+  "#74c476",
+  "#41ab5d",
+  "#238b45",
+  "#005a32"
+)
 dots_corrected <- ggplot(counted) +
   geom_segment(aes(
     x = value,
@@ -196,17 +225,22 @@ dots_corrected <- ggplot(counted) +
     y = 0,
     yend = m
   ), color = "grey") +
-  geom_point(aes(x = value,
-                 # color = concentration,
-                 y = m),
-             size = 3) +
+  geom_point(
+    aes(
+      x = value,
+      # color = concentration,
+      y = m
+    ),
+    size = 3
+  ) +
   scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
   coord_flip() +
   xlab("") +
   ylab("Value") +
   facet_wrap(
     facets = ~ paste(format(
-      round(x = concentration, digits = 2), nsmall = 2
+      round(x = concentration, digits = 2),
+      nsmall = 2
     ), "[mg/L]"),
     ncol = 1,
     scales = "free_y"

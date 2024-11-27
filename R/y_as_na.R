@@ -1,12 +1,12 @@
-#' Title
+#' Y as NA
 #'
-#' @param x
-#' @param y
+#' @param x X
+#' @param y Y
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 y_as_na <- function(x, y) {
   if ("factor" %in% class(x)) {
     x <- as.character(x)

@@ -34,19 +34,23 @@ cat("... functions \n")
 source(file = here(functions, "fitToNmr.R"))
 
 cat("Enabling parallelization \n")
-plan(strategy = multisession(workers = availableCores() - 2))
+future::plan(strategy = future::multisession(workers = availableCores() - 2))
 
 cat("NMR data was pre-treated with MestreNova, leading to the matrix below")
 
 mestreNova_sample_matrix <-
-  read_delim(file = here(data_inhouse_nmr_20210324_files_matrix_path),
-             delim = "\t") %>%
+  read_delim(
+    file = here(data_inhouse_nmr_20210324_files_matrix_path),
+    delim = "\t"
+  ) %>%
   select(ppm = `...1`, everything(), -ncol(.)) %>%
   group_by(ppm) %>%
   pivot_longer(2:ncol(.)) %>%
-  select(time = ppm,
-         id = name,
-         intensity = value) %>%
+  select(
+    time = ppm,
+    id = name,
+    intensity = value
+  ) %>%
   dplyr::filter(time >= 0 & time <= 14) %>%
   mutate(id = gsub(
     pattern = "#[0-9]{1}$",
@@ -70,7 +74,7 @@ mestreNova_sample_matrix <-
 cat("manipulating to fit to NMR package format \n")
 dataset <- fitToNmr(dataFrame = mestreNova_sample_matrix)
 
-ppm_res <- nmr_ppm_resolution(dataset)[[1]]
+ppm_res <- AlpsNMR::nmr_ppm_resolution(dataset)[[1]]
 
 cat(
   "The ppm resolution is: ",
@@ -79,10 +83,14 @@ cat(
   "Using it for interplation"
 )
 dataset_interpolated <-
-  nmr_interpolate_1D(samples = dataset,
-                     axis = c(min = 0,
-                              max = 14,
-                              by = ppm_res))
+  AlpsNMR::nmr_interpolate_1D(
+    samples = dataset,
+    axis = c(
+      min = 0,
+      max = 14,
+      by = ppm_res
+    )
+  )
 
 if (ENABLEDATAVIZ == TRUE) {
   plot(dataset_interpolated, chemshift_range = c(2, 7))
@@ -99,12 +107,13 @@ dataset_corrected$axis <-
 
 if (ENABLEDATAVIZ == TRUE) {
   plot(dataset_corrected,
-       chemshift_range = c(2, 8),
-       interactive = TRUE)
+    chemshift_range = c(2, 8),
+    interactive = TRUE
+  )
 }
 
 cat("Detecting peaks \n")
-peak_table <- nmr_detect_peaks(
+peak_table <- AlpsNMR::nmr_detect_peaks(
   nmr_dataset = dataset_corrected,
   nDivRange_ppm = 0.1,
   scales = seq(1, 16, 2),
@@ -113,55 +122,59 @@ peak_table <- nmr_detect_peaks(
 )
 
 cat("Integrating peaks \n")
-peak_table_integration <- nmr_integrate_peak_positions(
+peak_table_integration <- AlpsNMR::nmr_integrate_peak_positions(
   samples = dataset_corrected,
   peak_pos_ppm = peak_table$ppm,
   peak_width_ppm = 0.006
 )
 
 peak_table_integration <-
-  get_integration_with_metadata(peak_table_integration)
+  AlpsNMR::get_integration_with_metadata(peak_table_integration)
 
 cat("Keeping non-null peaks \n")
 peak_table_integration_full <-
-  peak_table_integration[, colSums(is.na(peak_table_integration)) != nrow(peak_table_integration)]
+  peak_table_integration$peak_table[, colSums(is.na(peak_table_integration$peak_table)) != nrow(peak_table_integration$peak_table)] |>
+  data.frame()
 
 cat("Quick Principal Component Analysis (PCA) \n")
 samplesPCA <-
-  prcomp(peak_table_integration_full[, c(2:ncol(peak_table_integration_full))],
-         center = TRUE,
-         scale. = TRUE)
+  stats::prcomp(peak_table_integration_full[, c(2:ncol(peak_table_integration_full))],
+    center = TRUE,
+    scale. = TRUE
+  )
 
 cat("creating scree plot \n")
-plot_ly(
+plotly::plot_ly(
   x = seq(1:length(samplesPCA$sdev)),
   y = samplesPCA$sdev,
   type = "bar",
   text = round(samplesPCA$sdev, 1),
-) %>%
+) |>
   plotly::layout(
     xaxis = list(title = "Component number"),
     yaxis = list(title = "Explained variance")
   )
 
 cat("creating PCA plot \n")
-plot_ly(
+plotly::plot_ly(
   x = samplesPCA$x[, 1],
   y = samplesPCA$x[, 2],
   mode = "text",
-  text = peak_table_integration_full$NMRExperiment,
-  color = peak_table_integration_full$NMRExperiment
-) %>%
-  plotly::layout(xaxis = list(title = "PC 1"),
-                 yaxis = list(title = "PC 2"))
+  text = rownames(peak_table_integration_full),
+  color = rownames(peak_table_integration_full)
+) |>
+  plotly::layout(
+    xaxis = list(title = "PC 1"),
+    yaxis = list(title = "PC 2")
+  )
 
 cat("creating clustered dendrogram on full set \n")
 dend_pos_full <-
-  peak_table_integration_full[1:69, c(2:ncol(peak_table_integration_full))] %>%
-  dist(method = "canberra") %>%
-  hclust() %>%
-  as.dendrogram() %>%
-  set("branches_k_color", k = 6) %>%
+  peak_table_integration_full[1:69, c(2:ncol(peak_table_integration_full))] |>
+  stats::dist(method = "canberra") |>
+  stats::hclust() |>
+  stats::as.dendrogram() |>
+  dendextend::set("branches_k_color", k = 6) |>
   sort()
 
 rownames(peak_table_integration_full) <-
@@ -171,17 +184,14 @@ source("r/colors.R")
 
 cat("creating clustered dendrogram on restricted set \n")
 dend_pos <-
-  peak_table_integration_full[5:58, c(2:ncol(peak_table_integration_full))] %>%
-  dist(method = "canberra") %>%
-  hclust(method = "ward.D2") %>%
-  as.dendrogram() %>%
-  set("branches_k_color",
-      k = 7,
-      value = paired) %>%
-  set("labels_colors", k = 7,
-      value = paired) %>%
-  set("labels_cex", 1.75) %>%
-  set("branches_lwd", 3) %>%
+  peak_table_integration_full[5:58, c(2:ncol(peak_table_integration_full))] |>
+  stats::dist(method = "canberra") |>
+  stats::hclust(method = "ward.D2") |>
+  stats::as.dendrogram() |>
+  dendextend::set("branches_k_color", k = 7, value = paired) |>
+  dendextend::set("labels_colors", k = 7, value = paired) |>
+  dendextend::set("labels_cex", 1.75) |>
+  dendextend::set("branches_lwd", 3) |>
   sort()
 
 cat("exporting figures \n")
@@ -258,15 +268,17 @@ plot(dend_pos, horiz = TRUE)
 
 p <- plot_ly(
   df_long,
-  x = ~ ppm,
-  y = ~ fraction,
-  z = ~ value,
+  x = ~ppm,
+  y = ~fraction,
+  z = ~value,
   type = "contour",
   colorscale = "Viridis",
   autocontour = FALSE,
-  contours = list(start = 0, # This is your "noise" of ELSD, all signals below won't be considered
-                  end = 200000, # Height of the highest point of your scale, all points above will be considered the same
-                  size = 20000),
+  contours = list(
+    start = 0, # This is your "noise" of ELSD, all signals below won't be considered
+    end = 200000, # Height of the highest point of your scale, all points above will be considered the same
+    size = 20000
+  ),
   line = list(width = 0.1)
 ) %>%
   plotly::layout(
@@ -288,8 +300,10 @@ p
 orca(p, file = "test.pdf")
 
 cat("exporting matrix \n")
-write_tsv(x = peak_table_integration_full,
-          file = here("../03_analysis/nmr_peaks.tsv"))
+write_tsv(
+  x = peak_table_integration_full,
+  file = here("../03_analysis/nmr_peaks.tsv")
+)
 
 end <- Sys.time()
 

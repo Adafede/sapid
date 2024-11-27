@@ -1,14 +1,12 @@
-require(plotly)
-
-#' Title
+#' Violin chasselas
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 violin_chasselas <-
   function() {
-    figure <- plot_ly(
+    figure <- plotly::plot_ly(
       data = chasselas_treated[[1]],
       x = ~name,
       y = ~value,

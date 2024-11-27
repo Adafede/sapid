@@ -1,11 +1,11 @@
-#' Title
+#' Fit to NMR
 #'
-#' @param dataFrame
+#' @param dataFrame Data frame
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 fitToNmr <- function(dataFrame) {
   samplesList <-
     split(dataFrame, with(dataFrame, interaction(id)), drop = TRUE)
@@ -39,6 +39,7 @@ fitToNmr <- function(dataFrame) {
   }
 
   data_fields_1D <- list(data_1r)
+  names(data_fields_1D) <- "data_1r"
 
   axis <- list()
   for (i in samplesLength) {
@@ -67,9 +68,7 @@ fitToNmr <- function(dataFrame) {
   }
 
   my_1D_data <-
-    new_nmr_dataset(metadata_1D, data_fields_1D, axis_1D)
-
-  names(my_1D_data)[2] <- "data_1r"
+    AlpsNMR::new_nmr_dataset(metadata = metadata_1D, data_fields = data_fields_1D, axis = axis_1D)
 
   return(my_1D_data)
 }

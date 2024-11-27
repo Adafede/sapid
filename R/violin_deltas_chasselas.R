@@ -1,11 +1,9 @@
-require(plotly)
-
-#' Title
+#' Violin deltas chasselas
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
+#' @examples NULL
 violin_deltas_chasselas <-
   function() {
     figure <- plotly::plot_ly(

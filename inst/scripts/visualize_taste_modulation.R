@@ -28,9 +28,11 @@ source(file = here("r/colors.R"))
 cat("... functions \n")
 
 cat("... files ... \n")
-files <- list.files(path = analysis_path_04_output,
-                    pattern = "^deltas.*.tsv",
-                    full.names = TRUE)
+files <- list.files(
+  path = analysis_path_04_output,
+  pattern = "^deltas.*.tsv",
+  full.names = TRUE
+)
 
 cat("... profile \n")
 filesList <- lapply(files, read_tsv)
@@ -84,9 +86,9 @@ deltas <- rbindlist(l = filesList, fill = TRUE, idcol = FALSE) |>
 
 deltas_1 <- deltas |>
   dplyr::filter(name == "sourness" |
-                  name == "bitterness" |
-                  name == "sweetness" |
-                  name == "saltiness")
+    name == "bitterness" |
+    name == "sweetness" |
+    name == "saltiness")
 
 deltas_2 <- deltas |>
   dplyr::filter(
@@ -186,18 +188,18 @@ fig_1 <- deltas_1 %>%
   # ) |>
   # add_segments(
   #   x = "sourness",
-#   xend = "mouthwatering",
-#   y = -1,
-#   yend = ~ -1,
-#   line = list(dash = "dash"),
-#   color = I("black"),
-#   showlegend = FALSE
-# ) |>
-plotly::layout(
-  yaxis = list(title = "delta", zeroline = F),
-  xaxis = list(title = "taste"),
-  violinmode = "group"
-)
+  #   xend = "mouthwatering",
+  #   y = -1,
+  #   yend = ~ -1,
+  #   line = list(dash = "dash"),
+  #   color = I("black"),
+  #   showlegend = FALSE
+  # ) |>
+  plotly::layout(
+    yaxis = list(title = "delta", zeroline = F),
+    xaxis = list(title = "taste"),
+    violinmode = "group"
+  )
 
 fig_2 <- deltas_2 %>%
   plot_ly(type = "violin") |>
@@ -282,24 +284,23 @@ fig_2 <- deltas_2 %>%
   # ) |>
   # add_segments(
   #   x = "sourness",
-#   xend = "mouthwatering",
-#   y = -1,
-#   yend = ~ -1,
-#   line = list(dash = "dash"),
-#   color = I("black"),
-#   showlegend = FALSE
-# ) |>
-plotly::layout(
-  yaxis = list(title = "delta", zeroline = F),
-  xaxis = list(title = "taste"),
-  violinmode = "group"
-)
+  #   xend = "mouthwatering",
+  #   y = -1,
+  #   yend = ~ -1,
+  #   line = list(dash = "dash"),
+  #   color = I("black"),
+  #   showlegend = FALSE
+  # ) |>
+  plotly::layout(
+    yaxis = list(title = "delta", zeroline = F),
+    xaxis = list(title = "taste"),
+    violinmode = "group"
+  )
 
 deltas_3 <- deltas_1 |>
   dplyr::bind_rows(deltas_2) |>
   dplyr::rowwise() |>
-  dplyr::mutate(group = switch(
-    as.character(Date),
+  dplyr::mutate(group = switch(as.character(Date),
     "2021-06-07" = "Fractions 17-21",
     "2021-04-19" = "Fractions 22-31",
     "2021-05-17" = "Fractions 32-39",
@@ -310,49 +311,51 @@ deltas_3 <- deltas_1 |>
   )) |>
   dplyr::ungroup()
 
-p_values_wilcox <- deltas_3 |> 
-  tidytable::group_by(name, group) |> 
+p_values_wilcox <- deltas_3 |>
+  tidytable::group_by(name, group) |>
   tidytable::summarize(p_value_wilcox = wilcox.test(delta, mu = 0)$p.value)
 
-p_values_sign <- deltas_3 |> 
-  tidytable::group_by(name, group) |> 
+p_values_sign <- deltas_3 |>
+  tidytable::group_by(name, group) |>
   tidytable::summarize(
     p_value_sign = BSDA::SIGN.test(delta, md = 0)$p.value
   )
 
-p_values_wilcox <- p_values_wilcox |> 
+p_values_wilcox <- p_values_wilcox |>
   tidytable::mutate(stars_wilcox = tidytable::case_when(
     p_value_wilcox < 0.001 ~ "***",
-    p_value_wilcox < 0.01  ~ "**",
-    p_value_wilcox < 0.05  ~ "*",
-    TRUE            ~ ""
+    p_value_wilcox < 0.01 ~ "**",
+    p_value_wilcox < 0.05 ~ "*",
+    TRUE ~ ""
   ))
 
 # Now, map significance levels to stars
-p_values_sign <- p_values_sign |> 
+p_values_sign <- p_values_sign |>
   tidytable::mutate(stars = tidytable::case_when(
     p_value_sign < 0.001 ~ "***",
-    p_value_sign < 0.01  ~ "**",
-    p_value_sign < 0.05  ~ "*",
-    TRUE            ~ ""
+    p_value_sign < 0.01 ~ "**",
+    p_value_sign < 0.05 ~ "*",
+    TRUE ~ ""
   ))
 
-deltas_4 <- deltas_3 |> 
-  # tidytable::left_join(p_values_wilcox) |> 
+deltas_4 <- deltas_3 |>
+  # tidytable::left_join(p_values_wilcox) |>
   tidytable::left_join(p_values_sign)
 
 p_1 <-
-  ggplot2::ggplot(deltas_4, ggplot2::aes(x = name,  y = delta, colour = name)) +
+  ggplot2::ggplot(deltas_4, ggplot2::aes(x = name, y = delta, colour = name)) +
   ggthemes::scale_color_tableau(palette = "Tableau 10") +
   ggplot2::geom_violin() +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = .05),
-                       alpha = 0.5) +
-  ggplot2::facet_wrap(facets = ~ group, scales = "free")  +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~group, scales = "free") +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
   ggplot2::ylab(label = "Intensity difference") +
   ggplot2::labs(colour = "Taste") +
-  ggplot2::ylim(-8,8) +
+  ggplot2::ylim(-8, 8) +
   ggplot2::theme(
     legend.position = "right",
     title = element_text(face = "bold"),
@@ -364,22 +367,25 @@ p_1 <-
   # ggplot2::geom_text(aes(x = name, y = 5, label = stars_wilcox),
   #                    color = "red", size = 8, vjust = -0.5) +
   ggplot2::geom_text(aes(x = name, y = 5, label = stars),
-                     color = "black", size = 8, vjust = -0.5) +
+    color = "black", size = 8, vjust = -0.5
+  ) +
   ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
 p_1
 
 # Plot with stars added for significance
-p_2 <- ggplot2::ggplot(deltas_4, ggplot2::aes(x = group,  y = delta, colour = group)) +
+p_2 <- ggplot2::ggplot(deltas_4, ggplot2::aes(x = group, y = delta, colour = group)) +
   ggthemes::scale_color_tableau(palette = "Tableau 10") +
   ggplot2::geom_violin() +
-  ggplot2::geom_jitter(position = ggplot2::position_jitter(width = .05),
-                       alpha = 0.5) +
-  ggplot2::facet_wrap(facets = ~ name, scales = "free")  +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~name, scales = "free") +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
   ggplot2::ylab(label = "Intensity difference") +
   ggplot2::labs(colour = "Group") +
-  ggplot2::ylim(-8,8) +
+  ggplot2::ylim(-8, 8) +
   ggplot2::theme(
     legend.position = "right",
     title = element_text(face = "bold"),
@@ -391,10 +397,10 @@ p_2 <- ggplot2::ggplot(deltas_4, ggplot2::aes(x = group,  y = delta, colour = gr
   # ggplot2::geom_text(aes(x = group, y = 5, label = stars_wilcox),
   #                    color = "red", size = 8, vjust = -0.5) +
   ggplot2::geom_text(aes(x = group, y = 5, label = stars),
-                     color = "black", size = 8, vjust = -0.5) +
+    color = "black", size = 8, vjust = -0.5
+  ) +
   ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
 
 p_2
 
-ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO",align = "hv")
-
+ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv")

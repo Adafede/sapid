@@ -1,37 +1,73 @@
 #' Clean terms
 #'
-#' @param dictionary Dictionary
-#' @param x X
+#' Replace terms in a given string using a dictionary, with intelligent matching
+#' and case-insensitive handling.
 #'
-#' @return NULL
-#' @export
+#' @param dictionary Path to the dictionary file or a data frame containing
+#'   replacement terms
+#' @param x Character string to be cleaned
+#' @param mode Replacement mode: 'word' for word boundary matching,
+#'   'substring' for partial matching
+#' @param fallback Logical, whether to fall back to original string if
+#'   no replacements occur
 #'
-#' @examples NULL
-clean_terms <-
-  function(dictionary = dictionary_path, x) {
-    dictionary <- dictionary |>
-      tidytable::fread() |>
-      tidytable::mutate(n = original |>
-        stringi::stri_length()) |>
-      tidytable::arrange(tidytable::desc(n))
+#' @return Character string with terms replaced
+#'
+#' @examples
+#' \dontrun{
+#' clean_terms(
+#'   dictionary = "path/to/dictionary.csv",
+#'   x = "Some text with specific terms"
+#' )
+#' }
+#'
+clean_terms <- function(dictionary,
+                        x,
+                        mode = "word",
+                        fallback = FALSE) {
+  # Prepare dictionary
+  prepared_dict <- dictionary |>
+    tidytable::fread() |>
+    tidytable::mutate(n = original |>
+      stringi::stri_length()) |>
+    tidytable::arrange(tidytable::desc(n))
 
-    string <- toupper(x)
-    pattern <- paste0("\\b", dictionary$original, "\\b")
-    replacement <- dictionary$translated
-    if (!is.null(dictionary$translated_simple)) {
-      replacement <- dictionary$translated_simple
-    }
-
-    replaced <- stringi::stri_replace_all_regex(
-      str = string,
-      pattern = pattern,
-      replacement = replacement,
-      case_insensitive = FALSE,
-      vectorize_all = FALSE
-    )
-
-    return(replaced)
+  replacement <- if ("translated_simple" %in% names(prepared_dict)) {
+    prepared_dict$translated_simple
+  } else {
+    prepared_dict$translated
   }
+
+  # Prepare pattern based on mode
+  pattern <- if (mode == "word") {
+    paste0("\\b", prepared_dict$original, "\\b")
+  } else {
+    prepared_dict$original
+  }
+
+  # Convert to uppercase for consistent matching
+  processed_string <- toupper(x)
+
+  # Perform replacements
+  replaced <- stringi::stri_replace_all_regex(
+    str = processed_string,
+    pattern = pattern,
+    replacement = replacement,
+    case_insensitive = FALSE,
+    vectorize_all = FALSE
+  )
+
+  # Handle fallback if requested
+  if (fallback) {
+    replaced <- tidytable::if_else(
+      condition = !is.na(replaced),
+      true = replaced,
+      false = processed_string
+    )
+  }
+
+  return(replaced)
+}
 
 #' Clean terms 2
 #'
@@ -39,39 +75,13 @@ clean_terms <-
 #' @param x X
 #'
 #' @return NULL
-#' @export
 #'
 #' @examples NULL
-clean_terms_2 <-
-  function(dictionary = dictionary_path, x) {
-    dictionary <- dictionary |>
-      tidytable::fread() |>
-      tidytable::mutate(n = original |>
-        stringi::stri_length()) |>
-      tidytable::arrange(tidytable::desc(n))
-
-    string <- toupper(x)
-    pattern <- dictionary$original
-    replacement <- dictionary$translated
-    if (!is.null(dictionary$translated_simple)) {
-      replacement <- dictionary$translated_simple
-    }
-
-    replaced_NA <- stringi::stri_replace_all_regex(
-      str = string,
-      pattern = pattern,
-      replacement = replacement,
-      case_insensitive = FALSE,
-      vectorize_all = FALSE
-    )
-
-    replaced_final <- cbind(string, replaced_NA) |>
-      data.frame() |>
-      tidytable::mutate(final = tidytable::if_else(
-        condition = !is.na(replaced_NA),
-        true = replaced_NA,
-        false = string
-      ))
-
-    return(replaced_final$final)
-  }
+clean_terms_2 <- function(dictionary, x) {
+  clean_terms(
+    dictionary = dictionary,
+    x = x,
+    mode = "substring",
+    fallback = TRUE
+  )
+}

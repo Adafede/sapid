@@ -4,16 +4,33 @@
 \alias{clean_terms}
 \title{Clean terms}
 \usage{
-clean_terms(dictionary = dictionary_path, x)
+clean_terms(dictionary, x, mode = "word", fallback = FALSE)
 }
 \arguments{
-\item{dictionary}{Dictionary}
+\item{dictionary}{Path to the dictionary file or a data frame containing
+replacement terms}
 
-\item{x}{X}
+\item{x}{Character string to be cleaned}
+
+\item{mode}{Replacement mode: 'word' for word boundary matching,
+'substring' for partial matching}
+
+\item{fallback}{Logical, whether to fall back to original string if
+no replacements occur}
+}
+\value{
+Character string with terms replaced
 }
 \description{
-Clean terms
+Replace terms in a given string using a dictionary, with intelligent matching
+and case-insensitive handling.
 }
 \examples{
-NULL
+\dontrun{
+clean_terms(
+  dictionary = "path/to/dictionary.csv",
+  x = "Some text with specific terms"
+)
+}
+
 }

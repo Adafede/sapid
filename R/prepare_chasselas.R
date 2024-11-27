@@ -1,19 +1,20 @@
-#' Treat chasselas
+#' Prepare chasselas
 #'
 #' @param path Path
-#' @param product_name Product name
 #' @param cluster Cluster
 #' @param date Date
+#' @param product_name Product name
+#' @param path_output Path output
 #'
 #' @return NULL
-#' @export
 #'
 #' @examples NULL
-treat_chasselas <-
+prepare_chasselas <-
   function(path = data_inhouse_sensory_path,
+           path_output = analysis_path_04_output,
+           date = DATE,
            product_name = PRODUCTNAME,
-           cluster = CLUSTER,
-           date = DATE) {
+           cluster = CLUSTER) {
     xls <- list.files(
       path =
         file.path(path, paste0(date, "_cluster", cluster), "03_files"),
@@ -58,6 +59,19 @@ treat_chasselas <-
       distinct(Date, CJ, name, delta)
 
     results <- list(chasselas_pivoted, chasselas_deltas)
+
+    tidytable::fwrite(
+      x = results[[1]],
+      file = file.path(path_output, paste0(
+        "chasselas_", "cluster_", cluster, ".tsv"
+      )),
+      sep = "\t"
+    )
+    tidytable::fwrite(
+      x = results[[2]],
+      file = file.path(path_output, paste0("deltas_", "cluster_", cluster, ".tsv")),
+      sep = "\t"
+    )
 
     return(results)
   }

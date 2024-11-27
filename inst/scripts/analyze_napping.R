@@ -1,6 +1,10 @@
-message("This script is made to treat NAPPING results. \n")
-
 start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program analyzes napping data.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
 
 message("Loading ... \n")
 message("... packages (and installing them if needed) \n")
@@ -26,7 +30,6 @@ source(file = "params.R")
 
 message("... functions \n")
 source(file = "r/clean_terms.R")
-source(file = "r/y_as_na.R")
 
 message("... files ... \n")
 xls <- list.files(
@@ -73,7 +76,11 @@ clean_text_napping <- function(df) {
     dplyr::mutate(newValue = clean_terms(value_5,
       dictionary = dictionary_specific_path
     )) |>
-    dplyr::mutate(intensity = y_as_na(intensity, "")) |>
+    dplyr::mutate(intensity = if_else(
+      condition = intensity == "",
+      true = NA_character_,
+      false = intensity
+    )) |>
     dplyr::mutate(taste = if_else(
       condition = !is.na(intensity),
       true = paste(newValue,
@@ -266,3 +273,7 @@ res <- SensoMineR::indscal(
 FactoMineR::prefpls(donnee = cbind.data.frame(res$points, df_coord), choix = "ind")
 
 FactoMineR::prefpls(donnee = cbind.data.frame(res$points, df_words_cleaned), choix = "var")
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

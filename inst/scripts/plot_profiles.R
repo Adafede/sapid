@@ -1,6 +1,10 @@
-message("This script is made to treat FLASH PROFILE results. \n")
-
 start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program TODO.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
 
 message("Loading ... \n")
 message("... packages (and installing them if needed) \n")
@@ -318,3 +322,7 @@ test_5 <- ggplot2::ggplot(
   ggplot2::ylab("Median score")
 
 test_5
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

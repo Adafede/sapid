@@ -1,6 +1,10 @@
-message("This script is made to treat all chasselas together. \n")
-
 start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program TODO.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
 
 message("Loading ... \n")
 message("... packages (and installing them if needed) \n")
@@ -204,3 +208,7 @@ p_2 <- ggplot2::ggplot(deltas_4, ggplot2::aes(x = group, y = delta, colour = gro
 p_2
 
 ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv")
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

@@ -17,11 +17,14 @@ Depends:
 Imports:
     AlpsNMR,
     data.table,
+    FactoMineR,
     furrr (>= 0.3.1),
     ggplot2,
     ggpubr,
     NMRphasing,
     plotly,
+    readxl,
+    SensoMineR,
     stringi,
     tidytable (>= 0.11.1)
 Suggests: 
@@ -41,12 +44,7 @@ Collate:
     'sapid-package.R'
     'clean_terms.R'
     'colors.R'
-    'export_chasselas.R'
-    'fitToNmr.R'
-    'treat_chasselas.R'
-    'violin_chasselas.R'
-    'violin_deltas_chasselas.R'
-    'y_as_na.R'
+    'prepare_chasselas.R'
 VignetteBuilder:
     knitr
 biocViews: TODO, TODO

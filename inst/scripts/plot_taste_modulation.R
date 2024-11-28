@@ -11,9 +11,7 @@ message("... packages (and installing them if needed) \n")
 if (!require(conflicted)) {
   install.packages("conflicted")
 }
-if (!require(data.table)) {
-  install.packages("data.table")
-}
+
 if (!require(tidyverse)) {
   install.packages("tidyverse")
 }

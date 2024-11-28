@@ -70,7 +70,7 @@ df_coord <- readxl::read_xlsx(
 
 rownames(df_coord) <- df_coord$Produit
 
-df_coord <- df_coord %>%
+df_coord <- df_coord |>
   dplyr::select(-Produit)
 
 if (SESSION == 8) {

@@ -28,7 +28,7 @@ filesList <- files |>
   furrr::future_map(tidytable::fread)
 
 profiles <- filesList |>
-  data.table::rbindlist(fill = TRUE, idcol = FALSE)
+  tidyfst::rbindlist(fill = TRUE, idcol = FALSE)
 
 n_panelists <- profiles |>
   tidytable::distinct(ProductName, J) |>

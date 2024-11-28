@@ -12,9 +12,9 @@ temp_ms_path <- "~/switchdrive/SAPERE/03_analysis/20210701_10043.csv"
 
 temp_nmr_path <- "~/switchdrive/SAPERE/03_analysis/nmr_peaks.tsv"
 
-ms_table <- data.table::fread(file = temp_ms_path)
+ms_table <- tidytable::fread(file = temp_ms_path)
 
-nmr_table <- data.table::fread(file = temp_nmr_path) |>
+nmr_table <- tidytable::fread(file = temp_nmr_path) |>
   data.frame()
 
 rownames(nmr_table) <-
@@ -82,7 +82,7 @@ samplesPCA_nmr <-
 
 message("creating scree plot \n")
 plot_ly(
-  x = seq(1:length(samplesPCA_nmr$sdev)),
+  x = seq(seq_along(samplesPCA_nmr$sdev)),
   y = samplesPCA_nmr$sdev,
   type = "bar",
   text = round(samplesPCA_nmr$sdev, 1),
@@ -107,7 +107,7 @@ plot_ly(
 
 message("creating scree plot \n")
 plotly::plot_ly(
-  x = seq(1:length(samplesPCA_ms$sdev)),
+  x = seq(seq_along(samplesPCA_ms$sdev)),
   y = samplesPCA_ms$sdev,
   type = "bar",
   text = round(samplesPCA_ms$sdev, 1)

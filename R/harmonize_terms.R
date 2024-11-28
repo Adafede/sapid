@@ -15,16 +15,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' clean_terms(
+#' harmonize_terms(
 #'   dictionary = "path/to/dictionary.csv",
 #'   x = "Some text with specific terms"
 #' )
 #' }
 #'
-clean_terms <- function(dictionary,
-                        x,
-                        mode = "word",
-                        fallback = FALSE) {
+harmonize_terms <- function(dictionary,
+                            x,
+                            mode = "word",
+                            fallback = FALSE) {
   # Prepare dictionary
   prepared_dict <- dictionary |>
     tidytable::fread() |>
@@ -67,21 +67,4 @@ clean_terms <- function(dictionary,
   }
 
   return(replaced)
-}
-
-#' Clean terms 2
-#'
-#' @param dictionary Dictionary
-#' @param x X
-#'
-#' @return NULL
-#'
-#' @examples NULL
-clean_terms_2 <- function(dictionary, x) {
-  clean_terms(
-    dictionary = dictionary,
-    x = x,
-    mode = "substring",
-    fallback = TRUE
-  )
 }

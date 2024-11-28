@@ -10,9 +10,6 @@ if (!require(conflicted)) {
 if (!require(readxl)) {
   install.packages("readxl")
 }
-if (!require(splitstackshape)) {
-  install.packages("splitstackshape")
-}
 if (!require(tidyverse)) {
   install.packages("tidyverse")
 }

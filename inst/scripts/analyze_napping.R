@@ -6,30 +6,9 @@ message("This program analyzes napping data.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-message("Loading ... \n")
-message("... packages (and installing them if needed) \n")
-if (!require(conflicted)) {
-  install.packages("conflicted")
-}
-if (!require(readxl)) {
-  install.packages("readxl")
-}
-if (!require(splitstackshape)) {
-  install.packages("splitstackshape")
-}
-if (!require(tidyverse)) {
-  install.packages("tidyverse")
-}
-if (!require(SensoMineR)) {
-  install.packages("SensoMineR")
-}
-
-message("... paths and parameters \n")
 source(file = "paths.R")
 source(file = "params.R")
 
-message("... functions \n")
-source(file = "r/harmonize_terms.R")
 
 message("... files ... \n")
 xls <- list.files(
@@ -48,63 +27,15 @@ file_text <- readxl::read_xlsx(
   sheet = 3
 )
 
-clean_text_napping <- function(df) {
-  file_text_cleaned <- df |>
-    tidyr::pivot_longer(2:ncol(df)) |>
-    dplyr::filter(!is.na(value)) |>
-    dplyr::mutate(value_2 = harmonize_terms(
-      x = value,
-      dictionary = dictionary_specific_path
-    )) |>
-    dplyr::mutate(value_3 = harmonize_terms(
-      x = value_2,
-      dictionary = dictionary_napping_path,
-      mode = "substring",
-      fallback = TRUE
-    )) |>
-    splitstackshape::cSplit("value_3",
-      sep = " ",
-      direction = "long"
-    ) |>
-    splitstackshape::cSplit("value_3",
-      sep = "_",
-      direction = "wide"
-    ) |>
-    dplyr::mutate(value_4 = value_3_1, intensity = value_3_2) |>
-    dplyr::filter(!is.na(value_4)) |>
-    dplyr::mutate(value_5 = harmonize_terms(value_4,
-      dictionary = dictionary_generic_path
-    )) |>
-    dplyr::mutate(newValue = harmonize_terms(value_5,
-      dictionary = dictionary_specific_path
-    )) |>
-    dplyr::mutate(intensity = if_else(
-      condition = intensity == "",
-      true = NA_character_,
-      false = intensity
-    )) |>
-    dplyr::mutate(taste = if_else(
-      condition = !is.na(intensity),
-      true = paste(newValue,
-        intensity,
-        sep = "_"
-      ),
-      false = newValue
-    )) |>
-    dplyr::filter(!is.na(taste)) |>
-    dplyr::relocate(taste, .after = name)
-
-  return(file_text_cleaned)
-}
-
-file_text_cleaned <- clean_text_napping(df = file_text)
+file_text_cleaned <- file_text |>
+  harmonize_terms_df()
 
 file_text_raw <- file_text |>
   tidyr::pivot_longer(2:ncol(file_text)) |>
   dplyr::filter(!is.na(value)) |>
-  splitstackshape::cSplit("value",
-    sep = " ",
-    direction = "long"
+  tidytable::separate_longer_delim(
+    cols = "value",
+    delim = " "
   ) |>
   dplyr::filter(!is.na(value))
 

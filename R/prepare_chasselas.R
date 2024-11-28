@@ -56,7 +56,7 @@ prepare_chasselas <-
       )]
 
     chasselas_deltas <- chasselas_deltas |>
-      distinct(Date, CJ, name, delta)
+      tidytable::distinct(Date, CJ, name, delta)
 
     results <- list(chasselas_pivoted, chasselas_deltas)
 

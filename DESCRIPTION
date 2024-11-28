@@ -15,17 +15,22 @@ BugReports: https://github.com/adafede/sapid/issues
 Depends:
     R (>= 4.3.0)
 Imports:
-    AlpsNMR,
-    data.table,
-    FactoMineR,
+    AlpsNMR (>= 4.8.0),
+    BiocParallel (>= 1.40.0),
+    data.table (>= 1.16.2),
+    dendextend (>= 1.19.0),
+    FactoMineR (>= 2.11),
     furrr (>= 0.3.1),
-    ggplot2,
-    ggpubr,
-    NMRphasing,
-    plotly,
-    readxl,
-    SensoMineR,
-    stringi,
+    ggplot2 (>= 3.5.1),
+    ggpubr (>= 0.6.0),
+    NMRphasing (>= 1.0.5),
+    plotly (>= 4.10.4),
+    readxl (>= 1.4.3),
+    SensoMineR (>= 1.27),
+    stats,
+    stringi (>= 1.8.4),
+    tibble (>= 3.2.1),
+    tidyfst (>= 1.8.1),
     tidytable (>= 0.11.1)
 Suggests: 
     BiocManager,
@@ -42,8 +47,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
     'sapid-package.R'
+    'cluster_nmr.R'
     'colors.R'
     'harmonize_terms.R'
+    'harmonize_terms_df.R'
     'prepare_chasselas.R'
 VignetteBuilder:
     knitr

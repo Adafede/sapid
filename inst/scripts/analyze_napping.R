@@ -29,7 +29,7 @@ source(file = "paths.R")
 source(file = "params.R")
 
 message("... functions \n")
-source(file = "r/clean_terms.R")
+source(file = "r/harmonize_terms.R")
 
 message("... files ... \n")
 xls <- list.files(
@@ -52,13 +52,15 @@ clean_text_napping <- function(df) {
   file_text_cleaned <- df |>
     tidyr::pivot_longer(2:ncol(df)) |>
     dplyr::filter(!is.na(value)) |>
-    dplyr::mutate(value_2 = clean_terms(
+    dplyr::mutate(value_2 = harmonize_terms(
       x = value,
       dictionary = dictionary_specific_path
     )) |>
-    dplyr::mutate(value_3 = clean_terms_2(
+    dplyr::mutate(value_3 = harmonize_terms(
       x = value_2,
-      dictionary = dictionary_napping_path
+      dictionary = dictionary_napping_path,
+      mode = "substring",
+      fallback = TRUE
     )) |>
     splitstackshape::cSplit("value_3",
       sep = " ",
@@ -70,10 +72,10 @@ clean_text_napping <- function(df) {
     ) |>
     dplyr::mutate(value_4 = value_3_1, intensity = value_3_2) |>
     dplyr::filter(!is.na(value_4)) |>
-    dplyr::mutate(value_5 = clean_terms(value_4,
+    dplyr::mutate(value_5 = harmonize_terms(value_4,
       dictionary = dictionary_generic_path
     )) |>
-    dplyr::mutate(newValue = clean_terms(value_5,
+    dplyr::mutate(newValue = harmonize_terms(value_5,
       dictionary = dictionary_specific_path
     )) |>
     dplyr::mutate(intensity = if_else(

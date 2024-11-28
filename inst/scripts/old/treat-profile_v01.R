@@ -25,7 +25,7 @@ source(file = "paths.R")
 source(file = "params.R")
 
 message("... functions \n")
-source(file = "r/clean_terms.R")
+source(file = "r/harmonize_terms.R")
 
 message("... files ... \n")
 xls <- list.files(
@@ -57,13 +57,13 @@ cluster_profile_pivoted <- cluster_profile %>%
   ))) %>%
   dplyr::select(ProductName, J, CJ, descriptors, name, value) %>%
   arrange(J) %>%
-  mutate(name_2 = clean_terms(
+  mutate(name_2 = harmonize_terms(
     x = name,
     dictionary = dictionary_specific_path
   )) %>%
   cSplit("name_2", sep = " ", direction = "long") %>%
   cSplit("name_2", sep = "_", direction = "wide") %>%
-  mutate(newName = clean_terms(
+  mutate(newName = harmonize_terms(
     x = name_2_1,
     dictionary = dictionary_generic_path
   )) |>

@@ -6,63 +6,24 @@ message("This program TODO.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-message("Loading ... \n")
-message("... packages (and installing them if needed) \n")
-if (!require(conflicted)) {
-  install.packages("conflicted")
-}
-if (!require(dendextend)) {
-  install.packages("dendextend")
-}
-if (!require(ggplot2)) {
-  install.packages("ggplot2")
-}
-if (!require(plotly)) {
-  install.packages("plotly")
-}
-if (!require(RColorBrewer)) {
-  install.packages("RColorBrewer")
-}
-if (!require(readxl)) {
-  install.packages("readxl")
-}
-if (!require(tidyverse)) {
-  install.packages("tidyverse")
-}
 
-message("... paths and parameters \n")
 source(file = "paths.R")
 source(file = "params.R")
 
-message("... functions \n")
-
-message("... files ... \n")
-
 message("... Pipol \n") ## Where does this funny names come from?
-Pipol <- read_xlsx(
-  path = file.path(
-    data_inhouse_sensory_20210329_files_excel_path
-  ),
+Pipol <- readxl::read_xlsx(
+  path = file.path(data_inhouse_sensory_20210329_files_excel_path),
   sheet = 4
-) %>%
-  mutate(concentration = factor(format(
-    round(
-      x = concentration,
-      digits = 2
-    ),
+) |>
+  tidytable::mutate(concentration = factor(format(
+    round(x = concentration, digits = 2),
     nsmall = 2
-  ))) %>%
+  ))) |>
   data.frame()
 
 message("... AFC Pipol \n")
-AFC_Pipol <- read_xlsx(
-  path = data_inhouse_sensory_20210329_files_excel_path,
-  sheet = 3
-) %>%
-  mutate(concentration = format(round(
-    x = concentration,
-    digits = 2
-  ), nsmall = 2)) %>%
+AFC_Pipol <- readxl::read_xlsx(path = data_inhouse_sensory_20210329_files_excel_path, sheet = 3) |>
+  tidytable::mutate(concentration = format(round(x = concentration, digits = 2), nsmall = 2)) |>
   data.frame()
 
 message(
@@ -71,91 +32,77 @@ message(
 )
 
 message("... AFC Pipol \n")
-AFC_Pipol_cleaned <- read_xlsx(
-  path = data_inhouse_sensory_20210329_files_excel_path,
-  sheet = 6
-) %>%
-  mutate(concentration = format(round(
-    x = concentration,
-    digits = 2
-  ), nsmall = 2)) %>%
+AFC_Pipol_cleaned <- readxl::read_xlsx(path = data_inhouse_sensory_20210329_files_excel_path, sheet = 6) |>
+  tidytable::mutate(concentration = format(round(x = concentration, digits = 2), nsmall = 2)) |>
   data.frame()
 
-cleaned <- read_xlsx(
-  path = data_inhouse_sensory_20210329_files_excel_path,
-  sheet = 5
-) %>%
+cleaned <- readxl::read_xlsx(path = data_inhouse_sensory_20210329_files_excel_path, sheet = 5) |>
   data.frame()
 
 message("starting manipulation ... \n")
 message("... joining data together \n")
-joined <- left_join(Pipol, AFC_Pipol) %>%
-  mutate(correct_percent = correct.responses / Total.responses)
+joined <- Pipol |>
+  tidytable::left_join(AFC_Pipol) |>
+  tidytable::mutate(correct_percent = correct.responses / Total.responses)
 
 message("... counting terms \n")
-counted <- cleaned %>%
-  pivot_longer(cols = colnames(.)[grepl(
-    pattern = "attribut",
-    x = colnames(.),
-    fixed = TRUE
-  )]) %>%
-  mutate(value = gsub(
+counted <- cleaned |>
+  tidytable::pivot_longer(cols = tidytable::contains("attribut")) |>
+  tidytable::mutate(value = gsub(
     pattern = "_.*$",
     replacement = "",
     x = value
-  )) %>%
-  group_by(
-    concentration,
-    value
-  ) %>%
-  add_count() %>%
-  mutate(intensity = mean(intensity)) %>%
-  mutate(m = n * intensity) %>%
-  distinct(
-    concentration,
-    value,
-    n,
-    m
-  ) %>%
-  dplyr::filter(!is.na(value)) %>%
-  group_by(concentration) %>%
-  arrange(
-    m,
-    n
-  ) %>%
-  mutate(value = factor(
-    x = value,
-    levels = value
-  ))
+  )) |>
+  tidytable::group_by(concentration, value) |>
+  tidytable::add_count() |>
+  tidytable::mutate(intensity = intensity |>
+    mean()) |>
+  tidytable::mutate(m = n * intensity) |>
+  tidytable::distinct(concentration, value, n, m) |>
+  tidytable::filter(!is.na(value)) |>
+  tidytable::group_by(concentration) |>
+  tidytable::arrange(m, n) |>
+  tidytable::mutate(value = factor(x = value, levels = value))
 
-groups <- nrow(counted %>% distinct(concentration))
+groups <- counted |>
+  tidytable::distinct(concentration) |>
+  nrow()
 
 message("visualizing ... \n")
 message("... intensity and p-value per concentration \n")
-boxes <-
-  ggplot2::ggplot(
-    data = joined,
-    mapping = ggplot2::aes(x = concentration, y = intensity, color = as.numeric(concentration))
-  ) +
+boxes <- joined |>
+  ggplot2::ggplot(mapping = ggplot2::aes(
+    x = concentration,
+    y = intensity,
+    color = as.numeric(concentration)
+  )) +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
     alpha = 0.5
   ) +
-  ggplot2::scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
+  ggplot2::scale_color_gradient2(
+    low = "#f7fcf5",
+    mid = "#74c476",
+    high = "#00441b"
+  ) +
   ggplot2::theme_bw() +
   ggplot2::theme_minimal() +
   ggplot2::xlab(label = "Concentration [mg/L]") +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::theme(
     legend.position = "none",
-    panel.grid = element_blank(),
+    panel.grid = ggplot2::element_blank(),
     text = ggplot2::element_text(face = "bold")
   )
 boxes
 
-scurve <-
-  ggplot2::ggplot(joined, ggplot2::aes(x = as.numeric(concentration), y = correct_percent, color = as.numeric(concentration))) +
+scurve <- joined |>
+  ggplot2::ggplot(mapping = ggplot2::aes(
+    x = as.numeric(concentration),
+    y = correct_percent,
+    color = as.numeric(concentration)
+  )) +
   ggplot2::geom_point() +
   ggplot2::scale_x_log10() +
   ggbump::geom_sigmoid(data = joined, ggplot2::aes(
@@ -164,7 +111,11 @@ scurve <-
     y = min(correct_percent),
     yend = max(correct_percent)
   )) +
-  ggplot2::scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
+  ggplot2::scale_color_gradient2(
+    low = "#f7fcf5",
+    mid = "#74c476",
+    high = "#00441b"
+  ) +
   ggplot2::xlab(label = "Concentration [mg/L]") +
   ggplot2::ylab("Correct answers [%]") +
   ggplot2::ylim(c(0, 1)) +
@@ -187,26 +138,31 @@ scurve <-
 scurve
 
 message("... terms per concentration \n")
-dots <- ggplot(counted) +
-  geom_segment(aes(
+dots <- counted |>
+  ggplot2::ggplot() +
+  ggplot2::geom_segment(mapping = ggplot2::aes(
     x = value,
     xend = value,
     y = 0,
     yend = n
   ), color = "grey") +
-  geom_point(aes(x = value, y = n, color = concentration), size = 3) +
-  scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
-  coord_flip() +
-  theme_bw() +
-  theme(
-    legend.position = "none",
-    panel.border = element_blank(),
-    panel.spacing = unit(0.1, "lines"),
-    strip.text.x = element_text(size = 8)
+  ggplot2::geom_point(mapping = ggplot2::aes(x = value, y = n, color = concentration), size = 3) +
+  ggplot2::scale_color_gradient2(
+    low = "#f7fcf5",
+    mid = "#74c476",
+    high = "#00441b"
   ) +
-  xlab("") +
-  ylab("Count") +
-  facet_wrap(
+  ggplot2::coord_flip() +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    legend.position = "none",
+    panel.border = ggplot2::element_blank(),
+    panel.spacing = ggplot2::unit(0.1, "lines"),
+    strip.text.x = ggplot2::element_text(size = 8)
+  ) +
+  ggplot2::xlab("") +
+  ggplot2::ylab("Count") +
+  ggplot2::facet_wrap(
     facets = ~ round(x = concentration, digits = 2),
     ncol = 1,
     scales = "free_y"
@@ -224,26 +180,24 @@ my7greens <- c(
   "#238b45",
   "#005a32"
 )
-dots_corrected <- ggplot(counted) +
-  geom_segment(aes(
+dots_corrected <- counted |>
+  ggplot2::ggplot() +
+  ggplot2::geom_segment(mapping = ggplot2::aes(
     x = value,
     xend = value,
     y = 0,
     yend = m
   ), color = "grey") +
-  geom_point(
-    aes(
-      x = value,
-      color = concentration,
-      y = m
-    ),
-    size = 3
+  ggplot2::geom_point(mapping = ggplot2::aes(x = value, color = concentration, y = m), size = 3) +
+  ggplot2::scale_color_gradient2(
+    low = "#f7fcf5",
+    mid = "#74c476",
+    high = "#00441b"
   ) +
-  scale_color_gradient2(low = "#f7fcf5", mid = "#74c476", high = "#00441b") +
-  coord_flip() +
-  xlab("") +
-  ylab("Value") +
-  facet_wrap(
+  ggplot2::coord_flip() +
+  ggplot2::xlab("") +
+  ggplot2::ylab("Value") +
+  ggplot2::facet_wrap(
     facets = ~ paste(format(
       round(x = concentration, digits = 2),
       nsmall = 2
@@ -251,15 +205,15 @@ dots_corrected <- ggplot(counted) +
     ncol = 1,
     scales = "free_y"
   ) +
-  theme_bw() +
-  theme(
+  ggplot2::theme_bw() +
+  ggplot2::theme(
     legend.position = "none",
-    panel.grid = element_blank(),
-    text = element_text(face = "bold"),
-    panel.border = element_blank(),
-    panel.spacing = unit(0.2, "lines"),
-    strip.text.x = element_text(size = 10),
-    strip.background = element_rect(fill = "white")
+    panel.grid = ggplot2::element_blank(),
+    text = ggplot2::element_text(face = "bold"),
+    panel.border = ggplot2::element_blank(),
+    panel.spacing = ggplot2::unit(0.2, "lines"),
+    strip.text.x = ggplot2::element_text(size = 10),
+    strip.background = ggplot2::element_rect(fill = "white")
   )
 dots_corrected
 

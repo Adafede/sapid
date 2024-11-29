@@ -46,12 +46,12 @@ ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
-    'sapid-package.R'
-    'cluster_nmr.R'
     'colors.R'
+    'cluster_nmr.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
     'prepare_chasselas.R'
+    'sapid-package.R'
 VignetteBuilder:
     knitr
 biocViews: TODO, TODO

@@ -1,18 +1,92 @@
 #' Cluster NMR
 #'
-#' @param todo todo
+#' @include colors.R
+#'
+#' @param nmr_dir NMR directory
+#' @param experiment_raw Experiment raw
+#' @param experiment_ref Experiment ref
+#' @param experiments_fractions Experiments fractions
+#' @param experiments_to_fix Experiments to fix
+#' @param k Number of clusters
+#' @param peak_width_ppm Peak width ppm
+#' @param ppm_min Ppm min
+#' @param ppm_max Ppm max
+#' @param area_min Area min
+#' @param range_exclude_area Range exclude area
+#' @param range_without_peaks Range without peaks
+#' @param ylim Y lim
 #'
 #' @return NULL
 #'
 #' @examples NULL
-cluster_nmr <- function(todo = NULL) {
-  BiocParallel::register(
-    BPPARAM = BiocParallel::MulticoreParam(exportglobals = FALSE),
-    default = TRUE
-  )
-
-  nmr_dir <- "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043"
-
+cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
+                        experiment_raw = "proton_00",
+                        experiment_ref = "proton_98",
+                        experiments_fractions = c(
+                          "proton_17",
+                          "proton_18",
+                          "proton_19",
+                          "proton_20",
+                          "proton_21",
+                          "proton_22",
+                          "proton_23",
+                          "proton_24",
+                          "proton_25",
+                          "proton_26",
+                          "proton_27",
+                          "proton_28",
+                          "proton_29",
+                          "proton_30",
+                          "proton_31",
+                          "proton_32",
+                          "proton_33",
+                          "proton_34",
+                          "proton_35",
+                          "proton_36",
+                          "proton_37",
+                          "proton_38",
+                          "proton_39",
+                          "proton_40",
+                          "proton_41",
+                          "proton_42",
+                          "proton_43",
+                          "proton_44",
+                          "proton_45",
+                          "proton_46",
+                          "proton_47",
+                          "proton_48",
+                          "proton_50",
+                          "proton_51",
+                          "proton_52",
+                          "proton_53",
+                          "proton_54",
+                          "proton_55",
+                          "proton_56",
+                          "proton_57",
+                          "proton_58",
+                          "proton_59",
+                          "proton_60",
+                          "proton_61",
+                          "proton_62",
+                          "proton_63",
+                          "proton_64",
+                          "proton_65",
+                          "proton_66",
+                          "proton_67",
+                          "proton_68",
+                          "proton_69",
+                          "proton_70",
+                          "proton_71"
+                        ),
+                        experiments_to_fix = c("proton_69", "proton_70", "proton_71"),
+                        k = 7,
+                        peak_width_ppm = 0.01,
+                        ppm_min = 0,
+                        ppm_max = 14.85,
+                        area_min = 0,
+                        range_exclude_area = c(2.5, 2.6),
+                        range_without_peaks = c(0, 0.4),
+                        ylim = c(0, 5E10)) {
   dirnames <- nmr_dir |>
     dir(
       pattern = "proton_\\d",
@@ -20,145 +94,68 @@ cluster_nmr <- function(todo = NULL) {
       recursive = TRUE,
       include.dirs = TRUE
     )
-  # dataset <- AlpsNMR::nmr_read_samples(sample_names = dirnames,
-  #                                      format = "bruker",
-  #                                      all_components = FALSE)
-  dataset <- AlpsNMR::nmr_read_samples(
-    sample_names = dirnames,
-    format = "bruker",
-    all_components = TRUE
-  )
-  experiment_raw <- "proton_00"
-  experiment_ref <- "proton_98"
-  experiments_fractions <- c(
-    "proton_17",
-    "proton_18",
-    "proton_19",
-    "proton_20",
-    "proton_21",
-    "proton_22",
-    "proton_23",
-    "proton_24",
-    "proton_25",
-    "proton_26",
-    "proton_27",
-    "proton_28",
-    "proton_29",
-    "proton_30",
-    "proton_31",
-    "proton_32",
-    "proton_33",
-    "proton_34",
-    "proton_35",
-    "proton_36",
-    "proton_37",
-    "proton_38",
-    "proton_39",
-    "proton_40",
-    "proton_41",
-    "proton_42",
-    "proton_43",
-    "proton_44",
-    "proton_45",
-    "proton_46",
-    "proton_47",
-    "proton_48",
-    "proton_50",
-    "proton_51",
-    "proton_52",
-    "proton_53",
-    "proton_54",
-    "proton_55",
-    "proton_56",
-    "proton_57",
-    "proton_58",
-    "proton_59",
-    "proton_60",
-    "proton_61",
-    "proton_62",
-    "proton_63",
-    "proton_64",
-    "proton_65",
-    "proton_66",
-    "proton_67",
-    "proton_68",
-    "proton_69",
-    "proton_70",
-    "proton_71"
-  )
   experiments <- c(experiment_raw, experiments_fractions, experiment_ref)
-  experiments_close_water <- c(
-    "proton_25",
-    "proton_26",
-    "proton_27",
-    "proton_28",
-    "proton_29",
-    "proton_30",
-    "proton_31",
-    "proton_32",
-    "proton_33",
-    "proton_34",
-    "proton_35"
-  )
-  experiments_close_2 <- c("proton_43", "proton_44", "proton_45", "proton_46")
-
   experiments_subset <- c(
     experiment_raw,
-    "proton_17",
-    "proton_27",
-    "proton_37",
-    "proton_47",
-    "proton_57",
-    "proton_67",
+    sample(x = experiments_fractions, size = 8),
     experiment_ref
   )
-
-  dataset_filtered <- dataset |>
-    AlpsNMR::filter(NMRExperiment %in% experiments)
-
-  dataset_corrected <- dataset_filtered
-
-  dataset_corrected$axis[["proton_69"]][[1]] <- dataset_corrected$axis[["proton_23"]][[1]]
-  dataset_corrected$axis[["proton_70"]][[1]] <- dataset_corrected$axis[["proton_23"]][[1]]
-  dataset_corrected$axis[["proton_71"]][[1]] <- dataset_corrected$axis[["proton_23"]][[1]]
-
-  # dataset_autophased <- dataset_corrected
-
-  dataset_autophased <- dataset_corrected |>
-    AlpsNMR::nmr_autophase(withBC = TRUE)
-
-  ppm_res <- AlpsNMR::nmr_ppm_resolution(dataset_autophased)[[1]]
-
-  message(
-    "The ppm resolution is: ",
-    format(ppm_res, digits = 2),
-    " ppm. \n",
-    "Using it for interplation"
-  )
-  ppm_min <- 0
-  ppm_max <- 14.85
-  dataset_interpolated <- dataset_autophased |>
-    AlpsNMR::nmr_interpolate_1D(axis = c(min = ppm_min, max = ppm_max, by = ppm_res))
-
   regions_to_exclude <- list(
     lower = c(-Inf, ppm_min),
     # dmso = c(2.3, 2.6),
     # water = c(3.23, 3.53),
     upper = c(ppm_max, Inf)
   )
+
+  message("Loading NMR experiments")
+  dataset <- AlpsNMR::nmr_read_samples(
+    sample_names = dirnames,
+    format = "bruker",
+    all_components = TRUE
+  )
+
+  message("Filtering desired experiments")
+  dataset_filtered <- dataset |>
+    AlpsNMR::filter(NMRExperiment %in% experiments)
+
+  dataset_corrected <- dataset_filtered
+
+  if (!is.null(experiments_to_fix)) {
+    message("Correcting experiments to fix")
+    for (experiment_to_fix in experiments_to_fix) {
+      dataset_corrected$axis[[experiment_to_fix]][[1]] <- dataset_corrected$axis[[experiment_ref]][[1]]
+    }
+  }
+
+  message("Phasing automatically experiments")
+  dataset_autophased <- dataset_corrected |>
+    AlpsNMR::nmr_autophase(withBC = TRUE)
+
+  ppm_res <- AlpsNMR::nmr_ppm_resolution(dataset_autophased)[[1]]
+  message(
+    "The ppm resolution of the experiments is: ",
+    format(ppm_res, digits = 2),
+    " ppm. \n",
+    "Using it for interplation ..."
+  )
+
+  message("Interpolating experiments")
+  dataset_interpolated <- dataset_autophased |>
+    AlpsNMR::nmr_interpolate_1D(axis = c(min = ppm_min, max = ppm_max, by = ppm_res))
+
+  message("Excluding ppm regions")
   dataset_excluded <- dataset_interpolated |>
     AlpsNMR::nmr_exclude_region(exclude = regions_to_exclude)
 
-  dataset_baselined <- dataset_excluded |>
-    AlpsNMR::nmr_baseline_estimation()
+  # message("Baselining experiments")
+  # dataset_baselined <- dataset_excluded |>
+  #   AlpsNMR::nmr_baseline_estimation()
+  #
+  # message("Estimating threshold")
+  # baselineThresh <- dataset_baselined |>
+  #   AlpsNMR::nmr_baseline_threshold(range_without_peaks = range_without_peaks, method = "median3mad")
 
-  range_without_peaks <- c(0, 0.4)
-  baselineThresh <- dataset_baselined |>
-    AlpsNMR::nmr_baseline_threshold(range_without_peaks = range_without_peaks, method = "median3mad")
-
-  dataset_baselined |>
-    AlpsNMR::nmr_baseline_threshold_plot(thresholds = baselineThresh, chemshift_range = range_without_peaks)
-
+  message("Detecting peaks")
   peak_list_initial <- dataset_excluded |>
     AlpsNMR::nmr_detect_peaks(
       baselineThresh = NULL,
@@ -167,30 +164,34 @@ cluster_nmr <- function(todo = NULL) {
       fit_lorentzians = TRUE
     )
 
-  peak_list_initial |>
-    AlpsNMR::nmr_detect_peaks_plot_overview()
+  # message("Plotting detected peaks overview")
+  # peak_list_initial |>
+  #   AlpsNMR::nmr_detect_peaks_plot_overview()
 
+  message("Normalizing fractions")
   dataset_fractions <- dataset_excluded |>
     AlpsNMR::filter(NMRExperiment %in% experiments_fractions) |>
     AlpsNMR::nmr_normalize()
 
+  message("Integrating peaks positions")
   peak_table_integration <- dataset_fractions |>
     AlpsNMR::nmr_integrate_peak_positions(
       peak_pos_ppm = peak_list_initial$ppm,
-      peak_width_ppm = 0.01,
+      peak_width_ppm = peak_width_ppm,
       fix_baseline = TRUE,
       set_negative_areas_to_zero = TRUE
     )
 
+  message("Formatting ...")
   peak_table_integration_ready <- peak_table_integration |>
     AlpsNMR::get_integration_with_metadata() |>
     tibble::column_to_rownames("NMRExperiment")
-
   table_integration <- peak_table_integration_ready |>
     tidytable::tidytable()
   rownames(table_integration) <- experiments_fractions |>
     gsub(pattern = "proton_", replacement = "")
 
+  message("Filtering ...")
   table_integration_filtered <- table_integration |>
     tibble::rownames_to_column() |>
     tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
@@ -204,8 +205,9 @@ cluster_nmr <- function(todo = NULL) {
         as.numeric()
     ) |>
     tidytable::filter(!is.na(name)) |>
-    tidytable::filter(value > 0) |>
-    tidytable::filter(name < 2.5 | name > 2.6) |>
+    tidytable::filter(value > area_min) |>
+    tidytable::filter(name < range_exclude_area[1] |
+      name > range_exclude_area[2]) |>
     tidytable::group_by(rowname, name) |>
     tidytable::summarize(value = value |>
       sqrt()) |>
@@ -220,8 +222,8 @@ cluster_nmr <- function(todo = NULL) {
 
   dend <- hclust |>
     stats::as.dendrogram() |>
-    dendextend::set("branches_k_color", k = 7, value = paired) |>
-    dendextend::set("labels_colors", k = 7, value = paired) |>
+    dendextend::set("branches_k_color", k = k, value = paired) |>
+    dendextend::set("labels_colors", k = k, value = paired) |>
     dendextend::set("labels_cex", 1) |>
     sort()
 
@@ -229,18 +231,6 @@ cluster_nmr <- function(todo = NULL) {
     dendextend::get_leaves_attr("nodePar")
 
   groups <- dend_attr[names(dend_attr) == "lab.col"] |>
-    data.frame() |>
-    tidytable::rename(group = 1) |>
-    tidytable::mutate(group = group |>
-      as.character())
-  groups$rowname <- experiments_fractions |>
-    gsub(
-      pattern = "proton_",
-      replacement = "",
-      fixed = TRUE
-    )
-
-  groups <- cutree(hclust, k = 7) |>
     data.frame() |>
     tidytable::rename(group = 1) |>
     tidytable::mutate(group = group |>
@@ -297,15 +287,9 @@ cluster_nmr <- function(todo = NULL) {
       )
     ) +
     ggplot2::geom_line(linewidth = 0.5) +
-    # directlabels::geom_dl(method = list(
-    #   directlabels::dl.trans(x = round(x - 0.2)),
-    #   "first.points",
-    #   cex = 0.5,
-    #   fontface = 'bold'
-    # )) +
     ggplot2::facet_grid(rowname ~ .) +
-    ggplot2::ylim(c(0, 5E10)) +
-    ggplot2::scale_x_reverse(limits = c(14, 0), n.breaks = 14) +
+    ggplot2::ylim(ylim) +
+    ggplot2::scale_x_reverse(limits = c(round(ppm_max), round(ppm_min)), n.breaks = round(ppm_max - ppm_min)) +
     ggplot2::scale_color_identity() +
     ggplot2::theme_minimal() +
     ggplot2::xlab("ppm") +

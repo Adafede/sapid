@@ -4,10 +4,58 @@
 \alias{cluster_nmr}
 \title{Cluster NMR}
 \usage{
-cluster_nmr(todo = NULL)
+cluster_nmr(
+  nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
+  experiment_raw = "proton_00",
+  experiment_ref = "proton_98",
+  experiments_fractions = c("proton_17", "proton_18", "proton_19", "proton_20",
+    "proton_21", "proton_22", "proton_23", "proton_24", "proton_25", "proton_26",
+    "proton_27", "proton_28", "proton_29", "proton_30", "proton_31", "proton_32",
+    "proton_33", "proton_34", "proton_35", "proton_36", "proton_37", "proton_38",
+    "proton_39", "proton_40", "proton_41", "proton_42", "proton_43", "proton_44",
+    "proton_45", "proton_46", "proton_47", "proton_48", "proton_50", "proton_51",
+    "proton_52", "proton_53", "proton_54", "proton_55", "proton_56", 
+     "proton_57",
+    "proton_58", "proton_59", "proton_60", "proton_61", "proton_62", "proton_63",
+    "proton_64", "proton_65", "proton_66", "proton_67", "proton_68", "proton_69",
+    "proton_70", "proton_71"),
+  experiments_to_fix = c("proton_69", "proton_70", "proton_71"),
+  k = 7,
+  peak_width_ppm = 0.01,
+  ppm_min = 0,
+  ppm_max = 14.85,
+  area_min = 0,
+  range_exclude_area = c(2.5, 2.6),
+  range_without_peaks = c(0, 0.4),
+  ylim = c(0, 5e+10)
+)
 }
 \arguments{
-\item{todo}{todo}
+\item{nmr_dir}{NMR directory}
+
+\item{experiment_raw}{Experiment raw}
+
+\item{experiment_ref}{Experiment ref}
+
+\item{experiments_fractions}{Experiments fractions}
+
+\item{experiments_to_fix}{Experiments to fix}
+
+\item{k}{Number of clusters}
+
+\item{peak_width_ppm}{Peak width ppm}
+
+\item{ppm_min}{Ppm min}
+
+\item{ppm_max}{Ppm max}
+
+\item{area_min}{Area min}
+
+\item{range_exclude_area}{Range exclude area}
+
+\item{range_without_peaks}{Range without peaks}
+
+\item{ylim}{Y lim}
 }
 \description{
 Cluster NMR

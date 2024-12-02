@@ -12,57 +12,32 @@ message("... profile \n")
 table <- file |>
   tidytable::fread()
 
-deltas <- table |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "acide.*", replacement = "sourness")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "amer.*", replacement = "bitterness")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "sucré.*", replacement = "sweetness")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "salé.*", replacement = "saltiness")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "gras.*", replacement = "fatness, volume")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "équilibre.*", replacement = "balance")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "fraicheur.*", replacement = "freshness")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "longueur.*", replacement = "persistency")) |>
-  tidytable::mutate(name = name |>
-    gsub(pattern = "salivant.*", replacement = "mouthwatering"))
+deltas <- table
 
-deltas_avant <- deltas |>
-  tidytable::filter(grepl(pattern = "avant", x = ProductName))
+deltas_before <- deltas |>
+  tidytable::filter(grepl(pattern = "before", x = product))
 
-deltas_après <- deltas |>
-  tidytable::filter(grepl(pattern = "après", x = ProductName))
+deltas_after <- deltas |>
+  tidytable::filter(grepl(pattern = "after", x = product))
 
-deltas_1 <- deltas_avant |>
-  tidytable::filter(name == "sourness" |
-    name == "bitterness" |
-    name == "sweetness" |
-    name == "saltiness")
+deltas_1 <- deltas_before |>
+  tidytable::filter(taste %in% c("sourness", "bitterness", "sweetness", "saltiness"))
 
-deltas_2 <- deltas_avant |>
+deltas_2 <- deltas_before |>
   tidytable::filter(
-    name == "fatness, volume" |
-      name == "balance" |
-      name == "freshness" |
-      name == "persistency" |
-      name == "mouthwatering"
+    taste %in% c("fatness, volume", "balance", "freshness", "persistency", "mouthwatering")
   )
 
 deltas_3 <- deltas_1 |>
   tidytable::bind_rows(deltas_2) |>
   tidytable::filter(!is.na(value)) |>
-  tidytable::group_by(CJ, name) |>
+  tidytable::group_by(jury, taste) |>
   tidytable::add_count() |>
   tidytable::filter(n >= 3) |>
   tidytable::ungroup()
 
-p_1 <-
-  ggplot2::ggplot(deltas_3, ggplot2::aes(x = CJ, y = value, colour = CJ)) +
+p_1 <- deltas_3 |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = jury, y = value, colour = jury)) +
   ggplot2::scale_x_discrete() +
   ggthemes::scale_color_tableau(palette = "Tableau 20") +
   ggplot2::geom_violin() +
@@ -70,7 +45,7 @@ p_1 <-
     position = ggplot2::position_jitter(width = .05),
     alpha = 0.5
   ) +
-  ggplot2::facet_wrap(facets = ~ as.character(name), ncol = 3) +
+  ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
   ggplot2::theme_minimal() +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::ylim(c(0, 10)) +
@@ -85,8 +60,8 @@ p_1 <-
   )
 p_1
 
-p_2 <-
-  ggplot2::ggplot(deltas_3, ggplot2::aes(x = name, y = value, colour = name)) +
+p_2 <- deltas_3 |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
   ggplot2::scale_x_discrete() +
   ggthemes::scale_color_tableau(palette = "Tableau 20") +
   ggplot2::geom_violin() +
@@ -94,7 +69,7 @@ p_2 <-
     position = ggplot2::position_jitter(width = .05),
     alpha = 0.5
   ) +
-  ggplot2::facet_wrap(facets = ~ as.character(CJ), ncol = 3) +
+  ggplot2::facet_wrap(facets = ~ as.character(jury), ncol = 3) +
   ggplot2::theme_minimal() +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::ylim(c(0, 10)) +

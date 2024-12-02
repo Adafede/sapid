@@ -5,23 +5,17 @@
 \title{Prepare chasselas}
 \usage{
 prepare_chasselas(
-  path = data_inhouse_sensory_path,
-  path_output = analysis_path_04_output,
-  date = DATE,
-  product_name = PRODUCTNAME,
-  cluster = CLUSTER
+  input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
+  output_dir = "~/switchdrive/SAPERE/03_analysis/04_fractions-sensory/03_output",
+  sessions = seq(1, 7)
 )
 }
 \arguments{
-\item{path}{Path}
+\item{input_dir}{Input dir}
 
-\item{path_output}{Path output}
+\item{output_dir}{output_dir}
 
-\item{date}{Date}
-
-\item{product_name}{Product name}
-
-\item{cluster}{Cluster}
+\item{sessions}{Sessions}
 }
 \description{
 Prepare chasselas

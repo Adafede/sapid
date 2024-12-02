@@ -46,10 +46,12 @@ ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
+    'analyze_napping.R'
     'colors.R'
     'cluster_nmr.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
+    'plot_concentration.R'
     'prepare_chasselas.R'
     'sapid-package.R'
 VignetteBuilder:

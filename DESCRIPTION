@@ -30,7 +30,6 @@ Imports:
     stats,
     stringi (>= 1.8.4),
     tibble (>= 3.2.1),
-    tidyfst (>= 1.8.1),
     tidytable (>= 0.11.1)
 Suggests: 
     BiocManager,
@@ -49,6 +48,7 @@ Collate:
     'analyze_napping.R'
     'colors.R'
     'cluster_nmr.R'
+    'get_session_info.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
     'plot_concentration.R'

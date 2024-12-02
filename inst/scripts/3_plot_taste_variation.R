@@ -6,23 +6,13 @@ message("This program TODO.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-source(file = "paths.R")
-source(file = "params.R")
-source(file = "r/colors.R")
-
-message("... files ... \n")
-files <- list.files(
-  path = analysis_path_04_output,
-  pattern = "^chasselas.*.tsv",
-  full.names = TRUE
-)
+file <- "~/switchdrive/SAPERE/03_analysis/04_fractions-sensory/03_output/chasselas_prepared.tsv"
 
 message("... profile \n")
-filesList <- files |>
-  furrr::future_map(.f = tidytable::fread)
+table <- file |>
+  tidytable::fread()
 
-deltas <- filesList |>
-  tidyfst::rbindlist(fill = TRUE, idcol = FALSE) |>
+deltas <- table |>
   tidytable::mutate(name = name |>
     gsub(pattern = "acide.*", replacement = "sourness")) |>
   tidytable::mutate(name = name |>
@@ -65,6 +55,7 @@ deltas_2 <- deltas_avant |>
 
 deltas_3 <- deltas_1 |>
   tidytable::bind_rows(deltas_2) |>
+  tidytable::filter(!is.na(value)) |>
   tidytable::group_by(CJ, name) |>
   tidytable::add_count() |>
   tidytable::filter(n >= 3) |>
@@ -86,8 +77,8 @@ p_1 <-
   ggplot2::labs(colour = "Panelist") +
   ggplot2::theme(
     legend.position = "right",
-    title = element_text(face = "bold"),
-    strip.text = element_text(face = "bold"),
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
     axis.text.x = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank()
@@ -110,8 +101,8 @@ p_2 <-
   ggplot2::labs(colour = "Panelist") +
   ggplot2::theme(
     legend.position = "right",
-    title = element_text(face = "bold"),
-    strip.text = element_text(face = "bold"),
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
     axis.text.x = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank()

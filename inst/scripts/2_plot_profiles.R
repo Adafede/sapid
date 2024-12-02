@@ -25,10 +25,10 @@ files <- analysis_path_04_output |>
 
 message("... profile \n")
 filesList <- files |>
-  furrr::future_map(tidytable::fread)
+  furrr::future_map(.f = tidytable::fread)
 
 profiles <- filesList |>
-  tidyfst::rbindlist(fill = TRUE, idcol = FALSE)
+  tidytable::bind_rows()
 
 n_panelists <- profiles |>
   tidytable::distinct(ProductName, J) |>

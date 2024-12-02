@@ -6,23 +6,14 @@ message("This program TODO.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-source(file = "paths.R")
-source(file = "params.R")
-source(file = "r/colors.R")
-
 message("... files ... \n")
-files <- list.files(
-  path = analysis_path_04_output,
-  pattern = "^deltas.*.tsv",
-  full.names = TRUE
-)
+file <- "~/switchdrive/SAPERE/03_analysis/04_fractions-sensory/03_output/deltas_prepared.tsv"
 
 message("... profile \n")
-filesList <- files |>
-  furrr::future_map(.f = tidytable::fread)
+table <- file |>
+  tidytable::fread()
 
-deltas <- filesList |>
-  tidyfst::rbindlist(fill = TRUE, idcol = FALSE) |>
+deltas <- table |>
   tidytable::mutate(name = name |>
     gsub(pattern = "acide.*", replacement = "sourness")) |>
   tidytable::mutate(name = name |>
@@ -127,8 +118,8 @@ p_1 <-
   ggplot2::ylim(-8, 8) +
   ggplot2::theme(
     legend.position = "right",
-    title = element_text(face = "bold"),
-    strip.text = element_text(face = "bold"),
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
     plot.caption = ggplot2::element_text(face = "bold"),
     axis.title.x = ggplot2::element_blank(),
     axis.text.x = ggplot2::element_blank(),
@@ -137,7 +128,7 @@ p_1 <-
   # ggplot2::geom_text(aes(x = name, y = 5, label = stars_wilcox),
   #                    color = "red", size = 8, vjust = -0.5) +
   ggplot2::geom_text(
-    aes(x = name, y = 5, label = stars),
+    ggplot2::aes(x = name, y = 5, label = stars),
     color = "black",
     size = 8,
     vjust = -0.5
@@ -170,7 +161,7 @@ p_2 <- ggplot2::ggplot(deltas_4, ggplot2::aes(x = group, y = delta, colour = gro
   # ggplot2::geom_text(aes(x = group, y = 5, label = stars_wilcox),
   #                    color = "red", size = 8, vjust = -0.5) +
   ggplot2::geom_text(
-    aes(x = group, y = 5, label = stars),
+    ggplot2::aes(x = group, y = 5, label = stars),
     color = "black",
     size = 8,
     vjust = -0.5

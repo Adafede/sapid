@@ -11,10 +11,8 @@ prepare_chasselas <-
   function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
            output_dir = "~/switchdrive/SAPERE/03_analysis/04_fractions-sensory/03_output",
            sessions = seq(1, 7)) {
-    sessions_infos <- sessions |>
-      furrr::future_map(.f = get_session_info)
-
-    chasselas <- sessions_infos |>
+    table <- sessions |>
+      furrr::future_map(.f = get_session_info) |>
       furrr::future_map(
         .f = function(session_info) {
           list.files(
@@ -31,55 +29,64 @@ prepare_chasselas <-
             tidytable::mutate(
               ProductName = tidytable::if_else(
                 condition = ProductName == session_info$product_name,
-                true = paste("1_avant_cluster", session_info$cluster, sep = "_"),
-                false = paste("2_après_cluster", session_info$cluster, sep = "_")
+                true = "product_1before",
+                false = "product_2after"
+              ),
+              session = paste0(
+                "session_",
+                session_info$cluster |>
+                  stringi::stri_pad(pad = "0", width = 2)
               )
             ) |>
+            tidytable::relocate(session, .after = ProductName) |>
+            tidytable::arrange(CJ) |>
+            tidytable::group_by(CJ) |>
+            tidytable::mutate(CJ = paste0(
+              "jury_",
+              tidytable::cur_group_id() |>
+                stringi::stri_pad(pad = "0", width = 2)
+            )) |>
+            tidytable::ungroup() |>
             data.frame()
         }
       ) |>
       tidytable::bind_rows()
 
-    chasselas_pivoted <- chasselas |>
+    table_pivoted <- table |>
       tidytable::group_by(CJ, ProductName) |>
       tidytable::pivot_longer(tidytable::where(is.numeric)) |>
       tidytable::ungroup() |>
-      tidytable::group_by(CJ) |>
-      tidytable::mutate(CJ = paste0(
-        "jury_",
-        tidytable::cur_group_id() |>
-          stringi::stri_pad(pad = "0", width = 2)
-      )) |>
-      data.frame()
-
-    chasselas_wide <- chasselas_pivoted |>
-      tidytable::group_by(CJ, name) |>
-      tidytable::pivot_wider(names_from = ProductName, values_from = value)
-
-    before <- tidytable::coalesce(chasselas_wide[, 4:(4 + length(sessions))])
-    after <- tidytable::coalesce(chasselas_wide[, (4 + length(sessions)):(4 +
-      2 * length(sessions) - 1)])
-
-    colnames_after <- colnames(chasselas_wide)[(4 + length(sessions)):(4 +
-      2 * length(sessions) - 1)]
-
-    chasselas_deltas <- chasselas_wide
-    chasselas_deltas[, "delta"] <- after - before
-
-    chasselas_deltas <- chasselas_deltas |>
-      tidytable::filter(!is.na(delta)) |>
-      tidytable::distinct(Date, CJ, name, delta)
-
-    results <- list(chasselas_pivoted, chasselas_deltas)
+      tidytable::filter(!is.na(value)) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "acide.*", replacement = "sourness")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "amer.*", replacement = "bitterness")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "sucré.*", replacement = "sweetness")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "salé.*", replacement = "saltiness")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "gras.*", replacement = "fatness, volume")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "équilibre.*", replacement = "balance")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "fraicheur.*", replacement = "freshness")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "longueur.*", replacement = "persistency")) |>
+      tidytable::mutate(name = name |>
+        gsub(pattern = "salivant.*", replacement = "mouthwatering")) |>
+      tidytable::rename(
+        date = Date,
+        jury = CJ,
+        product = ProductName,
+        session = session,
+        taste = name,
+        value = value
+      )
 
     tidytable::fwrite(
-      x = results[[1]],
+      x = table_pivoted,
       file = file.path(output_dir, "chasselas_prepared.tsv"),
-      sep = "\t"
-    )
-    tidytable::fwrite(
-      x = results[[2]],
-      file = file.path(output_dir, "deltas_prepared.tsv"),
       sep = "\t"
     )
   }

@@ -1,4 +1,4 @@
-load_session <- function(session_info, tab) {
+load_session <- function(input_dir, session_info, tab) {
   sheet <- switch(tab,
     "chasselas" = 1,
     "napping_coord" = 2,

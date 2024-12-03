@@ -17,13 +17,26 @@ load_session <- function(input_dir, session_info, tab) {
   ) |>
     readxl::read_xlsx(sheet = sheet)
 
-  if (tab != "napping_coord") {
+  df <- df |>
+    tidytable::rename_with(
+      .cols = tidytable::starts_with("J"),
+      .fn = function(cols) {
+        gsub("^J(\\d)([A-Z])", "J0\\1\\2", cols)
+      }
+    )
+
+  df <- df |>
+    tidytable::mutate(session = paste0(
+      "session_",
+      session_info$cluster |>
+        stringi::stri_pad(pad = "0", width = 2)
+    )) |>
+    tidytable::relocate(session, .after = 1)
+
+
+  if (tab == "napping_coord") {
     df <- df |>
-      tidytable::mutate(session = paste0(
-        "session_",
-        session_info$cluster |>
-          stringi::stri_pad(pad = "0", width = 2)
-      ))
+      tidytable::rename(fraction = Produit)
   }
 
   if (tab == "chasselas") {

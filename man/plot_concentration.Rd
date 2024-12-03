@@ -5,13 +5,12 @@
 \title{Plot concentration}
 \usage{
 plot_concentration(
-  input_xlsx =
-    "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/20210329_raw-extract/03_files/20210329_raw-extract.xlsx",
+  input = "~/git/sapid/inst/extdata/concentration_afc.tsv",
   output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf"
 )
 }
 \arguments{
-\item{input_xlsx}{Input xlsx}
+\item{input}{Input}
 
 \item{output}{Output}
 }

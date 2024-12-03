@@ -1,71 +1,29 @@
 #' Plot concentration
 #'
-#' @param input_xlsx Input xlsx
+#' @param input Input
 #' @param output Output
 #'
 #' @return NULL
 #'
 #' @examples NULL
-plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/20210329_raw-extract/03_files/20210329_raw-extract.xlsx",
-                               output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf") {
-  message("... Pipol \n") ## Where does this funny names come from?
-  Pipol <- input_xlsx |>
-    readxl::read_xlsx(sheet = 4) |>
-    tidytable::mutate(concentration = concentration |>
-      round(digits = 2) |>
-      format(nsmall = 2) |>
-      factor()) |>
-    data.frame()
+plot_concentration <- function(input = "~/git/sapid/inst/extdata/concentration_afc.tsv", output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf") {
+  message("Loading file...\n")
+  prepared <- input |>
+    tidytable::fread()
 
-  message("... AFC Pipol \n")
-  AFC_Pipol <- input_xlsx |>
-    readxl::read_xlsx(sheet = 3) |>
-    tidytable::mutate(concentration = concentration |>
-      round(digits = 2) |>
-      format(nsmall = 2)) |>
-    data.frame()
-
-  message(
-    "... version with cleaned terms (manually for now), \n",
-    "will probably be done automatically later on. \n"
-  )
-
-  message("... AFC Pipol \n")
-  AFC_Pipol_cleaned <- input_xlsx |>
-    readxl::read_xlsx(sheet = 6) |>
-    tidytable::mutate(concentration = concentration |>
-      round(digits = 2) |>
-      format(nsmall = 2)) |>
-    data.frame()
-
-  cleaned <- input_xlsx |>
-    readxl::read_xlsx(sheet = 5) |>
-    data.frame()
-
-  message("starting manipulation ... \n")
-  message("... joining data together \n")
-  joined <- Pipol |>
-    tidytable::left_join(AFC_Pipol) |>
-    tidytable::mutate(correct_percent = correct.responses / Total.responses)
-
-  message("... counting terms \n")
-  counted <- cleaned |>
-    tidytable::pivot_longer(cols = tidytable::contains("attribut")) |>
-    tidytable::mutate(value = gsub(
-      pattern = "_.*$",
-      replacement = "",
-      x = value
-    )) |>
-    tidytable::group_by(concentration, value) |>
+  counted <- prepared |>
+    tidytable::mutate(correct_percent = afc_correct / afc_total) |>
+    tidytable::group_by(concentration, taste) |>
     tidytable::add_count() |>
-    tidytable::mutate(intensity = intensity |>
+    tidytable::mutate(value = value |>
       mean()) |>
-    tidytable::mutate(m = n * intensity) |>
-    tidytable::distinct(concentration, value, n, m) |>
+    tidytable::mutate(m = n * value) |>
+    tidytable::distinct(concentration, jury, value, n, m, .keep_all = TRUE) |>
     tidytable::filter(!is.na(value)) |>
-    tidytable::group_by(concentration) |>
+    tidytable::group_by(jury, concentration) |>
     tidytable::arrange(m, n) |>
-    tidytable::mutate(value = factor(x = value, levels = value))
+    tidytable::distinct() |>
+    tidytable::ungroup()
 
   groups <- counted |>
     tidytable::distinct(concentration) |>
@@ -73,13 +31,17 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
 
   message("visualizing ... \n")
   message("... intensity and p-value per concentration \n")
-  boxes <- joined |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      x = concentration,
-      y = intensity,
-      color = as.numeric(concentration)
-    )) +
+  boxes <- counted |>
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = concentration |> as.numeric(),
+        y = value,
+        color = concentration |> as.numeric(),
+        group = concentration |> as.numeric()
+      )
+    ) +
     ggplot2::geom_violin() +
+    ggplot2::scale_x_log10() +
     ggplot2::geom_jitter(
       position = ggplot2::position_jitter(width = .05),
       alpha = 0.5
@@ -100,20 +62,25 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     )
   boxes
 
-  scurve <- joined |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      x = as.numeric(concentration),
-      y = correct_percent,
-      color = as.numeric(concentration)
-    )) +
+  scurve <- counted |>
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = concentration |> as.numeric(),
+        y = correct_percent,
+        color = concentration |> as.numeric()
+      )
+    ) +
     ggplot2::geom_point() +
     ggplot2::scale_x_log10() +
-    ggbump::geom_sigmoid(data = joined, ggplot2::aes(
-      x = min(as.numeric(concentration)),
-      xend = max(as.numeric(concentration)),
-      y = min(correct_percent),
-      yend = max(correct_percent)
-    )) +
+    ggbump::geom_sigmoid(
+      data = counted,
+      mapping = ggplot2::aes(
+        x = min(concentration |> as.numeric()),
+        xend = max(concentration |> as.numeric()),
+        y = min(correct_percent),
+        yend = max(correct_percent)
+      )
+    ) +
     ggplot2::scale_color_gradient2(
       low = "#f7fcf5",
       mid = "#74c476",
@@ -145,15 +112,19 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     ggplot2::ggplot() +
     ggplot2::geom_segment(
       mapping = ggplot2::aes(
-        x = value,
-        xend = value,
+        x = taste,
+        xend = taste,
         y = 0,
         yend = n
       ),
       color = "grey"
     ) +
     ggplot2::geom_point(
-      mapping = ggplot2::aes(x = value, y = n, color = concentration),
+      mapping = ggplot2::aes(
+        x = taste,
+        y = n,
+        color = concentration |> as.numeric()
+      ),
       size = 3
     ) +
     ggplot2::scale_color_gradient2(
@@ -172,7 +143,7 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     ggplot2::xlab("") +
     ggplot2::ylab("Count") +
     ggplot2::facet_wrap(
-      facets = ~ round(x = concentration, digits = 2),
+      facets = ~concentration,
       ncol = 1,
       scales = "free_y"
     )
@@ -193,15 +164,19 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     ggplot2::ggplot() +
     ggplot2::geom_segment(
       mapping = ggplot2::aes(
-        x = value,
-        xend = value,
+        x = taste,
+        xend = taste,
         y = 0,
         yend = m
       ),
       color = "grey"
     ) +
     ggplot2::geom_point(
-      mapping = ggplot2::aes(x = value, color = concentration, y = m),
+      mapping = ggplot2::aes(
+        x = taste,
+        color = concentration |> as.numeric(),
+        y = m
+      ),
       size = 3
     ) +
     ggplot2::scale_color_gradient2(
@@ -214,7 +189,7 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     ggplot2::ylab("Value") +
     ggplot2::facet_wrap(
       facets = ~ paste(format(
-        round(x = concentration, digits = 2),
+        round(x = concentration |> as.numeric(), digits = 2),
         nsmall = 2
       ), "[mg/L]"),
       ncol = 1,
@@ -240,11 +215,12 @@ plot_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/in
     heights = c(1, 2)
   )
 
-  message("exporting figures \n")
+  message("exporting figure \n")
   figure |>
     ggplot2::ggsave(
       filename = output,
       width = 9,
       height = 12
     )
+  return(output)
 }

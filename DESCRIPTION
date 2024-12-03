@@ -51,6 +51,7 @@ Collate:
     'get_session_info.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
+    'load_session.R'
     'plot_concentration.R'
     'prepare_chasselas.R'
     'sapid-package.R'

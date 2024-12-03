@@ -85,7 +85,7 @@ p_2 <- deltas_3 |>
   ggplot2::theme_minimal() +
   ggplot2::ylab(label = "Intensity") +
   ggplot2::ylim(c(0, 10)) +
-  ggplot2::labs(colour = "Panelist") +
+  ggplot2::labs(colour = "Taste") +
   ggplot2::theme(
     legend.position = "right",
     title = ggplot2::element_text(face = "bold"),
@@ -96,8 +96,63 @@ p_2 <- deltas_3 |>
   )
 p_2
 
+p_3 <- deltas_3 |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = session, y = value, colour = session)) +
+  ggplot2::scale_x_discrete() +
+  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::geom_violin() +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
+  ggplot2::theme_minimal() +
+  ggplot2::ylab(label = "Intensity") +
+  ggplot2::ylim(c(0, 10)) +
+  ggplot2::labs(colour = "Session") +
+  ggplot2::theme(
+    legend.position = "right",
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank()
+  )
+p_3
+
+p_4 <- deltas_3 |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
+  ggplot2::scale_x_discrete() +
+  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::geom_violin() +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~ as.character(session), ncol = 3) +
+  ggplot2::theme_minimal() +
+  ggplot2::ylab(label = "Intensity") +
+  ggplot2::ylim(c(0, 10)) +
+  ggplot2::labs(colour = "Taste") +
+  ggplot2::theme(
+    legend.position = "right",
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank()
+  )
+p_4
+
 ggpubr::ggarrange(p_1,
   p_2,
+  nrow = 2,
+  labels = "AUTO",
+  align = "hv"
+)
+
+ggpubr::ggarrange(p_3,
+  p_4,
   nrow = 2,
   labels = "AUTO",
   align = "hv"

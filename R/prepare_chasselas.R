@@ -13,44 +13,18 @@ prepare_chasselas <-
            sessions = seq(1, 7)) {
     table <- sessions |>
       furrr::future_map(.f = get_session_info) |>
-      furrr::future_map(
-        .f = function(session_info) {
-          list.files(
-            path =
-              file.path(
-                input_dir,
-                paste0(session_info$date, "_cluster", session_info$cluster),
-                "03_files"
-              ),
-            pattern = ".xlsx",
-            full.names = TRUE
-          ) |>
-            readxl::read_xlsx(sheet = 1) |>
-            tidytable::mutate(
-              ProductName = tidytable::if_else(
-                condition = ProductName == session_info$product_name,
-                true = "product_1before",
-                false = "product_2after"
-              ),
-              session = paste0(
-                "session_",
-                session_info$cluster |>
-                  stringi::stri_pad(pad = "0", width = 2)
-              )
-            ) |>
-            tidytable::relocate(session, .after = ProductName) |>
-            tidytable::arrange(CJ) |>
-            tidytable::group_by(CJ) |>
-            tidytable::mutate(CJ = paste0(
-              "jury_",
-              tidytable::cur_group_id() |>
-                stringi::stri_pad(pad = "0", width = 2)
-            )) |>
-            tidytable::ungroup() |>
-            data.frame()
-        }
-      ) |>
-      tidytable::bind_rows()
+      furrr::future_map(.f = load_session, tab = "chasselas") |>
+      tidytable::bind_rows() |>
+      tidytable::relocate(session, .after = ProductName) |>
+      tidytable::arrange(CJ) |>
+      tidytable::group_by(CJ) |>
+      tidytable::mutate(CJ = paste0(
+        "jury_",
+        tidytable::cur_group_id() |>
+          stringi::stri_pad(pad = "0", width = 2)
+      )) |>
+      tidytable::ungroup() |>
+      data.frame()
 
     table_pivoted <- table |>
       tidytable::group_by(CJ, ProductName) |>

@@ -4,29 +4,37 @@
 #'
 #' @examples NULL
 analyze_napping <- function() {
-  message("... files ... \n")
-  xls <- list.files(
-    path = file.path(
-      data_inhouse_sensory_path,
-      paste0(DATE, "_cluster", CLUSTER),
-      "03_files"
-    ),
-    pattern = ".xlsx",
-    full.names = TRUE
-  )
+  input_dir <- "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory"
+  dictionary_generic_path <- "inst/extdata/dictionary_generic.tsv"
 
-  message("... text \n")
-  file_text <- readxl::read_xlsx(path = xls, sheet = 3)
+  dictionary_napping_path <- "inst/extdata/dictionary_napping.tsv"
 
-  file_text_cleaned <- file_text |>
-    harmonize_terms_df()
+  dictionary_specific_path <- "inst/extdata/dictionary_specific.tsv"
+  sessions <- 6
+  session_infos <- sessions |>
+    furrr::future_map(.f = get_session_info)
+  tables_words <- session_infos |>
+    furrr::future_map(.f = load_session, tab = "napping_words")
 
-  file_text_raw <- file_text |>
-    tidytable::pivot_longer(2:ncol(file_text)) |>
-    tidytable::filter(!is.na(value)) |>
-    tidytable::separate_longer_delim(cols = "value", delim = " ") |>
-    tidytable::filter(!is.na(value)) |>
-    tidytable::filter(value != "")
+  tables_words_harmonized <- tables_words |>
+    furrr::future_map(.f = harmonize_terms_df)
+
+  tables_words_raw <- tables_words |>
+    furrr::future_map(
+      .f = function(x) {
+        x |>
+          tidytable::pivot_longer(2:ncol(x)) |>
+          tidytable::filter(!is.na(value)) |>
+          tidytable::separate_longer_delim(cols = "value", delim = " ") |>
+          tidytable::filter(!is.na(value)) |>
+          tidytable::filter(value != "")
+      }
+    )
+
+  file_text_cleaned <- tables_words_harmonized |>
+    tidytable::bind_rows()
+  file_text_raw <- tables_words_raw |>
+    tidytable::bind_rows()
 
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,
@@ -51,7 +59,11 @@ analyze_napping <- function() {
     data.frame()
 
   # import the coordinate data set
-  df_coord <- readxl::read_xlsx(path = xls, sheet = 2) |>
+  tables_coord <- session_infos |>
+    furrr::future_map(.f = load_session, tab = "napping_coord")
+  
+  df_coord <- tables_coord |>
+    tidytable::bind_rows() |>
     data.frame()
 
   rownames(df_coord) <- df_coord$Produit

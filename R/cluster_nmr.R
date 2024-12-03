@@ -295,13 +295,13 @@ cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/100
     ggplot2::xlab("ppm") +
     # ggplot2::ylab("Intensity") +
     ggplot2::theme(
-      axis.text = ggtext::element_markdown(color = "grey30"),
+      axis.text = ggplot2::element_text(color = "grey30"),
       axis.text.y = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
-      axis.title = ggtext::element_markdown(color = "grey30"),
+      axis.title = ggplot2::element_text(color = "grey30"),
       axis.title.y = ggplot2::element_blank(),
       legend.position = "none",
-      legend.text = ggtext::element_markdown(color = "grey30"),
+      legend.text = ggplot2::element_text(color = "grey30"),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.y = ggplot2::element_blank(),
       panel.spacing.y = ggplot2::unit(x = -100, units = "pt"),

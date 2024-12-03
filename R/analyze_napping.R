@@ -61,7 +61,7 @@ analyze_napping <- function() {
   # import the coordinate data set
   tables_coord <- session_infos |>
     furrr::future_map(.f = load_session, tab = "napping_coord")
-  
+
   df_coord <- tables_coord |>
     tidytable::bind_rows() |>
     data.frame()

@@ -1,11 +1,14 @@
 #' Harmonize terms df
 #'
 #' @param df Df
+#' @param dictionary_generic_path Dictionary generic path
+#' @param dictionary_napping_path Dictionary napping path
+#' @param dictionary_specific_path Dictionary specific path
 #'
 #' @return NULL
 #'
 #' @examples NULL
-harmonize_terms_df <- function(df) {
+harmonize_terms_df <- function(df, dictionary_generic_path, dictionary_napping_path, dictionary_specific_path) {
   file_text_cleaned <- df |>
     tidytable::pivot_longer(cols = 2:ncol(df)) |>
     tidytable::filter(!is.na(value)) |>

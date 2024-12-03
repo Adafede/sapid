@@ -13,7 +13,7 @@ prepare_chasselas <-
            sessions = seq(1, 7)) {
     table <- sessions |>
       furrr::future_map(.f = get_session_info) |>
-      furrr::future_map(.f = load_session, tab = "chasselas") |>
+      furrr::future_map(.f = load_session, input_dir = input_dir, tab = "chasselas") |>
       tidytable::bind_rows() |>
       tidytable::relocate(session, .after = ProductName) |>
       tidytable::arrange(CJ) |>

@@ -1,64 +1,51 @@
-#' Analyze napping
+#' Plot napping
+#'
+#' @param input_coordinates Input coordinates
+#' @param input_descriptors Input descriptors
+#' @param session Session
 #'
 #' @return NULL
 #'
 #' @examples NULL
-analyze_napping <- function() {
-  input_dir <- "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory"
-  dictionary_generic_path <- "inst/extdata/dictionary_generic.tsv"
+plot_napping <- function(input_coordinates = "inst/extdata/napping_coordinates.tsv",
+                         input_descriptors = "inst/extdata/napping_descriptors.tsv",
+                         sessions = 2) {
+  df_coord <- input_coordinates |>
+    tidytable::fread() |>
+    tidytable::filter(session == paste0("session_", sessions |>
+      stringi::stri_pad(pad = "0", width = 2))) |>
+    data.frame()
 
-  dictionary_napping_path <- "inst/extdata/dictionary_napping.tsv"
+  rownames(df_coord) <- df_coord$fraction
 
-  dictionary_specific_path <- "inst/extdata/dictionary_specific.tsv"
-  sessions <- 6
-  session_infos <- sessions |>
-    furrr::future_map(.f = get_session_info)
-  tables_words <- session_infos |>
-    furrr::future_map(
-      .f = load_session,
-      input_dir = input_dir,
-      tab = "napping_words"
-    )
+  df_coord <- df_coord |>
+    dplyr::select(-fraction, -session)
 
-  tables_words_harmonized <- tables_words |>
-    furrr::future_map(
-      .f = harmonize_terms_df,
-      dictionary_generic_path = dictionary_generic_path,
-      dictionary_napping_path = dictionary_napping_path,
-      dictionary_specific_path = dictionary_specific_path
-    )
+  table_words_prepared <- input_descriptors |>
+    tidytable::fread() |>
+    tidytable::filter(session == paste0("session_", sessions |>
+      stringi::stri_pad(pad = "0", width = 2)))
 
-  tables_words_raw <- tables_words |>
-    furrr::future_map(
-      .f = function(x) {
-        x |>
-          tidytable::pivot_longer(2:ncol(x)) |>
-          tidytable::filter(!is.na(value)) |>
-          tidytable::separate_longer_delim(cols = "value", delim = " ") |>
-          tidytable::filter(!is.na(value)) |>
-          tidytable::filter(value != "")
-      }
-    )
+  file_text_cleaned <- table_words_prepared |>
+    tidytable::distinct(fraction, session, jury, taste_intermediate)
 
-  file_text_cleaned <- tables_words_harmonized |>
-    tidytable::bind_rows()
-  file_text_raw <- tables_words_raw |>
-    tidytable::bind_rows()
+  file_text_raw <- table_words_prepared |>
+    tidytable::distinct(fraction, session, jury, taste_original)
 
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,
     maj.in.min = TRUE,
     sep.word = c(" "),
-    num.text = 3,
-    contingence.by = c(1) ## ask Pascale
+    num.text = 4,
+    contingence.by = 1
   )
 
   words_raw <- FactoMineR::textual(
     tab = file_text_raw,
     maj.in.min = TRUE,
     sep.word = c(" "),
-    num.text = 3,
-    contingence.by = c(1) ## ask Pascale
+    num.text = 4,
+    contingence.by = 1
   )
 
   df_words_cleaned <- words_cleaned$cont.table |>
@@ -67,35 +54,21 @@ analyze_napping <- function() {
   df_words_raw <- words_raw$cont.table |>
     data.frame()
 
-  # import the coordinate data set
-  tables_coord <- session_infos |>
-    furrr::future_map(
-      .f = load_session,
-      input_dir = input_dir,
-      tab = "napping_coord"
-    )
-
-  df_coord <- tables_coord |>
-    tidytable::bind_rows() |>
-    data.frame()
-
-  rownames(df_coord) <- df_coord$Produit
-
-  df_coord <- df_coord |>
-    dplyr::select(-Produit)
-
-  # if (SESSION == 8) {
+  # if (sessions == 8) {
   #   df_coord <- df_coord |>
   #     tidytable::filter(rownames(df_coord) != 23 &
-  #       rownames(df_coord) != 32) ## discarded
+  #       rownames(df_coord) != 32) |>
+  #     as.data.frame()
   #
   #   df_words_cleaned <- df_words_cleaned |>
   #     tidytable::filter(rownames(df_words_cleaned) != 23 &
-  #       rownames(df_words_cleaned) != 32) ## discarded
+  #       rownames(df_words_cleaned) != 32) |>
+  #     data.frame()
   #
   #   df_words_raw <- df_words_raw |>
   #     tidytable::filter(rownames(df_words_raw) != 23 &
-  #       rownames(df_words_raw) != 32) ## discarded
+  #       rownames(df_words_raw) != 32) |>
+  #     data.frame()
   # }
 
   df_coord <-
@@ -106,7 +79,6 @@ analyze_napping <- function() {
 
   df_words_raw <-
     df_words_raw[, colSums(df_words_raw) != 0]
-
 
   nap.tot <- cbind(df_coord, df_words_cleaned)
 

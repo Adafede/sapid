@@ -4,10 +4,21 @@
 \alias{harmonize_terms_df}
 \title{Harmonize terms df}
 \usage{
-harmonize_terms_df(df)
+harmonize_terms_df(
+  df,
+  dictionary_generic_path,
+  dictionary_napping_path,
+  dictionary_specific_path
+)
 }
 \arguments{
 \item{df}{Df}
+
+\item{dictionary_generic_path}{Dictionary generic path}
+
+\item{dictionary_napping_path}{Dictionary napping path}
+
+\item{dictionary_specific_path}{Dictionary specific path}
 }
 \description{
 Harmonize terms df

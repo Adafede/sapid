@@ -46,7 +46,6 @@ ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
-    'analyze_napping.R'
     'colors.R'
     'cluster_nmr.R'
     'get_session_info.R'
@@ -54,8 +53,10 @@ Collate:
     'harmonize_terms_df.R'
     'load_session.R'
     'plot_concentration.R'
+    'plot_napping.R'
     'prepare_chasselas.R'
     'prepare_concentration.R'
+    'prepare_napping.R'
     'sapid-package.R'
 VignetteBuilder:
     knitr

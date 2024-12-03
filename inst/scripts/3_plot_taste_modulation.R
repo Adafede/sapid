@@ -79,42 +79,8 @@ deltas_4 <- deltas_3 |>
   tidytable::left_join(p_values_sign)
 
 p_1 <- deltas_4 |>
-  ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = delta, colour = taste)) +
-  ggthemes::scale_color_tableau(palette = "Tableau 10") +
-  ggplot2::geom_violin() +
-  ggplot2::geom_jitter(
-    position = ggplot2::position_jitter(width = .05),
-    alpha = 0.5
-  ) +
-  ggplot2::facet_wrap(facets = ~group, scales = "free") +
-  ggplot2::theme_minimal() +
-  ggplot2::ylab(label = "Intensity difference") +
-  ggplot2::labs(colour = "Taste") +
-  ggplot2::ylim(-8, 8) +
-  ggplot2::theme(
-    legend.position = "right",
-    title = ggplot2::element_text(face = "bold"),
-    strip.text = ggplot2::element_text(face = "bold"),
-    plot.caption = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    axis.ticks = ggplot2::element_blank(),
-  ) +
-  # ggplot2::geom_text(aes(x = name, y = 5, label = stars_wilcox),
-  #                    color = "red", size = 8, vjust = -0.5) +
-  ggplot2::geom_text(
-    ggplot2::aes(x = taste, y = 5, label = stars),
-    color = "black",
-    size = 8,
-    vjust = 0
-  ) +
-  ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
-p_1
-
-# Plot with stars added for significance
-p_2 <- deltas_4 |>
   ggplot2::ggplot(mapping = ggplot2::aes(x = group, y = delta, colour = group)) +
-  ggthemes::scale_color_tableau(palette = "Tableau 10") +
+  ggplot2::scale_color_manual(values = discrete_rainbow_14[rep(c(FALSE, TRUE), length = length(discrete_rainbow_14))]) +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
@@ -143,7 +109,39 @@ p_2 <- deltas_4 |>
     vjust = 0
   ) +
   ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
+p_1
 
+p_2 <- deltas_4 |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = delta, colour = taste)) +
+  ggplot2::scale_color_brewer(palette = "Paired") +
+  ggplot2::geom_violin() +
+  ggplot2::geom_jitter(
+    position = ggplot2::position_jitter(width = .05),
+    alpha = 0.5
+  ) +
+  ggplot2::facet_wrap(facets = ~group, scales = "free") +
+  ggplot2::theme_minimal() +
+  ggplot2::ylab(label = "Intensity difference") +
+  ggplot2::labs(colour = "Taste") +
+  ggplot2::ylim(-8, 8) +
+  ggplot2::theme(
+    legend.position = "right",
+    title = ggplot2::element_text(face = "bold"),
+    strip.text = ggplot2::element_text(face = "bold"),
+    plot.caption = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+  ) +
+  # ggplot2::geom_text(aes(x = name, y = 5, label = stars_wilcox),
+  #                    color = "red", size = 8, vjust = -0.5) +
+  ggplot2::geom_text(
+    ggplot2::aes(x = taste, y = 5, label = stars),
+    color = "black",
+    size = 8,
+    vjust = 0
+  ) +
+  ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
 p_2
 
 ggpubr::ggarrange(p_1,

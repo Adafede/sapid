@@ -51,7 +51,7 @@ deltas_3 <- deltas_1 |>
 p_1 <- deltas_3 |>
   ggplot2::ggplot(mapping = ggplot2::aes(x = jury, y = value, colour = jury)) +
   ggplot2::scale_x_discrete() +
-  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::scale_color_manual(values = discrete_rainbow_14) +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
@@ -75,7 +75,7 @@ p_1
 p_2 <- deltas_3 |>
   ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
   ggplot2::scale_x_discrete() +
-  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::scale_color_brewer(palette = "Paired") +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
@@ -99,7 +99,7 @@ p_2
 p_3 <- deltas_3 |>
   ggplot2::ggplot(mapping = ggplot2::aes(x = session, y = value, colour = session)) +
   ggplot2::scale_x_discrete() +
-  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::scale_color_manual(values = discrete_rainbow_14[rep(c(FALSE, TRUE), length = length(discrete_rainbow_14))]) +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),
@@ -123,7 +123,7 @@ p_3
 p_4 <- deltas_3 |>
   ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
   ggplot2::scale_x_discrete() +
-  ggthemes::scale_color_tableau(palette = "Tableau 20") +
+  ggplot2::scale_color_brewer(palette = "Paired") +
   ggplot2::geom_violin() +
   ggplot2::geom_jitter(
     position = ggplot2::position_jitter(width = .05),

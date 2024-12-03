@@ -21,6 +21,7 @@ Imports:
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),
     furrr (>= 0.3.1),
+    ggbump (>= 0.1.0),
     ggplot2 (>= 3.5.1),
     ggpubr (>= 0.6.0),
     NMRphasing (>= 1.0.5),
@@ -54,6 +55,7 @@ Collate:
     'load_session.R'
     'plot_concentration.R'
     'prepare_chasselas.R'
+    'prepare_concentration.R'
     'sapid-package.R'
 VignetteBuilder:
     knitr

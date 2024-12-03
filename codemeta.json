@@ -195,6 +195,19 @@
     },
     "8": {
       "@type": "SoftwareApplication",
+      "identifier": "ggbump",
+      "name": "ggbump",
+      "version": ">= 0.1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggbump"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 3.5.1",
@@ -206,7 +219,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -219,7 +232,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -232,7 +245,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "plotly",
       "name": "plotly",
@@ -245,7 +258,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plotly"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -258,7 +271,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -271,12 +284,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -289,7 +302,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -302,7 +315,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",

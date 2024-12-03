@@ -1,0 +1,77 @@
+concentration	jury	taste	value	afc_correct	afc_total
+0.62	jury_01	amer	7.6	9	12
+1.55	jury_01	amer	9	12	12
+1.55	jury_01	astringent	9	12	12
+3.10	jury_01	amer	9.7	12	12
+3.10	jury_01	astringence moyenne	9.7	12	12
+6.21	jury_01	amer	10	12	12
+6.21	jury_01	métallique	10	12	12
+0.01	jury_02	acide	2.6	5	12
+1.55	jury_02	amer	7.3	12	12
+3.10	jury_02	amer	8.9	12	12
+6.21	jury_02	amer	10	12	12
+0.01	jury_03	gras	0.7	5	12
+0.01	jury_03	volume	0.7	5	12
+0.62	jury_03	amer	5	9	12
+1.55	jury_03	amer	6.3	12	12
+3.10	jury_03	amer	8.9	12	12
+6.21	jury_03	amer	9.8	12	12
+0.01	jury_04	acide	2.7	5	12
+0.01	jury_04	volume	2.7	5	12
+0.03	jury_04	acide	3.7	6	12
+0.03	jury_04	volume	3.7	6	12
+0.03	jury_04	citron	3.7	6	12
+0.12	jury_04	volume	1.2	5	12
+0.12	jury_04	léger amer	1.2	5	12
+0.62	jury_04	amer	7.6	9	12
+1.55	jury_04	amer	9.6	12	12
+3.10	jury_04	amer	10	12	12
+6.21	jury_04	amer	10	12	12
+0.12	jury_05	amer	2.1	5	12
+0.62	jury_05	amer	6.2	9	12
+1.55	jury_05	amer	8.7	12	12
+3.10	jury_05	amer	10	12	12
+6.21	jury_05	amer	10	12	12
+0.01	jury_06	sucre	0.9	5	12
+0.01	jury_06	plus de rondeur	0.9	5	12
+0.03	jury_06	volume	0.8	6	12
+0.03	jury_06	tres leger mais plus de volume	0.8	6	12
+0.62	jury_06	amer	3.8	9	12
+0.62	jury_06	volume puis amer qui monte	3.8	9	12
+1.55	jury_06	amer	5.1	12	12
+1.55	jury_06	vegetal	5.1	12	12
+3.10	jury_06	amer	7.7	12	12
+3.10	jury_06	beaucoup de volume au depart	7.7	12	12
+6.21	jury_06	amer	9.1	12	12
+0.12	jury_07	amer	2.3	5	12
+0.62	jury_07	amer	9.6	9	12
+1.55	jury_07	volume	9.9	12	12
+1.55	jury_07	amer	9.9	12	12
+3.10	jury_07	amer	9.9	12	12
+6.21	jury_07	amer	10	12	12
+0.03	jury_08	amer	2.4	6	12
+0.62	jury_08	amer	5.1	9	12
+1.55	jury_08	amer	7.3	12	12
+3.10	jury_08	amer	8.2	12	12
+6.21	jury_08	amer	9.5	12	12
+0.03	jury_09	frais	1	6	12
+0.12	jury_09	moins gras que les autres	0.9	5	12
+0.62	jury_09	amer	7.8	9	12
+1.55	jury_09	amer	8.6	12	12
+3.10	jury_09	amer	9.5	12	12
+6.21	jury_09	amer	10	12	12
+1.55	jury_10	amer	7.6	12	12
+3.10	jury_10	amer	7.3	12	12
+6.21	jury_10	amer	10	12	12
+0.03	jury_11	astringent	4.4	6	12
+0.12	jury_11	sec	7.7	5	12
+0.62	jury_11	amer	7.7	9	12
+0.62	jury_11	acide	7.7	9	12
+1.55	jury_11	amer	9.3	12	12
+3.10	jury_11	amer	8.9	12	12
+6.21	jury_11	amer	9.3	12	12
+0.01	jury_12	amer	1	5	12
+0.03	jury_12	amer	2.5	6	12
+1.55	jury_12	amer	5	12	12
+3.10	jury_12	amer	5.1	12	12
+6.21	jury_12	amer	9.2	12	12

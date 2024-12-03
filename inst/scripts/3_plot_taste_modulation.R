@@ -106,7 +106,7 @@ p_1 <- deltas_4 |>
     ggplot2::aes(x = taste, y = 5, label = stars),
     color = "black",
     size = 8,
-    vjust = -0.5
+    vjust = 0
   ) +
   ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
 p_1
@@ -140,7 +140,7 @@ p_2 <- deltas_4 |>
     ggplot2::aes(x = group, y = 5, label = stars),
     color = "black",
     size = 8,
-    vjust = -0.5
+    vjust = 0
   ) +
   ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
 

@@ -1,28 +1,13 @@
-message("This script is made to treat FLASH PROFILE results. \n")
-
 start <- Sys.time()
 
-message("Loading ... \n")
-message("... packages (and installing them if needed) \n")
-if (!require(conflicted)) {
-  install.packages("conflicted")
-}
-if (!require(readxl)) {
-  install.packages("readxl")
-}
-if (!require(tidyverse)) {
-  install.packages("tidyverse")
-}
-if (!require(SensoMineR)) {
-  install.packages("SensoMineR")
-}
+pkgload::load_all()
 
-message("... paths and parameters \n")
+message("This program treats flash profiles results.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
+
 source(file = "paths.R")
 source(file = "params.R")
-
-message("... functions \n")
-source(file = "r/harmonize_terms.R")
 
 message("... files ... \n")
 xls <- list.files(
@@ -36,53 +21,58 @@ xls <- list.files(
 )
 
 message("... profile \n")
-cluster_profile <- read_xlsx(
+cluster_profile <- readxl::read_xlsx(
   path = xls,
   sheet = 4
 )
 
-cluster_profile_pivoted <- cluster_profile %>%
-  group_by(CJ, ProductName) %>%
-  pivot_longer(4:ncol(.)) %>%
-  dplyr::filter(!is.na(value)) %>%
-  group_by(CJ) %>%
-  mutate(J = cur_group_id()) %>%
-  ungroup() %>%
-  add_count(J) %>%
-  mutate(descriptors = n / (nrow(
-    cluster_profile %>% distinct(ProductName)
-  ))) %>%
-  dplyr::select(ProductName, J, CJ, descriptors, name, value) %>%
-  arrange(J) %>%
-  mutate(name_2 = harmonize_terms(
+cluster_profile_pivoted <- cluster_profile |>
+  tidytable::mutate(ProductName = ProductName |>
+    as.character()) |>
+  tidytable::group_by(CJ, ProductName) |>
+  tidytable::select(-tidytable::where(is.logical)) |>
+  tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
+  tidytable::filter(!is.na(value)) |>
+  tidytable::group_by(CJ) |>
+  tidytable::mutate(J = tidytable::cur_group_id()) |>
+  tidytable::ungroup() |>
+  tidytable::add_count(J) |>
+  tidytable::mutate(descriptors = n / (nrow(
+    cluster_profile |> tidytable::distinct(ProductName)
+  ))) |>
+  tidytable::select(ProductName, J, CJ, descriptors, name, value) |>
+  tidytable::arrange(J) |>
+  tidytable::mutate(name_2 = harmonize_terms(
     x = name,
     dictionary = dictionary_specific_path
-  )) %>%
-  cSplit("name_2", sep = " ", direction = "long") %>%
-  cSplit("name_2", sep = "_", direction = "wide") %>%
-  mutate(newName = harmonize_terms(
-    x = name_2_1,
+  )) |>
+  tidytable::separate_longer_delim(cols = "name_2", delim = " ") |>
+  tidytable::separate_wider_delim(cols = "name_2", delim = "_") |>
+  tidytable::mutate(newName = harmonize_terms(
+    x = name_21,
     dictionary = dictionary_generic_path
   )) |>
-  distinct(ProductName, J, newName, .keep_all = TRUE) |>
-  group_by(ProductName, newName) |>
-  add_count() |>
-  dplyr::filter(n >= MIN_PANELISTS)
+  tidytable::distinct(ProductName, J, newName, .keep_all = TRUE) |>
+  tidytable::group_by(ProductName, newName) |>
+  tidytable::add_count() |>
+  tidytable::ungroup() |>
+  tidytable::filter(n >= MIN_PANELISTS)
 
 if (iHaveNoTime != TRUE) {
-  cluster_profile_pivoted_mfa <- cluster_profile_pivoted %>%
-    dplyr::filter(descriptors > 1)
+  cluster_profile_pivoted_mfa <- cluster_profile_pivoted |>
+    tidytable::filter(descriptors > 1)
 
-  cluster_profile_pivoted_distinct <-
-    cluster_profile_pivoted_mfa %>%
-    distinct(J, .keep_all = TRUE)
+  cluster_profile_pivoted_distinct <- cluster_profile_pivoted_mfa |>
+    tidytable::distinct(J, ProductName, newName, .keep_all = TRUE)
 
   attributes <- cluster_profile_pivoted_distinct$descriptors
 
-  cluster_profile_pivoted_wide <- cluster_profile_pivoted_mfa %>%
-    select(ProductName, J, newName, value) %>%
-    arrange(newName) %>%
-    pivot_wider(names_from = c(newName, J), values_from = value) %>%
+  cluster_profile_pivoted_wide <- cluster_profile_pivoted_mfa |>
+    tidytable::select(ProductName, J, newName, value) |>
+    tidytable::arrange(newName) |>
+    tidytable::mutate(newcol = paste0(newName, "_", J)) |>
+    tidytable::distinct(ProductName, newcol, value) |>
+    tidyr::pivot_wider(names_from = newcol, values_from = value) |>
     data.frame()
 
   panelists <- nrow(cluster_profile_pivoted_wide)
@@ -90,42 +80,40 @@ if (iHaveNoTime != TRUE) {
   rownames(cluster_profile_pivoted_wide) <-
     cluster_profile_pivoted_wide$ProductName
 
-  cluster_profile_pivoted_wide <-
-    cluster_profile_pivoted_wide %>%
-    select(-ProductName)
+  cluster_profile_pivoted_wide <- cluster_profile_pivoted_wide |>
+    tidytable::select(-ProductName)
 
   ## alternative
-  cluster_profile_pivoted_wide_2 <- cluster_profile_pivoted %>%
-    select(ProductName, newName, value) %>%
-    pivot_wider(
+  cluster_profile_pivoted_wide_2 <- cluster_profile_pivoted |>
+    tidytable::select(ProductName, newName, value) |>
+    tidytable::pivot_wider(
       names_from = newName,
       values_from = value,
       values_fn = sum
-    ) %>%
+    ) |>
     data.frame()
 
   rownames(cluster_profile_pivoted_wide_2) <-
     cluster_profile_pivoted_wide_2$ProductName
 
-  cluster_profile_pivoted_wide_2 <-
-    cluster_profile_pivoted_wide_2 %>%
-    select(-ProductName)
+  cluster_profile_pivoted_wide_2 <- cluster_profile_pivoted_wide_2 |>
+    tidytable::select(-ProductName)
 
   res.MFA <-
-    MFA(
+    FactoMineR::MFA(
       base = cluster_profile_pivoted_wide,
       group = c(rep(
-        panelists, ncol(cluster_profile_pivoted_wide)
+        1, ncol(cluster_profile_pivoted_wide)
       )),
       type = c(rep(
         "s", ncol(cluster_profile_pivoted_wide)
       )),
-      ncp = 12,
+      ncp = Inf,
       axes = c(1, 2)
     )
 
   res.MFA.2 <-
-    MFA(
+    FactoMineR::MFA(
       base = cluster_profile_pivoted_wide_2,
       group = c(rep(
         1, ncol(cluster_profile_pivoted_wide_2)
@@ -139,7 +127,7 @@ if (iHaveNoTime != TRUE) {
 
   ## later
   # to export listing
-  # write.infile(res.MFA, file.path(exportDir, "res_PF_cheese.csv"),  sep = ";")
+  # FactoMineR::write.infile(res.MFA, file.path(exportDir, "res_PF_cheese.csv"),  sep = ";")
 
   # to obtain better graphes
   plot(
@@ -210,37 +198,37 @@ if (iHaveNoTime != TRUE) {
 
   ####   Clustering analysis based on coordinates of products ####
 
-  res.HCPC <- HCPC(res.MFA, nb.clust = -1, proba = 0.10)
+  res.HCPC <- FactoMineR::HCPC(res.MFA, nb.clust = -1, proba = 0.10)
 
-  res.HCPC.2 <- HCPC(res.MFA.2, nb.clust = -1, proba = 0.10)
+  res.HCPC.2 <- FactoMineR::HCPC(res.MFA.2, nb.clust = -1, proba = 0.10)
 
   ## later
-  # write.infile(res.HCPC, file.path(exportDir, "res_hcpc.csv"),  sep = ";")
+  # FactoMineR::write.infile(res.HCPC, file.path(exportDir, "res_hcpc.csv"),  sep = ";")
 }
 
-if (CLUSTER != "All") {
-  write_tsv(
-    x = cluster_profile_pivoted,
-    file = file.path(
-      analysis_path_04_output,
-      paste0(
-        "profile_",
-        "cluster_",
-        CLUSTER,
-        ".tsv"
-      )
-    )
-  )
-} else {
-  write_tsv(
-    x = cluster_profile_pivoted,
-    file = file.path(
-      analysis_path_04_output,
-      paste0(
-        "FullProfile_",
-        "all_clusters",
-        ".tsv"
-      )
-    )
-  )
-}
+# if (CLUSTER != "All") {
+#   write_tsv(
+#     x = cluster_profile_pivoted,
+#     file = file.path(
+#       analysis_path_04_output,
+#       paste0(
+#         "profile_",
+#         "cluster_",
+#         CLUSTER,
+#         ".tsv"
+#       )
+#     )
+#   )
+# } else {
+#   write_tsv(
+#     x = cluster_profile_pivoted,
+#     file = file.path(
+#       analysis_path_04_output,
+#       paste0(
+#         "FullProfile_",
+#         "all_clusters",
+#         ".tsv"
+#       )
+#     )
+#   )
+# }

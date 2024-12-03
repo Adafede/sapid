@@ -12,7 +12,13 @@ message("... profile \n")
 table <- file |>
   tidytable::fread()
 
-deltas <- table
+deltas <- table |>
+  tidytable::mutate(tidytable::across(tidytable::everything(), function(x) {
+    x |>
+      gsub(pattern = "_", replacement = " ")
+  })) |>
+  tidytable::mutate(value = value |>
+    as.numeric())
 
 deltas_before <- deltas |>
   tidytable::filter(grepl(pattern = "before", x = product))
@@ -25,7 +31,13 @@ deltas_1 <- deltas_before |>
 
 deltas_2 <- deltas_before |>
   tidytable::filter(
-    taste %in% c("fatness, volume", "balance", "freshness", "persistency", "mouthwatering")
+    taste %in% c(
+      "fatness, volume",
+      "balance",
+      "freshness",
+      "persistency",
+      "mouthwatering"
+    )
   )
 
 deltas_3 <- deltas_1 |>

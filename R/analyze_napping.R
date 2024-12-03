@@ -22,10 +22,11 @@ analyze_napping <- function() {
     harmonize_terms_df()
 
   file_text_raw <- file_text |>
-    tidyr::pivot_longer(2:ncol(file_text)) |>
-    dplyr::filter(!is.na(value)) |>
+    tidytable::pivot_longer(2:ncol(file_text)) |>
+    tidytable::filter(!is.na(value)) |>
     tidytable::separate_longer_delim(cols = "value", delim = " ") |>
-    dplyr::filter(!is.na(value))
+    tidytable::filter(!is.na(value)) |>
+    tidytable::filter(value != "")
 
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,

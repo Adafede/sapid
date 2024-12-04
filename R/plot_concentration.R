@@ -7,7 +7,7 @@
 #'
 #' @examples NULL
 plot_concentration <- function(input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-                               output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf") {
+                               output = "~/switchdrive/SAPERE/06_figures/figure_raw_extract.svg") {
   message("Loading file...\n")
   prepared <- input |>
     tidytable::fread()
@@ -195,20 +195,18 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     )
   dots_corrected
 
-  figure <- ggpubr::ggarrange(
+  ggpubr::ggarrange(
     ggpubr::ggarrange(boxes, scurve, ncol = 2, labels = "AUTO"),
     dots_corrected,
     nrow = 2,
     labels = c("", "C"),
     heights = c(1, 2)
-  )
-
-  message("exporting figure \n")
-  figure |>
+  ) |>
     ggplot2::ggsave(
       filename = output,
       width = 9,
       height = 12
     )
+
   return(output)
 }

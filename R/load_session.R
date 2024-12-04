@@ -1,3 +1,12 @@
+#' Load session
+#'
+#' @param input_dir Input dir
+#' @param session_info Session info
+#' @param tab Tab
+#'
+#' @return NULL
+#'
+#' @examples NULL
 load_session <- function(input_dir, session_info, tab) {
   sheet <- switch(tab,
     "chasselas" = 1,

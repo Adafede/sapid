@@ -5,7 +5,7 @@
 \title{Plot concentration}
 \usage{
 plot_concentration(
-  input = "~/git/sapid/inst/extdata/concentration_afc.tsv",
+  input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
   output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf"
 )
 }

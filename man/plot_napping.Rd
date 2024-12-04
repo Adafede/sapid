@@ -5,8 +5,10 @@
 \title{Plot napping}
 \usage{
 plot_napping(
-  input_coordinates = "inst/extdata/napping_coordinates.tsv",
-  input_descriptors = "inst/extdata/napping_descriptors.tsv",
+  input_coordinates = system.file("extdata", "napping_coordinates.tsv", package =
+    "sapid"),
+  input_descriptors = system.file("extdata", "napping_descriptors.tsv", package =
+    "sapid"),
   sessions = 2
 )
 }

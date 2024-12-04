@@ -182,6 +182,19 @@
     },
     "7": {
       "@type": "SoftwareApplication",
+      "identifier": "forcats",
+      "name": "forcats",
+      "version": ">= 1.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=forcats"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
       "identifier": "furrr",
       "name": "furrr",
       "version": ">= 0.3.1",
@@ -193,7 +206,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=furrr"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggbump",
       "name": "ggbump",
@@ -206,7 +219,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggbump"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -219,7 +232,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -232,7 +245,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -245,7 +258,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "plotly",
       "name": "plotly",
@@ -258,7 +271,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plotly"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -271,7 +284,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -284,12 +297,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -302,7 +315,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -315,7 +328,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -327,6 +340,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
+    },
+    "20": {
+      "@type": "SoftwareApplication",
+      "identifier": "treemapify",
+      "name": "treemapify",
+      "version": ">= 2.5.6",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=treemapify"
     },
     "SystemRequirements": null
   },

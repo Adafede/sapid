@@ -75,7 +75,8 @@ prepare_profiles <-
         value = value
       ) |>
       tidytable::distinct() |>
-      tidytable::arrange(fraction)
+      tidytable::arrange(fraction) |>
+      tidytable::fwrite(file = output, sep = "\t")
 
     return(output)
   }

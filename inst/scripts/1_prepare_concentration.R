@@ -2,7 +2,7 @@ start <- Sys.time()
 
 pkgload::load_all()
 
-message("This program prepares working concentration determination")
+message("This program prepares working concentration determination.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 

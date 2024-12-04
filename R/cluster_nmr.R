@@ -3,6 +3,7 @@
 #' @include colors.R
 #'
 #' @param nmr_dir NMR directory
+#' @param output Output
 #' @param experiment_raw Experiment raw
 #' @param experiment_ref Experiment ref
 #' @param experiments_fractions Experiments fractions
@@ -20,6 +21,7 @@
 #'
 #' @examples NULL
 cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
+                        output = "~/switchdrive/SAPERE/06_figures/figure_nmr.svg",
                         experiment_raw = "proton_00",
                         experiment_ref = "proton_98",
                         experiments_fractions = c(
@@ -289,7 +291,10 @@ cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/100
     ggplot2::geom_line(linewidth = 0.5) +
     ggplot2::facet_grid(rowname ~ .) +
     ggplot2::ylim(ylim) +
-    ggplot2::scale_x_reverse(limits = c(round(ppm_max), round(ppm_min)), n.breaks = round(ppm_max - ppm_min)) +
+    ggplot2::scale_x_reverse(
+      limits = c(round(ppm_max), round(ppm_min)),
+      n.breaks = round(ppm_max - ppm_min)
+    ) +
     ggplot2::scale_color_identity() +
     ggplot2::theme_minimal() +
     ggplot2::xlab("ppm") +
@@ -332,10 +337,12 @@ cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/100
     ))
   plot_1
 
-  plot <- ggpubr::ggarrange(plot_1, plot_2, widths = c(0.2, 1))
-  plot |> ggplot2::ggsave(
-    filename = "protons.svg",
-    width = 16,
-    height = 12
-  )
+  ggpubr::ggarrange(plot_1, plot_2, widths = c(0.2, 1)) |>
+    ggplot2::ggsave(
+      filename = output,
+      width = 16,
+      height = 12
+    )
+
+  return(output)
 }

@@ -6,6 +6,7 @@
 \usage{
 cluster_nmr(
   nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
+  output = "~/switchdrive/SAPERE/06_figures/figure_nmr.svg",
   experiment_raw = "proton_00",
   experiment_ref = "proton_98",
   experiments_fractions = c("proton_17", "proton_18", "proton_19", "proton_20",
@@ -32,6 +33,8 @@ cluster_nmr(
 }
 \arguments{
 \item{nmr_dir}{NMR directory}
+
+\item{output}{Output}
 
 \item{experiment_raw}{Experiment raw}
 

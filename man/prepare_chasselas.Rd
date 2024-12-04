@@ -6,14 +6,14 @@
 \usage{
 prepare_chasselas(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-  output_dir = "~/switchdrive/SAPERE/03_analysis/04_fractions-sensory/03_output",
+  output = "~/git/sapid/inst/extdata/chasselas.tsv",
   sessions = seq(1, 7)
 )
 }
 \arguments{
 \item{input_dir}{Input dir}
 
-\item{output_dir}{output_dir}
+\item{output}{output}
 
 \item{sessions}{Sessions}
 }

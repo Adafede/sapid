@@ -21,7 +21,7 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
   session_infos <- sessions |>
     furrr::future_map(.f = get_session_info)
 
-  tables_coord <- session_infos |>
+  session_infos |>
     furrr::future_map(
       .f = load_session,
       input_dir = input_dir,
@@ -30,14 +30,12 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     tidytable::bind_rows() |>
     tidytable::fwrite(file = output_coordinates, sep = "\t")
 
-  tables_words <- session_infos |>
+  session_infos |>
     furrr::future_map(
       .f = load_session,
       input_dir = input_dir,
       tab = "napping_words"
-    )
-
-  tables_words_harmonized <- tables_words |>
+    ) |>
     furrr::future_map(
       .f = harmonize_terms_df,
       dictionary_generic_path = dictionary_generic_path,

@@ -35,24 +35,22 @@ plot_napping <- function(input_coordinates = "inst/extdata/napping_coordinates.t
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,
     maj.in.min = TRUE,
-    sep.word = c(" "),
+    sep.word = " ",
     num.text = 4,
     contingence.by = 1
   )
-
-  words_raw <- FactoMineR::textual(
-    tab = file_text_raw,
-    maj.in.min = TRUE,
-    sep.word = c(" "),
-    num.text = 4,
-    contingence.by = 1
-  )
-
   df_words_cleaned <- words_cleaned$cont.table |>
     data.frame()
 
-  df_words_raw <- words_raw$cont.table |>
-    data.frame()
+  # words_raw <- FactoMineR::textual(
+  #   tab = file_text_raw,
+  #   maj.in.min = TRUE,
+  #   sep.word = " ",
+  #   num.text = 4,
+  #   contingence.by = 1
+  # )
+  # df_words_raw <- words_raw$cont.table |>
+  #   data.frame()
 
   # if (sessions == 8) {
   #   df_coord <- df_coord |>
@@ -77,8 +75,8 @@ plot_napping <- function(input_coordinates = "inst/extdata/napping_coordinates.t
   df_words_cleaned <-
     df_words_cleaned[, colSums(df_words_cleaned) != 0]
 
-  df_words_raw <-
-    df_words_raw[, colSums(df_words_raw) != 0]
+  # df_words_raw <-
+  #   df_words_raw[, colSums(df_words_raw) != 0]
 
   nap.tot <- cbind(df_coord, df_words_cleaned)
 

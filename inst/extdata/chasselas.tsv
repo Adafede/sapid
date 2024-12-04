@@ -1,0 +1,1315 @@
+date	jury	product	session	taste	value
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	sourness	5.2
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	sourness	5.5
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	sourness	5
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	sourness	5.5
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	sourness	4.2
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	sourness	5.7
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	sourness	6
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	sourness	6.7
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	sourness	6.3
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	sourness	6.8
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	sourness	6.9
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	sourness	6.7
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	sourness	7.1
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	sourness	6.9
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	sourness	5.4
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	sourness	7.9
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	sourness	7.7
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	sourness	7.7
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	sourness	6.2
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	sourness	6.5
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	sourness	6.5
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	sourness	6.1
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	sourness	6.3
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	sourness	7.6
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	sourness	3.8
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	sourness	8.8
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	sourness	5.9
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	sourness	7.6
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	sourness	4.3
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	sourness	8.2
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	sourness	4.7
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	sourness	4.5
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	sourness	5.3
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	sourness	7.6
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	sourness	4.1
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	sourness	8.3
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	sourness	4.5
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	sourness	7.9
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	sourness	6.3
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	sourness	7.3
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	sourness	5.8
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	sourness	8.1
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	sourness	6.5
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	sourness	7.3
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	sourness	7.6
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	sourness	7.7
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	sourness	7.8
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	sourness	7.8
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	sourness	5.4
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	sourness	8.3
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	sourness	5.4
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	sourness	7.2
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	sourness	5.1
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	sourness	5.5
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	sourness	5.7
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	sourness	7.5
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	sourness	9.2
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	sourness	8.9
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	sourness	1.3
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	sourness	5.8
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	sourness	6
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	sourness	6.9
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	sourness	1.1
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	sourness	4.2
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	sourness	2.8
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	sourness	8.6
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	sourness	4.9
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	sourness	1.3
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	sourness	4.6
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	sourness	10
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	sourness	4.2
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	sourness	8.3
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	sourness	3.8
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	sourness	4.9
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	sourness	7
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	sourness	7.2
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	sourness	5
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	sourness	5.4
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	sourness	4.9
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	sourness	6.6
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	sourness	5.2
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	sourness	6
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	sourness	4.3
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	sourness	5.1
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	sourness	5.2
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	sourness	5.2
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	sourness	5.1
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	sourness	5.1
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	sourness	5.7
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	sourness	3.9
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	sourness	5.5
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	sourness	3.6
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	sourness	5.5
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	sourness	3.9
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	sourness	1.8
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	sourness	3.4
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	sourness	5.7
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	sourness	5.5
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	sourness	2.6
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	sourness	3.2
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	sourness	3.7
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	sourness	3.5
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	sourness	3.3
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	sourness	5.2
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	sourness	3.3
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	sourness	3.8
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	sourness	2.4
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	sourness	8.3
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	sourness	1.9
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	sourness	6.1
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	sourness	6.3
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	sourness	6.3
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	sourness	7
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	sourness	6.7
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	sourness	7.1
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	sourness	6.4
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	sourness	7
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	sourness	6
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	sourness	6.7
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	sourness	8.1
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	sourness	7.7
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	sourness	6.9
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	sourness	6.9
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	sourness	5.6
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	sourness	5.7
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	sourness	5.3
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	sourness	4.8
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	sourness	4
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	sourness	4.9
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	sourness	5
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	sourness	7.8
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	sourness	7
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	sourness	5.4
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	sourness	7.5
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	sourness	4.1
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	sourness	1.8
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	sourness	4.3
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	sourness	9
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	sourness	3.7
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	sourness	6.3
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	sourness	4.7
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	sourness	9.1
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	sourness	3.8
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	sourness	5.8
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	sourness	2.9
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	sourness	5.5
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	bitterness	4.4
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	bitterness	4
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	bitterness	6
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	bitterness	6.3
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	bitterness	6.8
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	bitterness	7.1
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	bitterness	6
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	bitterness	7.3
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	bitterness	5.9
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	bitterness	5.9
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	bitterness	2
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	bitterness	0
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	bitterness	5.3
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	bitterness	4.3
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	bitterness	5.2
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	bitterness	4.6
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	bitterness	3.4
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	bitterness	4.1
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	bitterness	6.7
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	bitterness	4.5
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	bitterness	5.3
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	bitterness	6.6
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	bitterness	6.9
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	bitterness	6.3
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	bitterness	6.2
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	bitterness	2.5
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	bitterness	3.9
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	bitterness	6.2
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	bitterness	4.4
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	bitterness	7.8
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	bitterness	6.6
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	bitterness	5.1
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	bitterness	7.7
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	bitterness	6.7
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	bitterness	2.4
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	bitterness	5.3
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	bitterness	1.9
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	bitterness	1.8
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	bitterness	1
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	bitterness	1.4
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	bitterness	2.6
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	bitterness	6.1
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	bitterness	3.1
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	bitterness	2.5
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	bitterness	2.1
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	bitterness	1.7
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	bitterness	3.3
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	bitterness	4.1
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	bitterness	2
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	bitterness	6.6
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	bitterness	4.5
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	bitterness	3.9
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	bitterness	2.8
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	bitterness	1.2
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	bitterness	2.8
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	bitterness	4.9
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	bitterness	4.1
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	bitterness	3.1
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	bitterness	5.7
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	bitterness	5
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	bitterness	1.6
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	bitterness	0.9
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	bitterness	7.5
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	bitterness	6.1
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	bitterness	3.5
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	bitterness	1.7
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	bitterness	2.1
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	bitterness	6.1
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	bitterness	5.7
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	bitterness	8.2
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	bitterness	2.6
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	bitterness	5.9
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	bitterness	1.4
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	bitterness	6.2
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	bitterness	2.1
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	bitterness	5
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	bitterness	3.4
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	bitterness	3.1
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	bitterness	2.9
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	bitterness	5.6
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	bitterness	4.4
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	bitterness	3.9
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	bitterness	4.7
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	bitterness	4
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	bitterness	1.5
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	bitterness	1.8
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	bitterness	2.7
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	bitterness	3.3
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	bitterness	2.2
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	bitterness	4.3
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	bitterness	2.2
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	bitterness	2.7
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	bitterness	3
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	bitterness	0.5
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	bitterness	3.1
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	bitterness	5
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	bitterness	2.6
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	bitterness	4.4
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	bitterness	1.8
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	bitterness	4
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	bitterness	2.4
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	bitterness	5.6
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	bitterness	2.9
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	bitterness	1.8
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	bitterness	4.6
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	bitterness	5.1
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	bitterness	3.6
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	bitterness	1.4
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	bitterness	1.9
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	bitterness	4.3
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	bitterness	7
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	bitterness	4.9
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	bitterness	5.8
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	bitterness	3.8
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	bitterness	6.2
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	bitterness	4.7
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	bitterness	5.6
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	bitterness	5.2
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	bitterness	5.4
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	bitterness	5.4
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	bitterness	6
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	bitterness	4.6
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	bitterness	4.9
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	bitterness	2.8
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	bitterness	2
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	bitterness	2.6
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	bitterness	2
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	bitterness	0.7
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	bitterness	0.5
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	bitterness	3.1
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	bitterness	0.6
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	bitterness	1.2
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	bitterness	1.2
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	bitterness	6.4
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	bitterness	1
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	bitterness	0
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	bitterness	6.7
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	bitterness	3.2
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	bitterness	2.3
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	bitterness	4.7
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	bitterness	2.8
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	bitterness	2.3
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	bitterness	2.1
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	bitterness	5.2
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	bitterness	4.9
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	bitterness	5.5
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	sweetness	3
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	sweetness	3
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	sweetness	2.7
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	sweetness	2.7
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	sweetness	2.5
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	sweetness	0.7
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	sweetness	1.7
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	sweetness	2.7
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	sweetness	3
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	sweetness	3.7
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	sweetness	0
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	sweetness	2.7
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	sweetness	4.2
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	sweetness	3.8
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	sweetness	2.2
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	sweetness	5.1
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	sweetness	2.4
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	sweetness	2
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	sweetness	5.3
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	sweetness	4.1
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	sweetness	3.6
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	sweetness	4.8
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	sweetness	2.8
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	sweetness	6.8
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	sweetness	0.2
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	sweetness	0.1
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	sweetness	2.9
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	sweetness	0.1
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	sweetness	4.4
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	sweetness	2.5
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	sweetness	3.2
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	sweetness	2
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	sweetness	0.3
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	sweetness	0.3
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	sweetness	2.5
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	sweetness	2.9
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	sweetness	5.3
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	sweetness	7
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	sweetness	4.5
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	sweetness	3.5
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	sweetness	3.1
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	sweetness	2.3
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	sweetness	3.3
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	sweetness	2.5
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	sweetness	2.2
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	sweetness	3.7
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	sweetness	0.5
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	sweetness	0.4
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	sweetness	0.1
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	sweetness	0.1
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	sweetness	1.2
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	sweetness	0.3
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	sweetness	0.2
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	sweetness	0.2
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	sweetness	0.7
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	sweetness	0.4
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	sweetness	2.8
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	sweetness	2.6
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	sweetness	2.2
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	sweetness	4.5
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	sweetness	0.3
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	sweetness	2.1
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	sweetness	2.6
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	sweetness	0.4
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	sweetness	0.1
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	sweetness	0.1
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	sweetness	2
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	sweetness	4
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	sweetness	1
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	sweetness	0
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	sweetness	1.2
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	sweetness	2.1
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	sweetness	2.4
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	sweetness	0
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	sweetness	0.1
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	sweetness	0
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	sweetness	0
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	sweetness	1.3
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	sweetness	0.9
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	sweetness	0.1
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	sweetness	0
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	sweetness	0
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	sweetness	0.1
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	sweetness	0.1
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	sweetness	3
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	sweetness	2.5
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	sweetness	1.4
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	sweetness	1.1
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	sweetness	1.8
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	sweetness	1.1
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	sweetness	0.9
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	sweetness	1
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	sweetness	0.6
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	sweetness	0.4
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	sweetness	1.1
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	sweetness	1.9
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	sweetness	0.8
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	sweetness	1.5
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	sweetness	1.6
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	sweetness	1.9
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	sweetness	1.5
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	sweetness	1.6
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	sweetness	1.6
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	sweetness	1.5
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	sweetness	1.1
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	sweetness	1.7
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	sweetness	2.8
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	sweetness	2.3
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	sweetness	0
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	sweetness	3.5
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	sweetness	3.6
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	sweetness	3.9
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	sweetness	3.6
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	sweetness	4.9
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	sweetness	4.8
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	sweetness	2.2
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	sweetness	0.9
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	sweetness	1.4
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	sweetness	1.8
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	sweetness	1.8
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	sweetness	2.7
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	sweetness	1.2
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	sweetness	2.3
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	sweetness	0.1
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	sweetness	1.1
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	sweetness	1.4
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	sweetness	1.7
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	sweetness	1.8
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	sweetness	0.5
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	sweetness	0.8
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	sweetness	1.5
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	sweetness	2.2
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	sweetness	2.2
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	sweetness	0
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	sweetness	0
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	sweetness	0
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	sweetness	0.4
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	sweetness	0
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	sweetness	1.6
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	sweetness	3.1
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	sweetness	1.7
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	sweetness	0.3
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	sweetness	0.9
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	sweetness	0.7
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	sweetness	1.7
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	sweetness	0.9
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	saltiness	3.7
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	saltiness	3.5
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	saltiness	3.7
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	saltiness	3.8
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	saltiness	3.5
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	saltiness	3.8
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	saltiness	3.9
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	saltiness	4
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	saltiness	3.9
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	saltiness	3.7
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	saltiness	1.8
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	saltiness	0.2
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	saltiness	5.4
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	saltiness	7.1
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	saltiness	5.3
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	saltiness	3.6
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	saltiness	4.5
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	saltiness	5.7
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	saltiness	3.7
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	saltiness	8
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	saltiness	6
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	saltiness	5.6
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	saltiness	4.9
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	saltiness	6.8
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	saltiness	6
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	saltiness	5.1
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	saltiness	1.2
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	saltiness	7.6
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	saltiness	0.1
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	saltiness	1.4
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	saltiness	7
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	saltiness	6.9
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	saltiness	7
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	saltiness	6.7
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	saltiness	1.6
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	saltiness	3.4
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	saltiness	1.4
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	saltiness	2.6
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	saltiness	3
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	saltiness	4.6
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	saltiness	1.9
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	saltiness	2
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	saltiness	1.9
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	saltiness	2.5
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	saltiness	1.7
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	saltiness	1.4
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	saltiness	0.6
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	saltiness	0.5
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	saltiness	0.1
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	saltiness	0.1
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	saltiness	0.2
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	saltiness	2.4
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	saltiness	1.7
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	saltiness	0.9
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	saltiness	0.8
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	saltiness	2.3
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	saltiness	6.1
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	saltiness	4.4
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	saltiness	3.1
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	saltiness	8.5
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	saltiness	5.3
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	saltiness	4.3
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	saltiness	6.2
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	saltiness	2.7
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	saltiness	3.2
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	saltiness	6.5
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	saltiness	3.9
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	saltiness	4.4
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	saltiness	0
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	saltiness	0
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	saltiness	0.5
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	saltiness	0
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	saltiness	1
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	saltiness	0
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	saltiness	1.4
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	saltiness	1.3
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	saltiness	0.1
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	saltiness	0.1
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	saltiness	0
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	saltiness	2.4
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	saltiness	3.4
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	saltiness	2.1
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	saltiness	5.3
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	saltiness	4.6
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	saltiness	3.9
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	saltiness	3.7
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	saltiness	3.1
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	saltiness	3.2
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	saltiness	1.8
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	saltiness	3.7
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	saltiness	3
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	saltiness	4.1
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	saltiness	3.9
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	saltiness	4.8
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	saltiness	4.4
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	saltiness	5.7
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	saltiness	5.3
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	saltiness	4.9
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	saltiness	4.2
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	saltiness	4.8
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	saltiness	5.1
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	saltiness	4.9
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	saltiness	5.3
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	saltiness	6.6
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	saltiness	5.1
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	saltiness	5.4
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	saltiness	4.4
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	saltiness	10
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	saltiness	4.1
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	saltiness	4.6
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	saltiness	4.6
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	saltiness	4.8
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	saltiness	5.2
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	saltiness	4.1
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	saltiness	5.6
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	saltiness	4.6
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	saltiness	4.8
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	saltiness	2.5
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	saltiness	4.1
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	saltiness	3.5
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	saltiness	4.1
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	saltiness	3.5
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	saltiness	3.7
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	saltiness	3.3
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	saltiness	2.1
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	saltiness	1.8
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	saltiness	2
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	saltiness	1
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	saltiness	4.9
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	saltiness	1.8
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	saltiness	0
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	saltiness	1.4
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	saltiness	0
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	saltiness	0
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	saltiness	2.5
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	saltiness	2.9
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	saltiness	2.2
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	saltiness	3.2
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	saltiness	2.8
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	saltiness	4.6
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	saltiness	3.1
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	saltiness	3.7
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	saltiness	2.9
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	saltiness	4.1
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	saltiness	2.5
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	saltiness	3.3
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	fatness, volume	3.1
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	fatness, volume	3
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	fatness, volume	6
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	fatness, volume	5.8
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	fatness, volume	3.5
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	fatness, volume	2.7
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	fatness, volume	4.4
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	fatness, volume	5.4
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	fatness, volume	4.6
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	fatness, volume	5
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	fatness, volume	5.5
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	fatness, volume	4.8
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	fatness, volume	5.2
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	fatness, volume	4
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	fatness, volume	4.5
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	fatness, volume	5.6
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	fatness, volume	4.2
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	fatness, volume	4.1
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	fatness, volume	5.3
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	fatness, volume	4.7
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	fatness, volume	5
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	fatness, volume	6
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	fatness, volume	5.8
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	fatness, volume	5.1
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	fatness, volume	4.9
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	fatness, volume	7.5
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	fatness, volume	0.9
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	fatness, volume	2.3
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	fatness, volume	1.1
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	fatness, volume	1.5
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	fatness, volume	1.9
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	fatness, volume	3.6
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	fatness, volume	5.3
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	fatness, volume	1.5
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	fatness, volume	2.6
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	fatness, volume	4.9
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	fatness, volume	3.6
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	fatness, volume	4.8
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	fatness, volume	3.6
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	fatness, volume	6.7
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	fatness, volume	5.5
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	fatness, volume	2.9
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	fatness, volume	3.8
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	fatness, volume	4.2
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	fatness, volume	3.4
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	fatness, volume	3.2
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	fatness, volume	4.2
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	fatness, volume	1.7
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	fatness, volume	3.1
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	fatness, volume	0.9
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	fatness, volume	4.1
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	fatness, volume	1.9
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	fatness, volume	4.8
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	fatness, volume	4
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	fatness, volume	3.4
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	fatness, volume	0.6
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	fatness, volume	2.8
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	fatness, volume	1.5
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	fatness, volume	2.2
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	fatness, volume	6.7
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	fatness, volume	2
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	fatness, volume	2.3
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	fatness, volume	1.5
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	fatness, volume	0.6
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	fatness, volume	0.2
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	fatness, volume	0.2
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	fatness, volume	3.9
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	fatness, volume	4.2
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	fatness, volume	3
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	fatness, volume	3.1
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	fatness, volume	4.2
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	fatness, volume	3.9
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	fatness, volume	4.3
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	fatness, volume	2.8
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	fatness, volume	0.9
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	fatness, volume	0.1
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	fatness, volume	2.1
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	fatness, volume	2.2
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	fatness, volume	1.3
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	fatness, volume	1.3
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	fatness, volume	2.4
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	fatness, volume	4.2
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	fatness, volume	2.2
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	fatness, volume	2.7
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	fatness, volume	4.6
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	fatness, volume	2.6
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	fatness, volume	3
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	fatness, volume	2.6
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	fatness, volume	4
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	fatness, volume	3
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	fatness, volume	2.8
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	fatness, volume	2.6
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	fatness, volume	3
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	fatness, volume	3.8
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	fatness, volume	3.9
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	fatness, volume	4.6
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	fatness, volume	4.4
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	fatness, volume	4.6
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	fatness, volume	6.7
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	fatness, volume	5.8
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	fatness, volume	5.5
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	fatness, volume	4.9
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	fatness, volume	5.7
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	fatness, volume	5.4
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	fatness, volume	6
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	fatness, volume	5.8
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	fatness, volume	2.7
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	fatness, volume	2.4
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	fatness, volume	2.1
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	fatness, volume	4.4
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	fatness, volume	3.7
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	fatness, volume	3
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	fatness, volume	3
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	fatness, volume	3.2
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	fatness, volume	3.5
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	fatness, volume	3.2
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	fatness, volume	2.7
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	fatness, volume	2.2
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	fatness, volume	2.5
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	fatness, volume	2.9
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	fatness, volume	4.4
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	fatness, volume	2.4
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	fatness, volume	2.3
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	fatness, volume	4.3
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	fatness, volume	0.9
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	fatness, volume	1.5
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	fatness, volume	1.5
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	fatness, volume	0.8
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	fatness, volume	1.1
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	fatness, volume	0.8
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	fatness, volume	0
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	fatness, volume	0
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	fatness, volume	0
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	fatness, volume	2.5
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	fatness, volume	4.2
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	fatness, volume	0
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	fatness, volume	0.8
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	fatness, volume	0
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	fatness, volume	1.7
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	fatness, volume	4.8
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	fatness, volume	3.1
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	fatness, volume	0.7
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	fatness, volume	2.3
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	fatness, volume	0.8
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	fatness, volume	1
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	fatness, volume	0.5
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	balance	6.1
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	balance	6.4
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	balance	7
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	balance	5.3
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	balance	5.8
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	balance	3.4
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	balance	6.1
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	balance	5.4
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	balance	4.9
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	balance	5.4
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	balance	6.8
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	balance	6
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	balance	4.6
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	balance	5.9
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	balance	3.7
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	balance	1.6
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	balance	2
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	balance	1.8
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	balance	5.9
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	balance	3.7
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	balance	4.8
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	balance	4.6
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	balance	4.5
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	balance	3.6
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	balance	4.3
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	balance	1.7
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	balance	6.8
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	balance	3.1
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	balance	7
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	balance	2.7
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	balance	7.1
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	balance	6.3
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	balance	1.2
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	balance	0.8
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	balance	5.6
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	balance	2.1
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	balance	4.9
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	balance	6.4
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	balance	5.3
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	balance	2.6
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	balance	4.8
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	balance	2.2
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	balance	1.9
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	balance	2.5
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	balance	3.5
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	balance	3.2
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	balance	4.4
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	balance	4.2
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	balance	2.4
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	balance	1.9
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	balance	2.8
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	balance	3.2
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	balance	3.7
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	balance	4.4
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	balance	5
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	balance	2.8
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	balance	2.2
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	balance	2.5
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	balance	6.6
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	balance	4
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	balance	7.1
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	balance	6.2
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	balance	5.3
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	balance	6.3
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	balance	7.3
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	balance	2.2
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	balance	5.1
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	balance	2.1
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	balance	4.6
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	balance	0
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	balance	5.7
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	balance	3.2
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	balance	4.9
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	balance	3.7
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	balance	3.6
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	balance	1.9
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	balance	3.7
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	balance	3.1
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	balance	3.3
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	balance	1.7
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	balance	3.6
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	balance	3.1
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	balance	3
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	balance	3.8
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	balance	7.2
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	balance	2.8
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	balance	7
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	balance	3
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	balance	7.1
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	balance	2.9
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	balance	6.3
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	balance	4.8
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	balance	5.2
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	balance	4.2
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	balance	4.7
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	balance	5.7
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	balance	4.8
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	balance	5.2
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	balance	5.8
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	balance	4.8
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	balance	5.4
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	balance	4.6
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	balance	4.8
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	balance	4.1
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	balance	4.9
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	balance	4.6
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	balance	5.4
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	balance	3.9
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	balance	5.8
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	balance	4.9
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	balance	5
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	balance	3.9
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	balance	4.5
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	balance	4.3
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	balance	4.6
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	balance	5.2
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	balance	3.8
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	balance	3.9
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	balance	3.6
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	balance	4.4
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	balance	4
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	balance	4.2
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	balance	4.5
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	balance	6.9
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	balance	3.1
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	balance	2.2
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	balance	1.9
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	balance	2.3
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	balance	3
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	balance	2.3
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	balance	7
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	balance	7.1
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	balance	6.9
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	balance	4.7
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	balance	6.3
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	balance	3.4
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	balance	3.5
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	balance	0.8
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	balance	5.2
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	balance	6.7
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	balance	6.5
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	balance	2.5
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	balance	6
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	balance	4.5
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	balance	5.4
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	balance	5.1
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	freshness	6.9
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	freshness	5.8
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	freshness	7.1
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	freshness	5.7
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	freshness	6
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	freshness	6.2
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	freshness	4.8
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	freshness	4.4
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	freshness	4.9
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	freshness	5.2
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	freshness	6
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	freshness	6.7
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	freshness	6.6
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	freshness	7
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	freshness	6.6
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	freshness	3.5
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	freshness	2.5
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	freshness	7.9
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	freshness	4.9
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	freshness	2.3
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	freshness	5
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	freshness	2.9
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	freshness	4.3
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	freshness	6.6
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	freshness	2.9
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	freshness	4.1
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	freshness	2.3
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	freshness	1.8
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	freshness	4.7
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	freshness	4.9
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	freshness	1.3
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	freshness	4.5
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	freshness	6.8
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	freshness	6.3
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	freshness	1.6
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	freshness	3.5
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	freshness	6.2
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	freshness	6.5
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	freshness	2.2
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	freshness	3.6
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	freshness	5.9
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	freshness	1.2
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	freshness	7.6
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	freshness	7.6
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	freshness	0.1
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	freshness	4.1
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	freshness	5.4
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	freshness	4.8
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	freshness	4.5
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	freshness	4.8
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	freshness	5.1
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	freshness	6.2
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	freshness	7
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	freshness	7.8
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	freshness	5.7
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	freshness	4.4
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	freshness	5.8
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	freshness	4.8
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	freshness	4.7
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	freshness	5.5
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	freshness	5.6
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	freshness	5.6
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	freshness	7
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	freshness	5.8
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	freshness	5.8
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	freshness	5.9
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	freshness	5.5
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	freshness	5.7
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	freshness	5.9
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	freshness	2.4
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	freshness	4.2
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	freshness	2.3
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	freshness	2.9
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	freshness	2
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	freshness	3.3
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	freshness	3.8
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	freshness	7.1
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	freshness	3.5
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	freshness	1.8
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	freshness	5.2
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	freshness	6.8
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	freshness	4
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	freshness	5.1
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	persistency	5.8
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	persistency	5.1
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	persistency	7
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	persistency	6.3
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	persistency	6.1
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	persistency	5.1
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	persistency	3.4
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	persistency	2.4
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	persistency	7.2
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	persistency	7.8
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	persistency	7.6
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	persistency	8.2
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	persistency	7.4
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	persistency	8.7
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	persistency	3.5
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	persistency	4.5
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	persistency	5.9
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	persistency	3.5
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	persistency	5.8
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	persistency	6.4
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	persistency	5.9
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	persistency	6.5
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	persistency	5.5
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	persistency	7.8
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	persistency	3
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	persistency	3.2
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	persistency	2
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	persistency	3.2
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	persistency	1.9
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	persistency	1.3
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	persistency	3.5
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	persistency	2
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	persistency	4.4
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	persistency	7.1
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	persistency	2.3
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	persistency	4.2
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	persistency	7.5
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	persistency	5.5
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	persistency	5.3
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	persistency	1.9
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	persistency	4.3
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	persistency	1
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	persistency	5.1
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	persistency	5.3
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	persistency	2.1
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	persistency	2.3
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	persistency	3
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	persistency	3.6
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	persistency	7.6
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	persistency	7.2
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	persistency	6.3
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	persistency	5.5
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	persistency	5.6
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	persistency	6.3
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	persistency	4.2
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	persistency	5.7
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	persistency	5.5
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	persistency	4.4
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	persistency	5.1
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	persistency	4.9
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	persistency	4.3
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	persistency	3.3
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	persistency	7.7
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	persistency	6.5
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	persistency	6.6
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	persistency	4.4
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	persistency	6.3
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	persistency	6.2
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	persistency	6.7
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	persistency	4.3
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	persistency	3.4
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	persistency	2
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	persistency	2.4
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	persistency	1.8
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	persistency	2.9
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	persistency	5.7
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	persistency	4.6
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	persistency	5.1
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	persistency	6.4
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	persistency	3.2
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	persistency	4.9
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	persistency	2.9
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	persistency	4.4
+2021-04-12T00:00:00Z	jury_01	product_1before	session_06	mouthwatering	2.8
+2021-04-12T00:00:00Z	jury_01	product_2after	session_06	mouthwatering	3.5
+2021-04-19T00:00:00Z	jury_01	product_1before	session_02	mouthwatering	4.8
+2021-04-19T00:00:00Z	jury_01	product_2after	session_02	mouthwatering	6.3
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	mouthwatering	4.9
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	mouthwatering	4.9
+2021-05-17T00:00:00Z	jury_01	product_1before	session_03	mouthwatering	3.4
+2021-05-17T00:00:00Z	jury_01	product_2after	session_03	mouthwatering	4.5
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	mouthwatering	6
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	mouthwatering	5.1
+2021-04-19T00:00:00Z	jury_02	product_1before	session_02	mouthwatering	5.8
+2021-04-19T00:00:00Z	jury_02	product_2after	session_02	mouthwatering	4.1
+2021-04-12T00:00:00Z	jury_03	product_1before	session_06	mouthwatering	8.2
+2021-04-12T00:00:00Z	jury_03	product_2after	session_06	mouthwatering	8.2
+2021-04-26T00:00:00Z	jury_03	product_1before	session_05	mouthwatering	6.9
+2021-04-26T00:00:00Z	jury_03	product_2after	session_05	mouthwatering	7.7
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	mouthwatering	6.7
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	mouthwatering	6
+2021-05-17T00:00:00Z	jury_03	product_1before	session_03	mouthwatering	5.4
+2021-05-17T00:00:00Z	jury_03	product_2after	session_03	mouthwatering	8.5
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	mouthwatering	7.1
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	mouthwatering	7.3
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	mouthwatering	7.9
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	mouthwatering	7.9
+2021-04-26T00:00:00Z	jury_04	product_1before	session_05	mouthwatering	7.1
+2021-04-26T00:00:00Z	jury_04	product_2after	session_05	mouthwatering	1.2
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	mouthwatering	6
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	mouthwatering	3.2
+2021-05-17T00:00:00Z	jury_04	product_1before	session_03	mouthwatering	1.4
+2021-05-17T00:00:00Z	jury_04	product_2after	session_03	mouthwatering	1.9
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	mouthwatering	7.4
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	mouthwatering	7.9
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	mouthwatering	5.7
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	mouthwatering	4.5
+2021-04-12T00:00:00Z	jury_05	product_1before	session_06	mouthwatering	4.7
+2021-04-12T00:00:00Z	jury_05	product_2after	session_06	mouthwatering	2.3
+2021-04-19T00:00:00Z	jury_05	product_1before	session_02	mouthwatering	2
+2021-04-19T00:00:00Z	jury_05	product_2after	session_02	mouthwatering	6.3
+2021-04-26T00:00:00Z	jury_05	product_1before	session_05	mouthwatering	5.8
+2021-04-26T00:00:00Z	jury_05	product_2after	session_05	mouthwatering	6.3
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	mouthwatering	5.2
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	mouthwatering	6.3
+2021-05-17T00:00:00Z	jury_05	product_1before	session_03	mouthwatering	5.3
+2021-05-17T00:00:00Z	jury_05	product_2after	session_03	mouthwatering	5.6
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	mouthwatering	4.4
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	mouthwatering	6.7
+2021-04-19T00:00:00Z	jury_06	product_1before	session_02	mouthwatering	7
+2021-04-19T00:00:00Z	jury_06	product_2after	session_02	mouthwatering	4.2
+2021-04-26T00:00:00Z	jury_06	product_1before	session_05	mouthwatering	4.3
+2021-04-26T00:00:00Z	jury_06	product_2after	session_05	mouthwatering	5.7
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	mouthwatering	6
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	mouthwatering	6.3
+2021-05-17T00:00:00Z	jury_06	product_1before	session_03	mouthwatering	6.4
+2021-05-17T00:00:00Z	jury_06	product_2after	session_03	mouthwatering	7.5
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	mouthwatering	4.4
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	mouthwatering	6.7
+2021-04-12T00:00:00Z	jury_07	product_1before	session_06	mouthwatering	8.3
+2021-04-12T00:00:00Z	jury_07	product_2after	session_06	mouthwatering	7.9
+2021-04-19T00:00:00Z	jury_07	product_1before	session_02	mouthwatering	3.5
+2021-04-19T00:00:00Z	jury_07	product_2after	session_02	mouthwatering	6.9
+2021-04-26T00:00:00Z	jury_07	product_1before	session_05	mouthwatering	7.2
+2021-04-26T00:00:00Z	jury_07	product_2after	session_05	mouthwatering	6.8
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	mouthwatering	6.7
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	mouthwatering	7.7
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	mouthwatering	3.6
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	mouthwatering	8.6
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	mouthwatering	6.5
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	mouthwatering	3.9
+2021-04-12T00:00:00Z	jury_08	product_1before	session_06	mouthwatering	2.9
+2021-04-12T00:00:00Z	jury_08	product_2after	session_06	mouthwatering	6.1
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	mouthwatering	3.4
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	mouthwatering	2.7
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	mouthwatering	3
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	mouthwatering	2.2
+2021-04-12T00:00:00Z	jury_09	product_1before	session_06	mouthwatering	2.3
+2021-04-12T00:00:00Z	jury_09	product_2after	session_06	mouthwatering	0.5
+2021-04-19T00:00:00Z	jury_09	product_1before	session_02	mouthwatering	2.2
+2021-04-19T00:00:00Z	jury_09	product_2after	session_02	mouthwatering	1.3
+2021-04-26T00:00:00Z	jury_09	product_1before	session_05	mouthwatering	1.6
+2021-04-26T00:00:00Z	jury_09	product_2after	session_05	mouthwatering	3.9
+2021-05-17T00:00:00Z	jury_09	product_1before	session_03	mouthwatering	2.6
+2021-05-17T00:00:00Z	jury_09	product_2after	session_03	mouthwatering	2.2
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	mouthwatering	2.1
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	mouthwatering	2.4
+2021-04-19T00:00:00Z	jury_10	product_1before	session_02	mouthwatering	4.5
+2021-04-19T00:00:00Z	jury_10	product_2after	session_02	mouthwatering	6.9
+2021-04-26T00:00:00Z	jury_10	product_1before	session_05	mouthwatering	3
+2021-04-26T00:00:00Z	jury_10	product_2after	session_05	mouthwatering	4.8
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	mouthwatering	3.3
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	mouthwatering	5.9
+2021-05-17T00:00:00Z	jury_10	product_1before	session_03	mouthwatering	4.7
+2021-05-17T00:00:00Z	jury_10	product_2after	session_03	mouthwatering	6.5
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	mouthwatering	5.7
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	mouthwatering	5.6
+2021-04-19T00:00:00Z	jury_11	product_1before	session_02	mouthwatering	3.5
+2021-04-19T00:00:00Z	jury_11	product_2after	session_02	mouthwatering	4.9
+2021-04-26T00:00:00Z	jury_11	product_1before	session_05	mouthwatering	4.7
+2021-04-26T00:00:00Z	jury_11	product_2after	session_05	mouthwatering	3.6
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	mouthwatering	5.7
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	mouthwatering	4.7
+2021-05-17T00:00:00Z	jury_11	product_1before	session_03	mouthwatering	4.1
+2021-05-17T00:00:00Z	jury_11	product_2after	session_03	mouthwatering	5.1
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	mouthwatering	4.9
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	mouthwatering	3.9
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	mouthwatering	5.4
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	mouthwatering	4.6
+2021-04-26T00:00:00Z	jury_12	product_1before	session_05	mouthwatering	2.2
+2021-04-26T00:00:00Z	jury_12	product_2after	session_05	mouthwatering	3.3
+2021-05-17T00:00:00Z	jury_12	product_1before	session_03	mouthwatering	3.5
+2021-04-12T00:00:00Z	jury_13	product_1before	session_06	mouthwatering	4.8
+2021-04-12T00:00:00Z	jury_13	product_2after	session_06	mouthwatering	5.3
+2021-04-19T00:00:00Z	jury_13	product_1before	session_02	mouthwatering	5.4
+2021-04-19T00:00:00Z	jury_13	product_2after	session_02	mouthwatering	5.4
+2021-04-26T00:00:00Z	jury_13	product_1before	session_05	mouthwatering	5.2
+2021-04-26T00:00:00Z	jury_13	product_2after	session_05	mouthwatering	5.4
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	mouthwatering	4.9
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	mouthwatering	5.4
+2021-05-17T00:00:00Z	jury_13	product_1before	session_03	mouthwatering	3
+2021-05-17T00:00:00Z	jury_13	product_2after	session_03	mouthwatering	5
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	mouthwatering	5.5
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	mouthwatering	4
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	mouthwatering	4
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	mouthwatering	2.1
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	mouthwatering	6.9
+2021-04-12T00:00:00Z	jury_15	product_1before	session_06	mouthwatering	4.4
+2021-04-12T00:00:00Z	jury_15	product_2after	session_06	mouthwatering	2.7
+2021-04-19T00:00:00Z	jury_15	product_1before	session_02	mouthwatering	0.9
+2021-04-19T00:00:00Z	jury_15	product_2after	session_02	mouthwatering	2.6
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	mouthwatering	4.4
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	mouthwatering	3.7
+2021-04-12T00:00:00Z	jury_16	product_1before	session_06	mouthwatering	9.2
+2021-04-12T00:00:00Z	jury_16	product_2after	session_06	mouthwatering	7.3
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	mouthwatering	8.1
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	mouthwatering	2.3
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	mouthwatering	0
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	mouthwatering	2.9
+2021-04-12T00:00:00Z	jury_17	product_1before	session_06	mouthwatering	6.4
+2021-04-12T00:00:00Z	jury_17	product_2after	session_06	mouthwatering	8
+2021-04-26T00:00:00Z	jury_17	product_1before	session_05	mouthwatering	3.6
+2021-04-26T00:00:00Z	jury_17	product_2after	session_05	mouthwatering	6.1
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	mouthwatering	4.9
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	mouthwatering	3.3
+2021-05-17T00:00:00Z	jury_17	product_1before	session_03	mouthwatering	2.9
+2021-05-17T00:00:00Z	jury_17	product_2after	session_03	mouthwatering	4.7
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	mouthwatering	3.4
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	mouthwatering	4.7
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	freshness	6.8
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	freshness	7.1
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	freshness	6.1
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	freshness	6
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	freshness	5.5
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	freshness	5.7
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	freshness	6.5
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	freshness	7.1
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	freshness	6.3
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	freshness	6.5
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	freshness	7.4
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	freshness	9
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	freshness	7.7
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	freshness	7.6
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	freshness	7.5
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	freshness	7.3
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	freshness	2.9
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	freshness	5.3
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	freshness	4.8
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	freshness	3.8
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	freshness	1
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	freshness	5.1
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	freshness	6.3
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	freshness	5.1
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	freshness	2.8
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	freshness	8.8
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	freshness	5
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	freshness	3
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	freshness	6.6
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	freshness	2.4
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	freshness	3.5
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	freshness	4.7
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	freshness	1.4
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	freshness	5
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	freshness	5
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	freshness	5.5
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	freshness	6.4
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	freshness	6.7
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	freshness	6.5
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	freshness	6.4
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	freshness	3.6
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	freshness	5.9
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	freshness	5.3
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	freshness	3.6
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	freshness	4.6
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	freshness	5.1
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	freshness	5.8
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	freshness	5
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	freshness	4.6
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	freshness	5.2
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	freshness	4.7
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	freshness	3.2
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	freshness	5
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	freshness	3.5
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	freshness	3.8
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	freshness	2.4
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	freshness	7.5
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	freshness	0.5
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	freshness	8.2
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	freshness	5.5
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	freshness	1.9
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	freshness	3.3
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	freshness	4.5
+2021-05-10T00:00:00Z	jury_01	product_1before	session_07	persistency	5.9
+2021-05-10T00:00:00Z	jury_01	product_2after	session_07	persistency	6.1
+2021-05-31T00:00:00Z	jury_01	product_1before	session_04	persistency	6
+2021-05-31T00:00:00Z	jury_01	product_2after	session_04	persistency	6.8
+2021-05-10T00:00:00Z	jury_03	product_1before	session_07	persistency	7.7
+2021-05-10T00:00:00Z	jury_03	product_2after	session_07	persistency	7.1
+2021-05-31T00:00:00Z	jury_03	product_1before	session_04	persistency	6.1
+2021-05-31T00:00:00Z	jury_03	product_2after	session_04	persistency	6.6
+2021-06-07T00:00:00Z	jury_03	product_1before	session_01	persistency	8.4
+2021-06-07T00:00:00Z	jury_03	product_2after	session_01	persistency	8.1
+2021-05-10T00:00:00Z	jury_04	product_1before	session_07	persistency	4.4
+2021-05-10T00:00:00Z	jury_04	product_2after	session_07	persistency	3.5
+2021-05-31T00:00:00Z	jury_04	product_1before	session_04	persistency	2.8
+2021-05-31T00:00:00Z	jury_04	product_2after	session_04	persistency	4.4
+2021-06-07T00:00:00Z	jury_04	product_1before	session_01	persistency	5.2
+2021-06-07T00:00:00Z	jury_04	product_2after	session_01	persistency	6.4
+2021-05-10T00:00:00Z	jury_05	product_1before	session_07	persistency	4.3
+2021-05-10T00:00:00Z	jury_05	product_2after	session_07	persistency	4.1
+2021-05-31T00:00:00Z	jury_05	product_1before	session_04	persistency	4.3
+2021-05-31T00:00:00Z	jury_05	product_2after	session_04	persistency	4.1
+2021-05-10T00:00:00Z	jury_06	product_1before	session_07	persistency	3.7
+2021-05-10T00:00:00Z	jury_06	product_2after	session_07	persistency	1.7
+2021-05-31T00:00:00Z	jury_06	product_1before	session_04	persistency	2.8
+2021-05-31T00:00:00Z	jury_06	product_2after	session_04	persistency	1.8
+2021-05-10T00:00:00Z	jury_07	product_1before	session_07	persistency	6.1
+2021-05-10T00:00:00Z	jury_07	product_2after	session_07	persistency	6.8
+2021-05-31T00:00:00Z	jury_07	product_1before	session_04	persistency	6.3
+2021-05-31T00:00:00Z	jury_07	product_2after	session_04	persistency	1.5
+2021-06-07T00:00:00Z	jury_07	product_1before	session_01	persistency	7.2
+2021-06-07T00:00:00Z	jury_07	product_2after	session_01	persistency	5.2
+2021-05-10T00:00:00Z	jury_08	product_1before	session_07	persistency	4.4
+2021-05-10T00:00:00Z	jury_08	product_2after	session_07	persistency	3.6
+2021-06-07T00:00:00Z	jury_08	product_1before	session_01	persistency	4
+2021-06-07T00:00:00Z	jury_08	product_2after	session_01	persistency	3.1
+2021-05-31T00:00:00Z	jury_09	product_1before	session_04	persistency	3.1
+2021-05-31T00:00:00Z	jury_09	product_2after	session_04	persistency	4.5
+2021-05-10T00:00:00Z	jury_10	product_1before	session_07	persistency	5.6
+2021-05-10T00:00:00Z	jury_10	product_2after	session_07	persistency	5.1
+2021-05-31T00:00:00Z	jury_10	product_1before	session_04	persistency	6.8
+2021-05-31T00:00:00Z	jury_10	product_2after	session_04	persistency	5.9
+2021-05-10T00:00:00Z	jury_11	product_1before	session_07	persistency	5.1
+2021-05-10T00:00:00Z	jury_11	product_2after	session_07	persistency	4.5
+2021-05-31T00:00:00Z	jury_11	product_1before	session_04	persistency	4
+2021-05-31T00:00:00Z	jury_11	product_2after	session_04	persistency	4.8
+2021-06-07T00:00:00Z	jury_11	product_1before	session_01	persistency	5.5
+2021-06-07T00:00:00Z	jury_11	product_2after	session_01	persistency	4.2
+2021-05-10T00:00:00Z	jury_13	product_1before	session_07	persistency	5.4
+2021-05-10T00:00:00Z	jury_13	product_2after	session_07	persistency	6
+2021-05-31T00:00:00Z	jury_13	product_1before	session_04	persistency	6.1
+2021-05-31T00:00:00Z	jury_13	product_2after	session_04	persistency	4.7
+2021-06-07T00:00:00Z	jury_13	product_1before	session_01	persistency	6.2
+2021-06-07T00:00:00Z	jury_13	product_2after	session_01	persistency	4.8
+2021-05-31T00:00:00Z	jury_14	product_1before	session_04	persistency	5.9
+2021-06-07T00:00:00Z	jury_15	product_1before	session_01	persistency	2.3
+2021-06-07T00:00:00Z	jury_15	product_2after	session_01	persistency	2.1
+2021-05-10T00:00:00Z	jury_16	product_1before	session_07	persistency	6.2
+2021-05-10T00:00:00Z	jury_16	product_2after	session_07	persistency	5
+2021-06-07T00:00:00Z	jury_16	product_1before	session_01	persistency	4.9
+2021-06-07T00:00:00Z	jury_16	product_2after	session_01	persistency	3.9
+2021-05-10T00:00:00Z	jury_17	product_1before	session_07	persistency	4.9
+2021-05-10T00:00:00Z	jury_17	product_2after	session_07	persistency	3.3
+2021-06-07T00:00:00Z	jury_17	product_1before	session_01	persistency	4.7
+2021-06-07T00:00:00Z	jury_17	product_2after	session_01	persistency	4.1

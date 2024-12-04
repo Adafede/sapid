@@ -46,7 +46,7 @@ colnames(ms_table) <-
     replacement = ""
   )
 
-ms_table <- ms_table[, c(4:(ncol(ms_table) - 1)), with = FALSE] |>
+ms_table <- ms_table[, 4:(ncol(ms_table) - 1), with = FALSE] |>
   t() |>
   data.frame()
 

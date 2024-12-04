@@ -95,11 +95,11 @@ cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/100
       include.dirs = TRUE
     )
   experiments <- c(experiment_raw, experiments_fractions, experiment_ref)
-  experiments_subset <- c(
-    experiment_raw,
-    sample(x = experiments_fractions, size = 8),
-    experiment_ref
-  )
+  # experiments_subset <- c(
+  #   experiment_raw,
+  #   sample(x = experiments_fractions, size = 8),
+  #   experiment_ref
+  # )
   regions_to_exclude <- list(
     lower = c(-Inf, ppm_min),
     # dmso = c(2.3, 2.6),

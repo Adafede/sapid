@@ -3,7 +3,7 @@ load_session <- function(input_dir, session_info, tab) {
     "chasselas" = 1,
     "napping_coord" = 2,
     "napping_words" = 3,
-    "profile" = 4
+    "profiles" = 4
   )
   df <- list.files(
     path =
@@ -49,5 +49,15 @@ load_session <- function(input_dir, session_info, tab) {
         )
       )
   }
+
+  if (tab == "profiles") {
+    df <- df |>
+      tidytable::mutate(ProductName = ProductName |>
+        as.character()) |>
+      tidytable::select(-tidytable::where(is.logical)) |>
+      tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
+      tidytable::filter(!is.na(value))
+  }
+
   return(df)
 }

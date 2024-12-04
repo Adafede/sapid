@@ -25,10 +25,6 @@ plot_concentration <- function(input = "~/git/sapid/inst/extdata/concentration_a
     tidytable::distinct() |>
     tidytable::ungroup()
 
-  groups <- counted |>
-    tidytable::distinct(concentration) |>
-    nrow()
-
   message("visualizing ... \n")
   message("... intensity and p-value per concentration \n")
   boxes <- counted |>
@@ -151,15 +147,6 @@ plot_concentration <- function(input = "~/git/sapid/inst/extdata/concentration_a
   dots
 
   message("... terms multiplied by mean intensity per concentration \n")
-  my7greens <- c(
-    "#edf8e9",
-    "#c7e9c0",
-    "#a1d99b",
-    "#74c476",
-    "#41ab5d",
-    "#238b45",
-    "#005a32"
-  )
   dots_corrected <- counted |>
     ggplot2::ggplot() +
     ggplot2::geom_segment(

@@ -6,7 +6,8 @@
 #' @return NULL
 #'
 #' @examples NULL
-plot_concentration <- function(input = "~/git/sapid/inst/extdata/concentration_afc.tsv", output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf") {
+plot_concentration <- function(input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
+                               output = "~/switchdrive/SAPERE/06_figures/figure-raw-extract.pdf") {
   message("Loading file...\n")
   prepared <- input |>
     tidytable::fread()

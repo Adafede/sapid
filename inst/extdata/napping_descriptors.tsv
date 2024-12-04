@@ -1,1146 +1,1146 @@
 fraction	session	jury	taste_original	taste_intermediate	taste_harmonized
-55	session_06	J1	amertume_forte	BITTER_HIGH	BITTER
-56	session_06	J1	amertume_tres_forte	BITTER_HIGH	BITTER
-57	session_06	J1	amertume_moyenne	BITTER	BITTER
-58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	FATTY	FATTY
-58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	SWEET_LOW	SWEET
-58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	ACID_LOW	ACID
-58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	BITTER_LOW	BITTER
-59	session_06	J1	gras ameertume_faible	FATTY	FATTY
-59	session_06	J1	gras ameertume_faible	BITTER_LOW	BITTER
-60	session_06	J1	salinite_faible amertume_faible	SALTY_LOW	SALTY
-60	session_06	J1	salinite_faible amertume_faible	BITTER_LOW	BITTER
-61	session_06	J1	salinite_faible amertume_faible	SALTY_LOW	SALTY
-61	session_06	J1	salinite_faible amertume_faible	BITTER_LOW	BITTER
-62	session_06	J1	amertume_moyenne	BITTER	BITTER
-63	session_06	J1	amertume_tres_forte	BITTER_HIGH	BITTER
-55	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
-56	session_06	J2	AMERTUME-MOYENNE	BITTER	BITTER
-57	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
-58	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
-59	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
-60	session_06	J2	AMERTUME-MOYENNE	BITTER	BITTER
-61	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
-62	session_06	J2	AMERTUME-LEOERE	BITTER_LOW	BITTER
-63	session_06	J2	AMERTUME-LEOERE	BITTER_LOW	BITTER
-55	session_06	J3	AMER	BITTER	BITTER
-56	session_06	J3	SUCRE	SWEET	SWEET
-57	session_06	J3	SUCRE	SWEET	SWEET
-58	session_06	J3	SUCRE	SWEET	SWEET
-59	session_06	J3	AMER	BITTER	BITTER
-60	session_06	J3	GRAS	FATTY	FATTY
-61	session_06	J3	GRAS	FATTY	FATTY
-62	session_06	J3	GRAS	FATTY	FATTY
-63	session_06	J3	AMER	BITTER	BITTER
-55	session_06	J4	acqueux frais minedral assechant	FRESH	FRESH
-55	session_06	J4	acqueux frais minedral assechant	MINERALITY	MINERALITY
-55	session_06	J4	acqueux frais minedral assechant	ASTRINGENT	ASTRINGENT
-56	session_06	J4	sec mineral	ACID	ACID
-56	session_06	J4	sec mineral	MINERALITY	MINERALITY
-57	session_06	J4	mineralassechant amer	MINERALITY	MINERALITY
-57	session_06	J4	mineralassechant amer	ACID	ACID
-57	session_06	J4	mineralassechant amer	BITTER	BITTER
-58	session_06	J4	eau sec collant amer	""	""
-58	session_06	J4	eau sec collant amer	ACID	ACID
-58	session_06	J4	eau sec collant amer	MOUTHFILLING	MOUTHFILLING
-58	session_06	J4	eau sec collant amer	BITTER	BITTER
-59	session_06	J4	acqueux fraicheur mineral	FRESH	FRESH
-59	session_06	J4	acqueux fraicheur mineral	MINERALITY	MINERALITY
-60	session_06	J4	acqueux frais mineral	FRESH	FRESH
-60	session_06	J4	acqueux frais mineral	MINERALITY	MINERALITY
-61	session_06	J4	fraicheur tension mineral	FRESH	FRESH
-61	session_06	J4	fraicheur tension mineral	TENSION	TENSION
-61	session_06	J4	fraicheur tension mineral	MINERALITY	MINERALITY
-62	session_06	J4	sedc mineral	ACID	ACID
-62	session_06	J4	sedc mineral	MINERALITY	MINERALITY
-63	session_06	J4	eau sec amer	""	""
-63	session_06	J4	eau sec amer	ACID	ACID
-63	session_06	J4	eau sec amer	BITTER	BITTER
-55	session_06	J5	un_peu_moins_gras  fraicheur	FATTY_LOW	FATTY
-55	session_06	J5	un_peu_moins_gras  fraicheur	FRESH	FRESH
-56	session_06	J5	gras  un_peu_de _fraicheur	FATTY	FATTY
-56	session_06	J5	gras  un_peu_de _fraicheur	FRESH_LOW	FRESH
-57	session_06	J5	un_peu_de_gras  plus_de_fraicheur	FATTY_LOW	FATTY
-57	session_06	J5	un_peu_de_gras  plus_de_fraicheur	FRESH	FRESH
-58	session_06	J5	peu_de_gras  plus_de_fraicheur	FATTY_LOW	FATTY
-58	session_06	J5	peu_de_gras  plus_de_fraicheur	FRESH	FRESH
-59	session_06	J5	fraicheur	FRESH	FRESH
-60	session_06	J5	un_peu_moins_gras  fraicheur	FATTY_LOW	FATTY
-60	session_06	J5	un_peu_moins_gras  fraicheur	FRESH	FRESH
-61	session_06	J5	gras	FATTY	FATTY
-62	session_06	J5	fraicheur  leger_gras	FRESH	FRESH
-62	session_06	J5	fraicheur  leger_gras	FATTY_LOW	FATTY
-63	session_06	J5	gras  fraicheur	FATTY	FATTY
-63	session_06	J5	gras  fraicheur	FRESH	FRESH
-55	session_06	J7	amertume gras boise	BITTER	BITTER
-55	session_06	J7	amertume gras boise	FATTY	FATTY
-55	session_06	J7	amertume gras boise	WOODY	WOODY
-56	session_06	J7	amertume boise	BITTER	BITTER
-56	session_06	J7	amertume boise	WOODY	WOODY
-57	session_06	J7	boise gras astringence	WOODY	WOODY
-57	session_06	J7	boise gras astringence	FATTY	FATTY
-57	session_06	J7	boise gras astringence	ASTRINGENT	ASTRINGENT
-58	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
-58	session_06	J7	astringence boise	WOODY	WOODY
-59	session_06	J7	gras boise	FATTY	FATTY
-59	session_06	J7	gras boise	WOODY	WOODY
-60	session_06	J7	boise gras	WOODY	WOODY
-60	session_06	J7	boise gras	FATTY	FATTY
-61	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
-61	session_06	J7	astringence boise	WOODY	WOODY
-62	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
-62	session_06	J7	astringence boise	WOODY	WOODY
-63	session_06	J7	amertume boise	BITTER	BITTER
-63	session_06	J7	amertume boise	WOODY	WOODY
-55	session_06	J8	legere_astringence fraicheur gras	ASTRINGENT_LOW	ASTRINGENT
-55	session_06	J8	legere_astringence fraicheur gras	FRESH	FRESH
-55	session_06	J8	legere_astringence fraicheur gras	FATTY	FATTY
-56	session_06	J8	sucrosite_faible grfas	SWEET_LOW	SWEET
-56	session_06	J8	sucrosite_faible grfas	FATTY	FATTY
-57	session_06	J8	astringence_moyenne legere_salinite	ASTRINGENT	ASTRINGENT
-57	session_06	J8	astringence_moyenne legere_salinite	SALTY_LOW	SALTY
-58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	SALTY_LOW	SALTY
-58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	ASTRINGENT	ASTRINGENT
-58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	BITTER_LOW	BITTER
-58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	CARTON	CARTON
-59	session_06	J8	strin gence_moyenne acidite_faible	ASTRINGENT	ASTRINGENT
-59	session_06	J8	strin gence_moyenne acidite_faible	ACID_LOW	ACID
-60	session_06	J8	gras	FATTY	FATTY
-61	session_06	J8	legere_sucrosite legere_acidite	SWEET_LOW	SWEET
-61	session_06	J8	legere_sucrosite legere_acidite	ACID_LOW	ACID
-62	session_06	J8	legere_acidite stringence_faible gras carton	ACID_LOW	ACID
-62	session_06	J8	legere_acidite stringence_faible gras carton	ASTRINGENT_LOW	ASTRINGENT
-62	session_06	J8	legere_acidite stringence_faible gras carton	FATTY	FATTY
-62	session_06	J8	legere_acidite stringence_faible gras carton	CARTON	CARTON
-63	session_06	J8	sucrosite_faible gras	SWEET_LOW	SWEET
-63	session_06	J8	sucrosite_faible gras	FATTY	FATTY
-55	session_06	J9	umami_moyen salé_fort gras_fort	UMAMI	UMAMI
-55	session_06	J9	umami_moyen salé_fort gras_fort	SALTY_HIGH	SALTY
-55	session_06	J9	umami_moyen salé_fort gras_fort	FATTY_HIGH	FATTY
-56	session_06	J9	umami_moyen salé_fort gras_fort	UMAMI	UMAMI
-56	session_06	J9	umami_moyen salé_fort gras_fort	SALTY_HIGH	SALTY
-56	session_06	J9	umami_moyen salé_fort gras_fort	FATTY_HIGH	FATTY
-57	session_06	J9	umami_faible salé_moyen amertume_faible	UMAMI_LOW	UMAMI
-57	session_06	J9	umami_faible salé_moyen amertume_faible	SALTY	SALTY
-57	session_06	J9	umami_faible salé_moyen amertume_faible	BITTER_LOW	BITTER
-58	session_06	J9	umami_moyen salé_faible	UMAMI	UMAMI
-58	session_06	J9	umami_moyen salé_faible	SALTY_LOW	SALTY
-59	session_06	J9	amertume_fort umami_fort	BITTER_HIGH	BITTER
-59	session_06	J9	amertume_fort umami_fort	UMAMI_HIGH	UMAMI
-60	session_06	J9	umami_faible salé_moyen amertume_moyen	UMAMI_LOW	UMAMI
-60	session_06	J9	umami_faible salé_moyen amertume_moyen	SALTY	SALTY
-60	session_06	J9	umami_faible salé_moyen amertume_moyen	BITTER	BITTER
-61	session_06	J9	umami_moyen frais_fort	UMAMI	UMAMI
-61	session_06	J9	umami_moyen frais_fort	FRESH_HIGH	FRESH
-62	session_06	J9	umami_moyen frais_fort	UMAMI	UMAMI
-62	session_06	J9	umami_moyen frais_fort	FRESH_HIGH	FRESH
-63	session_06	J9	umami_faible salé_moyen amertume_moyen	UMAMI_LOW	UMAMI
-63	session_06	J9	umami_faible salé_moyen amertume_moyen	SALTY	SALTY
-63	session_06	J9	umami_faible salé_moyen amertume_moyen	BITTER	BITTER
-55	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-56	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-57	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-58	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-59	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-60	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-61	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-62	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
-63	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+17	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
+17	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
+17	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
+17	session_01	J2	amer_leger	BITTER_LOW	BITTER
+17	session_01	J3	fraicheur	FRESH	FRESH
+17	session_01	J4	astringeaant	ASTRINGENT	ASTRINGENT
+17	session_01	J5	volume  crayeux	VOLUME	VOLUME
+17	session_01	J5	volume  crayeux	MOUTHFILLING	MOUTHFILLING
+17	session_01	J6	volume amertume	VOLUME	VOLUME
+17	session_01	J6	volume amertume	BITTER	BITTER
+17	session_01	J7	metallique_moyen fraicheur_moyen	METALLIC	METALLIC
+17	session_01	J7	metallique_moyen fraicheur_moyen	FRESH	FRESH
+17	session_01	J8	volume	VOLUME	VOLUME
+17	session_01	J9	gras salin	FATTY	FATTY
+17	session_01	J9	gras salin	SALTY	SALTY
+18	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
+18	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
+18	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
+18	session_01	J2	amer_leger volume	BITTER_LOW	BITTER
+18	session_01	J2	amer_leger volume	VOLUME	VOLUME
+18	session_01	J3	rien	""	""
+18	session_01	J4	astringeant	ASTRINGENT	ASTRINGENT
+18	session_01	J5	fraicheur	FRESH	FRESH
+18	session_01	J6	volume	VOLUME	VOLUME
+18	session_01	J7	gras_intense	FATTY_HIGH	FATTY
+18	session_01	J8	fluide amer	MOUTHFILLING	MOUTHFILLING
+18	session_01	J8	fluide amer	BITTER	BITTER
+18	session_01	J9	frais métalique	FRESH	FRESH
+18	session_01	J9	frais métalique	METALLIC	METALLIC
+19	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
+19	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
+19	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
+19	session_01	J2	amer_leger	BITTER_LOW	BITTER
+19	session_01	J3	rien	""	""
+19	session_01	J4	minerfal	MINERALITY	MINERALITY
+19	session_01	J5	fraicheur	FRESH	FRESH
+19	session_01	J6	fraicheur astringence	FRESH	FRESH
+19	session_01	J6	fraicheur astringence	ASTRINGENT	ASTRINGENT
+19	session_01	J7	gras_moyen plat	FATTY	FATTY
+19	session_01	J7	gras_moyen plat	""	""
+19	session_01	J8	volume legere_amertume	VOLUME	VOLUME
+19	session_01	J8	volume legere_amertume	BITTER_LOW	BITTER
+19	session_01	J9	frais légèrement_gras	FRESH	FRESH
+19	session_01	J9	frais légèrement_gras	FATTY_LOW	FATTY
+20	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
+20	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
+20	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
+20	session_01	J2	amer_leger volume	BITTER_LOW	BITTER
+20	session_01	J2	amer_leger volume	VOLUME	VOLUME
+20	session_01	J3	rien	""	""
+20	session_01	J4	mineral amer	MINERALITY	MINERALITY
+20	session_01	J4	mineral amer	BITTER	BITTER
+20	session_01	J5	crayeux  fraicheur  peu de volume	MOUTHFILLING	MOUTHFILLING
+20	session_01	J5	crayeux  fraicheur  peu de volume	FRESH	FRESH
+20	session_01	J5	crayeux  fraicheur  peu de volume	VOLUME_LOW	VOLUME
+20	session_01	J6	volume amertume	VOLUME	VOLUME
+20	session_01	J6	volume amertume	BITTER	BITTER
+20	session_01	J7	umami_faible rondeur_faible	UMAMI_LOW	UMAMI
+20	session_01	J7	umami_faible rondeur_faible	MOUTHFILLING_LOW	MOUTHFILLING
+20	session_01	J8	volume	VOLUME	VOLUME
+20	session_01	J9	frais légèrement_gras	FRESH	FRESH
+20	session_01	J9	frais légèrement_gras	FATTY_LOW	FATTY
+21	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
+21	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
+21	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
+21	session_01	J2	amer_moyen	BITTER	BITTER
+21	session_01	J3	rien	""	""
+21	session_01	J4	mineral	MINERALITY	MINERALITY
+21	session_01	J5	fraicheur  leger_volume  legere_astringence	FRESH	FRESH
+21	session_01	J5	fraicheur  leger_volume  legere_astringence	VOLUME_LOW	VOLUME
+21	session_01	J5	fraicheur  leger_volume  legere_astringence	ASTRINGENT_LOW	ASTRINGENT
+21	session_01	J6	volume	VOLUME	VOLUME
+21	session_01	J7	gras_moyen plat	FATTY	FATTY
+21	session_01	J7	gras_moyen plat	""	""
+21	session_01	J8	volume legere_amertume	VOLUME	VOLUME
+21	session_01	J8	volume legere_amertume	BITTER_LOW	BITTER
+21	session_01	J9	métalique	METALLIC	METALLIC
 22	session_02	J1	gras amertume_faible	FATTY	FATTY
 22	session_02	J1	gras amertume_faible	BITTER_LOW	BITTER
-24	session_02	J1	graa_mloyen amertume_tres_faible	FATTY	FATTY
-24	session_02	J1	graa_mloyen amertume_tres_faible	BITTER_LOW	BITTER
-25	session_02	J1	graa_mloyen amertume_tres_faible	FATTY	FATTY
-25	session_02	J1	graa_mloyen amertume_tres_faible	BITTER_LOW	BITTER
-26	session_02	J1	gras_aucun amertume_tres_faible	BITTER_LOW	BITTER
-27	session_02	J1	gras_aucun amertume_tres_forte	BITTER_HIGH	BITTER
-28	session_02	J1	gras amertume_tres_fort	FATTY	FATTY
-28	session_02	J1	gras amertume_tres_fort	BITTER_HIGH	BITTER
-29	session_02	J1	gras_moyen amertume_faible	FATTY	FATTY
-29	session_02	J1	gras_moyen amertume_faible	BITTER_LOW	BITTER
-30	session_02	J1	gras amertume_tres_faible	FATTY	FATTY
-30	session_02	J1	gras amertume_tres_faible	BITTER_LOW	BITTER
-31	session_02	J1	gras_moyenamertume_tres_forte	FATTY	FATTY
-31	session_02	J1	gras_moyenamertume_tres_forte	BITTER_HIGH	BITTER
+22	session_02	J10	fruite_faible	FRUITY_LOW	FRUITY
 22	session_02	J2	AMER-TRES-LEGER	BITTER_LOW	BITTER
-23	session_02	J2	AMER-MOYEN-FORT	BITTER	BITTER
-24	session_02	J2	AMER-MOYEN-FAIBLE	BITTER_LOW	BITTER
-25	session_02	J2	AMER-LEGER	BITTER_LOW	BITTER
-26	session_02	J2	AMER-MOYEN-FAIBLE	BITTER_LOW	BITTER
-27	session_02	J2	AMER-INTENSE	BITTER_HIGH	BITTER
-28	session_02	J2	AMER-INTENSE	BITTER_HIGH	BITTER
-29	session_02	J2	AMER-MOYEN-FORT	BITTER	BITTER
-30	session_02	J2	AMER-LEGER	BITTER_LOW	BITTER
-31	session_02	J2	AMER-TRES-INTENSE	BITTER_HIGH	BITTER
 22	session_02	J3	amer	BITTER	BITTER
-23	session_02	J3	rfas sucre	FATTY	FATTY
-23	session_02	J3	rfas sucre	SWEET	SWEET
-24	session_02	J3	amer_sucre	BITTERSWEET	BITTERSWEET
-25	session_02	J3	amer sucre	BITTER	BITTER
-25	session_02	J3	amer sucre	SWEET	SWEET
-26	session_02	J3	amer	BITTER	BITTER
-27	session_02	J3	amer	BITTER	BITTER
-28	session_02	J3	amer_fort	BITTER_HIGH	BITTER
-29	session_02	J3	amer_sucre	BITTERSWEET	BITTERSWEET
-30	session_02	J3	amer	BITTER	BITTER
-31	session_02	J3	amerf_intense	BITTER_HIGH	BITTER
 22	session_02	J4	acide sedc	ACID	ACID
 22	session_02	J4	acide sedc	ACID	ACID
-23	session_02	J4	sec_acide mineral	ACID_HIGH	ACID
-23	session_02	J4	sec_acide mineral	MINERALITY	MINERALITY
-24	session_02	J4	acide sec	ACID	ACID
-24	session_02	J4	acide sec	ACID	ACID
-25	session_02	J4	sec_acide mineral	ACID_HIGH	ACID
-25	session_02	J4	sec_acide mineral	MINERALITY	MINERALITY
-26	session_02	J4	amer	BITTER	BITTER
-27	session_02	J4	amer	BITTER	BITTER
-28	session_02	J4	amer	BITTER	BITTER
-29	session_02	J4	amer acide	BITTER	BITTER
-30	session_02	J4	secacide mineral	ACID_HIGH	ACID
-30	session_02	J4	secacide mineral	MINERALITY	MINERALITY
-31	session_02	J4	amer acide	BITTER	BITTER
 22	session_02	J5	sucre_leger	SWEET_LOW	SWEET
-23	session_02	J5	umami_leger	UMAMI_LOW	UMAMI
-24	session_02	J5	anis sucre_leger	ANIS	ANIS
-24	session_02	J5	anis sucre_leger	SWEET_LOW	SWEET
-25	session_02	J5	anis umami	ANIS	ANIS
-25	session_02	J5	anis umami	UMAMI	UMAMI
-26	session_02	J5	neutre	""	""
-27	session_02	J5	amer_fort	BITTER_HIGH	BITTER
-28	session_02	J5	amer_fort	BITTER_HIGH	BITTER
-29	session_02	J5	amer_leger terreux	BITTER_LOW	BITTER
-29	session_02	J5	amer_leger terreux	EARTHY	EARTHY
-30	session_02	J5	anis terreux amer_moyen	ANIS	ANIS
-30	session_02	J5	anis terreux amer_moyen	EARTHY	EARTHY
-30	session_02	J5	anis terreux amer_moyen	BITTER	BITTER
-31	session_02	J5	amer_fort _augmente	BITTER_HIGH	BITTER
 22	session_02	J6	gras  volume  legere_astreingence	FATTY	FATTY
 22	session_02	J6	gras  volume  legere_astreingence	VOLUME	VOLUME
 22	session_02	J6	gras  volume  legere_astreingence	ASTRINGENT_LOW	ASTRINGENT
-23	session_02	J6	gras  legere_astreigence	FATTY	FATTY
-23	session_02	J6	gras  legere_astreigence	ASTRINGENT_LOW	ASTRINGENT
-24	session_02	J6	gras  legere_amertume	FATTY	FATTY
-24	session_02	J6	gras  legere_amertume	BITTER_LOW	BITTER
-25	session_02	J6	tres_gras	FATTY_HIGH	FATTY
-26	session_02	J6	ghras	FATTY	FATTY
-27	session_02	J6	amer  leger_volume	BITTER	BITTER
-27	session_02	J6	amer  leger_volume	VOLUME_LOW	VOLUME
-28	session_02	J6	amer  leger_volume	BITTER	BITTER
-28	session_02	J6	amer  leger_volume	VOLUME_LOW	VOLUME
-29	session_02	J6	gras  legere_astreingence	FATTY	FATTY
-29	session_02	J6	gras  legere_astreingence	ASTRINGENT_LOW	ASTRINGENT
-30	session_02	J6	fraicheur	FRESH	FRESH
-31	session_02	J6	tres_amer  volume	BITTER_HIGH	BITTER
-31	session_02	J6	tres_amer  volume	VOLUME	VOLUME
 22	session_02	J7	amertume_faible volume_moyen lacte_moyen	BITTER_LOW	BITTER
 22	session_02	J7	amertume_faible volume_moyen lacte_moyen	VOLUME	VOLUME
 22	session_02	J7	amertume_faible volume_moyen lacte_moyen	FATTY	FATTY
-23	session_02	J7	amertume_faible volume_faible lacte_faible	BITTER_LOW	BITTER
-23	session_02	J7	amertume_faible volume_faible lacte_faible	VOLUME_LOW	VOLUME
-23	session_02	J7	amertume_faible volume_faible lacte_faible	FATTY_LOW	FATTY
-24	session_02	J7	rondeur_moyen metallique_moyen	MOUTHFILLING	MOUTHFILLING
-24	session_02	J7	rondeur_moyen metallique_moyen	METALLIC	METALLIC
-25	session_02	J7	rondeur_moyen metallique_moyen	MOUTHFILLING	MOUTHFILLING
-25	session_02	J7	rondeur_moyen metallique_moyen	METALLIC	METALLIC
-26	session_02	J7	amertume_faible volume_moyen	BITTER_LOW	BITTER
-26	session_02	J7	amertume_faible volume_moyen	VOLUME	VOLUME
-27	session_02	J7	amertume_moyen boise_moyen	BITTER	BITTER
-27	session_02	J7	amertume_moyen boise_moyen	WOODY	WOODY
-28	session_02	J7	amertume_forte	BITTER_HIGH	BITTER
-29	session_02	J7	amertume_faible volume_faible	BITTER_LOW	BITTER
-29	session_02	J7	amertume_faible volume_faible	VOLUME_LOW	VOLUME
-30	session_02	J7	metallique_moyen	METALLIC	METALLIC
-31	session_02	J7	amertume_forte boise_fort	BITTER_HIGH	BITTER
-31	session_02	J7	amertume_forte boise_fort	WOODY_HIGH	WOODY
 22	session_02	J8	neutre sucre_faible amer_leger	""	""
 22	session_02	J8	neutre sucre_faible amer_leger	SWEET_LOW	SWEET
 22	session_02	J8	neutre sucre_faible amer_leger	BITTER_LOW	BITTER
+22	session_02	J9	sucre_leger amer_tres_leger	SWEET_LOW	SWEET
+22	session_02	J9	sucre_leger amer_tres_leger	BITTER_LOW	BITTER
+23	session_02	J10	amer_faible	BITTER_LOW	BITTER
+23	session_02	J2	AMER-MOYEN-FORT	BITTER	BITTER
+23	session_02	J3	rfas sucre	FATTY	FATTY
+23	session_02	J3	rfas sucre	SWEET	SWEET
+23	session_02	J4	sec_acide mineral	ACID_HIGH	ACID
+23	session_02	J4	sec_acide mineral	MINERALITY	MINERALITY
+23	session_02	J5	umami_leger	UMAMI_LOW	UMAMI
+23	session_02	J6	gras  legere_astreigence	FATTY	FATTY
+23	session_02	J6	gras  legere_astreigence	ASTRINGENT_LOW	ASTRINGENT
+23	session_02	J7	amertume_faible volume_faible lacte_faible	BITTER_LOW	BITTER
+23	session_02	J7	amertume_faible volume_faible lacte_faible	VOLUME_LOW	VOLUME
+23	session_02	J7	amertume_faible volume_faible lacte_faible	FATTY_LOW	FATTY
 23	session_02	J8	neutre sucre_faible amer_leger assechant_leger	""	""
 23	session_02	J8	neutre sucre_faible amer_leger assechant_leger	SWEET_LOW	SWEET
 23	session_02	J8	neutre sucre_faible amer_leger assechant_leger	BITTER_LOW	BITTER
 23	session_02	J8	neutre sucre_faible amer_leger assechant_leger	ASTRINGENT_LOW	ASTRINGENT
+23	session_02	J9	sucre_leger amer_tres_leger	SWEET_LOW	SWEET
+23	session_02	J9	sucre_leger amer_tres_leger	BITTER_LOW	BITTER
+24	session_02	J1	graa_mloyen amertume_tres_faible	FATTY	FATTY
+24	session_02	J1	graa_mloyen amertume_tres_faible	BITTER_LOW	BITTER
+24	session_02	J10	fruite_fort	FRUITY_HIGH	FRUITY
+24	session_02	J2	AMER-MOYEN-FAIBLE	BITTER_LOW	BITTER
+24	session_02	J3	amer_sucre	BITTERSWEET	BITTERSWEET
+24	session_02	J4	acide sec	ACID	ACID
+24	session_02	J4	acide sec	ACID	ACID
+24	session_02	J5	anis sucre_leger	ANIS	ANIS
+24	session_02	J5	anis sucre_leger	SWEET_LOW	SWEET
+24	session_02	J6	gras  legere_amertume	FATTY	FATTY
+24	session_02	J6	gras  legere_amertume	BITTER_LOW	BITTER
+24	session_02	J7	rondeur_moyen metallique_moyen	MOUTHFILLING	MOUTHFILLING
+24	session_02	J7	rondeur_moyen metallique_moyen	METALLIC	METALLIC
 24	session_02	J8	neutre sucre_faible	""	""
 24	session_02	J8	neutre sucre_faible	SWEET_LOW	SWEET
+24	session_02	J9	sucre_leger amer_leger	SWEET_LOW	SWEET
+24	session_02	J9	sucre_leger amer_leger	BITTER_LOW	BITTER
+25	session_02	J1	graa_mloyen amertume_tres_faible	FATTY	FATTY
+25	session_02	J1	graa_mloyen amertume_tres_faible	BITTER_LOW	BITTER
+25	session_02	J10	fruite_moyen amer_faible	FRUITY	FRUITY
+25	session_02	J10	fruite_moyen amer_faible	BITTER_LOW	BITTER
+25	session_02	J2	AMER-LEGER	BITTER_LOW	BITTER
+25	session_02	J3	amer sucre	BITTER	BITTER
+25	session_02	J3	amer sucre	SWEET	SWEET
+25	session_02	J4	sec_acide mineral	ACID_HIGH	ACID
+25	session_02	J4	sec_acide mineral	MINERALITY	MINERALITY
+25	session_02	J5	anis umami	ANIS	ANIS
+25	session_02	J5	anis umami	UMAMI	UMAMI
+25	session_02	J6	tres_gras	FATTY_HIGH	FATTY
+25	session_02	J7	rondeur_moyen metallique_moyen	MOUTHFILLING	MOUTHFILLING
+25	session_02	J7	rondeur_moyen metallique_moyen	METALLIC	METALLIC
 25	session_02	J8	neutre	""	""
+25	session_02	J9	sucre_tres_leger amer_leger_a_moyen	SWEET_LOW	SWEET
+25	session_02	J9	sucre_tres_leger amer_leger_a_moyen	BITTER_LOW	BITTER
+26	session_02	J1	gras_aucun amertume_tres_faible	BITTER_LOW	BITTER
+26	session_02	J10	fruite_faible	FRUITY_LOW	FRUITY
+26	session_02	J2	AMER-MOYEN-FAIBLE	BITTER_LOW	BITTER
+26	session_02	J3	amer	BITTER	BITTER
+26	session_02	J4	amer	BITTER	BITTER
+26	session_02	J5	neutre	""	""
+26	session_02	J6	ghras	FATTY	FATTY
+26	session_02	J7	amertume_faible volume_moyen	BITTER_LOW	BITTER
+26	session_02	J7	amertume_faible volume_moyen	VOLUME	VOLUME
 26	session_02	J8	neutre sucre_faible amer_leger	""	""
 26	session_02	J8	neutre sucre_faible amer_leger	SWEET_LOW	SWEET
 26	session_02	J8	neutre sucre_faible amer_leger	BITTER_LOW	BITTER
+26	session_02	J9	amer_moyen	BITTER	BITTER
+27	session_02	J1	gras_aucun amertume_tres_forte	BITTER_HIGH	BITTER
+27	session_02	J10	amer_fort fruite_faible	BITTER_HIGH	BITTER
+27	session_02	J10	amer_fort fruite_faible	FRUITY_LOW	FRUITY
+27	session_02	J2	AMER-INTENSE	BITTER_HIGH	BITTER
+27	session_02	J3	amer	BITTER	BITTER
+27	session_02	J4	amer	BITTER	BITTER
+27	session_02	J5	amer_fort	BITTER_HIGH	BITTER
+27	session_02	J6	amer  leger_volume	BITTER	BITTER
+27	session_02	J6	amer  leger_volume	VOLUME_LOW	VOLUME
+27	session_02	J7	amertume_moyen boise_moyen	BITTER	BITTER
+27	session_02	J7	amertume_moyen boise_moyen	WOODY	WOODY
 27	session_02	J8	amer_tres_fort	BITTER_HIGH	BITTER
+27	session_02	J9	amer_tres_tres_fort	BITTER_HIGH	BITTER
+28	session_02	J1	gras amertume_tres_fort	FATTY	FATTY
+28	session_02	J1	gras amertume_tres_fort	BITTER_HIGH	BITTER
+28	session_02	J10	amer_moyen fuite_faible	BITTER	BITTER
+28	session_02	J10	amer_moyen fuite_faible	FRUITY_LOW	FRUITY
+28	session_02	J2	AMER-INTENSE	BITTER_HIGH	BITTER
+28	session_02	J3	amer_fort	BITTER_HIGH	BITTER
+28	session_02	J4	amer	BITTER	BITTER
+28	session_02	J5	amer_fort	BITTER_HIGH	BITTER
+28	session_02	J6	amer  leger_volume	BITTER	BITTER
+28	session_02	J6	amer  leger_volume	VOLUME_LOW	VOLUME
+28	session_02	J7	amertume_forte	BITTER_HIGH	BITTER
 28	session_02	J8	amer_fort sucre_leger	BITTER_HIGH	BITTER
 28	session_02	J8	amer_fort sucre_leger	SWEET_LOW	SWEET
+28	session_02	J9	amer_fort	BITTER_HIGH	BITTER
+29	session_02	J1	gras_moyen amertume_faible	FATTY	FATTY
+29	session_02	J1	gras_moyen amertume_faible	BITTER_LOW	BITTER
+29	session_02	J10	fruite_moyen amer_faible	FRUITY	FRUITY
+29	session_02	J10	fruite_moyen amer_faible	BITTER_LOW	BITTER
+29	session_02	J2	AMER-MOYEN-FORT	BITTER	BITTER
+29	session_02	J3	amer_sucre	BITTERSWEET	BITTERSWEET
+29	session_02	J4	amer acide	BITTER	BITTER
+29	session_02	J5	amer_leger terreux	BITTER_LOW	BITTER
+29	session_02	J5	amer_leger terreux	EARTHY	EARTHY
+29	session_02	J6	gras  legere_astreingence	FATTY	FATTY
+29	session_02	J6	gras  legere_astreingence	ASTRINGENT_LOW	ASTRINGENT
+29	session_02	J7	amertume_faible volume_faible	BITTER_LOW	BITTER
+29	session_02	J7	amertume_faible volume_faible	VOLUME_LOW	VOLUME
 29	session_02	J8	neutre sucre_faible amer_moy assechant_moy	""	""
 29	session_02	J8	neutre sucre_faible amer_moy assechant_moy	SWEET_LOW	SWEET
 29	session_02	J8	neutre sucre_faible amer_moy assechant_moy	BITTER	BITTER
 29	session_02	J8	neutre sucre_faible amer_moy assechant_moy	ASTRINGENT	ASTRINGENT
+29	session_02	J9	amer_moyen_a_fort	BITTER	BITTER
+30	session_02	J1	gras amertume_tres_faible	FATTY	FATTY
+30	session_02	J1	gras amertume_tres_faible	BITTER_LOW	BITTER
+30	session_02	J10	amer_faible	BITTER_LOW	BITTER
+30	session_02	J2	AMER-LEGER	BITTER_LOW	BITTER
+30	session_02	J3	amer	BITTER	BITTER
+30	session_02	J4	secacide mineral	ACID_HIGH	ACID
+30	session_02	J4	secacide mineral	MINERALITY	MINERALITY
+30	session_02	J5	anis terreux amer_moyen	ANIS	ANIS
+30	session_02	J5	anis terreux amer_moyen	EARTHY	EARTHY
+30	session_02	J5	anis terreux amer_moyen	BITTER	BITTER
+30	session_02	J6	fraicheur	FRESH	FRESH
+30	session_02	J7	metallique_moyen	METALLIC	METALLIC
 30	session_02	J8	neutre sucre_faible amer_leger	""	""
 30	session_02	J8	neutre sucre_faible amer_leger	SWEET_LOW	SWEET
 30	session_02	J8	neutre sucre_faible amer_leger	BITTER_LOW	BITTER
-31	session_02	J8	amer_tres_fort	BITTER_HIGH	BITTER
-22	session_02	J9	sucre_leger amer_tres_leger	SWEET_LOW	SWEET
-22	session_02	J9	sucre_leger amer_tres_leger	BITTER_LOW	BITTER
-23	session_02	J9	sucre_leger amer_tres_leger	SWEET_LOW	SWEET
-23	session_02	J9	sucre_leger amer_tres_leger	BITTER_LOW	BITTER
-24	session_02	J9	sucre_leger amer_leger	SWEET_LOW	SWEET
-24	session_02	J9	sucre_leger amer_leger	BITTER_LOW	BITTER
-25	session_02	J9	sucre_tres_leger amer_leger_a_moyen	SWEET_LOW	SWEET
-25	session_02	J9	sucre_tres_leger amer_leger_a_moyen	BITTER_LOW	BITTER
-26	session_02	J9	amer_moyen	BITTER	BITTER
-27	session_02	J9	amer_tres_tres_fort	BITTER_HIGH	BITTER
-28	session_02	J9	amer_fort	BITTER_HIGH	BITTER
-29	session_02	J9	amer_moyen_a_fort	BITTER	BITTER
-31	session_02	J9	amer_fort	BITTER_HIGH	BITTER
-22	session_02	J10	fruite_faible	FRUITY_LOW	FRUITY
-23	session_02	J10	amer_faible	BITTER_LOW	BITTER
-24	session_02	J10	fruite_fort	FRUITY_HIGH	FRUITY
-25	session_02	J10	fruite_moyen amer_faible	FRUITY	FRUITY
-25	session_02	J10	fruite_moyen amer_faible	BITTER_LOW	BITTER
-26	session_02	J10	fruite_faible	FRUITY_LOW	FRUITY
-27	session_02	J10	amer_fort fruite_faible	BITTER_HIGH	BITTER
-27	session_02	J10	amer_fort fruite_faible	FRUITY_LOW	FRUITY
-28	session_02	J10	amer_moyen fuite_faible	BITTER	BITTER
-28	session_02	J10	amer_moyen fuite_faible	FRUITY_LOW	FRUITY
-29	session_02	J10	fruite_moyen amer_faible	FRUITY	FRUITY
-29	session_02	J10	fruite_moyen amer_faible	BITTER_LOW	BITTER
-30	session_02	J10	amer_faible	BITTER_LOW	BITTER
+31	session_02	J1	gras_moyenamertume_tres_forte	FATTY	FATTY
+31	session_02	J1	gras_moyenamertume_tres_forte	BITTER_HIGH	BITTER
 31	session_02	J10	fruite_fort amer_fort	FRUITY_HIGH	FRUITY
 31	session_02	J10	fruite_fort amer_fort	BITTER_HIGH	BITTER
+31	session_02	J2	AMER-TRES-INTENSE	BITTER_HIGH	BITTER
+31	session_02	J3	amerf_intense	BITTER_HIGH	BITTER
+31	session_02	J4	amer acide	BITTER	BITTER
+31	session_02	J5	amer_fort _augmente	BITTER_HIGH	BITTER
+31	session_02	J6	tres_amer  volume	BITTER_HIGH	BITTER
+31	session_02	J6	tres_amer  volume	VOLUME	VOLUME
+31	session_02	J7	amertume_forte boise_fort	BITTER_HIGH	BITTER
+31	session_02	J7	amertume_forte boise_fort	WOODY_HIGH	WOODY
+31	session_02	J8	amer_tres_fort	BITTER_HIGH	BITTER
+31	session_02	J9	amer_fort	BITTER_HIGH	BITTER
+32	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
+32	session_03	J10	amer_moy final	BITTER	BITTER
+32	session_03	J11	amer_tres_fort apre_sueur_fort	BITTER_HIGH	BITTER
+32	session_03	J11	amer_tres_fort apre_sueur_fort	ACID_HIGH	ACID
+32	session_03	J2	amertume_forte gras_faible	BITTER_HIGH	BITTER
+32	session_03	J2	amertume_forte gras_faible	FATTY_LOW	FATTY
+32	session_03	J3	amer_tres_fort	BITTER_HIGH	BITTER
+32	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
+32	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
+32	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
+32	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
+32	session_03	J6	amer_fort defaut_leger	BITTER_HIGH	BITTER
+32	session_03	J6	amer_fort defaut_leger	OFFNOTE_LOW	OFFNOTE
+32	session_03	J7	tres amerr sec	BITTER_HIGH	BITTER
+32	session_03	J8	amer_moyen	BITTER	BITTER
+32	session_03	J9	astringent_leger	ASTRINGENT_LOW	ASTRINGENT
+33	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
+33	session_03	J10	amer_fort	BITTER_HIGH	BITTER
+33	session_03	J11	amer_tres_fort poivre_fort	BITTER_HIGH	BITTER
+33	session_03	J11	amer_tres_fort poivre_fort	PUNGENT_HIGH	PUNGENT
+33	session_03	J2	acidite_moyenne amertume_forte gras_faible	ACID	ACID
+33	session_03	J2	acidite_moyenne amertume_forte gras_faible	BITTER_HIGH	BITTER
+33	session_03	J2	acidite_moyenne amertume_forte gras_faible	FATTY_LOW	FATTY
+33	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
+33	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
+33	session_03	J4	Amer_moyen	BITTER	BITTER
+33	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
+33	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
+33	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
+33	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
+33	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
+33	session_03	J7	tres amer acide	BITTER_HIGH	BITTER
+33	session_03	J7	tres amer acide	ACID	ACID
+33	session_03	J8	amer_fort	BITTER_HIGH	BITTER
+33	session_03	J9	amere astringent	BITTER	BITTER
+33	session_03	J9	amere astringent	ASTRINGENT	ASTRINGENT
+34	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
+34	session_03	J10	amer_fort	BITTER_HIGH	BITTER
+34	session_03	J2	amertume_forte gras_moyen	BITTER_HIGH	BITTER
+34	session_03	J2	amertume_forte gras_moyen	FATTY	FATTY
+34	session_03	J3	amer_tres_fort	BITTER_HIGH	BITTER
+34	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
+34	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
+34	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
+34	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
+34	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
+34	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
+34	session_03	J7	tres amer sec	BITTER_HIGH	BITTER
+34	session_03	J8	amer_tres_fort encaustique	BITTER_HIGH	BITTER
+34	session_03	J8	amer_tres_fort encaustique	CHEMICAL	CHEMICAL
+34	session_03	J9	astringent_leger	ASTRINGENT_LOW	ASTRINGENT
+35	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
+35	session_03	J10	amer_fort	BITTER_HIGH	BITTER
+35	session_03	J11	amer_tres_fort apre_sueur_fort	BITTER_HIGH	BITTER
+35	session_03	J11	amer_tres_fort apre_sueur_fort	ACID_HIGH	ACID
+35	session_03	J2	amertume_moyenne gras_faible	BITTER	BITTER
+35	session_03	J2	amertume_moyenne gras_faible	FATTY_LOW	FATTY
+35	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
+35	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
+35	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
+35	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
+35	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
+35	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
+35	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
+35	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
+35	session_03	J7	tres amer acide	BITTER_HIGH	BITTER
+35	session_03	J7	tres amer acide	ACID	ACID
+35	session_03	J8	amer_fort salivant	BITTER_HIGH	BITTER
+35	session_03	J8	amer_fort salivant	MOUTHFILLING	MOUTHFILLING
+35	session_03	J9	amere astringent	BITTER	BITTER
+35	session_03	J9	amere astringent	ASTRINGENT	ASTRINGENT
+36	session_03	J1	acide	ACID	ACID
+36	session_03	J10	amer_moy final	BITTER	BITTER
+36	session_03	J11	amer_leger apre_sueur_moyen	BITTER_LOW	BITTER
+36	session_03	J11	amer_leger apre_sueur_moyen	ACID	ACID
+36	session_03	J2	amertume_forte gras_moyen	BITTER_HIGH	BITTER
+36	session_03	J2	amertume_forte gras_moyen	FATTY	FATTY
+36	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
+36	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
+36	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
+36	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
+36	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
+36	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
+36	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
+36	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
+36	session_03	J7	amer collant	BITTER	BITTER
+36	session_03	J7	amer collant	MOUTHFILLING	MOUTHFILLING
+36	session_03	J8	amer_leger encaustique_en_attaque	BITTER_LOW	BITTER
+36	session_03	J8	amer_leger encaustique_en_attaque	CHEMICAL	CHEMICAL
+36	session_03	J9	volume collant	VOLUME	VOLUME
+36	session_03	J9	volume collant	MOUTHFILLING	MOUTHFILLING
+37	session_03	J1	acide	ACID	ACID
+37	session_03	J10	neutre gras	""	""
+37	session_03	J10	neutre gras	FATTY	FATTY
+37	session_03	J11	amer_moyen apre_sueur_leger	BITTER	BITTER
+37	session_03	J11	amer_moyen apre_sueur_leger	ACID_LOW	ACID
+37	session_03	J2	amertume_faible gras_moyen	BITTER_LOW	BITTER
+37	session_03	J2	amertume_faible gras_moyen	FATTY	FATTY
+37	session_03	J3	amer_leger  craie	BITTER_LOW	BITTER
+37	session_03	J3	amer_leger  craie	MOUTHFILLING	MOUTHFILLING
+37	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
+37	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
+37	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
+37	session_03	J5	amer_lege	BITTER_LOW	BITTER
+37	session_03	J6	defaut_leger	OFFNOTE_LOW	OFFNOTE
+37	session_03	J7	amer collant	BITTER	BITTER
+37	session_03	J7	amer collant	MOUTHFILLING	MOUTHFILLING
+37	session_03	J8	encaustique	CHEMICAL	CHEMICAL
+37	session_03	J9	amertume_leger	BITTER_LOW	BITTER
+38	session_03	J1	acide	ACID	ACID
+38	session_03	J10	neutre gras	""	""
+38	session_03	J10	neutre gras	FATTY	FATTY
+38	session_03	J11	amer_leger apre_sueur_moyen	BITTER_LOW	BITTER
+38	session_03	J11	amer_leger apre_sueur_moyen	ACID	ACID
+38	session_03	J2	amertume_faible gras_faible	BITTER_LOW	BITTER
+38	session_03	J2	amertume_faible gras_faible	FATTY_LOW	FATTY
+38	session_03	J3	amer_leger  craie	BITTER_LOW	BITTER
+38	session_03	J3	amer_leger  craie	MOUTHFILLING	MOUTHFILLING
+38	session_03	J4	Amer_moyen	BITTER	BITTER
+38	session_03	J5	amer_lege	BITTER_LOW	BITTER
+38	session_03	J6	defaut_leger	OFFNOTE_LOW	OFFNOTE
+38	session_03	J7	tres amer sec	BITTER_HIGH	BITTER
+38	session_03	J8	gras encaustique_leger	FATTY	FATTY
+38	session_03	J8	gras encaustique_leger	CHEMICAL_LOW	CHEMICAL
+38	session_03	J9	amertume_leger	BITTER_LOW	BITTER
+39	session_03	J1	acide	ACID	ACID
+39	session_03	J10	neutre gras	""	""
+39	session_03	J10	neutre gras	FATTY	FATTY
+39	session_03	J11	amer_leger craie_leger	BITTER_LOW	BITTER
+39	session_03	J11	amer_leger craie_leger	MOUTHFILLING_LOW	MOUTHFILLING
+39	session_03	J2	acidite_legere amertume_faible gras_faible	ACID_LOW	ACID
+39	session_03	J2	acidite_legere amertume_faible gras_faible	BITTER_LOW	BITTER
+39	session_03	J2	acidite_legere amertume_faible gras_faible	FATTY_LOW	FATTY
+39	session_03	J3	craie  amer_trres_leger	MOUTHFILLING	MOUTHFILLING
+39	session_03	J3	craie  amer_trres_leger	BITTER_LOW	BITTER
+39	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
+39	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
+39	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
+39	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
+39	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
+39	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
+39	session_03	J7	mineral	MINERALITY	MINERALITY
+39	session_03	J8	umami	UMAMI	UMAMI
+39	session_03	J9	volume collant	VOLUME	VOLUME
+39	session_03	J9	volume collant	MOUTHFILLING	MOUTHFILLING
+40	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
+40	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
+40	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
+40	session_04	J10	amertume_forte	BITTER_HIGH	BITTER
+40	session_04	J11	amer_tres_fort asringent_fort	BITTER_HIGH	BITTER
+40	session_04	J11	amer_tres_fort asringent_fort	ASTRINGENT_HIGH	ASTRINGENT
+40	session_04	J2	gras_faible amertume_tre_tres_forte	FATTY_LOW	FATTY
+40	session_04	J2	gras_faible amertume_tre_tres_forte	BITTER_HIGH	BITTER
+40	session_04	J3	amertume_tres_forte	BITTER_HIGH	BITTER
+40	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
+40	session_04	J4	Amner_leger sucre	SWEET	SWEET
+40	session_04	J5	amertume_tres_forte	BITTER_HIGH	BITTER
+40	session_04	J6	tres amer echard	BITTER_HIGH	BITTER
+40	session_04	J6	tres amer echard	ACID	ACID
+40	session_04	J7	amer_fort	BITTER_HIGH	BITTER
+40	session_04	J8	amer	BITTER	BITTER
+40	session_04	J9	astringent  tres_amer	ASTRINGENT	ASTRINGENT
+40	session_04	J9	astringent  tres_amer	BITTER_HIGH	BITTER
+41	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
+41	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
+41	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
+41	session_04	J10	amertume_moyenne	BITTER	BITTER
+41	session_04	J11	amer_fort astringent_moyen_a_fort	BITTER_HIGH	BITTER
+41	session_04	J11	amer_fort astringent_moyen_a_fort	ASTRINGENT	ASTRINGENT
+41	session_04	J2	gras_faible amertume_tres_forte	FATTY_LOW	FATTY
+41	session_04	J2	gras_faible amertume_tres_forte	BITTER_HIGH	BITTER
+41	session_04	J3	amertume_moyenne_iforte	BITTER	BITTER
+41	session_04	J4	Amer_moyen boise	BITTER	BITTER
+41	session_04	J4	Amer_moyen boise	WOODY	WOODY
+41	session_04	J5	amertume_moyenne	BITTER	BITTER
+41	session_04	J6	trfes amer acide	BITTER_HIGH	BITTER
+41	session_04	J6	trfes amer acide	ACID	ACID
+41	session_04	J7	amer	BITTER	BITTER
+41	session_04	J8	amer	BITTER	BITTER
+41	session_04	J9	leger_amer_vegetal  leger_gras	BITTER_LOW	BITTER
+41	session_04	J9	leger_amer_vegetal  leger_gras	VEGETAL	VEGETAL
+41	session_04	J9	leger_amer_vegetal  leger_gras	FATTY_LOW	FATTY
+42	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
+42	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
+42	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
+42	session_04	J10	sucre_moyen amertume_leger	SWEET	SWEET
+42	session_04	J10	sucre_moyen amertume_leger	BITTER_LOW	BITTER
+42	session_04	J11	amer_moyen_a_fort papier_mouille_leger	BITTER	BITTER
+42	session_04	J11	amer_moyen_a_fort papier_mouille_leger	CARTON_LOW	CARTON
+42	session_04	J2	Gras_faible amertume_forte	FATTY_LOW	FATTY
+42	session_04	J2	Gras_faible amertume_forte	BITTER_HIGH	BITTER
+42	session_04	J3	amertume_forte	BITTER_HIGH	BITTER
+42	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
+42	session_04	J4	Amner_leger sucre	SWEET	SWEET
+42	session_04	J5	amertume_forte	BITTER_HIGH	BITTER
+42	session_04	J6	tres amer acide	BITTER_HIGH	BITTER
+42	session_04	J6	tres amer acide	ACID	ACID
+42	session_04	J7	amer_moyen	BITTER	BITTER
+42	session_04	J8	glissant gras	MOUTHFILLING	MOUTHFILLING
+42	session_04	J8	glissant gras	FATTY	FATTY
+42	session_04	J9	tres_amer  tendu	BITTER_HIGH	BITTER
+42	session_04	J9	tres_amer  tendu	ACID	ACID
+43	session_04	J1	volume_fort acidite_legere amer_moyen	VOLUME_HIGH	VOLUME
+43	session_04	J1	volume_fort acidite_legere amer_moyen	ACID_LOW	ACID
+43	session_04	J1	volume_fort acidite_legere amer_moyen	BITTER	BITTER
+43	session_04	J10	sucre_leger amertume_leger	SWEET_LOW	SWEET
+43	session_04	J10	sucre_leger amertume_leger	BITTER_LOW	BITTER
+43	session_04	J11	amer_moyen_a_fort papier_mouille_leger	BITTER	BITTER
+43	session_04	J11	amer_moyen_a_fort papier_mouille_leger	CARTON_LOW	CARTON
+43	session_04	J2	gras_moyen amertume_faible fraikcheujr	FATTY	FATTY
+43	session_04	J2	gras_moyen amertume_faible fraikcheujr	BITTER_LOW	BITTER
+43	session_04	J2	gras_moyen amertume_faible fraikcheujr	FRESH	FRESH
+43	session_04	J3	amertume_moyenne_legere	BITTER	BITTER
+43	session_04	J4	Amer_moyen	BITTER	BITTER
+43	session_04	J5	amertume_moyenne	BITTER	BITTER
+43	session_04	J6	tres amr sechard	BITTER_HIGH	BITTER
+43	session_04	J6	tres amr sechard	ACID	ACID
+43	session_04	J7	amer_faible	BITTER_LOW	BITTER
+43	session_04	J8	gras lisse	FATTY	FATTY
+43	session_04	J8	gras lisse	MOUTHFILLING	MOUTHFILLING
+43	session_04	J9	amer  tendu	BITTER	BITTER
+43	session_04	J9	amer  tendu	ACID	ACID
+44	session_04	J1	volume_moyen acidite_legere amer_leger	VOLUME	VOLUME
+44	session_04	J1	volume_moyen acidite_legere amer_leger	ACID_LOW	ACID
+44	session_04	J1	volume_moyen acidite_legere amer_leger	BITTER_LOW	BITTER
+44	session_04	J10	sucre_leger amertume_leger	SWEET_LOW	SWEET
+44	session_04	J10	sucre_leger amertume_leger	BITTER_LOW	BITTER
+44	session_04	J11	amer_leger papier_mouille leger	BITTER_LOW	BITTER
+44	session_04	J11	amer_leger papier_mouille leger	CARTON_LOW	CARTON
+44	session_04	J2	grfas_moyen amertume_faible	FATTY	FATTY
+44	session_04	J2	grfas_moyen amertume_faible	BITTER_LOW	BITTER
+44	session_04	J3	amertume_moyenne_iforte	BITTER	BITTER
+44	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
+44	session_04	J4	Amner_leger sucre	SWEET	SWEET
+44	session_04	J5	amertume_legere	BITTER_LOW	BITTER
+44	session_04	J6	amer	BITTER	BITTER
+44	session_04	J7	amer_peu gras	BITTER_LOW	BITTER
+44	session_04	J7	amer_peu gras	FATTY	FATTY
+44	session_04	J8	glissant gras	MOUTHFILLING	MOUTHFILLING
+44	session_04	J8	glissant gras	FATTY	FATTY
+44	session_04	J9	leger_amer_vegetal  leger gras	BITTER_LOW	BITTER
+44	session_04	J9	leger_amer_vegetal  leger gras	VEGETAL	VEGETAL
+44	session_04	J9	leger_amer_vegetal  leger gras	FATTY_LOW	FATTY
+45	session_04	J1	volume_moyen acidite_legere amer_leger	VOLUME	VOLUME
+45	session_04	J1	volume_moyen acidite_legere amer_leger	ACID_LOW	ACID
+45	session_04	J1	volume_moyen acidite_legere amer_leger	BITTER_LOW	BITTER
+45	session_04	J10	amertume_leger	BITTER_LOW	BITTER
+45	session_04	J11	amer_leger_a_moyen Papier_mouille_leger	BITTER_LOW	BITTER
+45	session_04	J11	amer_leger_a_moyen Papier_mouille_leger	CARTON_LOW	CARTON
+45	session_04	J2	gras_moyen amertume_faible fraikcheujr	FATTY	FATTY
+45	session_04	J2	gras_moyen amertume_faible fraikcheujr	BITTER_LOW	BITTER
+45	session_04	J2	gras_moyen amertume_faible fraikcheujr	FRESH	FRESH
+45	session_04	J3	amertume_assez_legere	BITTER_LOW	BITTER
+45	session_04	J4	Amer_leger	BITTER_LOW	BITTER
+45	session_04	J5	amertume_legere	BITTER_LOW	BITTER
+45	session_04	J6	amerf	BITTER	BITTER
+45	session_04	J7	gras	FATTY	FATTY
+45	session_04	J8	gras doucereux	FATTY	FATTY
+45	session_04	J8	gras doucereux	SWEET	SWEET
+45	session_04	J9	frais  tendu  pas_amer	FRESH	FRESH
+45	session_04	J9	frais  tendu  pas_amer	ACID	ACID
 46	session_05	J1	acide_fort volume_plus	ACID_HIGH	ACID
 46	session_05	J1	acide_fort volume_plus	VOLUME_HIGH	VOLUME
-47	session_05	J1	acide_fort volume_faible	ACID_HIGH	ACID
-47	session_05	J1	acide_fort volume_faible	VOLUME_LOW	VOLUME
-48	session_05	J1	acide_moyen volume_moyen	ACID	ACID
-48	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
-50	session_05	J1	acide_fort volume_faible	ACID_HIGH	ACID
-50	session_05	J1	acide_fort volume_faible	VOLUME_LOW	VOLUME
-51	session_05	J1	acide_moyen volume_moyen	ACID	ACID
-51	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
-52	session_05	J1	acide_fort volume_plus	ACID_HIGH	ACID
-52	session_05	J1	acide_fort volume_plus	VOLUME_HIGH	VOLUME
-53	session_05	J1	acide_moyen volume_moyen	ACID	ACID
-53	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
-54	session_05	J1	acide_moyen volume_faible	ACID	ACID
-54	session_05	J1	acide_moyen volume_faible	VOLUME_LOW	VOLUME
+46	session_05	J10	volume  astingence	VOLUME	VOLUME
+46	session_05	J10	volume  astingence	ASTRINGENT	ASTRINGENT
+46	session_05	J11	doux	SWEET	SWEET
+46	session_05	J13	gras_faible sucre_moy	FATTY_LOW	FATTY
+46	session_05	J13	gras_faible sucre_moy	SWEET	SWEET
 46	session_05	J2	gras_moyen piquant_faible	FATTY	FATTY
 46	session_05	J2	gras_moyen piquant_faible	PUNGENT_LOW	PUNGENT
-47	session_05	J2	gras_fort amertume_faible	FATTY_HIGH	FATTY
-47	session_05	J2	gras_fort amertume_faible	BITTER_LOW	BITTER
-48	session_05	J2	gras_mloyen amertume_mloyenne	FATTY	FATTY
-48	session_05	J2	gras_mloyen amertume_mloyenne	BITTER	BITTER
-50	session_05	J2	gras_faible ameertume_faible	FATTY_LOW	FATTY
-50	session_05	J2	gras_faible ameertume_faible	BITTER_LOW	BITTER
-52	session_05	J2	gras_moyen amertume_faible salinite_faible	FATTY	FATTY
-52	session_05	J2	gras_moyen amertume_faible salinite_faible	BITTER_LOW	BITTER
-52	session_05	J2	gras_moyen amertume_faible salinite_faible	SALTY_LOW	SALTY
-53	session_05	J2	gras_fasible amertume_faible acidite_faible	FATTY_LOW	FATTY
-53	session_05	J2	gras_fasible amertume_faible acidite_faible	BITTER_LOW	BITTER
-53	session_05	J2	gras_fasible amertume_faible acidite_faible	ACID_LOW	ACID
-54	session_05	J2	gras_fort amertume_moyenne	FATTY_HIGH	FATTY
-54	session_05	J2	gras_fort amertume_moyenne	BITTER	BITTER
 46	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	MOUTHFILLING_HIGH	MOUTHFILLING
 46	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	BITTER_HIGH	BITTER
-47	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
-47	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
-48	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	MOUTHFILLING_HIGH	MOUTHFILLING
-48	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	BITTER_HIGH	BITTER
-50	session_05	J3	CRAIE-LEGER  AMER-LEGER	MOUTHFILLING_LOW	MOUTHFILLING
-50	session_05	J3	CRAIE-LEGER  AMER-LEGER	BITTER_LOW	BITTER
-51	session_05	J3	CRAIE-LEGER  AMER-LEGER	MOUTHFILLING_LOW	MOUTHFILLING
-51	session_05	J3	CRAIE-LEGER  AMER-LEGER	BITTER_LOW	BITTER
-52	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	MOUTHFILLING_HIGH	MOUTHFILLING
-52	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	BITTER_HIGH	BITTER
-53	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
-53	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
-54	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
-54	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
 46	session_05	J4	amer_leger	BITTER_LOW	BITTER
-47	session_05	J4	amer_moyen gras	BITTER	BITTER
-47	session_05	J4	amer_moyen gras	FATTY	FATTY
-48	session_05	J4	amer_moyen gras	BITTER	BITTER
-48	session_05	J4	amer_moyen gras	FATTY	FATTY
-50	session_05	J4	amer_fasible	BITTER_LOW	BITTER
-51	session_05	J4	amer_fasible	BITTER_LOW	BITTER
-52	session_05	J4	amer_leger sucre	BITTER_LOW	BITTER
-52	session_05	J4	amer_leger sucre	SWEET	SWEET
-53	session_05	J4	amer_leger	BITTER_LOW	BITTER
-54	session_05	J4	amer_moyen gras	BITTER	BITTER
-54	session_05	J4	amer_moyen gras	FATTY	FATTY
 46	session_05	J5	huileux frais amer	FATTY	FATTY
 46	session_05	J5	huileux frais amer	FRESH	FRESH
 46	session_05	J5	huileux frais amer	BITTER	BITTER
+46	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
+46	session_05	J8	amer acide	BITTER	BITTER
+46	session_05	J9	neutre	""	""
+47	session_05	J1	acide_fort volume_faible	ACID_HIGH	ACID
+47	session_05	J1	acide_fort volume_faible	VOLUME_LOW	VOLUME
+47	session_05	J10	leger _volume   leger_stringence	VOLUME_LOW	VOLUME
+47	session_05	J10	leger _volume   leger_stringence	ASTRINGENT_LOW	ASTRINGENT
+47	session_05	J11	amere volume	BITTER	BITTER
+47	session_05	J11	amere volume	VOLUME	VOLUME
+47	session_05	J13	neutre	""	""
+47	session_05	J2	gras_fort amertume_faible	FATTY_HIGH	FATTY
+47	session_05	J2	gras_fort amertume_faible	BITTER_LOW	BITTER
+47	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
+47	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
+47	session_05	J4	amer_moyen gras	BITTER	BITTER
+47	session_05	J4	amer_moyen gras	FATTY	FATTY
 47	session_05	J5	huileux frais amer	FATTY	FATTY
 47	session_05	J5	huileux frais amer	FRESH	FRESH
 47	session_05	J5	huileux frais amer	BITTER	BITTER
+47	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
+47	session_05	J8	amer sec	BITTER	BITTER
+47	session_05	J8	amer sec	ACID	ACID
+47	session_05	J9	umami_leger	UMAMI_LOW	UMAMI
+48	session_05	J1	acide_moyen volume_moyen	ACID	ACID
+48	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
+48	session_05	J10	peu_de_volume  astringence	VOLUME_LOW	VOLUME
+48	session_05	J10	peu_de_volume  astringence	ASTRINGENT	ASTRINGENT
+48	session_05	J11	amere	BITTER	BITTER
+48	session_05	J13	neutre assechant_moy	""	""
+48	session_05	J13	neutre assechant_moy	ASTRINGENT	ASTRINGENT
+48	session_05	J2	gras_mloyen amertume_mloyenne	FATTY	FATTY
+48	session_05	J2	gras_mloyen amertume_mloyenne	BITTER	BITTER
+48	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	MOUTHFILLING_HIGH	MOUTHFILLING
+48	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	BITTER_HIGH	BITTER
+48	session_05	J4	amer_moyen gras	BITTER	BITTER
+48	session_05	J4	amer_moyen gras	FATTY	FATTY
 48	session_05	J5	huileux frais amer	FATTY	FATTY
 48	session_05	J5	huileux frais amer	FRESH	FRESH
 48	session_05	J5	huileux frais amer	BITTER	BITTER
+48	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
+48	session_05	J8	amer sec	BITTER	BITTER
+48	session_05	J8	amer sec	ACID	ACID
+48	session_05	J9	volume_leger umami_leger	VOLUME_LOW	VOLUME
+48	session_05	J9	volume_leger umami_leger	UMAMI_LOW	UMAMI
+50	session_05	J1	acide_fort volume_faible	ACID_HIGH	ACID
+50	session_05	J1	acide_fort volume_faible	VOLUME_LOW	VOLUME
+50	session_05	J10	fraicheur  pas de volume	FRESH	FRESH
+50	session_05	J11	amere	BITTER	BITTER
+50	session_05	J13	neutre	""	""
+50	session_05	J2	gras_faible ameertume_faible	FATTY_LOW	FATTY
+50	session_05	J2	gras_faible ameertume_faible	BITTER_LOW	BITTER
+50	session_05	J3	CRAIE-LEGER  AMER-LEGER	MOUTHFILLING_LOW	MOUTHFILLING
+50	session_05	J3	CRAIE-LEGER  AMER-LEGER	BITTER_LOW	BITTER
+50	session_05	J4	amer_fasible	BITTER_LOW	BITTER
 50	session_05	J5	huileux frais acide	FATTY	FATTY
 50	session_05	J5	huileux frais acide	FRESH	FRESH
 50	session_05	J5	huileux frais acide	ACID	ACID
+50	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
+50	session_05	J8	amer acide	BITTER	BITTER
+50	session_05	J9	amer_tres_leger	BITTER_LOW	BITTER
+51	session_05	J1	acide_moyen volume_moyen	ACID	ACID
+51	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
+51	session_05	J10	leger_volume  leger_stringence	VOLUME_LOW	VOLUME
+51	session_05	J10	leger_volume  leger_stringence	ASTRINGENT_LOW	ASTRINGENT
+51	session_05	J11	amere volume	BITTER	BITTER
+51	session_05	J11	amere volume	VOLUME	VOLUME
+51	session_05	J13	neutre assechant_faible	""	""
+51	session_05	J13	neutre assechant_faible	ASTRINGENT_LOW	ASTRINGENT
+51	session_05	J3	CRAIE-LEGER  AMER-LEGER	MOUTHFILLING_LOW	MOUTHFILLING
+51	session_05	J3	CRAIE-LEGER  AMER-LEGER	BITTER_LOW	BITTER
+51	session_05	J4	amer_fasible	BITTER_LOW	BITTER
 51	session_05	J5	huileux frais acide	FATTY	FATTY
 51	session_05	J5	huileux frais acide	FRESH	FRESH
 51	session_05	J5	huileux frais acide	ACID	ACID
+51	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
+51	session_05	J8	sedc tanique	ACID	ACID
+51	session_05	J8	sedc tanique	ASTRINGENT	ASTRINGENT
+51	session_05	J9	amer_faible	BITTER_LOW	BITTER
+52	session_05	J1	acide_fort volume_plus	ACID_HIGH	ACID
+52	session_05	J1	acide_fort volume_plus	VOLUME_HIGH	VOLUME
+52	session_05	J10	peu_de_volume  astingence	VOLUME_LOW	VOLUME
+52	session_05	J10	peu_de_volume  astingence	ASTRINGENT	ASTRINGENT
+52	session_05	J11	amere volume	BITTER	BITTER
+52	session_05	J11	amere volume	VOLUME	VOLUME
+52	session_05	J13	sucre_faible	SWEET_LOW	SWEET
+52	session_05	J2	gras_moyen amertume_faible salinite_faible	FATTY	FATTY
+52	session_05	J2	gras_moyen amertume_faible salinite_faible	BITTER_LOW	BITTER
+52	session_05	J2	gras_moyen amertume_faible salinite_faible	SALTY_LOW	SALTY
+52	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	MOUTHFILLING_HIGH	MOUTHFILLING
+52	session_05	J3	CRAIE-PONONCEE  AMER-PRONONCE	BITTER_HIGH	BITTER
+52	session_05	J4	amer_leger sucre	BITTER_LOW	BITTER
+52	session_05	J4	amer_leger sucre	SWEET	SWEET
 52	session_05	J5	huileux frais acide	FATTY	FATTY
 52	session_05	J5	huileux frais acide	FRESH	FRESH
 52	session_05	J5	huileux frais acide	ACID	ACID
+52	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
+52	session_05	J8	amer acide	BITTER	BITTER
+52	session_05	J9	neutre	""	""
+53	session_05	J1	acide_moyen volume_moyen	ACID	ACID
+53	session_05	J1	acide_moyen volume_moyen	VOLUME	VOLUME
+53	session_05	J10	astringent	ASTRINGENT	ASTRINGENT
+53	session_05	J11	doux	SWEET	SWEET
+53	session_05	J13	neutre assechant_moy	""	""
+53	session_05	J13	neutre assechant_moy	ASTRINGENT	ASTRINGENT
+53	session_05	J2	gras_fasible amertume_faible acidite_faible	FATTY_LOW	FATTY
+53	session_05	J2	gras_fasible amertume_faible acidite_faible	BITTER_LOW	BITTER
+53	session_05	J2	gras_fasible amertume_faible acidite_faible	ACID_LOW	ACID
+53	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
+53	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
+53	session_05	J4	amer_leger	BITTER_LOW	BITTER
 53	session_05	J5	huileux	FATTY	FATTY
+53	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
+53	session_05	J8	syec tanique	ACID	ACID
+53	session_05	J8	syec tanique	ASTRINGENT	ASTRINGENT
+53	session_05	J9	amer_leger umami_leger	BITTER_LOW	BITTER
+53	session_05	J9	amer_leger umami_leger	UMAMI_LOW	UMAMI
+54	session_05	J1	acide_moyen volume_faible	ACID	ACID
+54	session_05	J1	acide_moyen volume_faible	VOLUME_LOW	VOLUME
+54	session_05	J10	volume  astringence	VOLUME	VOLUME
+54	session_05	J10	volume  astringence	ASTRINGENT	ASTRINGENT
+54	session_05	J11	amere	BITTER	BITTER
+54	session_05	J13	neutre assechant_faible	""	""
+54	session_05	J13	neutre assechant_faible	ASTRINGENT_LOW	ASTRINGENT
+54	session_05	J2	gras_fort amertume_moyenne	FATTY_HIGH	FATTY
+54	session_05	J2	gras_fort amertume_moyenne	BITTER	BITTER
+54	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	MOUTHFILLING	MOUTHFILLING
+54	session_05	J3	CRAIE-MOYEN  AMER-MOYEN	BITTER	BITTER
+54	session_05	J4	amer_moyen gras	BITTER	BITTER
+54	session_05	J4	amer_moyen gras	FATTY	FATTY
 54	session_05	J5	huileux frais amer	FATTY	FATTY
 54	session_05	J5	huileux frais amer	FRESH	FRESH
 54	session_05	J5	huileux frais amer	BITTER	BITTER
-46	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
-47	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
-48	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
-50	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
-51	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
-52	session_05	J6	sensation_de bouche_enrobee_terre de silice_moyen	MOUTHFILLING	MOUTHFILLING
-53	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
 54	session_05	J6	sensation_de bouche_enrobee_terre de silice_fort	MOUTHFILLING_HIGH	MOUTHFILLING
-46	session_05	J8	amer acide	BITTER	BITTER
-47	session_05	J8	amer sec	BITTER	BITTER
-47	session_05	J8	amer sec	ACID	ACID
-48	session_05	J8	amer sec	BITTER	BITTER
-48	session_05	J8	amer sec	ACID	ACID
-50	session_05	J8	amer acide	BITTER	BITTER
-51	session_05	J8	sedc tanique	ACID	ACID
-51	session_05	J8	sedc tanique	ASTRINGENT	ASTRINGENT
-52	session_05	J8	amer acide	BITTER	BITTER
-53	session_05	J8	syec tanique	ACID	ACID
-53	session_05	J8	syec tanique	ASTRINGENT	ASTRINGENT
 54	session_05	J8	amer sec	BITTER	BITTER
 54	session_05	J8	amer sec	ACID	ACID
-46	session_05	J9	neutre	""	""
-47	session_05	J9	umami_leger	UMAMI_LOW	UMAMI
-48	session_05	J9	volume_leger umami_leger	VOLUME_LOW	VOLUME
-48	session_05	J9	volume_leger umami_leger	UMAMI_LOW	UMAMI
-50	session_05	J9	amer_tres_leger	BITTER_LOW	BITTER
-51	session_05	J9	amer_faible	BITTER_LOW	BITTER
-52	session_05	J9	neutre	""	""
-53	session_05	J9	amer_leger umami_leger	BITTER_LOW	BITTER
-53	session_05	J9	amer_leger umami_leger	UMAMI_LOW	UMAMI
 54	session_05	J9	neutre	""	""
-46	session_05	J10	volume  astingence	VOLUME	VOLUME
-46	session_05	J10	volume  astingence	ASTRINGENT	ASTRINGENT
-47	session_05	J10	leger _volume   leger_stringence	VOLUME_LOW	VOLUME
-47	session_05	J10	leger _volume   leger_stringence	ASTRINGENT_LOW	ASTRINGENT
-48	session_05	J10	peu_de_volume  astringence	VOLUME_LOW	VOLUME
-48	session_05	J10	peu_de_volume  astringence	ASTRINGENT	ASTRINGENT
-50	session_05	J10	fraicheur  pas de volume	FRESH	FRESH
-51	session_05	J10	leger_volume  leger_stringence	VOLUME_LOW	VOLUME
-51	session_05	J10	leger_volume  leger_stringence	ASTRINGENT_LOW	ASTRINGENT
-52	session_05	J10	peu_de_volume  astingence	VOLUME_LOW	VOLUME
-52	session_05	J10	peu_de_volume  astingence	ASTRINGENT	ASTRINGENT
-53	session_05	J10	astringent	ASTRINGENT	ASTRINGENT
-54	session_05	J10	volume  astringence	VOLUME	VOLUME
-54	session_05	J10	volume  astringence	ASTRINGENT	ASTRINGENT
-46	session_05	J11	doux	SWEET	SWEET
-47	session_05	J11	amere volume	BITTER	BITTER
-47	session_05	J11	amere volume	VOLUME	VOLUME
-48	session_05	J11	amere	BITTER	BITTER
-50	session_05	J11	amere	BITTER	BITTER
-51	session_05	J11	amere volume	BITTER	BITTER
-51	session_05	J11	amere volume	VOLUME	VOLUME
-52	session_05	J11	amere volume	BITTER	BITTER
-52	session_05	J11	amere volume	VOLUME	VOLUME
-53	session_05	J11	doux	SWEET	SWEET
-54	session_05	J11	amere	BITTER	BITTER
-46	session_05	J13	gras_faible sucre_moy	FATTY_LOW	FATTY
-46	session_05	J13	gras_faible sucre_moy	SWEET	SWEET
-47	session_05	J13	neutre	""	""
-48	session_05	J13	neutre assechant_moy	""	""
-48	session_05	J13	neutre assechant_moy	ASTRINGENT	ASTRINGENT
-50	session_05	J13	neutre	""	""
-51	session_05	J13	neutre assechant_faible	""	""
-51	session_05	J13	neutre assechant_faible	ASTRINGENT_LOW	ASTRINGENT
-52	session_05	J13	sucre_faible	SWEET_LOW	SWEET
-53	session_05	J13	neutre assechant_moy	""	""
-53	session_05	J13	neutre assechant_moy	ASTRINGENT	ASTRINGENT
-54	session_05	J13	neutre assechant_faible	""	""
-54	session_05	J13	neutre assechant_faible	ASTRINGENT_LOW	ASTRINGENT
+55	session_06	J1	amertume_forte	BITTER_HIGH	BITTER
+55	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+55	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
+55	session_06	J3	AMER	BITTER	BITTER
+55	session_06	J4	acqueux frais minedral assechant	FRESH	FRESH
+55	session_06	J4	acqueux frais minedral assechant	MINERALITY	MINERALITY
+55	session_06	J4	acqueux frais minedral assechant	ASTRINGENT	ASTRINGENT
+55	session_06	J5	un_peu_moins_gras  fraicheur	FATTY_LOW	FATTY
+55	session_06	J5	un_peu_moins_gras  fraicheur	FRESH	FRESH
+55	session_06	J7	amertume gras boise	BITTER	BITTER
+55	session_06	J7	amertume gras boise	FATTY	FATTY
+55	session_06	J7	amertume gras boise	WOODY	WOODY
+55	session_06	J8	legere_astringence fraicheur gras	ASTRINGENT_LOW	ASTRINGENT
+55	session_06	J8	legere_astringence fraicheur gras	FRESH	FRESH
+55	session_06	J8	legere_astringence fraicheur gras	FATTY	FATTY
+55	session_06	J9	umami_moyen salé_fort gras_fort	UMAMI	UMAMI
+55	session_06	J9	umami_moyen salé_fort gras_fort	SALTY_HIGH	SALTY
+55	session_06	J9	umami_moyen salé_fort gras_fort	FATTY_HIGH	FATTY
+56	session_06	J1	amertume_tres_forte	BITTER_HIGH	BITTER
+56	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+56	session_06	J2	AMERTUME-MOYENNE	BITTER	BITTER
+56	session_06	J3	SUCRE	SWEET	SWEET
+56	session_06	J4	sec mineral	ACID	ACID
+56	session_06	J4	sec mineral	MINERALITY	MINERALITY
+56	session_06	J5	gras  un_peu_de _fraicheur	FATTY	FATTY
+56	session_06	J5	gras  un_peu_de _fraicheur	FRESH_LOW	FRESH
+56	session_06	J7	amertume boise	BITTER	BITTER
+56	session_06	J7	amertume boise	WOODY	WOODY
+56	session_06	J8	sucrosite_faible grfas	SWEET_LOW	SWEET
+56	session_06	J8	sucrosite_faible grfas	FATTY	FATTY
+56	session_06	J9	umami_moyen salé_fort gras_fort	UMAMI	UMAMI
+56	session_06	J9	umami_moyen salé_fort gras_fort	SALTY_HIGH	SALTY
+56	session_06	J9	umami_moyen salé_fort gras_fort	FATTY_HIGH	FATTY
+57	session_06	J1	amertume_moyenne	BITTER	BITTER
+57	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+57	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
+57	session_06	J3	SUCRE	SWEET	SWEET
+57	session_06	J4	mineralassechant amer	MINERALITY	MINERALITY
+57	session_06	J4	mineralassechant amer	ACID	ACID
+57	session_06	J4	mineralassechant amer	BITTER	BITTER
+57	session_06	J5	un_peu_de_gras  plus_de_fraicheur	FATTY_LOW	FATTY
+57	session_06	J5	un_peu_de_gras  plus_de_fraicheur	FRESH	FRESH
+57	session_06	J7	boise gras astringence	WOODY	WOODY
+57	session_06	J7	boise gras astringence	FATTY	FATTY
+57	session_06	J7	boise gras astringence	ASTRINGENT	ASTRINGENT
+57	session_06	J8	astringence_moyenne legere_salinite	ASTRINGENT	ASTRINGENT
+57	session_06	J8	astringence_moyenne legere_salinite	SALTY_LOW	SALTY
+57	session_06	J9	umami_faible salé_moyen amertume_faible	UMAMI_LOW	UMAMI
+57	session_06	J9	umami_faible salé_moyen amertume_faible	SALTY	SALTY
+57	session_06	J9	umami_faible salé_moyen amertume_faible	BITTER_LOW	BITTER
+58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	FATTY	FATTY
+58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	SWEET_LOW	SWEET
+58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	ACID_LOW	ACID
+58	session_06	J1	ggras sucrosite_faible acidite_faible             amertume_faible	BITTER_LOW	BITTER
+58	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+58	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
+58	session_06	J3	SUCRE	SWEET	SWEET
+58	session_06	J4	eau sec collant amer	""	""
+58	session_06	J4	eau sec collant amer	ACID	ACID
+58	session_06	J4	eau sec collant amer	MOUTHFILLING	MOUTHFILLING
+58	session_06	J4	eau sec collant amer	BITTER	BITTER
+58	session_06	J5	peu_de_gras  plus_de_fraicheur	FATTY_LOW	FATTY
+58	session_06	J5	peu_de_gras  plus_de_fraicheur	FRESH	FRESH
+58	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
+58	session_06	J7	astringence boise	WOODY	WOODY
+58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	SALTY_LOW	SALTY
+58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	ASTRINGENT	ASTRINGENT
+58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	BITTER_LOW	BITTER
+58	session_06	J8	legere_salinite astringence_moyenne amertume_faible carton	CARTON	CARTON
+58	session_06	J9	umami_moyen salé_faible	UMAMI	UMAMI
+58	session_06	J9	umami_moyen salé_faible	SALTY_LOW	SALTY
+59	session_06	J1	gras ameertume_faible	FATTY	FATTY
+59	session_06	J1	gras ameertume_faible	BITTER_LOW	BITTER
+59	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+59	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
+59	session_06	J3	AMER	BITTER	BITTER
+59	session_06	J4	acqueux fraicheur mineral	FRESH	FRESH
+59	session_06	J4	acqueux fraicheur mineral	MINERALITY	MINERALITY
+59	session_06	J5	fraicheur	FRESH	FRESH
+59	session_06	J7	gras boise	FATTY	FATTY
+59	session_06	J7	gras boise	WOODY	WOODY
+59	session_06	J8	strin gence_moyenne acidite_faible	ASTRINGENT	ASTRINGENT
+59	session_06	J8	strin gence_moyenne acidite_faible	ACID_LOW	ACID
+59	session_06	J9	amertume_fort umami_fort	BITTER_HIGH	BITTER
+59	session_06	J9	amertume_fort umami_fort	UMAMI_HIGH	UMAMI
+60	session_06	J1	salinite_faible amertume_faible	SALTY_LOW	SALTY
+60	session_06	J1	salinite_faible amertume_faible	BITTER_LOW	BITTER
+60	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+60	session_06	J2	AMERTUME-MOYENNE	BITTER	BITTER
+60	session_06	J3	GRAS	FATTY	FATTY
+60	session_06	J4	acqueux frais mineral	FRESH	FRESH
+60	session_06	J4	acqueux frais mineral	MINERALITY	MINERALITY
+60	session_06	J5	un_peu_moins_gras  fraicheur	FATTY_LOW	FATTY
+60	session_06	J5	un_peu_moins_gras  fraicheur	FRESH	FRESH
+60	session_06	J7	boise gras	WOODY	WOODY
+60	session_06	J7	boise gras	FATTY	FATTY
+60	session_06	J8	gras	FATTY	FATTY
+60	session_06	J9	umami_faible salé_moyen amertume_moyen	UMAMI_LOW	UMAMI
+60	session_06	J9	umami_faible salé_moyen amertume_moyen	SALTY	SALTY
+60	session_06	J9	umami_faible salé_moyen amertume_moyen	BITTER	BITTER
+61	session_06	J1	salinite_faible amertume_faible	SALTY_LOW	SALTY
+61	session_06	J1	salinite_faible amertume_faible	BITTER_LOW	BITTER
+61	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+61	session_06	J2	AMERTUME-UN-PEU-PLUS-SOUTENUE	BITTER	BITTER
+61	session_06	J3	GRAS	FATTY	FATTY
+61	session_06	J4	fraicheur tension mineral	FRESH	FRESH
+61	session_06	J4	fraicheur tension mineral	TENSION	TENSION
+61	session_06	J4	fraicheur tension mineral	MINERALITY	MINERALITY
+61	session_06	J5	gras	FATTY	FATTY
+61	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
+61	session_06	J7	astringence boise	WOODY	WOODY
+61	session_06	J8	legere_sucrosite legere_acidite	SWEET_LOW	SWEET
+61	session_06	J8	legere_sucrosite legere_acidite	ACID_LOW	ACID
+61	session_06	J9	umami_moyen frais_fort	UMAMI	UMAMI
+61	session_06	J9	umami_moyen frais_fort	FRESH_HIGH	FRESH
+62	session_06	J1	amertume_moyenne	BITTER	BITTER
+62	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+62	session_06	J2	AMERTUME-LEOERE	BITTER_LOW	BITTER
+62	session_06	J3	GRAS	FATTY	FATTY
+62	session_06	J4	sedc mineral	ACID	ACID
+62	session_06	J4	sedc mineral	MINERALITY	MINERALITY
+62	session_06	J5	fraicheur  leger_gras	FRESH	FRESH
+62	session_06	J5	fraicheur  leger_gras	FATTY_LOW	FATTY
+62	session_06	J7	astringence boise	ASTRINGENT	ASTRINGENT
+62	session_06	J7	astringence boise	WOODY	WOODY
+62	session_06	J8	legere_acidite stringence_faible gras carton	ACID_LOW	ACID
+62	session_06	J8	legere_acidite stringence_faible gras carton	ASTRINGENT_LOW	ASTRINGENT
+62	session_06	J8	legere_acidite stringence_faible gras carton	FATTY	FATTY
+62	session_06	J8	legere_acidite stringence_faible gras carton	CARTON	CARTON
+62	session_06	J9	umami_moyen frais_fort	UMAMI	UMAMI
+62	session_06	J9	umami_moyen frais_fort	FRESH_HIGH	FRESH
+63	session_06	J1	amertume_tres_forte	BITTER_HIGH	BITTER
+63	session_06	J10	boise_leger mais_effet_cumulatif	WOODY_LOW	WOODY
+63	session_06	J2	AMERTUME-LEOERE	BITTER_LOW	BITTER
+63	session_06	J3	AMER	BITTER	BITTER
+63	session_06	J4	eau sec amer	""	""
+63	session_06	J4	eau sec amer	ACID	ACID
+63	session_06	J4	eau sec amer	BITTER	BITTER
+63	session_06	J5	gras  fraicheur	FATTY	FATTY
+63	session_06	J5	gras  fraicheur	FRESH	FRESH
+63	session_06	J7	amertume boise	BITTER	BITTER
+63	session_06	J7	amertume boise	WOODY	WOODY
+63	session_06	J8	sucrosite_faible gras	SWEET_LOW	SWEET
+63	session_06	J8	sucrosite_faible gras	FATTY	FATTY
+63	session_06	J9	umami_faible salé_moyen amertume_moyen	UMAMI_LOW	UMAMI
+63	session_06	J9	umami_faible salé_moyen amertume_moyen	SALTY	SALTY
+63	session_06	J9	umami_faible salé_moyen amertume_moyen	BITTER	BITTER
 64	session_07	J1	volume_eleve acide_eleve	VOLUME_HIGH	VOLUME
 64	session_07	J1	volume_eleve acide_eleve	ACID_HIGH	ACID
-65	session_07	J1	volume_eleve acide_eleve	VOLUME_HIGH	VOLUME
-65	session_07	J1	volume_eleve acide_eleve	ACID_HIGH	ACID
-66	session_07	J1	volume_moyen acide_eleve	VOLUME	VOLUME
-66	session_07	J1	volume_moyen acide_eleve	ACID_HIGH	ACID
-67	session_07	J1	volume_faible acide_moyen	VOLUME_LOW	VOLUME
-67	session_07	J1	volume_faible acide_moyen	ACID	ACID
-68	session_07	J1	volume_eleve acide moyen	VOLUME_HIGH	VOLUME
-68	session_07	J1	volume_eleve acide moyen	ACID	ACID
-69	session_07	J1	volume_moyen acide_eleve	VOLUME	VOLUME
-69	session_07	J1	volume_moyen acide_eleve	ACID_HIGH	ACID
-70	session_07	J1	volume_faible acide_eleve	VOLUME_LOW	VOLUME
-70	session_07	J1	volume_faible acide_eleve	ACID_HIGH	ACID
-71	session_07	J1	volume_faible acide_moyen	VOLUME_LOW	VOLUME
-71	session_07	J1	volume_faible acide_moyen	ACID	ACID
+64	session_07	J10	salé_faible doux	SALTY_LOW	SALTY
+64	session_07	J10	salé_faible doux	SWEET	SWEET
+64	session_07	J11	sucre_tres faible gras	SWEET_LOW	SWEET
+64	session_07	J11	sucre_tres faible gras	FATTY	FATTY
+64	session_07	J12	iode_fort craie_moyen amer_faible	IODINE_HIGH	IODINE
+64	session_07	J12	iode_fort craie_moyen amer_faible	MOUTHFILLING	MOUTHFILLING
+64	session_07	J12	iode_fort craie_moyen amer_faible	BITTER_LOW	BITTER
 64	session_07	J2	amertume_faible gras_moyen acidite_faible	BITTER_LOW	BITTER
 64	session_07	J2	amertume_faible gras_moyen acidite_faible	FATTY	FATTY
 64	session_07	J2	amertume_faible gras_moyen acidite_faible	ACID_LOW	ACID
-65	session_07	J2	salinite_moyen gras_moyen amertume_faible	SALTY	SALTY
-65	session_07	J2	salinite_moyen gras_moyen amertume_faible	FATTY	FATTY
-65	session_07	J2	salinite_moyen gras_moyen amertume_faible	BITTER_LOW	BITTER
-66	session_07	J2	salinite_mayen amertume_faible gras_faible	SALTY	SALTY
-66	session_07	J2	salinite_mayen amertume_faible gras_faible	BITTER_LOW	BITTER
-66	session_07	J2	salinite_mayen amertume_faible gras_faible	FATTY_LOW	FATTY
-67	session_07	J2	salinitefakible martume_moyen gras_faible	SALTY	SALTY
-67	session_07	J2	salinitefakible martume_moyen gras_faible	BITTER	BITTER
-67	session_07	J2	salinitefakible martume_moyen gras_faible	FATTY_LOW	FATTY
-68	session_07	J2	salinite_faible amertume_faible	SALTY_LOW	SALTY
-68	session_07	J2	salinite_faible amertume_faible	BITTER_LOW	BITTER
-69	session_07	J2	amertume_moyen gras_faible	BITTER	BITTER
-69	session_07	J2	amertume_moyen gras_faible	FATTY_LOW	FATTY
-70	session_07	J2	amertume_faible gras_faible	BITTER_LOW	BITTER
-70	session_07	J2	amertume_faible gras_faible	FATTY_LOW	FATTY
-71	session_07	J2	salinite_faible amertume_faible gras_faible	SALTY_LOW	SALTY
-71	session_07	J2	salinite_faible amertume_faible gras_faible	BITTER_LOW	BITTER
-71	session_07	J2	salinite_faible amertume_faible gras_faible	FATTY_LOW	FATTY
 64	session_07	J3	amer_soutenu	BITTER_HIGH	BITTER
-65	session_07	J3	amer_soutenu	BITTER_HIGH	BITTER
-66	session_07	J3	amer_soutenu	BITTER_HIGH	BITTER
-67	session_07	J3	amer-faible	BITTER_LOW	BITTER
-68	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
-68	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
-69	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
-69	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
-70	session_07	J3	amer-faible	BITTER_LOW	BITTER
-71	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
-71	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
 64	session_07	J4	chlore	CHLORINE	CHLORINE
-65	session_07	J4	gras chlore	FATTY	FATTY
-65	session_07	J4	gras chlore	CHLORINE	CHLORINE
-66	session_07	J4	chlore	CHLORINE	CHLORINE
-67	session_07	J4	gras chlore sucre	FATTY	FATTY
-67	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
-67	session_07	J4	gras chlore sucre	SWEET	SWEET
-68	session_07	J4	gras chlore sucre	FATTY	FATTY
-68	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
-68	session_07	J4	gras chlore sucre	SWEET	SWEET
-69	session_07	J4	chlore	CHLORINE	CHLORINE
-70	session_07	J4	gras chlore sucre	FATTY	FATTY
-70	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
-70	session_07	J4	gras chlore sucre	SWEET	SWEET
-71	session_07	J4	gras chlore	FATTY	FATTY
-71	session_07	J4	gras chlore	CHLORINE	CHLORINE
 64	session_07	J5	mineral-amer	MINERALITY	MINERALITY
 64	session_07	J5	mineral-amer	BITTER	BITTER
-65	session_07	J5	amer-finale	BITTER	BITTER
-66	session_07	J5	sec-minedrfal	ACID	ACID
-66	session_07	J5	sec-minedrfal	MINERALITY	MINERALITY
-67	session_07	J5	sec-mineral	ACID	ACID
-67	session_07	J5	sec-mineral	MINERALITY	MINERALITY
-68	session_07	J5	mineral-amer-acide	MINERALITY	MINERALITY
-68	session_07	J5	mineral-amer-acide	BITTER-ACID	BITTER-ACID
-69	session_07	J5	sec-mineral	ACID	ACID
-69	session_07	J5	sec-mineral	MINERALITY	MINERALITY
-70	session_07	J5	amer-finale	BITTER	BITTER
-71	session_07	J5	mineral-amer	MINERALITY	MINERALITY
-71	session_07	J5	mineral-amer	BITTER	BITTER
 64	session_07	J6	umami vieille_cave_peinture gras_leger	UMAMI	UMAMI
 64	session_07	J6	umami vieille_cave_peinture gras_leger	MOIST	MOIST
 64	session_07	J6	umami vieille_cave_peinture gras_leger	CHEMICAL	CHEMICAL
 64	session_07	J6	umami vieille_cave_peinture gras_leger	FATTY_LOW	FATTY
+64	session_07	J7	fraicheur  leger_volume	FRESH	FRESH
+64	session_07	J7	fraicheur  leger_volume	VOLUME_LOW	VOLUME
+64	session_07	J8	volume_faible amertume_faible	VOLUME_LOW	VOLUME
+64	session_07	J8	volume_faible amertume_faible	BITTER_LOW	BITTER
+64	session_07	J9	fluide legere_sucrosite	MOUTHFILLING	MOUTHFILLING
+64	session_07	J9	fluide legere_sucrosite	SWEET_LOW	SWEET
+65	session_07	J1	volume_eleve acide_eleve	VOLUME_HIGH	VOLUME
+65	session_07	J1	volume_eleve acide_eleve	ACID_HIGH	ACID
+65	session_07	J10	amer_faible fraicheur	BITTER_LOW	BITTER
+65	session_07	J10	amer_faible fraicheur	FRESH	FRESH
+65	session_07	J11	amertume_tres_faible assechant_faible	BITTER_LOW	BITTER
+65	session_07	J11	amertume_tres_faible assechant_faible	ASTRINGENT_LOW	ASTRINGENT
+65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	IODINE_HIGH	IODINE
+65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	MOIST_HIGH	MOIST
+65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	BITTER	BITTER
+65	session_07	J2	salinite_moyen gras_moyen amertume_faible	SALTY	SALTY
+65	session_07	J2	salinite_moyen gras_moyen amertume_faible	FATTY	FATTY
+65	session_07	J2	salinite_moyen gras_moyen amertume_faible	BITTER_LOW	BITTER
+65	session_07	J3	amer_soutenu	BITTER_HIGH	BITTER
+65	session_07	J4	gras chlore	FATTY	FATTY
+65	session_07	J4	gras chlore	CHLORINE	CHLORINE
+65	session_07	J5	amer-finale	BITTER	BITTER
 65	session_07	J6	vegetal_chimique_peinture	VEGETAL	VEGETAL
 65	session_07	J6	vegetal_chimique_peinture	CHEMICAL	CHEMICAL
+65	session_07	J7	fraicheur  leger_volume	FRESH	FRESH
+65	session_07	J7	fraicheur  leger_volume	VOLUME_LOW	VOLUME
+65	session_07	J8	volume_faible amertume_faible	VOLUME_LOW	VOLUME
+65	session_07	J8	volume_faible amertume_faible	BITTER_LOW	BITTER
+65	session_07	J9	sucrosite tres_gras	SWEET	SWEET
+65	session_07	J9	sucrosite tres_gras	FATTY_HIGH	FATTY
+66	session_07	J1	volume_moyen acide_eleve	VOLUME	VOLUME
+66	session_07	J1	volume_moyen acide_eleve	ACID_HIGH	ACID
+66	session_07	J10	umami amer fraicheur	UMAMI	UMAMI
+66	session_07	J10	umami amer fraicheur	BITTER	BITTER
+66	session_07	J10	umami amer fraicheur	FRESH	FRESH
+66	session_07	J11	neutre	""	""
+66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	IODINE_HIGH	IODINE
+66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	ANIMAL	ANIMAL
+66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	BITTER	BITTER
+66	session_07	J2	salinite_mayen amertume_faible gras_faible	SALTY	SALTY
+66	session_07	J2	salinite_mayen amertume_faible gras_faible	BITTER_LOW	BITTER
+66	session_07	J2	salinite_mayen amertume_faible gras_faible	FATTY_LOW	FATTY
+66	session_07	J3	amer_soutenu	BITTER_HIGH	BITTER
+66	session_07	J4	chlore	CHLORINE	CHLORINE
+66	session_07	J5	sec-minedrfal	ACID	ACID
+66	session_07	J5	sec-minedrfal	MINERALITY	MINERALITY
 66	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	BITTER_LOW	BITTER
 66	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	VEGETAL	VEGETAL
 66	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	CHEMICAL	CHEMICAL
 66	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	FATTY_LOW	FATTY
-67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	BITTER_LOW	BITTER
-67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	VEGETAL	VEGETAL
-67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	CHEMICAL	CHEMICAL
-67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	FATTY_LOW	FATTY
-68	session_07	J6	umami gras_leger	UMAMI	UMAMI
-68	session_07	J6	umami gras_leger	FATTY_LOW	FATTY
-69	session_07	J6	umami vieille_cave_peinture gras_leger	UMAMI	UMAMI
-69	session_07	J6	umami vieille_cave_peinture gras_leger	MOIST	MOIST
-69	session_07	J6	umami vieille_cave_peinture gras_leger	CHEMICAL	CHEMICAL
-69	session_07	J6	umami vieille_cave_peinture gras_leger	FATTY_LOW	FATTY
-70	session_07	J6	umami vieille_cave_peinture gras_leger	UMAMI	UMAMI
-70	session_07	J6	umami vieille_cave_peinture gras_leger	MOIST	MOIST
-70	session_07	J6	umami vieille_cave_peinture gras_leger	CHEMICAL	CHEMICAL
-70	session_07	J6	umami vieille_cave_peinture gras_leger	FATTY_LOW	FATTY
-71	session_07	J6	amer_leger vegetal_chimique_peinture	BITTER_LOW	BITTER
-71	session_07	J6	amer_leger vegetal_chimique_peinture	VEGETAL	VEGETAL
-71	session_07	J6	amer_leger vegetal_chimique_peinture	CHEMICAL	CHEMICAL
-64	session_07	J7	fraicheur  leger_volume	FRESH	FRESH
-64	session_07	J7	fraicheur  leger_volume	VOLUME_LOW	VOLUME
-65	session_07	J7	fraicheur  leger_volume	FRESH	FRESH
-65	session_07	J7	fraicheur  leger_volume	VOLUME_LOW	VOLUME
 66	session_07	J7	peu_de_volume  fraicheurr  astrinbgence  mine_de_crayon	VOLUME_LOW	VOLUME
 66	session_07	J7	peu_de_volume  fraicheurr  astrinbgence  mine_de_crayon	FRESH	FRESH
 66	session_07	J7	peu_de_volume  fraicheurr  astrinbgence  mine_de_crayon	ASTRINGENT	ASTRINGENT
 66	session_07	J7	peu_de_volume  fraicheurr  astrinbgence  mine_de_crayon	MOUTHFILLING	MOUTHFILLING
-67	session_07	J7	volume  fraicheurf	VOLUME	VOLUME
-67	session_07	J7	volume  fraicheurf	FRESH	FRESH
-68	session_07	J7	volume_gras	VOLUME	VOLUME
-68	session_07	J7	volume_gras	FATTY	FATTY
-69	session_07	J7	fraîcheur	FRESH	FRESH
-70	session_07	J7	fraicheur  volume	FRESH	FRESH
-70	session_07	J7	fraicheur  volume	VOLUME	VOLUME
-71	session_07	J7	volume gras  gout_citronné	VOLUME	VOLUME
-71	session_07	J7	volume gras  gout_citronné	FATTY	FATTY
-71	session_07	J7	volume gras  gout_citronné	LEMON	LEMON
-64	session_07	J8	volume_faible amertume_faible	VOLUME_LOW	VOLUME
-64	session_07	J8	volume_faible amertume_faible	BITTER_LOW	BITTER
-65	session_07	J8	volume_faible amertume_faible	VOLUME_LOW	VOLUME
-65	session_07	J8	volume_faible amertume_faible	BITTER_LOW	BITTER
 66	session_07	J8	volume_faible amertume_faible	VOLUME_LOW	VOLUME
 66	session_07	J8	volume_faible amertume_faible	BITTER_LOW	BITTER
-67	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-67	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-68	session_07	J8	amertume	BITTER	BITTER
-69	session_07	J8	Volume_moyenne	VOLUME	VOLUME
-70	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-70	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-71	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-71	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
-64	session_07	J9	fluide legere_sucrosite	MOUTHFILLING	MOUTHFILLING
-64	session_07	J9	fluide legere_sucrosite	SWEET_LOW	SWEET
-65	session_07	J9	sucrosite tres_gras	SWEET	SWEET
-65	session_07	J9	sucrosite tres_gras	FATTY_HIGH	FATTY
 66	session_07	J9	sucrosite tres_gras	SWEET	SWEET
 66	session_07	J9	sucrosite tres_gras	FATTY_HIGH	FATTY
-67	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
-68	session_07	J9	sucrosite gras	SWEET	SWEET
-68	session_07	J9	sucrosite gras	FATTY	FATTY
-69	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
-70	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
-71	session_07	J9	fluide	MOUTHFILLING	MOUTHFILLING
-64	session_07	J10	salé_faible doux	SALTY_LOW	SALTY
-64	session_07	J10	salé_faible doux	SWEET	SWEET
-65	session_07	J10	amer_faible fraicheur	BITTER_LOW	BITTER
-65	session_07	J10	amer_faible fraicheur	FRESH	FRESH
-66	session_07	J10	umami amer fraicheur	UMAMI	UMAMI
-66	session_07	J10	umami amer fraicheur	BITTER	BITTER
-66	session_07	J10	umami amer fraicheur	FRESH	FRESH
+67	session_07	J1	volume_faible acide_moyen	VOLUME_LOW	VOLUME
+67	session_07	J1	volume_faible acide_moyen	ACID	ACID
 67	session_07	J10	salé_faible doux amer_légé	SALTY_LOW	SALTY
 67	session_07	J10	salé_faible doux amer_légé	SWEET	SWEET
 67	session_07	J10	salé_faible doux amer_légé	BITTER_LOW	BITTER
-68	session_07	J10	intensité_moyenne fraicheur	FRESH	FRESH
-69	session_07	J10	umami amer fraicheur	UMAMI	UMAMI
-69	session_07	J10	umami amer fraicheur	BITTER	BITTER
-69	session_07	J10	umami amer fraicheur	FRESH	FRESH
-70	session_07	J10	intensité_moyenne fraicheur	FRESH	FRESH
-71	session_07	J10	instensité_fsible doux	SWEET_LOW	SWEET
-64	session_07	J11	sucre_tres faible gras	SWEET_LOW	SWEET
-64	session_07	J11	sucre_tres faible gras	FATTY	FATTY
-65	session_07	J11	amertume_tres_faible assechant_faible	BITTER_LOW	BITTER
-65	session_07	J11	amertume_tres_faible assechant_faible	ASTRINGENT_LOW	ASTRINGENT
-66	session_07	J11	neutre	""	""
 67	session_07	J11	amertume_tres_faible assechant_faible	BITTER_LOW	BITTER
 67	session_07	J11	amertume_tres_faible assechant_faible	ASTRINGENT_LOW	ASTRINGENT
-68	session_07	J11	amertume_faible assechant	BITTER_LOW	BITTER
-68	session_07	J11	amertume_faible assechant	ASTRINGENT	ASTRINGENT
-69	session_07	J11	amertume_tres_faible assechant_faible	BITTER_LOW	BITTER
-69	session_07	J11	amertume_tres_faible assechant_faible	ASTRINGENT_LOW	ASTRINGENT
-70	session_07	J11	amertume_faible assechant	BITTER_LOW	BITTER
-70	session_07	J11	amertume_faible assechant	ASTRINGENT	ASTRINGENT
-71	session_07	J11	sucre_fiable gras	SWEET_LOW	SWEET
-71	session_07	J11	sucre_fiable gras	FATTY	FATTY
-64	session_07	J12	iode_fort craie_moyen amer_faible	IODINE_HIGH	IODINE
-64	session_07	J12	iode_fort craie_moyen amer_faible	MOUTHFILLING	MOUTHFILLING
-64	session_07	J12	iode_fort craie_moyen amer_faible	BITTER_LOW	BITTER
-65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	IODINE_HIGH	IODINE
-65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	MOIST_HIGH	MOIST
-65	session_07	J12	iode_fort animal_mouille_fort amer_moyen	BITTER	BITTER
-66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	IODINE_HIGH	IODINE
-66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	ANIMAL	ANIMAL
-66	session_07	J12	iode_tres_fort animal_moyen amer_moyen	BITTER	BITTER
 67	session_07	J12	iode_fort animal_mouille_fort amer_moyen	IODINE_HIGH	IODINE
 67	session_07	J12	iode_fort animal_mouille_fort amer_moyen	MOIST_HIGH	MOIST
 67	session_07	J12	iode_fort animal_mouille_fort amer_moyen	BITTER	BITTER
+67	session_07	J2	salinitefakible martume_moyen gras_faible	SALTY	SALTY
+67	session_07	J2	salinitefakible martume_moyen gras_faible	BITTER	BITTER
+67	session_07	J2	salinitefakible martume_moyen gras_faible	FATTY_LOW	FATTY
+67	session_07	J3	amer-faible	BITTER_LOW	BITTER
+67	session_07	J4	gras chlore sucre	FATTY	FATTY
+67	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
+67	session_07	J4	gras chlore sucre	SWEET	SWEET
+67	session_07	J5	sec-mineral	ACID	ACID
+67	session_07	J5	sec-mineral	MINERALITY	MINERALITY
+67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	BITTER_LOW	BITTER
+67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	VEGETAL	VEGETAL
+67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	CHEMICAL	CHEMICAL
+67	session_07	J6	amer_leger vegetal_chimique_peinture gras_leger	FATTY_LOW	FATTY
+67	session_07	J7	volume  fraicheurf	VOLUME	VOLUME
+67	session_07	J7	volume  fraicheurf	FRESH	FRESH
+67	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+67	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+67	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
+68	session_07	J1	volume_eleve acide moyen	VOLUME_HIGH	VOLUME
+68	session_07	J1	volume_eleve acide moyen	ACID	ACID
+68	session_07	J10	intensité_moyenne fraicheur	FRESH	FRESH
+68	session_07	J11	amertume_faible assechant	BITTER_LOW	BITTER
+68	session_07	J11	amertume_faible assechant	ASTRINGENT	ASTRINGENT
 68	session_07	J12	iode_tres_fort animal_moyen amer_moyen	IODINE_HIGH	IODINE
 68	session_07	J12	iode_tres_fort animal_moyen amer_moyen	ANIMAL	ANIMAL
 68	session_07	J12	iode_tres_fort animal_moyen amer_moyen	BITTER	BITTER
+68	session_07	J2	salinite_faible amertume_faible	SALTY_LOW	SALTY
+68	session_07	J2	salinite_faible amertume_faible	BITTER_LOW	BITTER
+68	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
+68	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
+68	session_07	J4	gras chlore sucre	FATTY	FATTY
+68	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
+68	session_07	J4	gras chlore sucre	SWEET	SWEET
+68	session_07	J5	mineral-amer-acide	MINERALITY	MINERALITY
+68	session_07	J5	mineral-amer-acide	BITTER-ACID	BITTER-ACID
+68	session_07	J6	umami gras_leger	UMAMI	UMAMI
+68	session_07	J6	umami gras_leger	FATTY_LOW	FATTY
+68	session_07	J7	volume_gras	VOLUME	VOLUME
+68	session_07	J7	volume_gras	FATTY	FATTY
+68	session_07	J8	amertume	BITTER	BITTER
+68	session_07	J9	sucrosite gras	SWEET	SWEET
+68	session_07	J9	sucrosite gras	FATTY	FATTY
+69	session_07	J1	volume_moyen acide_eleve	VOLUME	VOLUME
+69	session_07	J1	volume_moyen acide_eleve	ACID_HIGH	ACID
+69	session_07	J10	umami amer fraicheur	UMAMI	UMAMI
+69	session_07	J10	umami amer fraicheur	BITTER	BITTER
+69	session_07	J10	umami amer fraicheur	FRESH	FRESH
+69	session_07	J11	amertume_tres_faible assechant_faible	BITTER_LOW	BITTER
+69	session_07	J11	amertume_tres_faible assechant_faible	ASTRINGENT_LOW	ASTRINGENT
 69	session_07	J12	iode_fort craie_moyen amer_faible	IODINE_HIGH	IODINE
 69	session_07	J12	iode_fort craie_moyen amer_faible	MOUTHFILLING	MOUTHFILLING
 69	session_07	J12	iode_fort craie_moyen amer_faible	BITTER_LOW	BITTER
+69	session_07	J2	amertume_moyen gras_faible	BITTER	BITTER
+69	session_07	J2	amertume_moyen gras_faible	FATTY_LOW	FATTY
+69	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
+69	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
+69	session_07	J4	chlore	CHLORINE	CHLORINE
+69	session_07	J5	sec-mineral	ACID	ACID
+69	session_07	J5	sec-mineral	MINERALITY	MINERALITY
+69	session_07	J6	umami vieille_cave_peinture gras_leger	UMAMI	UMAMI
+69	session_07	J6	umami vieille_cave_peinture gras_leger	MOIST	MOIST
+69	session_07	J6	umami vieille_cave_peinture gras_leger	CHEMICAL	CHEMICAL
+69	session_07	J6	umami vieille_cave_peinture gras_leger	FATTY_LOW	FATTY
+69	session_07	J7	fraîcheur	FRESH	FRESH
+69	session_07	J8	Volume_moyenne	VOLUME	VOLUME
+69	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
+70	session_07	J1	volume_faible acide_eleve	VOLUME_LOW	VOLUME
+70	session_07	J1	volume_faible acide_eleve	ACID_HIGH	ACID
+70	session_07	J10	intensité_moyenne fraicheur	FRESH	FRESH
+70	session_07	J11	amertume_faible assechant	BITTER_LOW	BITTER
+70	session_07	J11	amertume_faible assechant	ASTRINGENT	ASTRINGENT
 70	session_07	J12	iode_fort craie_moyen amer_faible	IODINE_HIGH	IODINE
 70	session_07	J12	iode_fort craie_moyen amer_faible	MOUTHFILLING	MOUTHFILLING
 70	session_07	J12	iode_fort craie_moyen amer_faible	BITTER_LOW	BITTER
+70	session_07	J2	amertume_faible gras_faible	BITTER_LOW	BITTER
+70	session_07	J2	amertume_faible gras_faible	FATTY_LOW	FATTY
+70	session_07	J3	amer-faible	BITTER_LOW	BITTER
+70	session_07	J4	gras chlore sucre	FATTY	FATTY
+70	session_07	J4	gras chlore sucre	CHLORINE	CHLORINE
+70	session_07	J4	gras chlore sucre	SWEET	SWEET
+70	session_07	J5	amer-finale	BITTER	BITTER
+70	session_07	J6	umami vieille_cave_peinture gras_leger	UMAMI	UMAMI
+70	session_07	J6	umami vieille_cave_peinture gras_leger	MOIST	MOIST
+70	session_07	J6	umami vieille_cave_peinture gras_leger	CHEMICAL	CHEMICAL
+70	session_07	J6	umami vieille_cave_peinture gras_leger	FATTY_LOW	FATTY
+70	session_07	J7	fraicheur  volume	FRESH	FRESH
+70	session_07	J7	fraicheur  volume	VOLUME	VOLUME
+70	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+70	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+70	session_07	J9	tres_fluide	MOUTHFILLING_HIGH	MOUTHFILLING
+71	session_07	J1	volume_faible acide_moyen	VOLUME_LOW	VOLUME
+71	session_07	J1	volume_faible acide_moyen	ACID	ACID
+71	session_07	J10	instensité_fsible doux	SWEET_LOW	SWEET
+71	session_07	J11	sucre_fiable gras	SWEET_LOW	SWEET
+71	session_07	J11	sucre_fiable gras	FATTY	FATTY
 71	session_07	J12	iode_moyen amer_faible craie_faible	IODINE	IODINE
 71	session_07	J12	iode_moyen amer_faible craie_faible	BITTER_LOW	BITTER
 71	session_07	J12	iode_moyen amer_faible craie_faible	MOUTHFILLING_LOW	MOUTHFILLING
-32	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
-33	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
-34	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
-35	session_03	J1	amer_fort peristant	BITTER_HIGH	BITTER
-36	session_03	J1	acide	ACID	ACID
-37	session_03	J1	acide	ACID	ACID
-38	session_03	J1	acide	ACID	ACID
-39	session_03	J1	acide	ACID	ACID
-32	session_03	J2	amertume_forte gras_faible	BITTER_HIGH	BITTER
-32	session_03	J2	amertume_forte gras_faible	FATTY_LOW	FATTY
-33	session_03	J2	acidite_moyenne amertume_forte gras_faible	ACID	ACID
-33	session_03	J2	acidite_moyenne amertume_forte gras_faible	BITTER_HIGH	BITTER
-33	session_03	J2	acidite_moyenne amertume_forte gras_faible	FATTY_LOW	FATTY
-34	session_03	J2	amertume_forte gras_moyen	BITTER_HIGH	BITTER
-34	session_03	J2	amertume_forte gras_moyen	FATTY	FATTY
-35	session_03	J2	amertume_moyenne gras_faible	BITTER	BITTER
-35	session_03	J2	amertume_moyenne gras_faible	FATTY_LOW	FATTY
-36	session_03	J2	amertume_forte gras_moyen	BITTER_HIGH	BITTER
-36	session_03	J2	amertume_forte gras_moyen	FATTY	FATTY
-37	session_03	J2	amertume_faible gras_moyen	BITTER_LOW	BITTER
-37	session_03	J2	amertume_faible gras_moyen	FATTY	FATTY
-38	session_03	J2	amertume_faible gras_faible	BITTER_LOW	BITTER
-38	session_03	J2	amertume_faible gras_faible	FATTY_LOW	FATTY
-39	session_03	J2	acidite_legere amertume_faible gras_faible	ACID_LOW	ACID
-39	session_03	J2	acidite_legere amertume_faible gras_faible	BITTER_LOW	BITTER
-39	session_03	J2	acidite_legere amertume_faible gras_faible	FATTY_LOW	FATTY
-32	session_03	J3	amer_tres_fort	BITTER_HIGH	BITTER
-33	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
-33	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
-34	session_03	J3	amer_tres_fort	BITTER_HIGH	BITTER
-35	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
-35	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
-36	session_03	J3	amer_fort  craie	BITTER_HIGH	BITTER
-36	session_03	J3	amer_fort  craie	MOUTHFILLING	MOUTHFILLING
-37	session_03	J3	amer_leger  craie	BITTER_LOW	BITTER
-37	session_03	J3	amer_leger  craie	MOUTHFILLING	MOUTHFILLING
-38	session_03	J3	amer_leger  craie	BITTER_LOW	BITTER
-38	session_03	J3	amer_leger  craie	MOUTHFILLING	MOUTHFILLING
-39	session_03	J3	craie  amer_trres_leger	MOUTHFILLING	MOUTHFILLING
-39	session_03	J3	craie  amer_trres_leger	BITTER_LOW	BITTER
-32	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
-33	session_03	J4	Amer_moyen	BITTER	BITTER
-34	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
-35	session_03	J4	Amer_fort	BITTER_HIGH	BITTER
-36	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
-36	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
-36	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
-37	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
-37	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
-37	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
-38	session_03	J4	Amer_moyen	BITTER	BITTER
-39	session_03	J4	Amer_moyen gras sucrre_leger	BITTER	BITTER
-39	session_03	J4	Amer_moyen gras sucrre_leger	FATTY	FATTY
-39	session_03	J4	Amer_moyen gras sucrre_leger	SWEET_LOW	SWEET
-32	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
-32	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
-32	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
-33	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
-33	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
-33	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
-34	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
-34	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
-34	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
-35	session_03	J5	amer_fort tanin bois_vert	BITTER_HIGH	BITTER
-35	session_03	J5	amer_fort tanin bois_vert	ASTRINGENT	ASTRINGENT
-35	session_03	J5	amer_fort tanin bois_vert	VEGETAL	VEGETAL
-36	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
-36	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
-36	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
-37	session_03	J5	amer_lege	BITTER_LOW	BITTER
-38	session_03	J5	amer_lege	BITTER_LOW	BITTER
-39	session_03	J5	amere sale eau_dhuitres	BITTER	BITTER
-39	session_03	J5	amere sale eau_dhuitres	SALTY	SALTY
-39	session_03	J5	amere sale eau_dhuitres	IODINE	IODINE
-32	session_03	J6	amer_fort defaut_leger	BITTER_HIGH	BITTER
-32	session_03	J6	amer_fort defaut_leger	OFFNOTE_LOW	OFFNOTE
-33	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
-33	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
-34	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
-34	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
-35	session_03	J6	amer_fort defaut_fort	BITTER_HIGH	BITTER
-35	session_03	J6	amer_fort defaut_fort	OFFNOTE_HIGH	OFFNOTE
-37	session_03	J6	defaut_leger	OFFNOTE_LOW	OFFNOTE
-38	session_03	J6	defaut_leger	OFFNOTE_LOW	OFFNOTE
-32	session_03	J7	tres amerr sec	BITTER_HIGH	BITTER
-33	session_03	J7	tres amer acide	BITTER_HIGH	BITTER
-33	session_03	J7	tres amer acide	ACID	ACID
-34	session_03	J7	tres amer sec	BITTER_HIGH	BITTER
-35	session_03	J7	tres amer acide	BITTER_HIGH	BITTER
-35	session_03	J7	tres amer acide	ACID	ACID
-36	session_03	J7	amer collant	BITTER	BITTER
-36	session_03	J7	amer collant	MOUTHFILLING	MOUTHFILLING
-37	session_03	J7	amer collant	BITTER	BITTER
-37	session_03	J7	amer collant	MOUTHFILLING	MOUTHFILLING
-38	session_03	J7	tres amer sec	BITTER_HIGH	BITTER
-39	session_03	J7	mineral	MINERALITY	MINERALITY
-32	session_03	J8	amer_moyen	BITTER	BITTER
-33	session_03	J8	amer_fort	BITTER_HIGH	BITTER
-34	session_03	J8	amer_tres_fort encaustique	BITTER_HIGH	BITTER
-34	session_03	J8	amer_tres_fort encaustique	CHEMICAL	CHEMICAL
-35	session_03	J8	amer_fort salivant	BITTER_HIGH	BITTER
-35	session_03	J8	amer_fort salivant	MOUTHFILLING	MOUTHFILLING
-36	session_03	J8	amer_leger encaustique_en_attaque	BITTER_LOW	BITTER
-36	session_03	J8	amer_leger encaustique_en_attaque	CHEMICAL	CHEMICAL
-37	session_03	J8	encaustique	CHEMICAL	CHEMICAL
-38	session_03	J8	gras encaustique_leger	FATTY	FATTY
-38	session_03	J8	gras encaustique_leger	CHEMICAL_LOW	CHEMICAL
-39	session_03	J8	umami	UMAMI	UMAMI
-32	session_03	J9	astringent_leger	ASTRINGENT_LOW	ASTRINGENT
-33	session_03	J9	amere astringent	BITTER	BITTER
-33	session_03	J9	amere astringent	ASTRINGENT	ASTRINGENT
-34	session_03	J9	astringent_leger	ASTRINGENT_LOW	ASTRINGENT
-35	session_03	J9	amere astringent	BITTER	BITTER
-35	session_03	J9	amere astringent	ASTRINGENT	ASTRINGENT
-36	session_03	J9	volume collant	VOLUME	VOLUME
-36	session_03	J9	volume collant	MOUTHFILLING	MOUTHFILLING
-37	session_03	J9	amertume_leger	BITTER_LOW	BITTER
-38	session_03	J9	amertume_leger	BITTER_LOW	BITTER
-39	session_03	J9	volume collant	VOLUME	VOLUME
-39	session_03	J9	volume collant	MOUTHFILLING	MOUTHFILLING
-32	session_03	J10	amer_moy final	BITTER	BITTER
-33	session_03	J10	amer_fort	BITTER_HIGH	BITTER
-34	session_03	J10	amer_fort	BITTER_HIGH	BITTER
-35	session_03	J10	amer_fort	BITTER_HIGH	BITTER
-36	session_03	J10	amer_moy final	BITTER	BITTER
-37	session_03	J10	neutre gras	""	""
-37	session_03	J10	neutre gras	FATTY	FATTY
-38	session_03	J10	neutre gras	""	""
-38	session_03	J10	neutre gras	FATTY	FATTY
-39	session_03	J10	neutre gras	""	""
-39	session_03	J10	neutre gras	FATTY	FATTY
-32	session_03	J11	amer_tres_fort apre_sueur_fort	BITTER_HIGH	BITTER
-32	session_03	J11	amer_tres_fort apre_sueur_fort	ACID_HIGH	ACID
-33	session_03	J11	amer_tres_fort poivre_fort	BITTER_HIGH	BITTER
-33	session_03	J11	amer_tres_fort poivre_fort	PUNGENT_HIGH	PUNGENT
-35	session_03	J11	amer_tres_fort apre_sueur_fort	BITTER_HIGH	BITTER
-35	session_03	J11	amer_tres_fort apre_sueur_fort	ACID_HIGH	ACID
-36	session_03	J11	amer_leger apre_sueur_moyen	BITTER_LOW	BITTER
-36	session_03	J11	amer_leger apre_sueur_moyen	ACID	ACID
-37	session_03	J11	amer_moyen apre_sueur_leger	BITTER	BITTER
-37	session_03	J11	amer_moyen apre_sueur_leger	ACID_LOW	ACID
-38	session_03	J11	amer_leger apre_sueur_moyen	BITTER_LOW	BITTER
-38	session_03	J11	amer_leger apre_sueur_moyen	ACID	ACID
-39	session_03	J11	amer_leger craie_leger	BITTER_LOW	BITTER
-39	session_03	J11	amer_leger craie_leger	MOUTHFILLING_LOW	MOUTHFILLING
-40	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
-40	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
-40	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
-41	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
-41	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
-41	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
-42	session_04	J1	volume_fort pioquant amer_fort	VOLUME_HIGH	VOLUME
-42	session_04	J1	volume_fort pioquant amer_fort	PUNGENT	PUNGENT
-42	session_04	J1	volume_fort pioquant amer_fort	BITTER_HIGH	BITTER
-43	session_04	J1	volume_fort acidite_legere amer_moyen	VOLUME_HIGH	VOLUME
-43	session_04	J1	volume_fort acidite_legere amer_moyen	ACID_LOW	ACID
-43	session_04	J1	volume_fort acidite_legere amer_moyen	BITTER	BITTER
-44	session_04	J1	volume_moyen acidite_legere amer_leger	VOLUME	VOLUME
-44	session_04	J1	volume_moyen acidite_legere amer_leger	ACID_LOW	ACID
-44	session_04	J1	volume_moyen acidite_legere amer_leger	BITTER_LOW	BITTER
-45	session_04	J1	volume_moyen acidite_legere amer_leger	VOLUME	VOLUME
-45	session_04	J1	volume_moyen acidite_legere amer_leger	ACID_LOW	ACID
-45	session_04	J1	volume_moyen acidite_legere amer_leger	BITTER_LOW	BITTER
-40	session_04	J2	gras_faible amertume_tre_tres_forte	FATTY_LOW	FATTY
-40	session_04	J2	gras_faible amertume_tre_tres_forte	BITTER_HIGH	BITTER
-41	session_04	J2	gras_faible amertume_tres_forte	FATTY_LOW	FATTY
-41	session_04	J2	gras_faible amertume_tres_forte	BITTER_HIGH	BITTER
-42	session_04	J2	Gras_faible amertume_forte	FATTY_LOW	FATTY
-42	session_04	J2	Gras_faible amertume_forte	BITTER_HIGH	BITTER
-43	session_04	J2	gras_moyen amertume_faible fraikcheujr	FATTY	FATTY
-43	session_04	J2	gras_moyen amertume_faible fraikcheujr	BITTER_LOW	BITTER
-43	session_04	J2	gras_moyen amertume_faible fraikcheujr	FRESH	FRESH
-44	session_04	J2	grfas_moyen amertume_faible	FATTY	FATTY
-44	session_04	J2	grfas_moyen amertume_faible	BITTER_LOW	BITTER
-45	session_04	J2	gras_moyen amertume_faible fraikcheujr	FATTY	FATTY
-45	session_04	J2	gras_moyen amertume_faible fraikcheujr	BITTER_LOW	BITTER
-45	session_04	J2	gras_moyen amertume_faible fraikcheujr	FRESH	FRESH
-40	session_04	J3	amertume_tres_forte	BITTER_HIGH	BITTER
-41	session_04	J3	amertume_moyenne_iforte	BITTER	BITTER
-42	session_04	J3	amertume_forte	BITTER_HIGH	BITTER
-43	session_04	J3	amertume_moyenne_legere	BITTER	BITTER
-44	session_04	J3	amertume_moyenne_iforte	BITTER	BITTER
-45	session_04	J3	amertume_assez_legere	BITTER_LOW	BITTER
-40	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
-40	session_04	J4	Amner_leger sucre	SWEET	SWEET
-41	session_04	J4	Amer_moyen boise	BITTER	BITTER
-41	session_04	J4	Amer_moyen boise	WOODY	WOODY
-42	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
-42	session_04	J4	Amner_leger sucre	SWEET	SWEET
-43	session_04	J4	Amer_moyen	BITTER	BITTER
-44	session_04	J4	Amner_leger sucre	BITTER_LOW	BITTER
-44	session_04	J4	Amner_leger sucre	SWEET	SWEET
-45	session_04	J4	Amer_leger	BITTER_LOW	BITTER
-40	session_04	J5	amertume_tres_forte	BITTER_HIGH	BITTER
-41	session_04	J5	amertume_moyenne	BITTER	BITTER
-42	session_04	J5	amertume_forte	BITTER_HIGH	BITTER
-43	session_04	J5	amertume_moyenne	BITTER	BITTER
-44	session_04	J5	amertume_legere	BITTER_LOW	BITTER
-45	session_04	J5	amertume_legere	BITTER_LOW	BITTER
-40	session_04	J6	tres amer echard	BITTER_HIGH	BITTER
-40	session_04	J6	tres amer echard	ACID	ACID
-41	session_04	J6	trfes amer acide	BITTER_HIGH	BITTER
-41	session_04	J6	trfes amer acide	ACID	ACID
-42	session_04	J6	tres amer acide	BITTER_HIGH	BITTER
-42	session_04	J6	tres amer acide	ACID	ACID
-43	session_04	J6	tres amr sechard	BITTER_HIGH	BITTER
-43	session_04	J6	tres amr sechard	ACID	ACID
-44	session_04	J6	amer	BITTER	BITTER
-45	session_04	J6	amerf	BITTER	BITTER
-40	session_04	J7	amer_fort	BITTER_HIGH	BITTER
-41	session_04	J7	amer	BITTER	BITTER
-42	session_04	J7	amer_moyen	BITTER	BITTER
-43	session_04	J7	amer_faible	BITTER_LOW	BITTER
-44	session_04	J7	amer_peu gras	BITTER_LOW	BITTER
-44	session_04	J7	amer_peu gras	FATTY	FATTY
-45	session_04	J7	gras	FATTY	FATTY
-40	session_04	J8	amer	BITTER	BITTER
-41	session_04	J8	amer	BITTER	BITTER
-42	session_04	J8	glissant gras	MOUTHFILLING	MOUTHFILLING
-42	session_04	J8	glissant gras	FATTY	FATTY
-43	session_04	J8	gras lisse	FATTY	FATTY
-43	session_04	J8	gras lisse	MOUTHFILLING	MOUTHFILLING
-44	session_04	J8	glissant gras	MOUTHFILLING	MOUTHFILLING
-44	session_04	J8	glissant gras	FATTY	FATTY
-45	session_04	J8	gras doucereux	FATTY	FATTY
-45	session_04	J8	gras doucereux	SWEET	SWEET
-40	session_04	J9	astringent  tres_amer	ASTRINGENT	ASTRINGENT
-40	session_04	J9	astringent  tres_amer	BITTER_HIGH	BITTER
-41	session_04	J9	leger_amer_vegetal  leger_gras	BITTER_LOW	BITTER
-41	session_04	J9	leger_amer_vegetal  leger_gras	VEGETAL	VEGETAL
-41	session_04	J9	leger_amer_vegetal  leger_gras	FATTY_LOW	FATTY
-42	session_04	J9	tres_amer  tendu	BITTER_HIGH	BITTER
-42	session_04	J9	tres_amer  tendu	ACID	ACID
-43	session_04	J9	amer  tendu	BITTER	BITTER
-43	session_04	J9	amer  tendu	ACID	ACID
-44	session_04	J9	leger_amer_vegetal  leger gras	BITTER_LOW	BITTER
-44	session_04	J9	leger_amer_vegetal  leger gras	VEGETAL	VEGETAL
-44	session_04	J9	leger_amer_vegetal  leger gras	FATTY_LOW	FATTY
-45	session_04	J9	frais  tendu  pas_amer	FRESH	FRESH
-45	session_04	J9	frais  tendu  pas_amer	ACID	ACID
-40	session_04	J10	amertume_forte	BITTER_HIGH	BITTER
-41	session_04	J10	amertume_moyenne	BITTER	BITTER
-42	session_04	J10	sucre_moyen amertume_leger	SWEET	SWEET
-42	session_04	J10	sucre_moyen amertume_leger	BITTER_LOW	BITTER
-43	session_04	J10	sucre_leger amertume_leger	SWEET_LOW	SWEET
-43	session_04	J10	sucre_leger amertume_leger	BITTER_LOW	BITTER
-44	session_04	J10	sucre_leger amertume_leger	SWEET_LOW	SWEET
-44	session_04	J10	sucre_leger amertume_leger	BITTER_LOW	BITTER
-45	session_04	J10	amertume_leger	BITTER_LOW	BITTER
-40	session_04	J11	amer_tres_fort asringent_fort	BITTER_HIGH	BITTER
-40	session_04	J11	amer_tres_fort asringent_fort	ASTRINGENT_HIGH	ASTRINGENT
-41	session_04	J11	amer_fort astringent_moyen_a_fort	BITTER_HIGH	BITTER
-41	session_04	J11	amer_fort astringent_moyen_a_fort	ASTRINGENT	ASTRINGENT
-42	session_04	J11	amer_moyen_a_fort papier_mouille_leger	BITTER	BITTER
-42	session_04	J11	amer_moyen_a_fort papier_mouille_leger	CARTON_LOW	CARTON
-43	session_04	J11	amer_moyen_a_fort papier_mouille_leger	BITTER	BITTER
-43	session_04	J11	amer_moyen_a_fort papier_mouille_leger	CARTON_LOW	CARTON
-44	session_04	J11	amer_leger papier_mouille leger	BITTER_LOW	BITTER
-44	session_04	J11	amer_leger papier_mouille leger	CARTON_LOW	CARTON
-45	session_04	J11	amer_leger_a_moyen Papier_mouille_leger	BITTER_LOW	BITTER
-45	session_04	J11	amer_leger_a_moyen Papier_mouille_leger	CARTON_LOW	CARTON
-17	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
-17	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
-17	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
-18	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
-18	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
-18	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
-19	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
-19	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
-19	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
-20	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
-20	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
-20	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
-21	session_01	J1	volumre_moyen acide moyen citron_leger	VOLUME	VOLUME
-21	session_01	J1	volumre_moyen acide moyen citron_leger	ACID	ACID
-21	session_01	J1	volumre_moyen acide moyen citron_leger	ACID_LOW	ACID
-17	session_01	J2	amer_leger	BITTER_LOW	BITTER
-18	session_01	J2	amer_leger volume	BITTER_LOW	BITTER
-18	session_01	J2	amer_leger volume	VOLUME	VOLUME
-19	session_01	J2	amer_leger	BITTER_LOW	BITTER
-20	session_01	J2	amer_leger volume	BITTER_LOW	BITTER
-20	session_01	J2	amer_leger volume	VOLUME	VOLUME
-21	session_01	J2	amer_moyen	BITTER	BITTER
-17	session_01	J3	fraicheur	FRESH	FRESH
-18	session_01	J3	rien	""	""
-19	session_01	J3	rien	""	""
-20	session_01	J3	rien	""	""
-21	session_01	J3	rien	""	""
-17	session_01	J4	astringeaant	ASTRINGENT	ASTRINGENT
-18	session_01	J4	astringeant	ASTRINGENT	ASTRINGENT
-19	session_01	J4	minerfal	MINERALITY	MINERALITY
-20	session_01	J4	mineral amer	MINERALITY	MINERALITY
-20	session_01	J4	mineral amer	BITTER	BITTER
-21	session_01	J4	mineral	MINERALITY	MINERALITY
-17	session_01	J5	volume  crayeux	VOLUME	VOLUME
-17	session_01	J5	volume  crayeux	MOUTHFILLING	MOUTHFILLING
-18	session_01	J5	fraicheur	FRESH	FRESH
-19	session_01	J5	fraicheur	FRESH	FRESH
-20	session_01	J5	crayeux  fraicheur  peu de volume	MOUTHFILLING	MOUTHFILLING
-20	session_01	J5	crayeux  fraicheur  peu de volume	FRESH	FRESH
-20	session_01	J5	crayeux  fraicheur  peu de volume	VOLUME_LOW	VOLUME
-21	session_01	J5	fraicheur  leger_volume  legere_astringence	FRESH	FRESH
-21	session_01	J5	fraicheur  leger_volume  legere_astringence	VOLUME_LOW	VOLUME
-21	session_01	J5	fraicheur  leger_volume  legere_astringence	ASTRINGENT_LOW	ASTRINGENT
-17	session_01	J6	volume amertume	VOLUME	VOLUME
-17	session_01	J6	volume amertume	BITTER	BITTER
-18	session_01	J6	volume	VOLUME	VOLUME
-19	session_01	J6	fraicheur astringence	FRESH	FRESH
-19	session_01	J6	fraicheur astringence	ASTRINGENT	ASTRINGENT
-20	session_01	J6	volume amertume	VOLUME	VOLUME
-20	session_01	J6	volume amertume	BITTER	BITTER
-21	session_01	J6	volume	VOLUME	VOLUME
-17	session_01	J7	metallique_moyen fraicheur_moyen	METALLIC	METALLIC
-17	session_01	J7	metallique_moyen fraicheur_moyen	FRESH	FRESH
-18	session_01	J7	gras_intense	FATTY_HIGH	FATTY
-19	session_01	J7	gras_moyen plat	FATTY	FATTY
-19	session_01	J7	gras_moyen plat	""	""
-20	session_01	J7	umami_faible rondeur_faible	UMAMI_LOW	UMAMI
-20	session_01	J7	umami_faible rondeur_faible	MOUTHFILLING_LOW	MOUTHFILLING
-21	session_01	J7	gras_moyen plat	FATTY	FATTY
-21	session_01	J7	gras_moyen plat	""	""
-17	session_01	J8	volume	VOLUME	VOLUME
-18	session_01	J8	fluide amer	MOUTHFILLING	MOUTHFILLING
-18	session_01	J8	fluide amer	BITTER	BITTER
-19	session_01	J8	volume legere_amertume	VOLUME	VOLUME
-19	session_01	J8	volume legere_amertume	BITTER_LOW	BITTER
-20	session_01	J8	volume	VOLUME	VOLUME
-21	session_01	J8	volume legere_amertume	VOLUME	VOLUME
-21	session_01	J8	volume legere_amertume	BITTER_LOW	BITTER
-17	session_01	J9	gras salin	FATTY	FATTY
-17	session_01	J9	gras salin	SALTY	SALTY
-18	session_01	J9	frais métalique	FRESH	FRESH
-18	session_01	J9	frais métalique	METALLIC	METALLIC
-19	session_01	J9	frais légèrement_gras	FRESH	FRESH
-19	session_01	J9	frais légèrement_gras	FATTY_LOW	FATTY
-20	session_01	J9	frais légèrement_gras	FRESH	FRESH
-20	session_01	J9	frais légèrement_gras	FATTY_LOW	FATTY
-21	session_01	J9	métalique	METALLIC	METALLIC
+71	session_07	J2	salinite_faible amertume_faible gras_faible	SALTY_LOW	SALTY
+71	session_07	J2	salinite_faible amertume_faible gras_faible	BITTER_LOW	BITTER
+71	session_07	J2	salinite_faible amertume_faible gras_faible	FATTY_LOW	FATTY
+71	session_07	J3	amer_fasible sucre_faible	BITTER_LOW	BITTER
+71	session_07	J3	amer_fasible sucre_faible	SWEET_LOW	SWEET
+71	session_07	J4	gras chlore	FATTY	FATTY
+71	session_07	J4	gras chlore	CHLORINE	CHLORINE
+71	session_07	J5	mineral-amer	MINERALITY	MINERALITY
+71	session_07	J5	mineral-amer	BITTER	BITTER
+71	session_07	J6	amer_leger vegetal_chimique_peinture	BITTER_LOW	BITTER
+71	session_07	J6	amer_leger vegetal_chimique_peinture	VEGETAL	VEGETAL
+71	session_07	J6	amer_leger vegetal_chimique_peinture	CHEMICAL	CHEMICAL
+71	session_07	J7	volume gras  gout_citronné	VOLUME	VOLUME
+71	session_07	J7	volume gras  gout_citronné	FATTY	FATTY
+71	session_07	J7	volume gras  gout_citronné	LEMON	LEMON
+71	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+71	session_07	J8	collant rond	MOUTHFILLING	MOUTHFILLING
+71	session_07	J9	fluide	MOUTHFILLING	MOUTHFILLING
 17	session_All	J1	amertume_tres_legere	BITTER_LOW	BITTER
-23	session_All	J1	amertume_legere	BITTER_LOW	BITTER
-28	session_All	J1	amertume-tres-forte	BITTER_HIGH	BITTER
-36	session_All	J1	amertume-moyenne acidite-legere	BITTER	BITTER
-36	session_All	J1	amertume-moyenne acidite-legere	ACID_LOW	ACID
-40	session_All	J1	amertume-tres-tres-forte	BITTER_HIGH	BITTER
-47	session_All	J1	amertume-legere aacidite-legere	BITTER_LOW	BITTER
-47	session_All	J1	amertume-legere aacidite-legere	ACID_LOW	ACID
-57	session_All	J1	acidite-tres-legere amertume-legere	ACID_LOW	ACID
-57	session_All	J1	acidite-tres-legere amertume-legere	BITTER_LOW	BITTER
-67	session_All	J1	acidite-tres-legere	ACID_LOW	ACID
-RAW	session_All	J1	amertume-tres-tres-forte	BITTER_HIGH	BITTER
+17	session_All	J10	sucre_2 amer_1	SWEET_LOW	SWEET
+17	session_All	J10	sucre_2 amer_1	BITTER_LOW	BITTER
 17	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
 17	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
 17	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
+17	session_All	J3	sale_leger	SALTY_LOW	SALTY
+17	session_All	J4	tanin	ASTRINGENT	ASTRINGENT
+17	session_All	J5	vegetal_leger	VEGETAL_LOW	VEGETAL
+17	session_All	J6	volume  sucre	VOLUME	VOLUME
+17	session_All	J6	volume  sucre	SWEET	SWEET
+17	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
+17	session_All	J8	ferreux salin	METALLIC	METALLIC
+17	session_All	J8	ferreux salin	SALTY	SALTY
+17	session_All	J9	neutre	""	""
+23	session_All	J1	amertume_legere	BITTER_LOW	BITTER
+23	session_All	J10	amer_4 carton_mouille_2	BITTER	BITTER
+23	session_All	J10	amer_4 carton_mouille_2	CARTON	CARTON
 23	session_All	J2	amer_leger Gras sucre_marque	BITTER_LOW	BITTER
 23	session_All	J2	amer_leger Gras sucre_marque	FATTY	FATTY
 23	session_All	J2	amer_leger Gras sucre_marque	SWEET_HIGH	SWEET
+23	session_All	J3	amer_leger	BITTER_LOW	BITTER
+23	session_All	J4	miknerfal	MINERALITY	MINERALITY
+23	session_All	J5	gras_leger agrume	FATTY_LOW	FATTY
+23	session_All	J5	gras_leger agrume	ACID	ACID
+23	session_All	J6	volume  sucre	VOLUME	VOLUME
+23	session_All	J6	volume  sucre	SWEET	SWEET
+23	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
+23	session_All	J8	ferreux aqueu	METALLIC	METALLIC
+23	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
+28	session_All	J1	amertume-tres-forte	BITTER_HIGH	BITTER
+28	session_All	J10	amer_5	BITTER	BITTER
 28	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
 28	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
 28	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
+28	session_All	J3	amer_fort	BITTER_HIGH	BITTER
+28	session_All	J4	amertujme	BITTER	BITTER
+28	session_All	J5	amer_moyen agume	BITTER	BITTER
+28	session_All	J5	amer_moyen agume	ACID	ACID
+28	session_All	J6	sucre  leger_volumre	SWEET	SWEET
+28	session_All	J6	sucre  leger_volumre	VOLUME_LOW	VOLUME
+28	session_All	J7	amertume	BITTER	BITTER
+28	session_All	J8	peu_aromaique aqueu legerement_floral_rosé	AROMATIC_LOW	AROMATIC
+28	session_All	J8	peu_aromaique aqueu legerement_floral_rosé	FLORAL_LOW	FLORAL
+28	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
+32	session_All	J10	amer_2_a_3	BITTER_LOW	BITTER
 32	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
 32	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
 32	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
-36	session_All	J2	amerr_moyen sucre_leger	BITTER	BITTER
-36	session_All	J2	amerr_moyen sucre_leger	SWEET_LOW	SWEET
-40	session_All	J2	amerr_moyen sucre_leger	BITTER	BITTER
-40	session_All	J2	amerr_moyen sucre_leger	SWEET_LOW	SWEET
-47	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
-47	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
-47	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
-57	session_All	J2	amer_leger fraicheur sucre_leger	BITTER_LOW	BITTER
-57	session_All	J2	amer_leger fraicheur sucre_leger	FRESH	FRESH
-57	session_All	J2	amer_leger fraicheur sucre_leger	SWEET_LOW	SWEET
-67	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
-67	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
-67	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
-RAW	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
-RAW	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
-RAW	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
-17	session_All	J3	sale_leger	SALTY_LOW	SALTY
-23	session_All	J3	amer_leger	BITTER_LOW	BITTER
-28	session_All	J3	amer_fort	BITTER_HIGH	BITTER
 32	session_All	J3	sale_leger	SALTY_LOW	SALTY
-36	session_All	J3	amer_moyen	BITTER	BITTER
-40	session_All	J3	amer_fort	BITTER_HIGH	BITTER
-47	session_All	J3	sale_leger	SALTY_LOW	SALTY
-57	session_All	J3	amer_tres_leger	BITTER_LOW	BITTER
-67	session_All	J3	rien	""	""
-RAW	session_All	J3	amer_fort	BITTER_HIGH	BITTER
-17	session_All	J4	tanin	ASTRINGENT	ASTRINGENT
-23	session_All	J4	miknerfal	MINERALITY	MINERALITY
-28	session_All	J4	amertujme	BITTER	BITTER
 32	session_All	J4	tanin	ASTRINGENT	ASTRINGENT
-36	session_All	J4	amertume	BITTER	BITTER
-40	session_All	J4	amertume	BITTER	BITTER
-47	session_All	J4	mineral	MINERALITY	MINERALITY
-57	session_All	J4	tanin	ASTRINGENT	ASTRINGENT
-67	session_All	J4	mineral	MINERALITY	MINERALITY
-RAW	session_All	J4	amertume	BITTER	BITTER
-17	session_All	J5	vegetal_leger	VEGETAL_LOW	VEGETAL
-23	session_All	J5	gras_leger agrume	FATTY_LOW	FATTY
-23	session_All	J5	gras_leger agrume	ACID	ACID
-28	session_All	J5	amer_moyen agume	BITTER	BITTER
-28	session_All	J5	amer_moyen agume	ACID	ACID
 32	session_All	J5	volume umami metallique_finale	VOLUME	VOLUME
 32	session_All	J5	volume umami metallique_finale	UMAMI	UMAMI
 32	session_All	J5	volume umami metallique_finale	METALLIC	METALLIC
+32	session_All	J6	volume  sucre	VOLUME	VOLUME
+32	session_All	J6	volume  sucre	SWEET	SWEET
+32	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
+32	session_All	J8	aqueue gras	FATTY	FATTY
+32	session_All	J9	neutre	""	""
+36	session_All	J1	amertume-moyenne acidite-legere	BITTER	BITTER
+36	session_All	J1	amertume-moyenne acidite-legere	ACID_LOW	ACID
+36	session_All	J10	amer_8	BITTER_HIGH	BITTER
+36	session_All	J2	amerr_moyen sucre_leger	BITTER	BITTER
+36	session_All	J2	amerr_moyen sucre_leger	SWEET_LOW	SWEET
+36	session_All	J3	amer_moyen	BITTER	BITTER
+36	session_All	J4	amertume	BITTER	BITTER
 36	session_All	J5	amer_moyen sucre frais	BITTER	BITTER
 36	session_All	J5	amer_moyen sucre frais	SWEET	SWEET
 36	session_All	J5	amer_moyen sucre frais	FRESH	FRESH
+36	session_All	J6	sucre  leger_volume  vegetal	SWEET	SWEET
+36	session_All	J6	sucre  leger_volume  vegetal	VOLUME_LOW	VOLUME
+36	session_All	J6	sucre  leger_volume  vegetal	VEGETAL	VEGETAL
+36	session_All	J7	amertume	BITTER	BITTER
+36	session_All	J8	moyennement_amer	BITTER	BITTER
+36	session_All	J9	amer_fort	BITTER_HIGH	BITTER
+40	session_All	J1	amertume-tres-tres-forte	BITTER_HIGH	BITTER
+40	session_All	J10	amer_9	BITTER_HIGH	BITTER
+40	session_All	J2	amerr_moyen sucre_leger	BITTER	BITTER
+40	session_All	J2	amerr_moyen sucre_leger	SWEET_LOW	SWEET
+40	session_All	J3	amer_fort	BITTER_HIGH	BITTER
+40	session_All	J4	amertume	BITTER	BITTER
 40	session_All	J5	amer_fort_sur_langue	BITTER_HIGH	BITTER
+40	session_All	J6	volume  tres_amer	VOLUME	VOLUME
+40	session_All	J6	volume  tres_amer	BITTER_HIGH	BITTER
+40	session_All	J7	forte_amertume	BITTER_HIGH	BITTER
+40	session_All	J8	tres_amrer	BITTER_HIGH	BITTER
+40	session_All	J9	amer_fort	BITTER_HIGH	BITTER
+47	session_All	J1	amertume-legere aacidite-legere	BITTER_LOW	BITTER
+47	session_All	J1	amertume-legere aacidite-legere	ACID_LOW	ACID
+47	session_All	J10	amer_2 sucre:_2	BITTER_LOW	BITTER
+47	session_All	J10	amer_2 sucre:_2	SWEET_LOW	SWEET
+47	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
+47	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
+47	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
+47	session_All	J3	sale_leger	SALTY_LOW	SALTY
+47	session_All	J4	mineral	MINERALITY	MINERALITY
 47	session_All	J5	gras_faible fruite	FATTY_LOW	FATTY
 47	session_All	J5	gras_faible fruite	FRUITY	FRUITY
+47	session_All	J7	sucrosite	SWEET	SWEET
+47	session_All	J8	ferreux aqueu	METALLIC	METALLIC
+47	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
+57	session_All	J1	acidite-tres-legere amertume-legere	ACID_LOW	ACID
+57	session_All	J1	acidite-tres-legere amertume-legere	BITTER_LOW	BITTER
+57	session_All	J10	sucre_3 amer_3	SWEET	SWEET
+57	session_All	J10	sucre_3 amer_3	BITTER	BITTER
+57	session_All	J2	amer_leger fraicheur sucre_leger	BITTER_LOW	BITTER
+57	session_All	J2	amer_leger fraicheur sucre_leger	FRESH	FRESH
+57	session_All	J2	amer_leger fraicheur sucre_leger	SWEET_LOW	SWEET
+57	session_All	J3	amer_tres_leger	BITTER_LOW	BITTER
+57	session_All	J4	tanin	ASTRINGENT	ASTRINGENT
 57	session_All	J5	gras volume frais_vegetal	FATTY	FATTY
 57	session_All	J5	gras volume frais_vegetal	VOLUME	VOLUME
 57	session_All	J5	gras volume frais_vegetal	FRESH	FRESH
 57	session_All	J5	gras volume frais_vegetal	VEGETAL	VEGETAL
+57	session_All	J6	Astringent  fraicheur	ASTRINGENT	ASTRINGENT
+57	session_All	J6	Astringent  fraicheur	FRESH	FRESH
+57	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
+57	session_All	J8	legerement_amer	BITTER_LOW	BITTER
+57	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
+67	session_All	J1	acidite-tres-legere	ACID_LOW	ACID
+67	session_All	J10	carton_mouille_1 amer_0	CARTON_MOUILLE	CARTON
+67	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
+67	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
+67	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
+67	session_All	J3	rien	""	""
+67	session_All	J4	mineral	MINERALITY	MINERALITY
 67	session_All	J5	volume frais petit_pois	VOLUME	VOLUME
 67	session_All	J5	volume frais petit_pois	FRESH	FRESH
 67	session_All	J5	volume frais petit_pois	VEGETAL	VEGETAL
-RAW	session_All	J5	amer_fort	BITTER_HIGH	BITTER
-17	session_All	J6	volume  sucre	VOLUME	VOLUME
-17	session_All	J6	volume  sucre	SWEET	SWEET
-23	session_All	J6	volume  sucre	VOLUME	VOLUME
-23	session_All	J6	volume  sucre	SWEET	SWEET
-28	session_All	J6	sucre  leger_volumre	SWEET	SWEET
-28	session_All	J6	sucre  leger_volumre	VOLUME_LOW	VOLUME
-32	session_All	J6	volume  sucre	VOLUME	VOLUME
-32	session_All	J6	volume  sucre	SWEET	SWEET
-36	session_All	J6	sucre  leger_volume  vegetal	SWEET	SWEET
-36	session_All	J6	sucre  leger_volume  vegetal	VOLUME_LOW	VOLUME
-36	session_All	J6	sucre  leger_volume  vegetal	VEGETAL	VEGETAL
-40	session_All	J6	volume  tres_amer	VOLUME	VOLUME
-40	session_All	J6	volume  tres_amer	BITTER_HIGH	BITTER
-57	session_All	J6	Astringent  fraicheur	ASTRINGENT	ASTRINGENT
-57	session_All	J6	Astringent  fraicheur	FRESH	FRESH
 67	session_All	J6	sucre  pas de vol	SWEET	SWEET
-RAW	session_All	J6	gtres_amer  volumr	BITTER_HIGH	BITTER
-RAW	session_All	J6	gtres_amer  volumr	VOLUME	VOLUME
-17	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
-23	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
-28	session_All	J7	amertume	BITTER	BITTER
-32	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
-36	session_All	J7	amertume	BITTER	BITTER
-40	session_All	J7	forte_amertume	BITTER_HIGH	BITTER
-47	session_All	J7	sucrosite	SWEET	SWEET
-57	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
 67	session_All	J7	legere_sucrosite	SWEET_LOW	SWEET
-RAW	session_All	J7	forte_amertume	BITTER_HIGH	BITTER
-17	session_All	J8	ferreux salin	METALLIC	METALLIC
-17	session_All	J8	ferreux salin	SALTY	SALTY
-23	session_All	J8	ferreux aqueu	METALLIC	METALLIC
-28	session_All	J8	peu_aromaique aqueu legerement_floral_rosé	AROMATIC_LOW	AROMATIC
-28	session_All	J8	peu_aromaique aqueu legerement_floral_rosé	FLORAL_LOW	FLORAL
-32	session_All	J8	aqueue gras	FATTY	FATTY
-36	session_All	J8	moyennement_amer	BITTER	BITTER
-40	session_All	J8	tres_amrer	BITTER_HIGH	BITTER
-47	session_All	J8	ferreux aqueu	METALLIC	METALLIC
-57	session_All	J8	legerement_amer	BITTER_LOW	BITTER
 67	session_All	J8	aqueue gras	FATTY	FATTY
-RAW	session_All	J8	moyennement_amer	BITTER	BITTER
-17	session_All	J9	neutre	""	""
-23	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
-28	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
-32	session_All	J9	neutre	""	""
-36	session_All	J9	amer_fort	BITTER_HIGH	BITTER
-40	session_All	J9	amer_fort	BITTER_HIGH	BITTER
-47	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
-57	session_All	J9	amer_leger en fin	BITTER_LOW	BITTER
 67	session_All	J9	gras sucre_leger	FATTY	FATTY
 67	session_All	J9	gras sucre_leger	SWEET_LOW	SWEET
-RAW	session_All	J9	amer_fort	BITTER_HIGH	BITTER
-17	session_All	J10	sucre_2 amer_1	SWEET_LOW	SWEET
-17	session_All	J10	sucre_2 amer_1	BITTER_LOW	BITTER
-23	session_All	J10	amer_4 carton_mouille_2	BITTER	BITTER
-23	session_All	J10	amer_4 carton_mouille_2	CARTON	CARTON
-28	session_All	J10	amer_5	BITTER	BITTER
-32	session_All	J10	amer_2_a_3	BITTER_LOW	BITTER
-36	session_All	J10	amer_8	BITTER_HIGH	BITTER
-40	session_All	J10	amer_9	BITTER_HIGH	BITTER
-47	session_All	J10	amer_2 sucre:_2	BITTER_LOW	BITTER
-47	session_All	J10	amer_2 sucre:_2	SWEET_LOW	SWEET
-57	session_All	J10	sucre_3 amer_3	SWEET	SWEET
-57	session_All	J10	sucre_3 amer_3	BITTER	BITTER
-67	session_All	J10	carton_mouille_1 amer_0	CARTON_MOUILLE	CARTON
+RAW	session_All	J1	amertume-tres-tres-forte	BITTER_HIGH	BITTER
 RAW	session_All	J10	amer_10	BITTER_HIGH	BITTER
+RAW	session_All	J2	amer_ledger gras sucre_leger	BITTER_LOW	BITTER
+RAW	session_All	J2	amer_ledger gras sucre_leger	FATTY	FATTY
+RAW	session_All	J2	amer_ledger gras sucre_leger	SWEET_LOW	SWEET
+RAW	session_All	J3	amer_fort	BITTER_HIGH	BITTER
+RAW	session_All	J4	amertume	BITTER	BITTER
+RAW	session_All	J5	amer_fort	BITTER_HIGH	BITTER
+RAW	session_All	J6	gtres_amer  volumr	BITTER_HIGH	BITTER
+RAW	session_All	J6	gtres_amer  volumr	VOLUME	VOLUME
+RAW	session_All	J7	forte_amertume	BITTER_HIGH	BITTER
+RAW	session_All	J8	moyennement_amer	BITTER	BITTER
+RAW	session_All	J9	amer_fort	BITTER_HIGH	BITTER

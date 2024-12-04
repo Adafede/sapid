@@ -1,20 +1,31 @@
+start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program prepares flash profiles results.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
+
 #' Prepare profiles
 #'
+#' @include get_session_info.R
+#' @include load_session.R
+#'
 #' @param input_dir Input dir
-#' @param output output
-#' @param sessions Sessions
 #' @param dictionary_generic_path Dictionary generic path
 #' @param dictionary_specific_path Dictionary specific path
+#' @param sessions Sessions
+#' @param output output
 #'
 #' @return NULL
 #'
 #' @examples NULL
 prepare_profiles <-
   function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-           output = "~/git/sapid/inst/extdata/profiles.tsv",
+           dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package = "sapid"),
+           dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package = "sapid"),
            sessions = seq(1, 7),
-           dictionary_generic_path = "inst/extdata/dictionary_generic.tsv",
-           dictionary_specific_path = "inst/extdata/dictionary_specific.tsv") {
+           output = system.file("extdata", "profiles.tsv", package = "sapid")) {
     sessions |>
       furrr::future_map(.f = get_session_info) |>
       furrr::future_map(
@@ -75,8 +86,16 @@ prepare_profiles <-
         value = value
       ) |>
       tidytable::distinct() |>
+      tidytable::arrange(jury) |>
       tidytable::arrange(fraction) |>
+      tidytable::arrange(session) |>
       tidytable::fwrite(file = output, sep = "\t")
 
     return(output)
   }
+
+prepare_profiles()
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

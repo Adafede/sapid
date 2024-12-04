@@ -1,3 +1,11 @@
+start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program prepares napping data.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
+
 #' Prepare napping
 #'
 #' @param input_dir Input directory
@@ -12,12 +20,12 @@
 #'
 #' @examples NULL
 prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-                            dictionary_generic_path = "inst/extdata/dictionary_generic.tsv",
-                            dictionary_napping_path = "inst/extdata/dictionary_napping.tsv",
-                            dictionary_specific_path = "inst/extdata/dictionary_specific.tsv",
+                            dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package = "sapid"),
+                            dictionary_napping_path = system.file("extdata", "dictionary_napping.tsv", package = "sapid"),
+                            dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package = "sapid"),
                             sessions = seq(1, 8),
-                            output_coordinates = "inst/extdata/napping_coordinates.tsv",
-                            output_descriptors = "inst/extdata/napping_descriptors.tsv") {
+                            output_coordinates = system.file("extdata", "napping_coordinates.tsv", package = "sapid"),
+                            output_descriptors = system.file("extdata", "napping_descriptors.tsv", package = "sapid")) {
   session_infos <- sessions |>
     furrr::future_map(.f = get_session_info)
 
@@ -28,6 +36,8 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
       tab = "napping_coord"
     ) |>
     tidytable::bind_rows() |>
+    tidytable::arrange(fraction) |>
+    tidytable::arrange(session) |>
     tidytable::fwrite(file = output_coordinates, sep = "\t")
 
   session_infos |>
@@ -51,7 +61,16 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
       taste_intermediate = taste,
       taste_harmonized = newValue
     ) |>
+    tidytable::arrange(jury) |>
+    tidytable::arrange(fraction) |>
+    tidytable::arrange(session) |>
     tidytable::fwrite(file = output_descriptors, sep = "\t")
 
   return(list(coordinates = output_coordinates, descriptors = output_descriptors))
 }
+
+prepare_napping()
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

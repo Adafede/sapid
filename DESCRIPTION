@@ -56,10 +56,6 @@ Collate:
     'load_session.R'
     'plot_concentration.R'
     'plot_napping.R'
-    'prepare_chasselas.R'
-    'prepare_concentration.R'
-    'prepare_napping.R'
-    'prepare_profiles.R'
     'sapid-package.R'
 VignetteBuilder:
     knitr

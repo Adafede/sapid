@@ -1,16 +1,27 @@
+start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program prepares Chasselas data.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
+
 #' Prepare chasselas
 #'
+#' @include get_session_info.R
+#' @include load_session.R
+#'
 #' @param input_dir Input dir
-#' @param output output
 #' @param sessions Sessions
+#' @param output output
 #'
 #' @return NULL
 #'
 #' @examples NULL
 prepare_chasselas <-
   function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-           output = "~/git/sapid/inst/extdata/chasselas.tsv",
-           sessions = seq(1, 7)) {
+           sessions = seq(1, 7),
+           output = system.file("extdata", "chasselas.tsv", package = "sapid")) {
     sessions |>
       furrr::future_map(.f = get_session_info) |>
       furrr::future_map(
@@ -59,7 +70,15 @@ prepare_chasselas <-
         taste = name,
         value = value
       ) |>
+      tidytable::arrange(jury) |>
+      tidytable::arrange(date) |>
       tidytable::fwrite(file = output, sep = "\t")
 
     return(output)
   }
+
+prepare_chasselas()
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

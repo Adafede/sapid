@@ -1,3 +1,11 @@
+start <- Sys.time()
+
+pkgload::load_all()
+
+message("This program prepares working concentration determination.")
+message("Authors: \n", "AR")
+message("Contributors: \n", "...")
+
 #' Prepare concentration
 #'
 #' @param input_xlsx Input xlsx
@@ -7,23 +15,22 @@
 #'
 #' @examples NULL
 prepare_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/20210329_raw-extract/03_files/20210329_raw-extract.xlsx",
-                                  output = "~/git/sapid/inst/extdata/concentration_afc.tsv") {
-  message("Loading original files...\n")
-  Pipol <- input_xlsx |>
+                                  output = system.file("extdata", "concentration_afc.tsv", package = "sapid")) {
+  pipol <- input_xlsx |>
     readxl::read_xlsx(sheet = 4) |>
     tidytable::mutate(concentration = concentration |>
       round(digits = 2) |>
       format(nsmall = 2) |>
       factor()) |>
     data.frame()
-  AFC_Pipol <- input_xlsx |>
+
+  pipol_afc <- input_xlsx |>
     readxl::read_xlsx(sheet = 3) |>
     tidytable::mutate(concentration = concentration |>
       round(digits = 2) |>
       format(nsmall = 2)) |>
     data.frame()
 
-  message("Loading cleaned files...\n")
   cleaned <- input_xlsx |>
     readxl::read_xlsx(sheet = 5) |>
     tidytable::mutate(concentration = concentration |>
@@ -31,9 +38,8 @@ prepare_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data
       format(nsmall = 2)) |>
     data.frame()
 
-  message("Joining data together \n")
-  joined <- Pipol |>
-    tidytable::left_join(AFC_Pipol) |>
+  joined <- pipol |>
+    tidytable::left_join(pipol_afc) |>
     tidytable::distinct(
       judge,
       concentration,
@@ -42,8 +48,7 @@ prepare_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data
       Total.responses
     )
 
-  message("Counting terms \n")
-  prepared <- cleaned |>
+  cleaned |>
     tidytable::pivot_longer(cols = tidytable::contains("attribut")) |>
     tidytable::mutate(value = gsub(
       pattern = "_.*$",
@@ -66,9 +71,14 @@ prepare_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data
       "jury_",
       tidytable::cur_group_id() |>
         stringi::stri_pad(pad = "0", width = 2)
-    ))
-
-  prepared |>
+    )) |>
     tidytable::fwrite(file = output, sep = "\t")
+
   return(output)
 }
+
+prepare_concentration()
+
+end <- Sys.time()
+
+message("Script finished in ", format(end - start))

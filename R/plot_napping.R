@@ -7,8 +7,8 @@
 #' @return NULL
 #'
 #' @examples NULL
-plot_napping <- function(input_coordinates = "inst/extdata/napping_coordinates.tsv",
-                         input_descriptors = "inst/extdata/napping_descriptors.tsv",
+plot_napping <- function(input_coordinates = system.file("extdata", "napping_coordinates.tsv", package = "sapid"),
+                         input_descriptors = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
                          sessions = 2) {
   df_coord <- input_coordinates |>
     tidytable::fread() |>

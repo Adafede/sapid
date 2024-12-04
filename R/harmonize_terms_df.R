@@ -8,7 +8,10 @@
 #' @return NULL
 #'
 #' @examples NULL
-harmonize_terms_df <- function(df, dictionary_generic_path, dictionary_napping_path, dictionary_specific_path) {
+harmonize_terms_df <- function(df,
+                               dictionary_generic_path,
+                               dictionary_napping_path,
+                               dictionary_specific_path) {
   file_text_cleaned <- df |>
     tidytable::pivot_longer(cols = 3:ncol(df)) |>
     tidytable::filter(!is.na(value)) |>

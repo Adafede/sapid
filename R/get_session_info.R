@@ -1,3 +1,10 @@
+#' Get session info
+#'
+#' @param session Session
+#'
+#' @return NULL
+#'
+#' @examples NULL
 get_session_info <- function(session) {
   cluster <- switch(as.character(session),
     "1" = 6,

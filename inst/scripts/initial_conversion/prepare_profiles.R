@@ -35,7 +35,9 @@ prepare_profiles <-
       ) |>
       tidytable::bind_rows() |>
       tidytable::mutate(ProductName = ProductName |>
-        as.character()) |>
+        as.character(),
+        name = name |>
+          toupper()) |>
       tidytable::group_by(CJ, ProductName) |>
       tidytable::select(-tidytable::where(is.logical)) |>
       tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
@@ -77,8 +79,9 @@ prepare_profiles <-
         true = 0.5 * value,
         false = value
       )) |>
+      tidytable::mutate(fraction = paste0("fraction_", ProductName)) |> 
       tidytable::select(
-        fraction = ProductName,
+        fraction = fraction,
         session = session,
         jury = CJ,
         taste_original = name,

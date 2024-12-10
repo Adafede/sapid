@@ -6,7 +6,7 @@
 \usage{
 plot_concentration(
   input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-  output = "~/switchdrive/SAPERE/06_figures/figure_raw_extract.svg"
+  output = "~/switchdrive/SAPERE/06_figures/figure_raw_extract.pdf"
 )
 }
 \arguments{

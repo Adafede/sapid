@@ -17,7 +17,7 @@ Depends:
 Imports:
     AlpsNMR (>= 4.8.0),
     BiocParallel (>= 1.40.0),
-    data.table (>= 1.16.2),
+    data.table (>= 1.16.4),
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),
     forcats (>= 1.0.0),
@@ -25,6 +25,9 @@ Imports:
     ggbump (>= 0.1.0),
     ggplot2 (>= 3.5.1),
     ggpubr (>= 0.6.0),
+    ggraph (>= 2.2.1),
+    igraph (>= 2.1.2),
+    khroma (>= 1.14.0),
     NMRphasing (>= 1.0.5),
     plotly (>= 4.10.4),
     readxl (>= 1.4.3),
@@ -57,6 +60,8 @@ Collate:
     'plot_chasselas_modulation.R'
     'plot_chasselas_variation.R'
     'plot_concentration.R'
+    'plot_descriptors_network.R'
+    'plot_matrices.R'
     'plot_napping.R'
     'sapid-package.R'
 VignetteBuilder:

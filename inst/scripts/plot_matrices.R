@@ -2,11 +2,11 @@ start <- Sys.time()
 
 pkgload::load_all()
 
-message("This program plots matrices before and after vocabulary curation.")
+message("This program plots descriptors network.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-plot_matrices()
+plot_descriptors_network()
 
 end <- Sys.time()
 

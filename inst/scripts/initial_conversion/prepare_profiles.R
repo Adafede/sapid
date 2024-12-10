@@ -71,16 +71,16 @@ prepare_profiles <-
       ## Due to dilutions
       ## Session 03 was diluted 50 times
       ## Session 07 was concentrated 2 times
-      tidytable::mutate(value = tidytable::if_else(
-        condition = session == "session_03",
-        true = 50 * value,
-        false = value
-      )) |>
-      tidytable::mutate(value = tidytable::if_else(
-        condition = session == "session_07",
-        true = 0.5 * value,
-        false = value
-      )) |>
+      # tidytable::mutate(value = tidytable::if_else(
+      #   condition = session == "session_03",
+      #   true = 50 * value,
+      #   false = value
+      # )) |>
+      # tidytable::mutate(value = tidytable::if_else(
+      #   condition = session == "session_07",
+      #   true = 0.5 * value,
+      #   false = value
+      # )) |>
       tidytable::mutate(fraction = paste0("fraction_", ProductName)) |>
       tidytable::select(
         fraction = fraction,

@@ -28,20 +28,24 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
                             output_descriptors = system.file("extdata", "napping_descriptors.tsv", package = "sapid")) {
   session_infos <- sessions |>
     furrr::future_map(.f = get_session_info)
-  
+
   session_infos |>
-    furrr::future_map(.f = load_session,
-                      input_dir = input_dir,
-                      tab = "napping_coord") |>
+    furrr::future_map(
+      .f = load_session,
+      input_dir = input_dir,
+      tab = "napping_coord"
+    ) |>
     tidytable::bind_rows() |>
     tidytable::arrange(fraction) |>
     tidytable::arrange(session) |>
     tidytable::fwrite(file = output_coordinates, sep = "\t")
-  
+
   session_infos |>
-    furrr::future_map(.f = load_session,
-                      input_dir = input_dir,
-                      tab = "napping_words") |>
+    furrr::future_map(
+      .f = load_session,
+      input_dir = input_dir,
+      tab = "napping_words"
+    ) |>
     furrr::future_map(
       .f = harmonize_terms_df,
       dictionary_generic_path = dictionary_generic_path,
@@ -51,12 +55,13 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     tidytable::bind_rows() |>
     tidytable::mutate(fraction = paste0("fraction_", Produit)) |>
     tidytable::mutate(value = value |>
-                        toupper()) |>
+      toupper()) |>
     tidytable::select(
       fraction = fraction,
       session = session,
       jury = name,
-      taste_original = value,
+      # taste_original = value,
+      taste_original = value_2,
       taste_intermediate = taste,
       taste_harmonized = newValue
     ) |>
@@ -64,7 +69,7 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     tidytable::arrange(fraction) |>
     tidytable::arrange(session) |>
     tidytable::fwrite(file = output_descriptors, sep = "\t")
-  
+
   return(list(coordinates = output_coordinates, descriptors = output_descriptors))
 }
 

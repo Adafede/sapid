@@ -17,6 +17,8 @@ harmonize_terms_df <- function(df,
     tidytable::filter(!is.na(value)) |>
     tidytable::mutate(value_2 = value |>
       harmonize_terms(dictionary = dictionary_specific_path)) |>
+    tidytable::separate_longer_delim(cols = "value_2", delim = " ") |>
+    tidytable::filter(value_2 != "") |>
     tidytable::mutate(
       value_3 = value_2 |>
         harmonize_terms(
@@ -25,8 +27,7 @@ harmonize_terms_df <- function(df,
           fallback = TRUE
         )
     ) |>
-    tidytable::separate_longer_delim(cols = "value_3", delim = " ") |>
-    tidytable::separate_wider_delim(cols = "value_3", delim = "_") |>
+    tidytable::separate_wider_delim(cols = "value_3", delim = "_", cols_remove = FALSE) |>
     tidytable::mutate(value_4 = value_31, intensity = value_32) |>
     tidytable::filter(!is.na(value_4)) |>
     tidytable::mutate(value_5 = value_4 |>

@@ -17,50 +17,12 @@ source(file = "paths.R")
 source(file = "params.R")
 source(file = "r/colors.R")
 
+input <- system.file("extdata", "profiles.tsv", package = "sapid")
 
-input = system.file("extdata", "profiles.tsv", package = "sapid")
+profiles_consistent <- input |>
+  load_consistent_profiles()
 
-profiles <- input |>
-  tidytable::fread() |>
-  # tidytable::mutate(value = tidytable::if_else(
-  #   condition = session == "session_03",
-  #   true = value / 500,
-  #   false = value
-  # )) |> 
-  tidytable::distinct()
-
-n_panelists <- profiles |>
-  tidytable::distinct(fraction, jury) |>
-  tidytable::group_by(fraction) |>
-  tidytable::count()
-
-presence <- profiles |>
-  tidytable::distinct(fraction, jury) |>
-  tidytable::group_by(jury) |>
-  tidytable::count(sort = TRUE)
-
-consistent_descriptors <- profiles |>
-  tidytable::distinct(jury, taste = taste_harmonized) |>
-  tidytable::group_by(taste) |>
-  tidytable::count() |>
-  tidytable::filter(n >= MIN_PANELISTS) |>
-  tidytable::filter(!is.na(taste))
-
-profiles_consistent <- profiles |>
-  tidytable::left_join(n_panelists) |>
-  tidytable::select(fraction, session, jury, taste_original, taste_harmonized, value) |>
-  tidytable::rename(taste = taste_harmonized) |>
-  tidytable::filter(taste %in% consistent_descriptors$taste) |>
-  # tidytable::filter(value > 0) |>
-  tidytable::group_by(fraction, taste) |> 
-  tidytable::mutate(median = value |>
-    median()) |>
-  tidytable::group_by(taste) |>
-  tidytable::mutate(sum_taste = value |>
-    sum()) |>
-  tidytable::arrange(tidytable::desc(sum_taste)) |>
-  tidytable::group_by(sum_taste) |>
-  tidytable::mutate(group = tidytable::cur_group_id()) |>
+profiles_consistent <- profiles_consistent |>
   tidytable::group_by(fraction) |>
   tidytable::mutate(sum_name = value |>
     sum()) |>
@@ -116,20 +78,20 @@ test_basis <- ggplot2::ggplot(
   ggplot2::xlab("sample") +
   ggplot2::ylab("absolute")
 
-test_zoom <- test_basis +
-  ggplot2::ylim(0, 10) +
-  ggplot2::facet_wrap(facets = ~taste)
-test_zoom
-
-test_zoom2 <- test_basis +
-  ggplot2::ylim(0, 500) +
-  ggplot2::facet_wrap(facets = ~taste)
-test_zoom2
-
-test_zoom <- test_basis +
-  ggplot2::ylim(0, 10) +
-  ggplot2::facet_wrap(facets = ~taste)
-test_zoom
+# test_zoom <- test_basis +
+#   ggplot2::ylim(0, 10) +
+#   ggplot2::facet_wrap(facets = ~ taste)
+# test_zoom
+#
+# test_zoom2 <- test_basis +
+#   ggplot2::ylim(0, 500) +
+#   ggplot2::facet_wrap(facets = ~ taste)
+# test_zoom2
+#
+# test_zoom <- test_basis +
+#   ggplot2::ylim(0, 10) +
+#   ggplot2::facet_wrap(facets = ~ taste)
+# test_zoom
 
 test_2 <- ggplot2::ggplot(
   profiles_consistent |>
@@ -159,12 +121,12 @@ test_2 <- ggplot2::ggplot(
     axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
   ) +
   ggplot2::xlab("sample") +
-  ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(
-    breaks = c(47, 1360),
-    which = c(1, 3),
-    scales = c(0, 1)
-  )
+  # ggbreak::scale_y_cut(
+  #   breaks = c(10, 30),
+  #   which = c(1, 3),
+  #   scales = c(0, 1)
+  # ) +
+  ggplot2::ylab("Median score")
 
 test_2
 
@@ -200,12 +162,12 @@ test_3 <- ggplot2::ggplot(
     axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
   ) +
   ggplot2::xlab("sample") +
-  ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(
-    breaks = c(17, 535),
-    which = c(1, 3),
-    scales = c(0, 1)
-  )
+  # ggbreak::scale_y_cut(
+  #   breaks = c(17, 535),
+  #   which = c(1, 3),
+  #   scales = c(0, 1)
+  # ) +
+  ggplot2::ylab("Median score")
 
 test_3
 
@@ -239,12 +201,12 @@ test_4 <- ggplot2::ggplot(
     axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
   ) +
   ggplot2::xlab("sample") +
-  ggplot2::ylab("Median score") +
-  ggbreak::scale_y_cut(
-    breaks = c(37, 807.5),
-    which = c(1, 3),
-    scales = c(0, 1)
-  )
+  # ggbreak::scale_y_cut(
+  #   breaks = c(37, 807.5),
+  #   which = c(1, 3),
+  #   scales = c(0, 1)
+  # ) +
+  ggplot2::ylab("Median score")
 
 test_4
 

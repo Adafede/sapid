@@ -11,11 +11,17 @@ plot_matrices <- function(input = system.file("extdata", "profiles.tsv", package
                           output = "~/switchdrive/SAPERE/06_figures/figure_matrices.pdf") {
   table_profiles <- input |>
     tidytable::fread() |>
-    tidytable::mutate(value = tidytable::if_else(
-      condition = session == "session_03",
-      true = value / 500,
-      false = value
-    ))
+    # tidytable::mutate(value = tidytable::if_else(
+    #   condition = session == "session_03",
+    #   true = value / 500,
+    #   false = value
+    # )) |>
+    # tidytable::mutate(value = tidytable::if_else(
+    #   condition = session == "session_03",
+    #   true = value / 500,
+    #   false = value
+    # )) |>
+    tidytable::distinct()
 
   tables_profiles_original <- table_profiles |>
     tidytable::filter(taste_original == "AMER") |>

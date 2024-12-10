@@ -34,10 +34,12 @@ prepare_profiles <-
         tab = "profiles"
       ) |>
       tidytable::bind_rows() |>
-      tidytable::mutate(ProductName = ProductName |>
-        as.character(),
+      tidytable::mutate(
+        ProductName = ProductName |>
+          as.character(),
         name = name |>
-          toupper()) |>
+          toupper()
+      ) |>
       tidytable::group_by(CJ, ProductName) |>
       tidytable::select(-tidytable::where(is.logical)) |>
       tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
@@ -79,7 +81,7 @@ prepare_profiles <-
         true = 0.5 * value,
         false = value
       )) |>
-      tidytable::mutate(fraction = paste0("fraction_", ProductName)) |> 
+      tidytable::mutate(fraction = paste0("fraction_", ProductName)) |>
       tidytable::select(
         fraction = fraction,
         session = session,

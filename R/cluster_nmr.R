@@ -21,7 +21,7 @@
 #'
 #' @examples NULL
 cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
-                        output = "~/switchdrive/SAPERE/06_figures/figure_nmr.svg",
+                        output = "~/switchdrive/SAPERE/06_figures/figure_nmr.pdf",
                         experiment_raw = "proton_00",
                         experiment_ref = "proton_98",
                         experiments_fractions = c(

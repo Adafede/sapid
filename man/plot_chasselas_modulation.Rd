@@ -6,7 +6,7 @@
 \usage{
 plot_chasselas_modulation(
   input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-  output = "~/switchdrive/SAPERE/06_figures/figure_modulation.svg"
+  output = "~/switchdrive/SAPERE/06_figures/figure_modulation.pdf"
 )
 }
 \arguments{

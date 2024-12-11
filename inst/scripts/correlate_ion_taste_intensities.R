@@ -9,7 +9,17 @@ message("Contributors: \n", "...")
 correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/sapere_tmp/fractions_mzmine/fractions.csv",
                                             input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                                             output = "inst/extdata/correlations.tsv",
+                                            tastes = c(
+                                              "BITTER",
+                                              "VOLUME",
+                                              "ASTRINGENT",
+                                              "MOUTHFILLING",
+                                              "SWEET",
+                                              "UMAMI",
+                                              "SALTY"
+                                            ),
                                             min_jury = 2L,
+                                            min_area_ion = 1L,
                                             imputation_factor = 0.5,
                                             widths = 5:9) {
   df_ion_intensities <- input_ions |>
@@ -29,6 +39,13 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
         )
       )
     ) |>
+    tidytable::group_by(id) |>
+    tidytable::mutate(
+      non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))
+    ) |>
+    tidytable::ungroup() |>
+    tidytable::filter(non_na_count >= min(widths)) |>
+    tidytable::filter(value >= min_area_ion) |>
     tidytable::mutate(value = value |>
       tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
     tidytable::select(
@@ -59,11 +76,12 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
     )) |>
     tidytable::mutate(value = value |>
       tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
+    tidytable::filter(taste %in% tastes) |>
     tidytable::group_by(fraction, taste) |>
-    tidytable::mutate(median = value |>
-      median()) |>
+    tidytable::mutate(sum = value |>
+      sum()) |>
     tidytable::ungroup() |>
-    tidytable::select(fraction, id_taste = taste, intensity_taste = median) |>
+    tidytable::select(fraction, id_taste = taste, intensity_taste = sum) |>
     tidytable::distinct() |>
     tidytable::mutate(fraction = fraction |>
       gsub(
@@ -169,7 +187,14 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
             return(NULL)
           }
 
-          correlations <- df[2:ncol(df)] |>
+          correlations <- df[df[2:ncol(df)] |>
+            furrr::future_map_lgl(
+              .f = function(x) {
+                all(!is.na(x))
+              }
+            ) |>
+            which() |>
+            names()] |>
             as.list() |>
             furrr::future_map(
               .f = function(ion_intensity,
@@ -207,9 +232,9 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
 
           return(cor_summary)
         },
+        taste = taste,
         df_ion_intensities = df_ion_intensities,
-        df_taste_intensities = df_taste_intensities,
-        taste = taste
+        df_taste_intensities = df_taste_intensities
       )
 
     empty_results <- tidytable::tidytable(
@@ -236,8 +261,8 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
 
   fractions_lists <- widths |>
     furrr::future_map(
-      .f = function(fractions, size) {
-        generate_rolling_windows(fractions, size)
+      .f = function(fractions, widths) {
+        generate_rolling_windows(fractions, widths)
       },
       fractions = fractions
     ) |>
@@ -245,7 +270,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
 
   # fractions_lists <- list(seq(32, 39))
   # fractions_lists <- fractions_lists[160:170]
-  # tastes <- c("BITTER", "VOLUME", "FRESH")
+  # tastes <- c("BITTER", "VOLUME", "SWEET")
 
   results <- tastes |>
     furrr::future_map(

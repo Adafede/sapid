@@ -25,7 +25,7 @@ prepare_profiles <-
            dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package = "sapid"),
            dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package = "sapid"),
            sessions = seq(1, 7),
-           output = system.file("extdata", "profiles.tsv", package = "sapid")) {
+           output = "inst/extdata/profiles.tsv") {
     sessions |>
       furrr::future_map(.f = get_session_info) |>
       furrr::future_map(

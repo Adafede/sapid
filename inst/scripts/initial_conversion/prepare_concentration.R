@@ -15,7 +15,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 prepare_concentration <- function(input_xlsx = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/20210329_raw-extract/03_files/20210329_raw-extract.xlsx",
-                                  output = system.file("extdata", "concentration_afc.tsv", package = "sapid")) {
+                                  output = "inst/extdata/concentration_afc.tsv") {
   pipol <- input_xlsx |>
     readxl::read_xlsx(sheet = 4) |>
     tidytable::mutate(concentration = concentration |>

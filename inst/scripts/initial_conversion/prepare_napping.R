@@ -24,8 +24,8 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
                             dictionary_napping_path = system.file("extdata", "dictionary_napping.tsv", package = "sapid"),
                             dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package = "sapid"),
                             sessions = seq(1, 8),
-                            output_coordinates = system.file("extdata", "napping_coordinates.tsv", package = "sapid"),
-                            output_descriptors = system.file("extdata", "napping_descriptors.tsv", package = "sapid")) {
+                            output_coordinates = "inst/extdata/napping_coordinates.tsv",
+                            output_descriptors = "inst/extdata/napping_descriptors.tsv") {
   session_infos <- sessions |>
     furrr::future_map(.f = get_session_info)
 

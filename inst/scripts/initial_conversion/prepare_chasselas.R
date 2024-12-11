@@ -21,7 +21,7 @@ message("Contributors: \n", "...")
 prepare_chasselas <-
   function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
            sessions = seq(1, 7),
-           output = system.file("extdata", "chasselas.tsv", package = "sapid")) {
+           output = "inst/extdata/chasselas.tsv") {
     sessions |>
       furrr::future_map(.f = get_session_info) |>
       furrr::future_map(

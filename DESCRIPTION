@@ -56,6 +56,7 @@ Collate:
     'get_session_info.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
+    'load_consistent_profiles.R'
     'load_session.R'
     'plot_chasselas_modulation.R'
     'plot_chasselas_variation.R'

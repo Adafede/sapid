@@ -37,16 +37,21 @@ plot_informed_tasting <- function(file_taste_raw = "inst/extdata/concentration_a
     tidytable::arrange(value |>
       tidytable::desc())
 
+  n <- taste_informed$taste |>
+    unique() |>
+    length()
+
   colors <- taste_informed |>
     tidytable::distinct(taste) |>
-    tidytable::bind_cols(paired) |>
+    tidytable::bind_cols(discrete_rainbow_14[1:n]) |>
     tidytable::rename(color = 2)
 
   col <- as.character(colors$color)
   names(col) <- as.character(colors$taste)
 
   plot_raw <- taste_raw |>
-    tidytable::mutate(taste = forcats::fct_reorder(taste, tidytable::desc(value))) |>
+    tidytable::mutate(taste = taste |>
+      forcats::fct_reorder(value, .desc = TRUE)) |>
     ggplot2::ggplot(mapping = ggplot2::aes(
       area = value,
       fill = taste,
@@ -60,7 +65,8 @@ plot_informed_tasting <- function(file_taste_raw = "inst/extdata/concentration_a
     ggplot2::labs(caption = "Classical tasting")
 
   plot_informed <- taste_informed |>
-    tidytable::mutate(taste = forcats::fct_reorder(taste, tidytable::desc(value))) |>
+    tidytable::mutate(taste = taste |>
+      forcats::fct_reorder(value, .desc = TRUE)) |>
     ggplot2::ggplot(mapping = ggplot2::aes(
       area = value,
       fill = taste,

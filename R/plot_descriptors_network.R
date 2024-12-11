@@ -38,18 +38,36 @@ plot_descriptors_network <- function(input = system.file("extdata", "napping_des
     tidytable::arrange(tidytable::desc(size)) |>
     tidytable::distinct(name, .keep_all = TRUE) |>
     tidytable::full_join(
-      table_descriptors |> tidytable::distinct(taste_original, color = taste_harmonized),
-      by = c("name" = "taste_original")
+      tidytable::bind_rows(
+        table_descriptors |>
+          tidytable::distinct(taste = taste_original, color = taste_harmonized),
+        table_descriptors |>
+          tidytable::mutate(taste = taste_harmonized) |>
+          tidytable::distinct(taste, color = taste_harmonized)
+      ) |>
+        tidytable::distinct(taste, color),
+      by = c("name" = "taste")
     ) |>
     tidytable::mutate(size = tidytable::if_else(
       condition = name |>
         grepl(pattern = "fraction", fixed = TRUE),
       true = 1,
       false = size
-    ))
+    )) |>
+    tidytable::group_by(color) |>
+    tidytable::mutate(sum = size |>
+      sum())
+
+  table_vertices$color <- table_vertices$color |>
+    forcats::fct_reorder(table_vertices$sum, .desc = TRUE)
+  table_vertices$name <- table_vertices$name |>
+    forcats::fct_reorder(table_vertices$sum, .desc = TRUE)
 
   graph <- table_edges |>
     igraph::graph_from_data_frame(directed = FALSE, vertices = table_vertices)
+
+  igraph::V(graph)$name <- table_vertices$name
+  igraph::V(graph)$color <- table_vertices$color
 
   plot <- graph |>
     ggraph::ggraph(layout = "stress") +

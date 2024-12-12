@@ -17,7 +17,6 @@ Depends:
 Imports:
     AlpsNMR (>= 4.8.0),
     BiocParallel (>= 1.40.0),
-    data.table (>= 1.16.4),
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),
     forcats (>= 1.0.0),
@@ -29,7 +28,6 @@ Imports:
     igraph (>= 2.1.2),
     khroma (>= 1.14.0),
     NMRphasing (>= 1.0.5),
-    plotly (>= 4.10.4),
     readxl (>= 1.4.3),
     SensoMineR (>= 1.27),
     stats,

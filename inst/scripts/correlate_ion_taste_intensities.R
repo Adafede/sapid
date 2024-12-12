@@ -9,15 +9,19 @@ message("Contributors: \n", "...")
 correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/sapere_tmp/fractions_mzmine/fractions.csv",
                                             input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                                             output = "inst/extdata/correlations.tsv",
-                                            tastes = c(
-                                              "BITTER",
-                                              "VOLUME",
-                                              "ASTRINGENT",
-                                              "MOUTHFILLING",
-                                              "SWEET",
-                                              "UMAMI",
-                                              "SALTY"
-                                            ),
+                                            # tastes = c(
+                                            #   "BITTER",
+                                            #   "FATTY",
+                                            #   "ACID",
+                                            #   "VOLUME",
+                                            #   "FRESH",
+                                            #   "ASTRINGENT",
+                                            #   "MOUTHFILLING",
+                                            #   "UMAMI",
+                                            #   "SALTY",
+                                            #   "SWEET",
+                                            #   "PUNGENT"
+                                            # ),
                                             min_jury = 2L,
                                             min_area_ion = 1L,
                                             imputation_factor = 0.5,
@@ -76,7 +80,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
     )) |>
     tidytable::mutate(value = value |>
       tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
-    tidytable::filter(taste %in% tastes) |>
+    # tidytable::filter(taste %in% tastes) |>
     tidytable::group_by(fraction, taste) |>
     tidytable::mutate(sum = value |>
       sum()) |>

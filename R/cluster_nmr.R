@@ -3,7 +3,8 @@
 #' @include colors.R
 #'
 #' @param nmr_dir NMR directory
-#' @param output Output
+#' @param output_figure Output figure
+#' @param output_groups Output groups
 #' @param experiment_raw Experiment raw
 #' @param experiment_ref Experiment ref
 #' @param experiments_fractions Experiments fractions
@@ -21,7 +22,8 @@
 #'
 #' @examples NULL
 cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
-                        output = "~/switchdrive/SAPERE/06_figures/figure_nmr.pdf",
+                        output_figure = "~/switchdrive/SAPERE/06_figures/figure_nmr.pdf",
+                        output_groups = "inst/extdata/groups.tsv",
                         experiment_raw = "proton_00",
                         experiment_ref = "proton_98",
                         experiments_fractions = c(
@@ -339,10 +341,12 @@ cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/100
 
   ggpubr::ggarrange(plot_1, plot_2, widths = c(0.2, 1)) |>
     ggplot2::ggsave(
-      filename = output,
+      filename = output_figure,
       width = 16,
       height = 12
     )
+  groups |>
+    tidytable::fwrite(file = output_groups, sep = "\t")
 
   return(output)
 }

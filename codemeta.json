@@ -143,6 +143,13 @@
     },
     "4": {
       "@type": "SoftwareApplication",
+      "identifier": "cascade",
+      "name": "cascade",
+      "version": ">= 0.0.0.9000",
+      "sameAs": "https://github.com/adafede/cascade"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
       "identifier": "dendextend",
       "name": "dendextend",
       "version": ">= 1.19.0",
@@ -154,7 +161,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dendextend"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
@@ -167,7 +174,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "forcats",
       "name": "forcats",
@@ -180,7 +187,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=forcats"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "furrr",
       "name": "furrr",
@@ -193,7 +200,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=furrr"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggbump",
       "name": "ggbump",
@@ -206,7 +213,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggbump"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -219,7 +226,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -232,7 +239,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -245,7 +252,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -258,7 +265,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -271,7 +278,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -284,7 +291,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -297,7 +304,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -310,12 +317,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -328,7 +335,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -341,11 +348,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "20": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
-      "version": ">= 0.11.1",
+      "version": ">= 0.11.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -354,7 +361,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "21": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",

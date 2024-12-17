@@ -23,6 +23,13 @@ profiles_consistent <- input |>
   load_consistent_profiles()
 
 profiles_consistent <- profiles_consistent |>
+  tidytable::mutate(fraction = fraction |>
+    gsub(
+      pattern = "fraction_",
+      replacement = "",
+      fixed = TRUE
+    ) |>
+    as.character()) |>
   tidytable::group_by(fraction) |>
   tidytable::mutate(sum_name = value |>
     sum()) |>
@@ -120,13 +127,13 @@ test_2 <- ggplot2::ggplot(
     legend.title = ggplot2::element_text(face = "bold"),
     axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
   ) +
-  ggplot2::xlab("sample") +
+  ggplot2::xlab("Fraction") +
   # ggbreak::scale_y_cut(
   #   breaks = c(10, 30),
   #   which = c(1, 3),
   #   scales = c(0, 1)
   # ) +
-  ggplot2::ylab("Median score")
+  ggplot2::ylab("Taste intensity")
 
 test_2
 

@@ -68,6 +68,6 @@ Collate:
     'sapid-package.R'
 VignetteBuilder:
     knitr
-biocViews: TODO, TODO
-X-schema.org-keywords: TODO, TODO
+biocViews: computational metabolomics, natural extracts, taste
+X-schema.org-keywords: computational metabolomics, natural extracts, taste
 Language: en-US

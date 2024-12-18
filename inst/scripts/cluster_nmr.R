@@ -29,9 +29,9 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-cluster_nmr <- function(nmr_dir = "~/../../Volumes/LaCie/Adriano/06_data/NMR/10043",
-                        output_figure = "~/switchdrive/SAPERE/06_figures/figure_nmr.pdf",
-                        output_groups = "inst/extdata/groups.tsv",
+cluster_nmr <- function(nmr_dir = "./data/10043",
+                        output_figure = "./man/figures/figure_nmr.pdf",
+                        output_groups = "./inst/extdata/groups.tsv",
                         experiment_raw = "proton_00",
                         experiment_ref = "proton_98",
                         experiments_fractions = c(

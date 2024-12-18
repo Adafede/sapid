@@ -15,7 +15,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_concentration <- function(input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-                               output = "~/switchdrive/SAPERE/06_figures/figure_raw_extract.pdf") {
+                               output = "./man/figures/figure_raw_extract.pdf") {
   message("Loading file...\n")
   prepared <- input |>
     tidytable::fread()

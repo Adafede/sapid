@@ -6,10 +6,10 @@ message("This program plots a comparison between classical and chemically inform
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-plot_informed_tasting <- function(file_fractions_mass = "inst/extdata/fractions.tsv",
-                                  file_taste_raw = "inst/extdata/concentration_afc.tsv",
-                                  file_taste_informed = "inst/extdata/profiles.tsv",
-                                  output = "~/switchdrive/SAPERE/06_figures/figure_chemically_informed_tasting.pdf",
+plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "fractions.tsv", package = "sapid"),
+                                  file_taste_raw = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
+                                  file_taste_informed = system.file("extdata", "profiles.tsv", package = "sapid"),
+                                  output = "./man/figures/figure_chemically_informed_tasting.pdf",
                                   min_panelists = 2) {
   fraction_masses <- file_fractions_mass |>
     tidytable::fread() |>

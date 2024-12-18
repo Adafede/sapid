@@ -16,7 +16,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_matrices <- function(input = system.file("extdata", "profiles.tsv", package = "sapid"),
-                          output = "~/switchdrive/SAPERE/06_figures/figure_matrices.pdf") {
+                          output = "./man/figures/figure_matrices.pdf") {
   table_profiles <- input |>
     tidytable::fread() |>
     # tidytable::mutate(value = tidytable::if_else(

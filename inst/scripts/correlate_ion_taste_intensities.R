@@ -21,7 +21,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/fractions_mzmine/fractions.csv",
                                             input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
-                                            output = "inst/extdata/correlations.tsv",
+                                            output = "./inst/extdata/correlations.tsv",
                                             # tastes = c(
                                             #   "BITTER",
                                             #   "FATTY",

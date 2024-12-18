@@ -16,8 +16,8 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                     output_jury = "~/switchdrive/SAPERE/06_figures/figure_variation_jury.pdf",
-                                     output_session = "~/switchdrive/SAPERE/06_figures/figure_variation_session.pdf") {
+                                     output_jury = "./man/figures/figure_variation_jury.pdf",
+                                     output_session = "./man/figures/figure_variation_session.pdf") {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::mutate(tidytable::across(tidytable::everything(), function(x) {

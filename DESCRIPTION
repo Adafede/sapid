@@ -53,18 +53,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
     'colors.R'
-    'cluster_nmr.R'
     'get_session_info.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
     'load_consistent_profiles.R'
     'load_session.R'
-    'plot_chasselas_modulation.R'
-    'plot_chasselas_variation.R'
-    'plot_concentration.R'
-    'plot_descriptors_network.R'
-    'plot_matrices.R'
-    'plot_napping.R'
     'sapid-package.R'
 VignetteBuilder:
     knitr

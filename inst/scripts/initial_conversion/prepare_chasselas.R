@@ -23,8 +23,8 @@ prepare_chasselas <-
            sessions = seq(1, 7),
            output = "inst/extdata/chasselas.tsv") {
     sessions |>
-      furrr::future_map(.f = get_session_info) |>
-      furrr::future_map(
+      purrr::map(.f = get_session_info) |>
+      purrr::map(
         .f = load_session,
         input_dir = input_dir,
         tab = "chasselas"

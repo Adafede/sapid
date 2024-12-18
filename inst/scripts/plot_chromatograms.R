@@ -37,11 +37,11 @@ plot_chromatograms <- function(input_dir = "~/Documents/papers/sapid/sapere_tmp/
   }
 
   data_raw <- files[raw_index] |>
-    furrr::future_map(.f = extract_chromatogram_df) |>
+    purrr::map(.f = extract_chromatogram_df) |>
     tidytable::bind_rows()
 
   data_fractions <- files[fractions_indices] |>
-    furrr::future_map(.f = extract_chromatogram_df) |>
+    purrr::map(.f = extract_chromatogram_df) |>
     tidytable::bind_rows()
 
   data_full <- data_raw |>

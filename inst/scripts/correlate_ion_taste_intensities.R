@@ -103,7 +103,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
 
   generate_rolling_windows <- function(fractions, window_size) {
     seq_len(length(fractions) - window_size + 1) |>
-      furrr::future_map(
+      purrr::map(
         .f = function(fractions, window_size, i) {
           fractions[i:(i + window_size - 1)]
         },
@@ -159,7 +159,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
                                     df_ion_intensities,
                                     df_taste_intensities) {
     results_list <- fractions_lists |>
-      furrr::future_map(
+      purrr::map(
         function(taste,
                  fractions_list,
                  df_taste_intensities,
@@ -192,7 +192,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
           }
 
           correlations <- df[df[2:ncol(df)] |>
-            furrr::future_map_lgl(
+            purrr::map_lgl(
               .f = function(x) {
                 all(!is.na(x))
               }
@@ -200,7 +200,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
             which() |>
             names()] |>
             as.list() |>
-            furrr::future_map(
+            purrr::map(
               .f = function(ion_intensity,
                             taste_intensity = df$intensity_taste) {
                 auto_correlate(x = ion_intensity, y = taste_intensity)
@@ -209,15 +209,15 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
 
           cor_summary <- data.frame(
             correlation = correlations |>
-              furrr::future_map_dbl(function(x) {
+              purrr::map_dbl(function(x) {
                 x$correlation
               }),
             p_value = correlations |>
-              furrr::future_map_dbl(function(x) {
+              purrr::map_dbl(function(x) {
                 x$p.value
               }),
             method = correlations |>
-              furrr::future_map_chr(function(x) {
+              purrr::map_chr(function(x) {
                 x$method
               })
           )
@@ -250,7 +250,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
       id_ion = NA_integer_
     )
     filtered_results <- results_list[results_list |>
-      furrr::future_map_lgl(
+      purrr::map_lgl(
         .f = function(x) {
           !is.null(x)
         }
@@ -264,7 +264,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
   }
 
   fractions_lists <- widths |>
-    furrr::future_map(
+    purrr::map(
       .f = function(fractions, widths) {
         generate_rolling_windows(fractions, widths)
       },
@@ -277,7 +277,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
   # tastes <- c("BITTER", "VOLUME", "SWEET")
 
   results <- tastes |>
-    furrr::future_map(
+    purrr::map(
       .f = function(taste,
                     fractions_lists,
                     df_ion_intensities,

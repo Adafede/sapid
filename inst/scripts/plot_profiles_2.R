@@ -27,10 +27,10 @@ input_dir <- "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory"
 sessions <- seq(1, 7)
 
 session_infos <- sessions |>
-  furrr::future_map(.f = get_session_info)
+  purrr::map(.f = get_session_info)
 
 table_profile <- session_infos |>
-  furrr::future_map(
+  purrr::map(
     .f = load_session,
     input_dir = input_dir,
     tab = "profiles"

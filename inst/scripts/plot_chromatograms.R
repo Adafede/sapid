@@ -6,6 +6,18 @@ message("This program plots chromatograms.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
+#' Plot chromatograms
+#'
+#' @param input_dir Input dir
+#' @param input_groups Input groups
+#' @param raw_index Raw index
+#' @param fractions_indices Fractions indices
+#' @param xlim Xlim
+#' @param output Output
+#'
+#' @return NULL
+#'
+#' @examples NULL
 plot_chromatograms <- function(input_dir = "~/Documents/papers/sapid/sapere_tmp/20210619",
                                input_groups = "inst/extdata/groups.tsv",
                                raw_index = 7,

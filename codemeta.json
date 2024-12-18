@@ -189,19 +189,6 @@
     },
     "8": {
       "@type": "SoftwareApplication",
-      "identifier": "furrr",
-      "name": "furrr",
-      "version": ">= 0.3.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=furrr"
-    },
-    "9": {
-      "@type": "SoftwareApplication",
       "identifier": "ggbump",
       "name": "ggbump",
       "version": ">= 0.1.0",
@@ -213,7 +200,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggbump"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -226,7 +213,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -239,7 +226,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -252,7 +239,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -265,7 +252,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -278,7 +265,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -290,6 +277,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
+    },
+    "15": {
+      "@type": "SoftwareApplication",
+      "identifier": "purrr",
+      "name": "purrr",
+      "version": ">= 1.0.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
     "16": {
       "@type": "SoftwareApplication",
@@ -352,7 +352,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
-      "version": ">= 0.11.2",
+      "version": ">= 0.11.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -377,7 +377,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "0KB",
+  "fileSize": "587614.646KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

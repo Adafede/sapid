@@ -27,10 +27,10 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
                             output_coordinates = "inst/extdata/napping_coordinates.tsv",
                             output_descriptors = "inst/extdata/napping_descriptors.tsv") {
   session_infos <- sessions |>
-    furrr::future_map(.f = get_session_info)
+    purrr::map(.f = get_session_info)
 
   session_infos |>
-    furrr::future_map(
+    purrr::map(
       .f = load_session,
       input_dir = input_dir,
       tab = "napping_coord"
@@ -41,12 +41,12 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     tidytable::fwrite(file = output_coordinates, sep = "\t")
 
   session_infos |>
-    furrr::future_map(
+    purrr::map(
       .f = load_session,
       input_dir = input_dir,
       tab = "napping_words"
     ) |>
-    furrr::future_map(
+    purrr::map(
       .f = harmonize_terms_df,
       dictionary_generic_path = dictionary_generic_path,
       dictionary_napping_path = dictionary_napping_path,

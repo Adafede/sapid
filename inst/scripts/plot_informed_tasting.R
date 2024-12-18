@@ -60,6 +60,7 @@ plot_informed_tasting <- function(file_taste_raw = "inst/extdata/concentration_a
         format(nsmall = 2)
     )) +
     treemapify::geom_treemap() +
+    # treemapify::geom_treemap_subgroup_border() +
     treemapify::geom_treemap_text(place = "centre") +
     ggplot2::scale_fill_manual(values = col, guide = "none") +
     ggplot2::labs(caption = "Classical tasting")
@@ -75,6 +76,7 @@ plot_informed_tasting <- function(file_taste_raw = "inst/extdata/concentration_a
         format(nsmall = 2)
     )) +
     treemapify::geom_treemap() +
+    # treemapify::geom_treemap_subgroup_border() +
     treemapify::geom_treemap_text(place = "centre") +
     ggplot2::scale_fill_manual(values = col) +
     ggplot2::labs(caption = "Chemically informed tasting", fill = "Taste")
@@ -82,11 +84,11 @@ plot_informed_tasting <- function(file_taste_raw = "inst/extdata/concentration_a
   ggpubr::ggarrange(
     plotlist = list(plot_raw, plot_informed),
     ncol = 2,
-    legend = "right",
+    legend = "top",
     common.legend = TRUE
   )
 }
-plot_informed_tasting()
+plot_taste <- plot_informed_tasting()
 
 end <- Sys.time()
 

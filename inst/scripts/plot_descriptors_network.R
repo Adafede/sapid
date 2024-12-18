@@ -16,7 +16,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_descriptors_network <- function(input = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
-                                     output = "~/switchdrive/SAPERE/06_figures/figure_network.pdf") {
+                                     output = "./man/figures/figure_network.pdf") {
   table_descriptors <- input |>
     tidytable::fread() |>
     tidytable::filter(taste_harmonized != "") |>

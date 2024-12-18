@@ -15,7 +15,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                      output = "~/switchdrive/SAPERE/06_figures/figure_modulation.pdf") {
+                                      output = "./man/figures/figure_modulation.pdf") {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::pivot_wider(names_from = product, values_from = value) |>

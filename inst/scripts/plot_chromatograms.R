@@ -18,12 +18,12 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_chromatograms <- function(input_dir = "~/Documents/papers/sapid/sapere_tmp/20210619",
-                               input_groups = "inst/extdata/groups.tsv",
+plot_chromatograms <- function(input_dir = "./data/20210619",
+                               input_groups = system.file("extdata", "groups.tsv", package = "sapid"),
                                raw_index = 7,
                                fractions_indices = 12:65,
                                xlim = c(2, 25),
-                               output = "~/switchdrive/SAPERE/06_figures/figure_chromatograms.pdf") {
+                               output = "./man/figures/figure_chromatograms.pdf") {
   files <- input_dir |>
     list.files(
       path = ,

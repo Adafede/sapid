@@ -6,7 +6,20 @@ message("This program calculates ion/taste intensities correlations.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/sapere_tmp/fractions_mzmine/fractions.csv",
+#' Correlate ion taste intensities
+#'
+#' @param input_ions Input ions
+#' @param input_tastes Input tastes
+#' @param output Output
+#' @param min_jury Min jury
+#' @param min_area_ion Min area ion
+#' @param imputation_factor Imputation factor
+#' @param widths Widths
+#'
+#' @return NULL
+#'
+#' @examples NULL
+correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/fractions_mzmine/fractions.csv",
                                             input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                                             output = "inst/extdata/correlations.tsv",
                                             # tastes = c(

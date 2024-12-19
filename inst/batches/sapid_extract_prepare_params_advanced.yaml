@@ -1,0 +1,249 @@
+annotations:
+  candidates:
+    final: 500
+  ms1only: no
+  ms2approx: no
+  thresholds:
+    consistency: 0.3
+    ms1:
+      biological: 0.6
+      chemical: 0.3
+      condition: OR
+    ms2:
+      similarity:
+        annotation: 0
+        edges: 0.7
+files:
+  pattern: extract
+  annotations:
+    raw:
+      spectral:
+        gnps: data/interim/annotations/extract_gnps.tsv
+        spectral: data/interim/annotations/extract_spectralMatches.tsv.gz
+      sirius: data/interim/annotations/extract_sirius.zip
+    filtered: data/interim/annotations/extract_annotationsFiltered.tsv.gz
+    prepared:
+      canopus: data/interim/annotations/extract_canopusPrepared.tsv.gz
+      formula: data/interim/annotations/extract_formulaPrepared.tsv.gz
+      structural:
+        gnps: data/interim/annotations/extract_gnpsPrepared.tsv.gz
+        ms1: data/interim/annotations/extract_ms1Prepared.tsv.gz
+        sirius: data/interim/annotations/extract_siriusPrepared.tsv.gz
+        spectral: data/interim/annotations/extract_spectralMatchesPrepared.tsv.gz
+    processed: example_results.tsv
+  features:
+    raw: data/source/extract.csv
+    prepared: data/interim/features/extract_features.tsv.gz
+  libraries:
+    sop:
+      raw:
+        closed: ../lotus-processor/data/processed/230106_closed_metadata.csv.gz
+        ecmdb: data/source/libraries/sop/ecmdb.json.zip
+        hmdb: data/source/libraries/sop/hmdb/structures.zip
+        lotus: data/source/libraries/sop/lotus.csv.gz
+      prepared:
+        closed: data/interim/libraries/sop/closed_prepared.tsv.gz
+        ecmdb: data/interim/libraries/sop/ecmdb_prepared.tsv.gz
+        hmdb: data/interim/libraries/sop/hmdb_prepared.tsv.gz
+        lotus: data/interim/libraries/sop/lotus_prepared.tsv.gz
+        rt: data/interim/libraries/sop/rt_prepared.tsv.gz
+        spectral: data/interim/libraries/sop/spectral_prepared.tsv.gz
+      merged:
+        keys: data/interim/libraries/sop/merged/keys.tsv.gz
+        organisms:
+          names: data/interim/libraries/sop/merged/organisms/names.tsv.gz
+          taxonomies:
+            ott: data/interim/libraries/sop/merged/organisms/taxonomies/ott.tsv.gz
+        structures:
+          stereo: data/interim/libraries/sop/merged/structures/stereo.tsv.gz
+          metadata: data/interim/libraries/sop/merged/structures/metadata.tsv.gz
+          names: data/interim/libraries/sop/merged/structures/names.tsv.gz
+          taxonomies:
+            cla: data/interim/libraries/sop/merged/structures/taxonomies/classyfire.tsv.gz
+            npc: data/interim/libraries/sop/merged/structures/taxonomies/npc.tsv.gz
+    spectral:
+      neg: data/interim/libraries/spectra/exp/internal_neg.rds
+      pos: data/interim/libraries/spectra/exp/internal_pos.rds
+    temporal:
+      exp:
+        mgf:
+          neg: []
+          pos: []
+      is:
+        mgf:
+          neg: []
+          pos: []
+      prepared: data/interim/libraries/rt/prepared.tsv.gz
+  metadata:
+    prepared: data/interim/taxa/extract_taxed.tsv.gz
+  networks:
+    spectral:
+      edges:
+        raw:
+          ms1: data/interim/features/extract_edgesMasses.tsv
+          spectral: data/interim/features/extract_edgesSpectra.tsv
+        prepared: data/interim/features/extract_edges.tsv
+      components:
+        raw: data/interim/features/extract_components.tsv
+        prepared: data/interim/features/extract_componentsPrepared.tsv
+  spectral:
+    raw: data/source/extract.mgf
+gnps:
+  workflow: fbmn
+ms:
+  adducts:
+    neg:
+    - '[M-H2]2-'
+    - '[M-H]-'
+    - '[2M-H]-'
+    pos:
+    - '[M+H2]2+'
+    - '[M+H]+'
+    - '[M+H4N]+'
+    - '[M+Na]+'
+    - '[2M+H]+'
+  clusters:
+    neg:
+    - H2O
+    - CH2O2
+    - H2PO4
+    pos:
+    - H2O
+    - C2H3N
+  neutral_losses:
+  - O
+  - H3N (ammonia)
+  - H2O (water)
+  - CO
+  - C2H5 (ethyl radical)
+  - H4O2 (2xH2O)
+  - CO2
+  - CHO2
+  - H6O3 (3xH2O)
+  - C2O2 (2xCO)
+  - CH6O3 (combination)
+  - H8O4 (4xH2O)
+  - C3H6O3 (sugar)
+  - H2O4S (sulfuric)
+  - H3O4P (phosphoric)
+  - C4H8O4 (sugar)
+  - C6H6O3 (HRF)
+  - C5H8O4 (pentose-H2O)
+  - C8H8O2 (RDA-1)
+  - C6H8O4 (HRF)
+  - C6H10O4 (methylpentose/desoxyhexose-H2O)
+  - C8H8O3 (RDA-2)
+  - C6H10O5 (hexose-H2O)
+  - C8H8O4 (RDA-3)
+  - C8H10O4 (RDA-2-H2O)
+  - C6H12O6 (hexose)
+  - C11H10O4 (sinapoyl)
+  - C16H30O (pamitoyl)
+  - C12H20O8 (2xmethylpentose/desoxyhexose-H2O)
+  - C12H20O10 (2xhexose-H2O)
+  polarity: pos
+  thresholds:
+    ms2:
+      intensity: 5
+  tolerances:
+    mass:
+      ppm:
+        ms1: 10
+        ms2: 10
+      dalton:
+        ms1: 0.01
+        ms2: 0.01
+    rt:
+      adducts: 0.02
+      library: 0.1
+names:
+  adduct: ion_identities:ion_identities
+  extension: yes
+  features: id
+  filename: filename
+  libraries: internal
+  inchikey: inchikey
+  mgf:
+    adduct: ''
+    collision_energy: ''
+    compound_id: SPECTRUMID
+    exact_mass: EXACTMASS
+    inchi: INCHI
+    inchi_no_stereo: ''
+    inchikey: ''
+    inchikey_no_stereo: ''
+    molecular_formula: ''
+    name: ''
+    polarity: IONMODE
+    retention_time: RTINSECONDS
+    smiles: SMILES
+    smiles_no_stereo: ''
+    spectrum_id: ''
+    splash: ''
+    synonyms: ''
+    xlogp: ''
+  precursor: mz
+  rt:
+    features: rt
+    library: rt
+  smiles: smiles
+  source: CLUSTERID1
+  target: CLUSTERID2
+  taxon: ATTRIBUTE_species
+organisms:
+  candidates: 1
+  filter:
+    mode: no
+    level: phylum
+    value: Streptophyta
+  taxon: Swertia chirayita
+tools:
+  metadata: gnps
+  networks:
+    spectral:
+      components: gnps
+      edges: gnps
+  sirius:
+    version: '6'
+  taxonomies:
+    biological: otl
+    chemical: npc
+units:
+  rt: seconds
+weights:
+  global:
+    biological: 0.5
+    chemical: 0.166
+    spectral: 0.333
+  biological:
+    domain: 0.1
+    kingdom: 0.2
+    phylum: 0.3
+    class: 0.4
+    order: 0.5
+    infraorder: 0.55
+    family: 0.6
+    subfamily: 0.65
+    tribe: 0.7
+    subtribe: 0.75
+    genus: 0.8
+    subgenus: 0.85
+    species: 0.9
+    subspecies: 0.95
+    variety: 1
+  chemical:
+    cla:
+      kingdom: 0.25
+      superclass: 0.5
+      class: 0.75
+      parent: 1
+    npc:
+      pathway: 0.333
+      superclass: 0.666
+      class: 1
+options:
+  compounds_names: no
+  force: no
+  high_confidence: no
+  remove_ties: no
+  summarise: yes

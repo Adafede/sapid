@@ -51,55 +51,6 @@ profiles_consistent$color <-
     .desc = FALSE
   )
 
-test_basis <- ggplot2::ggplot(
-  profiles_consistent,
-  ggplot2::aes(
-    x = fraction,
-    y = value,
-    fill = taste,
-    color = taste,
-    group = fraction
-  )
-) +
-  ggplot2::geom_violin(ggplot2::aes(fill = taste)) +
-  ggplot2::scale_fill_manual(
-    values = levels(profiles_consistent$color) |>
-      as.character(),
-    guide = ggplot2::guide_legend(reverse = TRUE, ncol = 1)
-  ) +
-  ggplot2::scale_color_manual(
-    values = levels(profiles_consistent$color) |>
-      as.character(),
-    guide = ggplot2::guide_legend(reverse = TRUE, ncol = 1)
-  ) +
-  ggplot2::geom_jitter(
-    position = ggplot2::position_jitter(width = .05),
-    alpha = 0.5
-  ) +
-  ggplot2::labs(fill = "taste") +
-  ggplot2::theme_bw() +
-  ggplot2::theme(
-    legend.title = ggplot2::element_text(face = "bold"),
-    axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
-  ) +
-  ggplot2::xlab("sample") +
-  ggplot2::ylab("absolute")
-
-# test_zoom <- test_basis +
-#   ggplot2::ylim(0, 10) +
-#   ggplot2::facet_wrap(facets = ~ taste)
-# test_zoom
-#
-# test_zoom2 <- test_basis +
-#   ggplot2::ylim(0, 500) +
-#   ggplot2::facet_wrap(facets = ~ taste)
-# test_zoom2
-#
-# test_zoom <- test_basis +
-#   ggplot2::ylim(0, 10) +
-#   ggplot2::facet_wrap(facets = ~ taste)
-# test_zoom
-
 test_2 <- ggplot2::ggplot(
   profiles_consistent |>
     tidytable::distinct(fraction, median, taste, color),
@@ -121,7 +72,7 @@ test_2 <- ggplot2::ggplot(
       as.character(),
     guide = ggplot2::guide_legend(reverse = TRUE, ncol = 1)
   ) +
-  ggplot2::labs(fill = "taste") +
+  ggplot2::labs(fill = "Taste", color = "Taste") +
   ggplot2::theme_bw() +
   ggplot2::theme(
     legend.title = ggplot2::element_text(face = "bold"),
@@ -133,8 +84,17 @@ test_2 <- ggplot2::ggplot(
   #   which = c(1, 3),
   #   scales = c(0, 1)
   # ) +
-  ggplot2::ylab("Taste intensity")
-
+  ggplot2::ylab("Taste intensity") +
+  ggplot2::theme(
+    axis.text = ggplot2::element_text(color = "grey30"),
+    axis.title = ggplot2::element_text(color = "grey30"),
+    legend.text = ggplot2::element_text(color = "grey30"),
+    text = ggplot2::element_text(
+      face = "bold",
+      color = "grey30",
+      size = 20
+    )
+  )
 test_2
 
 test_3 <- test_2 +

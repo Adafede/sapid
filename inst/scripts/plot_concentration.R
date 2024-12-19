@@ -62,7 +62,6 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     ggplot2::ylab(label = "Intensity") +
     ggplot2::theme(
       legend.position = "none",
-      panel.grid = ggplot2::element_blank(),
       text = ggplot2::element_text(face = "bold")
     )
   boxes
@@ -99,12 +98,12 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     ggplot2::geom_hline(
       yintercept = 0.5,
       linetype = "dashed",
-      color = "grey"
+      color = "#19597e"
     ) +
     ggplot2::geom_vline(
       xintercept = 0.12,
       linetype = "dashed",
-      color = "grey"
+      color = "#19597e"
     ) +
     ggplot2::theme(
       legend.position = "none",
@@ -122,7 +121,7 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
         y = 0,
         yend = n
       ),
-      color = "grey"
+      color = "#19597e"
     ) +
     ggplot2::geom_point(
       mapping = ggplot2::aes(
@@ -141,7 +140,6 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     ggplot2::theme_bw() +
     ggplot2::theme(
       legend.position = "none",
-      panel.border = ggplot2::element_blank(),
       panel.spacing = ggplot2::unit(0.1, "lines"),
       strip.text.x = ggplot2::element_text(size = 8)
     ) +
@@ -165,7 +163,7 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
         y = 0,
         yend = m
       ),
-      color = "grey"
+      color = "#19597e"
     ) +
     ggplot2::geom_point(
       mapping = ggplot2::aes(
@@ -194,9 +192,7 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     ggplot2::theme_bw() +
     ggplot2::theme(
       legend.position = "none",
-      panel.grid = ggplot2::element_blank(),
       text = ggplot2::element_text(face = "bold"),
-      panel.border = ggplot2::element_blank(),
       panel.spacing = ggplot2::unit(0.2, "lines"),
       strip.text.x = ggplot2::element_text(size = 10),
       strip.background = ggplot2::element_rect(fill = "white")

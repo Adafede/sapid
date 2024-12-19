@@ -1,0 +1,17 @@
+files:
+  pattern: extract
+  features:
+    raw: data/source/extract.csv
+  metadata: {}
+  spectral:
+    raw: data/source/extract.mgf
+  annotations:
+    raw:
+      sirius: data/interim/annotations/extract_sirius.zip
+ms:
+  polarity: pos
+organisms:
+  taxon: Swertia chirayita
+options:
+  high_confidence: no
+  summarise: yes

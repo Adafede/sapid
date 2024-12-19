@@ -1,0 +1,17 @@
+files:
+  pattern: fractions
+  features:
+    raw: data/source/fractions.csv
+  metadata: {}
+  spectral:
+    raw: data/source/fractions.mgf
+  annotations:
+    raw:
+      sirius: data/interim/annotations/fractions_sirius.zip
+ms:
+  polarity: pos
+organisms:
+  taxon: Swertia chirayita
+options:
+  high_confidence: no
+  summarise: yes

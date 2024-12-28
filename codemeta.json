@@ -306,6 +306,19 @@
     },
     "17": {
       "@type": "SoftwareApplication",
+      "identifier": "scales",
+      "name": "scales",
+      "version": ">= 1.3.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=scales"
+    },
+    "18": {
+      "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
       "version": ">= 1.27",
@@ -317,12 +330,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -335,7 +348,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "20": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -348,7 +361,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "21": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -361,7 +374,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -377,7 +390,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "594128.694KB",
+  "fileSize": "594145.165KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

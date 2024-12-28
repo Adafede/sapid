@@ -8,8 +8,22 @@ message("Contributors: \n", "...")
 
 #' Plot correlations
 #'
-#' @param input Input
-#' @param output Output
+#' @param input_correlations Input correlations
+#' @param input_ions Input ions
+#' @param input_tastes Input tastes
+#' @param output_1 Output 1
+#' @param output_2 Output 2
+#' @param annotation_path_fractions Annotation path fractions
+#' @param features_path_fractions Features path fractions
+#' @param imputation_factor Imputation factor
+#' @param max_pval Max p value
+#' @param min_area_ion Minimal area ion
+#' @param min_confidence Minimal confidence
+#' @param min_consistency Minimal consistency
+#' @param min_corr Minimal correlation
+#' @param min_jury Minimal number of jury
+#' @param mode Mode
+#' @param widths Widths (of the taste-ion windows)
 #'
 #' @return NULL
 #'
@@ -17,6 +31,8 @@ message("Contributors: \n", "...")
 plot_correlations <- function(input_correlations = system.file("extdata", "correlations.tsv", package = "sapid"),
                               input_ions = "./data/fractions_mzmine/fractions.csv",
                               input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
+                              output_1 = "./man/figures/figure_correlations_1.pdf",
+                              output_2 = "./man/figures/figure_correlations_2.pdf",
                               annotation_path_fractions = "./data/processed/241217_130815_fractions/fractions_results.tsv",
                               features_path_fractions = "./data/fractions_mzmine/fractions.csv",
                               imputation_factor = 0.5,
@@ -295,8 +311,12 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
         size = 20
       )
     )
-  plot_correlations_1
-  # TODO 12x12
+  plot_correlations_1 |>
+    ggplot2::ggsave(
+      filename = output_1,
+      width = 12,
+      height = 12
+    )
 
   candidates_confident_fractions |>
     tidytable::filter(best_candidate_3 |>
@@ -422,8 +442,17 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
         size = 20
       )
     )
-  plot_correlations_2
-  # TODO 12x12
+  plot_correlations_2 |>
+    ggplot2::ggsave(
+      filename = output_2,
+      width = 12,
+      height = 12
+    )
+
+  return(list(
+    "plot_correlations_1" = output_1,
+    "plot_correlations_2" = output_2
+  ))
 }
 
 plot_correlations()

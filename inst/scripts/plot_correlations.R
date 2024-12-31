@@ -21,6 +21,7 @@ message("Contributors: \n", "...")
 #' @param min_confidence Minimal confidence
 #' @param min_consistency Minimal consistency
 #' @param min_corr Minimal correlation
+#' @param min_intense_ions_ratio Minimal intense ions ratio
 #' @param min_jury Minimal number of jury
 #' @param mode Mode
 #' @param widths Widths (of the taste-ion windows)
@@ -41,9 +42,14 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
                               min_confidence = 0.45,
                               min_consistency = 0.9,
                               min_corr = 0.95,
+                              min_intense_ions_ratio = 0.8,
                               min_jury = 2L,
                               mode = "pos",
                               widths = 5:9) {
+  min_width <- widths |>
+    min()
+  min_min_width <- min_width * min_intense_ions_ratio
+  
   annotation_table_fractions <- annotation_path_fractions |>
     tidytable::fread()
 
@@ -78,7 +84,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::group_by(id) |>
     tidytable::mutate(non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))) |>
     tidytable::ungroup() |>
-    tidytable::filter(non_na_count >= min(widths)) |>
+    tidytable::filter(non_na_count >= min_width) |>
     tidytable::filter(value >= min_area_ion) |>
     tidytable::mutate(value = value |>
       tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
@@ -130,7 +136,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::rename(intensity_new = intensity_ion) |>
     tidytable::filter(!is.na(intensity_new)) |>
     tidytable::group_by(id_ion) |>
-    tidytable::slice_max(intensity_new, n = 5) |>
+    tidytable::slice_max(order_by = intensity_new, n = min_width, with_ties = FALSE) |>
     tidytable::mutate(
       fraction = fraction |>
         gsub(pattern = ".*M_", replacement = "") |>
@@ -146,7 +152,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::mutate(fractions_list = fractions |>
       strsplit(split = " ")) |>
     tidytable::inner_join(df_ion_selection, by = c("id_ion" = "id_ion")) |>
-    tidytable::filter(tidytable::map2_lgl(fractions.y, fractions_list, ~ sum(.x %in% .y) >= 4))
+    tidytable::filter(tidytable::map2_lgl(fractions.y, fractions_list, ~ sum(.x %in% .y) >= min_min_width))
 
   nrow(correlations_significant) / nrow(correlations)
 
@@ -186,6 +192,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::filter(score_mixed == max(score_mixed, na.rm = TRUE)) |>
     tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
     tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
+    # tidytable::distinct(id_taste, .keep_all = TRUE) |>
     tidytable::ungroup()
 
   correlations_significant_filtered_neg <- correlations_significant_top |>
@@ -194,13 +201,14 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::filter(score_mixed == min(score_mixed, na.rm = TRUE)) |>
     tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
     tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
+    # tidytable::distinct(id_taste, .keep_all = TRUE) |>
     tidytable::ungroup()
 
   indices_significant_pos <- correlations_significant_filtered_pos |>
     tidytable::distinct(id_ion, id_taste, fractions.x) |>
     tidytable::mutate(id_ion = id_ion |>
       as.integer()) |>
-    tidytable::separate_longer_delim(fractions.x, delim = " ") |>
+    tidytable::separate_longer_delim(cols = fractions.x, delim = " ") |>
     tidytable::rename(fraction = fractions.x) |>
     tidytable::mutate(fraction = fraction |>
       as.integer())
@@ -209,7 +217,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
     tidytable::distinct(id_ion, id_taste, fractions.x) |>
     tidytable::mutate(id_ion = id_ion |>
       as.integer()) |>
-    tidytable::separate_longer_delim(fractions.x, delim = " ") |>
+    tidytable::separate_longer_delim(cols = fractions.x, delim = " ") |>
     tidytable::rename(fraction = fractions.x) |>
     tidytable::mutate(fraction = fraction |>
       as.integer())

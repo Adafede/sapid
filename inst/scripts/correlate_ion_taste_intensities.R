@@ -19,7 +19,7 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sapid/fractions_mzmine/fractions.csv",
+correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmine/fractions.csv",
                                             input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                                             output = "./inst/extdata/correlations.tsv",
                                             # tastes = c(
@@ -39,6 +39,12 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
                                             min_area_ion = 1L,
                                             imputation_factor = 0.5,
                                             widths = 5:9) {
+  
+  min_width <- widths |>
+    min()
+  max_width <- widths |> 
+    max()
+  
   df_ion_intensities <- input_ions |>
     tidytable::fread() |>
     tidytable::distinct(id, rt, mz, contains(":area")) |>
@@ -57,11 +63,10 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
       )
     ) |>
     tidytable::group_by(id) |>
-    tidytable::mutate(
-      non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))
-    ) |>
+    # tidytable::slice_max(order_by = value, n = max_width, with_ties = FALSE) |>
+    tidytable::mutate(non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))) |>
     tidytable::ungroup() |>
-    tidytable::filter(non_na_count >= min(widths)) |>
+    tidytable::filter(non_na_count >= min_width) |>
     tidytable::filter(value >= min_area_ion) |>
     tidytable::mutate(value = value |>
       tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
@@ -235,17 +240,22 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
               })
           )
 
-          cor_summary$p_adjusted <- cor_summary$p_value |>
-            stats::p.adjust(method = "BH")
-          cor_summary$fractions <- fractions_list |>
-            paste(collapse = " ")
-          cor_summary$id_ion <- rownames(cor_summary) |>
-            gsub(
-              pattern = "X",
-              replacement = "",
-              fixed = TRUE
-            ) |>
-            as.integer()
+          if (nrow(cor_summary) > 0) {
+            cor_summary$p_adjusted <- cor_summary$p_value |>
+              stats::p.adjust(method = "BH")
+
+            cor_summary$fractions <- fractions_list |>
+              paste(collapse = " ")
+            cor_summary$id_ion <- rownames(cor_summary) |>
+              gsub(
+                pattern = "X",
+                replacement = "",
+                fixed = TRUE
+              ) |>
+              as.integer()
+          } else {
+            return(NULL)
+          }
 
           return(cor_summary)
         },
@@ -289,7 +299,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
   # fractions_lists <- fractions_lists[160:170]
   # tastes <- c("BITTER", "VOLUME", "SWEET")
 
-  results <- tastes |>
+  correlations <- tastes |>
     purrr::map(
       .f = function(taste,
                     fractions_lists,
@@ -320,7 +330,7 @@ correlate_ion_taste_intensities <- function(input_ions = "~/Documents/papers/sap
     ) |>
     tidytable::distinct()
 
-  results |>
+  correlations |>
     tidytable::fwrite(file = output, sep = "\t")
 
   return(output)

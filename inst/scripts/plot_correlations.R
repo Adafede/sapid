@@ -49,7 +49,7 @@ plot_correlations <- function(input_correlations = system.file("extdata", "corre
   min_width <- widths |>
     min()
   min_min_width <- min_width * min_intense_ions_ratio
-  
+
   annotation_table_fractions <- annotation_path_fractions |>
     tidytable::fread()
 

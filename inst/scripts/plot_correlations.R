@@ -29,7 +29,7 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_correlations <- function(input_correlations = system.file("extdata", "correlations.tsv", package = "sapid"),
+plot_correlations <- function(input_correlations = "./data/correlations.tsv",
                               input_ions = "./data/fractions_mzmine/fractions.csv",
                               input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                               output_1 = "./man/figures/figure_correlations_1.pdf",

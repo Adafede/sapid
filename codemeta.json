@@ -390,7 +390,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "7602.084KB",
+  "fileSize": "7598.337KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -404,7 +404,7 @@
           "@id": "https://orcid.org/0000-0003-0443-9902"
         }
       ],
-      "name": "sapid: TODO",
+      "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
       "description": "R package, version 0.0.9000"
     }
   ],

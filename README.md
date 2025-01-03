@@ -38,7 +38,7 @@ install.packages(
 
 ### SAPID
 
-INSERT PREPRINT AND ARTICLE WHEN READY
+Preprint: **upcoming**
 
 According to which steps you used, please give credit to the authors of
 the tools/resources used.

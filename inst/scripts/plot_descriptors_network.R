@@ -16,7 +16,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_descriptors_network <- function(input = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
-                                     output = "./man/figures/figure_network.pdf") {
+                                     output = "./data/figures/figure_network.pdf") {
   table_descriptors <- input |>
     tidytable::fread() |>
     tidytable::filter(taste_harmonized != "") |>
@@ -105,6 +105,7 @@ plot_descriptors_network <- function(input = system.file("extdata", "napping_des
     ) +
     ggplot2::theme_void()
 
+  cascade:::check_export_dir(output)
   plot |>
     ggplot2::ggsave(
       filename = output,

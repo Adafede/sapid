@@ -35,13 +35,6 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
       )
     )
 
-  deltas_1_new <- deltas_1 |>
-    # tidytable::filter(CJ != "Dubois Co") |>
-    tidytable::distinct()
-
-  deltas_2_new <- deltas_2 |>
-    # tidytable::filter(CJ != "Dubois Co") |>
-    tidytable::distinct()
 
   deltas_3 <- deltas_1 |>
     tidytable::bind_rows(deltas_2) |>
@@ -57,23 +50,23 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
     )) |>
     dplyr::ungroup()
 
-  p_values_wilcox <- deltas_3 |>
-    tidytable::group_by(taste, group) |>
-    tidytable::summarize(p_value_wilcox = wilcox.test(delta, mu = 0)$p.value)
+  # p_values_wilcox <- deltas_3 |>
+  #  tidytable::group_by(taste, group) |>
+  #   tidytable::summarize(p_value_wilcox = wilcox.test(delta, mu = 0)$p.value)
 
   p_values_sign <- deltas_3 |>
     tidytable::group_by(taste, group) |>
     tidytable::summarize(p_value_sign = BSDA::SIGN.test(delta, md = 0)$p.value)
 
-  p_values_wilcox <- p_values_wilcox |>
-    tidytable::mutate(
-      stars_wilcox = tidytable::case_when(
-        p_value_wilcox < 0.001 ~ "***",
-        p_value_wilcox < 0.01 ~ "**",
-        p_value_wilcox < 0.05 ~ "*",
-        TRUE ~ ""
-      )
-    )
+  #  p_values_wilcox <- p_values_wilcox |>
+  #    tidytable::mutate(
+  #      stars_wilcox = tidytable::case_when(
+  #        p_value_wilcox < 0.001 ~ "***",
+  #        p_value_wilcox < 0.01 ~ "**",
+  #        p_value_wilcox < 0.05 ~ "*",
+  #        TRUE ~ ""
+  #      )
+  #    )
 
   p_values_sign <- p_values_sign |>
     tidytable::mutate(

@@ -15,7 +15,6 @@ message("Contributors: \n", "...")
 #' @param output_2 Output 2
 #' @param output_3 Output 3
 #' @param annotation_path_fractions Annotation path fractions
-#' @param features_path_fractions Features path fractions
 #' @param imputation_factor Imputation factor
 #' @param max_pval Max p value
 #' @param min_area_ion Minimal area ion
@@ -37,7 +36,6 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
                               output_2 = "./data/figures/figure_correlations_2.pdf",
                               output_3 = "./data/figures/figure_correlations_3.pdf",
                               annotation_path_fractions = "./data/processed/241217_130815_fractions/fractions_results.tsv",
-                              features_path_fractions = "./data/fractions_mzmine/fractions.csv",
                               imputation_factor = 0.5,
                               max_pval = 0.05,
                               min_area_ion = 1L,
@@ -60,8 +58,8 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
 
   df_ion_intensities <- input_ions |>
     tidytable::fread() |>
-    tidytable::distinct(id, rt, mz, contains(":area")) |>
-    tidytable::pivot_longer(contains(":area")) |>
+    tidytable::distinct(id, rt, mz, tidytable::contains(":area")) |>
+    tidytable::pivot_longer(tidytable::contains(":area")) |>
     tidytable::select(-mz, -rt) |>
     tidytable::mutate(
       name = gsub(
@@ -203,8 +201,6 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     # tidytable::distinct(id_taste,inchikey_2D, .keep_all = TRUE) |>
     tidytable::distinct()
 
-  correlations_temp <- correlations_significant_top
-
   correlations_significant_filtered_pos <- correlations_significant_top |>
     tidytable::filter(correlation > min_corr) |>
     tidytable::group_by(id_taste) |>
@@ -214,14 +210,14 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     # tidytable::distinct(id_taste, .keep_all = TRUE) |>
     tidytable::ungroup()
 
-  correlations_significant_filtered_neg <- correlations_significant_top |>
-    tidytable::group_by(id_taste) |>
-    tidytable::filter(correlation < -1 * min_corr) |>
-    tidytable::filter(score_mixed == min(score_mixed, na.rm = TRUE)) |>
-    tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
-    tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
-    # tidytable::distinct(id_taste, .keep_all = TRUE) |>
-    tidytable::ungroup()
+  # correlations_significant_filtered_neg <- correlations_significant_top |>
+  #   tidytable::group_by(id_taste) |>
+  #   tidytable::filter(correlation < -1 * min_corr) |>
+  #   tidytable::filter(score_mixed == min(score_mixed, na.rm = TRUE)) |>
+  #   tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
+  #   tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
+  #   # tidytable::distinct(id_taste, .keep_all = TRUE) |>
+  #   tidytable::ungroup()
 
   indices_significant_pos <- correlations_significant_filtered_pos |>
     tidytable::distinct(id_ion, id_taste, fractions.x) |>
@@ -232,14 +228,14 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     tidytable::mutate(fraction = fraction |>
       as.integer())
 
-  indices_significant_neg <- correlations_significant_filtered_neg |>
-    tidytable::distinct(id_ion, id_taste, fractions.x) |>
-    tidytable::mutate(id_ion = id_ion |>
-      as.integer()) |>
-    tidytable::separate_longer_delim(cols = fractions.x, delim = " ") |>
-    tidytable::rename(fraction = fractions.x) |>
-    tidytable::mutate(fraction = fraction |>
-      as.integer())
+  # indices_significant_neg <- correlations_significant_filtered_neg |>
+  #   tidytable::distinct(id_ion, id_taste, fractions.x) |>
+  #   tidytable::mutate(id_ion = id_ion |>
+  #     as.integer()) |>
+  #   tidytable::separate_longer_delim(cols = fractions.x, delim = " ") |>
+  #   tidytable::rename(fraction = fractions.x) |>
+  #   tidytable::mutate(fraction = fraction |>
+  #     as.integer())
 
   df_merged <- df_taste_intensities |>
     tidytable::inner_join(df_ion_intensities)
@@ -247,8 +243,8 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
   df_merged_pos <- df_merged |>
     tidytable::inner_join(indices_significant_pos)
 
-  df_merged_neg <- df_merged |>
-    tidytable::inner_join(indices_significant_neg)
+  # df_merged_neg <- df_merged |>
+  #   tidytable::inner_join(indices_significant_neg)
 
   plot_correlations_1 <- df_merged_pos |>
     ggplot2::ggplot(
@@ -351,29 +347,6 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
       grepl(pattern = "iridoid", ignore.case = TRUE)) |>
     tidytable::pull(smiles_2D) |>
     unique()
-
-  features_fractions <- features_path_fractions |>
-    tidytable::fread() |>
-    tidytable::select(id, tidytable::contains(":area")) |>
-    tidytable::pivot_longer(tidytable::contains(":area"), names_prefix = "datafile:") |>
-    tidytable::mutate(name = name |> gsub(pattern = ":area", replacement = "")) |>
-    tidytable::select(
-      id_ion = id,
-      sample = name,
-      intensity_new = value
-    ) |>
-    tidytable::filter(!is.na(intensity_new)) |>
-    tidytable::group_by(id_ion) |>
-    tidytable::slice_max(intensity_new, n = 5) |>
-    tidytable::mutate(
-      sample = sample |>
-        gsub(pattern = ".*M_", replacement = "") |>
-        gsub(pattern = "_.*", replacement = "")
-    ) |>
-    tidytable::arrange(sample) |>
-    tidytable::group_by(id_ion) |>
-    tidytable::mutate(fractions = list(sample)) |>
-    tidytable::distinct(id_ion, fractions)
 
   iridoids <- candidates_confident_fractions |>
     tidytable::filter(best_candidate_3 |>

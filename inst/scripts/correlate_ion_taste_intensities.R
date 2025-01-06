@@ -41,13 +41,13 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
                                             widths = 5:9) {
   min_width <- widths |>
     min()
-  max_width <- widths |>
-    max()
+  # max_width <- widths |>
+  #   max()
 
   df_ion_intensities <- input_ions |>
     tidytable::fread() |>
-    tidytable::distinct(id, rt, mz, contains(":area")) |>
-    tidytable::pivot_longer(contains(":area")) |>
+    tidytable::distinct(id, rt, mz, tidytable::contains(":area")) |>
+    tidytable::pivot_longer(tidytable::contains(":area")) |>
     tidytable::select(-mz, -rt) |>
     tidytable::mutate(
       name = gsub(

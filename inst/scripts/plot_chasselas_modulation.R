@@ -15,7 +15,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                      output = "./man/figures/figure_modulation.pdf") {
+                                      output = "./data/figures/figure_modulation.pdf") {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::pivot_wider(names_from = product, values_from = value) |>
@@ -154,6 +154,7 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
     ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
   p_2
 
+  cascade:::check_export_dir(output)
   ggpubr::ggarrange(p_1,
     p_2,
     nrow = 2,

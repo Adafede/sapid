@@ -9,7 +9,7 @@ message("Contributors: \n", "...")
 plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "fractions.tsv", package = "sapid"),
                                   file_taste_raw = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
                                   file_taste_informed = system.file("extdata", "profiles.tsv", package = "sapid"),
-                                  output = "./man/figures/figure_chemically_informed_tasting.pdf",
+                                  output = "./data/figures/figure_chemically_informed_tasting.pdf",
                                   min_panelists = 2) {
   fraction_masses <- file_fractions_mass |>
     tidytable::fread() |>
@@ -118,6 +118,7 @@ plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "
       )
     )
 
+  cascade:::check_export_dir(output)
   ggpubr::ggarrange(
     plotlist = list(plot_raw, plot_informed),
     ncol = 2,

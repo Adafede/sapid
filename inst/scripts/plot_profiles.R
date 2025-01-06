@@ -55,7 +55,7 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     ) |>
     tidytable::group_by(fraction) |>
     tidytable::mutate(sum_name = value |>
-      sum()) |>
+      sum(na.rm = TRUE)) |>
     tidytable::ungroup() |>
     tidytable::mutate_rowwise(color = discrete_rainbow_14[[group]], relative = value / sum_name) |>
     tidytable::ungroup()
@@ -75,10 +75,10 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     )
 
   profile_sensorial <- profiles_consistent |>
-    tidytable::distinct(fraction, median, taste, color) |>
+    tidytable::distinct(fraction, sum, taste, color) |>
     ggplot2::ggplot(mapping = ggplot2::aes(
       x = fraction,
-      y = median,
+      y = sum,
       fill = taste,
       color = taste,
     )) +

@@ -13,6 +13,7 @@ message("Contributors: \n", "...")
 #' @param input_tastes Input tastes
 #' @param output_1 Output 1
 #' @param output_2 Output 2
+#' @param output_3 Output 3
 #' @param annotation_path_fractions Annotation path fractions
 #' @param features_path_fractions Features path fractions
 #' @param imputation_factor Imputation factor
@@ -34,6 +35,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
                               input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
                               output_1 = "./man/figures/figure_correlations_1.pdf",
                               output_2 = "./man/figures/figure_correlations_2.pdf",
+                              output_3 = "./man/figures/figure_correlations_3.pdf",
                               annotation_path_fractions = "./data/processed/241217_130815_fractions/fractions_results.tsv",
                               features_path_fractions = "./data/fractions_mzmine/fractions.csv",
                               imputation_factor = 0.5,
@@ -52,14 +54,6 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
 
   annotation_table_fractions <- annotation_path_fractions |>
     tidytable::fread()
-
-  candidates_confident_fractions <- annotation_table_fractions |>
-    tidytable::mutate(mode = mode) |>
-    cascade:::keep_best_candidates() |>
-    tidytable::mutate(species = "Swertia chirayita") |>
-    tidytable::mutate(feature_id = feature_id |>
-      as.numeric()) |>
-    cascade:::make_confident(score = min_confidence)
 
   correlations <- input_correlations |>
     tidytable::fread()
@@ -103,6 +97,26 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
       as.integer()) |>
     tidytable::arrange(fraction)
 
+  candidates_confident_fractions <- annotation_table_fractions |>
+    tidytable::mutate(mode = mode) |>
+    cascade:::keep_best_candidates() |>
+    tidytable::mutate(species = "Swertia chirayita") |>
+    tidytable::mutate(feature_id = feature_id |>
+      as.numeric()) |>
+    cascade:::make_confident(score = min_confidence) |>
+    tidytable::left_join(
+      df_ion_intensities |>
+        tidytable::rename(feature_id = id_ion) |>
+        tidytable::group_by(feature_id) |>
+        tidytable::summarize(intensity_ion = intensity_ion |>
+          sum()) |>
+        tidytable::ungroup()
+    ) |>
+    tidytable::group_by(inchikey_2D) |>
+    tidytable::filter(intensity_ion == intensity_ion |>
+      max(na.rm = TRUE)) |>
+    tidytable::ungroup()
+
   df_taste_intensities <- input_tastes |>
     load_consistent_profiles(min_jury = min_jury) |>
     tidytable::mutate(tidytable::across(
@@ -119,7 +133,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     # tidytable::filter(taste %in% tastes) |>
     tidytable::group_by(fraction, taste) |>
     tidytable::mutate(sum = value |>
-      sum()) |>
+      sum(na.rm = TRUE)) |>
     tidytable::ungroup() |>
     tidytable::select(fraction, id_taste = taste, intensity_taste = sum) |>
     tidytable::distinct() |>
@@ -136,7 +150,11 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     tidytable::rename(intensity_new = intensity_ion) |>
     tidytable::filter(!is.na(intensity_new)) |>
     tidytable::group_by(id_ion) |>
-    tidytable::slice_max(order_by = intensity_new, n = min_width, with_ties = FALSE) |>
+    tidytable::slice_max(
+      order_by = intensity_new,
+      n = min_width,
+      with_ties = FALSE
+    ) |>
     tidytable::mutate(
       fraction = fraction |>
         gsub(pattern = ".*M_", replacement = "") |>
@@ -167,28 +185,29 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
 
   correlations_significant_top <- correlations_significant |>
     tidytable::filter(abs(correlation) >= min_corr) |>
-    tidytable::group_by(id_ion, id_taste) |>
-    tidytable::mutate(min = min(p_adjusted, na.rm = TRUE)) |>
-    tidytable::ungroup() |>
-    tidytable::filter(p_adjusted == min) |>
-    tidytable::group_by(fractions.x, id_taste) |>
-    tidytable::mutate(min_2 = min(p_adjusted, na.rm = TRUE)) |>
-    tidytable::ungroup() |>
-    tidytable::filter(p_adjusted == min_2) |>
-    tidytable::inner_join(candidates_confident_fractions,
+    # tidytable::group_by(id_ion, id_taste) |>
+    # tidytable::mutate(min = min(p_adjusted, na.rm = TRUE)) |>
+    # tidytable::ungroup() |>
+    # tidytable::filter(p_adjusted == min) |>
+    # tidytable::group_by(fractions.x, id_taste) |>
+    # tidytable::mutate(min_2 = min(p_adjusted, na.rm = TRUE)) |>
+    # tidytable::ungroup() |>
+    # tidytable::filter(p_adjusted == min_2) |>
+    tidytable::left_join(candidates_confident_fractions,
       by = c("id_ion" = "feature_id")
     ) |>
     tidytable::mutate(score_mixed = correlation * score_final |>
       as.numeric()) |>
-    tidytable::arrange(score_mixed |> tidytable::desc()) |>
+    tidytable::arrange(score_mixed |>
+      tidytable::desc()) |>
     # tidytable::distinct(id_taste,inchikey_2D, .keep_all = TRUE) |>
     tidytable::distinct()
 
   correlations_temp <- correlations_significant_top
 
   correlations_significant_filtered_pos <- correlations_significant_top |>
-    tidytable::group_by(id_taste) |>
     tidytable::filter(correlation > min_corr) |>
+    tidytable::group_by(id_taste) |>
     tidytable::filter(score_mixed == max(score_mixed, na.rm = TRUE)) |>
     tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
     tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
@@ -457,9 +476,258 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
       height = 12
     )
 
+  profiles_correlation <- df_merged_pos |>
+    tidytable::pivot_longer(cols = tidytable::starts_with("intensity")) |>
+    tidytable::mutate(value = ifelse(
+      test = name == "intensity_taste",
+      yes = value,
+      no = 1 * value
+    )) |>
+    tidytable::distinct(fraction,
+      name,
+      median = value,
+      taste = id_taste,
+      color = id_ion
+    )
+
+  profile_anti_taste <- df_taste_intensities |>
+    tidytable::mutate(fraction = fraction |>
+      as.numeric()) |>
+    tidytable::distinct(fraction, median = intensity_taste, taste = id_taste) |>
+    tidytable::anti_join(profiles_correlation) |>
+    tidytable::mutate(
+      taste = "OTHER",
+      color = "gray",
+      name = "intensity_taste"
+    )
+
+  profile_anti_ion <- df_ion_intensities |>
+    tidytable::distinct(fraction) |>
+    tidytable::mutate(median = 0) |>
+    tidytable::anti_join(profiles_correlation) |>
+    tidytable::mutate(
+      taste = "OTHER",
+      color = "gray",
+      name = "intensity_ion"
+    )
+
+  profile_full <- profile_anti_taste |>
+    tidytable::bind_rows(profile_anti_ion) |>
+    tidytable::bind_rows(profiles_correlation) |>
+    tidytable::group_by(taste) |>
+    tidytable::mutate(sum = median |>
+      sum()) |>
+    tidytable::ungroup() |>
+    tidytable::mutate(sum = ifelse(
+      test = taste == "OTHER",
+      yes = Inf,
+      no = sum
+    )) |>
+    tidytable::mutate(fraction = fraction |> as.character())
+
+  profile_full$taste <-
+    forcats::fct_reorder(
+      .f = profile_full$taste,
+      .x = profile_full$sum,
+      .desc = TRUE
+    )
+
+  profiles_correlation_1 <- profile_full |>
+    tidytable::filter(name == "intensity_taste") |>
+    ggplot2::ggplot(mapping = ggplot2::aes(
+      x = fraction,
+      y = median,
+      fill = taste,
+      color = taste,
+    )) +
+    ggplot2::geom_col() +
+    # ggplot2::geom_col(stat = "identity", position = "dodge") +
+    ggplot2::scale_fill_manual(values = c(
+      "grey90",
+      "#D1BBD7",
+      # bitter
+      "#F1932D",
+      # pungent
+      "#90C987",
+      # sweet
+      "#7BAFDE",
+      # astringent
+      "#1965B0",
+      # volume
+      "#AE76A3" # fatty
+      # "#882E72", # acid
+      # "#DC050C", # carton
+      # "#5289C7", # fresh
+      # "#E8601C", # metallic
+      # "#4EB265", # mouthfilling
+      # "#F6C141", # salty
+      # "#CAE0AB", # umami
+      # "#F7F056", # woody
+      # "#777777"
+    )) +
+    ggplot2::scale_color_manual(values = c(
+      "grey90",
+      "#D1BBD7",
+      # bitter
+      "#F1932D",
+      # pungent
+      "#90C987",
+      # sweet
+      "#7BAFDE",
+      # astringent
+      "#1965B0",
+      # volume
+      "#AE76A3" # fatty
+      # "#882E72", # acid
+      # "#DC050C", # carton
+      # "#5289C7", # fresh
+      # "#E8601C", # metallic
+      # "#4EB265", # mouthfilling
+      # "#F6C141", # salty
+      # "#CAE0AB", # umami
+      # "#F7F056", # woody
+      # "#777777"
+    )) +
+    ggplot2::labs(fill = "Taste", color = "Taste") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      legend.title = ggplot2::element_text(face = "bold"),
+      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
+    ) +
+    ggplot2::xlab("") +
+    # ggforce::facet_zoom(ylim = c(0, 20)) +
+    # ggbreak::scale_y_cut(
+    #   breaks = c(10, 30),
+    #   which = c(1, 3),
+    #   scales = c(0, 1)
+    # ) +
+    ggplot2::ylab("Taste intensity") +
+    ggplot2::theme(
+      axis.text = ggplot2::element_text(color = "grey30"),
+      axis.title = ggplot2::element_text(color = "grey30"),
+      legend.text = ggplot2::element_text(color = "grey30"),
+      text = ggplot2::element_text(
+        face = "bold",
+        color = "grey30",
+        size = 20
+      )
+    )
+  profiles_correlation_1
+
+  profiles_correlation_2 <- profile_full |>
+    tidytable::filter(name == "intensity_ion") |>
+    tidytable::mutate(median = ifelse(
+      test = taste == "BITTER",
+      yes = median / 300,
+      no = median
+    )) |>
+    tidytable::mutate(median = ifelse(
+      test = taste == "PUNGENT",
+      yes = median / 100,
+      no = median
+    )) |>
+    ggplot2::ggplot(mapping = ggplot2::aes(
+      x = fraction,
+      y = median,
+      fill = taste,
+      color = taste,
+    )) +
+    ggplot2::geom_col() +
+    # ggplot2::geom_col(stat = "identity", position = "dodge") +
+    ggplot2::scale_fill_manual(values = c(
+      "grey90",
+      "#D1BBD7",
+      # bitter
+      "#F1932D",
+      # pungent
+      "#90C987",
+      # sweet
+      "#7BAFDE",
+      # astringent
+      "#1965B0",
+      # volume
+      "#AE76A3" # fatty
+      # "#882E72", # acid
+      # "#DC050C", # carton
+      # "#5289C7", # fresh
+      # "#E8601C", # metallic
+      # "#4EB265", # mouthfilling
+      # "#F6C141", # salty
+      # "#CAE0AB", # umami
+      # "#F7F056", # woody
+      # "#777777"
+    )) +
+    ggplot2::scale_color_manual(values = c(
+      "grey90",
+      "#D1BBD7",
+      # bitter
+      "#F1932D",
+      # pungent
+      "#90C987",
+      # sweet
+      "#7BAFDE",
+      # astringent
+      "#1965B0",
+      # volume
+      "#AE76A3" # fatty
+      # "#882E72", # acid
+      # "#DC050C", # carton
+      # "#5289C7", # fresh
+      # "#E8601C", # metallic
+      # "#4EB265", # mouthfilling
+      # "#F6C141", # salty
+      # "#CAE0AB", # umami
+      # "#F7F056", # woody
+      # "#777777"
+    )) +
+    ggplot2::labs(fill = "Taste", color = "Taste") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      legend.title = ggplot2::element_text(face = "bold"),
+      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
+    ) +
+    ggplot2::xlab("Fraction") +
+    # ggforce::facet_zoom(ylim = c(1E4, 2E5)) +
+    # ggplot2::scale_y_continuous(transform = "log10") +
+    # ggplot2::ylim(c(1E2,1E10)) +
+    # ggbreak::scale_y_cut(
+    #   breaks = c(2E5, 5E5),
+    #   which = c(1, 2,3),
+    #   scales = c( 1,0,1)
+    # ) +
+    ggplot2::ylab("Feature intensity") +
+    ggplot2::theme(
+      axis.text = ggplot2::element_text(color = "grey30"),
+      axis.title = ggplot2::element_text(color = "grey30"),
+      legend.text = ggplot2::element_text(color = "grey30"),
+      text = ggplot2::element_text(
+        face = "bold",
+        color = "grey30",
+        size = 20
+      )
+    )
+  profiles_correlation_2
+
+  selected_profiles <- ggpubr::ggarrange(
+    profiles_correlation_1,
+    profiles_correlation_2,
+    nrow = 2,
+    align = "hv",
+    common.legend = TRUE,
+    legend = "right"
+  )
+
+  selected_profiles |>
+    ggplot2::ggsave(
+      filename = output_3,
+      width = 15,
+      height = 15
+    )
+
   return(list(
     "plot_correlations_1" = output_1,
-    "plot_correlations_2" = output_2
+    "plot_correlations_2" = output_2,
+    "plot_correlations_3" = output_3
   ))
 }
 

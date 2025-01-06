@@ -37,8 +37,8 @@ plot_napping <- function(input_coordinates = system.file("extdata", "napping_coo
   file_text_cleaned <- table_words_prepared |>
     tidytable::distinct(fraction, session, jury, taste_intermediate)
 
-  file_text_raw <- table_words_prepared |>
-    tidytable::distinct(fraction, session, jury, taste_original)
+  # file_text_raw <- table_words_prepared |>
+  #   tidytable::distinct(fraction, session, jury, taste_original)
 
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,

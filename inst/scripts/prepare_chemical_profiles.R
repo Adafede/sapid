@@ -46,7 +46,7 @@ prepare_chemical_profiles <- function(mzmls_dir = "./data/20210619",
     start_extract <- start_extract + 1
     gc()
   }
-  while (start_fractions <= fractions_end) {
+  while (start_fractions <= end_fractions) {
     message(start_fractions)
     cascade::process_compare_peaks(
       export_dir = peaks_dir_fractions,

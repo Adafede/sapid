@@ -142,25 +142,25 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     compared_peaks_list_fractions$peaks_maj_precor
   }
 
-  features_informed_extract <- peaks_dir_extract |>
-    list.files(pattern = "featuresInformed_cad.tsv", full.names = TRUE)
-  features_not_informed_extract <- peaks_dir_extract |>
-    list.files(pattern = "featuresNotInformed_cad.tsv", full.names = TRUE)
+  # features_informed_extract <- peaks_dir_extract |>
+  #   list.files(pattern = "featuresInformed_cad.tsv", full.names = TRUE)
+  # features_not_informed_extract <- peaks_dir_extract |>
+  #   list.files(pattern = "featuresNotInformed_cad.tsv", full.names = TRUE)
   features_informed_fractions <- peaks_dir_fractions |>
     list.files(pattern = "featuresInformed_cad.tsv", full.names = TRUE)
   features_not_informed_fractions <- peaks_dir_fractions |>
     list.files(pattern = "featuresNotInformed_cad.tsv", full.names = TRUE)
 
-  features_extract <- features_path_extract |>
-    tidytable::fread() |>
-    tidytable::select(id, tidytable::contains(":area")) |>
-    tidytable::pivot_longer(tidytable::contains(":area"), names_prefix = "datafile:") |>
-    tidytable::mutate(name = name |> gsub(pattern = ":area", replacement = "")) |>
-    tidytable::select(
-      feature_id = id,
-      sample = name,
-      intensity_new = value
-    )
+  # features_extract <- features_path_extract |>
+  #   tidytable::fread() |>
+  #   tidytable::select(id, tidytable::contains(":area")) |>
+  #   tidytable::pivot_longer(tidytable::contains(":area"), names_prefix = "datafile:") |>
+  #   tidytable::mutate(name = name |> gsub(pattern = ":area", replacement = "")) |>
+  #   tidytable::select(
+  #     feature_id = id,
+  #     sample = name,
+  #     intensity_new = value
+  #   )
   features_fractions <- features_path_fractions |>
     tidytable::fread() |>
     tidytable::select(id, tidytable::contains(":area")) |>
@@ -172,18 +172,18 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
       intensity_new = value
     )
 
-  annotation_table_extract <- annotation_path_extract |>
-    tidytable::fread()
+  # annotation_table_extract <- annotation_path_extract |>
+  #   tidytable::fread()
   annotation_table_fractions <- annotation_path_fractions |>
     tidytable::fread()
 
-  candidates_confident_extract <- annotation_table_extract |>
-    tidytable::mutate(mode = mode) |>
-    cascade:::keep_best_candidates() |>
-    tidytable::mutate(species = "Swertia chirayita") |>
-    tidytable::mutate(feature_id = feature_id |>
-      as.numeric()) |>
-    cascade:::make_confident(score = min_confidence)
+  # candidates_confident_extract <- annotation_table_extract |>
+  #   tidytable::mutate(mode = mode) |>
+  #   cascade:::keep_best_candidates() |>
+  #   tidytable::mutate(species = "Swertia chirayita") |>
+  #   tidytable::mutate(feature_id = feature_id |>
+  #     as.numeric()) |>
+  #   cascade:::make_confident(score = min_confidence)
   candidates_confident_fractions <- annotation_table_fractions |>
     tidytable::mutate(mode = mode) |>
     cascade:::keep_best_candidates() |>
@@ -192,29 +192,28 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
       as.numeric()) |>
     cascade:::make_confident(score = min_confidence)
 
-  chemicals_informed_extract <- seq_along(features_informed_extract) |>
-    purrr::map(
-      .f = prepare_comparison_list,
-      features_informed = features_informed_extract,
-      features_not_informed = features_not_informed_extract,
-      candidates_confident = candidates_confident_extract,
-      min_similarity_prefilter = min_similarity_prefilter,
-      min_similarity_filter = min_similarity_filter,
-      mode = mode
-    ) |>
-    tidytable::bind_rows() |>
-    tidytable::inner_join(features_extract) |>
-    tidytable::mutate(intensity = intensity_new) |>
-    cascade:::make_other() |>
-    cascade:::no_other() |>
-    cascade:::prepare_hierarchy(type = type, detector = detector) |>
-    tidytable::filter(!ids |>
-      grepl(pattern = "$", fixed = TRUE)) |>
-    tidytable::mutate(ids = ids |>
-      gsub(pattern = "-", replacement = "- \n ")) |>
-    cascade:::prepare_plot() |>
-    tidytable::distinct(sample, values, ids, color)
-
+  # chemicals_informed_extract <- seq_along(features_informed_extract) |>
+  #   purrr::map(
+  #     .f = prepare_comparison_list,
+  #     features_informed = features_informed_extract,
+  #     features_not_informed = features_not_informed_extract,
+  #     candidates_confident = candidates_confident_extract,
+  #     min_similarity_prefilter = min_similarity_prefilter,
+  #     min_similarity_filter = min_similarity_filter,
+  #     mode = mode
+  #   ) |>
+  #   tidytable::bind_rows() |>
+  #   tidytable::inner_join(features_extract) |>
+  #   tidytable::mutate(intensity = intensity_new) |>
+  #   cascade:::make_other() |>
+  #   cascade:::no_other() |>
+  #   cascade:::prepare_hierarchy(type = type, detector = detector) |>
+  #   tidytable::filter(!ids |>
+  #     grepl(pattern = "$", fixed = TRUE)) |>
+  #   tidytable::mutate(ids = ids |>
+  #     gsub(pattern = "-", replacement = "- \n ")) |>
+  #   cascade:::prepare_plot() |>
+  #   tidytable::distinct(sample, values, ids, color)
   chemicals_informed_fractions_list <- seq_along(features_informed_fractions) |>
     purrr::map(
       .f = prepare_comparison_list,

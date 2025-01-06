@@ -24,12 +24,8 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
   n_panelists <- profiles |>
     tidytable::distinct(fraction, jury) |>
     tidytable::group_by(fraction) |>
-    tidytable::count()
-
-  presence <- profiles |>
-    tidytable::distinct(fraction, jury) |>
-    tidytable::group_by(jury) |>
-    tidytable::count(sort = TRUE)
+    tidytable::count() |>
+    tidytable::ungroup()
 
   consistent_descriptors <- profiles |>
     tidytable::distinct(jury, taste = taste_harmonized) |>
@@ -37,7 +33,8 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     tidytable::count() |>
     tidytable::filter(n >= min_jury) |>
     tidytable::filter(!is.na(taste)) |>
-    tidytable::filter(taste != "")
+    tidytable::filter(taste != "") |>
+    tidytable::ungroup()
 
   profiles_consistent <- profiles |>
     tidytable::left_join(n_panelists) |>
@@ -52,11 +49,11 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     tidytable::rename(taste = taste_harmonized) |>
     tidytable::filter(taste %in% consistent_descriptors$taste) |>
     tidytable::group_by(fraction, taste) |>
-    tidytable::mutate(median = value |>
-      median()) |>
+    tidytable::mutate(sum = value |>
+      sum(na.rm = TRUE)) |>
     tidytable::group_by(taste) |>
     tidytable::mutate(sum_taste = value |>
-      sum()) |>
+      sum(na.rm = TRUE)) |>
     tidytable::arrange(tidytable::desc(sum_taste)) |>
     tidytable::group_by(sum_taste) |>
     tidytable::mutate(group = tidytable::cur_group_id()) |>

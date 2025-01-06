@@ -15,7 +15,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_concentration <- function(input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-                               output = "./man/figures/figure_raw_extract.pdf") {
+                               output = "./data/figures/figure_raw_extract.pdf") {
   message("Loading file...\n")
   prepared <- input |>
     tidytable::fread()
@@ -199,6 +199,7 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     )
   dots_corrected
 
+  cascade:::check_export_dir(output)
   ggpubr::ggarrange(
     ggpubr::ggarrange(boxes, scurve, ncol = 2, labels = "AUTO"),
     dots_corrected,

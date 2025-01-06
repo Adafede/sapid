@@ -33,9 +33,9 @@ message("Contributors: \n", "...")
 plot_correlations <- function(input_correlations = "./data/correlations.tsv",
                               input_ions = "./data/fractions_mzmine/fractions.csv",
                               input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
-                              output_1 = "./man/figures/figure_correlations_1.pdf",
-                              output_2 = "./man/figures/figure_correlations_2.pdf",
-                              output_3 = "./man/figures/figure_correlations_3.pdf",
+                              output_1 = "./data/figures/figure_correlations_1.pdf",
+                              output_2 = "./data/figures/figure_correlations_2.pdf",
+                              output_3 = "./data/figures/figure_correlations_3.pdf",
                               annotation_path_fractions = "./data/processed/241217_130815_fractions/fractions_results.tsv",
                               features_path_fractions = "./data/fractions_mzmine/fractions.csv",
                               imputation_factor = 0.5,
@@ -338,6 +338,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
         size = 20
       )
     )
+  cascade:::check_export_dir(output_1)
   plot_correlations_1 |>
     ggplot2::ggsave(
       filename = output_1,
@@ -469,6 +470,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
         size = 20
       )
     )
+  cascade:::check_export_dir(output_2)
   plot_correlations_2 |>
     ggplot2::ggsave(
       filename = output_2,
@@ -717,6 +719,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     legend = "right"
   )
 
+  cascade:::check_export_dir(output_3)
   selected_profiles |>
     ggplot2::ggsave(
       filename = output_3,

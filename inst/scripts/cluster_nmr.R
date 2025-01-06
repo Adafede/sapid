@@ -30,7 +30,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 cluster_nmr <- function(nmr_dir = "./data/10043",
-                        output_figure = "./man/figures/figure_nmr.pdf",
+                        output_figure = "./data/figures/figure_nmr.pdf",
                         output_groups = "./inst/extdata/groups.tsv",
                         experiment_raw = "proton_00",
                         experiment_ref = "proton_98",
@@ -347,6 +347,8 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
     ))
   plot_1
 
+  cascade:::check_export_dir(output_figure)
+  cascade:::check_export_dir(output_groups)
   ggpubr::ggarrange(plot_1, plot_2, widths = c(0.2, 1)) |>
     ggplot2::ggsave(
       filename = output_figure,

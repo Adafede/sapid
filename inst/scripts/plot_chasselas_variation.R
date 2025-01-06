@@ -16,8 +16,8 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                     output_jury = "./man/figures/figure_variation_jury.pdf",
-                                     output_session = "./man/figures/figure_variation_session.pdf") {
+                                     output_jury = "./data/figures/figure_variation_jury.pdf",
+                                     output_session = "./data/figures/figure_variation_session.pdf") {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::mutate(tidytable::across(tidytable::everything(), function(x) {
@@ -151,6 +151,8 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
     )
   p_4
 
+  cascade:::check_export_dir(output_jury)
+  cascade:::check_export_dir(output_session)
   ggpubr::ggarrange(p_1,
     p_2,
     nrow = 2,

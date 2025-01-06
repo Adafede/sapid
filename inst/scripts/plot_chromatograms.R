@@ -23,7 +23,7 @@ plot_chromatograms <- function(input_dir = "./data/20210619",
                                raw_index = 7,
                                fractions_indices = 12:65,
                                xlim = c(2, 25),
-                               output = "./man/figures/figure_chromatograms.pdf") {
+                               output = "./data/figures/figure_chromatograms.pdf") {
   files <- input_dir |>
     list.files(
       path = ,
@@ -95,6 +95,7 @@ plot_chromatograms <- function(input_dir = "./data/20210619",
       )
     )
 
+  cascade:::check_export_dir(output_session)
   plot |>
     ggplot2::ggsave(
       filename = output,

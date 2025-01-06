@@ -27,7 +27,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package = "sapid"),
-                          output = "./man/figures/figure_profiles.pdf",
+                          output = "./data/figures/figure_profiles.pdf",
                           annotation_path_extract = "~/Git/sapid/data/processed/241026_103144_extract/extract_results.tsv",
                           annotation_path_fractions = "~/Git/sapid/data/processed/241217_130815_fractions/fractions_results.tsv",
                           features_path_extract = "~/Git/sapid/data/extract_mzmine/extract.csv",
@@ -289,6 +289,7 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     nrow = 2,
     align = "v"
   )
+  cascade:::check_export_dir(output)
   profiles |>
     ggplot2::ggsave(
       filename = output,

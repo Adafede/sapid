@@ -16,7 +16,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_matrices <- function(input = system.file("extdata", "profiles.tsv", package = "sapid"),
-                          output = "./man/figures/figure_matrices.pdf") {
+                          output = "./data/figures/figure_matrices.pdf") {
   table_profiles <- input |>
     tidytable::fread() |>
     # tidytable::mutate(value = tidytable::if_else(
@@ -109,6 +109,7 @@ plot_matrices <- function(input = system.file("extdata", "profiles.tsv", package
       )
     )
 
+  cascade:::check_export_dir(output)
   ggpubr::ggarrange(
     matrix_original,
     matrix_curated,

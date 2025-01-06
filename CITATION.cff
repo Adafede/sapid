@@ -9,7 +9,7 @@ type: software
 license: GPL-3.0-or-later
 title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth.'
 version: 0.0.0.9000
-abstract: TODO.
+abstract: This package provides the infrastructure to analyze plant extracts taste in depth.
 authors:
 - family-names: Rutz
   given-names: Adriano

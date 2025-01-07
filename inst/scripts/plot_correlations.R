@@ -362,7 +362,7 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     tidytable::mutate(fractions_list = fractions |>
       strsplit(split = " ")) |>
     tidytable::inner_join(df_ion_selection, by = c("id_ion" = "id_ion")) |>
-    tidytable::filter(tidytable::map2_lgl(fractions.y, fractions_list, ~ sum(.x %in% .y) >= 4)) |>
+    tidytable::filter(tidytable::map2_lgl(fractions.y, fractions_list, ~ sum(.x %in% .y) >= min_min_width)) |>
     tidytable::group_by(inchikey_2D) |>
     tidytable::filter(correlation == max(correlation)) |>
     tidytable::ungroup()

@@ -16,7 +16,6 @@ Depends:
     R (>= 4.3.0)
 Imports:
     AlpsNMR (>= 4.8.0),
-    BiocParallel (>= 1.40.0),
     cascade (>= 0.0.0.9000),
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),

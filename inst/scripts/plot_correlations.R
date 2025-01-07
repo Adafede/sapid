@@ -410,13 +410,14 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     ggplot2::facet_wrap(
       facets = "id_ion",
       # facets = c("id_ion", "p_adjusted"),
-      scales = "free",
-      ncol = 3
+      scales = "free_x",
+      ncol = 2
     ) +
     ggplot2::geom_point(size = 2) +
     ggplot2::geom_smooth(size = 0.5, method = "lm") +
     ggrepel::geom_text_repel(size = 5) +
     # ggplot2::scale_x_log10() +
+    ggplot2::ylim(c(0, 100)) +
     ggplot2::xlab("Ion intensity") +
     ggplot2::ylab("Bitter intensity") +
     ggplot2::labs(color = "Correlation", fill = "Correlation") +
@@ -428,14 +429,15 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
       strip.text = ggplot2::element_text(color = "grey30"),
       axis.text = ggplot2::element_text(color = "grey30"),
       axis.title = ggplot2::element_text(color = "grey30"),
+      panel.spacing.x = ggplot2::unit(10, "lines"),
       plot.margin = ggplot2::margin(
         l = 5,
         t = 5,
         b = 5,
-        r = 20
+        r = 125
       ),
-      # legend.position = "none",
-      legend.position = c(0.75, 0.1),
+      legend.position = "bottom",
+      # legend.position = c(0.75, 0.1),
       legend.text = ggplot2::element_text(color = "grey30"),
       text = ggplot2::element_text(
         face = "bold",

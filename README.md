@@ -11,6 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-Universe](https://adafede.r-universe.dev/badges/sapid)](https://adafede.r-universe.dev/sapid)
 [![Codecov test
 coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg)](https://doi.org/10.5281/zenodo.14616395)
 <!-- badges: end -->
 
 A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth.

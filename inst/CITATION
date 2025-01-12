@@ -9,3 +9,24 @@ bibentry(
   year     = "2024",
   note     = "R package, version 0.0.9000",
 )
+
+bibentry(
+  bibtype  = "Article",
+  title    = "SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.",
+  author   = c(
+    person(given = "Adriano", family = "Rutz", comment = c(ORCID = "0000-0003-0443-9902")),
+    person(given = "Pascale", family = "Deneulin", comment = c(ORCID = "0000-0001-5398-4419")),
+    person(given = "Ivano", family = "Tonutti"),
+    person(given = "Benoit", family = "Bach", comment = c(ORCID = "0000-0001-8677-4506")),
+    person(given = "Jean-Luc", family = "Wolfender", comment = c(ORCID = "0000-0002-0125-952X"))
+    ),
+  journal  = "bioRxiv",
+  year     = "2025",
+  url      = "https://doi.org/10.1101/2025.01.11.628830",
+  language = "en",
+  keywords = "metabolite annotation, charged aerosol detector, semi-quantitative, natural products, computational metabolomics, specialized metabolome",
+  doi      = "10.1101/2025.01.11.628830",
+  textVersion = paste(
+  "Adriano Rutz; Pascale Deneulin; Ivano Tonutti; Benoit Bach and Jean-Luc Wolfender. (12 January 2025). SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst. bioRxiv. doi:10.1101/2025.01.11.628830."
+  )
+)

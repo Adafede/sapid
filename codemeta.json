@@ -130,25 +130,12 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "BiocParallel",
-      "name": "BiocParallel",
-      "version": ">= 1.40.0",
-      "provider": {
-        "@id": "https://www.bioconductor.org",
-        "@type": "Organization",
-        "name": "Bioconductor",
-        "url": "https://www.bioconductor.org"
-      },
-      "sameAs": "https://bioconductor.org/packages/release/bioc/html/BiocParallel.html"
-    },
-    "4": {
-      "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
       "version": ">= 0.0.0.9000",
       "sameAs": "https://github.com/adafede/cascade"
     },
-    "5": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "dendextend",
       "name": "dendextend",
@@ -161,7 +148,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dendextend"
     },
-    "6": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
@@ -174,7 +161,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "forcats",
       "name": "forcats",
@@ -187,7 +174,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=forcats"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "ggbump",
       "name": "ggbump",
@@ -200,7 +187,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggbump"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -213,7 +200,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -226,7 +213,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -239,7 +226,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -252,7 +239,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -265,7 +252,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -278,7 +265,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -291,7 +278,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "16": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -304,7 +291,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "17": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -317,7 +304,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "18": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -330,12 +317,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "19": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "20": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -348,7 +335,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "21": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -361,7 +348,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "22": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -374,7 +361,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "23": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -390,7 +377,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "1065.034KB",
+  "fileSize": "1066.499KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -406,6 +393,54 @@
       ],
       "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
       "description": "R package, version 0.0.9001"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2025",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Adriano",
+          "familyName": "Rutz",
+          "@id": "https://orcid.org/0000-0003-0443-9902"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Pascale",
+          "familyName": "Deneulin",
+          "@id": "https://orcid.org/0000-0001-5398-4419"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Ivano",
+          "familyName": "Tonutti"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Benoit",
+          "familyName": "Bach",
+          "@id": "https://orcid.org/0000-0001-8677-4506"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Jean-Luc",
+          "familyName": "Wolfender",
+          "@id": "https://orcid.org/0000-0002-0125-952X"
+        }
+      ],
+      "name": "SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.",
+      "identifier": "10.1101/2025.01.11.628830",
+      "url": "https://doi.org/10.1101/2025.01.11.628830",
+      "@id": "https://doi.org/10.1101/2025.01.11.628830",
+      "sameAs": "https://doi.org/10.1101/2025.01.11.628830",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "datePublished": "2025",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "bioRxiv"
+        }
+      }
     }
   ],
   "releaseNotes": "https://github.com/adafede/sapid/blob/master/NEWS.md",

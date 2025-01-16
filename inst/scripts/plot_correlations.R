@@ -455,10 +455,10 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
 
   profiles_correlation <- df_merged_pos |>
     tidytable::pivot_longer(cols = tidytable::starts_with("intensity")) |>
-    tidytable::mutate(value = ifelse(
-      test = name == "intensity_taste",
-      yes = value,
-      no = 1 * value
+    tidytable::mutate(value = tidytable::if_else(
+      condition = name == "intensity_taste",
+      true = value,
+      false = 1 * value
     )) |>
     tidytable::distinct(fraction,
       name,
@@ -495,10 +495,10 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
     tidytable::mutate(sum = median |>
       sum()) |>
     tidytable::ungroup() |>
-    tidytable::mutate(sum = ifelse(
-      test = taste == "OTHER",
-      yes = Inf,
-      no = sum
+    tidytable::mutate(sum = tidytable::if_else(
+      condition = taste == "OTHER",
+      true = Inf,
+      false = sum
     )) |>
     tidytable::mutate(fraction = fraction |> as.character())
 
@@ -593,15 +593,15 @@ plot_correlations <- function(input_correlations = "./data/correlations.tsv",
 
   profiles_correlation_2 <- profile_full |>
     tidytable::filter(name == "intensity_ion") |>
-    tidytable::mutate(median = ifelse(
-      test = taste == "BITTER",
-      yes = median / 300,
-      no = median
+    tidytable::mutate(median = tidytable::if_else(
+      condition = taste == "BITTER",
+      true = median / 300,
+      false = median
     )) |>
-    tidytable::mutate(median = ifelse(
-      test = taste == "PUNGENT",
-      yes = median / 100,
-      no = median
+    tidytable::mutate(median = tidytable::if_else(
+      condition = taste == "PUNGENT",
+      true = median / 100,
+      false = median
     )) |>
     ggplot2::ggplot(mapping = ggplot2::aes(
       x = fraction,

@@ -243,7 +243,7 @@
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
-      "version": ">= 1.14.0",
+      "version": ">= 1.15.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -256,7 +256,7 @@
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
-      "version": ">= 1.0.5",
+      "version": ">= 1.0.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -352,7 +352,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
-      "version": ">= 0.11.1",
+      "version": ">= 0.11.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -377,7 +377,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "1066.499KB",
+  "fileSize": "1066.605KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -392,7 +392,7 @@
         }
       ],
       "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
-      "description": "R package, version 0.0.9001"
+      "description": "R package, version 0.0.9000"
     },
     {
       "@type": "ScholarlyArticle",
@@ -443,7 +443,6 @@
       }
     }
   ],
-  "releaseNotes": "https://github.com/adafede/sapid/blob/master/NEWS.md",
   "readme": "https://github.com/Adafede/sapid/blob/main/README.md",
   "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/adafede/sapid"],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"

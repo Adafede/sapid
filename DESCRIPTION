@@ -31,7 +31,7 @@ Imports:
     readxl (>= 1.4.3),
     scales (>= 1.3.0),
     SensoMineR (>= 1.27),
-    speaq (>=2.7.0),
+    speaq (>= 2.7.0),
     stats,
     stringi (>= 1.8.4),
     tibble (>= 3.2.1),

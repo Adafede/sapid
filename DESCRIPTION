@@ -16,7 +16,7 @@ Depends:
     R (>= 4.3.0)
 Imports:
     AlpsNMR (>= 4.4.0),
-    cascade (>= 0.0.0.9000),
+    cascade (>= 0.0.0.9001),
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),
     forcats (>= 1.0.0),

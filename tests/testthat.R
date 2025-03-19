@@ -1,4 +1,4 @@
 library(testthat)
 
 ## Test the package
-test_package(package = "sapid")
+testthat::test_package(package = "sapid")

@@ -49,3 +49,6 @@ po/*~
 rsconnect/
 
 data/
+
+# MacOS
+.DS_Store

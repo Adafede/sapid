@@ -22,16 +22,18 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-prepare_chemical_profiles <- function(mzmls_dir = "./data/20210619",
-                                      peaks_dir_extract = "./data/interim/peaks/extract",
-                                      peaks_dir_fractions = "./data/interim/peaks/fractions",
-                                      features_path_extract = "./data/extract_mzmine/extract.csv",
-                                      features_path_fractions = "./data/fractions_mzmine/fractions.csv",
-                                      min_intensity = 1E5,
-                                      start_extract = 5L,
-                                      end_extract = 7L,
-                                      start_fractions = 12L,
-                                      end_fractions = 65L) {
+prepare_chemical_profiles <- function(
+  mzmls_dir = "./data/20210619",
+  peaks_dir_extract = "./data/interim/peaks/extract",
+  peaks_dir_fractions = "./data/interim/peaks/fractions",
+  features_path_extract = "./data/extract_mzmine/extract.csv",
+  features_path_fractions = "./data/fractions_mzmine/fractions.csv",
+  min_intensity = 1E5,
+  start_extract = 5L,
+  end_extract = 7L,
+  start_fractions = 12L,
+  end_fractions = 65L
+) {
   mzmls <- mzmls_dir |>
     list.files(pattern = ".mzML", full.names = TRUE)
 

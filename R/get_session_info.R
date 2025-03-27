@@ -6,7 +6,8 @@
 #'
 #' @examples NULL
 get_session_info <- function(session) {
-  cluster <- switch(as.character(session),
+  cluster <- switch(
+    as.character(session),
     "1" = 6,
     "2" = 2,
     "3" = 5,
@@ -17,7 +18,8 @@ get_session_info <- function(session) {
     "8" = "All"
   )
 
-  date <- switch(as.character(session),
+  date <- switch(
+    as.character(session),
     "1" = 20210412,
     "2" = 20210419,
     "3" = 20210426,
@@ -28,7 +30,8 @@ get_session_info <- function(session) {
     "8" = 20210614
   )
 
-  product_name <- switch(as.character(date),
+  product_name <- switch(
+    as.character(date),
     "20210412" = "CHASAVANT",
     "20210419" = "Chas avant",
     "20210426" = "CHASAVANT",

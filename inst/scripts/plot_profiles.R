@@ -26,20 +26,22 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package = "sapid"),
-                          output = "./data/figures/figure_profiles.pdf",
-                          annotation_path_extract = "~/Git/sapid/data/processed/241026_103144_extract/extract_results.tsv",
-                          annotation_path_fractions = "~/Git/sapid/data/processed/241217_130815_fractions/fractions_results.tsv",
-                          features_path_extract = "~/Git/sapid/data/extract_mzmine/extract.csv",
-                          features_path_fractions = "~/Git/sapid/data/fractions_mzmine/fractions.csv",
-                          peaks_dir_extract = "~/Git/sapid/data/interim/peaks/extract",
-                          peaks_dir_fractions = "~/Git/sapid/data/interim/peaks/fractions",
-                          min_confidence = 0.45,
-                          min_similarity_prefilter = 0.6,
-                          min_similarity_filter = 0.8,
-                          mode = "pos",
-                          detector = "ms",
-                          type = "analysis") {
+plot_profiles <- function(
+  input = system.file("extdata", "profiles.tsv", package = "sapid"),
+  output = "./data/figures/figure_profiles.pdf",
+  annotation_path_extract = "~/Git/sapid/data/processed/241026_103144_extract/extract_results.tsv",
+  annotation_path_fractions = "~/Git/sapid/data/processed/241217_130815_fractions/fractions_results.tsv",
+  features_path_extract = "~/Git/sapid/data/extract_mzmine/extract.csv",
+  features_path_fractions = "~/Git/sapid/data/fractions_mzmine/fractions.csv",
+  peaks_dir_extract = "~/Git/sapid/data/interim/peaks/extract",
+  peaks_dir_fractions = "~/Git/sapid/data/interim/peaks/fractions",
+  min_confidence = 0.45,
+  min_similarity_prefilter = 0.6,
+  min_similarity_filter = 0.8,
+  mode = "pos",
+  detector = "ms",
+  type = "analysis"
+) {
   profiles_consistent <- input |>
     load_consistent_profiles()
 
@@ -54,10 +56,15 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
         as.character()
     ) |>
     tidytable::group_by(fraction) |>
-    tidytable::mutate(sum_name = value |>
-      sum(na.rm = TRUE)) |>
+    tidytable::mutate(
+      sum_name = value |>
+        sum(na.rm = TRUE)
+    ) |>
     tidytable::ungroup() |>
-    tidytable::mutate_rowwise(color = discrete_rainbow_14[[group]], relative = value / sum_name) |>
+    tidytable::mutate_rowwise(
+      color = discrete_rainbow_14[[group]],
+      relative = value / sum_name
+    ) |>
     tidytable::ungroup()
 
   profiles_consistent$taste <-
@@ -76,12 +83,14 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
 
   profile_sensorial <- profiles_consistent |>
     tidytable::distinct(fraction, sum, taste, color) |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      x = fraction,
-      y = sum,
-      fill = taste,
-      color = taste,
-    )) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = fraction,
+        y = sum,
+        fill = taste,
+        color = taste,
+      )
+    ) +
     ggplot2::geom_col() +
     ggplot2::scale_fill_manual(
       values = levels(profiles_consistent$color) |>
@@ -123,13 +132,15 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
   #
   # profile_sensorial_facets
 
-  prepare_comparison_list <- function(x,
-                                      features_informed,
-                                      features_not_informed,
-                                      candidates_confident,
-                                      min_similarity_prefilter,
-                                      min_similarity_filter,
-                                      mode) {
+  prepare_comparison_list <- function(
+    x,
+    features_informed,
+    features_not_informed,
+    candidates_confident,
+    min_similarity_prefilter,
+    min_similarity_filter,
+    mode
+  ) {
     compared_peaks_list_fractions <- cascade:::prepare_comparison(
       features_informed = features_informed[[x]],
       features_not_informed = features_not_informed[[x]],
@@ -164,8 +175,13 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
   features_fractions <- features_path_fractions |>
     tidytable::fread() |>
     tidytable::select(id, tidytable::contains(":area")) |>
-    tidytable::pivot_longer(tidytable::contains(":area"), names_prefix = "datafile:") |>
-    tidytable::mutate(name = name |> gsub(pattern = ":area", replacement = "")) |>
+    tidytable::pivot_longer(
+      tidytable::contains(":area"),
+      names_prefix = "datafile:"
+    ) |>
+    tidytable::mutate(
+      name = name |> gsub(pattern = ":area", replacement = "")
+    ) |>
     tidytable::select(
       feature_id = id,
       sample = name,
@@ -188,8 +204,10 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     tidytable::mutate(mode = mode) |>
     cascade:::keep_best_candidates() |>
     tidytable::mutate(species = "Swertia chirayita") |>
-    tidytable::mutate(feature_id = feature_id |>
-      as.numeric()) |>
+    tidytable::mutate(
+      feature_id = feature_id |>
+        as.numeric()
+    ) |>
     cascade:::make_confident(score = min_confidence)
 
   # chemicals_informed_extract <- seq_along(features_informed_extract) |>
@@ -231,8 +249,10 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     cascade:::make_other() |>
     cascade:::no_other() |>
     cascade:::prepare_hierarchy(type = type, detector = detector) |>
-    tidytable::filter(!ids |>
-      grepl(pattern = "$", fixed = TRUE)) |>
+    tidytable::filter(
+      !ids |>
+        grepl(pattern = "$", fixed = TRUE)
+    ) |>
     tidytable::mutate(
       ids = ids |>
         gsub(pattern = " and ", replacement = " &\n") |>
@@ -242,14 +262,16 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     cascade:::prepare_plot()
 
   profile_chemical <- chemicals_informed_fractions |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      x = sample |>
-        gsub(pattern = ".*M_", replacement = "") |>
-        gsub(pattern = "_.*", replacement = ""),
-      y = values,
-      fill = ids,
-      color = ids,
-    )) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = sample |>
+          gsub(pattern = ".*M_", replacement = "") |>
+          gsub(pattern = "_.*", replacement = ""),
+        y = values,
+        fill = ids,
+        color = ids,
+      )
+    ) +
     ggplot2::geom_col() +
     ggplot2::scale_fill_manual(
       values = chemicals_informed_fractions$color |> levels(),
@@ -267,10 +289,11 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     ) +
     ggplot2::xlab("Fraction") +
     ggplot2::ylab("Feature intensity") +
-    ggplot2::scale_y_continuous(labels = scales::label_number(
-      scale_cut =
-        scales::cut_short_scale()
-    )) +
+    ggplot2::scale_y_continuous(
+      labels = scales::label_number(
+        scale_cut = scales::cut_short_scale()
+      )
+    ) +
     ggplot2::theme(
       axis.text = ggplot2::element_text(color = "grey30"),
       axis.title = ggplot2::element_text(color = "grey30"),
@@ -283,7 +306,8 @@ plot_profiles <- function(input = system.file("extdata", "profiles.tsv", package
     )
   profile_chemical
 
-  profiles <- ggpubr::ggarrange(profile_sensorial,
+  profiles <- ggpubr::ggarrange(
+    profile_sensorial,
     profile_chemical,
     nrow = 2,
     align = "v"

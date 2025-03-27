@@ -21,15 +21,14 @@
 #' )
 #' }
 #'
-harmonize_terms <- function(dictionary,
-                            x,
-                            mode = "word",
-                            fallback = FALSE) {
+harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   # Prepare dictionary
   prepared_dict <- dictionary |>
     tidytable::fread() |>
-    tidytable::mutate(n = original |>
-      stringi::stri_length()) |>
+    tidytable::mutate(
+      n = original |>
+        stringi::stri_length()
+    ) |>
     tidytable::arrange(tidytable::desc(n))
 
   replacement <- if ("translated_simple" %in% names(prepared_dict)) {

@@ -15,13 +15,29 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_napping <- function(input_coordinates = system.file("extdata", "napping_coordinates.tsv", package = "sapid"),
-                         input_descriptors = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
-                         sessions = 2) {
+plot_napping <- function(
+  input_coordinates = system.file(
+    "extdata",
+    "napping_coordinates.tsv",
+    package = "sapid"
+  ),
+  input_descriptors = system.file(
+    "extdata",
+    "napping_descriptors.tsv",
+    package = "sapid"
+  ),
+  sessions = 2
+) {
   df_coord <- input_coordinates |>
     tidytable::fread() |>
-    tidytable::filter(session == paste0("session_", sessions |>
-      stringi::stri_pad(pad = "0", width = 2))) |>
+    tidytable::filter(
+      session ==
+        paste0(
+          "session_",
+          sessions |>
+            stringi::stri_pad(pad = "0", width = 2)
+        )
+    ) |>
     data.frame()
 
   rownames(df_coord) <- df_coord$fraction
@@ -31,8 +47,14 @@ plot_napping <- function(input_coordinates = system.file("extdata", "napping_coo
 
   table_words_prepared <- input_descriptors |>
     tidytable::fread() |>
-    tidytable::filter(session == paste0("session_", sessions |>
-      stringi::stri_pad(pad = "0", width = 2)))
+    tidytable::filter(
+      session ==
+        paste0(
+          "session_",
+          sessions |>
+            stringi::stri_pad(pad = "0", width = 2)
+        )
+    )
 
   file_text_cleaned <- table_words_prepared |>
     tidytable::distinct(fraction, session, jury, taste_intermediate)
@@ -188,7 +210,10 @@ plot_napping <- function(input_coordinates = system.file("extdata", "napping_coo
   )
 
   dev.off()
-  FactoMineR::prefpls(donnee = cbind.data.frame(res$points, df_coord), choix = "ind")
+  FactoMineR::prefpls(
+    donnee = cbind.data.frame(res$points, df_coord),
+    choix = "ind"
+  )
 
   dev.off()
   FactoMineR::prefpls(

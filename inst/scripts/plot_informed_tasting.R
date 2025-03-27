@@ -2,24 +2,41 @@ start <- Sys.time()
 
 pkgload::load_all()
 
-message("This program plots a comparison between classical and chemically informed analysis.")
+message(
+  "This program plots a comparison between classical and chemically informed analysis."
+)
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "fractions.tsv", package = "sapid"),
-                                  file_taste_raw = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-                                  file_taste_informed = system.file("extdata", "profiles.tsv", package = "sapid"),
-                                  output = "./data/figures/figure_chemically_informed_tasting.pdf",
-                                  min_panelists = 2) {
+plot_informed_tasting <- function(
+  file_fractions_mass = system.file(
+    "extdata",
+    "fractions.tsv",
+    package = "sapid"
+  ),
+  file_taste_raw = system.file(
+    "extdata",
+    "concentration_afc.tsv",
+    package = "sapid"
+  ),
+  file_taste_informed = system.file(
+    "extdata",
+    "profiles.tsv",
+    package = "sapid"
+  ),
+  output = "./data/figures/figure_chemically_informed_tasting.pdf",
+  min_panelists = 2
+) {
   fraction_masses <- file_fractions_mass |>
     tidytable::fread() |>
     tidytable::select(fraction = label, mass = 3) |>
     tidytable::mutate(
-      fraction = fraction |> gsub(
-        pattern = "M_",
-        replacement = "fraction_",
-        fixed = TRUE
-      ),
+      fraction = fraction |>
+        gsub(
+          pattern = "M_",
+          replacement = "fraction_",
+          fixed = TRUE
+        ),
       mass = mass |> as.numeric()
     )
   taste_raw <- file_taste_raw |>
@@ -49,8 +66,10 @@ plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "
     tidytable::summarize(value = sum(value * mass)) |>
     tidytable::mutate(value = value / sum(value)) |>
     tidytable::ungroup() |>
-    tidytable::arrange(value |>
-      tidytable::desc())
+    tidytable::arrange(
+      value |>
+        tidytable::desc()
+    )
 
   n <- taste_informed$taste |>
     unique() |>
@@ -65,16 +84,20 @@ plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "
   names(col) <- as.character(colors$taste)
 
   plot_raw <- taste_raw |>
-    tidytable::mutate(taste = taste |>
-      forcats::fct_reorder(value, .desc = TRUE)) |>
+    tidytable::mutate(
+      taste = taste |>
+        forcats::fct_reorder(value, .desc = TRUE)
+    ) |>
     tidytable::mutate(value = value * 100) |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      area = value,
-      fill = taste,
-      label = value |>
-        round(digits = 2) |>
-        sprintf(fmt = "%0.1f%%")
-    )) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        area = value,
+        fill = taste,
+        label = value |>
+          round(digits = 2) |>
+          sprintf(fmt = "%0.1f%%")
+      )
+    ) +
     treemapify::geom_treemap() +
     # treemapify::geom_treemap_subgroup_border() +
     treemapify::geom_treemap_text(place = "centre") +
@@ -92,16 +115,20 @@ plot_informed_tasting <- function(file_fractions_mass = system.file("extdata", "
     )
 
   plot_informed <- taste_informed |>
-    tidytable::mutate(taste = taste |>
-      forcats::fct_reorder(value, .desc = TRUE)) |>
+    tidytable::mutate(
+      taste = taste |>
+        forcats::fct_reorder(value, .desc = TRUE)
+    ) |>
     tidytable::mutate(value = value * 100) |>
-    ggplot2::ggplot(mapping = ggplot2::aes(
-      area = value,
-      fill = taste,
-      label = value |>
-        round(digits = 2) |>
-        sprintf(fmt = "%0.1f%%")
-    )) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        area = value,
+        fill = taste,
+        label = value |>
+          round(digits = 2) |>
+          sprintf(fmt = "%0.1f%%")
+      )
+    ) +
     treemapify::geom_treemap() +
     # treemapify::geom_treemap_subgroup_border() +
     treemapify::geom_treemap_text(place = "centre") +

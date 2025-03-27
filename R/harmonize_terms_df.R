@@ -8,15 +8,19 @@
 #' @return NULL
 #'
 #' @examples NULL
-harmonize_terms_df <- function(df,
-                               dictionary_generic_path,
-                               dictionary_napping_path,
-                               dictionary_specific_path) {
+harmonize_terms_df <- function(
+  df,
+  dictionary_generic_path,
+  dictionary_napping_path,
+  dictionary_specific_path
+) {
   file_text_cleaned <- df |>
     tidytable::pivot_longer(cols = 3:ncol(df)) |>
     tidytable::filter(!is.na(value)) |>
-    tidytable::mutate(value_2 = value |>
-      harmonize_terms(dictionary = dictionary_specific_path)) |>
+    tidytable::mutate(
+      value_2 = value |>
+        harmonize_terms(dictionary = dictionary_specific_path)
+    ) |>
     tidytable::separate_longer_delim(cols = "value_2", delim = " ") |>
     tidytable::filter(value_2 != "") |>
     tidytable::mutate(
@@ -27,13 +31,21 @@ harmonize_terms_df <- function(df,
           fallback = TRUE
         )
     ) |>
-    tidytable::separate_wider_delim(cols = "value_3", delim = "_", cols_remove = FALSE) |>
+    tidytable::separate_wider_delim(
+      cols = "value_3",
+      delim = "_",
+      cols_remove = FALSE
+    ) |>
     tidytable::mutate(value_4 = value_31, intensity = value_32) |>
     tidytable::filter(!is.na(value_4)) |>
-    tidytable::mutate(value_5 = value_4 |>
-      harmonize_terms(dictionary = dictionary_generic_path)) |>
-    tidytable::mutate(newValue = value_5 |>
-      harmonize_terms(dictionary = dictionary_specific_path)) |>
+    tidytable::mutate(
+      value_5 = value_4 |>
+        harmonize_terms(dictionary = dictionary_generic_path)
+    ) |>
+    tidytable::mutate(
+      newValue = value_5 |>
+        harmonize_terms(dictionary = dictionary_specific_path)
+    ) |>
     tidytable::mutate(
       intensity = tidytable::if_else(
         condition = intensity == "",
@@ -41,11 +53,13 @@ harmonize_terms_df <- function(df,
         false = intensity
       )
     ) |>
-    tidytable::mutate(taste = tidytable::if_else(
-      condition = !is.na(intensity),
-      true = paste(newValue, intensity, sep = "_"),
-      false = newValue
-    )) |>
+    tidytable::mutate(
+      taste = tidytable::if_else(
+        condition = !is.na(intensity),
+        true = paste(newValue, intensity, sep = "_"),
+        false = newValue
+      )
+    ) |>
     tidytable::filter(!is.na(taste)) |>
     tidytable::relocate(taste, .after = name)
 

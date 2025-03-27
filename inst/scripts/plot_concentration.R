@@ -14,8 +14,10 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_concentration <- function(input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
-                               output = "./data/figures/figure_raw_extract.pdf") {
+plot_concentration <- function(
+  input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
+  output = "./data/figures/figure_raw_extract.pdf"
+) {
   message("Loading file...\n")
   prepared <- input |>
     tidytable::fread()
@@ -24,8 +26,10 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     tidytable::mutate(correct_percent = afc_correct / afc_total) |>
     tidytable::group_by(concentration, taste) |>
     tidytable::add_count() |>
-    tidytable::mutate(value = value |>
-      mean()) |>
+    tidytable::mutate(
+      value = value |>
+        mean()
+    ) |>
     tidytable::mutate(m = n * value) |>
     tidytable::distinct(concentration, jury, value, n, m, .keep_all = TRUE) |>
     tidytable::filter(!is.na(value)) |>
@@ -182,10 +186,13 @@ plot_concentration <- function(input = system.file("extdata", "concentration_afc
     ggplot2::xlab("") +
     ggplot2::ylab("Value") +
     ggplot2::facet_wrap(
-      facets = ~ paste(format(
-        round(x = concentration |> as.numeric(), digits = 2),
-        nsmall = 2
-      ), "[mg/L]"),
+      facets = ~ paste(
+        format(
+          round(x = concentration |> as.numeric(), digits = 2),
+          nsmall = 2
+        ),
+        "[mg/L]"
+      ),
       ncol = 1,
       scales = "free_y"
     ) +

@@ -49,11 +49,15 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     tidytable::rename(taste = taste_harmonized) |>
     tidytable::filter(taste %in% consistent_descriptors$taste) |>
     tidytable::group_by(fraction, taste) |>
-    tidytable::mutate(sum = value |>
-      sum(na.rm = TRUE)) |>
+    tidytable::mutate(
+      sum = value |>
+        sum(na.rm = TRUE)
+    ) |>
     tidytable::group_by(taste) |>
-    tidytable::mutate(sum_taste = value |>
-      sum(na.rm = TRUE)) |>
+    tidytable::mutate(
+      sum_taste = value |>
+        sum(na.rm = TRUE)
+    ) |>
     tidytable::arrange(tidytable::desc(sum_taste)) |>
     tidytable::group_by(sum_taste) |>
     tidytable::mutate(group = tidytable::cur_group_id()) |>

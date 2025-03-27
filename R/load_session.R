@@ -8,19 +8,19 @@
 #'
 #' @examples NULL
 load_session <- function(input_dir, session_info, tab) {
-  sheet <- switch(tab,
+  sheet <- switch(
+    tab,
     "chasselas" = 1,
     "napping_coord" = 2,
     "napping_words" = 3,
     "profiles" = 4
   )
   df <- list.files(
-    path =
-      file.path(
-        input_dir,
-        paste0(session_info$date, "_cluster", session_info$cluster),
-        "03_files"
-      ),
+    path = file.path(
+      input_dir,
+      paste0(session_info$date, "_cluster", session_info$cluster),
+      "03_files"
+    ),
     pattern = ".xlsx",
     full.names = TRUE
   ) |>
@@ -35,13 +35,14 @@ load_session <- function(input_dir, session_info, tab) {
     )
 
   df <- df |>
-    tidytable::mutate(session = paste0(
-      "session_",
-      session_info$cluster |>
-        stringi::stri_pad(pad = "0", width = 2)
-    )) |>
+    tidytable::mutate(
+      session = paste0(
+        "session_",
+        session_info$cluster |>
+          stringi::stri_pad(pad = "0", width = 2)
+      )
+    ) |>
     tidytable::relocate(session, .after = 1)
-
 
   if (tab == "napping_coord") {
     df <- df |>
@@ -61,8 +62,10 @@ load_session <- function(input_dir, session_info, tab) {
 
   if (tab == "profiles") {
     df <- df |>
-      tidytable::mutate(ProductName = ProductName |>
-        as.character()) |>
+      tidytable::mutate(
+        ProductName = ProductName |>
+          as.character()
+      ) |>
       tidytable::select(-tidytable::where(is.logical)) |>
       tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
       tidytable::filter(!is.na(value))

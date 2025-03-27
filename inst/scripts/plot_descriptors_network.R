@@ -15,8 +15,10 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 #'
-plot_descriptors_network <- function(input = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
-                                     output = "./data/figures/figure_network.pdf") {
+plot_descriptors_network <- function(
+  input = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
+  output = "./data/figures/figure_network.pdf"
+) {
   table_descriptors <- input |>
     tidytable::fread() |>
     tidytable::filter(taste_harmonized != "") |>
@@ -41,8 +43,10 @@ plot_descriptors_network <- function(input = system.file("extdata", "napping_des
 
   table_vertices <- table_edges |>
     tidytable::distinct(name = from) |>
-    tidytable::bind_rows(table_edges_size |>
-      tidytable::distinct(name = to, size)) |>
+    tidytable::bind_rows(
+      table_edges_size |>
+        tidytable::distinct(name = to, size)
+    ) |>
     tidytable::arrange(tidytable::desc(size)) |>
     tidytable::distinct(name, .keep_all = TRUE) |>
     tidytable::full_join(
@@ -56,15 +60,19 @@ plot_descriptors_network <- function(input = system.file("extdata", "napping_des
         tidytable::distinct(taste, color),
       by = c("name" = "taste")
     ) |>
-    tidytable::mutate(size = tidytable::if_else(
-      condition = name |>
-        grepl(pattern = "fraction", fixed = TRUE),
-      true = 1,
-      false = size
-    )) |>
+    tidytable::mutate(
+      size = tidytable::if_else(
+        condition = name |>
+          grepl(pattern = "fraction", fixed = TRUE),
+        true = 1,
+        false = size
+      )
+    ) |>
     tidytable::group_by(color) |>
-    tidytable::mutate(sum = size |>
-      sum())
+    tidytable::mutate(
+      sum = size |>
+        sum()
+    )
 
   table_vertices$color <- table_vertices$color |>
     forcats::fct_reorder(table_vertices$sum, .desc = TRUE)
@@ -79,9 +87,18 @@ plot_descriptors_network <- function(input = system.file("extdata", "napping_des
 
   plot <- graph |>
     ggraph::ggraph(layout = "stress") +
-    ggplot2::scale_color_manual(values = discrete_rainbow_14, na.value = "grey60") +
-    ggplot2::scale_fill_manual(values = discrete_rainbow_14, na.value = "grey60") +
-    ggraph::scale_edge_color_manual(values = discrete_rainbow_14, na.value = "grey60") +
+    ggplot2::scale_color_manual(
+      values = discrete_rainbow_14,
+      na.value = "grey60"
+    ) +
+    ggplot2::scale_fill_manual(
+      values = discrete_rainbow_14,
+      na.value = "grey60"
+    ) +
+    ggraph::scale_edge_color_manual(
+      values = discrete_rainbow_14,
+      na.value = "grey60"
+    ) +
     ggraph::geom_edge_bundle_force(
       edge_alpha = 0.1,
       edge_color = "grey30",

@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "runtimePlatform": "R version 4.4.3 (2025-02-28)",
   "author": [
     {
       "@type": "Person",
@@ -119,7 +119,7 @@
       "@type": "SoftwareApplication",
       "identifier": "AlpsNMR",
       "name": "AlpsNMR",
-      "version": ">= 4.8.0",
+      "version": ">= 4.4.0",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -132,7 +132,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
-      "version": ">= 0.0.0.9000",
+      "version": ">= 0.0.0.9001",
       "sameAs": "https://github.com/adafede/cascade"
     },
     "4": {
@@ -377,7 +377,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "1066.605KB",
+  "fileSize": "1063.782KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -443,6 +443,7 @@
       }
     }
   ],
+  "releaseNotes": "https://github.com/adafede/sapid/blob/master/NEWS.md",
   "readme": "https://github.com/Adafede/sapid/blob/main/README.md",
   "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/adafede/sapid"],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"

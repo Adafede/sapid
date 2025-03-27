@@ -15,17 +15,21 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                     output_jury = "./data/figures/figure_variation_jury.pdf",
-                                     output_session = "./data/figures/figure_variation_session.pdf") {
+plot_chasselas_variation <- function(
+  input = system.file("extdata", "chasselas.tsv", package = "sapid"),
+  output_jury = "./data/figures/figure_variation_jury.pdf",
+  output_session = "./data/figures/figure_variation_session.pdf"
+) {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::mutate(tidytable::across(tidytable::everything(), function(x) {
       x |>
         gsub(pattern = "_", replacement = " ")
     })) |>
-    tidytable::mutate(value = value |>
-      as.numeric())
+    tidytable::mutate(
+      value = value |>
+        as.numeric()
+    )
 
   deltas_before <- deltas |>
     tidytable::filter(grepl(pattern = "before", x = product))
@@ -34,17 +38,20 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
   #   tidytable::filter(grepl(pattern = "after", x = product))
 
   deltas_1 <- deltas_before |>
-    tidytable::filter(taste %in% c("sourness", "bitterness", "sweetness", "saltiness"))
+    tidytable::filter(
+      taste %in% c("sourness", "bitterness", "sweetness", "saltiness")
+    )
 
   deltas_2 <- deltas_before |>
     tidytable::filter(
-      taste %in% c(
-        "fatness, volume",
-        "balance",
-        "freshness",
-        "persistency",
-        "mouthwatering"
-      )
+      taste %in%
+        c(
+          "fatness, volume",
+          "balance",
+          "freshness",
+          "persistency",
+          "mouthwatering"
+        )
     )
 
   deltas_3 <- deltas_1 |>
@@ -56,7 +63,9 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
     tidytable::ungroup()
 
   p_1 <- deltas_3 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = jury, y = value, colour = jury)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = jury, y = value, colour = jury)
+    ) +
     ggplot2::scale_x_discrete() +
     ggplot2::scale_color_manual(values = discrete_rainbow_14) +
     ggplot2::geom_violin() +
@@ -80,7 +89,9 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
   p_1
 
   p_2 <- deltas_3 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = taste, y = value, colour = taste)
+    ) +
     ggplot2::scale_x_discrete() +
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
@@ -104,9 +115,16 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
   p_2
 
   p_3 <- deltas_3 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = session, y = value, colour = session)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = session, y = value, colour = session)
+    ) +
     ggplot2::scale_x_discrete() +
-    ggplot2::scale_color_manual(values = discrete_rainbow_14[rep(c(FALSE, TRUE), length = length(discrete_rainbow_14))]) +
+    ggplot2::scale_color_manual(
+      values = discrete_rainbow_14[rep(
+        c(FALSE, TRUE),
+        length = length(discrete_rainbow_14)
+      )]
+    ) +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
       position = ggplot2::position_jitter(width = .05),
@@ -128,7 +146,9 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
   p_3
 
   p_4 <- deltas_3 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = value, colour = taste)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = taste, y = value, colour = taste)
+    ) +
     ggplot2::scale_x_discrete() +
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
@@ -153,24 +173,14 @@ plot_chasselas_variation <- function(input = system.file("extdata", "chasselas.t
 
   cascade:::check_export_dir(output_jury)
   cascade:::check_export_dir(output_session)
-  ggpubr::ggarrange(p_1,
-    p_2,
-    nrow = 2,
-    labels = "AUTO",
-    align = "hv"
-  ) |>
+  ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>
     ggplot2::ggsave(
       filename = output_jury,
       width = 9,
       height = 12
     )
 
-  ggpubr::ggarrange(p_3,
-    p_4,
-    nrow = 2,
-    labels = "AUTO",
-    align = "hv"
-  ) |>
+  ggpubr::ggarrange(p_3, p_4, nrow = 2, labels = "AUTO", align = "hv") |>
     ggplot2::ggsave(
       filename = output_session,
       width = 9,

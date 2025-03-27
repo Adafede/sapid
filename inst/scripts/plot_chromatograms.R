@@ -18,12 +18,14 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_chromatograms <- function(input_dir = "./data/20210619",
-                               input_groups = system.file("extdata", "groups.tsv", package = "sapid"),
-                               raw_index = 7,
-                               fractions_indices = 12:65,
-                               xlim = c(2, 25),
-                               output = "./data/figures/figure_chromatograms.pdf") {
+plot_chromatograms <- function(
+  input_dir = "./data/20210619",
+  input_groups = system.file("extdata", "groups.tsv", package = "sapid"),
+  raw_index = 7,
+  fractions_indices = 12:65,
+  xlim = c(2, 25),
+  output = "./data/figures/figure_chromatograms.pdf"
+) {
   files <- input_dir |>
     list.files(
       path = ,
@@ -57,8 +59,10 @@ plot_chromatograms <- function(input_dir = "./data/20210619",
     tidytable::bind_rows()
 
   data_full <- data_raw |>
-    tidytable::bind_rows(data_fractions |>
-      tidytable::mutate(intensity = -1 * intensity)) |>
+    tidytable::bind_rows(
+      data_fractions |>
+        tidytable::mutate(intensity = -1 * intensity)
+    ) |>
     tidytable::mutate(
       id = id |>
         gsub(pattern = ".*_M_", replacement = "") |>
@@ -66,12 +70,16 @@ plot_chromatograms <- function(input_dir = "./data/20210619",
     ) |>
     tidytable::full_join(
       groups |>
-        tidytable::mutate(id = rowname |>
-          as.character()),
+        tidytable::mutate(
+          id = rowname |>
+            as.character()
+        ),
       by = c("id" = "id")
     )
   plot <- data_full |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = time, y = intensity, color = id)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = time, y = intensity, color = id)
+    ) +
     ggplot2::geom_line(size = 0.2, show.legend = FALSE) +
     ggplot2::scale_color_manual(
       values = data_full |>

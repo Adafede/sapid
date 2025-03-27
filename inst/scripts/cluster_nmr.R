@@ -29,76 +29,78 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-cluster_nmr <- function(nmr_dir = "./data/10043",
-                        output_figure = "./data/figures/figure_nmr.pdf",
-                        output_groups = "./inst/extdata/groups.tsv",
-                        experiment_raw = "proton_00",
-                        experiment_ref = "proton_98",
-                        experiments_fractions = c(
-                          "proton_17",
-                          "proton_18",
-                          "proton_19",
-                          "proton_20",
-                          "proton_21",
-                          "proton_22",
-                          "proton_23",
-                          "proton_24",
-                          "proton_25",
-                          "proton_26",
-                          "proton_27",
-                          "proton_28",
-                          "proton_29",
-                          "proton_30",
-                          "proton_31",
-                          "proton_32",
-                          "proton_33",
-                          "proton_34",
-                          "proton_35",
-                          "proton_36",
-                          "proton_37",
-                          "proton_38",
-                          "proton_39",
-                          "proton_40",
-                          "proton_41",
-                          "proton_42",
-                          "proton_43",
-                          "proton_44",
-                          "proton_45",
-                          "proton_46",
-                          "proton_47",
-                          "proton_48",
-                          "proton_50",
-                          "proton_51",
-                          "proton_52",
-                          "proton_53",
-                          "proton_54",
-                          "proton_55",
-                          "proton_56",
-                          "proton_57",
-                          "proton_58",
-                          "proton_59",
-                          "proton_60",
-                          "proton_61",
-                          "proton_62",
-                          "proton_63",
-                          "proton_64",
-                          "proton_65",
-                          "proton_66",
-                          "proton_67",
-                          "proton_68",
-                          "proton_69",
-                          "proton_70",
-                          "proton_71"
-                        ),
-                        experiments_to_fix = c("proton_69", "proton_70", "proton_71"),
-                        k = 7,
-                        peak_width_ppm = 0.01,
-                        ppm_min = 0,
-                        ppm_max = 14.85,
-                        area_min = 0,
-                        range_exclude_area = c(2.5, 2.6),
-                        range_without_peaks = c(0, 0.4),
-                        ylim = c(0, 5E10)) {
+cluster_nmr <- function(
+  nmr_dir = "./data/10043",
+  output_figure = "./data/figures/figure_nmr.pdf",
+  output_groups = "./inst/extdata/groups.tsv",
+  experiment_raw = "proton_00",
+  experiment_ref = "proton_98",
+  experiments_fractions = c(
+    "proton_17",
+    "proton_18",
+    "proton_19",
+    "proton_20",
+    "proton_21",
+    "proton_22",
+    "proton_23",
+    "proton_24",
+    "proton_25",
+    "proton_26",
+    "proton_27",
+    "proton_28",
+    "proton_29",
+    "proton_30",
+    "proton_31",
+    "proton_32",
+    "proton_33",
+    "proton_34",
+    "proton_35",
+    "proton_36",
+    "proton_37",
+    "proton_38",
+    "proton_39",
+    "proton_40",
+    "proton_41",
+    "proton_42",
+    "proton_43",
+    "proton_44",
+    "proton_45",
+    "proton_46",
+    "proton_47",
+    "proton_48",
+    "proton_50",
+    "proton_51",
+    "proton_52",
+    "proton_53",
+    "proton_54",
+    "proton_55",
+    "proton_56",
+    "proton_57",
+    "proton_58",
+    "proton_59",
+    "proton_60",
+    "proton_61",
+    "proton_62",
+    "proton_63",
+    "proton_64",
+    "proton_65",
+    "proton_66",
+    "proton_67",
+    "proton_68",
+    "proton_69",
+    "proton_70",
+    "proton_71"
+  ),
+  experiments_to_fix = c("proton_69", "proton_70", "proton_71"),
+  k = 7,
+  peak_width_ppm = 0.01,
+  ppm_min = 0,
+  ppm_max = 14.85,
+  area_min = 0,
+  range_exclude_area = c(2.5, 2.6),
+  range_without_peaks = c(0, 0.4),
+  ylim = c(0, 5E10)
+) {
   dirnames <- nmr_dir |>
     dir(
       pattern = "proton_\\d",
@@ -135,7 +137,9 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
   if (!is.null(experiments_to_fix)) {
     message("Correcting experiments to fix")
     for (experiment_to_fix in experiments_to_fix) {
-      dataset_corrected$axis[[experiment_to_fix]][[1]] <- dataset_corrected$axis[[experiment_ref]][[1]]
+      dataset_corrected$axis[[experiment_to_fix]][[
+        1
+      ]] <- dataset_corrected$axis[[experiment_ref]][[1]]
     }
   }
 
@@ -153,7 +157,9 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
 
   message("Interpolating experiments")
   dataset_interpolated <- dataset_autophased |>
-    AlpsNMR::nmr_interpolate_1D(axis = c(min = ppm_min, max = ppm_max, by = ppm_res))
+    AlpsNMR::nmr_interpolate_1D(
+      axis = c(min = ppm_min, max = ppm_max, by = ppm_res)
+    )
 
   message("Excluding ppm regions")
   dataset_excluded <- dataset_interpolated |>
@@ -208,21 +214,26 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
     tibble::rownames_to_column() |>
     tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
     tidytable::mutate(
-      name = name |> gsub(
-        pattern = "ppm_",
-        replacement = "",
-        fixed = TRUE
-      ) |>
+      name = name |>
+        gsub(
+          pattern = "ppm_",
+          replacement = "",
+          fixed = TRUE
+        ) |>
         gsub(pattern = "\\.\\.\\..*", replacement = "") |>
         as.numeric()
     ) |>
     tidytable::filter(!is.na(name)) |>
     tidytable::filter(value > area_min) |>
-    tidytable::filter(name < range_exclude_area[1] |
-      name > range_exclude_area[2]) |>
+    tidytable::filter(
+      name < range_exclude_area[1] |
+        name > range_exclude_area[2]
+    ) |>
     tidytable::group_by(rowname, name) |>
-    tidytable::summarize(value = value |>
-      sqrt()) |>
+    tidytable::summarize(
+      value = value |>
+        sqrt()
+    ) |>
     tidytable::ungroup() |>
     tidytable::pivot_wider(names_from = name, values_from = value) |>
     tibble::column_to_rownames()
@@ -245,8 +256,10 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
   groups <- dend_attr[names(dend_attr) == "lab.col"] |>
     data.frame() |>
     tidytable::rename(group = 1) |>
-    tidytable::mutate(group = group |>
-      as.character())
+    tidytable::mutate(
+      group = group |>
+        as.character()
+    )
   groups$rowname <- experiments_fractions |>
     gsub(
       pattern = "proton_",
@@ -270,18 +283,22 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
     #                     max()) |>
     # tidytable::mutate(value = value / max) |>
     tidytable::ungroup() |>
-    tidytable::mutate(name = name |>
-      as.numeric() |>
-      round(digits = 3)) |>
+    tidytable::mutate(
+      name = name |>
+        as.numeric() |>
+        round(digits = 3)
+    ) |>
     tidytable::group_by(rowname, name) |>
     tidytable::summarize(value = sum(value)) |>
     tidytable::ungroup() |>
-    tidytable::mutate(rowname = rowname |>
-      gsub(
-        pattern = "proton_",
-        replacement = "",
-        fixed = TRUE
-      )) |>
+    tidytable::mutate(
+      rowname = rowname |>
+        gsub(
+          pattern = "proton_",
+          replacement = "",
+          fixed = TRUE
+        )
+    ) |>
     tidytable::inner_join(groups) |>
     data.frame()
 
@@ -338,13 +355,15 @@ cluster_nmr <- function(nmr_dir = "./data/10043",
   plot_1 <- dend |>
     dendextend::as.ggdend() |>
     ggplot2::ggplot(horiz = TRUE, mapping = ggplot2::aes(size = 0.5)) +
-    ggplot2::theme(plot.margin = ggplot2::margin(
-      t = 75,
-      r = 0,
-      b = 2,
-      l = 0,
-      "pt"
-    ))
+    ggplot2::theme(
+      plot.margin = ggplot2::margin(
+        t = 75,
+        r = 0,
+        b = 2,
+        l = 0,
+        "pt"
+      )
+    )
   plot_1
 
   cascade:::check_export_dir(output_figure)

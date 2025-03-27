@@ -19,13 +19,27 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-                            dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package = "sapid"),
-                            dictionary_napping_path = system.file("extdata", "dictionary_napping.tsv", package = "sapid"),
-                            dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package = "sapid"),
-                            sessions = seq(1, 8),
-                            output_coordinates = "inst/extdata/napping_coordinates.tsv",
-                            output_descriptors = "inst/extdata/napping_descriptors.tsv") {
+prepare_napping <- function(
+  input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
+  dictionary_generic_path = system.file(
+    "extdata",
+    "dictionary_generic.tsv",
+    package = "sapid"
+  ),
+  dictionary_napping_path = system.file(
+    "extdata",
+    "dictionary_napping.tsv",
+    package = "sapid"
+  ),
+  dictionary_specific_path = system.file(
+    "extdata",
+    "dictionary_specific.tsv",
+    package = "sapid"
+  ),
+  sessions = seq(1, 8),
+  output_coordinates = "inst/extdata/napping_coordinates.tsv",
+  output_descriptors = "inst/extdata/napping_descriptors.tsv"
+) {
   session_infos <- sessions |>
     purrr::map(.f = get_session_info)
 
@@ -54,8 +68,10 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     ) |>
     tidytable::bind_rows() |>
     tidytable::mutate(fraction = paste0("fraction_", Produit)) |>
-    tidytable::mutate(value = value |>
-      toupper()) |>
+    tidytable::mutate(
+      value = value |>
+        toupper()
+    ) |>
     tidytable::select(
       fraction = fraction,
       session = session,
@@ -70,7 +86,10 @@ prepare_napping <- function(input_dir = "~/switchdrive/SAPERE/02_raw-data/inhous
     tidytable::arrange(session) |>
     tidytable::fwrite(file = output_descriptors, sep = "\t")
 
-  return(list(coordinates = output_coordinates, descriptors = output_descriptors))
+  return(list(
+    coordinates = output_coordinates,
+    descriptors = output_descriptors
+  ))
 }
 
 prepare_napping()

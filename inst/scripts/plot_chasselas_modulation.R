@@ -14,40 +14,47 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.tsv", package = "sapid"),
-                                      output = "./data/figures/figure_modulation.pdf") {
+plot_chasselas_modulation <- function(
+  input = system.file("extdata", "chasselas.tsv", package = "sapid"),
+  output = "./data/figures/figure_modulation.pdf"
+) {
   deltas <- input |>
     tidytable::fread() |>
     tidytable::pivot_wider(names_from = product, values_from = value) |>
     tidytable::mutate(delta = product_2after - product_1before)
 
   deltas_1 <- deltas |>
-    tidytable::filter(taste %in% c("sourness", "bitterness", "sweetness", "saltiness"))
+    tidytable::filter(
+      taste %in% c("sourness", "bitterness", "sweetness", "saltiness")
+    )
 
   deltas_2 <- deltas |>
     tidytable::filter(
-      taste %in% c(
-        "fatness, volume",
-        "balance",
-        "freshness",
-        "persistency",
-        "mouthwatering"
-      )
+      taste %in%
+        c(
+          "fatness, volume",
+          "balance",
+          "freshness",
+          "persistency",
+          "mouthwatering"
+        )
     )
-
 
   deltas_3 <- deltas_1 |>
     tidytable::bind_rows(deltas_2) |>
     tidytable::rowwise() |>
-    tidytable::mutate(group = switch(as.character(date),
-      "2021-06-07" = "Fractions 17-21",
-      "2021-04-19" = "Fractions 22-31",
-      "2021-05-17" = "Fractions 32-39",
-      "2021-05-31" = "Fractions 40-45",
-      "2021-04-26" = "Fractions 46-54",
-      "2021-04-12" = "Fractions 55-63",
-      "2021-05-10" = "Fractions 64-71"
-    )) |>
+    tidytable::mutate(
+      group = switch(
+        as.character(date),
+        "2021-06-07" = "Fractions 17-21",
+        "2021-04-19" = "Fractions 22-31",
+        "2021-05-17" = "Fractions 32-39",
+        "2021-05-31" = "Fractions 40-45",
+        "2021-04-26" = "Fractions 46-54",
+        "2021-04-12" = "Fractions 55-63",
+        "2021-05-10" = "Fractions 64-71"
+      )
+    ) |>
     dplyr::ungroup()
 
   # p_values_wilcox <- deltas_3 |>
@@ -82,8 +89,15 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
     tidytable::left_join(p_values_sign)
 
   p_1 <- deltas_4 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = group, y = delta, colour = group)) +
-    ggplot2::scale_color_manual(values = discrete_rainbow_14[rep(c(FALSE, TRUE), length = length(discrete_rainbow_14))]) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = group, y = delta, colour = group)
+    ) +
+    ggplot2::scale_color_manual(
+      values = discrete_rainbow_14[rep(
+        c(FALSE, TRUE),
+        length = length(discrete_rainbow_14)
+      )]
+    ) +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
       position = ggplot2::position_jitter(width = .05),
@@ -115,7 +129,9 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
   p_1
 
   p_2 <- deltas_4 |>
-    ggplot2::ggplot(mapping = ggplot2::aes(x = taste, y = delta, colour = taste)) +
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = taste, y = delta, colour = taste)
+    ) +
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
@@ -148,12 +164,7 @@ plot_chasselas_modulation <- function(input = system.file("extdata", "chasselas.
   p_2
 
   cascade:::check_export_dir(output)
-  ggpubr::ggarrange(p_1,
-    p_2,
-    nrow = 2,
-    labels = "AUTO",
-    align = "hv"
-  ) |>
+  ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>
     ggplot2::ggsave(
       filename = output,
       width = 9,

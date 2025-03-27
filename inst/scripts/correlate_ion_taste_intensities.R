@@ -19,26 +19,28 @@ message("Contributors: \n", "...")
 #' @return NULL
 #'
 #' @examples NULL
-correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmine/fractions.csv",
-                                            input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
-                                            output = "./data/correlations.tsv",
-                                            # tastes = c(
-                                            #   "BITTER",
-                                            #   "FATTY",
-                                            #   "ACID",
-                                            #   "VOLUME",
-                                            #   "FRESH",
-                                            #   "ASTRINGENT",
-                                            #   "MOUTHFILLING",
-                                            #   "UMAMI",
-                                            #   "SALTY",
-                                            #   "SWEET",
-                                            #   "PUNGENT"
-                                            # ),
-                                            min_jury = 2L,
-                                            min_area_ion = 1L,
-                                            imputation_factor = 0.5,
-                                            widths = 5:9) {
+correlate_ion_taste_intensities <- function(
+  input_ions = "./data/fractions_mzmine/fractions.csv",
+  input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
+  output = "./data/correlations.tsv",
+  # tastes = c(
+  #   "BITTER",
+  #   "FATTY",
+  #   "ACID",
+  #   "VOLUME",
+  #   "FRESH",
+  #   "ASTRINGENT",
+  #   "MOUTHFILLING",
+  #   "UMAMI",
+  #   "SALTY",
+  #   "SWEET",
+  #   "PUNGENT"
+  # ),
+  min_jury = 2L,
+  min_area_ion = 1L,
+  imputation_factor = 0.5,
+  widths = 5:9
+) {
   min_width <- widths |>
     min()
   # max_width <- widths |>
@@ -63,25 +65,31 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
     ) |>
     tidytable::group_by(id) |>
     # tidytable::slice_max(order_by = value, n = max_width, with_ties = FALSE) |>
-    tidytable::mutate(non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))) |>
+    tidytable::mutate(
+      non_na_count = with(rle(!is.na(value)), rep(lengths * values, lengths))
+    ) |>
     tidytable::ungroup() |>
     tidytable::filter(non_na_count >= min_width) |>
     tidytable::filter(value >= min_area_ion) |>
-    tidytable::mutate(value = value |>
-      tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
+    tidytable::mutate(
+      value = value |>
+        tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))
+    ) |>
     tidytable::select(
       fraction = name,
       id_ion = id,
       intensity_ion = value
     ) |>
     tidytable::distinct() |>
-    tidytable::mutate(fraction = fraction |>
-      gsub(
-        pattern = "fraction_",
-        replacement = "",
-        fixed = TRUE
-      ) |>
-      as.integer()) |>
+    tidytable::mutate(
+      fraction = fraction |>
+        gsub(
+          pattern = "fraction_",
+          replacement = "",
+          fixed = TRUE
+        ) |>
+        as.integer()
+    ) |>
     tidytable::arrange(fraction)
 
   df_taste_intensities <- input_tastes |>
@@ -89,28 +97,31 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
     tidytable::mutate(tidytable::across(
       tidytable::everything(),
       .fns = function(x) {
-        tidytable::if_else(condition = x == 0,
-          true = NA,
-          false = x
-        )
+        tidytable::if_else(condition = x == 0, true = NA, false = x)
       }
     )) |>
-    tidytable::mutate(value = value |>
-      tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))) |>
+    tidytable::mutate(
+      value = value |>
+        tidytable::replace_na(imputation_factor * min(value, na.rm = TRUE))
+    ) |>
     # tidytable::filter(taste %in% tastes) |>
     tidytable::group_by(fraction, taste) |>
-    tidytable::mutate(sum = value |>
-      sum()) |>
+    tidytable::mutate(
+      sum = value |>
+        sum()
+    ) |>
     tidytable::ungroup() |>
     tidytable::select(fraction, id_taste = taste, intensity_taste = sum) |>
     tidytable::distinct() |>
-    tidytable::mutate(fraction = fraction |>
-      gsub(
-        pattern = "fraction_",
-        replacement = "",
-        fixed = TRUE
-      ) |>
-      as.integer()) |>
+    tidytable::mutate(
+      fraction = fraction |>
+        gsub(
+          pattern = "fraction_",
+          replacement = "",
+          fixed = TRUE
+        ) |>
+        as.integer()
+    ) |>
     tidytable::arrange(fraction)
 
   fractions <- df_ion_intensities$fraction |>
@@ -143,19 +154,29 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
       ))
     }
 
-    if (length(unique(x[is.finite(x)])) <= 1 ||
-      length(unique(y[is.finite(y)])) <= 1) {
-      warning("All values in x or y are identical. Defaulting to Kendall correlation.")
+    if (
+      length(unique(x[is.finite(x)])) <= 1 ||
+        length(unique(y[is.finite(y)])) <= 1
+    ) {
+      warning(
+        "All values in x or y are identical. Defaulting to Kendall correlation."
+      )
       method <- "kendall"
     } else if (length(x) < 3 || length(y) < 3) {
-      warning("Sample size too small for Shapiro-Wilk test. Defaulting to Kendall correlation.")
+      warning(
+        "Sample size too small for Shapiro-Wilk test. Defaulting to Kendall correlation."
+      )
       method <- "kendall"
     } else if (length(x) > 5000 || length(y) > 5000) {
-      warning("Sample size too large for Shapiro-Wilk test. Defaulting to Kendall correlation.")
+      warning(
+        "Sample size too large for Shapiro-Wilk test. Defaulting to Kendall correlation."
+      )
       method <- "kendall"
     } else {
-      if (stats::shapiro.test(x)$p.value > 0.05 &&
-        stats::shapiro.test(y)$p.value > 0.05) {
+      if (
+        stats::shapiro.test(x)$p.value > 0.05 &&
+          stats::shapiro.test(y)$p.value > 0.05
+      ) {
         method <- "pearson"
       } else {
         method <- "kendall"
@@ -171,20 +192,26 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
     ))
   }
 
-  correlate_intensities <- function(taste,
-                                    fractions_lists,
-                                    df_ion_intensities,
-                                    df_taste_intensities) {
+  correlate_intensities <- function(
+    taste,
+    fractions_lists,
+    df_ion_intensities,
+    df_taste_intensities
+  ) {
     results_list <- fractions_lists |>
       purrr::map(
-        function(taste,
-                 fractions_list,
-                 df_taste_intensities,
-                 df_ion_intensities) {
+        function(
+          taste,
+          fractions_list,
+          df_taste_intensities,
+          df_ion_intensities
+        ) {
           df <- df_taste_intensities |>
             tidytable::filter(id_taste == taste) |>
-            tidytable::inner_join(df_ion_intensities |>
-              tidytable::filter(fraction %in% fractions_list)) |>
+            tidytable::inner_join(
+              df_ion_intensities |>
+                tidytable::filter(fraction %in% fractions_list)
+            ) |>
             tidytable::select(-id_taste)
 
           if (nrow(df) == 0) {
@@ -196,7 +223,10 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
           }
 
           df <- df |>
-            tidytable::pivot_wider(names_from = id_ion, values_from = intensity_ion) |>
+            tidytable::pivot_wider(
+              names_from = id_ion,
+              values_from = intensity_ion
+            ) |>
             tidytable::select(-1) |>
             data.frame()
 
@@ -208,18 +238,22 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
             return(NULL)
           }
 
-          correlations <- df[df[2:ncol(df)] |>
-            purrr::map_lgl(
-              .f = function(x) {
-                all(!is.na(x))
-              }
-            ) |>
-            which() |>
-            names()] |>
+          correlations <- df[
+            df[2:ncol(df)] |>
+              purrr::map_lgl(
+                .f = function(x) {
+                  all(!is.na(x))
+                }
+              ) |>
+              which() |>
+              names()
+          ] |>
             as.list() |>
             purrr::map(
-              .f = function(ion_intensity,
-                            taste_intensity = df$intensity_taste) {
+              .f = function(
+                ion_intensity,
+                taste_intensity = df$intensity_taste
+              ) {
                 auto_correlate(x = ion_intensity, y = taste_intensity)
               }
             )
@@ -271,18 +305,22 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
       fractions = NA_character_,
       id_ion = NA_integer_
     )
-    filtered_results <- results_list[results_list |>
-      purrr::map_lgl(
-        .f = function(x) {
-          !is.null(x)
-        }
-      )]
+    filtered_results <- results_list[
+      results_list |>
+        purrr::map_lgl(
+          .f = function(x) {
+            !is.null(x)
+          }
+        )
+    ]
 
     if (length(filtered_results) == 0) {
       filtered_results <- empty_results
     }
-    return(filtered_results |>
-      tidytable::bind_rows())
+    return(
+      filtered_results |>
+        tidytable::bind_rows()
+    )
   }
 
   fractions_lists <- widths |>
@@ -300,10 +338,12 @@ correlate_ion_taste_intensities <- function(input_ions = "./data/fractions_mzmin
 
   correlations <- tastes |>
     purrr::map(
-      .f = function(taste,
-                    fractions_lists,
-                    df_ion_intensities,
-                    df_taste_intensities) {
+      .f = function(
+        taste,
+        fractions_lists,
+        df_ion_intensities,
+        df_taste_intensities
+      ) {
         correlate_intensities(
           taste = taste,
           fractions_lists = fractions_lists,

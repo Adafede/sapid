@@ -61,6 +61,6 @@ Collate:
     'sapid-package.R'
 VignetteBuilder:
     knitr
-biocViews: computational metabolomics, natural extracts, taste
-X-schema.org-keywords: computational metabolomics, natural extracts, taste
+biocViews: computationalMetabolomics, naturalExtracts, taste
+X-schema.org-keywords: computationalMetabolomics, naturalExtracts, taste
 Language: en-US

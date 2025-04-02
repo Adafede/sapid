@@ -376,8 +376,8 @@
     },
     "SystemRequirements": null
   },
-  "keywords": ["computationalmetabolomics", "naturalextracts", "taste"],
-  "fileSize": "1063.782KB",
+  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste"],
+  "fileSize": "1063.778KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

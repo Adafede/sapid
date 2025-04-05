@@ -377,11 +377,11 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste"],
-  "fileSize": "1063.778KB",
+  "fileSize": "1063.828KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2024",
+      "datePublished": "2025",
       "author": [
         {
           "@type": "Person",
@@ -429,16 +429,16 @@
         }
       ],
       "name": "SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.",
-      "identifier": "10.1101/2025.01.11.628830",
-      "url": "https://doi.org/10.1101/2025.01.11.628830",
-      "@id": "https://doi.org/10.1101/2025.01.11.628830",
-      "sameAs": "https://doi.org/10.1101/2025.01.11.628830",
+      "identifier": "10.1016/j.crfs.2025.101043",
+      "url": "https://doi.org/10.1016/j.crfs.2025.101043",
+      "@id": "https://doi.org/10.1016/j.crfs.2025.101043",
+      "sameAs": "https://doi.org/10.1016/j.crfs.2025.101043",
       "isPartOf": {
         "@type": "PublicationIssue",
         "datePublished": "2025",
         "isPartOf": {
           "@type": ["PublicationVolume", "Periodical"],
-          "name": "bioRxiv"
+          "name": "Current Research in Food Science"
         }
       }
     }

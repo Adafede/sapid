@@ -39,7 +39,7 @@ install.packages(
 
 ### SAPID
 
-Preprint: <https://doi.org/10.1101/2025.01.11.628830>
+Article: <https://doi.org/10.1016/j.crfs.2025.101043>
 
 According to which steps you used, please give credit to the authors of
 the tools/resources used.

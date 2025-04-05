@@ -37,3 +37,24 @@ keywords:
 - computationalMetabolomics
 - naturalExtracts
 - taste
+references:
+- type: article
+  title: 'SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.'
+  authors:
+  - family-names: Rutz
+    given-names: Adriano
+    orcid: https://orcid.org/0000-0003-0443-9902
+  - family-names: Deneulin
+    given-names: Pascale
+    orcid: https://orcid.org/0000-0001-5398-4419
+  - family-names: Tonutti
+    given-names: Ivano
+  - family-names: Bach
+    given-names: Benoit
+    orcid: https://orcid.org/0000-0001-8677-4506
+  - family-names: Wolfender
+    given-names: Jean-Luc
+    orcid: https://orcid.org/0000-0002-0125-952X
+  journal: Current Research in Food Science
+  year: '2025'
+  url: https://doi.org/10.1016/j.crfs.2025.101043

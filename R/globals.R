@@ -1,0 +1,24 @@
+utils::globalVariables(
+  c(
+    "fraction",
+    "intensity",
+    "jury",
+    "n",
+    "name",
+    "newValue",
+    "original",
+    "ProductName",
+    "Produit",
+    "session",
+    "sum_taste",
+    "taste",
+    "taste_harmonized",
+    "taste_original",
+    "value",
+    "value_2",
+    "value_31",
+    "value_32",
+    "value_4",
+    "value_5"
+  )
+)

@@ -48,18 +48,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
       "provider": {
@@ -377,7 +365,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste"],
-  "fileSize": "1063.828KB",
+  "fileSize": "1064.153KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

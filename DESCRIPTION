@@ -40,7 +40,6 @@ Remotes:
     adafede/cascade
 Suggests: 
     BiocManager,
-    knitr,
     lifecycle,
     R.utils,
     spelling,
@@ -54,13 +53,12 @@ RoxygenNote: 7.3.2
 Collate:
     'colors.R'
     'get_session_info.R'
+    'globals.R'
     'harmonize_terms.R'
     'harmonize_terms_df.R'
     'load_consistent_profiles.R'
     'load_session.R'
     'sapid-package.R'
-VignetteBuilder:
-    knitr
 biocViews: computationalMetabolomics, naturalExtracts, taste
 X-schema.org-keywords: computationalMetabolomics, naturalExtracts, taste
 Language: en-US

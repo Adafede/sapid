@@ -13,9 +13,9 @@ URL: https://github.com/adafede/sapid,
     https://adafede.github.io/sapid
 BugReports: https://github.com/adafede/sapid/issues
 Depends:
-    R (>= 4.3.0)
+    R (>= 4.4.0)
 Imports:
-    AlpsNMR (>= 4.4.0),
+    AlpsNMR (>= 4.8.0),
     cascade (>= 0.0.0.9001),
     dendextend (>= 1.19.0),
     FactoMineR (>= 2.11),

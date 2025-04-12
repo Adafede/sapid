@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.3 (2025-02-28)",
+  "runtimePlatform": "R version 4.5.0 (2025-04-11)",
   "author": [
     {
       "@type": "Person",
@@ -101,13 +101,13 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.3.0"
+      "version": ">= 4.4.0"
     },
     "2": {
       "@type": "SoftwareApplication",
       "identifier": "AlpsNMR",
       "name": "AlpsNMR",
-      "version": ">= 4.4.0",
+      "version": ">= 4.8.0",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",

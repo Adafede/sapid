@@ -8,12 +8,10 @@ figure:
 
 template:
   bootstrap: 5
-  light-switch: true
+  light-switch: yes
   opengraph:
     image:
       src: man/figures/logo.svg
-      alt: "SAPID"
-    twitter:
-      creator: "@adafede"
+      alt: SAPID
 
 url: https://adafede.github.io/sapid

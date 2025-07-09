@@ -53,3 +53,6 @@ data/
 # MacOS
 .DS_Store
 docs
+altdoc/freeze.rds
+_quarto/*
+!_quarto/_freeze/

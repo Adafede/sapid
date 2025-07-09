@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # SAPID <img src='https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg' align="right" height="139" />
 
@@ -8,7 +9,6 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml)
-[![R-Universe](https://adafede.r-universe.dev/badges/sapid)](https://adafede.r-universe.dev/sapid)
 [![Codecov test
 coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg)](https://doi.org/10.5281/zenodo.14616395)
@@ -52,10 +52,10 @@ General: <https://doi.org/10.1038/s41587-023-01690-2>
 
 General: <https://doi.org/10.1038/s41592-019-0344-8>
 
-- *CSI:FingerId*: <https://doi.org/10.1073/pnas.1509788112>
-- *ZODIAC*: <https://doi.org/10.1038/s42256-020-00234-6>
-- *CANOPUS*: <https://doi.org/10.1038/s41587-020-0740-8>
-- *COSMIC*: <https://doi.org/10.1038/s41587-021-01045-9>
+-   *CSI:FingerId*: <https://doi.org/10.1073/pnas.1509788112>
+-   *ZODIAC*: <https://doi.org/10.1038/s42256-020-00234-6>
+-   *CANOPUS*: <https://doi.org/10.1038/s41587-020-0740-8>
+-   *COSMIC*: <https://doi.org/10.1038/s41587-021-01045-9>
 
 ### LOTUS
 
@@ -80,9 +80,9 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 ### Others
 
-- AlpsNMR: <https://doi.org/10.1093/bioinformatics/btaa022>
-- FactoMineR: <https://doi.org/10.18637/jss.v025.i01>
-- SensoMineR: <https://cran.r-project.org/package=SensoMineR>
-- The *RforMassSpectrometry* packages suite for MS2 matching:
-  <https://doi.org/10.3390/metabo12020173>
-- NPClassifier: <https://doi.org/10.1021/acs.jnatprod.1c00399>
+-   AlpsNMR: <https://doi.org/10.1093/bioinformatics/btaa022>
+-   FactoMineR: <https://doi.org/10.18637/jss.v025.i01>
+-   SensoMineR: <https://cran.r-project.org/package=SensoMineR>
+-   The *RforMassSpectrometry* packages suite for MS2 matching:
+    <https://doi.org/10.3390/metabo12020173>
+-   NPClassifier: <https://doi.org/10.1021/acs.jnatprod.1c00399>

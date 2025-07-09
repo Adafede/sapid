@@ -38,10 +38,11 @@ Imports:
 Remotes:
     adafede/cascade
 Suggests: 
-    BiocManager,
-    lifecycle,
-    R.utils,
-    spelling,
+    altdoc (>= 0.5.0),
+    BiocManager (>= 1.30.25),
+    lifecycle (>= 1.0.4),
+    R.utils (>= 2.13.0),
+    spelling (>= 2.3.1),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8

@@ -450,6 +450,6 @@
   ],
   "releaseNotes": "https://github.com/adafede/sapid/blob/master/NEWS.md",
   "readme": "https://github.com/Adafede/sapid/blob/main/README.md",
-  "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/adafede/sapid"],
+  "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check", "https://app.codecov.io/gh/adafede/sapid"],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

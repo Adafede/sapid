@@ -17,8 +17,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/adafede/sapid/actions/workflows/R-CMD-check/badge.svg)](https://github.com/adafede/sapid/actions/workflows/R-CMD-check)
 [![Codecov test coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
+[![r-universe badge](https://adafede.r-universe.dev/sapid/badges/version?&color=green&style=flat)](https://adafede.r-universe.dev/sapid)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg)](https://doi.org/10.5281/zenodo.14616395)
 <!-- badges: end -->
 

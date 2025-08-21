@@ -15,6 +15,7 @@ Depends:
     R (>= 4.4.0)
 Imports:
     AlpsNMR (>= 4.8.0),
+    BSDA (>= 1.2.2),
     cascade (>= 0.0.0.9001),
     dendextend (>= 1.19.1),
     FactoMineR (>= 2.12),

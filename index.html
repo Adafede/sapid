@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -351,9 +371,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tima" id="toc-tima" class="nav-link" data-scroll-target="#tima">TIMA</a></li>
   <li><a href="#others" id="toc-others" class="nav-link" data-scroll-target="#others">Others</a></li>
   </ul></li>
+  <li><a href="#additional-software-credits" id="toc-additional-software-credits" class="nav-link" data-scroll-target="#additional-software-credits">Additional software credits</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -420,19 +441,258 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="others" class="level3">
 <h3 class="anchored" data-anchor-id="others">Others</h3>
 <ul>
-<li>AlpsNMR: <a href="https://doi.org/10.1093/bioinformatics/btaa022" class="uri">https://doi.org/10.1093/bioinformatics/btaa022</a></li>
-<li>FactoMineR: <a href="https://doi.org/10.18637/jss.v025.i01" class="uri">https://doi.org/10.18637/jss.v025.i01</a></li>
-<li>SensoMineR: <a href="https://cran.r-project.org/package=SensoMineR" class="uri">https://cran.r-project.org/package=SensoMineR</a></li>
-<li>The <em>RforMassSpectrometry</em> packages suite for MS2 matching: <a href="https://doi.org/10.3390/metabo12020173" class="uri">https://doi.org/10.3390/metabo12020173</a></li>
 <li>NPClassifier: <a href="https://doi.org/10.1021/acs.jnatprod.1c00399" class="uri">https://doi.org/10.1021/acs.jnatprod.1c00399</a></li>
 </ul>
+</section>
+</section>
+<section id="additional-software-credits" class="level2">
+<h2 class="anchored" data-anchor-id="additional-software-credits">Additional software credits</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 67%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Package</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AlpsNMR</td>
+<td style="text-align: left;">4.10.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="AlpsNMR">Madrid-Gambin et al. (<a href="#ref-AlpsNMR" role="doc-biblioref">2020</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">base</td>
+<td style="text-align: left;">4.5.1</td>
+<td style="text-align: left;"><span class="citation" data-cites="base">R Core Team (<a href="#ref-base" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BiocManager</td>
+<td style="text-align: left;">1.30.26</td>
+<td style="text-align: left;"><span class="citation" data-cites="BiocManager">Morgan and Ramos (<a href="#ref-BiocManager" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BiocVersion</td>
+<td style="text-align: left;">3.21.1</td>
+<td style="text-align: left;"><span class="citation" data-cites="BiocVersion">Morgan (<a href="#ref-BiocVersion" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSDA</td>
+<td style="text-align: left;">1.2.2</td>
+<td style="text-align: left;"><span class="citation" data-cites="BSDA">Arnholt and Evans (<a href="#ref-BSDA" role="doc-biblioref">2023</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cascade</td>
+<td style="text-align: left;">0.0.0.9001</td>
+<td style="text-align: left;"><span class="citation" data-cites="cascade2023">Rutz and Wolfender (<a href="#ref-cascade2023" role="doc-biblioref">2023</a>)</span>; <span class="citation" data-cites="cascade2025">Rutz (<a href="#ref-cascade2025" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dendextend</td>
+<td style="text-align: left;">1.19.1</td>
+<td style="text-align: left;"><span class="citation" data-cites="dendextend">Galili (<a href="#ref-dendextend" role="doc-biblioref">2015</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FactoMineR</td>
+<td style="text-align: left;">2.12</td>
+<td style="text-align: left;"><span class="citation" data-cites="FactoMineR">Lê, Josse, and Husson (<a href="#ref-FactoMineR" role="doc-biblioref">2008</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ggbump</td>
+<td style="text-align: left;">0.1.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="ggbump">Sjoberg (<a href="#ref-ggbump" role="doc-biblioref">2020</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ggpubr</td>
+<td style="text-align: left;">0.6.1</td>
+<td style="text-align: left;"><span class="citation" data-cites="ggpubr">Kassambara (<a href="#ref-ggpubr" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ggraph</td>
+<td style="text-align: left;">2.2.1</td>
+<td style="text-align: left;"><span class="citation" data-cites="ggraph">Pedersen (<a href="#ref-ggraph" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ggrepel</td>
+<td style="text-align: left;">0.9.6</td>
+<td style="text-align: left;"><span class="citation" data-cites="ggrepel">Slowikowski (<a href="#ref-ggrepel" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">igraph</td>
+<td style="text-align: left;">2.1.4</td>
+<td style="text-align: left;"><span class="citation" data-cites="igraph2006">Csardi and Nepusz (<a href="#ref-igraph2006" role="doc-biblioref">2006</a>)</span>; <span class="citation" data-cites="igraph2025">Csárdi et al. (<a href="#ref-igraph2025" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">khroma</td>
+<td style="text-align: left;">1.16.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="khroma">Frerebeau (<a href="#ref-khroma" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">knitr</td>
+<td style="text-align: left;">1.50</td>
+<td style="text-align: left;"><span class="citation" data-cites="knitr2014">Xie (<a href="#ref-knitr2014" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="knitr2015">Xie (<a href="#ref-knitr2015" role="doc-biblioref">2015</a>)</span>; <span class="citation" data-cites="knitr2025">Xie (<a href="#ref-knitr2025" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NMRphasing</td>
+<td style="text-align: left;">1.0.7</td>
+<td style="text-align: left;"><span class="citation" data-cites="NMRphasing">Jiang (<a href="#ref-NMRphasing" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pkgload</td>
+<td style="text-align: left;">1.4.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="pkgload">Wickham et al. (<a href="#ref-pkgload" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rmarkdown</td>
+<td style="text-align: left;">2.29</td>
+<td style="text-align: left;"><span class="citation" data-cites="rmarkdown2018">Xie, Allaire, and Grolemund (<a href="#ref-rmarkdown2018" role="doc-biblioref">2018</a>)</span>; <span class="citation" data-cites="rmarkdown2020">Xie, Dervieux, and Riederer (<a href="#ref-rmarkdown2020" role="doc-biblioref">2020</a>)</span>; <span class="citation" data-cites="rmarkdown2024">Allaire et al. (<a href="#ref-rmarkdown2024" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scales</td>
+<td style="text-align: left;">1.4.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="scales">Wickham, Pedersen, and Seidel (<a href="#ref-scales" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SensoMineR</td>
+<td style="text-align: left;">1.28</td>
+<td style="text-align: left;"><span class="citation" data-cites="SensoMineR">Husson, Le, and Cadoret (<a href="#ref-SensoMineR" role="doc-biblioref">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stringi</td>
+<td style="text-align: left;">1.8.7</td>
+<td style="text-align: left;"><span class="citation" data-cites="stringi">Gagolewski (<a href="#ref-stringi" role="doc-biblioref">2022</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">testthat</td>
+<td style="text-align: left;">3.2.3</td>
+<td style="text-align: left;"><span class="citation" data-cites="testthat">Wickham (<a href="#ref-testthat" role="doc-biblioref">2011</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tidytable</td>
+<td style="text-align: left;">0.11.2</td>
+<td style="text-align: left;"><span class="citation" data-cites="tidytable">Fairbanks (<a href="#ref-tidytable" role="doc-biblioref">2024</a>)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tidyverse</td>
+<td style="text-align: left;">2.0.0</td>
+<td style="text-align: left;"><span class="citation" data-cites="tidyverse">Wickham et al. (<a href="#ref-tidyverse" role="doc-biblioref">2019</a>)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">treemapify</td>
+<td style="text-align: left;">2.5.6</td>
+<td style="text-align: left;"><span class="citation" data-cites="treemapify">Wilkins (<a href="#ref-treemapify" role="doc-biblioref">2023</a>)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
 
 
 </section>
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-rmarkdown2024" class="csl-entry" role="listitem">
+Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. 2024. <em><span class="nocase">rmarkdown</span>: Dynamic Documents for r</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
+</div>
+<div id="ref-BSDA" class="csl-entry" role="listitem">
+Arnholt, Alan T., and Ben Evans. 2023. <em><span>BSDA</span>: Basic Statistics and Data Analysis</em>. <a href="https://github.com/alanarnholt/BSDA">https://github.com/alanarnholt/BSDA</a>.
+</div>
+<div id="ref-igraph2006" class="csl-entry" role="listitem">
+Csardi, Gabor, and Tamas Nepusz. 2006. <span>“The Igraph Software Package for Complex Network Research.”</span> <em>InterJournal</em> Complex Systems: 1695. <a href="https://igraph.org">https://igraph.org</a>.
+</div>
+<div id="ref-igraph2025" class="csl-entry" role="listitem">
+Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio Zanini, Daniel Noom, and Kirill Müller. 2025. <em><span class="nocase">igraph</span>: Network Analysis and Visualization in r</em>. <a href="https://doi.org/10.5281/zenodo.7682609">https://doi.org/10.5281/zenodo.7682609</a>.
+</div>
+<div id="ref-tidytable" class="csl-entry" role="listitem">
+Fairbanks, Mark. 2024. <em><span class="nocase">tidytable</span>: Tidy Interface to <span>“<span class="nocase">data.table</span>”</span></em>. <a href="https://markfairbanks.github.io/tidytable/">https://markfairbanks.github.io/tidytable/</a>.
+</div>
+<div id="ref-khroma" class="csl-entry" role="listitem">
+Frerebeau, Nicolas. 2025. <em><span class="nocase">khroma: Colour Schemes for Scientific Data Visualization</span></em>. Pessac, France: Université Bordeaux Montaigne. <a href="https://doi.org/10.5281/zenodo.1472077">https://doi.org/10.5281/zenodo.1472077</a>.
+</div>
+<div id="ref-stringi" class="csl-entry" role="listitem">
+Gagolewski, Marek. 2022. <span>“<span class="nocase">stringi</span>: <span>F</span>ast and Portable Character String Processing in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 103 (2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.
+</div>
+<div id="ref-dendextend" class="csl-entry" role="listitem">
+Galili, Tal. 2015. <span>“<span class="nocase">dendextend</span>: An r Package for Visualizing, Adjusting, and Comparing Trees of Hierarchical Clustering.”</span> <em>Bioinformatics</em>. <a href="https://doi.org/10.1093/bioinformatics/btv428">https://doi.org/10.1093/bioinformatics/btv428</a>.
+</div>
+<div id="ref-SensoMineR" class="csl-entry" role="listitem">
+Husson, Francois, Sebastien Le, and Marine Cadoret. 2025. <em><span>SensoMineR</span>: Sensory Data Analysis</em>. <a href="http://sensominer.free.fr">http://sensominer.free.fr</a>.
+</div>
+<div id="ref-NMRphasing" class="csl-entry" role="listitem">
+Jiang, Aixiang. 2025. <em><span>NMRphasing</span>: Phase Error Correction and Baseline Correction for One Dimensional (<span>“<span>1D</span>”</span>) <span>“<span>NMR</span>”</span> Data</em>.
+</div>
+<div id="ref-ggpubr" class="csl-entry" role="listitem">
+Kassambara, Alboukadel. 2025. <em><span class="nocase">ggpubr</span>: <span>“<span class="nocase">ggplot2</span>”</span> Based Publication Ready Plots</em>. <a href="https://rpkgs.datanovia.com/ggpubr/">https://rpkgs.datanovia.com/ggpubr/</a>.
+</div>
+<div id="ref-FactoMineR" class="csl-entry" role="listitem">
+Lê, Sébastien, Julie Josse, and François Husson. 2008. <span>“<span>FactoMineR</span>: A Package for Multivariate Analysis.”</span> <em>Journal of Statistical Software</em> 25 (1): 1–18. <a href="https://doi.org/10.18637/jss.v025.i01">https://doi.org/10.18637/jss.v025.i01</a>.
+</div>
+<div id="ref-AlpsNMR" class="csl-entry" role="listitem">
+Madrid-Gambin, Francisco, Oller-Moreno, Sergio, Fernandez, Luis, Bartova, et al. 2020. <span>“<span>AlpsNMR</span>: An r Package for Signal Processing of Fully Untargeted NMR-Based Metabolomics.”</span> <em>Bioinformatics</em>, January. <a href="https://doi.org/10.1093/bioinformatics/btaa022">https://doi.org/10.1093/bioinformatics/btaa022</a>.
+</div>
+<div id="ref-BiocVersion" class="csl-entry" role="listitem">
+Morgan, Martin. 2024. <em><span>BiocVersion</span>: Set the Appropriate Version of Bioconductor Packages</em>. <a href="https://doi.org/10.18129/B9.bioc.BiocVersion">https://doi.org/10.18129/B9.bioc.BiocVersion</a>.
+</div>
+<div id="ref-BiocManager" class="csl-entry" role="listitem">
+Morgan, Martin, and Marcel Ramos. 2025. <em><span>BiocManager</span>: Access the Bioconductor Project Package Repository</em>. <a href="https://bioconductor.github.io/BiocManager/">https://bioconductor.github.io/BiocManager/</a>.
+</div>
+<div id="ref-ggraph" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin. 2024. <em><span class="nocase">ggraph</span>: An Implementation of Grammar of Graphics for Graphs and Networks</em>. <a href="https://ggraph.data-imaginist.com">https://ggraph.data-imaginist.com</a>.
+</div>
+<div id="ref-base" class="csl-entry" role="listitem">
+R Core Team. 2025. <em><span>R</span>: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-cascade2025" class="csl-entry" role="listitem">
+Rutz, Adriano. 2025. <em><span class="nocase">cascade</span>: Contextualizing Untargeted Annotation with Semi-Quantitative Charged Aerosol Detection for Pertinent Characterization of Natural Extracts</em>.
+</div>
+<div id="ref-cascade2023" class="csl-entry" role="listitem">
+Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.”</span> <em>Journal of Agricultural and Food Chemistry</em> 71 (46). <a href="https://doi.org/10.1021/acs.jafc.3c03099">https://doi.org/10.1021/acs.jafc.3c03099</a>.
+</div>
+<div id="ref-ggbump" class="csl-entry" role="listitem">
+Sjoberg, David. 2020. <em><span class="nocase">ggbump</span>: Bump Chart and Sigmoid Curves</em>.
+</div>
+<div id="ref-ggrepel" class="csl-entry" role="listitem">
+Slowikowski, Kamil. 2024. <em><span class="nocase">ggrepel</span>: Automatically Position Non-Overlapping Text Labels with <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://ggrepel.slowkow.com/">https://ggrepel.slowkow.com/</a>.
+</div>
+<div id="ref-testthat" class="csl-entry" role="listitem">
+Wickham, Hadley. 2011. <span>“<span class="nocase">testthat</span>: Get Started with Testing.”</span> <em>The R Journal</em> 3: 5–10. <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-pkgload" class="csl-entry" role="listitem">
+Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2024. <em><span class="nocase">pkgload</span>: Simulate Package Installation and Attach</em>. <a href="https://github.com/r-lib/pkgload">https://github.com/r-lib/pkgload</a>.
+</div>
+<div id="ref-scales" class="csl-entry" role="listitem">
+Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025. <em><span class="nocase">scales</span>: Scale Functions for Visualization</em>. <a href="https://scales.r-lib.org">https://scales.r-lib.org</a>.
+</div>
+<div id="ref-treemapify" class="csl-entry" role="listitem">
+Wilkins, David. 2023. <em><span class="nocase">treemapify</span>: Draw Treemaps in <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://wilkox.org/treemapify/">https://wilkox.org/treemapify/</a>.
+</div>
+<div id="ref-knitr2014" class="csl-entry" role="listitem">
+Xie, Yihui. 2014. <span>“<span class="nocase">knitr</span>: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC.
+</div>
+<div id="ref-knitr2015" class="csl-entry" role="listitem">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-knitr2025" class="csl-entry" role="listitem">
+———. 2025. <em><span class="nocase">knitr</span>: A General-Purpose Package for Dynamic Report Generation in <span>R</span></em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-rmarkdown2018" class="csl-entry" role="listitem">
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.
+</div>
+<div id="ref-rmarkdown2020" class="csl-entry" role="listitem">
+Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbook</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown-cookbook">https://bookdown.org/yihui/rmarkdown-cookbook</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

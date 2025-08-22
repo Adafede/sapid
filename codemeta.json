@@ -62,6 +62,32 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "BiocVersion",
+      "name": "BiocVersion",
+      "version": ">= 3.20.0",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/BiocVersion.html"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "grateful",
+      "name": "grateful",
+      "version": ">= 0.2.12",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=grateful"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
       "version": ">= 1.0.4",
@@ -135,12 +161,25 @@
     },
     "3": {
       "@type": "SoftwareApplication",
+      "identifier": "BSDA",
+      "name": "BSDA",
+      "version": ">= 1.2.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=BSDA"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
       "version": ">= 0.0.0.9001",
       "sameAs": "https://github.com/adafede/cascade"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "dendextend",
       "name": "dendextend",
@@ -153,7 +192,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dendextend"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
@@ -166,7 +205,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "forcats",
       "name": "forcats",
@@ -179,7 +218,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=forcats"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "ggbump",
       "name": "ggbump",
@@ -192,7 +231,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggbump"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -205,7 +244,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -218,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -231,7 +270,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -244,7 +283,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -257,7 +296,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -270,7 +309,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -283,7 +322,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -296,7 +335,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -309,7 +348,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -322,12 +361,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -340,7 +379,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "20": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -353,7 +392,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "21": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -366,7 +405,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -381,8 +420,8 @@
     },
     "SystemRequirements": null
   },
-  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste"],
-  "fileSize": "3372.635KB",
+  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts"],
+  "fileSize": "3391.494KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

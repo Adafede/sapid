@@ -98,7 +98,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | FactoMineR | 2.12 | Lê, Josse, and Husson (2008) |
 | ggbump | 0.1.0 | Sjoberg (2020) |
 | ggpubr | 0.6.1 | Kassambara (2025) |
-| ggraph | 2.2.1 | Pedersen (2024) |
+| ggraph | 2.2.2 | Pedersen (2025) |
 | ggrepel | 0.9.6 | Slowikowski (2024) |
 | igraph | 2.1.4 | Csardi and Nepusz (2006); Csárdi et al. (2025) |
 | khroma | 1.16.0 | Frerebeau (2025) |
@@ -239,7 +239,7 @@ Bioconductor Project Package Repository*.
 
 <div id="ref-ggraph" class="csl-entry">
 
-Pedersen, Thomas Lin. 2024. *<span class="nocase">ggraph</span>: An
+Pedersen, Thomas Lin. 2025. *<span class="nocase">ggraph</span>: An
 Implementation of Grammar of Graphics for Graphs and Networks*.
 <https://ggraph.data-imaginist.com>.
 

@@ -104,7 +104,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | khroma | 1.16.0 | Frerebeau (2025) |
 | knitr | 1.50 | Xie (2014); Xie (2015); Xie (2025) |
 | NMRphasing | 1.0.7 | Jiang (2025) |
-| pkgload | 1.4.0 | Wickham et al. (2024) |
+| pkgload | 1.4.1 | Wickham et al. (2025) |
 | rmarkdown | 2.29 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2024) |
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | SensoMineR | 1.28 | Husson, Le, and Cadoret (2025) |
@@ -305,7 +305,7 @@ Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 <div id="ref-pkgload" class="csl-entry">
 
-Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2024.
+Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2025.
 *<span class="nocase">pkgload</span>: Simulate Package Installation and
 Attach*. <https://github.com/r-lib/pkgload>.
 

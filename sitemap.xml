@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adafede.github.io/sapid/NEWS.html</loc>
-    <lastmod>2025-09-05T15:46:27.380Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/load_consistent_profiles.html</loc>
-    <lastmod>2025-09-05T15:46:29.400Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/harmonize_terms.html</loc>
-    <lastmod>2025-09-05T15:46:28.880Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/index.html</loc>
-    <lastmod>2025-09-05T15:46:27.409Z</lastmod>
-  </url>
-  <url>
     <loc>https://adafede.github.io/sapid/CITATION.html</loc>
-    <lastmod>2025-09-05T15:46:27.449Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/LICENSE.html</loc>
-    <lastmod>2025-09-05T15:46:27.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/get_session_info.html</loc>
-    <lastmod>2025-09-05T15:46:27.526Z</lastmod>
+    <lastmod>2025-09-25T05:56:53.662Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/load_session.html</loc>
-    <lastmod>2025-09-05T15:46:29.932Z</lastmod>
+    <lastmod>2025-09-25T05:56:57.283Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/harmonize_terms_df.html</loc>
-    <lastmod>2025-09-05T15:46:28.284Z</lastmod>
+    <lastmod>2025-09-25T05:56:54.729Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/NEWS.html</loc>
+    <lastmod>2025-09-25T05:56:53.605Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/LICENSE.html</loc>
+    <lastmod>2025-09-25T05:56:53.614Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/index.html</loc>
+    <lastmod>2025-09-25T05:56:53.628Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/get_session_info.html</loc>
+    <lastmod>2025-09-25T05:56:53.725Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/load_consistent_profiles.html</loc>
+    <lastmod>2025-09-25T05:56:56.357Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/harmonize_terms.html</loc>
+    <lastmod>2025-09-25T05:56:55.487Z</lastmod>
   </url>
 </urlset>

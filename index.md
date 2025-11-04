@@ -88,10 +88,10 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 | Package | Version | Citation |
 |:---|:---|:---|
-| AlpsNMR | 4.10.1 | Madrid-Gambin et al. (2020) |
-| base | 4.5.1 | R Core Team (2025) |
+| AlpsNMR | 4.12.0 | Madrid-Gambin et al. (2020) |
+| base | 4.5.2 | R Core Team (2025) |
 | BiocManager | 1.30.26 | Morgan and Ramos (2025) |
-| BiocVersion | 3.21.1 | Morgan (2024) |
+| BiocVersion | 3.22.0 | Morgan (2025) |
 | BSDA | 1.2.2 | Arnholt and Evans (2023) |
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
 | dendextend | 1.19.1 | Galili (2015) |
@@ -234,7 +234,7 @@ Fully Untargeted NMR-Based Metabolomics.” *Bioinformatics*, January.
 
 <div id="ref-BiocVersion" class="csl-entry">
 
-Morgan, Martin. 2024. *BiocVersion: Set the Appropriate Version of
+Morgan, Martin. 2025. *BiocVersion: Set the Appropriate Version of
 Bioconductor Packages*. <https://doi.org/10.18129/B9.bioc.BiocVersion>.
 
 </div>

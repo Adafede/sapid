@@ -39,7 +39,7 @@
     "href": "NEWS.html",
     "title": "sapid",
     "section": "",
-    "text": "sapid\n\n\nsapid 0.0.9001\n\nAdapt to tima updates\nSwitched documentation from pkgdown to altdoc\nUpdated minimal BioConductor version to 3.21 (and related Bioconductor dependencies)\nUpdated minimal R version to 4.4.0 (and related Bioconductor dependencies)\n\n\n\nsapid 0.0.9000\n\nInitial version."
+    "text": "sapid\n\n\nsapid 0.0.9001\n\nAdapt to tima updates\nSwitched documentation from pkgdown to altdoc\nUpdated minimal R version to 4.4.0 (and related Bioconductor dependencies)\n\n\n\nsapid 0.0.9000\n\nInitial version."
   },
   {
     "objectID": "LICENSE.html",

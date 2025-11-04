@@ -14,7 +14,7 @@ BugReports: https://github.com/adafede/sapid/issues
 Depends:
     R (>= 4.4.0)
 Imports:
-    AlpsNMR (>= 4.10.1),
+    AlpsNMR (>= 4.8.0),
     BSDA (>= 1.2.2),
     cascade (>= 0.0.0.9001),
     dendextend (>= 1.19.1),
@@ -41,7 +41,7 @@ Remotes:
 Suggests: 
     altdoc (>= 0.5.0),
     BiocManager (>= 1.30.25),
-    BiocVersion (>= 3.21.1),
+    BiocVersion (>= 3.20.0),
     grateful (>= 0.2.12),
     lifecycle (>= 1.0.4),
     R.utils (>= 2.13.0),

@@ -27,7 +27,7 @@ Imports:
     igraph (>= 2.1.4),
     khroma (>= 1.16.0),
     NMRphasing (>= 1.0.7),
-    purrr (>= 1.1.0),
+    purrr (>= 1.2.0),
     readxl (>= 1.4.5),
     scales (>= 1.4.0),
     SensoMineR (>= 1.28),
@@ -39,13 +39,13 @@ Imports:
 Remotes:
     adafede/cascade
 Suggests: 
-    altdoc (>= 0.5.0),
+    altdoc (>= 0.7.0),
     BiocManager (>= 1.30.25),
     BiocVersion (>= 3.20.0),
-    grateful (>= 0.2.12),
+    grateful (>= 0.3.0),
     lifecycle (>= 1.0.4),
     R.utils (>= 2.13.0),
-    spelling (>= 2.3.1),
+    spelling (>= 2.3.2),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8

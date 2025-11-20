@@ -90,7 +90,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 |:---|:---|:---|
 | AlpsNMR | 4.12.0 | Madrid-Gambin et al. (2020) |
 | base | 4.5.2 | R Core Team (2025) |
-| BiocManager | 1.30.26 | Morgan and Ramos (2025) |
+| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
 | BiocVersion | 3.22.0 | Morgan (2025) |
 | BSDA | 1.2.2 | Arnholt and Evans (2023) |
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
@@ -243,7 +243,7 @@ Bioconductor Packages*. <https://doi.org/10.18129/B9.bioc.BiocVersion>.
 
 Morgan, Martin, and Marcel Ramos. 2025. *BiocManager: Access the
 Bioconductor Project Package Repository*.
-<https://bioconductor.github.io/BiocManager/>.
+<https://doi.org/10.32614/CRAN.package.BiocManager>.
 
 </div>
 

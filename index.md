@@ -109,7 +109,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | SensoMineR | 1.28 | Husson, Le, and Cadoret (2025) |
 | stringi | 1.8.7 | Gagolewski (2022) |
-| testthat | 3.3.0 | Wickham (2011) |
+| testthat | 3.3.1 | Wickham (2011) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
 | treemapify | 2.5.6 | Wilkins (2023) |

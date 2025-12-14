@@ -96,7 +96,6 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
 | dendextend | 1.19.1 | Galili (2015) |
 | FactoMineR | 2.12 | Lê, Josse, and Husson (2008) |
-| ggbump | 0.1.0 | Sjoberg (2020) |
 | ggpubr | 0.6.2 | Kassambara (2025) |
 | ggraph | 2.2.2 | Pedersen (2025) |
 | ggrepel | 0.9.6 | Slowikowski (2024) |
@@ -112,7 +111,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | testthat | 3.3.1 | Wickham (2011) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
-| treemapify | 2.5.6 | Wilkins (2023) |
+| treemapify | 2.6.0 | Wilkins (2025) |
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
@@ -281,13 +280,6 @@ of Agricultural and Food Chemistry* 71 (46).
 
 </div>
 
-<div id="ref-ggbump" class="csl-entry">
-
-Sjoberg, David. 2020. *<span class="nocase">ggbump</span>: Bump Chart
-and Sigmoid Curves*.
-
-</div>
-
 <div id="ref-ggrepel" class="csl-entry">
 
 Slowikowski, Kamil. 2024. *<span class="nocase">ggrepel</span>:
@@ -331,9 +323,9 @@ Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
 
 <div id="ref-treemapify" class="csl-entry">
 
-Wilkins, David. 2023. *<span class="nocase">treemapify</span>: Draw
+Wilkins, David. 2025. *<span class="nocase">treemapify</span>: Draw
 Treemaps in “<span class="nocase">ggplot2</span>”*.
-<https://wilkox.org/treemapify/>.
+<https://doi.org/10.32614/CRAN.package.treemapify>.
 
 </div>
 

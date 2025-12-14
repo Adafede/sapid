@@ -21,25 +21,60 @@
     "text": "Load session\n\n\n\nload_session(input_dir, session_info, tab)\n\n\n\n\n\n\n\ninput_dir\n\n\nInput dir\n\n\n\n\nsession_info\n\n\nSession info\n\n\n\n\ntab\n\n\nTab\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
   },
   {
-    "objectID": "man/harmonize_terms_df.html",
-    "href": "man/harmonize_terms_df.html",
+    "objectID": "man/load_consistent_profiles.html",
+    "href": "man/load_consistent_profiles.html",
     "title": "sapid",
     "section": "",
-    "text": "Harmonize terms df\n\n\n\nharmonize_terms_df(\n  df,\n  dictionary_generic_path,\n  dictionary_napping_path,\n  dictionary_specific_path\n)\n\n\n\n\n\n\n\ndf\n\n\nDf\n\n\n\n\ndictionary_generic_path\n\n\nDictionary generic path\n\n\n\n\ndictionary_napping_path\n\n\nDictionary napping path\n\n\n\n\ndictionary_specific_path\n\n\nDictionary specific path\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "Load consistent profiles\n\n\n\nload_consistent_profiles(input, min_jury = 2L)\n\n\n\n\n\n\n\ninput\n\n\nInput\n\n\n\n\nmin_jury\n\n\nMin jury. Default to 2.\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
   },
   {
-    "objectID": "man/harmonize_terms_df.html#harmonize-terms-df",
-    "href": "man/harmonize_terms_df.html#harmonize-terms-df",
+    "objectID": "man/load_consistent_profiles.html#load-consistent-profiles",
+    "href": "man/load_consistent_profiles.html#load-consistent-profiles",
     "title": "sapid",
     "section": "",
-    "text": "Harmonize terms df\n\n\n\nharmonize_terms_df(\n  df,\n  dictionary_generic_path,\n  dictionary_napping_path,\n  dictionary_specific_path\n)\n\n\n\n\n\n\n\ndf\n\n\nDf\n\n\n\n\ndictionary_generic_path\n\n\nDictionary generic path\n\n\n\n\ndictionary_napping_path\n\n\nDictionary napping path\n\n\n\n\ndictionary_specific_path\n\n\nDictionary specific path\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "Load consistent profiles\n\n\n\nload_consistent_profiles(input, min_jury = 2L)\n\n\n\n\n\n\n\ninput\n\n\nInput\n\n\n\n\nmin_jury\n\n\nMin jury. Default to 2.\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
   },
   {
-    "objectID": "NEWS.html",
-    "href": "NEWS.html",
+    "objectID": "man/get_session_info.html",
+    "href": "man/get_session_info.html",
     "title": "sapid",
     "section": "",
-    "text": "sapid\n\n\nsapid 0.0.9001\n\nAdapt to tima updates\nSwitched documentation from pkgdown to altdoc\nUpdated minimal R version to 4.4.0 (and related Bioconductor dependencies)\n\n\n\nsapid 0.0.9000\n\nInitial version."
+    "text": "Get session info\n\n\n\nget_session_info(session)\n\n\n\n\n\n\n\nsession\n\n\nSession\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+  },
+  {
+    "objectID": "man/get_session_info.html#get-session-info",
+    "href": "man/get_session_info.html#get-session-info",
+    "title": "sapid",
+    "section": "",
+    "text": "Get session info\n\n\n\nget_session_info(session)\n\n\n\n\n\n\n\nsession\n\n\nSession\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SAPID ",
+    "section": "",
+    "text": "A Strategy to Analyze Plant Extracts Taste In Depth.\n⚠️ This repository is not maintained and will not be except for extreme interest. It has just been opened for the sake of transparency.\n\n\nAs the package is not (yet) available on CRAN, you will need to install with:\ninstall.packages(\n  \"sapid\",\n  repos = c(\n    \"https://adafede.r-universe.dev\",\n    \"https://bioc.r-universe.dev\",\n    \"https://cloud.r-project.org\"\n  )\n)\n\n\n\n\n\nArticle: https://doi.org/10.1016/j.crfs.2025.101043\nAccording to which steps you used, please give credit to the authors of the tools/resources used.\n\n\n\nGeneral: https://doi.org/10.1038/s41587-023-01690-2\n\n\n\nGeneral: https://doi.org/10.1038/s41592-019-0344-8\n\nCSI:FingerId: https://doi.org/10.1073/pnas.1509788112\nZODIAC: https://doi.org/10.1038/s42256-020-00234-6\nCANOPUS: https://doi.org/10.1038/s41587-020-0740-8\nCOSMIC: https://doi.org/10.1038/s41587-021-01045-9\n\n\n\n\nGeneral: https://doi.org/10.7554/eLife.70780\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5794106\n\n\n\nGeneral: https://doi.org/10.1021/acs.analchem.5b04804\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5607185\n\n\n\nGeneral: https://doi.org/10.3389/fpls.2019.01329\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5797920\n\n\n\n\nNPClassifier: https://doi.org/10.1021/acs.jnatprod.1c00399\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPackage\nVersion\nCitation\n\n\n\n\nAlpsNMR\n4.12.0\nMadrid-Gambin et al. (2020)\n\n\nbase\n4.5.2\nR Core Team (2025)\n\n\nBiocManager\n1.30.27\nMorgan and Ramos (2025)\n\n\nBiocVersion\n3.22.0\nMorgan (2025)\n\n\nBSDA\n1.2.2\nArnholt and Evans (2023)\n\n\ncascade\n0.0.0.9001\nRutz and Wolfender (2023); Rutz (2025)\n\n\ndendextend\n1.19.1\nGalili (2015)\n\n\nFactoMineR\n2.12\nLê, Josse, and Husson (2008)\n\n\nggpubr\n0.6.2\nKassambara (2025)\n\n\nggraph\n2.2.2\nPedersen (2025)\n\n\nggrepel\n0.9.6\nSlowikowski (2024)\n\n\nigraph\n2.2.1\nCsárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025)\n\n\nkhroma\n1.17.0\nFrerebeau (2025)\n\n\nknitr\n1.50\nXie (2014); Xie (2015); Xie (2025)\n\n\nNMRphasing\n1.0.7\nJiang (2025)\n\n\npkgload\n1.4.1\nWickham et al. (2025)\n\n\nrmarkdown\n2.30\nXie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025)\n\n\nscales\n1.4.0\nWickham, Pedersen, and Seidel (2025)\n\n\nSensoMineR\n1.28\nHusson, Le, and Cadoret (2025)\n\n\nstringi\n1.8.7\nGagolewski (2022)\n\n\ntestthat\n3.3.1\nWickham (2011)\n\n\ntidytable\n0.11.2\nFairbanks (2024)\n\n\ntidyverse\n2.0.0\nWickham et al. (2019)\n\n\ntreemapify\n2.6.0\nWilkins (2025)"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "SAPID ",
+    "section": "",
+    "text": "As the package is not (yet) available on CRAN, you will need to install with:\ninstall.packages(\n  \"sapid\",\n  repos = c(\n    \"https://adafede.r-universe.dev\",\n    \"https://bioc.r-universe.dev\",\n    \"https://cloud.r-project.org\"\n  )\n)"
+  },
+  {
+    "objectID": "index.html#main-citations",
+    "href": "index.html#main-citations",
+    "title": "SAPID ",
+    "section": "",
+    "text": "Article: https://doi.org/10.1016/j.crfs.2025.101043\nAccording to which steps you used, please give credit to the authors of the tools/resources used.\n\n\n\nGeneral: https://doi.org/10.1038/s41587-023-01690-2\n\n\n\nGeneral: https://doi.org/10.1038/s41592-019-0344-8\n\nCSI:FingerId: https://doi.org/10.1073/pnas.1509788112\nZODIAC: https://doi.org/10.1038/s42256-020-00234-6\nCANOPUS: https://doi.org/10.1038/s41587-020-0740-8\nCOSMIC: https://doi.org/10.1038/s41587-021-01045-9\n\n\n\n\nGeneral: https://doi.org/10.7554/eLife.70780\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5794106\n\n\n\nGeneral: https://doi.org/10.1021/acs.analchem.5b04804\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5607185\n\n\n\nGeneral: https://doi.org/10.3389/fpls.2019.01329\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5797920\n\n\n\n\nNPClassifier: https://doi.org/10.1021/acs.jnatprod.1c00399"
+  },
+  {
+    "objectID": "index.html#additional-software-credits",
+    "href": "index.html#additional-software-credits",
+    "title": "SAPID ",
+    "section": "",
+    "text": "Package\nVersion\nCitation\n\n\n\n\nAlpsNMR\n4.12.0\nMadrid-Gambin et al. (2020)\n\n\nbase\n4.5.2\nR Core Team (2025)\n\n\nBiocManager\n1.30.27\nMorgan and Ramos (2025)\n\n\nBiocVersion\n3.22.0\nMorgan (2025)\n\n\nBSDA\n1.2.2\nArnholt and Evans (2023)\n\n\ncascade\n0.0.0.9001\nRutz and Wolfender (2023); Rutz (2025)\n\n\ndendextend\n1.19.1\nGalili (2015)\n\n\nFactoMineR\n2.12\nLê, Josse, and Husson (2008)\n\n\nggpubr\n0.6.2\nKassambara (2025)\n\n\nggraph\n2.2.2\nPedersen (2025)\n\n\nggrepel\n0.9.6\nSlowikowski (2024)\n\n\nigraph\n2.2.1\nCsárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025)\n\n\nkhroma\n1.17.0\nFrerebeau (2025)\n\n\nknitr\n1.50\nXie (2014); Xie (2015); Xie (2025)\n\n\nNMRphasing\n1.0.7\nJiang (2025)\n\n\npkgload\n1.4.1\nWickham et al. (2025)\n\n\nrmarkdown\n2.30\nXie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025)\n\n\nscales\n1.4.0\nWickham, Pedersen, and Seidel (2025)\n\n\nSensoMineR\n1.28\nHusson, Le, and Cadoret (2025)\n\n\nstringi\n1.8.7\nGagolewski (2022)\n\n\ntestthat\n3.3.1\nWickham (2011)\n\n\ntidytable\n0.11.2\nFairbanks (2024)\n\n\ntidyverse\n2.0.0\nWickham et al. (2019)\n\n\ntreemapify\n2.6.0\nWilkins (2025)"
   },
   {
     "objectID": "LICENSE.html",
@@ -70,60 +105,39 @@
     "text": "If you develop a new program, and you want it to be of the greatest possible use to the public, the best way to achieve this is to make it free software which everyone can redistribute and change under these terms.\nTo do so, attach the following notices to the program. It is safest to attach them to the start of each source file to most effectively state the exclusion of warranty; and each file should have at least the “copyright” line and a pointer to where the full notice is found.\n    &lt;one line to give the program's name and a brief idea of what it does.&gt;\n    Copyright (C) &lt;year&gt;  &lt;name of author&gt;\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as\n    published by the Free Software Foundation, either version 3 of the\n    License, or (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.\nAlso add information on how to contact you by electronic and paper mail.\nIf your software can interact with users remotely through a computer network, you should also make sure that it provides a way for users to get its source. For example, if your program is a web application, its interface could display a “Source” link that leads users to an archive of the code. There are many ways you could offer source, and different solutions will be better for different programs; see section 13 for the specific requirements.\nYou should also get your employer (if you work as a programmer) or school, if any, to sign a “copyright disclaimer” for the program, if necessary. For more information on this, and how to apply and follow the GNU AGPL, see https://www.gnu.org/licenses/."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "SAPID ",
-    "section": "",
-    "text": "A Strategy to Analyze Plant Extracts Taste In Depth.\n⚠️ This repository is not maintained and will not be except for extreme interest. It has just been opened for the sake of transparency.\n\n\nAs the package is not (yet) available on CRAN, you will need to install with:\ninstall.packages(\n  \"sapid\",\n  repos = c(\n    \"https://adafede.r-universe.dev\",\n    \"https://bioc.r-universe.dev\",\n    \"https://cloud.r-project.org\"\n  )\n)\n\n\n\n\n\nArticle: https://doi.org/10.1016/j.crfs.2025.101043\nAccording to which steps you used, please give credit to the authors of the tools/resources used.\n\n\n\nGeneral: https://doi.org/10.1038/s41587-023-01690-2\n\n\n\nGeneral: https://doi.org/10.1038/s41592-019-0344-8\n\nCSI:FingerId: https://doi.org/10.1073/pnas.1509788112\nZODIAC: https://doi.org/10.1038/s42256-020-00234-6\nCANOPUS: https://doi.org/10.1038/s41587-020-0740-8\nCOSMIC: https://doi.org/10.1038/s41587-021-01045-9\n\n\n\n\nGeneral: https://doi.org/10.7554/eLife.70780\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5794106\n\n\n\nGeneral: https://doi.org/10.1021/acs.analchem.5b04804\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5607185\n\n\n\nGeneral: https://doi.org/10.3389/fpls.2019.01329\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5797920\n\n\n\n\nNPClassifier: https://doi.org/10.1021/acs.jnatprod.1c00399\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPackage\nVersion\nCitation\n\n\n\n\nAlpsNMR\n4.12.0\nMadrid-Gambin et al. (2020)\n\n\nbase\n4.5.2\nR Core Team (2025)\n\n\nBiocManager\n1.30.27\nMorgan and Ramos (2025)\n\n\nBiocVersion\n3.22.0\nMorgan (2025)\n\n\nBSDA\n1.2.2\nArnholt and Evans (2023)\n\n\ncascade\n0.0.0.9001\nRutz and Wolfender (2023); Rutz (2025)\n\n\ndendextend\n1.19.1\nGalili (2015)\n\n\nFactoMineR\n2.12\nLê, Josse, and Husson (2008)\n\n\nggbump\n0.1.0\nSjoberg (2020)\n\n\nggpubr\n0.6.2\nKassambara (2025)\n\n\nggraph\n2.2.2\nPedersen (2025)\n\n\nggrepel\n0.9.6\nSlowikowski (2024)\n\n\nigraph\n2.2.1\nCsárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025)\n\n\nkhroma\n1.17.0\nFrerebeau (2025)\n\n\nknitr\n1.50\nXie (2014); Xie (2015); Xie (2025)\n\n\nNMRphasing\n1.0.7\nJiang (2025)\n\n\npkgload\n1.4.1\nWickham et al. (2025)\n\n\nrmarkdown\n2.30\nXie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025)\n\n\nscales\n1.4.0\nWickham, Pedersen, and Seidel (2025)\n\n\nSensoMineR\n1.28\nHusson, Le, and Cadoret (2025)\n\n\nstringi\n1.8.7\nGagolewski (2022)\n\n\ntestthat\n3.3.1\nWickham (2011)\n\n\ntidytable\n0.11.2\nFairbanks (2024)\n\n\ntidyverse\n2.0.0\nWickham et al. (2019)\n\n\ntreemapify\n2.5.6\nWilkins (2023)"
-  },
-  {
-    "objectID": "index.html#installation",
-    "href": "index.html#installation",
-    "title": "SAPID ",
-    "section": "",
-    "text": "As the package is not (yet) available on CRAN, you will need to install with:\ninstall.packages(\n  \"sapid\",\n  repos = c(\n    \"https://adafede.r-universe.dev\",\n    \"https://bioc.r-universe.dev\",\n    \"https://cloud.r-project.org\"\n  )\n)"
-  },
-  {
-    "objectID": "index.html#main-citations",
-    "href": "index.html#main-citations",
-    "title": "SAPID ",
-    "section": "",
-    "text": "Article: https://doi.org/10.1016/j.crfs.2025.101043\nAccording to which steps you used, please give credit to the authors of the tools/resources used.\n\n\n\nGeneral: https://doi.org/10.1038/s41587-023-01690-2\n\n\n\nGeneral: https://doi.org/10.1038/s41592-019-0344-8\n\nCSI:FingerId: https://doi.org/10.1073/pnas.1509788112\nZODIAC: https://doi.org/10.1038/s42256-020-00234-6\nCANOPUS: https://doi.org/10.1038/s41587-020-0740-8\nCOSMIC: https://doi.org/10.1038/s41587-021-01045-9\n\n\n\n\nGeneral: https://doi.org/10.7554/eLife.70780\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5794106\n\n\n\nGeneral: https://doi.org/10.1021/acs.analchem.5b04804\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5607185\n\n\n\nGeneral: https://doi.org/10.3389/fpls.2019.01329\n⚠️ Do not forget to cite which version you used: https://doi.org/10.5281/zenodo.5797920\n\n\n\n\nNPClassifier: https://doi.org/10.1021/acs.jnatprod.1c00399"
-  },
-  {
-    "objectID": "index.html#additional-software-credits",
-    "href": "index.html#additional-software-credits",
-    "title": "SAPID ",
-    "section": "",
-    "text": "Package\nVersion\nCitation\n\n\n\n\nAlpsNMR\n4.12.0\nMadrid-Gambin et al. (2020)\n\n\nbase\n4.5.2\nR Core Team (2025)\n\n\nBiocManager\n1.30.27\nMorgan and Ramos (2025)\n\n\nBiocVersion\n3.22.0\nMorgan (2025)\n\n\nBSDA\n1.2.2\nArnholt and Evans (2023)\n\n\ncascade\n0.0.0.9001\nRutz and Wolfender (2023); Rutz (2025)\n\n\ndendextend\n1.19.1\nGalili (2015)\n\n\nFactoMineR\n2.12\nLê, Josse, and Husson (2008)\n\n\nggbump\n0.1.0\nSjoberg (2020)\n\n\nggpubr\n0.6.2\nKassambara (2025)\n\n\nggraph\n2.2.2\nPedersen (2025)\n\n\nggrepel\n0.9.6\nSlowikowski (2024)\n\n\nigraph\n2.2.1\nCsárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025)\n\n\nkhroma\n1.17.0\nFrerebeau (2025)\n\n\nknitr\n1.50\nXie (2014); Xie (2015); Xie (2025)\n\n\nNMRphasing\n1.0.7\nJiang (2025)\n\n\npkgload\n1.4.1\nWickham et al. (2025)\n\n\nrmarkdown\n2.30\nXie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025)\n\n\nscales\n1.4.0\nWickham, Pedersen, and Seidel (2025)\n\n\nSensoMineR\n1.28\nHusson, Le, and Cadoret (2025)\n\n\nstringi\n1.8.7\nGagolewski (2022)\n\n\ntestthat\n3.3.1\nWickham (2011)\n\n\ntidytable\n0.11.2\nFairbanks (2024)\n\n\ntidyverse\n2.0.0\nWickham et al. (2019)\n\n\ntreemapify\n2.5.6\nWilkins (2023)"
-  },
-  {
-    "objectID": "man/get_session_info.html",
-    "href": "man/get_session_info.html",
+    "objectID": "NEWS.html",
+    "href": "NEWS.html",
     "title": "sapid",
     "section": "",
-    "text": "Get session info\n\n\n\nget_session_info(session)\n\n\n\n\n\n\n\nsession\n\n\nSession\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "sapid\n\n\nsapid 0.0.9001\n\nAdapt to tima updates\nSwitched documentation from pkgdown to altdoc\nUpdated minimal R version to 4.4.0 (and related Bioconductor dependencies)\n\n\n\nsapid 0.0.9000\n\nInitial version."
   },
   {
-    "objectID": "man/get_session_info.html#get-session-info",
-    "href": "man/get_session_info.html#get-session-info",
+    "objectID": "man/harmonize_terms_df.html",
+    "href": "man/harmonize_terms_df.html",
     "title": "sapid",
     "section": "",
-    "text": "Get session info\n\n\n\nget_session_info(session)\n\n\n\n\n\n\n\nsession\n\n\nSession\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "Harmonize terms df\n\n\n\nharmonize_terms_df(\n  df,\n  dictionary_generic_path,\n  dictionary_napping_path,\n  dictionary_specific_path\n)\n\n\n\n\n\n\n\ndf\n\n\nDf\n\n\n\n\ndictionary_generic_path\n\n\nDictionary generic path\n\n\n\n\ndictionary_napping_path\n\n\nDictionary napping path\n\n\n\n\ndictionary_specific_path\n\n\nDictionary specific path\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
   },
   {
-    "objectID": "man/load_consistent_profiles.html",
-    "href": "man/load_consistent_profiles.html",
+    "objectID": "man/harmonize_terms_df.html#harmonize-terms-df",
+    "href": "man/harmonize_terms_df.html#harmonize-terms-df",
     "title": "sapid",
     "section": "",
-    "text": "Load consistent profiles\n\n\n\nload_consistent_profiles(input, min_jury = 2L)\n\n\n\n\n\n\n\ninput\n\n\nInput\n\n\n\n\nmin_jury\n\n\nMin jury. Default to 2.\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "Harmonize terms df\n\n\n\nharmonize_terms_df(\n  df,\n  dictionary_generic_path,\n  dictionary_napping_path,\n  dictionary_specific_path\n)\n\n\n\n\n\n\n\ndf\n\n\nDf\n\n\n\n\ndictionary_generic_path\n\n\nDictionary generic path\n\n\n\n\ndictionary_napping_path\n\n\nDictionary napping path\n\n\n\n\ndictionary_specific_path\n\n\nDictionary specific path\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
   },
   {
-    "objectID": "man/load_consistent_profiles.html#load-consistent-profiles",
-    "href": "man/load_consistent_profiles.html#load-consistent-profiles",
+    "objectID": "man/geom_sigmoid.html",
+    "href": "man/geom_sigmoid.html",
     "title": "sapid",
     "section": "",
-    "text": "Load consistent profiles\n\n\n\nload_consistent_profiles(input, min_jury = 2L)\n\n\n\n\n\n\n\ninput\n\n\nInput\n\n\n\n\nmin_jury\n\n\nMin jury. Default to 2.\n\n\n\n\n\n\n\nlibrary(\"sapid\")\n\nNULL\n\nNULL"
+    "text": "geom_sigmoid\n\n\n\ngeom_sigmoid(\n  mapping = NULL,\n  data = NULL,\n  geom = \"line\",\n  position = \"identity\",\n  na.rm = FALSE,\n  show.legend = NA,\n  smooth = 8,\n  direction = \"x\",\n  inherit.aes = TRUE,\n  ...\n)\n\n\n\n\n\n\n\nmapping\n\n\nprovide you own mapping. both x, xend, y and yend need to be numeric.\n\n\n\n\ndata\n\n\nprovide you own data\n\n\n\n\ngeom\n\n\nxhange geom\n\n\n\n\nposition\n\n\nchange position\n\n\n\n\nna.rm\n\n\nremove missing values\n\n\n\n\nshow.legend\n\n\nshow legend in plot\n\n\n\n\nsmooth\n\n\nhow much smooth should the curve have? More means steeper curve.\n\n\n\n\ndirection\n\n\nthe character x or y depending of smoothing direction\n\n\n\n\ninherit.aes\n\n\nshould the geom inherits aestethics\n\n\n\n\n…\n\n\nother arguments to be passed to the geom\n\n\n\n\n\n\nggplot layer"
+  },
+  {
+    "objectID": "man/geom_sigmoid.html#geom_sigmoid",
+    "href": "man/geom_sigmoid.html#geom_sigmoid",
+    "title": "sapid",
+    "section": "",
+    "text": "geom_sigmoid\n\n\n\ngeom_sigmoid(\n  mapping = NULL,\n  data = NULL,\n  geom = \"line\",\n  position = \"identity\",\n  na.rm = FALSE,\n  show.legend = NA,\n  smooth = 8,\n  direction = \"x\",\n  inherit.aes = TRUE,\n  ...\n)\n\n\n\n\n\n\n\nmapping\n\n\nprovide you own mapping. both x, xend, y and yend need to be numeric.\n\n\n\n\ndata\n\n\nprovide you own data\n\n\n\n\ngeom\n\n\nxhange geom\n\n\n\n\nposition\n\n\nchange position\n\n\n\n\nna.rm\n\n\nremove missing values\n\n\n\n\nshow.legend\n\n\nshow legend in plot\n\n\n\n\nsmooth\n\n\nhow much smooth should the curve have? More means steeper curve.\n\n\n\n\ndirection\n\n\nthe character x or y depending of smoothing direction\n\n\n\n\ninherit.aes\n\n\nshould the geom inherits aestethics\n\n\n\n\n…\n\n\nother arguments to be passed to the geom\n\n\n\n\n\n\nggplot layer"
   },
   {
     "objectID": "man/harmonize_terms.html",

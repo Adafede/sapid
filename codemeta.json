@@ -38,7 +38,7 @@
       "@type": "SoftwareApplication",
       "identifier": "altdoc",
       "name": "altdoc",
-      "version": ">= 0.5.0",
+      "version": ">= 0.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -51,7 +51,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocManager",
       "name": "BiocManager",
-      "version": ">= 1.30.25",
+      "version": ">= 1.30.26",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -77,7 +77,7 @@
       "@type": "SoftwareApplication",
       "identifier": "grateful",
       "name": "grateful",
-      "version": ">= 0.2.12",
+      "version": ">= 0.3.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -116,7 +116,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.3.1",
+      "version": ">= 2.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -220,19 +220,6 @@
     },
     "8": {
       "@type": "SoftwareApplication",
-      "identifier": "ggbump",
-      "name": "ggbump",
-      "version": ">= 0.1.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggbump"
-    },
-    "9": {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 3.5.2",
@@ -244,7 +231,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -257,7 +244,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -270,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -283,7 +270,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -296,7 +283,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "NMRphasing",
       "name": "NMRphasing",
@@ -309,11 +296,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 1.1.0",
+      "version": ">= 1.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -322,7 +309,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "16": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -335,7 +322,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "17": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -348,7 +335,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "18": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -361,12 +348,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "19": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "20": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -379,7 +366,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "21": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -392,7 +379,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "22": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -405,7 +392,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "23": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -421,7 +408,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "3391.494KB",
+  "fileSize": "3395.269KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

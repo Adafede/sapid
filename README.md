@@ -88,41 +88,50 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 | Package | Version | Citation |
 |:---|:---|:---|
-| AlpsNMR | 4.11.0 | Madrid-Gambin et al. (2020) |
-| base | 4.5.1 | R Core Team (2025) |
-| BiocManager | 1.30.26 | Morgan and Ramos (2025) |
+| AlpsNMR | 4.12.0 | Madrid-Gambin et al. (2020) |
+| base | 4.5.2 | R Core Team (2025) |
+| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
 | BiocVersion | 3.22.0 | Morgan (2025) |
 | BSDA | 1.2.2 | Arnholt and Evans (2023) |
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
 | dendextend | 1.19.1 | Galili (2015) |
 | FactoMineR | 2.12 | Lê, Josse, and Husson (2008) |
-| ggbump | 0.1.0 | Sjoberg (2020) |
-| ggpubr | 0.6.1 | Kassambara (2025) |
+| ggpubr | 0.6.2 | Kassambara (2025) |
 | ggraph | 2.2.2 | Pedersen (2025) |
 | ggrepel | 0.9.6 | Slowikowski (2024) |
-| igraph | 2.1.4 | Csardi and Nepusz (2006); Csárdi et al. (2025) |
-| khroma | 1.16.0 | Frerebeau (2025) |
+| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025) |
+| khroma | 1.17.0 | Frerebeau (2025) |
 | knitr | 1.50 | Xie (2014); Xie (2015); Xie (2025) |
 | NMRphasing | 1.0.7 | Jiang (2025) |
 | pkgload | 1.4.1 | Wickham et al. (2025) |
-| rmarkdown | 2.29 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2024) |
+| rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | SensoMineR | 1.28 | Husson, Le, and Cadoret (2025) |
 | stringi | 1.8.7 | Gagolewski (2022) |
-| testthat | 3.2.3 | Wickham (2011) |
+| testthat | 3.3.1 | Wickham (2011) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
-| treemapify | 2.5.6 | Wilkins (2023) |
+| treemapify | 2.6.0 | Wilkins (2025) |
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
-<div id="ref-rmarkdown2024" class="csl-entry">
+<div id="ref-rmarkdown2025" class="csl-entry">
 
 Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier
-Luraschi, Kevin Ushey, Aron Atkins, et al. 2024.
+Luraschi, Kevin Ushey, Aron Atkins, et al. 2025.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
+
+</div>
+
+<div id="ref-igraph2023" class="csl-entry">
+
+Antonov, Michael, Gábor Csárdi, Szabolcs Horvát, Kirill Müller, Tamás
+Nepusz, Daniel Noom, Maëlle Salmon, Vincent Traag, Brooke Foucault
+Welles, and Fabio Zanini. 2023. “Igraph Enables Fast and Robust Network
+Analysis Across Programming Languages.” *arXiv Preprint
+arXiv:2311.10260*. <https://doi.org/10.48550/arXiv.2311.10260>.
 
 </div>
 
@@ -135,7 +144,7 @@ Analysis*. <https://doi.org/10.32614/CRAN.package.BSDA>.
 
 <div id="ref-igraph2006" class="csl-entry">
 
-Csardi, Gabor, and Tamas Nepusz. 2006. “The Igraph Software Package for
+Csárdi, Gábor, and Tamás Nepusz. 2006. “The Igraph Software Package for
 Complex Network Research.” *InterJournal* Complex Systems: 1695.
 <https://igraph.org>.
 
@@ -144,9 +153,9 @@ Complex Network Research.” *InterJournal* Complex Systems: 1695.
 <div id="ref-igraph2025" class="csl-entry">
 
 Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio
-Zanini, Daniel Noom, and Kirill Müller. 2025.
-*<span class="nocase">igraph</span>: Network Analysis and Visualization
-in r*. <https://doi.org/10.5281/zenodo.7682609>.
+Zanini, Daniel Noom, Kirill Müller, David Schoch, and Maëlle Salmon.
+2025. *<span class="nocase">igraph</span>: Network Analysis and
+Visualization in r*. <https://doi.org/10.5281/zenodo.7682609>.
 
 </div>
 
@@ -273,13 +282,6 @@ of Agricultural and Food Chemistry* 71 (46).
 
 </div>
 
-<div id="ref-ggbump" class="csl-entry">
-
-Sjoberg, David. 2020. *<span class="nocase">ggbump</span>: Bump Chart
-and Sigmoid Curves*. <https://doi.org/10.32614/CRAN.package.ggbump>.
-
-</div>
-
 <div id="ref-ggrepel" class="csl-entry">
 
 Slowikowski, Kamil. 2024. *<span class="nocase">ggrepel</span>:
@@ -293,7 +295,7 @@ Automatically Position Non-Overlapping Text Labels with
 
 Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
 Started with Testing.” *The R Journal* 3: 5–10.
-<https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.
+<https://journal.r-project.org/articles/RJ-2011-002/>.
 
 </div>
 
@@ -324,7 +326,7 @@ Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
 
 <div id="ref-treemapify" class="csl-entry">
 
-Wilkins, David. 2023. *<span class="nocase">treemapify</span>: Draw
+Wilkins, David. 2025. *<span class="nocase">treemapify</span>: Draw
 Treemaps in “<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.treemapify>.
 

@@ -42,17 +42,5 @@ geom_sigmoid(
 ggplot layer
 }
 \description{
-Creates a ggplot that makes a smooth rank over time. To change the \code{smooth}
-argument you need to put it outside of the \code{aes} of the geom.
-Uses the x, xend, y and yend aestethics. Make sure each sigmoid curve is its own group.
-}
-\examples{
-library(ggplot2)
-df <- data.frame(x = 1:6,
-       y = 5:10,
-       xend = 7,
-       yend = -3:2)
-
-ggplot(df, aes(x = x, xend = xend, y = y, yend = yend, color = factor(x))) +
-  geom_sigmoid()
+geom_sigmoid
 }

@@ -54,6 +54,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Collate:
     'colors.R'
+    'geom_sigmoid.R'
     'get_session_info.R'
     'globals.R'
     'harmonize_terms.R'

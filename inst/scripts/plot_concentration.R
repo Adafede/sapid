@@ -80,7 +80,7 @@ plot_concentration <- function(
     ) +
     ggplot2::geom_point() +
     ggplot2::scale_x_log10() +
-    ggbump::geom_sigmoid(
+    geom_sigmoid(
       data = counted,
       mapping = ggplot2::aes(
         x = min(concentration |> as.numeric()),

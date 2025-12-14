@@ -31,12 +31,8 @@ StatSigmoid <- ggplot2::ggproto(
 )
 
 # ** geom_sigmoid -----------------------------------------------------------------
+
 #' geom_sigmoid
-#'
-#' Creates a ggplot that makes a smooth rank over time. To change the `smooth`
-#' argument you need to put it outside of the `aes` of the geom.
-#' Uses the x, xend, y and yend aestethics. Make sure each sigmoid curve is its own group.
-#'
 #' @param mapping provide you own mapping. both x, xend, y and yend need to be numeric.
 #' @param data provide you own data
 #' @param geom xhange geom
@@ -49,16 +45,6 @@ StatSigmoid <- ggplot2::ggproto(
 #' @param ... other arguments to be passed to the geom
 #'
 #' @return ggplot layer
-#'
-#' @examples
-#' library(ggplot2)
-#' df <- data.frame(x = 1:6,
-#'        y = 5:10,
-#'        xend = 7,
-#'        yend = -3:2)
-#'
-#' ggplot(df, aes(x = x, xend = xend, y = y, yend = yend, color = factor(x))) +
-#'   geom_sigmoid()
 geom_sigmoid <- function(
   mapping = NULL,
   data = NULL,

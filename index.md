@@ -101,7 +101,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | ggrepel | 0.9.6 | Slowikowski (2024) |
 | igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025) |
 | khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.50 | Xie (2014); Xie (2015); Xie (2025) |
+| knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
 | NMRphasing | 1.0.7 | Jiang (2025) |
 | pkgload | 1.4.1 | Wickham et al. (2025) |
 | rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |

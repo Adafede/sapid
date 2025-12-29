@@ -82,12 +82,12 @@ plot_matrices <- function(
     ggplot2::ylab("Jury") +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
-      legend.text = ggplot2::element_text(color = "grey30"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )
@@ -101,12 +101,12 @@ plot_matrices <- function(
     ggplot2::ylab("Jury") +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
-      legend.text = ggplot2::element_text(color = "grey30"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )

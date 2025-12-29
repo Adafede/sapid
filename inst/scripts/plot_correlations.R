@@ -356,9 +356,9 @@ plot_correlations <- function(
     ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      strip.text = ggplot2::element_text(color = "grey30"),
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
+      strip.text = ggplot2::element_text(color = "#767676"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
       plot.margin = ggplot2::margin(
         l = 5,
         t = 5,
@@ -366,10 +366,10 @@ plot_correlations <- function(
         r = 20
       ),
       legend.position = "none",
-      legend.text = ggplot2::element_text(color = "grey30"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )
@@ -491,9 +491,9 @@ plot_correlations <- function(
     khroma::scale_fill_batlow() +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      strip.text = ggplot2::element_text(color = "grey30"),
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
+      strip.text = ggplot2::element_text(color = "#767676"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
       panel.spacing.x = ggplot2::unit(10, "lines"),
       plot.margin = ggplot2::margin(
         l = 5,
@@ -503,10 +503,10 @@ plot_correlations <- function(
       ),
       legend.position = "bottom",
       # legend.position = c(0.75, 0.1),
-      legend.text = ggplot2::element_text(color = "grey30"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )
@@ -660,12 +660,12 @@ plot_correlations <- function(
     # ) +
     ggplot2::ylab("Taste intensity") +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
-      legend.text = ggplot2::element_text(color = "grey30"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )
@@ -764,12 +764,12 @@ plot_correlations <- function(
     # ) +
     ggplot2::ylab("Feature intensity") +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "grey30"),
-      axis.title = ggplot2::element_text(color = "grey30"),
-      legend.text = ggplot2::element_text(color = "grey30"),
+      axis.text = ggplot2::element_text(color = "#767676"),
+      axis.title = ggplot2::element_text(color = "#767676"),
+      legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
-        color = "grey30",
+        color = "#767676",
         size = 20
       )
     )

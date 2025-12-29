@@ -89,19 +89,19 @@ plot_descriptors_network <- function(
     ggraph::ggraph(layout = "stress") +
     ggplot2::scale_color_manual(
       values = discrete_rainbow_14,
-      na.value = "grey60"
+      na.value = "#767676"
     ) +
     ggplot2::scale_fill_manual(
       values = discrete_rainbow_14,
-      na.value = "grey60"
+      na.value = "#767676"
     ) +
     ggraph::scale_edge_color_manual(
       values = discrete_rainbow_14,
-      na.value = "grey60"
+      na.value = "#767676"
     ) +
     ggraph::geom_edge_bundle_force(
       edge_alpha = 0.1,
-      edge_color = "grey30",
+      edge_color = "#767676",
       edge_width = 0.01,
       n_cycle = 10,
       threshold = 0.3,

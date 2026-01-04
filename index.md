@@ -99,7 +99,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | ggpubr | 0.6.2 | Kassambara (2025) |
 | ggraph | 2.2.2 | Pedersen (2025) |
 | ggrepel | 0.9.6 | Slowikowski (2024) |
-| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025) |
+| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
 | khroma | 1.17.0 | Frerebeau (2025) |
 | knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
 | NMRphasing | 1.0.7 | Jiang (2025) |
@@ -150,11 +150,11 @@ Complex Network Research.” *InterJournal* Complex Systems: 1695.
 
 </div>
 
-<div id="ref-igraph2025" class="csl-entry">
+<div id="ref-igraph2026" class="csl-entry">
 
 Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio
 Zanini, Daniel Noom, Kirill Müller, David Schoch, and Maëlle Salmon.
-2025. *<span class="nocase">igraph</span>: Network Analysis and
+2026. *<span class="nocase">igraph</span>: Network Analysis and
 Visualization in r*. <https://doi.org/10.5281/zenodo.7682609>.
 
 </div>

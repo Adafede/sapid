@@ -31,6 +31,7 @@ install.packages(
   "sapid",
   repos = c(
     "https://adafede.r-universe.dev",
+    "https://taxonomicallyinformedannotation.r-universe.dev",
     "https://bioc.r-universe.dev",
     "https://cloud.r-project.org"
   )
@@ -95,20 +96,20 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 | BSDA | 1.2.2 | Arnholt and Evans (2023) |
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
 | dendextend | 1.19.1 | Galili (2015) |
-| FactoMineR | 2.12 | Lê, Josse, and Husson (2008) |
+| FactoMineR | 2.13 | Lê, Josse, and Husson (2008) |
 | ggpubr | 0.6.2 | Kassambara (2025) |
 | ggraph | 2.2.2 | Pedersen (2025) |
 | ggrepel | 0.9.6 | Slowikowski (2024) |
-| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2025) |
+| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
 | khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.50 | Xie (2014); Xie (2015); Xie (2025) |
+| knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
 | NMRphasing | 1.0.7 | Jiang (2025) |
-| pkgload | 1.4.1 | Wickham et al. (2025) |
+| pkgload | 1.5.0 | Wickham et al. (2026) |
 | rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | SensoMineR | 1.28 | Husson, Le, and Cadoret (2025) |
 | stringi | 1.8.7 | Gagolewski (2022) |
-| testthat | 3.3.1 | Wickham (2011) |
+| testthat | 3.3.2 | Wickham (2011) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
 | treemapify | 2.6.0 | Wilkins (2025) |
@@ -150,11 +151,11 @@ Complex Network Research.” *InterJournal* Complex Systems: 1695.
 
 </div>
 
-<div id="ref-igraph2025" class="csl-entry">
+<div id="ref-igraph2026" class="csl-entry">
 
 Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio
 Zanini, Daniel Noom, Kirill Müller, David Schoch, and Maëlle Salmon.
-2025. *<span class="nocase">igraph</span>: Network Analysis and
+2026. *<span class="nocase">igraph</span>: Network Analysis and
 Visualization in r*. <https://doi.org/10.5281/zenodo.7682609>.
 
 </div>
@@ -310,7 +311,7 @@ Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 <div id="ref-pkgload" class="csl-entry">
 
-Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2025.
+Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2026.
 *<span class="nocase">pkgload</span>: Simulate Package Installation and
 Attach*. <https://doi.org/10.32614/CRAN.package.pkgload>.
 

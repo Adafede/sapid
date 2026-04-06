@@ -242,7 +242,7 @@ correlate_ion_taste_intensities <- function(
             df[2:ncol(df)] |>
               purrr::map_lgl(
                 .f = function(x) {
-                  all(!is.na(x))
+                  !anyNA(x)
                 }
               ) |>
               which() |>

@@ -70,7 +70,7 @@ plot_chasselas_variation <- function(
     ggplot2::scale_color_manual(values = discrete_rainbow_14) +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
@@ -96,7 +96,7 @@ plot_chasselas_variation <- function(
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~ as.character(jury), ncol = 3) +
@@ -127,7 +127,7 @@ plot_chasselas_variation <- function(
     ) +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
@@ -153,7 +153,7 @@ plot_chasselas_variation <- function(
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~ as.character(session), ncol = 3) +

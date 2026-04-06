@@ -100,7 +100,7 @@ plot_chasselas_modulation <- function(
     ) +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~taste, scales = "free") +
@@ -135,7 +135,7 @@ plot_chasselas_modulation <- function(
     ggplot2::scale_color_brewer(palette = "Paired") +
     ggplot2::geom_violin() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::facet_wrap(facets = ~group, scales = "free") +

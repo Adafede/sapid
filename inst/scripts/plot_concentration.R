@@ -52,7 +52,7 @@ plot_concentration <- function(
     ggplot2::geom_violin() +
     ggplot2::scale_x_log10() +
     ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = .05),
+      position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
     ggplot2::scale_color_gradient2(

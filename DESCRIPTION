@@ -36,7 +36,7 @@ Imports:
     tidytable (>= 0.11.2),
     treemapify (>= 2.5.6)
 Remotes:
-    adafede/cascade
+    adafede/cascade,
     taxonomicallyinformedannotation/tima
 Suggests: 
     altdoc (>= 0.7.0),

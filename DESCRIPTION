@@ -37,6 +37,7 @@ Imports:
     treemapify (>= 2.5.6)
 Remotes:
     adafede/cascade
+    taxonomicallyinformedannotation/tima
 Suggests: 
     altdoc (>= 0.7.0),
     BiocManager (>= 1.30.26),

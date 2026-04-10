@@ -7,9 +7,10 @@ cff-version: 1.2.0
 message: 'To cite package "sapid" in publications use:'
 type: software
 license: GPL-3.0-or-later
-title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth.'
-version: 0.0.0.9000
-abstract: This package provides the infrastructure to analyze plant extracts taste in depth.
+title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth'
+version: 0.0.0.9001
+abstract: This package provides the infrastructure to implement a Strategy to Analyze
+  Plant Extracts Taste In Depth.
 authors:
 - family-names: Rutz
   given-names: Adriano
@@ -17,7 +18,7 @@ authors:
   orcid: https://orcid.org/0000-0003-0443-9902
 preferred-citation:
   type: manual
-  title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth.'
+  title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth'
   authors:
   - family-names: Rutz
     given-names: Adriano
@@ -25,9 +26,9 @@ preferred-citation:
     orcid: https://orcid.org/0000-0003-0443-9902
   year: '2025'
   notes: R package, version 0.0.9000
-repository: https://r-universe.dev
+repository: https://bioconductor.org/
 repository-code: https://github.com/adafede/sapid
-url: https://github.com/adafede.github.io/sapid
+url: https://adafede.github.io/sapid
 contact:
 - family-names: Rutz
   given-names: Adriano
@@ -37,9 +38,14 @@ keywords:
 - computationalMetabolomics
 - naturalExtracts
 - taste
+- lc-msms
+- metabolomics
+- natural-extracts
+- r
 references:
 - type: article
-  title: 'SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.'
+  title: 'SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application
+    to the complex taste of Swertia chirayita (Roxb.) H.Karst.'
   authors:
   - family-names: Rutz
     given-names: Adriano
@@ -58,3 +64,536 @@ references:
   journal: Current Research in Food Science
   year: '2025'
   url: https://doi.org/10.1016/j.crfs.2025.101043
+  keywords:
+  - metabolite annotation
+  - charged aerosol detector
+  - semi-quantitative
+  - natural products
+  - computational metabolomics
+  - specialized metabolome
+  doi: 10.1016/j.crfs.2025.101043
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 4.4.0'
+- type: software
+  title: AlpsNMR
+  abstract: 'AlpsNMR: Automated spectraL Processing System for NMR'
+  notes: Imports
+  url: https://sipss.github.io/AlpsNMR/
+  repository: https://bioc-release.r-universe.dev
+  authors:
+  - family-names: Montoliu Roura
+    given-names: Ivan
+    email: Ivan.MontoliuRoura@rd.nestle.com
+  - family-names: Oller Moreno
+    given-names: Sergio
+    email: sergioller@gmail.com
+    orcid: https://orcid.org/0000-0002-8994-1549
+  - family-names: Madrid Gambin
+    given-names: Francisco
+    email: fmadrid@ibecbarcelona.eu
+    orcid: https://orcid.org/0000-0001-9333-0014
+  - family-names: Fernandez
+    given-names: Luis
+    email: lfernandez@ibecbarcelona.eu
+    orcid: https://orcid.org/0000-0001-9790-6287
+  - family-names: Gracia Cabrera
+    given-names: Héctor
+    email: hgracia@ibecbarcelona.eu
+  - family-names: Marco Colás
+    given-names: Santiago
+    email: smarco@ibecbarcelona.eu
+    orcid: https://orcid.org/0000-0003-2663-2965
+  year: '2026'
+  version: '>= 4.8.0'
+- type: software
+  title: BSDA
+  abstract: 'BSDA: Basic Statistics and Data Analysis'
+  notes: Imports
+  url: https://alanarnholt.github.io/BSDA/
+  repository: https://CRAN.R-project.org/package=BSDA
+  authors:
+  - family-names: Arnholt
+    given-names: Alan T.
+    email: arnholtat@appstate.edu
+  - family-names: Evans
+    given-names: Ben
+    email: ben.evans@temple.edu
+  year: '2026'
+  doi: 10.32614/CRAN.package.BSDA
+  version: '>= 1.2.2'
+- type: software
+  title: cascade
+  abstract: 'cascade: Contextualizing untargeted Annotation with Semi-quantitative
+    Charged Aerosol Detection for pertinent characterization of natural Extracts'
+  notes: Imports
+  url: https://adafede.github.io/cascade
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Rutz
+    given-names: Adriano
+    email: adafede@gmail.com
+    orcid: https://orcid.org/0000-0003-0443-9902
+  year: '2026'
+  version: '>= 0.0.0.9001'
+- type: software
+  title: dendextend
+  abstract: 'dendextend: Extending ''dendrogram'' Functionality in R'
+  notes: Imports
+  url: https://talgalili.github.io/dendextend/
+  repository: https://CRAN.R-project.org/package=dendextend
+  authors:
+  - family-names: Galili
+    given-names: Tal
+    email: tal.galili@gmail.com
+  - family-names: Jefferis
+    given-names: Gregory
+    email: jefferis@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.dendextend
+  version: '>= 1.19.1'
+- type: software
+  title: FactoMineR
+  abstract: 'FactoMineR: Multivariate Exploratory Data Analysis and Data Mining'
+  notes: Imports
+  url: http://factominer.free.fr
+  repository: https://CRAN.R-project.org/package=FactoMineR
+  authors:
+  - family-names: Husson
+    given-names: Francois
+    email: francois.husson@institut-agro.fr
+    orcid: https://orcid.org/0000-0002-7271-8877
+  - family-names: Josse
+    given-names: Julie
+  - family-names: Le
+    given-names: Sebastien
+  - family-names: Mazet
+    given-names: Jeremy
+  year: '2026'
+  doi: 10.32614/CRAN.package.FactoMineR
+  version: '>= 2.12'
+- type: software
+  title: forcats
+  abstract: 'forcats: Tools for Working with Categorical Variables (Factors)'
+  notes: Imports
+  url: https://forcats.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=forcats
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.forcats
+  version: '>= 1.0.0'
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  url: https://ggplot2.tidyverse.org
+  repository: https://CRAN.R-project.org/package=ggplot2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: Brand
+    given-names: Teun
+    name-particle: van den
+    orcid: https://orcid.org/0000-0002-9335-7468
+  year: '2026'
+  doi: 10.32614/CRAN.package.ggplot2
+  version: '>= 3.5.2'
+- type: software
+  title: ggpubr
+  abstract: 'ggpubr: ''ggplot2'' Based Publication Ready Plots'
+  notes: Imports
+  url: https://rpkgs.datanovia.com/ggpubr/
+  repository: https://CRAN.R-project.org/package=ggpubr
+  authors:
+  - family-names: Kassambara
+    given-names: Alboukadel
+    email: alboukadel.kassambara@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.ggpubr
+  version: '>= 0.6.1'
+- type: software
+  title: ggraph
+  abstract: 'ggraph: An Implementation of Grammar of Graphics for Graphs and Networks'
+  notes: Imports
+  url: https://ggraph.data-imaginist.com
+  repository: https://CRAN.R-project.org/package=ggraph
+  authors:
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomasp85@gmail.com
+    orcid: https://orcid.org/0000-0002-5147-4711
+  year: '2026'
+  doi: 10.32614/CRAN.package.ggraph
+  version: '>= 2.2.1'
+- type: software
+  title: igraph
+  abstract: 'igraph: Network Analysis and Visualization'
+  notes: Imports
+  url: https://r.igraph.org/
+  repository: https://CRAN.R-project.org/package=igraph
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+    email: csardi.gabor@gmail.com
+    orcid: https://orcid.org/0000-0001-7098-9676
+  - family-names: Nepusz
+    given-names: Tamás
+    email: ntamas@gmail.com
+    orcid: https://orcid.org/0000-0002-1451-338X
+  - family-names: Traag
+    given-names: Vincent
+    orcid: https://orcid.org/0000-0003-3170-3879
+  - family-names: Horvát
+    given-names: Szabolcs
+    email: szhorvat@gmail.com
+    orcid: https://orcid.org/0000-0002-3100-523X
+  - family-names: Zanini
+    given-names: Fabio
+    email: fabio.zanini@unsw.edu.au
+    orcid: https://orcid.org/0000-0001-7097-8539
+  - family-names: Noom
+    given-names: Daniel
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Schoch
+    given-names: David
+    email: david.schoch@cynkra.com
+    orcid: https://orcid.org/0000-0003-2952-4812
+  - family-names: Salmon
+    given-names: Maëlle
+    email: maelle@cynkra.com
+    orcid: https://orcid.org/0000-0002-2815-0399
+  year: '2026'
+  doi: 10.32614/CRAN.package.igraph
+  version: '>= 2.1.4'
+- type: software
+  title: khroma
+  abstract: 'khroma: Colour Schemes for Scientific Data Visualization'
+  notes: Imports
+  url: https://packages.tesselle.org/khroma/
+  repository: https://CRAN.R-project.org/package=khroma
+  authors:
+  - family-names: Frerebeau
+    given-names: Nicolas
+    email: nicolas.frerebeau@u-bordeaux-montaigne.fr
+    orcid: https://orcid.org/0000-0001-5759-4944
+  year: '2026'
+  doi: 10.32614/CRAN.package.khroma
+  version: '>= 1.16.0'
+- type: software
+  title: NMRphasing
+  abstract: 'NMRphasing: Phase Error Correction and Baseline Correction for One Dimensional
+    (''1D'') ''NMR'' Data'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=NMRphasing
+  authors:
+  - family-names: Jiang
+    given-names: Aixiang
+    email: aijiang@bccrc.ca
+    orcid: https://orcid.org/0000-0002-6153-7595
+  year: '2026'
+  doi: 10.32614/CRAN.package.NMRphasing
+  version: '>= 1.0.7'
+- type: software
+  title: purrr
+  abstract: 'purrr: Functional Programming Tools'
+  notes: Imports
+  url: https://purrr.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=purrr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.purrr
+  version: '>= 1.2.0'
+- type: software
+  title: readxl
+  abstract: 'readxl: Read Excel Files'
+  notes: Imports
+  url: https://readxl.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readxl
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2026'
+  doi: 10.32614/CRAN.package.readxl
+  version: '>= 1.4.5'
+- type: software
+  title: scales
+  abstract: 'scales: Scale Functions for Visualization'
+  notes: Imports
+  url: https://scales.r-lib.org
+  repository: https://CRAN.R-project.org/package=scales
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Seidel
+    given-names: Dana
+  year: '2026'
+  doi: 10.32614/CRAN.package.scales
+  version: '>= 1.4.0'
+- type: software
+  title: SensoMineR
+  abstract: 'SensoMineR: Sensory Data Analysis'
+  notes: Imports
+  url: http://sensominer.free.fr
+  repository: https://CRAN.R-project.org/package=SensoMineR
+  authors:
+  - family-names: Husson
+    given-names: Francois
+    email: francois.husson@institut-agro.fr
+    orcid: https://orcid.org/0000-0002-7271-8877
+  - family-names: Le
+    given-names: Sebastien
+  - family-names: Cadoret
+    given-names: Marine
+  year: '2026'
+  doi: 10.32614/CRAN.package.SensoMineR
+  version: '>= 1.28'
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+- type: software
+  title: stringi
+  abstract: 'stringi: Fast and Portable Character String Processing Facilities'
+  notes: Imports
+  url: https://stringi.gagolewski.com/
+  repository: https://CRAN.R-project.org/package=stringi
+  authors:
+  - family-names: Gagolewski
+    given-names: Marek
+    email: marek@gagolewski.com
+    orcid: https://orcid.org/0000-0003-0637-6028
+  year: '2026'
+  doi: 10.32614/CRAN.package.stringi
+  version: '>= 1.8.7'
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Imports
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.tibble
+  version: '>= 3.3.0'
+- type: software
+  title: tidytable
+  abstract: 'tidytable: Tidy Interface to ''data.table'''
+  notes: Imports
+  url: https://markfairbanks.github.io/tidytable/
+  repository: https://CRAN.R-project.org/package=tidytable
+  authors:
+  - family-names: Fairbanks
+    given-names: Mark
+    email: mark.t.fairbanks@gmail.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.tidytable
+  version: '>= 0.11.2'
+- type: software
+  title: treemapify
+  abstract: 'treemapify: Draw Treemaps in ''ggplot2'''
+  notes: Imports
+  url: https://wilkox.org/treemapify/
+  repository: https://CRAN.R-project.org/package=treemapify
+  authors:
+  - family-names: Wilkins
+    given-names: David
+    email: david@wilkox.org
+    orcid: https://orcid.org/0000-0002-3385-8981
+  year: '2026'
+  doi: 10.32614/CRAN.package.treemapify
+  version: '>= 2.5.6'
+- type: software
+  title: altdoc
+  abstract: 'altdoc: Package Documentation Websites with ''Quarto'', ''Docsify'',
+    ''Docute'', or ''MkDocs'''
+  notes: Suggests
+  url: https://altdoc.etiennebacher.com
+  repository: https://CRAN.R-project.org/package=altdoc
+  authors:
+  - family-names: Bacher
+    given-names: Etienne
+    email: etienne.bacher@protonmail.com
+  - family-names: Arel-Bundock
+    given-names: Vincent
+    email: vincent.arel-bundock@umontreal.ca
+    orcid: https://orcid.org/0000-0003-2042-7063
+  year: '2026'
+  doi: 10.32614/CRAN.package.altdoc
+  version: '>= 0.7.0'
+- type: software
+  title: BiocManager
+  abstract: 'BiocManager: Access the Bioconductor Project Package Repository'
+  notes: Suggests
+  url: https://bioconductor.github.io/BiocManager/
+  repository: https://CRAN.R-project.org/package=BiocManager
+  authors:
+  - family-names: Morgan
+    given-names: Martin
+    email: martin.morgan@roswellpark.org
+    orcid: https://orcid.org/0000-0002-5874-8148
+  - family-names: Ramos
+    given-names: Marcel
+    email: marcel.ramos@sph.cuny.edu
+    orcid: https://orcid.org/0000-0002-3242-0582
+  year: '2026'
+  doi: 10.32614/CRAN.package.BiocManager
+  version: '>= 1.30.26'
+- type: software
+  title: BiocVersion
+  abstract: 'BiocVersion: Set the appropriate version of Bioconductor packages'
+  notes: Suggests
+  repository: https://bioc-release.r-universe.dev
+  authors:
+  - family-names: Morgan
+    given-names: Martin
+    email: martin.morgan@roswellpark.org
+  year: '2026'
+  version: '>= 3.20.0'
+- type: software
+  title: grateful
+  abstract: 'grateful: Facilitate Citation of R Packages'
+  notes: Suggests
+  url: https://pakillo.github.io/grateful/
+  repository: https://CRAN.R-project.org/package=grateful
+  authors:
+  - family-names: Rodriguez-Sanchez
+    given-names: Francisco
+    email: f.rodriguez.sanc@gmail.com
+    orcid: https://orcid.org/0000-0002-7981-1599
+  - family-names: Jackson
+    given-names: Connor P.
+    email: connor@cpjackson.net
+    orcid: https://orcid.org/0000-0002-4220-5210
+  year: '2026'
+  doi: 10.32614/CRAN.package.grateful
+  version: '>= 0.3.0'
+- type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Suggests
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2026'
+  doi: 10.32614/CRAN.package.lifecycle
+  version: '>= 1.0.4'
+- type: software
+  title: R.utils
+  abstract: 'R.utils: Various Programming Utilities'
+  notes: Suggests
+  url: https://henrikbengtsson.github.io/R.utils/
+  repository: https://CRAN.R-project.org/package=R.utils
+  authors:
+  - family-names: Bengtsson
+    given-names: Henrik
+    email: henrikb@braju.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.R.utils
+  version: '>= 2.13.0'
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://ropensci.r-universe.dev/spelling
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2026'
+  doi: 10.32614/CRAN.package.spelling
+  version: '>= 2.3.2'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.0.0'

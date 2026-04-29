@@ -1,6 +1,6 @@
 Package: sapid
 Title: A Strategy to Analyze Plant Extracts Taste In Depth
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: c(
     person("Adriano", "Rutz", , "adafede@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0443-9902"))
@@ -12,41 +12,41 @@ License: GPL (>= 3)
 URL: https://github.com/adafede/sapid, https://adafede.github.io/sapid
 BugReports: https://github.com/adafede/sapid/issues
 Depends:
-    R (>= 4.4.0)
+    R (>= 4.5.0)
 Imports:
-    AlpsNMR (>= 4.8.0),
+    AlpsNMR (>= 4.12.0),
     BSDA (>= 1.2.2),
     cascade (>= 0.0.0.9001),
     dendextend (>= 1.19.1),
-    FactoMineR (>= 2.12),
-    forcats (>= 1.0.0),
-    ggplot2 (>= 3.5.2),
-    ggpubr (>= 0.6.1),
-    ggraph (>= 2.2.1),
-    igraph (>= 2.1.4),
-    khroma (>= 1.16.0),
+    FactoMineR (>= 2.14),
+    forcats (>= 1.0.1),
+    ggplot2 (>= 4.0.3),
+    ggpubr (>= 0.6.3),
+    ggraph (>= 2.2.2),
+    igraph (>= 2.3.0),
+    khroma (>= 1.17.0),
     NMRphasing (>= 1.0.7),
-    purrr (>= 1.2.0),
+    purrr (>= 1.2.2),
     readxl (>= 1.4.5),
     scales (>= 1.4.0),
     SensoMineR (>= 1.28),
     stats,
     stringi (>= 1.8.7),
-    tibble (>= 3.3.0),
+    tibble (>= 3.3.1),
     tidytable (>= 0.11.2),
-    treemapify (>= 2.5.6)
+    treemapify (>= 2.6.0)
 Remotes:
     adafede/cascade,
     taxonomicallyinformedannotation/tima
 Suggests: 
-    altdoc (>= 0.7.0),
-    BiocManager (>= 1.30.26),
-    BiocVersion (>= 3.20.0),
+    altdoc (>= 0.7.2),
+    BiocManager (>= 1.30.27),
+    BiocVersion (>= 3.22.0),
     grateful (>= 0.3.0),
-    lifecycle (>= 1.0.4),
+    lifecycle (>= 1.0.5),
     R.utils (>= 2.13.0),
     spelling (>= 2.3.2),
-    testthat (>= 3.0.0)
+    testthat (>= 3.3.2)
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

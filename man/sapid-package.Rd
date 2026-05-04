@@ -6,6 +6,8 @@
 \alias{sapid-package}
 \title{sapid: A Strategy to Analyze Plant Extracts Taste In Depth}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 This package provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth.
 }
 \seealso{
@@ -19,6 +21,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Adriano Rutz \email{adafede@gmail.com} (\href{https://orcid.org/0000-0003-0443-9902}{ORCID})
+
+Authors:
+\itemize{
+  \item Adriano Rutz \email{adafede@gmail.com} (\href{https://orcid.org/0000-0003-0443-9902}{ORCID})
+}
 
 }
 \keyword{internal}

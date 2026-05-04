@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/adafede/sapid",
   "issueTracker": "https://github.com/adafede/sapid/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.0.0.9001",
+  "version": "0.0.0.9002",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
+  "runtimePlatform": "R version 4.6.0 (2026-04-24)",
   "author": [
     {
       "@type": "Person",
@@ -38,7 +38,7 @@
       "@type": "SoftwareApplication",
       "identifier": "altdoc",
       "name": "altdoc",
-      "version": ">= 0.7.0",
+      "version": ">= 0.7.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -51,7 +51,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocManager",
       "name": "BiocManager",
-      "version": ">= 1.30.26",
+      "version": ">= 1.30.27",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -64,7 +64,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocVersion",
       "name": "BiocVersion",
-      "version": ">= 3.20.0",
+      "version": ">= 3.22.0",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -90,7 +90,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
-      "version": ">= 1.0.4",
+      "version": ">= 1.0.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -129,7 +129,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.0.0",
+      "version": ">= 3.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -144,13 +144,13 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.4.0"
+      "version": ">= 4.5.0"
     },
     "2": {
       "@type": "SoftwareApplication",
       "identifier": "AlpsNMR",
       "name": "AlpsNMR",
-      "version": ">= 4.8.0",
+      "version": ">= 4.12.0",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -196,7 +196,7 @@
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
-      "version": ">= 2.12",
+      "version": ">= 2.14",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -209,7 +209,7 @@
       "@type": "SoftwareApplication",
       "identifier": "forcats",
       "name": "forcats",
-      "version": ">= 1.0.0",
+      "version": ">= 1.0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -222,7 +222,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
-      "version": ">= 3.5.2",
+      "version": ">= 4.0.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -235,7 +235,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
-      "version": ">= 0.6.1",
+      "version": ">= 0.6.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -248,7 +248,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
-      "version": ">= 2.2.1",
+      "version": ">= 2.2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -261,7 +261,7 @@
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
-      "version": ">= 2.1.4",
+      "version": ">= 2.3.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -274,7 +274,7 @@
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
-      "version": ">= 1.16.0",
+      "version": ">= 1.17.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -300,7 +300,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 1.2.0",
+      "version": ">= 1.2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -370,7 +370,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "version": ">= 3.3.0",
+      "version": ">= 3.3.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -396,7 +396,7 @@
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
-      "version": ">= 2.5.6",
+      "version": ">= 2.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -408,7 +408,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "3394.789KB",
+  "fileSize": "3395.17KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

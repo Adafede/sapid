@@ -16,7 +16,7 @@ Depends:
 Imports:
     AlpsNMR (>= 4.12.0),
     BSDA (>= 1.2.2),
-    cascade (>= 0.0.0.9001),
+    cascade (>= 0.0.0.9002),
     dendextend (>= 1.19.1),
     FactoMineR (>= 2.14),
     forcats (>= 1.0.1),

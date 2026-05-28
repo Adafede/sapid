@@ -116,7 +116,6 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -176,7 +175,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
-      "version": ">= 0.0.0.9001",
+      "version": ">= 0.0.0.9002",
       "sameAs": "https://github.com/adafede/cascade"
     },
     "5": {
@@ -261,7 +260,7 @@
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
-      "version": ">= 2.3.0",
+      "version": ">= 2.3.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -313,7 +312,7 @@
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
-      "version": ">= 1.4.5",
+      "version": ">= 1.5.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -408,7 +407,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "3395.17KB",
+  "fileSize": "3396.106KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

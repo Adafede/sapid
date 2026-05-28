@@ -8,7 +8,7 @@ message: 'To cite package "sapid" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'sapid: A Strategy to Analyze Plant Extracts Taste In Depth'
-version: 0.0.0.9001
+version: 0.0.0.9002
 abstract: This package provides the infrastructure to implement a Strategy to Analyze
   Plant Extracts Taste In Depth.
 authors:
@@ -24,8 +24,8 @@ preferred-citation:
     given-names: Adriano
     email: adafede@gmail.com
     orcid: https://orcid.org/0000-0003-0443-9902
-  year: '2025'
-  notes: R package, version 0.0.9000
+  year: '2026'
+  notes: R package, version 0.0.9002
 repository: https://bioconductor.org/
 repository-code: https://github.com/adafede/sapid
 url: https://adafede.github.io/sapid

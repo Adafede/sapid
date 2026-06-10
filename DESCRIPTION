@@ -38,7 +38,7 @@ Imports:
 Remotes:
     adafede/cascade,
     taxonomicallyinformedannotation/tima
-Suggests: 
+Suggests:
     altdoc (>= 0.7.2),
     BiocManager (>= 1.30.27),
     BiocVersion (>= 3.22.0),

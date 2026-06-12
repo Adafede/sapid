@@ -1,6 +1,6 @@
 # Taken from https://raw.githubusercontent.com/davidsjoberg/ggbump/refs/heads/master/R/geom_sigmoid.R
 # as it was removed from CRAN
-# simply changed `dplyr::` to `tidytable::` and `%>%` to `|>`
+# simply changed `dplyr` to `tidytable` and `%>%` to `|>`
 
 # ** StatSigmoid ------------------------------------------------------------------
 
@@ -10,9 +10,8 @@ StatSigmoid <- ggplot2::ggproto(
   setup_data = function(data, params) {
     data <- data |>
       tidytable::group_by(PANEL) |>
-      tidytable::mutate(group = dplyr::row_number()) |>
+      tidytable::mutate(group = tidytable::row_number()) |>
       as.data.frame()
-    data |> print()
     data
   },
   compute_group = function(data, scales, smooth = 8, direction = "x") {

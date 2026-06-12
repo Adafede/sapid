@@ -43,7 +43,7 @@ plot_napping <- function(
   rownames(df_coord) <- df_coord$fraction
 
   df_coord <- df_coord |>
-    dplyr::select(-fraction, -session)
+    tidytable::select(-fraction, -session)
 
   table_words_prepared <- input_descriptors |>
     tidytable::fread() |>
@@ -121,7 +121,7 @@ plot_napping <- function(
   ## decide to use this part or not
   # single.nap_high <- single.nap |>
   #   data.frame() |>
-  #   dplyr::filter(RV.coeff >= min_rv_coeff)
+  #   tidytable::filter(RV.coeff >= min_rv_coeff)
   #
   # nappes_ok <-
   #   gsub(

@@ -55,7 +55,7 @@ plot_chasselas_modulation <- function(
         "2021-05-10" = "Fractions 64-71"
       )
     ) |>
-    dplyr::ungroup()
+    tidytable::ungroup()
 
   # p_values_wilcox <- deltas_3 |>
   #  tidytable::group_by(taste, group) |>

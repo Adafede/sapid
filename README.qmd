@@ -7,7 +7,9 @@ bibliography: grateful-refs.bib
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| include: false
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -19,23 +21,26 @@ knitr::opts_chunk$set(
 # SAPID <img src='https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg' align="right" height="139" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
-[![r-universe badge](https://adafede.r-universe.dev/sapid/badges/version?&color=blue&style=classic)](https://adafede.r-universe.dev/sapid)
+[![Codecov test
+coverage](https://codecov.io/gh/adafede/sapid/graph/badge.svg)](https://app.codecov.io/gh/adafede/sapid)
+[![r-universe
+badge](https://adafede.r-universe.dev/sapid/badges/version?&color=blue&style=classic)](https://adafede.r-universe.dev/sapid)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg)](https://doi.org/10.5281/zenodo.14616395)
 <!-- badges: end -->
 
 A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth.
 
-⚠️ This repository is not maintained and will not be except for extreme interest.
-It has just been opened for the sake of transparency.
+⚠️ This repository is not maintained and will not be except for extreme
+interest. It has just been opened for the sake of transparency.
 
 ## Installation
 
 As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "sapid",
   repos = c(
@@ -53,7 +58,8 @@ install.packages(
 
 Article: <https://doi.org/10.1016/j.crfs.2025.101043>
 
-According to which steps you used, please give credit to the authors of the tools/resources used.
+According to which steps you used, please give credit to the authors of the
+tools/resources used.
 
 ### mzmine
 
@@ -72,19 +78,22 @@ General: <https://doi.org/10.1038/s41592-019-0344-8>
 
 General: <https://doi.org/10.7554/eLife.70780>
 
-⚠️ Do not forget to cite which version you used: <https://doi.org/10.5281/zenodo.5794106>
+⚠️ Do not forget to cite which version you used:
+<https://doi.org/10.5281/zenodo.5794106>
 
 ### ISDB
 
 General: <https://doi.org/10.1021/acs.analchem.5b04804>
 
-⚠️ Do not forget to cite which version you used: <https://doi.org/10.5281/zenodo.5607185>
+⚠️ Do not forget to cite which version you used:
+<https://doi.org/10.5281/zenodo.5607185>
 
 ### TIMA
 
 General: <https://doi.org/10.3389/fpls.2019.01329>
 
-⚠️ Do not forget to cite which version you used: <https://doi.org/10.5281/zenodo.5797920>
+⚠️ Do not forget to cite which version you used:
+<https://doi.org/10.5281/zenodo.5797920>
 
 ### Others
 
@@ -92,7 +101,10 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 ## Additional software credits
 
-```{r, echo = FALSE, message = FALSE}
+```{r}
+#| echo: false
+#| message: false
+
 # Check if DESCRIPTION is in current dir
 # Else `altdoc` will not find the dependencies
 desc_path <- if (file.exists("DESCRIPTION")) {

@@ -1,5 +1,3 @@
-
-
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 # SAPID <img src='https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg' align="right" height="139" />
@@ -23,10 +21,9 @@ interest. It has just been opened for the sake of transparency.
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install
-with:
+As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "sapid",
   repos = c(
@@ -44,8 +41,8 @@ install.packages(
 
 Article: <https://doi.org/10.1016/j.crfs.2025.101043>
 
-According to which steps you used, please give credit to the authors of
-the tools/resources used.
+According to which steps you used, please give credit to the authors of the
+tools/resources used.
 
 ### mzmine
 
@@ -87,32 +84,32 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 ## Additional software credits
 
-| Package | Version | Citation |
-|:---|:---|:---|
-| AlpsNMR | 4.12.0 | Madrid-Gambin et al. (2020) |
-| base | 4.5.2 | R Core Team (2025) |
-| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
-| BiocVersion | 3.22.0 | Morgan (2025) |
-| BSDA | 1.2.2 | Arnholt and Evans (2023) |
-| cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025) |
-| dendextend | 1.19.1 | Galili (2015) |
-| FactoMineR | 2.13 | Lê, Josse, and Husson (2008) |
-| ggpubr | 0.6.2 | Kassambara (2025) |
-| ggraph | 2.2.2 | Pedersen (2025) |
-| ggrepel | 0.9.6 | Slowikowski (2024) |
-| igraph | 2.2.1 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
-| khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
-| NMRphasing | 1.0.7 | Jiang (2025) |
-| pkgload | 1.5.0 | Wickham et al. (2026) |
-| rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
-| scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
-| SensoMineR | 1.28 | Husson, Le, and Cadoret (2025) |
-| stringi | 1.8.7 | Gagolewski (2022) |
-| testthat | 3.3.2 | Wickham (2011) |
-| tidytable | 0.11.2 | Fairbanks (2024) |
-| tidyverse | 2.0.0 | Wickham et al. (2019) |
-| treemapify | 2.6.0 | Wilkins (2025) |
+  | Package     | Version    | Citation                                                                                      |
+  | :---------- | :--------- | :-------------------------------------------------------------------------------------------- |
+  | AlpsNMR     | 4.12.0     | Madrid-Gambin et al. (2020)                                                                   |
+  | base        | 4.5.2      | R Core Team (2025)                                                                            |
+  | BiocManager | 1.30.27    | Morgan and Ramos (2025)                                                                       |
+  | BiocVersion | 3.22.0     | Morgan (2025)                                                                                 |
+  | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                                                      |
+  | cascade     | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025)                                                        |
+  | dendextend  | 1.19.1     | Galili (2015)                                                                                 |
+  | FactoMineR  | 2.13       | Lê, Josse, and Husson (2008)                                                                  |
+  | ggpubr      | 0.6.2      | Kassambara (2025)                                                                             |
+  | ggraph      | 2.2.2      | Pedersen (2025)                                                                               |
+  | ggrepel     | 0.9.6      | Slowikowski (2024)                                                                            |
+  | igraph      | 2.2.1      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026)                         |
+  | khroma      | 1.17.0     | Frerebeau (2025)                                                                              |
+  | knitr       | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                                            |
+  | NMRphasing  | 1.0.7      | Jiang (2025)                                                                                  |
+  | pkgload     | 1.5.0      | Wickham et al. (2026)                                                                         |
+  | rmarkdown   | 2.30       | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
+  | scales      | 1.4.0      | Wickham, Pedersen, and Seidel (2025)                                                          |
+  | SensoMineR  | 1.28       | Husson, Le, and Cadoret (2025)                                                                |
+  | stringi     | 1.8.7      | Gagolewski (2022)                                                                             |
+  | testthat    | 3.3.2      | Wickham (2011)                                                                                |
+  | tidytable   | 0.11.2     | Fairbanks (2024)                                                                              |
+  | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                                         |
+  | treemapify  | 2.6.0      | Wilkins (2025)                                                                                |
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">

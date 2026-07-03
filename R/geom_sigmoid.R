@@ -25,7 +25,6 @@ StatSigmoid <- ggplot2::ggproto(
     )
     out
   },
-
   required_aes = c("x", "y", "xend", "yend")
 )
 

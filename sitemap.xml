@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adafede.github.io/sapid/CITATION.html</loc>
-    <lastmod>2026-02-07T20:57:20.188Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/load_session.html</loc>
-    <lastmod>2026-02-07T20:57:24.909Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/load_consistent_profiles.html</loc>
-    <lastmod>2026-02-07T20:57:23.991Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/man/get_session_info.html</loc>
-    <lastmod>2026-02-07T20:57:21.254Z</lastmod>
-  </url>
-  <url>
     <loc>https://adafede.github.io/sapid/index.html</loc>
-    <lastmod>2026-02-07T20:57:20.154Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/LICENSE.html</loc>
-    <lastmod>2026-02-07T20:57:20.083Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/sapid/NEWS.html</loc>
-    <lastmod>2026-02-07T20:57:20.074Z</lastmod>
+    <lastmod>2026-07-24T15:26:02.125Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/harmonize_terms_df.html</loc>
-    <lastmod>2026-02-07T20:57:22.198Z</lastmod>
+    <lastmod>2026-07-24T15:26:04.202Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/load_session.html</loc>
+    <lastmod>2026-07-24T15:26:07.005Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/geom_sigmoid.html</loc>
-    <lastmod>2026-02-07T20:57:20.256Z</lastmod>
+    <lastmod>2026-07-24T15:26:02.234Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/CITATION.html</loc>
+    <lastmod>2026-07-24T15:26:02.160Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/LICENSE.html</loc>
+    <lastmod>2026-07-24T15:26:02.110Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/load_consistent_profiles.html</loc>
+    <lastmod>2026-07-24T15:26:06.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/man/get_session_info.html</loc>
+    <lastmod>2026-07-24T15:26:03.269Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/harmonize_terms.html</loc>
-    <lastmod>2026-02-07T20:57:23.094Z</lastmod>
+    <lastmod>2026-07-24T15:26:05.198Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/sapid/NEWS.html</loc>
+    <lastmod>2026-07-24T15:26:02.101Z</lastmod>
   </url>
 </urlset>

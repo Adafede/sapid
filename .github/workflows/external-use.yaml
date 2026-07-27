@@ -47,6 +47,8 @@ jobs:
           brew install libomp netcdf
           LIBOMP_PREFIX="$(brew --prefix libomp)"
           NETCDF_PREFIX="$(brew --prefix netcdf)"
+          echo "CPPFLAGS+=-I$GETTEXT_PREFIX/include" >> $GITHUB_ENV
+          echo "LDFLAGS+=-L$GETTEXT_PREFIX/lib" >> $GITHUB_ENV
 
       - name: Install dependencies (Windows)
         if: contains(matrix.os, 'windows')

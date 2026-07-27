@@ -45,10 +45,11 @@ jobs:
         run: |
           brew update
           brew install libomp netcdf
-          LIBOMP_PREFIX="$(brew --prefix libomp)"
-          NETCDF_PREFIX="$(brew --prefix netcdf)"
-          echo "CPPFLAGS+=-I$GETTEXT_PREFIX/include" >> $GITHUB_ENV
-          echo "LDFLAGS+=-L$GETTEXT_PREFIX/lib" >> $GITHUB_ENV
+          GETTEXT_PREFIX="$(brew --prefix gettext)"
+          cat >> ~/.R/Makevars <<EOF
+          CPPFLAGS += -I${GETTEXT_PREFIX}/include
+          LDFLAGS  += -L${GETTEXT_PREFIX}/lib -lintl
+          EOF
 
       - name: Install dependencies (Windows)
         if: contains(matrix.os, 'windows')

@@ -44,7 +44,7 @@ jobs:
         if: contains(matrix.os, 'macos')
         run: |
           brew update
-          brew install libomp netcdf
+          brew install netcdf
           GETTEXT_PREFIX="$(brew --prefix gettext)"
           mkdir -p ~/.R
           cat >> ~/.R/Makevars <<EOF

@@ -42,6 +42,8 @@
 ^vignettes/articles/.*_files$
 ^vignettes/\.quarto$
 
+^grateful-refs\.bib$
+
 ^LICENSE\.md$
 
 _\.new\.png$

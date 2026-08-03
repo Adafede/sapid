@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots matrices before and after vocabulary curation.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -16,11 +14,17 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_matrices <- function(
-  input = system.file("extdata", "profiles.tsv", package = "sapid"),
+  input = NULL,
   output = "./data/figures/figure_matrices.pdf"
 ) {
-  table_profiles <- input |>
-    tidytable::fread() |>
+  if (is.null(input)) {
+    data(profiles)
+    input_data <- profiles
+  } else {
+    input_data <- tidytable::fread(input)
+  }
+
+  table_profiles <- input_data |>
     # tidytable::mutate(value = tidytable::if_else(
     #   condition = session == "session_03",
     #   true = value / 500,

@@ -1,25 +1,36 @@
 #' Load consistent profiles
 #'
-#' @param input Input
-#' @param min_jury Min jury. Default to 2.
+#' Filter profiles to keep only taste descriptors that are consistently
+#' used across multiple panelists (minimum jury threshold). Uses fastmatch
+#' for efficient ID lookups.
 #'
-#' @return NULL
+#' @param input Input data frame or file path to profiles table
+#' @param min_jury Minimum number of jurors who must use a taste descriptor
+#'   for it to be kept. Default: 2.
 #'
-#' @examples NULL
+#' @details
+#' This function filters sensory data to keep only taste descriptors that appear
+#' consistently across at least `min_jury` panelists. It removes descriptors that
+#' are used by only one panelist (potentially idiosyncratic terms).
+#'
+#' @return Data frame with consistent profiles and grouped statistics
+#'
+#' @examples
+#' data(profiles)
+#' consistent <- load_consistent_profiles(profiles, min_jury = 2)
+#' nrow(consistent)
+#'
 load_consistent_profiles <- function(input, min_jury = 2L) {
-  profiles <- input |>
-    tidytable::fread() |>
-    # tidytable::mutate(value = tidytable::if_else(
-    #   condition = session == "session_03",
-    #   true = value / 500,
-    #   false = value
-    # )) |>
-    # tidytable::mutate(value = tidytable::if_else(
-    #   condition = session == "session_03",
-    #   true = value / 500,
-    #   false = value
-    # )) |>
-    tidytable::distinct()
+  # Load data if file path given, otherwise use data frame
+  profiles <- if (is.character(input)) {
+    tidytable::fread(input)
+  } else {
+    {
+      input
+    } |>
+      as.data.frame(stringsAsFactors = FALSE) |>
+      tidytable::distinct()
+  }
 
   n_panelists <- profiles |>
     tidytable::distinct(fraction, jury) |>
@@ -36,6 +47,7 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     tidytable::filter(taste != "") |>
     tidytable::ungroup()
 
+  # Use fastmatch::%fin% for faster taste descriptor filtering
   profiles_consistent <- profiles |>
     tidytable::left_join(n_panelists) |>
     tidytable::select(
@@ -47,7 +59,10 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
       value
     ) |>
     tidytable::rename(taste = taste_harmonized) |>
-    tidytable::filter(taste %in% consistent_descriptors$taste) |>
+    tidytable::filter(fastmatch::`%fin%`(
+      taste,
+      consistent_descriptors$taste
+    )) |>
     tidytable::group_by(fraction, taste) |>
     tidytable::mutate(
       sum = value |>

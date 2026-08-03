@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots correlations.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -32,7 +30,7 @@ message("Contributors: \n", "...")
 plot_correlations <- function(
   input_correlations = "./data/correlations.tsv",
   input_ions = "./data/fractions_mzmine/fractions.csv",
-  input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
+  input_tastes = NULL,
   output_1 = "./data/figures/figure_correlations_1.pdf",
   output_2 = "./data/figures/figure_correlations_2.pdf",
   output_3 = "./data/figures/figure_correlations_3.pdf",
@@ -130,7 +128,12 @@ plot_correlations <- function(
     ) |>
     tidytable::ungroup()
 
-  df_taste_intensities <- input_tastes |>
+  df_taste_intensities <- (if (is.null(input_tastes)) {
+    data(profiles)
+    profiles
+  } else {
+    tidytable::fread(input_tastes)
+  }) |>
     load_consistent_profiles(min_jury = min_jury) |>
     tidytable::mutate(tidytable::across(
       tidytable::everything(),

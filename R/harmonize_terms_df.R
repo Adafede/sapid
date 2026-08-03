@@ -1,13 +1,18 @@
-#' Harmonize terms df
+#' Harmonize terms in a data frame
 #'
-#' @param df Df
-#' @param dictionary_generic_path Dictionary generic path
-#' @param dictionary_napping_path Dictionary napping path
-#' @param dictionary_specific_path Dictionary specific path
+#' Apply harmonization to multiple taste terms in a data frame using
+#' provided dictionaries. Optimized with fastmatch for ID lookups
+#' and stringi for fixed-string replacements.
 #'
-#' @return NULL
+#' @param df Data frame containing taste/descriptor columns
+#' @param dictionary_generic_path Path to generic dict or data frame object
+#' @param dictionary_napping_path Path to napping dict or data frame object
+#' @param dictionary_specific_path Path to specific dict or data frame object
+#'
+#' @return Data frame with harmonized taste terms
 #'
 #' @examples NULL
+#'
 harmonize_terms_df <- function(
   df,
   dictionary_generic_path,
@@ -56,7 +61,7 @@ harmonize_terms_df <- function(
     tidytable::mutate(
       taste = tidytable::if_else(
         condition = !is.na(intensity),
-        true = paste(newValue, intensity, sep = "_"),
+        true = stringi::stri_paste(newValue, intensity, sep = "_"),
         false = newValue
       )
     ) |>

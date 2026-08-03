@@ -2,7 +2,7 @@
 % Please edit documentation in R/harmonize_terms_df.R
 \name{harmonize_terms_df}
 \alias{harmonize_terms_df}
-\title{Harmonize terms df}
+\title{Harmonize terms in a data frame}
 \usage{
 harmonize_terms_df(
   df,
@@ -12,17 +12,22 @@ harmonize_terms_df(
 )
 }
 \arguments{
-\item{df}{Df}
+\item{df}{Data frame containing taste/descriptor columns}
 
-\item{dictionary_generic_path}{Dictionary generic path}
+\item{dictionary_generic_path}{Path to generic dict or data frame object}
 
-\item{dictionary_napping_path}{Dictionary napping path}
+\item{dictionary_napping_path}{Path to napping dict or data frame object}
 
-\item{dictionary_specific_path}{Dictionary specific path}
+\item{dictionary_specific_path}{Path to specific dict or data frame object}
+}
+\value{
+Data frame with harmonized taste terms
 }
 \description{
-Harmonize terms df
+Apply harmonization to multiple taste terms in a data frame using
+provided dictionaries and stringi-backed term processing.
 }
 \examples{
 NULL
+
 }

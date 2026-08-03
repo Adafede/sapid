@@ -7,13 +7,27 @@
 load_consistent_profiles(input, min_jury = 2L)
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Input data frame or file path to profiles table}
 
-\item{min_jury}{Min jury. Default to 2.}
+\item{min_jury}{Minimum number of jurors who must use a taste descriptor
+for it to be kept. Default: 2.}
+}
+\value{
+Data frame with consistent profiles and grouped statistics
 }
 \description{
-Load consistent profiles
+Filter profiles to keep only taste descriptors that are consistently
+used across multiple panelists (minimum jury threshold). Uses fastmatch
+for efficient ID lookups.
+}
+\details{
+This function filters sensory data to keep only taste descriptors that appear
+consistently across at least \code{min_jury} panelists. It removes descriptors that
+are used by only one panelist (potentially idiosyncratic terms).
 }
 \examples{
-NULL
+data(profiles)
+consistent <- load_consistent_profiles(profiles, min_jury = 2)
+nrow(consistent)
+
 }

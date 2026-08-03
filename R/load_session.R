@@ -1,10 +1,13 @@
 #' Load session
 #'
-#' @param input_dir Input dir
-#' @param session_info Session info
-#' @param tab Tab
+#' Load and prepare data from a single sensory panel session.
+#' Uses stringi for efficient string operations.
 #'
-#' @return NULL
+#' @param input_dir Input directory path
+#' @param session_info Session metadata (date, cluster, product_name)
+#' @param tab Table type to load ('chasselas', 'napping_coord', 'napping_words', 'profiles')
+#'
+#' @return Data frame with loaded and processed session data
 #'
 #' @examples NULL
 load_session <- function(input_dir, session_info, tab) {
@@ -26,11 +29,12 @@ load_session <- function(input_dir, session_info, tab) {
   ) |>
     readxl::read_xlsx(sheet = sheet)
 
+  # Use stringi::stri_replace_all_fixed for faster fixed-string replacement
   df <- df |>
     tidytable::rename_with(
       .cols = tidytable::starts_with("J"),
       .fn = function(cols) {
-        gsub("^J(\\d)([A-Z])", "J0\\1\\2", cols)
+        stringi::stri_replace_all_regex(cols, "^J(\\d)([A-Z])", "J0$1$2")
       }
     )
 

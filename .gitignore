@@ -48,7 +48,12 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-data/
+data/correlations.tsv
+data/extract_mzmine
+data/figures
+data/fractions_mzmine
+data/interim
+data/processed
 
 # MacOS
 .DS_Store

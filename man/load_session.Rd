@@ -7,14 +7,18 @@
 load_session(input_dir, session_info, tab)
 }
 \arguments{
-\item{input_dir}{Input dir}
+\item{input_dir}{Input directory path}
 
-\item{session_info}{Session info}
+\item{session_info}{Session metadata (date, cluster, product_name)}
 
-\item{tab}{Tab}
+\item{tab}{Table type to load ('chasselas', 'napping_coord', 'napping_words', 'profiles')}
+}
+\value{
+Data frame with loaded and processed session data
 }
 \description{
-Load session
+Load and prepare data from a single sensory panel session.
+Uses stringi for efficient string operations.
 }
 \examples{
 NULL

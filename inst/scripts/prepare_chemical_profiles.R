@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program prepares chemical profiles")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")

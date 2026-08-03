@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots chromatograms.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -20,12 +18,19 @@ message("Contributors: \n", "...")
 #' @examples NULL
 plot_chromatograms <- function(
   input_dir = "./data/20210619",
-  input_groups = system.file("extdata", "groups.tsv", package = "sapid"),
+  input_groups = NULL,
   raw_index = 7,
   fractions_indices = 12:65,
   xlim = c(2, 25),
   output = "./data/figures/figure_chromatograms.pdf"
 ) {
+  if (is.null(input_groups)) {
+    data(groups)
+    table_groups <- groups
+  } else {
+    table_groups <- tidytable::fread(input_groups)
+  }
+
   files <- input_dir |>
     list.files(
       path = ,
@@ -33,8 +38,8 @@ plot_chromatograms <- function(
       full.names = TRUE
     )
 
-  groups <- input_groups |>
-    tidytable::fread()
+  # Continue with rest of function using table_groups instead of re-reading
+  groups <- table_groups
 
   extract_chromatogram_df <- function(file) {
     cascade:::preprocess_chromatograms(

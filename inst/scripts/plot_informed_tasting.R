@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message(
   "This program plots a comparison between classical and chemically informed analysis."
 )

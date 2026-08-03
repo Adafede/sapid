@@ -3,18 +3,32 @@
 #' Replace terms in a given string using a dictionary, with intelligent matching
 #' and case-insensitive handling.
 #'
-#' @param dictionary Path to the dictionary file or a data frame containing
-#'   replacement terms
+#' @param dictionary Path to the dictionary file, a data frame containing
+#'   replacement terms, or NULL to use cached environment dictionaries
 #' @param x Character string to be cleaned
 #' @param mode Replacement mode: 'word' for word boundary matching,
-#'   'substring' for partial matching
+#'   'substring' for partial matching, 'fixed' for fast fixed-string matching
 #' @param fallback Logical, whether to fall back to original string if
 #'   no replacements occur
+#'
+#' @details
+#' For better performance when calling this function repeatedly on many strings,
+#' pass a pre-loaded dictionary data frame instead of a file path. The function
+#' now uses [stringi::stri_replace_all_fixed()] for 'fixed' mode, which is
+#' significantly faster than regex-based matching for literal strings.
 #'
 #' @return Character string with terms replaced
 #'
 #' @examples
 #' \dontrun{
+#' # Using data frame dictionary (faster)
+#' data(dictionary_generic)
+#' harmonize_terms(
+#'   dictionary = dictionary_generic,
+#'   x = "Some text with specific terms"
+#' )
+#'
+#' # Using file path (legacy, slower)
 #' harmonize_terms(
 #'   dictionary = "path/to/dictionary.csv",
 #'   x = "Some text with specific terms"
@@ -22,14 +36,25 @@
 #' }
 #'
 harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
-  # Prepare dictionary
-  prepared_dict <- dictionary |>
-    tidytable::fread() |>
-    tidytable::mutate(
-      n = original |>
-        stringi::stri_length()
-    ) |>
-    tidytable::arrange(tidytable::desc(n))
+  # Prepare dictionary: accept data frame or file path
+  prepared_dict <- if (is.character(dictionary)) {
+    # Legacy: load from file path
+    tidytable::fread(dictionary) |>
+      tidytable::mutate(
+        n = original |>
+          stringi::stri_length()
+      ) |>
+      tidytable::arrange(tidytable::desc(n))
+  } else {
+    # Modern: use pre-loaded data frame (already tibble, just ensure sorted by length)
+    dictionary |>
+      as.data.frame(stringsAsFactors = FALSE) |>
+      tidytable::mutate(
+        n = original |>
+          stringi::stri_length()
+      ) |>
+      tidytable::arrange(tidytable::desc(n))
+  }
 
   replacement <- if ("translated_simple" %in% names(prepared_dict)) {
     prepared_dict$translated_simple
@@ -37,24 +62,38 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     prepared_dict$translated
   }
 
-  # Prepare pattern based on mode
-  pattern <- if (mode == "word") {
-    paste0("\\b", prepared_dict$original, "\\b")
-  } else {
-    prepared_dict$original
-  }
-
   # Convert to uppercase for consistent matching
   processed_string <- toupper(x)
 
-  # Perform replacements
-  replaced <- stringi::stri_replace_all_regex(
-    str = processed_string,
-    pattern = pattern,
-    replacement = replacement,
-    case_insensitive = FALSE,
-    vectorize_all = FALSE
-  )
+  # Perform replacements using appropriate method
+  replaced <- if (mode == "fixed") {
+    # Fast fixed-string replacement for literal matches
+    stringi::stri_replace_all_fixed(
+      str = processed_string,
+      pattern = prepared_dict$original,
+      replacement = replacement,
+      vectorize_all = FALSE
+    )
+  } else if (mode == "word") {
+    # Word boundary matching (regex)
+    pattern <- paste0("\\b", prepared_dict$original, "\\b")
+    stringi::stri_replace_all_regex(
+      str = processed_string,
+      pattern = pattern,
+      replacement = replacement,
+      case_insensitive = FALSE,
+      vectorize_all = FALSE
+    )
+  } else {
+    # Substring matching (regex without word boundaries)
+    stringi::stri_replace_all_regex(
+      str = processed_string,
+      pattern = prepared_dict$original,
+      replacement = replacement,
+      case_insensitive = FALSE,
+      vectorize_all = FALSE
+    )
+  }
 
   # Handle fallback if requested
   if (fallback) {

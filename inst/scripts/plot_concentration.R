@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots concentration evaluation.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -15,12 +13,16 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_concentration <- function(
-  input = system.file("extdata", "concentration_afc.tsv", package = "sapid"),
+  input = NULL,
   output = "./data/figures/figure_raw_extract.pdf"
 ) {
   message("Loading file...\n")
-  prepared <- input |>
-    tidytable::fread()
+  if (is.null(input)) {
+    data(concentration_afc)
+    prepared <- concentration_afc
+  } else {
+    prepared <- tidytable::fread(input)
+  }
 
   counted <- prepared |>
     tidytable::mutate(correct_percent = afc_correct / afc_total) |>

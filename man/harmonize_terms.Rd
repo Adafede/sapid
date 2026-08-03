@@ -7,13 +7,13 @@
 harmonize_terms(dictionary, x, mode = "word", fallback = FALSE)
 }
 \arguments{
-\item{dictionary}{Path to the dictionary file or a data frame containing
-replacement terms}
+\item{dictionary}{Path to the dictionary file, a data frame containing
+replacement terms, or NULL to use cached environment dictionaries}
 
 \item{x}{Character string to be cleaned}
 
 \item{mode}{Replacement mode: 'word' for word boundary matching,
-'substring' for partial matching}
+'substring' for partial matching, 'fixed' for fast fixed-string matching}
 
 \item{fallback}{Logical, whether to fall back to original string if
 no replacements occur}
@@ -25,8 +25,22 @@ Character string with terms replaced
 Replace terms in a given string using a dictionary, with intelligent matching
 and case-insensitive handling.
 }
+\details{
+For better performance when calling this function repeatedly on many strings,
+pass a pre-loaded dictionary data frame instead of a file path. The function
+now uses \code{\link[stringi:stri_replace_all_fixed]{stringi::stri_replace_all_fixed()}} for 'fixed' mode, which is
+significantly faster than regex-based matching for literal strings.
+}
 \examples{
 \dontrun{
+# Using data frame dictionary (faster)
+data(dictionary_generic)
+harmonize_terms(
+  dictionary = dictionary_generic,
+  x = "Some text with specific terms"
+)
+
+# Using file path (legacy, slower)
 harmonize_terms(
   dictionary = "path/to/dictionary.csv",
   x = "Some text with specific terms"

@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program calculates ion/taste intensities correlations.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -21,7 +19,7 @@ message("Contributors: \n", "...")
 #' @examples NULL
 correlate_ion_taste_intensities <- function(
   input_ions = "./data/fractions_mzmine/fractions.csv",
-  input_tastes = system.file("extdata", "profiles.tsv", package = "sapid"),
+  input_tastes = NULL,
   output = "./data/correlations.tsv",
   # tastes = c(
   #   "BITTER",
@@ -92,7 +90,12 @@ correlate_ion_taste_intensities <- function(
     ) |>
     tidytable::arrange(fraction)
 
-  df_taste_intensities <- input_tastes |>
+  df_taste_intensities <- (if (is.null(input_tastes)) {
+    data(profiles)
+    profiles
+  } else {
+    tidytable::fread(input_tastes)
+  }) |>
     load_consistent_profiles(min_jury = min_jury) |>
     tidytable::mutate(tidytable::across(
       tidytable::everything(),

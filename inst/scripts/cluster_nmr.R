@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program clusters proton NMR spectra.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")

@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots profiles")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -27,7 +25,7 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_profiles <- function(
-  input = system.file("extdata", "profiles.tsv", package = "sapid"),
+  input = NULL,
   output = "./data/figures/figure_profiles.pdf",
   annotation_path_extract = "~/Git/sapid/data/processed/241026_103144_extract/extract_results.tsv",
   annotation_path_fractions = "~/Git/sapid/data/processed/241217_130815_fractions/fractions_results.tsv",
@@ -42,8 +40,13 @@ plot_profiles <- function(
   detector = "ms",
   type = "analysis"
 ) {
-  profiles_consistent <- input |>
-    load_consistent_profiles()
+  if (is.null(input)) {
+    data(profiles)
+    profiles_consistent <- load_consistent_profiles(profiles)
+  } else {
+    profiles_consistent <- input |>
+      load_consistent_profiles()
+  }
 
   profiles_consistent <- profiles_consistent |>
     tidytable::mutate(

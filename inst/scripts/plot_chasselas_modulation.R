@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots chasselas taste modulation.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -15,11 +13,17 @@ message("Contributors: \n", "...")
 #'
 #' @examples NULL
 plot_chasselas_modulation <- function(
-  input = system.file("extdata", "chasselas.tsv", package = "sapid"),
+  input = NULL,
   output = "./data/figures/figure_modulation.pdf"
 ) {
-  deltas <- input |>
-    tidytable::fread() |>
+  if (is.null(input)) {
+    data(chasselas)
+    input_data <- chasselas
+  } else {
+    input_data <- tidytable::fread(input)
+  }
+
+  deltas <- input_data |>
     tidytable::pivot_wider(names_from = product, values_from = value) |>
     tidytable::mutate(delta = product_2after - product_1before)
 

@@ -1,7 +1,5 @@
 start <- Sys.time()
 
-pkgload::load_all()
-
 message("This program plots descriptors network.")
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
@@ -16,11 +14,17 @@ message("Contributors: \n", "...")
 #' @examples NULL
 #'
 plot_descriptors_network <- function(
-  input = system.file("extdata", "napping_descriptors.tsv", package = "sapid"),
+  input = NULL,
   output = "./data/figures/figure_network.pdf"
 ) {
-  table_descriptors <- input |>
-    tidytable::fread() |>
+  if (is.null(input)) {
+    data(napping_descriptors)
+    input_data <- napping_descriptors
+  } else {
+    input_data <- tidytable::fread(input)
+  }
+
+  table_descriptors <- input_data |>
     tidytable::filter(taste_harmonized != "") |>
     tidytable::distinct(fraction, jury, taste_original, taste_harmonized) |>
     tidytable::group_by(taste_original) |>

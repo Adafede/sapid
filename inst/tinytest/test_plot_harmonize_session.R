@@ -68,7 +68,10 @@ expect_identical(
   which(names(harmonized) == "taste"),
   which(names(harmonized) == "name") + 1L
 )
-expect_identical(sort(harmonized$taste), sort(c("ACID_3", "BITTER_1", "CITRUS_2")))
+expect_identical(
+  sort(harmonized$taste),
+  sort(c("ACID_3", "BITTER_1", "CITRUS_2"))
+)
 
 
 # load_session branch behavior is checked with a real multi-sheet xlsx fixture
@@ -81,7 +84,11 @@ if (!file.exists(fixture)) {
   fixture <- file.path("inst", "tinytest", "fixtures", "session_fixture.xlsx")
 }
 expect_true(file.exists(fixture))
-expect_true(file.copy(fixture, file.path(xlsx_dir, "session.xlsx"), overwrite = TRUE))
+expect_true(file.copy(
+  fixture,
+  file.path(xlsx_dir, "session.xlsx"),
+  overwrite = TRUE
+))
 
 loaded_chasselas <- load_session(input_dir, session_info, "chasselas")
 expect_true("session" %in% names(loaded_chasselas))
@@ -98,12 +105,9 @@ expect_false("Produit" %in% names(loaded_napping))
 expect_true(all(loaded_napping$session == "session_06"))
 
 loaded_profiles <- load_session(input_dir, session_info, "profiles")
-expect_true(all(c("session", "ProductName", "name", "value") %in% names(loaded_profiles)))
+expect_true(all(
+  c("session", "ProductName", "name", "value") %in% names(loaded_profiles)
+))
 expect_false("drop_me" %in% names(loaded_profiles))
 expect_false(anyNA(loaded_profiles$value))
 expect_true(all(loaded_profiles$name %in% c("J01A", "J02B")))
-
-
-
-
-

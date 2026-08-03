@@ -90,4 +90,3 @@ expect_true(all(consistent$taste == "BITTER"))
 expect_identical(nrow(consistent), 3L)
 expect_true(all(c("sum", "sum_taste", "group") %in% names(consistent)))
 expect_true(all(consistent$sum_taste == 7))
-

@@ -26,8 +26,10 @@ consistently across at least \code{min_jury} panelists. It removes descriptors t
 are used by only one panelist (potentially idiosyncratic terms).
 }
 \examples{
+\dontrun{
 data(profiles)
 consistent <- load_consistent_profiles(profiles, min_jury = 2)
 nrow(consistent)
+}
 
 }

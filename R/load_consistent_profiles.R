@@ -16,9 +16,11 @@
 #' @return Data frame with consistent profiles and grouped statistics
 #'
 #' @examples
+#' \dontrun{
 #' data(profiles)
 #' consistent <- load_consistent_profiles(profiles, min_jury = 2)
 #' nrow(consistent)
+#' }
 #'
 load_consistent_profiles <- function(input, min_jury = 2L) {
   # Load data if file path given, otherwise use data frame

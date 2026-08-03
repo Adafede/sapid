@@ -100,7 +100,9 @@ NULL
 #' \describe{
 #'   \item{fraction}{Fraction identifier (e.g., "fraction_17")}
 #'   \item{session}{Session identifier (e.g., "session_01")}
-#'   \item{J01X, J01Y, J02X, J02Y, ...}{Napping coordinates for each juror;
+#'   \item{J01X, J01Y, J02X, J02Y, J03X, J03Y, J04X, J04Y, J05X, J05Y, J06X,
+#'     J06Y, J07X, J07Y, J08X, J08Y, J09X, J09Y, J10X, J10Y, J11X, J11Y, J12X,
+#'     J12Y, J13X, J13Y, J14X, J14Y}{Napping coordinates for each juror;
 #'     column pairs (JxxX, JxxY) represent X and Y positions assigned by
 #'     juror Jxx}
 #' }

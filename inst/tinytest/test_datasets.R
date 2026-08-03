@@ -5,7 +5,10 @@ data(chasselas, package = "sapid")
 expect_true(is.data.frame(chasselas))
 expect_identical(nrow(chasselas), 1314L)
 expect_identical(ncol(chasselas), 6L)
-expect_identical(names(chasselas), c("date", "jury", "product", "session", "taste", "value"))
+expect_identical(
+  names(chasselas),
+  c("date", "jury", "product", "session", "taste", "value")
+)
 expect_true(inherits(chasselas$date, "POSIXct"))
 expect_identical(typeof(chasselas$jury), "character")
 expect_identical(typeof(chasselas$product), "character")
@@ -42,7 +45,14 @@ expect_identical(nrow(profiles), 1665L)
 expect_identical(ncol(profiles), 6L)
 expect_identical(
   names(profiles),
-  c("fraction", "session", "jury", "taste_original", "taste_harmonized", "value")
+  c(
+    "fraction",
+    "session",
+    "jury",
+    "taste_original",
+    "taste_harmonized",
+    "value"
+  )
 )
 expect_identical(typeof(profiles$fraction), "character")
 expect_identical(typeof(profiles$session), "character")
@@ -134,4 +144,3 @@ expect_identical(typeof(dictionary_specific$original), "character")
 expect_identical(typeof(dictionary_specific$translated), "character")
 expect_identical(typeof(dictionary_specific$translated_simple), "character")
 expect_false(anyNA(dictionary_specific$original))
-

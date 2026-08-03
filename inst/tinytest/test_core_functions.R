@@ -1,6 +1,11 @@
 library(tinytest)
 
-message("Fast function checks")
+message("Core function checks")
+ns <- asNamespace("sapid")
+get_session_info <- get("get_session_info", envir = ns)
+harmonize_terms <- get("harmonize_terms", envir = ns)
+load_consistent_profiles <- get("load_consistent_profiles", envir = ns)
+
 
 # get_session_info: deterministic mapping
 session_1 <- get_session_info(1)
@@ -37,7 +42,11 @@ expect_identical(fixed_out, "ACID-ACID")
 # harmonize_terms with dictionary file path
 path_dict <- tempfile(fileext = ".tsv")
 utils::write.table(
-  data.frame(original = "UMAMI", translated = "SAVORY", stringsAsFactors = FALSE),
+  data.frame(
+    original = "UMAMI",
+    translated = "SAVORY",
+    stringsAsFactors = FALSE
+  ),
   file = path_dict,
   sep = "\t",
   row.names = FALSE,
@@ -52,8 +61,22 @@ expect_identical(path_out, "SAVORY")
 
 # load_consistent_profiles keeps descriptors used by at least min_jury panelists
 small_profiles <- data.frame(
-  fraction = c("fraction_1", "fraction_1", "fraction_1", "fraction_2", "fraction_2", "fraction_2"),
-  session = c("session_1", "session_1", "session_1", "session_1", "session_1", "session_1"),
+  fraction = c(
+    "fraction_1",
+    "fraction_1",
+    "fraction_1",
+    "fraction_2",
+    "fraction_2",
+    "fraction_2"
+  ),
+  session = c(
+    "session_1",
+    "session_1",
+    "session_1",
+    "session_1",
+    "session_1",
+    "session_1"
+  ),
   jury = c("jury_1", "jury_2", "jury_3", "jury_1", "jury_2", "jury_3"),
   taste_original = c("AMER", "AMER", "ACIDE", "AMER", "RIEN", "RIEN"),
   taste_harmonized = c("BITTER", "BITTER", "ACID", "BITTER", "", NA_character_),

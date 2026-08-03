@@ -84,40 +84,41 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 
 ## Additional software credits
 
-  | Package     | Version    | Citation                                                                                      |
-  | :---------- | :--------- | :-------------------------------------------------------------------------------------------- |
-  | AlpsNMR     | 4.12.0     | Madrid-Gambin et al. (2020)                                                                   |
-  | base        | 4.5.2      | R Core Team (2025)                                                                            |
-  | BiocManager | 1.30.27    | Morgan and Ramos (2025)                                                                       |
-  | BiocVersion | 3.22.0     | Morgan (2025)                                                                                 |
-  | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                                                      |
-  | cascade     | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025)                                                        |
-  | dendextend  | 1.19.1     | Galili (2015)                                                                                 |
-  | FactoMineR  | 2.13       | Lê, Josse, and Husson (2008)                                                                  |
-  | ggpubr      | 0.6.2      | Kassambara (2025)                                                                             |
-  | ggraph      | 2.2.2      | Pedersen (2025)                                                                               |
-  | ggrepel     | 0.9.6      | Slowikowski (2024)                                                                            |
-  | igraph      | 2.2.1      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026)                         |
-  | khroma      | 1.17.0     | Frerebeau (2025)                                                                              |
-  | knitr       | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                                            |
-  | NMRphasing  | 1.0.7      | Jiang (2025)                                                                                  |
-  | pkgload     | 1.5.0      | Wickham et al. (2026)                                                                         |
-  | rmarkdown   | 2.30       | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
-  | scales      | 1.4.0      | Wickham, Pedersen, and Seidel (2025)                                                          |
-  | SensoMineR  | 1.28       | Husson, Le, and Cadoret (2025)                                                                |
-  | stringi     | 1.8.7      | Gagolewski (2022)                                                                             |
-  | testthat    | 3.3.2      | Wickham (2011)                                                                                |
-  | tidytable   | 0.11.2     | Fairbanks (2024)                                                                              |
-  | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                                         |
-  | treemapify  | 2.6.0      | Wilkins (2025)                                                                                |
+  | Package     | Version    | Citation                                                              |
+  | :---------- | :--------- | :-------------------------------------------------------------------- |
+  | AlpsNMR     | 4.14.0     | Madrid-Gambin et al. (2020)                                           |
+  | base        | 4.6.1      | R Core Team (2026)                                                    |
+  | BiocManager | 1.30.27    | Morgan and Ramos (2025)                                               |
+  | BiocVersion | 3.23.1     | Morgan (2025)                                                         |
+  | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                              |
+  | cascade     | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                               |
+  | cheapr      | 1.5.2      | Christofides (2026)                                                   |
+  | dendextend  | 1.19.1     | Galili (2015)                                                         |
+  | FactoMineR  | 2.16       | Lê et al. (2008)                                                      |
+  | fastmatch   | 1.1.8      | Urbanek (2026)                                                        |
+  | ggpubr      | 1.0.0      | Kassambara (2026)                                                     |
+  | ggraph      | 2.2.2      | Pedersen (2025)                                                       |
+  | ggrepel     | 0.9.8      | Slowikowski (2026)                                                    |
+  | igraph      | 2.3.3      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
+  | khroma      | 1.17.0     | Frerebeau (2025)                                                      |
+  | knitr       | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                    |
+  | NMRphasing  | 1.0.7      | Jiang (2025)                                                          |
+  | pkgload     | 1.5.3      | Wickham et al. (2026)                                                 |
+  | rmarkdown   | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)           |
+  | sapid       | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b)                                      |
+  | scales      | 1.4.0      | Wickham et al. (2025)                                                 |
+  | SensoMineR  | 1.28       | Husson et al. (2025)                                                  |
+  | stringi     | 1.8.7      | Gagolewski (2022)                                                     |
+  | tidytable   | 0.11.2     | Fairbanks (2024)                                                      |
+  | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                 |
+  | tinytest    | 1.4.3      | <span class="nocase">van der Loo</span> (2020)                        |
+  | treemapify  | 2.6.1      | Wilkins (2026)                                                        |
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-rmarkdown2025" class="csl-entry">
+<div id="ref-rmarkdown2026" class="csl-entry">
 
-Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier
-Luraschi, Kevin Ushey, Aron Atkins, et al. 2025.
+Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
 
@@ -125,11 +126,10 @@ Luraschi, Kevin Ushey, Aron Atkins, et al. 2025.
 
 <div id="ref-igraph2023" class="csl-entry">
 
-Antonov, Michael, Gábor Csárdi, Szabolcs Horvát, Kirill Müller, Tamás
-Nepusz, Daniel Noom, Maëlle Salmon, Vincent Traag, Brooke Foucault
-Welles, and Fabio Zanini. 2023. “Igraph Enables Fast and Robust Network
-Analysis Across Programming Languages.” *arXiv Preprint
-arXiv:2311.10260*. <https://doi.org/10.48550/arXiv.2311.10260>.
+Antonov, Michael, Gábor Csárdi, Szabolcs Horvát, et al. 2023. “Igraph
+Enables Fast and Robust Network Analysis Across Programming Languages.”
+*arXiv Preprint arXiv:2311.10260*, ahead of print.
+<https://doi.org/10.48550/arXiv.2311.10260>.
 
 </div>
 
@@ -137,6 +137,14 @@ arXiv:2311.10260*. <https://doi.org/10.48550/arXiv.2311.10260>.
 
 Arnholt, Alan T., and Ben Evans. 2023. *BSDA: Basic Statistics and Data
 Analysis*. <https://doi.org/10.32614/CRAN.package.BSDA>.
+
+</div>
+
+<div id="ref-cheapr" class="csl-entry">
+
+Christofides, Nick. 2026. *<span class="nocase">cheapr</span>: Simple
+Functions to Save Time and Memory*.
+<https://doi.org/10.32614/CRAN.package.cheapr>.
 
 </div>
 
@@ -150,10 +158,9 @@ Complex Network Research.” *InterJournal* Complex Systems: 1695.
 
 <div id="ref-igraph2026" class="csl-entry">
 
-Csárdi, Gábor, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio
-Zanini, Daniel Noom, Kirill Müller, David Schoch, and Maëlle Salmon.
-2026. *<span class="nocase">igraph</span>: Network Analysis and
-Visualization in r*. <https://doi.org/10.5281/zenodo.7682609>.
+Csárdi, Gábor, Tamás Nepusz, Vincent Traag, et al. 2026.
+*<span class="nocase">igraph</span>: Network Analysis and Visualization
+in r*. <https://doi.org/10.5281/zenodo.7682609>.
 
 </div>
 
@@ -168,8 +175,8 @@ Interface to “<span class="nocase">data.table</span>”*.
 <div id="ref-khroma" class="csl-entry">
 
 Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
-for Scientific Data Visualization</span>*. Pessac, France: Université
-Bordeaux Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
+for Scientific Data Visualization</span>*. Université Bordeaux
+Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 
 </div>
 
@@ -185,7 +192,7 @@ Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
 
 Galili, Tal. 2015. “<span class="nocase">dendextend</span>: An r Package
 for Visualizing, Adjusting, and Comparing Trees of Hierarchical
-Clustering.” *Bioinformatics*.
+Clustering.” *Bioinformatics*, ahead of print.
 <https://doi.org/10.1093/bioinformatics/btv428>.
 
 </div>
@@ -208,9 +215,9 @@ Correction for One Dimensional (“1D”) “NMR” Data*.
 
 <div id="ref-ggpubr" class="csl-entry">
 
-Kassambara, Alboukadel. 2025. *<span class="nocase">ggpubr</span>:
+Kassambara, Alboukadel. 2026. *<span class="nocase">ggpubr</span>:
 “<span class="nocase">ggplot2</span>” Based Publication Ready Plots*.
-<https://doi.org/10.32614/CRAN.package.ggpubr>.
+<https://CRAN.R-project.org/package=ggpubr>.
 
 </div>
 
@@ -224,9 +231,9 @@ Package for Multivariate Analysis.” *Journal of Statistical Software* 25
 
 <div id="ref-AlpsNMR" class="csl-entry">
 
-Madrid-Gambin, Francisco, Oller-Moreno, Sergio, Fernandez, Luis,
-Bartova, et al. 2020. “AlpsNMR: An r Package for Signal Processing of
-Fully Untargeted NMR-Based Metabolomics.” *Bioinformatics*, January.
+Madrid-Gambin, Francisco, Oller-Moreno, et al. 2020. “AlpsNMR: An r
+Package for Signal Processing of Fully Untargeted NMR-Based
+Metabolomics.” *Bioinformatics*, ahead of print, January.
 <https://doi.org/10.1093/bioinformatics/btaa022>.
 
 </div>
@@ -234,7 +241,7 @@ Fully Untargeted NMR-Based Metabolomics.” *Bioinformatics*, January.
 <div id="ref-BiocVersion" class="csl-entry">
 
 Morgan, Martin. 2025. *BiocVersion: Set the Appropriate Version of
-Bioconductor Packages*. <https://doi.org/10.18129/B9.bioc.BiocVersion>.
+Bioconductor Packages*.
 
 </div>
 
@@ -256,17 +263,34 @@ Implementation of Grammar of Graphics for Graphs and Networks*.
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2025. *R: A Language and Environment for Statistical
-Computing*. Vienna, Austria: R Foundation for Statistical Computing.
-<https://www.R-project.org/>.
+R Core Team. 2026. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
+<https://doi.org/10.32614/R.manuals>.
 
 </div>
 
-<div id="ref-cascade2025" class="csl-entry">
+<div id="ref-cascade2026" class="csl-entry">
 
-Rutz, Adriano. 2025. *<span class="nocase">cascade</span>:
+Rutz, Adriano. 2026a. *<span class="nocase">cascade</span>:
 Contextualizing Untargeted Annotation with Semi-Quantitative Charged
 Aerosol Detection for Pertinent Characterization of Natural Extracts*.
+
+</div>
+
+<div id="ref-sapid2026" class="csl-entry">
+
+Rutz, Adriano. 2026b. *<span class="nocase">sapid</span>: A Strategy to
+Analyze Plant Extracts Taste in Depth*.
+
+</div>
+
+<div id="ref-sapid2025" class="csl-entry">
+
+Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoit Bach, and
+Jean-Luc Wolfender. 2025. “SAPID: A Strategy to Analyze Plant Extracts
+Taste in Depth. Application to the Complex Taste of Swertia Chirayita
+(Roxb.) h.karst.” *Current Research in Food Science*, ahead of print.
+<https://doi.org/10.1016/j.crfs.2025.101043>.
 
 </div>
 
@@ -282,27 +306,34 @@ of Agricultural and Food Chemistry* 71 (46).
 
 <div id="ref-ggrepel" class="csl-entry">
 
-Slowikowski, Kamil. 2024. *<span class="nocase">ggrepel</span>:
+Slowikowski, Kamil. 2026. *<span class="nocase">ggrepel</span>:
 Automatically Position Non-Overlapping Text Labels with
 “<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.ggrepel>.
 
 </div>
 
-<div id="ref-testthat" class="csl-entry">
+<div id="ref-fastmatch" class="csl-entry">
 
-Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
-Started with Testing.” *The R Journal* 3: 5–10.
-<https://journal.r-project.org/articles/RJ-2011-002/>.
+Urbanek, Simon. 2026. *<span class="nocase">fastmatch</span>: Fast
+“<span class="nocase">match()</span>” Function*.
+<https://doi.org/10.32614/CRAN.package.fastmatch>.
+
+</div>
+
+<div id="ref-tinytest" class="csl-entry">
+
+<span class="nocase">van der Loo, MPJ</span>. 2020. “A Method for
+Deriving Information from Running r Code.” *The R Journal* 13: 42–52.
+<https://journal.r-project.org/articles/RJ-2021-056/>.
 
 </div>
 
 <div id="ref-tidyverse" class="csl-entry">
 
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
-D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
-“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
-Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
+the <span class="nocase">tidyverse</span>.” *Journal of Open Source
+Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
@@ -324,7 +355,7 @@ Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
 
 <div id="ref-treemapify" class="csl-entry">
 
-Wilkins, David. 2025. *<span class="nocase">treemapify</span>: Draw
+Wilkins, David. 2026. *<span class="nocase">treemapify</span>: Draw
 Treemaps in “<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.treemapify>.
 
@@ -341,31 +372,29 @@ and Roger D. Peng. Chapman; Hall/CRC.
 
 <div id="ref-knitr2015" class="csl-entry">
 
-———. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Boca Raton,
-Florida: Chapman; Hall/CRC. <https://yihui.org/knitr/>.
+Xie, Yihui. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Chapman;
+Hall/CRC. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-knitr2025" class="csl-entry">
 
-———. 2025. *<span class="nocase">knitr</span>: A General-Purpose Package
-for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
+Xie, Yihui. 2025. *<span class="nocase">knitr</span>: A General-Purpose
+Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-rmarkdown2018" class="csl-entry">
 
 Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
-Definitive Guide*. Boca Raton, Florida: Chapman; Hall/CRC.
-<https://bookdown.org/yihui/rmarkdown>.
+Definitive Guide*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown/>.
 
 </div>
 
 <div id="ref-rmarkdown2020" class="csl-entry">
 
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
-Cookbook*. Boca Raton, Florida: Chapman; Hall/CRC.
-<https://bookdown.org/yihui/rmarkdown-cookbook>.
+Cookbook*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown-cookbook>.
 
 </div>
 

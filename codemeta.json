@@ -139,16 +139,16 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "version": ">= 3.3.2",
+      "identifier": "tinytest",
+      "name": "tinytest",
+      "version": ">= 1.4.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
+      "sameAs": "https://CRAN.R-project.org/package=tinytest"
     }
   ],
   "softwareRequirements": {
@@ -419,19 +419,6 @@
     },
     "23": {
       "@type": "SoftwareApplication",
-      "identifier": "tibble",
-      "name": "tibble",
-      "version": ">= 3.3.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tibble"
-    },
-    "24": {
-      "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
       "version": ">= 0.11.2",
@@ -443,7 +430,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "25": {
+    "24": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -459,7 +446,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "1305433.026KB",
+  "fileSize": "3441.277KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

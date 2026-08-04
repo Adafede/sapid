@@ -76,7 +76,7 @@ prepare_profiles <-
       ## problem due to FIZZ export
       ## replace by the median of correct values or divide by 10
       tidytable::mutate(
-        median = tidytable::coalesce(value / 10, median(value[value <= 10]))
+        median = tidytable::coalesce(value / 10, stats::median(value[value <= 10]))
       ) |>
       tidytable::ungroup() |>
       tidytable::mutate(

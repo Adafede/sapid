@@ -137,7 +137,7 @@ plot_napping <- function(
   ###
 
   ##### MFA with descriptors assessment   ####
-  dev.off()
+  grDevices::dev.off()
   res.nap <- FactoMineR::MFA(
     base = nap.tot,
     group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
@@ -146,7 +146,7 @@ plot_napping <- function(
   )
 
   ##### MFA with word frequencies   ####
-  dev.off()
+  grDevices::dev.off()
   res.mfa <- FactoMineR::MFA(
     base = nap.tot,
     group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
@@ -169,7 +169,7 @@ plot_napping <- function(
 
   ####   Clustering analysis based on coordinates of products ####
 
-  dev.off()
+  grDevices::dev.off()
   res.HCPC <-
     FactoMineR::HCPC(
       res = res.nap,
@@ -183,7 +183,7 @@ plot_napping <- function(
 
   ## later
   # write.infile(res.HCPC, file.path(exportDir, "res_hcpc.csv"),  sep = ";")
-  dev.off()
+  grDevices::dev.off()
   SensoMineR::nappeplot(
     donnee = df_coord,
     numr = 3,
@@ -194,20 +194,20 @@ plot_napping <- function(
   #                     matrice.illu = df_words_raw,
   #                     maxit = 100)
 
-  dev.off()
+  grDevices::dev.off()
   res <- SensoMineR::indscal(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,
     maxit = 100
   )
 
-  dev.off()
+  grDevices::dev.off()
   FactoMineR::prefpls(
     donnee = cbind.data.frame(res$points, df_coord),
     choix = "ind"
   )
 
-  dev.off()
+  grDevices::dev.off()
   FactoMineR::prefpls(
     donnee = cbind.data.frame(res$points, df_words_cleaned),
     choix = "var"

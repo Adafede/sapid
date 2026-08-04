@@ -10,7 +10,7 @@ plot_matrices <- get("plot_matrices", envir = ns)
 plot_informed_tasting <- get("plot_informed_tasting", envir = ns)
 correlate_ion_taste_intensities <- get("correlate_ion_taste_intensities", envir = ns)
 
-tmp_dir <- getwd()
+tmp_dir <- withr::local_tempdir(pattern = "sapid-plots-")
 
 out_mod <- file.path(tmp_dir, "modulation.pdf")
 ret_mod <- plot_chasselas_modulation(output = out_mod)
@@ -109,25 +109,5 @@ expect_identical(
   c("id_ion", "id_taste", "fractions", "correlation", "p_value", "p_adjusted", "method")
 )
 expect_true(all(corr$method %in% c("kendall", "pearson")))
-
-unlink(
-  c(
-    out_mod,
-    out_var_jury,
-    out_var_session,
-    out_conc,
-    out_network,
-    out_matrices,
-    out_informed,
-    fractions_path,
-    concentration_path,
-    profiles_path,
-    ions_path,
-    corr_path
-  ),
-  recursive = TRUE,
-  force = TRUE
-)
-
 
 

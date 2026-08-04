@@ -27,6 +27,24 @@ setup_out <- stat_sigmoid$setup_data(
 expect_true("group" %in% names(setup_out))
 expect_identical(setup_out$group, c(1L, 2L, 1L))
 
+sigmoid_x <- stat_sigmoid$compute_group(
+  data.frame(x = 1, y = 1, xend = 3, yend = 4),
+  list(),
+  smooth = 6,
+  direction = "x"
+)
+expect_true(all(c("x", "y") %in% names(sigmoid_x)))
+expect_true(nrow(sigmoid_x) > 1)
+
+sigmoid_y <- stat_sigmoid$compute_group(
+  data.frame(x = 1, y = 1, xend = 3, yend = 4),
+  list(),
+  smooth = 6,
+  direction = "y"
+)
+expect_true(all(c("x", "y") %in% names(sigmoid_y)))
+expect_true(nrow(sigmoid_y) > 1)
+
 
 # harmonize_terms_df applies specific -> napping -> generic harmonization chain
 input_df <- data.frame(

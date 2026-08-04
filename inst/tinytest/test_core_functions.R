@@ -90,3 +90,17 @@ expect_true(all(consistent$taste == "BITTER"))
 expect_identical(nrow(consistent), 3L)
 expect_true(all(c("sum", "sum_taste", "group") %in% names(consistent)))
 expect_true(all(consistent$sum_taste == 7))
+
+profiles_path <- tempfile(fileext = ".tsv")
+utils::write.table(
+  x = small_profiles,
+  file = profiles_path,
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE
+)
+consistent_from_path <- load_consistent_profiles(profiles_path, min_jury = 2L)
+expect_true(is.data.frame(consistent_from_path))
+expect_identical(nrow(consistent_from_path), 3L)
+expect_true(all(consistent_from_path$taste == "BITTER"))
+

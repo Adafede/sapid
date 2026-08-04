@@ -80,6 +80,7 @@ Collate:
     'plot_napping.R'
     'plot_profiles.R'
     'prepare_chasselas.R'
+    'prepare_chemical_profiles.R'
     'prepare_concentration.R'
     'prepare_napping.R'
     'prepare_profiles.R'

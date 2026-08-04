@@ -50,11 +50,11 @@ prepare_chasselas <-
       ) |>
       tidytable::mutate(
         name = name |>
-          gsub(pattern = "sucré.*", replacement = "sweetness")
+          gsub(pattern = "sucr\u00E9.*", replacement = "sweetness")
       ) |>
       tidytable::mutate(
         name = name |>
-          gsub(pattern = "salé.*", replacement = "saltiness")
+          gsub(pattern = "sal\u00E9.*", replacement = "saltiness")
       ) |>
       tidytable::mutate(
         name = name |>
@@ -62,7 +62,7 @@ prepare_chasselas <-
       ) |>
       tidytable::mutate(
         name = name |>
-          gsub(pattern = "équilibre.*", replacement = "balance")
+          gsub(pattern = "\u00E9quilibre.*", replacement = "balance")
       ) |>
       tidytable::mutate(
         name = name |>

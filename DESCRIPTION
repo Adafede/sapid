@@ -59,6 +59,8 @@ Suggests:
 ByteCompile: TRUE
 Collate:
     'colors.R'
+    'cluster_nmr.R'
+    'correlate_ion_taste_intensities.R'
     'data.R'
     'geom_sigmoid.R'
     'get_session_info.R'
@@ -67,6 +69,20 @@ Collate:
     'harmonize_terms_df.R'
     'load_consistent_profiles.R'
     'load_session.R'
+    'plot_chasselas_modulation.R'
+    'plot_chasselas_variation.R'
+    'plot_chromatograms.R'
+    'plot_concentration.R'
+    'plot_correlations.R'
+    'plot_descriptors_network.R'
+    'plot_informed_tasting.R'
+    'plot_matrices.R'
+    'plot_napping.R'
+    'plot_profiles.R'
+    'prepare_chasselas.R'
+    'prepare_concentration.R'
+    'prepare_napping.R'
+    'prepare_profiles.R'
     'sapid-package.R'
 Config/roxygen2/markdown: TRUE
 Config/roxygen2/version: 8.0.0

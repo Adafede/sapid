@@ -370,7 +370,7 @@ plot_correlations <- function(
         size = 20
       )
     )
-  cascade:::check_export_dir(output_1)
+  cascade:::check_export_dir(dirname(output_1))
   plot_correlations_1 |>
     ggplot2::ggsave(
       filename = output_1,
@@ -507,7 +507,7 @@ plot_correlations <- function(
         size = 20
       )
     )
-  cascade:::check_export_dir(output_2)
+  cascade:::check_export_dir(dirname(output_2))
   plot_correlations_2 |>
     ggplot2::ggsave(
       filename = output_2,
@@ -781,7 +781,7 @@ plot_correlations <- function(
     legend = "right"
   )
 
-  cascade:::check_export_dir(output_3)
+  cascade:::check_export_dir(dirname(output_3))
   selected_profiles |>
     ggplot2::ggsave(
       filename = output_3,

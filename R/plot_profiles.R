@@ -309,7 +309,7 @@ plot_profiles <- function(
     nrow = 2,
     align = "v"
   )
-  cascade:::check_export_dir(output)
+  cascade:::check_export_dir(dirname(output))
   profiles |>
     ggplot2::ggsave(
       filename = output,

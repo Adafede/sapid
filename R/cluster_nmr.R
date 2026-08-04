@@ -358,8 +358,8 @@ cluster_nmr <- function(
     )
   plot_1
 
-  cascade:::check_export_dir(output_figure)
-  cascade:::check_export_dir(output_groups)
+  cascade:::check_export_dir(dirname(output_figure))
+  cascade:::check_export_dir(dirname(output_groups))
   ggpubr::ggarrange(plot_1, plot_2, widths = c(0.2, 1)) |>
     ggplot2::ggsave(
       filename = output_figure,

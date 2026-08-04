@@ -102,7 +102,7 @@ plot_chromatograms <- function(
       )
     )
 
-  cascade:::check_export_dir(output_session)
+  cascade:::check_export_dir(dirname(output_session))
   plot |>
     ggplot2::ggsave(
       filename = output,

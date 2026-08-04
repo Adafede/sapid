@@ -202,7 +202,7 @@ plot_concentration <- function(
     )
   dots_corrected
 
-  cascade:::check_export_dir(output)
+  cascade:::check_export_dir(dirname(output))
   ggpubr::ggarrange(
     ggpubr::ggarrange(boxes, scurve, ncol = 2, labels = "AUTO"),
     dots_corrected,

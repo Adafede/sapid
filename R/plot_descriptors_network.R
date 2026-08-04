@@ -120,7 +120,7 @@ plot_descriptors_network <- function(
     ) +
     ggplot2::theme_void()
 
-  cascade:::check_export_dir(output)
+  cascade:::check_export_dir(dirname(output))
   plot |>
     ggplot2::ggsave(
       filename = output,

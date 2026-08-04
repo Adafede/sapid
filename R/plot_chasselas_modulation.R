@@ -161,7 +161,7 @@ plot_chasselas_modulation <- function(
     ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
   p_2
 
-  cascade:::check_export_dir(output)
+  cascade:::check_export_dir(dirname(output))
   ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>
     ggplot2::ggsave(
       filename = output,

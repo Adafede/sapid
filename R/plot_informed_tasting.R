@@ -135,7 +135,7 @@ plot_informed_tasting <- function(
       )
     )
 
-  cascade:::check_export_dir(output)
+  cascade:::check_export_dir(dirname(output))
   ggpubr::ggarrange(
     plotlist = list(plot_raw, plot_informed),
     ncol = 2,

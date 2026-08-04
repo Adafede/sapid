@@ -12,7 +12,7 @@ plot_concentration <- function(
 ) {
   message("Loading file...\n")
   if (is.null(input)) {
-    data(concentration_afc)
+    data(concentration_afc, envir = environment())
     prepared <- concentration_afc
   } else {
     prepared <- tidytable::fread(input)

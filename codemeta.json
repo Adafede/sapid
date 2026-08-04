@@ -101,6 +101,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "NMRphasing",
+      "name": "NMRphasing",
+      "version": ">= 1.0.7",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "pkgload",
       "name": "pkgload",
       "version": ">= 1.4.0",
@@ -206,19 +219,6 @@
     },
     "5": {
       "@type": "SoftwareApplication",
-      "identifier": "cheapr",
-      "name": "cheapr",
-      "version": ">= 0.9.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=cheapr"
-    },
-    "6": {
-      "@type": "SoftwareApplication",
       "identifier": "dendextend",
       "name": "dendextend",
       "version": ">= 1.19.1",
@@ -230,7 +230,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dendextend"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
@@ -243,7 +243,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "fastmatch",
       "name": "fastmatch",
@@ -256,7 +256,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=fastmatch"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "forcats",
       "name": "forcats",
@@ -269,7 +269,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=forcats"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -282,7 +282,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -295,7 +295,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -308,7 +308,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggraph"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "ggrepel",
       "name": "ggrepel",
@@ -321,7 +321,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggrepel"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -334,7 +334,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -347,20 +347,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "16": {
-      "@type": "SoftwareApplication",
-      "identifier": "NMRphasing",
-      "name": "NMRphasing",
-      "version": ">= 1.0.7",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=NMRphasing"
-    },
-    "17": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -373,7 +360,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "18": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -386,7 +373,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "19": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -399,7 +386,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "20": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -412,12 +399,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "21": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "22": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -430,7 +417,20 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "23": {
+    "21": {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "version": ">= 3.2.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tibble"
+    },
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -443,7 +443,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "24": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -456,10 +456,15 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=treemapify"
     },
+    "24": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "3223.024KB",
+  "fileSize": "3224.41KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

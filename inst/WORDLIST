@@ -1,9 +1,9 @@
-Aixiang
 Alboukadel
 Allaire
 AlpsNMR
 Antonov
 Arnholt
+Arun
 Averick
 BSDA
 Benoit
@@ -16,13 +16,13 @@ CSI
 Cadoret
 Chasselas
 Chirayita
-Christofides
 Christophe
 Codecov
 Colour
 Csárdi
 Deneulin
 Dervieux
+Dowle
 EtOH
 FactoMineR
 FingerId
@@ -43,13 +43,13 @@ Igraph
 InterJournal
 Ivano
 JJ
-Jiang
 Josse
 Jxx
 JxxX
 JxxY
 Kamil
 Kassambara
+Kirill
 Knitr
 Leisch
 Lifecycle
@@ -58,9 +58,8 @@ Lê
 MPJ
 Marek
 Metabolomics
-Mzmls
+Müller
 NMR
-NMRphasing
 NPClassifier
 Nepusz
 ORCID
@@ -78,6 +77,7 @@ Semiquantitative
 SensoMineR
 Slowikowski
 Spectrometry
+Srinivasan
 Stodden
 Swertia
 Szabolcs
@@ -91,6 +91,7 @@ Treemaps
 Université
 Untargeted
 Urbanek
+Ushey
 Wickham
 Wolfender
 Xie
@@ -102,7 +103,6 @@ aestethics
 al
 amer
 chasselas
-cheapr
 chirayita
 chromatograms
 coord
@@ -123,10 +123,10 @@ khroma
 knitr
 lant
 lim
+mzML
 mzmine
 nalyze
 nd
-pkgload
 pre
 prefilter
 projective
@@ -137,6 +137,7 @@ tidyverse
 tinytest
 trategy
 treemapify
+withr
 xend
 xhange
 xlsx

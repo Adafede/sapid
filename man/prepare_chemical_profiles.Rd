@@ -18,7 +18,7 @@ prepare_chemical_profiles(
 )
 }
 \arguments{
-\item{mzmls_dir}{Mzmls dir}
+\item{mzmls_dir}{mzML files directory}
 
 \item{peaks_dir_extract}{Peaks dir extract}
 

@@ -23,7 +23,6 @@ Imports:
     AlpsNMR (>= 4.12.0),
     BSDA (>= 1.2.2),
     cascade (>= 0.0.0.9002),
-    cheapr (>= 0.9.0),
     dendextend (>= 1.19.1),
     FactoMineR (>= 2.14),
     fastmatch (>= 1.1.0),
@@ -34,15 +33,16 @@ Imports:
     ggrepel (>= 0.9.0),
     igraph (>= 2.3.1),
     khroma (>= 1.17.0),
-    NMRphasing (>= 1.0.7),
     purrr (>= 1.2.2),
     readxl (>= 1.5.0),
     scales (>= 1.4.0),
     SensoMineR (>= 1.28),
     stats,
     stringi (>= 1.8.7),
+    tibble (>= 3.2.1),
     tidytable (>= 0.11.2),
-    treemapify (>= 2.6.0)
+    treemapify (>= 2.6.0),
+    utils
 Remotes:
     adafede/cascade,
     taxonomicallyinformedannotation/tima
@@ -52,6 +52,7 @@ Suggests:
     BiocVersion (>= 3.22.0),
     grateful (>= 0.3.0),
     lifecycle (>= 1.0.5),
+    NMRphasing (>= 1.0.7),
     pkgload (>= 1.4.0),
     R.utils (>= 2.13.0),
     spelling,

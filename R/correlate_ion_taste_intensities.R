@@ -85,7 +85,7 @@ correlate_ion_taste_intensities <- function(
     tidytable::arrange(fraction)
 
   df_taste_intensities <- (if (is.null(input_tastes)) {
-    data(profiles)
+    data(profiles, envir = environment())
     profiles
   } else {
     tidytable::fread(input_tastes)

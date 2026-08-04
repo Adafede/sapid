@@ -8,7 +8,10 @@ plot_concentration <- get("plot_concentration", envir = ns)
 plot_descriptors_network <- get("plot_descriptors_network", envir = ns)
 plot_matrices <- get("plot_matrices", envir = ns)
 plot_informed_tasting <- get("plot_informed_tasting", envir = ns)
-correlate_ion_taste_intensities <- get("correlate_ion_taste_intensities", envir = ns)
+correlate_ion_taste_intensities <- get(
+  "correlate_ion_taste_intensities",
+  envir = ns
+)
 
 withr::with_tempdir({
   tmp_dir <- getwd()
@@ -86,7 +89,11 @@ withr::with_tempdir({
 
   ions <- data.frame(id = c(101L, 102L), rt = c(1, 2), mz = c(100.1, 200.2))
   for (fraction in 32:38) {
-    ions[[sprintf("datafile:210619_AR_%02d_M_%d_01.mzML:area", fraction - 20, fraction)]] <-
+    ions[[sprintf(
+      "datafile:210619_AR_%02d_M_%d_01.mzML:area",
+      fraction - 20,
+      fraction
+    )]] <-
       c(fraction * 100, fraction * 120)
   }
   ions_path <- file.path(tmp_dir, "ions.csv")
@@ -107,9 +114,15 @@ withr::with_tempdir({
   expect_true(nrow(corr) > 0)
   expect_identical(
     names(corr),
-    c("id_ion", "id_taste", "fractions", "correlation", "p_value", "p_adjusted", "method")
+    c(
+      "id_ion",
+      "id_taste",
+      "fractions",
+      "correlation",
+      "p_value",
+      "p_adjusted",
+      "method"
+    )
   )
   expect_true(all(corr$method %in% c("kendall", "pearson")))
 })
-
-

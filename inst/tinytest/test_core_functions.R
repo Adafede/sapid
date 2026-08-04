@@ -103,4 +103,3 @@ consistent_from_path <- load_consistent_profiles(profiles_path, min_jury = 2L)
 expect_true(is.data.frame(consistent_from_path))
 expect_identical(nrow(consistent_from_path), 3L)
 expect_true(all(consistent_from_path$taste == "BITTER"))
-

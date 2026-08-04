@@ -13,7 +13,7 @@ plot_chasselas_variation <- function(
   output_session = "./data/figures/figure_variation_session.pdf"
 ) {
   if (is.null(input)) {
-    data(chasselas)
+    data(chasselas, envir = environment())
     input_data <- chasselas
   } else {
     input_data <- tidytable::fread(input)

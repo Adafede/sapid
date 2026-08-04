@@ -17,7 +17,7 @@ plot_napping(
 
 \item{input_descriptors}{Input descriptors}
 
-\item{session}{Session}
+\item{sessions}{Sessions}
 }
 \description{
 Plot napping

@@ -12,7 +12,7 @@ plot_descriptors_network <- function(
   output = "./data/figures/figure_network.pdf"
 ) {
   if (is.null(input)) {
-    data(napping_descriptors)
+    data(napping_descriptors, envir = environment())
     input_data <- napping_descriptors
   } else {
     input_data <- tidytable::fread(input)

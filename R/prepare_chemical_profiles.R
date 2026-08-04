@@ -1,6 +1,6 @@
 #' Prepare chemical profiles
 #'
-#' @param mzmls_dir Mzmls dir
+#' @param mzmls_dir mzML files directory
 #' @param peaks_dir_extract Peaks dir extract
 #' @param peaks_dir_fractions Peaks dir fractions
 #' @param features_path_extract Features path extract

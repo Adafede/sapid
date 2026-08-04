@@ -12,7 +12,7 @@ plot_matrices <- function(
   output = "./data/figures/figure_matrices.pdf"
 ) {
   if (is.null(input)) {
-    data(profiles)
+    data(profiles, envir = environment())
     input_data <- profiles
   } else {
     input_data <- tidytable::fread(input)

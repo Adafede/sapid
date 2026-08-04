@@ -92,7 +92,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
   | BiocVersion | 3.23.1     | Morgan (2025)                                                         |
   | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                              |
   | cascade     | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                               |
-  | cheapr      | 1.5.2      | Christofides (2026)                                                   |
+  | data.table  | 1.18.4     | Barrett et al. (2026)                                                 |
   | dendextend  | 1.19.1     | Galili (2015)                                                         |
   | FactoMineR  | 2.16       | Lê et al. (2008)                                                      |
   | fastmatch   | 1.1.8      | Urbanek (2026)                                                        |
@@ -102,8 +102,6 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
   | igraph      | 2.3.3      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
   | khroma      | 1.17.0     | Frerebeau (2025)                                                      |
   | knitr       | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                    |
-  | NMRphasing  | 1.0.7      | Jiang (2025)                                                          |
-  | pkgload     | 1.5.3      | Wickham et al. (2026)                                                 |
   | rmarkdown   | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)           |
   | sapid       | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b)                                      |
   | scales      | 1.4.0      | Wickham et al. (2025)                                                 |
@@ -113,6 +111,7 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
   | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                 |
   | tinytest    | 1.4.3      | <span class="nocase">van der Loo</span> (2020)                        |
   | treemapify  | 2.6.1      | Wilkins (2026)                                                        |
+  | withr       | 3.0.3      | Hester et al. (2026)                                                  |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
@@ -140,11 +139,12 @@ Analysis*. <https://doi.org/10.32614/CRAN.package.BSDA>.
 
 </div>
 
-<div id="ref-cheapr" class="csl-entry">
+<div id="ref-datatable" class="csl-entry">
 
-Christofides, Nick. 2026. *<span class="nocase">cheapr</span>: Simple
-Functions to Save Time and Memory*.
-<https://doi.org/10.32614/CRAN.package.cheapr>.
+Barrett, Tyson, Matt Dowle, Arun Srinivasan, et al. 2026.
+*<span class="nocase">data.table</span>: Extension of
+“<span class="nocase">data.frame</span>”*.
+<https://doi.org/10.32614/CRAN.package.data.table>.
 
 </div>
 
@@ -197,19 +197,20 @@ Clustering.” *Bioinformatics*, ahead of print.
 
 </div>
 
+<div id="ref-withr" class="csl-entry">
+
+Hester, Jim, Lionel Henry, Kirill Müller, Kevin Ushey, Hadley Wickham,
+and Winston Chang. 2026. *<span class="nocase">withr</span>: Run Code
+“With” Temporarily Modified Global State*.
+<https://doi.org/10.32614/CRAN.package.withr>.
+
+</div>
+
 <div id="ref-SensoMineR" class="csl-entry">
 
 Husson, Francois, Sebastien Le, and Marine Cadoret. 2025. *SensoMineR:
 Sensory Data Analysis*.
 <https://doi.org/10.32614/CRAN.package.SensoMineR>.
-
-</div>
-
-<div id="ref-NMRphasing" class="csl-entry">
-
-Jiang, Aixiang. 2025. *NMRphasing: Phase Error Correction and Baseline
-Correction for One Dimensional (“1D”) “NMR” Data*.
-<https://doi.org/10.32614/CRAN.package.NMRphasing>.
 
 </div>
 
@@ -334,14 +335,6 @@ Deriving Information from Running r Code.” *The R Journal* 13: 42–52.
 Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
 the <span class="nocase">tidyverse</span>.” *Journal of Open Source
 Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
-
-</div>
-
-<div id="ref-pkgload" class="csl-entry">
-
-Wickham, Hadley, Winston Chang, Jim Hester, and Lionel Henry. 2026.
-*<span class="nocase">pkgload</span>: Simulate Package Installation and
-Attach*. <https://doi.org/10.32614/CRAN.package.pkgload>.
 
 </div>
 

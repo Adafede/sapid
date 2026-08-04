@@ -35,7 +35,7 @@ plot_profiles <- function(
   type = "analysis"
 ) {
   if (is.null(input)) {
-    data(profiles)
+    data(profiles, envir = environment())
     profiles_consistent <- load_consistent_profiles(profiles)
   } else {
     profiles_consistent <- input |>

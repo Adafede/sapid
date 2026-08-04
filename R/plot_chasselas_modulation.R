@@ -11,7 +11,7 @@ plot_chasselas_modulation <- function(
   output = "./data/figures/figure_modulation.pdf"
 ) {
   if (is.null(input)) {
-    data(chasselas)
+    data(chasselas, envir = environment())
     input_data <- chasselas
   } else {
     input_data <- tidytable::fread(input)

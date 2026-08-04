@@ -20,13 +20,21 @@ withr::with_tempdir({
   dir.create(xlsx_dir, recursive = TRUE)
 
   expect_true(file.exists(fixture))
-  expect_true(file.copy(fixture, file.path(xlsx_dir, "session.xlsx"), overwrite = TRUE))
+  expect_true(file.copy(
+    fixture,
+    file.path(xlsx_dir, "session.xlsx"),
+    overwrite = TRUE
+  ))
 
   # These preparation functions currently expect richer source sheets than this fixture provides.
   # We still run them in tests to exercise parsing and preprocessing paths.
   out_chasselas <- file.path(input_dir, "chasselas.tsv")
   expect_error(
-    prepare_chasselas(input_dir = input_dir, sessions = 1L, output = out_chasselas),
+    prepare_chasselas(
+      input_dir = input_dir,
+      sessions = 1L,
+      output = out_chasselas
+    ),
     "CJ"
   )
 
@@ -83,9 +91,11 @@ withr::with_tempdir({
     quote = FALSE
   )
   expect_error(
-    plot_napping(input_coordinates = coords_path, input_descriptors = desc_path, sessions = 2L),
+    plot_napping(
+      input_coordinates = coords_path,
+      input_descriptors = desc_path,
+      sessions = 2L
+    ),
     "differing number of rows"
   )
 })
-
-

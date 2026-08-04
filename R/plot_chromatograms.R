@@ -19,7 +19,7 @@ plot_chromatograms <- function(
   output = "./data/figures/figure_chromatograms.pdf"
 ) {
   if (is.null(input_groups)) {
-    data(groups)
+    data(groups, envir = environment())
     table_groups <- groups
   } else {
     table_groups <- tidytable::fread(input_groups)

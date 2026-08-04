@@ -2,7 +2,7 @@
 #'
 #' @param input_coordinates Input coordinates
 #' @param input_descriptors Input descriptors
-#' @param session Session
+#' @param sessions Sessions
 #'
 #' @return NULL
 #'

@@ -149,6 +149,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tinytest"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "withr",
+      "name": "withr",
+      "version": ">= 3.0.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
   "softwareRequirements": {
@@ -446,7 +459,7 @@
     "SystemRequirements": null
   },
   "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "3210.678KB",
+  "fileSize": "3223.024KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

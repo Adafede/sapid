@@ -55,7 +55,8 @@ Suggests:
     pkgload (>= 1.4.0),
     R.utils (>= 2.13.0),
     spelling,
-    tinytest (>= 1.4.3)
+    tinytest (>= 1.4.3),
+    withr (>= 3.0.2)
 ByteCompile: TRUE
 Collate:
     'colors.R'

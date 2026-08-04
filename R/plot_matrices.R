@@ -109,7 +109,7 @@ plot_matrices <- function(
       )
     )
 
-  cascade:::check_export_dir(dirname(output))
+  .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(
     matrix_original,
     matrix_curated,

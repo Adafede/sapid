@@ -169,8 +169,8 @@ plot_chasselas_variation <- function(
     )
   p_4
 
-  cascade:::check_export_dir(dirname(output_jury))
-  cascade:::check_export_dir(dirname(output_session))
+  .cascade_check_export_dir(dirname(output_jury))
+  .cascade_check_export_dir(dirname(output_session))
   ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>
     ggplot2::ggsave(
       filename = output_jury,

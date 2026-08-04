@@ -36,13 +36,13 @@ plot_chromatograms <- function(
   groups <- table_groups
 
   extract_chromatogram_df <- function(file) {
-    cascade:::preprocess_chromatograms(
+    .cascade_preprocess_chromatograms(
       list = file |>
-        cascade:::load_chromatograms() |>
+        .cascade_load_chromatograms() |>
         purrr::pluck(3) |>
         list(),
       name = file |>
-        cascade:::load_name()
+        .cascade_load_name()
     )$chromatograms_baselined |>
       purrr::pluck(1) |>
       tidytable::distinct(time, intensity) |>
@@ -102,7 +102,7 @@ plot_chromatograms <- function(
       )
     )
 
-  cascade:::check_export_dir(dirname(output_session))
+  .cascade_check_export_dir(dirname(output_session))
   plot |>
     ggplot2::ggsave(
       filename = output,

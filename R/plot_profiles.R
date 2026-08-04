@@ -138,7 +138,7 @@ plot_profiles <- function(
     min_similarity_filter,
     mode
   ) {
-    compared_peaks_list_fractions <- cascade:::prepare_comparison(
+    compared_peaks_list_fractions <- .cascade_prepare_comparison(
       features_informed = features_informed[[x]],
       features_not_informed = features_not_informed[[x]],
       candidates_confident = candidates_confident,
@@ -192,20 +192,20 @@ plot_profiles <- function(
 
   # candidates_confident_extract <- annotation_table_extract |>
   #   tidytable::mutate(mode = mode) |>
-  #   cascade:::keep_best_candidates() |>
+  #   .cascade_keep_best_candidates() |>
   #   tidytable::mutate(species = "Swertia chirayita") |>
   #   tidytable::mutate(feature_id = feature_id |>
   #     as.numeric()) |>
-  #   cascade:::make_confident(score = min_confidence)
+  #   .cascade_make_confident(score = min_confidence)
   candidates_confident_fractions <- annotation_table_fractions |>
     tidytable::mutate(mode = mode) |>
-    cascade:::keep_best_candidates() |>
+    .cascade_keep_best_candidates() |>
     tidytable::mutate(species = "Swertia chirayita") |>
     tidytable::mutate(
       feature_id = feature_id |>
         as.numeric()
     ) |>
-    cascade:::make_confident(score = min_confidence)
+    .cascade_make_confident(score = min_confidence)
 
   # chemicals_informed_extract <- seq_along(features_informed_extract) |>
   #   purrr::map(
@@ -220,14 +220,14 @@ plot_profiles <- function(
   #   tidytable::bind_rows() |>
   #   tidytable::inner_join(features_extract) |>
   #   tidytable::mutate(intensity = intensity_new) |>
-  #   cascade:::make_other() |>
-  #   cascade:::no_other() |>
-  #   cascade:::prepare_hierarchy(type = type, detector = detector) |>
+  #   .cascade_make_other() |>
+  #   .cascade_no_other() |>
+  #   .cascade_prepare_hierarchy(type = type, detector = detector) |>
   #   tidytable::filter(!ids |>
   #     grepl(pattern = "$", fixed = TRUE)) |>
   #   tidytable::mutate(ids = ids |>
   #     gsub(pattern = "-", replacement = "- \n ")) |>
-  #   cascade:::prepare_plot() |>
+  #   .cascade_prepare_plot() |>
   #   tidytable::distinct(sample, values, ids, color)
   chemicals_informed_fractions_list <- seq_along(features_informed_fractions) |>
     purrr::map(
@@ -243,9 +243,9 @@ plot_profiles <- function(
     tidytable::bind_rows() |>
     tidytable::inner_join(features_fractions) |>
     tidytable::mutate(intensity = intensity_new) |>
-    cascade:::make_other() |>
-    cascade:::no_other() |>
-    cascade:::prepare_hierarchy(type = type, detector = detector) |>
+    .cascade_make_other() |>
+    .cascade_no_other() |>
+    .cascade_prepare_hierarchy(type = type, detector = detector) |>
     tidytable::filter(
       !ids |>
         grepl(pattern = "$", fixed = TRUE)
@@ -256,7 +256,7 @@ plot_profiles <- function(
         gsub(pattern = " notClassified", replacement = "\nnotClassified") |>
         gsub(pattern = "-", replacement = "\n")
     ) |>
-    cascade:::prepare_plot()
+    .cascade_prepare_plot()
 
   profile_chemical <- chemicals_informed_fractions |>
     ggplot2::ggplot(
@@ -309,7 +309,7 @@ plot_profiles <- function(
     nrow = 2,
     align = "v"
   )
-  cascade:::check_export_dir(dirname(output))
+  .cascade_check_export_dir(dirname(output))
   profiles |>
     ggplot2::ggsave(
       filename = output,

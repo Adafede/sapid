@@ -97,13 +97,13 @@ plot_correlations <- function(
 
   candidates_confident_fractions <- annotation_table_fractions |>
     tidytable::mutate(mode = mode) |>
-    cascade:::keep_best_candidates() |>
+    .cascade_keep_best_candidates() |>
     tidytable::mutate(species = "Swertia chirayita") |>
     tidytable::mutate(
       feature_id = feature_id |>
         as.numeric()
     ) |>
-    cascade:::make_confident(score = min_confidence) |>
+    .cascade_make_confident(score = min_confidence) |>
     tidytable::left_join(
       df_ion_intensities |>
         tidytable::rename(feature_id = id_ion) |>
@@ -370,7 +370,7 @@ plot_correlations <- function(
         size = 20
       )
     )
-  cascade:::check_export_dir(dirname(output_1))
+  .cascade_check_export_dir(dirname(output_1))
   plot_correlations_1 |>
     ggplot2::ggsave(
       filename = output_1,
@@ -507,7 +507,7 @@ plot_correlations <- function(
         size = 20
       )
     )
-  cascade:::check_export_dir(dirname(output_2))
+  .cascade_check_export_dir(dirname(output_2))
   plot_correlations_2 |>
     ggplot2::ggsave(
       filename = output_2,
@@ -781,7 +781,7 @@ plot_correlations <- function(
     legend = "right"
   )
 
-  cascade:::check_export_dir(dirname(output_3))
+  .cascade_check_export_dir(dirname(output_3))
   selected_profiles |>
     ggplot2::ggsave(
       filename = output_3,

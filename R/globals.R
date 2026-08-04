@@ -88,3 +88,33 @@ utils::globalVariables(
     "values"
   )
 )
+
+.cascade_check_export_dir <- utils::getFromNamespace(
+  "check_export_dir",
+  "cascade"
+)
+.cascade_keep_best_candidates <- utils::getFromNamespace(
+  "keep_best_candidates",
+  "cascade"
+)
+.cascade_make_confident <- utils::getFromNamespace("make_confident", "cascade")
+.cascade_prepare_comparison <- utils::getFromNamespace(
+  "prepare_comparison",
+  "cascade"
+)
+.cascade_make_other <- utils::getFromNamespace("make_other", "cascade")
+.cascade_no_other <- utils::getFromNamespace("no_other", "cascade")
+.cascade_prepare_hierarchy <- utils::getFromNamespace(
+  "prepare_hierarchy",
+  "cascade"
+)
+.cascade_prepare_plot <- utils::getFromNamespace("prepare_plot", "cascade")
+.cascade_preprocess_chromatograms <- utils::getFromNamespace(
+  "preprocess_chromatograms",
+  "cascade"
+)
+.cascade_load_chromatograms <- utils::getFromNamespace(
+  "load_chromatograms",
+  "cascade"
+)
+.cascade_load_name <- utils::getFromNamespace("load_name", "cascade")

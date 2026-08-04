@@ -97,7 +97,13 @@ withr::with_tempdir({
       c(fraction * 100, fraction * 120)
   }
   ions_path <- file.path(tmp_dir, "ions.csv")
-  data.table::fwrite(ions, ions_path)
+  utils::write.table(
+    ions,
+    ions_path,
+    sep = ",",
+    row.names = FALSE,
+    quote = FALSE
+  )
 
   corr_path <- file.path(tmp_dir, "correlations.tsv")
   ret_corr <- correlate_ion_taste_intensities(
@@ -110,7 +116,7 @@ withr::with_tempdir({
   expect_identical(ret_corr, corr_path)
   expect_true(file.exists(corr_path))
 
-  corr <- data.table::fread(corr_path)
+  corr <- utils::read.delim(corr_path, check.names = FALSE)
   expect_true(nrow(corr) > 0)
   expect_identical(
     names(corr),

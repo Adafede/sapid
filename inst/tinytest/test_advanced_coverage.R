@@ -30,7 +30,7 @@ withr::with_tempdir({
   ret <- prepare_concentration(input_xlsx = conc_fixture, output = out_tsv)
   expect_identical(ret, out_tsv)
   expect_true(file.exists(out_tsv))
-  result <- data.table::fread(out_tsv)
+  result <- utils::read.delim(out_tsv, check.names = FALSE)
   expect_true(is.data.frame(result))
   expect_true(nrow(result) > 0)
   expect_true("jury" %in% names(result))
@@ -59,7 +59,13 @@ withr::with_tempdir({
   }
   ions_path <- file.path(getwd(), "ions.csv")
   corr_path <- file.path(getwd(), "corr.tsv")
-  data.table::fwrite(ions, ions_path)
+  utils::write.table(
+    ions,
+    ions_path,
+    sep = ",",
+    row.names = FALSE,
+    quote = FALSE
+  )
   ret <- correlate_ion_taste_intensities(
     input_ions = ions_path,
     input_tastes = profiles_path,
@@ -70,7 +76,7 @@ withr::with_tempdir({
   )
   expect_identical(ret, corr_path)
   expect_true(file.exists(corr_path))
-  df <- data.table::fread(corr_path)
+  df <- utils::read.delim(corr_path, check.names = FALSE)
   expect_true(is.data.frame(df))
 })
 

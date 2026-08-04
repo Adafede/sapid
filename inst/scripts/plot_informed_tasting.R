@@ -6,7 +6,10 @@ message(
 message("Authors: \n", "AR")
 message("Contributors: \n", "...")
 
-plot_informed_tasting()
+if (!requireNamespace("sapid", quietly = TRUE)) {
+  stop("Package 'sapid' must be installed to run this script.", call. = FALSE)
+}
+get("plot_informed_tasting", envir = asNamespace("sapid"))()
 
 end <- Sys.time()
 

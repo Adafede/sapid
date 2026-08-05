@@ -16,7 +16,7 @@ A data frame with 196 rows and 3 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(dictionary_specific)
+dictionary_specific
 }
 \description{
 A reference dictionary for specific or less-common taste descriptors,

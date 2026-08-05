@@ -75,8 +75,7 @@ prepare_concentration <- function(
     tidytable::mutate(
       jury = paste0(
         "jury_",
-        tidytable::cur_group_id() |>
-          stringi::stri_pad(pad = "0", width = 2)
+        sprintf("%02d", tidytable::cur_group_id())
       )
     ) |>
     tidytable::fwrite(file = output, sep = "\t")

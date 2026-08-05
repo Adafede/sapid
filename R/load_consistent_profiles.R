@@ -1,8 +1,7 @@
 #' Load consistent profiles
 #'
 #' Filter profiles to keep only taste descriptors that are consistently
-#' used across multiple panelists (minimum jury threshold). Uses fastmatch
-#' for efficient ID lookups.
+#' used across multiple panelists (minimum jury threshold).
 #'
 #' @param input Input data frame or file path to profiles table
 #' @param min_jury Minimum number of jurors who must use a taste descriptor
@@ -49,7 +48,6 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     tidytable::filter(taste != "") |>
     tidytable::ungroup()
 
-  # Use fastmatch::%fin% for faster taste descriptor filtering
   profiles_consistent <- profiles |>
     tidytable::left_join(n_panelists) |>
     tidytable::select(
@@ -61,10 +59,7 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
       value
     ) |>
     tidytable::rename(taste = taste_harmonized) |>
-    tidytable::filter(fastmatch::`%fin%`(
-      taste,
-      consistent_descriptors$taste
-    )) |>
+    tidytable::filter(taste %in% consistent_descriptors$taste) |>
     tidytable::group_by(fraction, taste) |>
     tidytable::mutate(
       sum = value |>

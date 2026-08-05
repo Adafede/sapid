@@ -1,7 +1,7 @@
 #' Load session
 #'
 #' Load and prepare data from a single sensory panel session.
-#' Uses stringi for efficient string operations.
+#' Uses base R string operations.
 #'
 #' @param input_dir Input directory path
 #' @param session_info Session metadata (date, cluster, product_name)
@@ -29,12 +29,11 @@ load_session <- function(input_dir, session_info, tab) {
   ) |>
     readxl::read_xlsx(sheet = sheet)
 
-  # Use stringi::stri_replace_all_fixed for faster fixed-string replacement
   df <- df |>
     tidytable::rename_with(
       .cols = tidytable::starts_with("J"),
       .fn = function(cols) {
-        stringi::stri_replace_all_regex(cols, "^J(\\d)([A-Z])", "J0$1$2")
+        gsub("^J(\\d)([A-Z])", "J0\\1\\2", cols, perl = TRUE)
       }
     )
 
@@ -42,8 +41,11 @@ load_session <- function(input_dir, session_info, tab) {
     tidytable::mutate(
       session = paste0(
         "session_",
-        session_info$cluster |>
-          stringi::stri_pad(pad = "0", width = 2)
+        if (is.numeric(session_info$cluster)) {
+          sprintf("%02d", session_info$cluster)
+        } else {
+          session_info$cluster
+        }
       )
     ) |>
     tidytable::relocate(session, .after = 1)

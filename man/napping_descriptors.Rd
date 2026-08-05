@@ -19,7 +19,7 @@ A data frame with 1,146 rows and 6 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(napping_descriptors)
+napping_descriptors
 }
 \description{
 Taste descriptors and attributes assigned to sample fractions

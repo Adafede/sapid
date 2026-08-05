@@ -25,8 +25,7 @@ Data frame with harmonized taste terms
 }
 \description{
 Apply harmonization to multiple taste terms in a data frame using
-provided dictionaries. Optimized with fastmatch for ID lookups
-and stringi for fixed-string replacements.
+provided dictionaries.
 }
 \examples{
 NULL

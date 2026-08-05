@@ -16,7 +16,7 @@ A data frame with 94 rows and 3 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(fractions)
+fractions
 }
 \description{
 Hierarchical record of sample preparation and fractionation of

@@ -15,7 +15,7 @@ A data frame with 45 rows and 2 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(dictionary_napping)
+dictionary_napping
 }
 \description{
 A reference dictionary specifically for napping session terminology,

@@ -234,8 +234,7 @@ plot_correlations <- function(
     tidytable::filter(score_mixed == max(score_mixed, na.rm = TRUE)) |>
     tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
     tidytable::filter(
-      stringi::stri_length(fractions.x) ==
-        max(stringi::stri_length(fractions.x), na.rm = TRUE)
+      nchar(fractions.x) == max(nchar(fractions.x), na.rm = TRUE)
     ) |>
     # tidytable::distinct(id_taste, .keep_all = TRUE) |>
     tidytable::ungroup()
@@ -245,7 +244,7 @@ plot_correlations <- function(
   #   tidytable::filter(correlation < -1 * min_corr) |>
   #   tidytable::filter(score_mixed == min(score_mixed, na.rm = TRUE)) |>
   #   tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
-  #   tidytable::filter(stringi::stri_length(fractions.x) == max(stringi::stri_length(fractions.x), na.rm = TRUE)) |>
+  #   tidytable::filter(nchar(fractions.x) == max(nchar(fractions.x), na.rm = TRUE)) |>
   #   # tidytable::distinct(id_taste, .keep_all = TRUE) |>
   #   tidytable::ungroup()
 

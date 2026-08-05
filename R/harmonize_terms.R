@@ -14,8 +14,7 @@
 #' @details
 #' For better performance when calling this function repeatedly on many strings,
 #' pass a pre-loaded dictionary data frame instead of a file path. The function
-#' now uses [stringi::stri_replace_all_fixed()] for 'fixed' mode, which is
-#' significantly faster than regex-based matching for literal strings.
+#' uses base R replacement helpers for all modes to avoid an extra dependency.
 #'
 #' @return Character string with terms replaced
 #'
@@ -42,7 +41,8 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     tidytable::fread(dictionary) |>
       tidytable::mutate(
         n = original |>
-          stringi::stri_length()
+          as.character() |>
+          nchar()
       ) |>
       tidytable::arrange(tidytable::desc(n))
   } else {
@@ -51,7 +51,8 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
       as.data.frame(stringsAsFactors = FALSE) |>
       tidytable::mutate(
         n = original |>
-          stringi::stri_length()
+          as.character() |>
+          nchar()
       ) |>
       tidytable::arrange(tidytable::desc(n))
   }
@@ -68,31 +69,41 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   # Perform replacements using appropriate method
   replaced <- if (mode == "fixed") {
     # Fast fixed-string replacement for literal matches
-    stringi::stri_replace_all_fixed(
-      str = processed_string,
-      pattern = prepared_dict$original,
-      replacement = replacement,
-      vectorize_all = FALSE
-    )
+    out <- processed_string
+    for (i in seq_along(prepared_dict$original)) {
+      out <- gsub(
+        pattern = prepared_dict$original[[i]],
+        replacement = replacement[[i]],
+        x = out,
+        fixed = TRUE
+      )
+    }
+    out
   } else if (mode == "word") {
     # Word boundary matching (regex)
     pattern <- paste0("\\b", prepared_dict$original, "\\b")
-    stringi::stri_replace_all_regex(
-      str = processed_string,
-      pattern = pattern,
-      replacement = replacement,
-      case_insensitive = FALSE,
-      vectorize_all = FALSE
-    )
+    out <- processed_string
+    for (i in seq_along(pattern)) {
+      out <- gsub(
+        pattern = pattern[[i]],
+        replacement = replacement[[i]],
+        x = out,
+        perl = TRUE
+      )
+    }
+    out
   } else {
     # Substring matching (regex without word boundaries)
-    stringi::stri_replace_all_regex(
-      str = processed_string,
-      pattern = prepared_dict$original,
-      replacement = replacement,
-      case_insensitive = FALSE,
-      vectorize_all = FALSE
-    )
+    out <- processed_string
+    for (i in seq_along(prepared_dict$original)) {
+      out <- gsub(
+        pattern = prepared_dict$original[[i]],
+        replacement = replacement[[i]],
+        x = out,
+        perl = TRUE
+      )
+    }
+    out
   }
 
   # Handle fallback if requested

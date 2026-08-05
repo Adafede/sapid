@@ -26,8 +26,7 @@ plot_napping <- function(
       session ==
         paste0(
           "session_",
-          sessions |>
-            stringi::stri_pad(pad = "0", width = 2)
+          sprintf("%02d", sessions)
         )
     ) |>
     data.frame()
@@ -43,8 +42,7 @@ plot_napping <- function(
       session ==
         paste0(
           "session_",
-          sessions |>
-            stringi::stri_pad(pad = "0", width = 2)
+          sprintf("%02d", sessions)
         )
     )
 

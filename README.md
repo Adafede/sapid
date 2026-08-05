@@ -92,10 +92,8 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
   | BiocVersion | 3.23.1     | Morgan (2025)                                                         |
   | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                              |
   | cascade     | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                               |
-  | data.table  | 1.18.4     | Barrett et al. (2026)                                                 |
   | dendextend  | 1.19.1     | Galili (2015)                                                         |
   | FactoMineR  | 2.16       | Lê et al. (2008)                                                      |
-  | fastmatch   | 1.1.8      | Urbanek (2026)                                                        |
   | ggpubr      | 1.0.0      | Kassambara (2026)                                                     |
   | ggraph      | 2.2.2      | Pedersen (2025)                                                       |
   | ggrepel     | 0.9.8      | Slowikowski (2026)                                                    |
@@ -106,7 +104,6 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
   | sapid       | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b)                                      |
   | scales      | 1.4.0      | Wickham et al. (2025)                                                 |
   | SensoMineR  | 1.28       | Husson et al. (2025)                                                  |
-  | stringi     | 1.8.7      | Gagolewski (2022)                                                     |
   | tidytable   | 0.11.2     | Fairbanks (2024)                                                      |
   | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                 |
   | tinytest    | 1.4.3      | <span class="nocase">van der Loo</span> (2020)                        |
@@ -139,15 +136,6 @@ Analysis*. <https://doi.org/10.32614/CRAN.package.BSDA>.
 
 </div>
 
-<div id="ref-datatable" class="csl-entry">
-
-Barrett, Tyson, Matt Dowle, Arun Srinivasan, et al. 2026.
-*<span class="nocase">data.table</span>: Extension of
-“<span class="nocase">data.frame</span>”*.
-<https://doi.org/10.32614/CRAN.package.data.table>.
-
-</div>
-
 <div id="ref-igraph2006" class="csl-entry">
 
 Csárdi, Gábor, and Tamás Nepusz. 2006. “The Igraph Software Package for
@@ -177,14 +165,6 @@ Interface to “<span class="nocase">data.table</span>”*.
 Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
 for Scientific Data Visualization</span>*. Université Bordeaux
 Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
-
-</div>
-
-<div id="ref-stringi" class="csl-entry">
-
-Gagolewski, Marek. 2022. “<span class="nocase">stringi</span>: Fast and
-Portable Character String Processing in R.” *Journal of Statistical
-Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
 
 </div>
 
@@ -311,14 +291,6 @@ Slowikowski, Kamil. 2026. *<span class="nocase">ggrepel</span>:
 Automatically Position Non-Overlapping Text Labels with
 “<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.ggrepel>.
-
-</div>
-
-<div id="ref-fastmatch" class="csl-entry">
-
-Urbanek, Simon. 2026. *<span class="nocase">fastmatch</span>: Fast
-“<span class="nocase">match()</span>” Function*.
-<https://doi.org/10.32614/CRAN.package.fastmatch>.
 
 </div>
 

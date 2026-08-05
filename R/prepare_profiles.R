@@ -51,8 +51,7 @@ prepare_profiles <-
       tidytable::mutate(
         CJ = paste0(
           "jury_",
-          tidytable::cur_group_id() |>
-            stringi::stri_pad(pad = "0", width = 2)
+          sprintf("%02d", tidytable::cur_group_id())
         )
       ) |>
       tidytable::ungroup() |>

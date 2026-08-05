@@ -19,7 +19,7 @@ A data frame with 76 rows and 6 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(concentration_afc)
+concentration_afc
 }
 \description{
 Results from an Ascending Forced Choice (AFC) sensory test

@@ -28,8 +28,7 @@ and case-insensitive handling.
 \details{
 For better performance when calling this function repeatedly on many strings,
 pass a pre-loaded dictionary data frame instead of a file path. The function
-now uses \code{\link[stringi:stri_replace_all_fixed]{stringi::stri_replace_all_fixed()}} for 'fixed' mode, which is
-significantly faster than regex-based matching for literal strings.
+uses base R replacement helpers for all modes to avoid an extra dependency.
 }
 \examples{
 \dontrun{

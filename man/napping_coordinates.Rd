@@ -20,7 +20,7 @@ juror Jxx}
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(napping_coordinates)
+napping_coordinates
 }
 \description{
 Coordinates assigned to sample fractions during napping sessions,

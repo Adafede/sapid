@@ -17,8 +17,7 @@ Data frame with consistent profiles and grouped statistics
 }
 \description{
 Filter profiles to keep only taste descriptors that are consistently
-used across multiple panelists (minimum jury threshold). Uses fastmatch
-for efficient ID lookups.
+used across multiple panelists (minimum jury threshold).
 }
 \details{
 This function filters sensory data to keep only taste descriptors that appear

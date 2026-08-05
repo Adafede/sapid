@@ -19,7 +19,7 @@ A data frame with 1,314 rows and 6 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(chasselas)
+chasselas
 }
 \description{
 A dataset of sensory panel ratings for Chasselas wine samples,

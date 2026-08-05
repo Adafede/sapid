@@ -15,7 +15,7 @@ A data frame with 54 rows and 2 columns:
 \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
-data(groups)
+groups
 }
 \description{
 Cluster or group assignments for sample fractions, including

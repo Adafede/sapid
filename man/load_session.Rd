@@ -18,7 +18,7 @@ Data frame with loaded and processed session data
 }
 \description{
 Load and prepare data from a single sensory panel session.
-Uses stringi for efficient string operations.
+Uses base R string operations.
 }
 \examples{
 NULL

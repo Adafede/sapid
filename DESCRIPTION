@@ -44,6 +44,7 @@ Imports:
 Remotes:
     adafede/cascade,
     taxonomicallyinformedannotation/tima
+    thomasp85/ggraph
 Suggests:
     mzR (>= 2.44.0),
     NMRphasing (>= 1.0.7),

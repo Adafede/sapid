@@ -43,7 +43,7 @@ Imports:
     utils
 Remotes:
     adafede/cascade,
-    taxonomicallyinformedannotation/tima
+    taxonomicallyinformedannotation/tima,
     thomasp85/ggraph
 Suggests:
     mzR (>= 2.44.0),

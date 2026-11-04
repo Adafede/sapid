@@ -47,16 +47,17 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
 
   # Convert to uppercase for consistent matching
   processed_string <- toupper(x)
-  out <- processed_string
+  u_str <- unique(processed_string)
+  u_out <- u_str
 
   # Perform replacements using appropriate method
   if (mode == "fixed") {
     # Fast fixed-string replacement for literal matches
     for (i in seq_along(patterns)) {
-      out <- gsub(
+      u_out <- gsub(
         pattern = patterns[[i]],
         replacement = replacement[[i]],
-        x = out,
+        x = u_out,
         fixed = TRUE
       )
     }
@@ -64,24 +65,25 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     # Word boundary matching (regex)
     word_patterns <- paste0("\\b", patterns, "\\b")
     for (i in seq_along(word_patterns)) {
-      out <- gsub(
+      u_out <- gsub(
         pattern = word_patterns[[i]],
         replacement = replacement[[i]],
-        x = out,
+        x = u_out,
         perl = TRUE
       )
     }
   } else {
     # Substring matching (regex without word boundaries)
     for (i in seq_along(patterns)) {
-      out <- gsub(
+      u_out <- gsub(
         pattern = patterns[[i]],
         replacement = replacement[[i]],
-        x = out,
+        x = u_out,
         perl = TRUE
       )
     }
   }
+  out <- u_out[match(processed_string, u_str)]
 
   # Handle fallback if requested
   if (fallback) {

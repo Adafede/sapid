@@ -161,15 +161,11 @@ plot_correlations <- function(
     drop = FALSE
   ]
   corr_sig$fractions.x <- as.character(corr_sig$fractions)
-  if (nrow(corr_sig) > 0L) {
-    r_ion <- match(corr_sig$id_ion, ion_ids_int)
-    r_win <- match(corr_sig$fractions.x, u_wins)
-    keep_sig <- !is.na(r_ion) &
-      !is.na(r_win) &
-      overlap_mat[cbind(r_ion, r_win)]
-  } else {
-    keep_sig <- logical(0L)
-  }
+  r_ion <- match(corr_sig$id_ion, ion_ids_int)
+  r_win <- match(corr_sig$fractions.x, u_wins)
+  keep_sig <- !is.na(r_ion) &
+    !is.na(r_win) &
+    overlap_mat[cbind(r_ion, r_win)]
   correlations_significant <- corr_sig[keep_sig, , drop = FALSE]
 
   nrow(correlations_significant) / nrow(correlations)
@@ -214,9 +210,6 @@ plot_correlations <- function(
   has_any_score <- !all(is.na(pos_sub$score_mixed))
   pos_splits <- split(pos_sub, pos_sub$id_taste)
   pos_filtered_list <- lapply(pos_splits, function(s) {
-    if (nrow(s) == 0L) {
-      return(s)
-    }
     if (has_any_score) {
       if (all(is.na(s$score_mixed))) {
         return(s[0L, , drop = FALSE])
@@ -584,13 +577,10 @@ plot_correlations <- function(
     ,
     drop = FALSE
   ]
-  if (nrow(profile_anti_taste) > 0L) {
-    profile_anti_taste$taste <- "OTHER"
-    profile_anti_taste$color <- "gray"
-    profile_anti_taste$name <- "intensity_taste"
-  } else {
-    profile_anti_taste <- profiles_correlation[0L, , drop = FALSE]
-  }
+  n_anti_taste <- nrow(profile_anti_taste)
+  profile_anti_taste$taste <- rep("OTHER", n_anti_taste)
+  profile_anti_taste$color <- rep("gray", n_anti_taste)
+  profile_anti_taste$name <- rep("intensity_taste", n_anti_taste)
 
   u_ion_fracs <- unique(as.numeric(df_ion_intensities$fraction))
   zero_ion_match <- paste(u_ion_fracs, 0, sep = "\r")
@@ -600,18 +590,15 @@ plot_correlations <- function(
     sep = "\r"
   )
   anti_ion_fracs <- u_ion_fracs[!zero_ion_match %in% corr_frac_med]
-  profile_anti_ion <- if (length(anti_ion_fracs) > 0L) {
-    data.frame(
-      fraction = anti_ion_fracs,
-      name = "intensity_ion",
-      median = 0,
-      taste = "OTHER",
-      color = "gray",
-      stringsAsFactors = FALSE
-    )
-  } else {
-    profiles_correlation[0L, , drop = FALSE]
-  }
+  n_anti_ion <- length(anti_ion_fracs)
+  profile_anti_ion <- data.frame(
+    fraction = anti_ion_fracs,
+    name = rep("intensity_ion", n_anti_ion),
+    median = rep(0, n_anti_ion),
+    taste = rep("OTHER", n_anti_ion),
+    color = rep("gray", n_anti_ion),
+    stringsAsFactors = FALSE
+  )
 
   profile_full <- rbind(
     profile_anti_taste[, names(profiles_correlation), drop = FALSE],

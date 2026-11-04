@@ -53,13 +53,7 @@ plot_napping <- function(
     }
   }
 
-  raw_coord <- if (
-    is.null(input_coordinates) || identical(input_coordinates, "")
-  ) {
-    load_dataset_or_file(NULL, "napping_coordinates")
-  } else {
-    load_dataset_or_file(input_coordinates, "napping_coordinates")
-  }
+  raw_coord <- load_dataset_or_file(input_coordinates, "napping_coordinates")
   df_coord <- as.data.frame(
     raw_coord[raw_coord$session == session_tag, , drop = FALSE],
     stringsAsFactors = FALSE
@@ -73,13 +67,7 @@ plot_napping <- function(
   df_coord$fraction <- NULL
   df_coord$session <- NULL
 
-  raw_words <- if (
-    is.null(input_descriptors) || identical(input_descriptors, "")
-  ) {
-    load_dataset_or_file(NULL, "napping_descriptors")
-  } else {
-    load_dataset_or_file(input_descriptors, "napping_descriptors")
-  }
+  raw_words <- load_dataset_or_file(input_descriptors, "napping_descriptors")
   table_words_prepared <- raw_words[
     raw_words$session == session_tag,
     ,

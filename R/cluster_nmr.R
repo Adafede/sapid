@@ -290,7 +290,7 @@ cluster_nmr <- function(
     ggplot2::ylim(ylim) +
     ggplot2::scale_x_reverse(
       limits = c(round(ppm_max), round(ppm_min)),
-      n.breaks = round(ppm_max - ppm_min)
+      n.breaks = max(2L, round(ppm_max - ppm_min))
     ) +
     ggplot2::scale_color_identity() +
     ggplot2::theme_minimal() +

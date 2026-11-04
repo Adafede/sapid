@@ -131,11 +131,12 @@ correlate_ion_taste_intensities <- function(
 
   win_cache <- new.env(parent = emptyenv())
   get_win_info <- function(f_rows, need_shapiro = FALSE) {
-    key <- if (length(f_rows) > 1L && all(diff(f_rows) == 1L)) {
-      paste0(f_rows[1L], ":", f_rows[length(f_rows)])
-    } else {
-      paste(f_rows, collapse = ",")
-    }
+    r_d <- rle(diff(f_rows))
+    key <- paste(
+      f_rows[1L],
+      paste0(r_d$values, "x", r_d$lengths, collapse = "_"),
+      sep = ":"
+    )
     if (!exists(key, envir = win_cache, inherits = FALSE)) {
       sub_mat <- ion_mat[f_rows, , drop = FALSE]
       complete_mask <- colSums(is.na(sub_mat)) == 0L

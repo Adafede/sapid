@@ -194,6 +194,14 @@ withr::with_tempdir({
   )
   expect_equal(row_104_s$p_value, ref_104_s$p.value, tolerance = 1e-12)
 
+  # Verify BH FDR adjustment across the 4 non-constant ions for BITTER
+  bitter_rows <- res_c[res_c$id_taste == "BITTER", ]
+  expect_equal(
+    bitter_rows$p_adjusted,
+    stats::p.adjust(bitter_rows$p_value, method = "BH"),
+    tolerance = 1e-12
+  )
+
   # Edge cases: n == 2L, n == 1L, non-overlapping window, and width > length(fractions)
   tastes_sub <- tastes_df[
     tastes_df$taste_harmonized == "BITTER" &

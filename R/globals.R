@@ -73,7 +73,8 @@ utils::globalVariables(
       !"candidate_structure_inchikey_connectivity_layer" %in% names(df) &&
       "candidate_structure_inchikey_no_stereo" %in% names(df)
   ) {
-    df$candidate_structure_inchikey_connectivity_layer <- df$candidate_structure_inchikey_no_stereo
+    col_conn <- "candidate_structure_inchikey_connectivity_layer"
+    df[[col_conn]] <- df$candidate_structure_inchikey_no_stereo
   }
   utils::getFromNamespace("keep_best_candidates", "cascade")(df, ...)
 }
@@ -351,9 +352,6 @@ prepare_ion_intensities_df <- function(
   }
 
   vals <- val_mat[keep_mask]
-  if (anyNA(vals)) {
-    vals[is.na(vals)] <- imputation_factor * min(vals, na.rm = TRUE)
-  }
 
   out <- data.frame(
     fraction = frac_nums[which_idx[, 2L]],

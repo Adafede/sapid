@@ -230,5 +230,5 @@ plot_concentration <- function(
       height = 12
     )
 
-  return(output)
+  output
 }

@@ -104,8 +104,8 @@ prepare_napping <- function(
   .cascade_check_export_dir(dirname(output_descriptors))
   data.table::fwrite(desc_out, file = output_descriptors, sep = "\t")
 
-  return(list(
+  list(
     coordinates = output_coordinates,
     descriptors = output_descriptors
-  ))
+  )
 }

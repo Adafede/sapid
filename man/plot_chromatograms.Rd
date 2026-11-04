@@ -21,9 +21,11 @@ plot_chromatograms(
 
 \item{raw_index}{Integer index of the raw extract file in \code{input_dir}.}
 
-\item{fractions_indices}{Integer vector of fraction file indices in \code{input_dir}.}
+\item{fractions_indices}{Integer vector of fraction file indices in
+\code{input_dir}.}
 
-\item{xlim}{Numeric length-2 retention time range in minutes (default \code{c(2, 25)}).}
+\item{xlim}{Numeric length-2 retention time range in minutes
+(default \code{c(2, 25)}).}
 
 \item{output}{Output PDF file path.}
 }

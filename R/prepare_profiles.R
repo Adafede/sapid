@@ -123,5 +123,5 @@ prepare_profiles <- function(
 
   .cascade_check_export_dir(dirname(output))
   data.table::fwrite(out, file = output, sep = "\t")
-  return(output)
+  output
 }

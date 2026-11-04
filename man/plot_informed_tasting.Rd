@@ -32,8 +32,8 @@ Output file path (\code{output}).
 }
 \description{
 Compare relative taste descriptor proportions between classical raw extract
-tasting and mass-weighted chemically informed fraction tasting using side-by-side
-treemaps.
+tasting and mass-weighted chemically informed fraction tasting using
+side-by-side treemaps.
 }
 \examples{
 \donttest{

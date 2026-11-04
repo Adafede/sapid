@@ -165,5 +165,5 @@ plot_chasselas_modulation <- function(
       height = 12
     )
 
-  return(output)
+  output
 }

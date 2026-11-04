@@ -16,7 +16,8 @@
 #' @param features_path_extract Path to mzmine feature table for raw extract.
 #' @param features_path_fractions Path to mzmine feature table for fractions.
 #' @param peaks_dir_extract Directory of CAD peak comparison tables for extract.
-#' @param peaks_dir_fractions Directory of CAD peak comparison tables for fractions.
+#' @param peaks_dir_fractions Directory of CAD peak comparison tables for
+#'   fractions.
 #' @param min_confidence Minimum TIMA final confidence score (default `0.45`).
 #' @param min_similarity_prefilter Minimum peak shape correlation prefilter
 #'   (default `0.6`).
@@ -341,5 +342,5 @@ plot_profiles <- function(
       width = 15,
       height = 15
     )
-  return(output)
+  output
 }

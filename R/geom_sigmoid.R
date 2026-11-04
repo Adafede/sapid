@@ -34,13 +34,15 @@ StatSigmoid <- ggplot2::ggproto(
 #'
 #' @concept EDAM:topic_0092 Data visualisation
 #' @concept EDAM:operation_0337 Visualisation
-#' @param mapping Aesthetic mapping (`x`, `xend`, `y`, and `yend` must be numeric).
+#' @param mapping Aesthetic mapping (`x`, `xend`, `y`, and `yend` must be
+#'   numeric).
 #' @param data Layer data frame.
 #' @param geom Geom to use (default `"line"`).
 #' @param position Position adjustment (default `"identity"`).
 #' @param na.rm Logical; remove missing values if `TRUE`.
 #' @param show.legend Logical; include layer in legend.
-#' @param smooth Numeric steepness parameter for the sigmoid curve (default `8`).
+#' @param smooth Numeric steepness parameter for the sigmoid curve
+#'   (default `8`).
 #' @param direction Character smoothing direction: `"x"` or `"y"`.
 #' @param inherit.aes Logical; inherit aesthetics from the parent plot.
 #' @param ... Additional arguments passed to the layer.

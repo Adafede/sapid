@@ -18,7 +18,8 @@ geom_sigmoid(
 )
 }
 \arguments{
-\item{mapping}{Aesthetic mapping (\code{x}, \code{xend}, \code{y}, and \code{yend} must be numeric).}
+\item{mapping}{Aesthetic mapping (\code{x}, \code{xend}, \code{y}, and \code{yend} must be
+numeric).}
 
 \item{data}{Layer data frame.}
 
@@ -30,7 +31,8 @@ geom_sigmoid(
 
 \item{show.legend}{Logical; include layer in legend.}
 
-\item{smooth}{Numeric steepness parameter for the sigmoid curve (default \code{8}).}
+\item{smooth}{Numeric steepness parameter for the sigmoid curve
+(default \code{8}).}
 
 \item{direction}{Character smoothing direction: \code{"x"} or \code{"y"}.}
 

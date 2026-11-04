@@ -14,7 +14,8 @@
 #' @param min_intensity Minimum MS intensity threshold (default `1e5`).
 #' @param start_extract Integer start index for extract files (default `5L`).
 #' @param end_extract Integer end index for extract files (default `7L`).
-#' @param start_fractions Integer start index for fraction files (default `12L`).
+#' @param start_fractions Integer start index for fraction files
+#'   (default `12L`).
 #' @param end_fractions Integer end index for fraction files (default `65L`).
 #'
 #' @return Invisibly returns `NULL`.

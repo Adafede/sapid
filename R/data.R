@@ -26,13 +26,16 @@ NULL
 #' \describe{
 #'   \item{date}{ISO 8601 timestamp of the rating session}
 #'   \item{jury}{Juror identifier (e.g., `"jury_01"`)}
-#'   \item{product}{Product identifier (`"product_1before"`, `"product_2after"`)}
+#'   \item{product}{Product identifier
+#'     (`"product_1before"`, `"product_2after"`)}
 #'   \item{session}{Session identifier (e.g., `"session_06"`)}
-#'   \item{taste}{Taste attribute or descriptor (e.g., `"sourness"`, `"bitterness"`)}
+#'   \item{taste}{Taste attribute or descriptor
+#'     (e.g., `"sourness"`, `"bitterness"`)}
 #'   \item{value}{Numerical rating value for the attribute}
 #' }
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(chasselas)
@@ -59,7 +62,8 @@ NULL
 #'   \item{afc_total}{Total number of trials in the AFC session}
 #' }
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(concentration_afc)
@@ -94,7 +98,8 @@ NULL
 #' Use `!is.na(taste_harmonized) & taste_harmonized != ""` to filter
 #' for valid descriptors in analyses.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(profiles)
@@ -126,7 +131,8 @@ NULL
 #' on a 2D plane based on perceived similarity. This produces a sensory map
 #' that can be analyzed via correspondence analysis or PCA.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(napping_coordinates)
@@ -157,7 +163,8 @@ NULL
 #' represent spatial positioning of similarities, descriptors provide
 #' explicit sensory attribute labels that jurors associate with each sample.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(napping_descriptors)
@@ -183,11 +190,13 @@ NULL
 #' }
 #'
 #' @details
-#' The hierarchy starts with raw plant material and initial solvents (EtOH, water)
-#' and traces through extraction, decanting, drying, and sub-fractionation steps
-#' leading to final analytic samples (`V_01`, `V_02`, etc.).
+#' The hierarchy starts with raw plant material and initial solvents
+#' (EtOH, water) and traces through extraction, decanting, drying, and
+#' sub-fractionation steps leading to final analytic samples
+#' (`V_01`, `V_02`, etc.).
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(fractions)
@@ -214,7 +223,8 @@ NULL
 #' or hierarchical analysis results. Typically derived from dendrogram
 #' or other unsupervised classification of sample sensory profiles.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(groups)
@@ -241,7 +251,8 @@ NULL
 #' Used by data harmonization functions (e.g., [harmonize_terms()])
 #' to standardize taste terminology across panelists and sessions.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(dictionary_generic)
@@ -267,7 +278,8 @@ NULL
 #' (e.g., `"_LEGER"` for `"light"`). This dictionary maps these to
 #' harmonized forms used in broader analyses.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(dictionary_napping)
@@ -293,7 +305,8 @@ NULL
 #' Larger and more specialized than [dictionary_generic].
 #' Used for comprehensive harmonization of all descriptors in the dataset.
 #'
-#' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+#' @source \doi{10.1016/j.crfs.2025.101043};
+#'   Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(dictionary_specific)

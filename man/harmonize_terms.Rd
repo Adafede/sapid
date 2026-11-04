@@ -13,7 +13,8 @@ containing \code{original} and \code{translated} (or \code{translated_simple}) c
 \item{x}{Character vector to be harmonized.}
 
 \item{mode}{Replacement mode: \code{"word"} for word-boundary matching,
-\code{"substring"} for regex partial matching, or \code{"fixed"} for literal matching.}
+\code{"substring"} for regex partial matching, or \code{"fixed"} for literal
+matching.}
 
 \item{fallback}{Logical; if \code{TRUE}, replace \code{NA} values with the uppercased
 input string.}

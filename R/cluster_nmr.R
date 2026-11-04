@@ -24,7 +24,8 @@
 #' @param ppm_min Minimum chemical shift in ppm (default `0`).
 #' @param ppm_max Maximum chemical shift in ppm (default `14.85`).
 #' @param area_min Minimum integrated peak area threshold (default `0`).
-#' @param range_exclude_area Numeric length-2 ppm range excluded from clustering.
+#' @param range_exclude_area Numeric length-2 ppm range excluded from
+#'   clustering.
 #' @param range_without_peaks Numeric length-2 baseline noise ppm range.
 #' @param ylim Numeric length-2 y-axis limits for spectral traces.
 #'
@@ -346,5 +347,5 @@ cluster_nmr <- function(
     )
   data.table::fwrite(groups, file = output_groups, sep = "\t")
 
-  return(list(figure = output_figure, groups = output_groups))
+  list(figure = output_figure, groups = output_groups)
 }

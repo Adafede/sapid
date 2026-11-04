@@ -16,7 +16,8 @@ A data frame with 1,665 rows and 6 columns:
 }
 }
 \source{
-\doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+\doi{10.1016/j.crfs.2025.101043};
+Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
 profiles

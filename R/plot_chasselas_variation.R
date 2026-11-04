@@ -190,5 +190,5 @@ plot_chasselas_variation <- function(
       height = 12
     )
 
-  return(list(jury = output_jury, session = output_session))
+  list(jury = output_jury, session = output_session)
 }

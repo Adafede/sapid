@@ -155,10 +155,10 @@ plot_napping <- function(
   # df_words_raw <-
   #   df_words_raw[, colSums(df_words_raw) != 0]
 
-  nap.tot <- cbind(df_coord, df_words_cleaned)
+  nap_tot <- cbind(df_coord, df_words_cleaned)
 
   ##### PMFA (Procuste Multiple Factor Analysis to obtain individual tableclothes  ####
-  single.nap <- SensoMineR::pmfa(
+  SensoMineR::pmfa(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,
     graph.mfa = FALSE
@@ -193,8 +193,8 @@ plot_napping <- function(
 
   ##### MFA with descriptors assessment   ####
   close_extra_devs()
-  res.nap <- FactoMineR::MFA(
-    base = nap.tot,
+  res_nap <- FactoMineR::MFA(
+    base = nap_tot,
     group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
     type = c(rep("c", ncol(df_coord) / 2), "s"),
     axes = c(1, 2)
@@ -202,8 +202,8 @@ plot_napping <- function(
 
   ##### MFA with word frequencies   ####
   close_extra_devs()
-  res.mfa <- FactoMineR::MFA(
-    base = nap.tot,
+  FactoMineR::MFA(
+    base = nap_tot,
     group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
     type = c(rep("c", ncol(df_coord) / 2), "f"),
     ncp = Inf,
@@ -225,8 +225,8 @@ plot_napping <- function(
   ####   Clustering analysis based on coordinates of products ####
 
   close_extra_devs()
-  res.HCPC <- FactoMineR::HCPC(
-    res = res.nap,
+  FactoMineR::HCPC(
+    res = res_nap,
     nb.clust = -1,
     consol = TRUE,
     iter.max = 100,

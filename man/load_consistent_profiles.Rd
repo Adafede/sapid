@@ -23,8 +23,8 @@ summed intensities.
 }
 \details{
 This function filters sensory data to keep only taste descriptors that appear
-consistently across at least \code{min_jury} panelists. It removes descriptors that
-are used by only one panelist (potentially idiosyncratic terms).
+consistently across at least \code{min_jury} panelists. It removes descriptors
+that are used by only one panelist (potentially idiosyncratic terms).
 }
 \examples{
 data(profiles)

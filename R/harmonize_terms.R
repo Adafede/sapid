@@ -9,7 +9,8 @@
 #'   containing `original` and `translated` (or `translated_simple`) columns.
 #' @param x Character vector to be harmonized.
 #' @param mode Replacement mode: `"word"` for word-boundary matching,
-#'   `"substring"` for regex partial matching, or `"fixed"` for literal matching.
+#'   `"substring"` for regex partial matching, or `"fixed"` for literal
+#'   matching.
 #' @param fallback Logical; if `TRUE`, replace `NA` values with the uppercased
 #'   input string.
 #'
@@ -88,5 +89,5 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     out[na_idx] <- processed_string[na_idx]
   }
 
-  return(out)
+  out
 }

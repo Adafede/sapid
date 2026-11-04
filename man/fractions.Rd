@@ -13,7 +13,8 @@ A data frame with 94 rows and 3 columns:
 }
 }
 \source{
-\doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
+\doi{10.1016/j.crfs.2025.101043};
+Zenodo \url{https://zenodo.org/records/14616396}
 }
 \usage{
 fractions
@@ -25,9 +26,10 @@ Hierarchical record of sample preparation and fractionation of
 and mass balance through extraction and purification.
 }
 \details{
-The hierarchy starts with raw plant material and initial solvents (EtOH, water)
-and traces through extraction, decanting, drying, and sub-fractionation steps
-leading to final analytic samples (\code{V_01}, \code{V_02}, etc.).
+The hierarchy starts with raw plant material and initial solvents
+(EtOH, water) and traces through extraction, decanting, drying, and
+sub-fractionation steps leading to final analytic samples
+(\code{V_01}, \code{V_02}, etc.).
 }
 \examples{
 data(fractions)

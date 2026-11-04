@@ -15,7 +15,8 @@ correlate_ion_taste_intensities(
 )
 }
 \arguments{
-\item{input_ions}{Path or \code{data.frame} of mzmine feature areas across fractions.}
+\item{input_ions}{Path or \code{data.frame} of mzmine feature areas across
+fractions.}
 
 \item{input_tastes}{Optional path or \code{data.frame} of sensory profiles
 (defaults to built-in \link{profiles}).}
@@ -27,10 +28,11 @@ correlate_ion_taste_intensities(
 
 \item{min_area_ion}{Minimum feature peak area threshold (default \code{1L}).}
 
-\item{imputation_factor}{Multiplicative factor applied to the minimum observed
-intensity when imputing missing values (default \code{0.5}).}
+\item{imputation_factor}{Multiplicative factor applied to the minimum
+observed intensity when imputing missing values (default \code{0.5}).}
 
-\item{widths}{Integer vector of rolling fraction window widths (default \code{5:9}).}
+\item{widths}{Integer vector of rolling fraction window widths
+(default \code{5:9}).}
 }
 \value{
 Path to the written \code{output} TSV file.

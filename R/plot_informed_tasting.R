@@ -1,8 +1,8 @@
 #' Plot classical vs. chemically informed tasting treemaps
 #'
 #' Compare relative taste descriptor proportions between classical raw extract
-#' tasting and mass-weighted chemically informed fraction tasting using side-by-side
-#' treemaps.
+#' tasting and mass-weighted chemically informed fraction tasting using
+#' side-by-side treemaps.
 #'
 #' @concept EDAM:topic_3172 Metabolomics
 #' @concept EDAM:topic_0092 Data visualisation
@@ -195,5 +195,5 @@ plot_informed_tasting <- function(
       width = 10,
       height = 6
     )
-  return(output)
+  output
 }

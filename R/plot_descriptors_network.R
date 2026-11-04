@@ -144,5 +144,5 @@ plot_descriptors_network <- function(
       width = 7,
       height = 7
     )
-  return(output)
+  output
 }

@@ -108,5 +108,5 @@ plot_matrices <- function(
       height = 12
     )
 
-  return(output)
+  output
 }

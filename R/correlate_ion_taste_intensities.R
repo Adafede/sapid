@@ -9,16 +9,18 @@
 #' @concept EDAM:topic_2269 Statistics and probability
 #' @concept EDAM:operation_3465 Correlation
 #' @concept EDAM:data_2536 Mass spectrometry data
-#' @param input_ions Path or `data.frame` of mzmine feature areas across fractions.
+#' @param input_ions Path or `data.frame` of mzmine feature areas across
+#'   fractions.
 #' @param input_tastes Optional path or `data.frame` of sensory profiles
 #'   (defaults to built-in [profiles]).
 #' @param output Path to write the resulting TSV correlation table.
 #' @param min_jury Minimum number of distinct jurors required for a taste term
 #'   (default `2L`).
 #' @param min_area_ion Minimum feature peak area threshold (default `1L`).
-#' @param imputation_factor Multiplicative factor applied to the minimum observed
-#'   intensity when imputing missing values (default `0.5`).
-#' @param widths Integer vector of rolling fraction window widths (default `5:9`).
+#' @param imputation_factor Multiplicative factor applied to the minimum
+#'   observed intensity when imputing missing values (default `0.5`).
+#' @param widths Integer vector of rolling fraction window widths
+#'   (default `5:9`).
 #'
 #' @return Path to the written `output` TSV file.
 #' @export
@@ -93,6 +95,9 @@ correlate_ion_taste_intensities <- function(
   }
 
   pkendall_lut <- function(n) {
+    if (n < 2L) {
+      return(1)
+    }
     max_q <- as.integer(n * (n - 1L) / 2L)
     dp <- 1
     for (k in 2L:n) {
@@ -204,10 +209,10 @@ correlate_ion_taste_intensities <- function(
       f_rows <- match(taste_fracs[in_win], fractions)
       valid_f <- !is.na(f_rows) & row_has_any_ion[f_rows]
       if (!any(valid_f)) {
-        warning(paste(
-          "No data found for fractions_list:",
+        warning(
+          "No data found for fractions_list: ",
           paste(fractions_list, collapse = ", ")
-        ))
+        )
         return(NULL)
       }
       f_rows <- f_rows[valid_f]
@@ -228,10 +233,10 @@ correlate_ion_taste_intensities <- function(
       }
 
       y_const <- length(unique(taste_vec)) <= 1L
-      y_norm <- (!y_const &&
+      y_norm <- !y_const &&
         n >= 3L &&
         n <= 5000L &&
-        stats::shapiro.test(taste_vec)$p.value > 0.05)
+        stats::shapiro.test(taste_vec)$p.value > 0.05
 
       info <- get_win_info(f_rows, need_shapiro = y_norm)
       if (info$empty) {
@@ -246,15 +251,18 @@ correlate_ion_taste_intensities <- function(
       any_const <- info$x_const | y_const
       if (any(any_const)) {
         warning(
-          "All values in x or y are identical. Defaulting to Kendall correlation."
+          "All values in x or y are identical. ",
+          "Defaulting to Kendall correlation."
         )
       } else if (n < 3L) {
         warning(
-          "Sample size too small for Shapiro-Wilk test. Defaulting to Kendall correlation."
+          "Sample size too small for Shapiro-Wilk test. ",
+          "Defaulting to Kendall correlation."
         )
       } else if (n > 5000L) {
         warning(
-          "Sample size too large for Shapiro-Wilk test. Defaulting to Kendall correlation."
+          "Sample size too large for Shapiro-Wilk test. ",
+          "Defaulting to Kendall correlation."
         )
       }
 
@@ -363,5 +371,5 @@ correlate_ion_taste_intensities <- function(
 
   .cascade_check_export_dir(dirname(output))
   data.table::fwrite(correlations, file = output, sep = "\t")
-  return(output)
+  output
 }

@@ -25,7 +25,8 @@
 #' @param max_pval Maximum BH-adjusted p-value threshold (default `0.05`).
 #' @param min_area_ion Minimum feature peak area threshold (default `1L`).
 #' @param min_confidence Minimum TIMA final annotation score (default `0.45`).
-#' @param min_consistency Minimum chemical class consistency score (default `0.9`).
+#' @param min_consistency Minimum chemical class consistency score
+#'   (default `0.9`).
 #' @param min_corr Minimum correlation coefficient threshold (default `0.95`).
 #' @param min_intense_ions_ratio Minimum overlap ratio with top-intensity
 #'   fractions (default `0.8`).
@@ -843,9 +844,9 @@ plot_correlations <- function(
       height = 15
     )
 
-  return(list(
+  list(
     "plot_correlations_1" = output_1,
     "plot_correlations_2" = output_2,
     "plot_correlations_3" = output_3
-  ))
+  )
 }

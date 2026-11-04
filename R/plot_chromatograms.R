@@ -11,8 +11,10 @@
 #' @param input_groups Optional path or `data.frame` of sample cluster groups
 #'   (defaults to built-in [groups]).
 #' @param raw_index Integer index of the raw extract file in `input_dir`.
-#' @param fractions_indices Integer vector of fraction file indices in `input_dir`.
-#' @param xlim Numeric length-2 retention time range in minutes (default `c(2, 25)`).
+#' @param fractions_indices Integer vector of fraction file indices in
+#'   `input_dir`.
+#' @param xlim Numeric length-2 retention time range in minutes
+#'   (default `c(2, 25)`).
 #' @param output Output PDF file path.
 #'
 #' @return Output file path (`output`).
@@ -38,7 +40,6 @@ plot_chromatograms <- function(
   )
 
   # Continue with rest of function using table_groups instead of re-reading
-  groups <- table_groups
 
   extract_chromatogram_df <- function(file) {
     chrom_loaded <- .cascade_load_chromatograms(file)

@@ -51,7 +51,8 @@ plot_correlations(
 
 \item{min_confidence}{Minimum TIMA final annotation score (default \code{0.45}).}
 
-\item{min_consistency}{Minimum chemical class consistency score (default \code{0.9}).}
+\item{min_consistency}{Minimum chemical class consistency score
+(default \code{0.9}).}
 
 \item{min_corr}{Minimum correlation coefficient threshold (default \code{0.95}).}
 

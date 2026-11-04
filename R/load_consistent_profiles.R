@@ -13,8 +13,8 @@
 #'
 #' @details
 #' This function filters sensory data to keep only taste descriptors that appear
-#' consistently across at least `min_jury` panelists. It removes descriptors that
-#' are used by only one panelist (potentially idiosyncratic terms).
+#' consistently across at least `min_jury` panelists. It removes descriptors
+#' that are used by only one panelist (potentially idiosyncratic terms).
 #'
 #' @return A `data.frame` with consistent sensory profiles and summary columns
 #'   `sum`, `sum_taste`, and `group`.

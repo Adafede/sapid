@@ -38,7 +38,8 @@ built-in \link{profiles}).}
 
 \item{peaks_dir_extract}{Directory of CAD peak comparison tables for extract.}
 
-\item{peaks_dir_fractions}{Directory of CAD peak comparison tables for fractions.}
+\item{peaks_dir_fractions}{Directory of CAD peak comparison tables for
+fractions.}
 
 \item{min_confidence}{Minimum TIMA final confidence score (default \code{0.45}).}
 

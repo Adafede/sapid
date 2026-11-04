@@ -34,7 +34,8 @@ prepare_chemical_profiles(
 
 \item{end_extract}{Integer end index for extract files (default \code{7L}).}
 
-\item{start_fractions}{Integer start index for fraction files (default \code{12L}).}
+\item{start_fractions}{Integer start index for fraction files
+(default \code{12L}).}
 
 \item{end_fractions}{Integer end index for fraction files (default \code{65L}).}
 }

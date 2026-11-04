@@ -2,19 +2,29 @@
 % Please edit documentation in R/plot_matrices.R
 \name{plot_matrices}
 \alias{plot_matrices}
-\title{Plot matrices}
+\title{Plot sensory matrices before and after vocabulary harmonization}
 \usage{
 plot_matrices(input = NULL, output = "./data/figures/figure_matrices.pdf")
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of sensory profiles (defaults to
+built-in \link{profiles}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot matrices
+Render side-by-side heatmaps of fraction-by-juror bitterness ratings before
+(\code{"AMER"}) and after (\code{"BITTER"}) descriptor vocabulary harmonization.
 }
 \examples{
-NULL
-
+\donttest{
+out <- tempfile(fileext = ".pdf")
+plot_matrices(output = out)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3370 Analytical chemistry}

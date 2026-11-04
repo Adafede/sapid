@@ -4,17 +4,17 @@
 \name{sapid-package}
 \alias{sapid}
 \alias{sapid-package}
-\title{sapid: A Strategy to Analyze Plant Extracts Taste In Depth}
+\title{sapid: A Strategy to Analyze Plant Extracts Taste in Depth}
 \description{
 \if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 
-This package provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth.
+Provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth (SAPID) by combining sensory panel profiling, projective napping, and Ascending Forced Choice (AFC) threshold testing with untargeted LC-MS feature tables, Charged Aerosol Detection (CAD) semi-quantification, taxonomically informed metabolite annotations (TIMA), and 1D proton NMR spectral clustering.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/adafede/sapid}
-  \item \url{https://adafede.github.io/sapid}
+  \item \url{https://adafede.github.io/sapid/}
   \item Report bugs at \url{https://github.com/adafede/sapid/issues}
 }
 
@@ -28,4 +28,16 @@ Authors:
 }
 
 }
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:operation_3214 Spectral analysis}
+\concept{EDAM:operation_3432 Clustering}
+\concept{EDAM:operation_3465 Correlation}
+\concept{EDAM:operation_3803 Natural product identification}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_0154 Small molecules}
+\concept{EDAM:topic_0593 NMR}
+\concept{EDAM:topic_0780 Plant biology}
+\concept{EDAM:topic_2258 Cheminformatics}
+\concept{EDAM:topic_3172 Metabolomics}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{internal}

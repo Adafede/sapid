@@ -7,7 +7,7 @@
 \format{
 A data frame with 94 rows and 3 columns:
 \describe{
-\item{parent}{Parent fraction identifier (NA for root material)}
+\item{parent}{Parent fraction identifier (\code{NA} for root material)}
 \item{label}{Child fraction or processing step identifier}
 \item{mass}{Mass in milligrams at this stage}
 }
@@ -20,19 +20,21 @@ fractions
 }
 \description{
 Hierarchical record of sample preparation and fractionation of
-Swertia chirayita, documenting parent-child relationships and mass
+\emph{Swertia chirayita}, documenting parent-child relationships and mass
 (in milligrams) at each step. Useful for tracking sample lineage
 and mass balance through extraction and purification.
 }
 \details{
 The hierarchy starts with raw plant material and initial solvents (EtOH, water)
 and traces through extraction, decanting, drying, and sub-fractionation steps
-leading to final analytic samples (V_01, V_02, etc.).
+leading to final analytic samples (\code{V_01}, \code{V_02}, etc.).
 }
 \examples{
 data(fractions)
 head(fractions)
-# View the hierarchy structure
 subset(fractions, !is.na(parent))
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3172 Metabolomics}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{datasets}

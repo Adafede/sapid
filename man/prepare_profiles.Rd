@@ -2,32 +2,42 @@
 % Please edit documentation in R/prepare_profiles.R
 \name{prepare_profiles}
 \alias{prepare_profiles}
-\title{Prepare profiles}
+\title{Prepare harmonized sensory profiles dataset}
 \usage{
 prepare_profiles(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-  dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package =
-    "sapid"),
-  dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package =
-    "sapid"),
+  dictionary_generic_path = NULL,
+  dictionary_specific_path = NULL,
   sessions = seq(1, 7),
   output = "inst/extdata/profiles.tsv"
 )
 }
 \arguments{
-\item{input_dir}{Input dir}
+\item{input_dir}{Path to the raw sensory sessions directory.}
 
-\item{dictionary_generic_path}{Dictionary generic path}
+\item{dictionary_generic_path}{Optional path or \code{data.frame} for generic
+dictionary (defaults to built-in \link{dictionary_generic}).}
 
-\item{dictionary_specific_path}{Dictionary specific path}
+\item{dictionary_specific_path}{Optional path or \code{data.frame} for specific
+dictionary (defaults to built-in \link{dictionary_specific}).}
 
-\item{sessions}{Sessions}
+\item{sessions}{Integer vector of session numbers (default \code{1:7}).}
 
-\item{output}{output}
+\item{output}{Output TSV file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Prepare profiles
+Load flash profile worksheets across sessions, harmonize French panelist
+taste terms using specific and generic dictionaries, correct out-of-range
+scale export artifacts, and write the combined TSV table.
 }
 \examples{
-NULL
+\dontrun{
+prepare_profiles()
 }
+}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
+\concept{EDAM:topic_3370 Analytical chemistry}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/correlate_ion_taste_intensities.R
 \name{correlate_ion_taste_intensities}
 \alias{correlate_ion_taste_intensities}
-\title{Correlate ion taste intensities}
+\title{Correlate LC-MS ion intensities with sensory taste intensities}
 \usage{
 correlate_ion_taste_intensities(
   input_ions = "./data/fractions_mzmine/fractions.csv",
@@ -15,23 +15,38 @@ correlate_ion_taste_intensities(
 )
 }
 \arguments{
-\item{input_ions}{Input ions}
+\item{input_ions}{Path or \code{data.frame} of mzmine feature areas across fractions.}
 
-\item{input_tastes}{Input tastes}
+\item{input_tastes}{Optional path or \code{data.frame} of sensory profiles
+(defaults to built-in \link{profiles}).}
 
-\item{output}{Output}
+\item{output}{Path to write the resulting TSV correlation table.}
 
-\item{min_jury}{Min jury}
+\item{min_jury}{Minimum number of distinct jurors required for a taste term
+(default \code{2L}).}
 
-\item{min_area_ion}{Min area ion}
+\item{min_area_ion}{Minimum feature peak area threshold (default \code{1L}).}
 
-\item{imputation_factor}{Imputation factor}
+\item{imputation_factor}{Multiplicative factor applied to the minimum observed
+intensity when imputing missing values (default \code{0.5}).}
 
-\item{widths}{Widths}
+\item{widths}{Integer vector of rolling fraction window widths (default \code{5:9}).}
+}
+\value{
+Path to the written \code{output} TSV file.
 }
 \description{
-Correlate ion taste intensities
+Compute rolling-window correlations between LC-MS feature peak areas and
+panel-consistent sensory taste ratings across contiguous chromatographic
+fractions, automatically selecting Pearson or Kendall correlation based on
+Shapiro-Wilk normality tests and applying Benjamini-Hochberg FDR adjustment.
 }
 \examples{
-NULL
+\dontrun{
+correlate_ion_taste_intensities()
 }
+}
+\concept{EDAM:data_2536 Mass spectrometry data}
+\concept{EDAM:operation_3465 Correlation}
+\concept{EDAM:topic_2269 Statistics and probability}
+\concept{EDAM:topic_3172 Metabolomics}

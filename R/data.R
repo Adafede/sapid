@@ -3,10 +3,14 @@
 #' This page documents the built-in datasets in the `sapid` package,
 #' which provide sensory panel data, sample metadata, and reference
 #' dictionaries for taste-characterization workflows.
-#' All datasets originate from or are derived from the Swertia chirayita
+#' All datasets originate from or are derived from the *Swertia chirayita*
 #' case study published in \doi{10.1016/j.crfs.2025.101043},
-#' with raw data archived at https://zenodo.org/records/14616396.
+#' with raw data archived at <https://zenodo.org/records/14616396>.
 #'
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:topic_0154 Small molecules
+#' @concept EDAM:topic_0780 Plant biology
+#' @concept EDAM:data_2048 Report
 #' @format NULL
 #' @name sapid-data
 NULL
@@ -16,13 +20,15 @@ NULL
 #' A dataset of sensory panel ratings for Chasselas wine samples,
 #' collected during multiple sessions with multiple jurors.
 #'
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 1,314 rows and 6 columns:
 #' \describe{
 #'   \item{date}{ISO 8601 timestamp of the rating session}
-#'   \item{jury}{Juror identifier (e.g., "jury_01")}
-#'   \item{product}{Product identifier ("product_1before", "product_2after")}
-#'   \item{session}{Session identifier (e.g., "session_06")}
-#'   \item{taste}{Taste attribute or descriptor (e.g., "sourness", "bitterness")}
+#'   \item{jury}{Juror identifier (e.g., `"jury_01"`)}
+#'   \item{product}{Product identifier (`"product_1before"`, `"product_2after"`)}
+#'   \item{session}{Session identifier (e.g., `"session_06"`)}
+#'   \item{taste}{Taste attribute or descriptor (e.g., `"sourness"`, `"bitterness"`)}
 #'   \item{value}{Numerical rating value for the attribute}
 #' }
 #'
@@ -40,11 +46,14 @@ NULL
 #' with concentration-dependent taste evaluation.
 #' Includes AFC accuracy metrics (number correct out of total trials).
 #'
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:topic_2269 Statistics and probability
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 76 rows and 6 columns:
 #' \describe{
 #'   \item{concentration}{Concentration level of the tested compound}
-#'   \item{jury}{Juror identifier (e.g., "jury_01")}
-#'   \item{taste}{Taste attribute tested (e.g., "amer", "acide")}
+#'   \item{jury}{Juror identifier (e.g., `"jury_01"`)}
+#'   \item{taste}{Taste attribute tested (e.g., `"amer"`, `"acide"`)}
 #'   \item{value}{Numerical rating or intensity value}
 #'   \item{afc_correct}{Number of correct responses in the AFC trial}
 #'   \item{afc_total}{Total number of trials in the AFC session}
@@ -61,15 +70,18 @@ NULL
 #' Sensory Profiles with Harmonized Taste Descriptors
 #'
 #' The primary sensory panel dataset containing taste profile ratings
-#' for Swertia chirayita sample fractions. Includes original (as entered
+#' for *Swertia chirayita* sample fractions. Includes original (as entered
 #' by panelists) and harmonized (standardized) taste descriptor terms.
 #' This is the main table for sensory-MS correlation analyses.
 #'
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 1,665 rows and 6 columns:
 #' \describe{
-#'   \item{fraction}{Fraction identifier (e.g., "fraction_17")}
-#'   \item{session}{Session identifier (e.g., "session_01")}
-#'   \item{jury}{Juror identifier (e.g., "jury_03")}
+#'   \item{fraction}{Fraction identifier (e.g., `"fraction_17"`)}
+#'   \item{session}{Session identifier (e.g., `"session_01"`)}
+#'   \item{jury}{Juror identifier (e.g., `"jury_03"`)}
 #'   \item{taste_original}{Original taste descriptor as entered by panelist}
 #'   \item{taste_harmonized}{Standardized/harmonized taste descriptor}
 #'   \item{value}{Numerical rating or intensity score}
@@ -78,8 +90,8 @@ NULL
 #' @details
 #' Missing or empty harmonized values indicate descriptors that could not
 #' be consistently mapped across panelists or were deemed non-informative
-#' (e.g., "RIEN" meaning "nothing").
-#' Use \code{!is.na(taste_harmonized) & taste_harmonized != ""} to filter
+#' (e.g., `"RIEN"` meaning `"nothing"`).
+#' Use `!is.na(taste_harmonized) & taste_harmonized != ""` to filter
 #' for valid descriptors in analyses.
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
@@ -96,15 +108,17 @@ NULL
 #' recorded by individual jurors (panelists). Each juror positioned samples
 #' on a 2D plane; coordinates represent their sensory perception of similarity.
 #'
+#' @concept EDAM:topic_2269 Statistics and probability
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 64 rows and multiple columns:
 #' \describe{
-#'   \item{fraction}{Fraction identifier (e.g., "fraction_17")}
-#'   \item{session}{Session identifier (e.g., "session_01")}
+#'   \item{fraction}{Fraction identifier (e.g., `"fraction_17"`)}
+#'   \item{session}{Session identifier (e.g., `"session_01"`)}
 #'   \item{J01X, J01Y, J02X, J02Y, J03X, J03Y, J04X, J04Y, J05X, J05Y, J06X,
 #'     J06Y, J07X, J07Y, J08X, J08Y, J09X, J09Y, J10X, J10Y, J11X, J11Y, J12X,
 #'     J12Y, J13X, J13Y, J14X, J14Y}{Napping coordinates for each juror;
-#'     column pairs (JxxX, JxxY) represent X and Y positions assigned by
-#'     juror Jxx}
+#'     column pairs (`JxxX`, `JxxY`) represent X and Y positions assigned by
+#'     juror `Jxx`}
 #' }
 #'
 #' @details
@@ -126,11 +140,13 @@ NULL
 #' during napping sessions. Each descriptor was provided by a juror
 #' for a specific fraction, with original, intermediate, and harmonized forms.
 #'
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 1,146 rows and 6 columns:
 #' \describe{
-#'   \item{fraction}{Fraction identifier (e.g., "fraction_17")}
-#'   \item{session}{Session identifier (e.g., "session_01")}
-#'   \item{jury}{Juror identifier (e.g., "J1")}
+#'   \item{fraction}{Fraction identifier (e.g., `"fraction_17"`)}
+#'   \item{session}{Session identifier (e.g., `"session_01"`)}
+#'   \item{jury}{Juror identifier (e.g., `"J1"`)}
 #'   \item{taste_original}{Original descriptor as written by juror}
 #'   \item{taste_intermediate}{Intermediate standardization step}
 #'   \item{taste_harmonized}{Final harmonized descriptor}
@@ -152,13 +168,16 @@ NULL
 #' Swertia chirayita Sample Fractionation Hierarchy
 #'
 #' Hierarchical record of sample preparation and fractionation of
-#' Swertia chirayita, documenting parent-child relationships and mass
+#' *Swertia chirayita*, documenting parent-child relationships and mass
 #' (in milligrams) at each step. Useful for tracking sample lineage
 #' and mass balance through extraction and purification.
 #'
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 94 rows and 3 columns:
 #' \describe{
-#'   \item{parent}{Parent fraction identifier (NA for root material)}
+#'   \item{parent}{Parent fraction identifier (`NA` for root material)}
 #'   \item{label}{Child fraction or processing step identifier}
 #'   \item{mass}{Mass in milligrams at this stage}
 #' }
@@ -166,14 +185,13 @@ NULL
 #' @details
 #' The hierarchy starts with raw plant material and initial solvents (EtOH, water)
 #' and traces through extraction, decanting, drying, and sub-fractionation steps
-#' leading to final analytic samples (V_01, V_02, etc.).
+#' leading to final analytic samples (`V_01`, `V_02`, etc.).
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
 #'
 #' @examples
 #' data(fractions)
 #' head(fractions)
-#' # View the hierarchy structure
 #' subset(fractions, !is.na(parent))
 "fractions"
 
@@ -183,10 +201,12 @@ NULL
 #' group identifiers (typically color codes used in visualizations)
 #' and corresponding sample row identifiers.
 #'
+#' @concept EDAM:operation_3432 Clustering
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 54 rows and 2 columns:
 #' \describe{
-#'   \item{group}{Group identifier, often a color code (e.g., "#e31a1c")}
-#'   \item{rowname}{Sample or fraction row identifier (e.g., "17")}
+#'   \item{group}{Group identifier, often a color code (e.g., `"#e31a1c"`)}
+#'   \item{rowname}{Sample or fraction row identifier (e.g., `"17"`)}
 #' }
 #'
 #' @details
@@ -208,6 +228,8 @@ NULL
 #' terms. Includes original, translated, and simplified versions.
 #' Designed for generic/widely-used sensory attributes.
 #'
+#' @concept EDAM:operation_2428 Validation
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 64 rows and 3 columns:
 #' \describe{
 #'   \item{original}{Original or raw descriptor (often in French)}
@@ -216,7 +238,7 @@ NULL
 #' }
 #'
 #' @details
-#' Used by data harmonization functions (e.g., \code{harmonize_terms()})
+#' Used by data harmonization functions (e.g., [harmonize_terms()])
 #' to standardize taste terminology across panelists and sessions.
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
@@ -224,8 +246,7 @@ NULL
 #' @examples
 #' data(dictionary_generic)
 #' head(dictionary_generic)
-#' # Example lookup
-#' subset(dictionary_generic, original == "BOISÉ")
+#' subset(dictionary_generic, original == "BOIS\u00c9")
 "dictionary_generic"
 
 #' Napping-Specific Taste Terms Dictionary
@@ -233,6 +254,8 @@ NULL
 #' A reference dictionary specifically for napping session terminology,
 #' mapping napping-specific descriptors to standardized terms.
 #'
+#' @concept EDAM:operation_2428 Validation
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 45 rows and 2 columns:
 #' \describe{
 #'   \item{original}{Original napping descriptor}
@@ -241,7 +264,7 @@ NULL
 #'
 #' @details
 #' Napping methods often generate unique terminology or abbreviations
-#' (e.g., "_LEGER" for "light"). This dictionary maps these to
+#' (e.g., `"_LEGER"` for `"light"`). This dictionary maps these to
 #' harmonized forms used in broader analyses.
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}
@@ -249,7 +272,6 @@ NULL
 #' @examples
 #' data(dictionary_napping)
 #' head(dictionary_napping)
-#' # Find mappings for "LEGER"
 #' subset(dictionary_napping, grepl("LEGER", original))
 "dictionary_napping"
 
@@ -258,6 +280,8 @@ NULL
 #' A reference dictionary for specific or less-common taste descriptors,
 #' including mappings to English translations and simplified forms.
 #'
+#' @concept EDAM:operation_2428 Validation
+#' @concept EDAM:data_2048 Report
 #' @format A data frame with 196 rows and 3 columns:
 #' \describe{
 #'   \item{original}{Original specific descriptor (often in French)}
@@ -266,7 +290,7 @@ NULL
 #' }
 #'
 #' @details
-#' Larger and more specialized than \code{dictionary_generic}.
+#' Larger and more specialized than [dictionary_generic].
 #' Used for comprehensive harmonization of all descriptors in the dataset.
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043}; Zenodo \url{https://zenodo.org/records/14616396}

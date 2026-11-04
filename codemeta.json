@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "sapid",
-  "description": "This package provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth.",
+  "description": "Provides the infrastructure to implement a Strategy to Analyze Plant Extracts Taste In Depth (SAPID) by combining sensory panel profiling, projective napping, and Ascending Forced Choice (AFC) threshold testing with untargeted LC-MS feature tables, Charged Aerosol Detection (CAD) semi-quantification, taxonomically informed metabolite annotations (TIMA), and 1D proton NMR spectral clustering.",
   "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
   "relatedLink": "https://adafede.github.io/sapid",
   "codeRepository": "https://github.com/adafede/sapid",
@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.6.1 (2026-06-24)",
+  "runtimePlatform": "R version 4.6.2 (2026-10-29)",
   "author": [
     {
       "@type": "Person",
@@ -122,23 +122,23 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "BSDA",
-      "name": "BSDA",
-      "version": ">= 1.2.2",
+      "identifier": "cascade",
+      "name": "cascade",
+      "version": ">= 0.0.0.9002",
+      "sameAs": "https://github.com/adafede/cascade"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "data.table",
+      "name": "data.table",
+      "version": ">= 1.18.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=BSDA"
-    },
-    "4": {
-      "@type": "SoftwareApplication",
-      "identifier": "cascade",
-      "name": "cascade",
-      "version": ">= 0.0.0.9002",
-      "sameAs": "https://github.com/adafede/cascade"
+      "sameAs": "https://CRAN.R-project.org/package=data.table"
     },
     "5": {
       "@type": "SoftwareApplication",
@@ -168,19 +168,6 @@
     },
     "7": {
       "@type": "SoftwareApplication",
-      "identifier": "forcats",
-      "name": "forcats",
-      "version": ">= 1.0.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=forcats"
-    },
-    "8": {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 4.0.3",
@@ -192,7 +179,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -205,7 +192,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -216,9 +203,9 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=ggraph"
+      "sameAs": "https://github.com/thomasp85/ggraph"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggrepel",
       "name": "ggrepel",
@@ -230,6 +217,11 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=ggrepel"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "grDevices",
+      "name": "grDevices"
     },
     "12": {
       "@type": "SoftwareApplication",
@@ -246,58 +238,6 @@
     },
     "13": {
       "@type": "SoftwareApplication",
-      "identifier": "khroma",
-      "name": "khroma",
-      "version": ">= 1.17.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=khroma"
-    },
-    "14": {
-      "@type": "SoftwareApplication",
-      "identifier": "purrr",
-      "name": "purrr",
-      "version": ">= 1.2.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=purrr"
-    },
-    "15": {
-      "@type": "SoftwareApplication",
-      "identifier": "readxl",
-      "name": "readxl",
-      "version": ">= 1.5.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=readxl"
-    },
-    "16": {
-      "@type": "SoftwareApplication",
-      "identifier": "scales",
-      "name": "scales",
-      "version": ">= 1.4.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=scales"
-    },
-    "17": {
-      "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
       "version": ">= 1.28",
@@ -309,38 +249,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "18": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "19": {
-      "@type": "SoftwareApplication",
-      "identifier": "tibble",
-      "name": "tibble",
-      "version": ">= 3.3.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tibble"
-    },
-    "20": {
-      "@type": "SoftwareApplication",
-      "identifier": "tidytable",
-      "name": "tidytable",
-      "version": ">= 0.11.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tidytable"
-    },
-    "21": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -353,15 +267,15 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=treemapify"
     },
-    "22": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
     "SystemRequirements": null
   },
-  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "lc-msms", "metabolomics", "natural-extracts", "r"],
-  "fileSize": "593141.681KB",
+  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "sensoryAnalysis", "massSpectrometry", "nmrSpectroscopy", "EDAM:topic_3172", "EDAM:topic_0154", "EDAM:topic_3370", "EDAM:topic_2258", "EDAM:topic_0780", "EDAM:topic_0593", "EDAM:topic_0092", "EDAM:topic_2269", "EDAM:operation_3803", "EDAM:operation_3214", "EDAM:operation_3215", "EDAM:operation_3432", "EDAM:operation_3465", "EDAM:operation_2428", "EDAM:operation_0337", "EDAM:operation_3203", "EDAM:operation_2942", "EDAM:operation_3925", "EDAM:data_2536", "EDAM:data_3488", "EDAM:data_2048", "EDAM:format_3244", "EDAM:format_3475", "EDAM:format_3752", "EDAM:format_3508", "lc-msms", "metabolomics", "natural-extracts", "r"],
+  "fileSize": "3322.194KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

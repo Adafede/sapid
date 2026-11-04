@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_chromatograms.R
 \name{plot_chromatograms}
 \alias{plot_chromatograms}
-\title{Plot chromatograms}
+\title{Plot raw extract and fraction chromatograms}
 \usage{
 plot_chromatograms(
   input_dir = "./data/20210619",
@@ -14,21 +14,32 @@ plot_chromatograms(
 )
 }
 \arguments{
-\item{input_dir}{Input dir}
+\item{input_dir}{Directory containing \code{.mzML} files.}
 
-\item{input_groups}{Input groups}
+\item{input_groups}{Optional path or \code{data.frame} of sample cluster groups
+(defaults to built-in \link{groups}).}
 
-\item{raw_index}{Raw index}
+\item{raw_index}{Integer index of the raw extract file in \code{input_dir}.}
 
-\item{fractions_indices}{Fractions indices}
+\item{fractions_indices}{Integer vector of fraction file indices in \code{input_dir}.}
 
-\item{xlim}{Xlim}
+\item{xlim}{Numeric length-2 retention time range in minutes (default \code{c(2, 25)}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot chromatograms
+Load and baseline-correct \code{.mzML} chromatograms for the raw plant extract
+and its fractions (mirrored along the y-axis), colored by NMR cluster group.
 }
 \examples{
-NULL
+\dontrun{
+plot_chromatograms()
 }
+}
+\concept{EDAM:data_2536 Mass spectrometry data}
+\concept{EDAM:format_3244 mzML}
+\concept{EDAM:operation_3203 Chromatogram visualisation}
+\concept{EDAM:topic_3172 Metabolomics}

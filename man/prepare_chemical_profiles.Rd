@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_chemical_profiles.R
 \name{prepare_chemical_profiles}
 \alias{prepare_chemical_profiles}
-\title{Prepare chemical profiles}
+\title{Prepare chemical profiles from LC-MS/CAD data}
 \usage{
 prepare_chemical_profiles(
   mzmls_dir = "./data/20210619",
@@ -18,29 +18,38 @@ prepare_chemical_profiles(
 )
 }
 \arguments{
-\item{mzmls_dir}{mzML files directory}
+\item{mzmls_dir}{Directory containing \code{.mzML} files.}
 
-\item{peaks_dir_extract}{Peaks dir extract}
+\item{peaks_dir_extract}{Output directory for extract peak tables.}
 
-\item{peaks_dir_fractions}{Peaks dir fractions}
+\item{peaks_dir_fractions}{Output directory for fraction peak tables.}
 
-\item{features_path_extract}{Features path extract}
+\item{features_path_extract}{Path to extract mzmine feature CSV.}
 
-\item{features_path_fractions}{Features path fractions}
+\item{features_path_fractions}{Path to fractions mzmine feature CSV.}
 
-\item{min_intensity}{Minimal intensity}
+\item{min_intensity}{Minimum MS intensity threshold (default \code{1e5}).}
 
-\item{start_extract}{Start extract}
+\item{start_extract}{Integer start index for extract files (default \code{5L}).}
 
-\item{end_extract}{End extract}
+\item{end_extract}{Integer end index for extract files (default \code{7L}).}
 
-\item{start_fractions}{Start fractions}
+\item{start_fractions}{Integer start index for fraction files (default \code{12L}).}
 
-\item{end_fractions}{End fractions}
+\item{end_fractions}{Integer end index for fraction files (default \code{65L}).}
+}
+\value{
+Invisibly returns \code{NULL}.
 }
 \description{
-Prepare chemical profiles
+Run \code{cascade::process_compare_peaks()} across raw extract and fraction
+\code{.mzML} files to generate CAD-informed and non-informed feature peak tables.
 }
 \examples{
-NULL
+\dontrun{
+prepare_chemical_profiles()
 }
+}
+\concept{EDAM:data_2536 Mass spectrometry data}
+\concept{EDAM:operation_3215 Peak detection}
+\concept{EDAM:topic_3172 Metabolomics}

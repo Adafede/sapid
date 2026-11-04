@@ -1,56 +1,48 @@
 Package: sapid
-Title: A Strategy to Analyze Plant Extracts Taste In Depth
+Title: A Strategy to Analyze Plant Extracts Taste in Depth
 Version: 0.0.0.9002
-Author: Adriano Rutz
-Authors@R: c(
-    person(
-        given = "Adriano",
-        family = "Rutz",
-        email = "adafede@gmail.com",
-        role = c("aut", "cre"),
-        comment = c(ORCID = "0000-0003-0443-9902")
-        )
-        )
-Maintainer: Adriano Rutz <adafede@gmail.com>
-Description: This package provides the infrastructure to implement a
-    Strategy to Analyze Plant Extracts Taste In Depth.
+Authors@R:
+    person(given = "Adriano",
+           family = "Rutz",
+           role = c("aut", "cre"),
+           email = "adafede@gmail.com",
+           comment = c(ORCID = "0000-0003-0443-9902"))
+Description: Provides the infrastructure to implement a Strategy to Analyze
+    Plant Extracts Taste In Depth (SAPID) by combining sensory panel profiling,
+    projective napping, and Ascending Forced Choice (AFC) threshold testing
+    with untargeted LC-MS feature tables, Charged Aerosol Detection (CAD)
+    semi-quantification, taxonomically informed metabolite annotations (TIMA),
+    and 1D proton NMR spectral clustering.
 License: GPL (>= 3)
-URL: https://github.com/adafede/sapid, https://adafede.github.io/sapid
+URL: https://github.com/adafede/sapid, https://adafede.github.io/sapid/
 BugReports: https://github.com/adafede/sapid/issues
 Depends:
     R (>= 4.5.0)
 Imports:
     AlpsNMR (>= 4.12.0),
-    BSDA (>= 1.2.2),
     cascade (>= 0.0.0.9002),
+    data.table (>= 1.18.4),
     dendextend (>= 1.19.1),
     FactoMineR (>= 2.16),
-    forcats (>= 1.0.1),
     ggplot2 (>= 4.0.3),
     ggpubr (>= 1.0.0),
     ggraph (>= 2.2.2),
     ggrepel (>= 0.9.8),
+    grDevices,
     igraph (>= 2.3.3),
-    khroma (>= 1.17.0),
-    purrr (>= 1.2.2),
-    readxl (>= 1.5.0),
-    scales (>= 1.4.0),
     SensoMineR (>= 1.28),
     stats,
-    tibble (>= 3.3.1),
-    tidytable (>= 0.11.2),
     treemapify (>= 2.6.1),
     utils
-Remotes:
-    adafede/cascade,
-    taxonomicallyinformedannotation/tima,
-    thomasp85/ggraph
 Suggests:
     mzR (>= 2.44.0),
     NMRphasing (>= 1.0.7),
     R.utils (>= 2.13.0),
     tinytest (>= 1.4.3),
     withr (>= 3.0.2)
+Remotes:
+    adafede/cascade,
+    thomasp85/ggraph
 ByteCompile: TRUE
 Collate:
     'colors.R'
@@ -81,10 +73,46 @@ Collate:
     'prepare_profiles.R'
     'sapid-package.R'
 Config/roxygen2/markdown: TRUE
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 Encoding: UTF-8
 Language: en-US
 LazyData: TRUE
 LazyDataCompression: bzip2
-biocViews: computationalMetabolomics, naturalExtracts, taste
-X-schema.org-keywords: computationalMetabolomics, naturalExtracts, taste
+biocViews: Metabolomics, MassSpectrometry, Cheminformatics,
+    NaturalProducts, Software
+X-schema.org-keywords: computationalMetabolomics, naturalExtracts, taste,
+    sensoryAnalysis, massSpectrometry, nmrSpectroscopy, EDAM:topic_3172,
+    EDAM:topic_0154, EDAM:topic_3370, EDAM:topic_2258, EDAM:topic_0780,
+    EDAM:topic_0593, EDAM:topic_0092, EDAM:topic_2269, EDAM:operation_3803,
+    EDAM:operation_3214, EDAM:operation_3215, EDAM:operation_3432,
+    EDAM:operation_3465, EDAM:operation_2428, EDAM:operation_0337,
+    EDAM:operation_3203, EDAM:operation_2942, EDAM:operation_3925,
+    EDAM:data_2536, EDAM:data_3488, EDAM:data_2048, EDAM:format_3244,
+    EDAM:format_3475, EDAM:format_3752, EDAM:format_3508
+X-EDAM-Topic: http://edamontology.org/topic_3172 (Metabolomics),
+    http://edamontology.org/topic_0154 (Small molecules),
+    http://edamontology.org/topic_3370 (Analytical chemistry),
+    http://edamontology.org/topic_2258 (Cheminformatics),
+    http://edamontology.org/topic_0780 (Plant biology),
+    http://edamontology.org/topic_0593 (NMR),
+    http://edamontology.org/topic_0092 (Data visualisation),
+    http://edamontology.org/topic_2269 (Statistics and probability)
+X-EDAM-Operation: http://edamontology.org/operation_3803 (Natural product
+    identification), http://edamontology.org/operation_3214 (Spectral
+    analysis), http://edamontology.org/operation_3215 (Peak detection),
+    http://edamontology.org/operation_3432 (Clustering),
+    http://edamontology.org/operation_3465 (Correlation),
+    http://edamontology.org/operation_2428 (Validation),
+    http://edamontology.org/operation_0337 (Visualisation),
+    http://edamontology.org/operation_3203 (Chromatogram visualisation),
+    http://edamontology.org/operation_2942 (Treemap visualisation),
+    http://edamontology.org/operation_3925 (Network visualisation)
+X-EDAM-Data: http://edamontology.org/data_2536 (Mass spectrometry data),
+    http://edamontology.org/data_3488 (NMR spectrum),
+    http://edamontology.org/data_0962 (Small molecule report),
+    http://edamontology.org/data_2048 (Report),
+    http://edamontology.org/data_2968 (Image)
+X-EDAM-Format: http://edamontology.org/format_3244 (mzML),
+    http://edamontology.org/format_3475 (TSV),
+    http://edamontology.org/format_3752 (CSV),
+    http://edamontology.org/format_3508 (PDF)

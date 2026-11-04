@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_chasselas_variation.R
 \name{plot_chasselas_variation}
 \alias{plot_chasselas_variation}
-\title{Plot chasselas variation}
+\title{Plot Chasselas baseline sensory variation across jurors and sessions}
 \usage{
 plot_chasselas_variation(
   input = NULL,
@@ -11,15 +11,27 @@ plot_chasselas_variation(
 )
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of Chasselas ratings (defaults to
+built-in \link{chasselas}).}
 
-\item{output_jury}{Output jury}
+\item{output_jury}{Output PDF file path for juror variation plots.}
 
-\item{output_session}{Output session}
+\item{output_session}{Output PDF file path for session variation plots.}
+}
+\value{
+Named list with elements \code{jury} and \code{session}.
 }
 \description{
-Plot chasselas variation
+Generate violin/jitter distribution plots of baseline (\code{before}) Chasselas
+ratings stratified by juror and by session.
 }
 \examples{
-NULL
+\donttest{
+out_j <- tempfile(fileext = ".pdf")
+out_s <- tempfile(fileext = ".pdf")
+plot_chasselas_variation(output_jury = out_j, output_session = out_s)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3370 Analytical chemistry}

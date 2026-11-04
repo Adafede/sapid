@@ -2,24 +2,28 @@
 % Please edit documentation in R/load_session.R
 \name{load_session}
 \alias{load_session}
-\title{Load session}
+\title{Load sensory panel session data}
 \usage{
 load_session(input_dir, session_info, tab)
 }
 \arguments{
-\item{input_dir}{Input directory path}
+\item{input_dir}{Path to the base sensory raw-data directory.}
 
-\item{session_info}{Session metadata (date, cluster, product_name)}
+\item{session_info}{Named list of session metadata (\code{date}, \code{cluster},
+\code{product_name}) as returned by \code{\link[=get_session_info]{get_session_info()}}.}
 
-\item{tab}{Table type to load ('chasselas', 'napping_coord', 'napping_words', 'profiles')}
+\item{tab}{Character worksheet identifier: \code{"chasselas"}, \code{"napping_coord"},
+\code{"napping_words"}, or \code{"profiles"}.}
 }
 \value{
-Data frame with loaded and processed session data
+A \code{data.frame} containing the loaded and standardized session data.
 }
 \description{
-Load and prepare data from a single sensory panel session.
-Uses base R string operations.
+Load and normalize a specific worksheet from a single sensory panel session
+Excel workbook.
 }
 \examples{
-NULL
+info <- get_session_info(1)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3370 Analytical chemistry}

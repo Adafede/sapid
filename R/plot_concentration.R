@@ -1,48 +1,59 @@
-#' Plot concentration
+#' Plot concentration-response and Ascending Forced Choice (AFC) results
 #'
-#' @param input Input
-#' @param output Output
+#' Visualize perceived taste intensity, AFC psychometric detection curve, and
+#' raw/weighted descriptor counts across tested extract concentrations.
 #'
-#' @return NULL
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:topic_0092 Data visualisation
+#' @concept EDAM:operation_0337 Visualisation
+#' @param input Optional path or `data.frame` of concentration AFC data
+#'   (defaults to built-in [concentration_afc]).
+#' @param output Output PDF file path.
 #'
-#' @examples NULL
+#' @return Output file path (`output`).
+#' @export
+#' @examples
+#' \donttest{
+#' out <- tempfile(fileext = ".pdf")
+#' plot_concentration(output = out)
+#' }
 plot_concentration <- function(
   input = NULL,
   output = "./data/figures/figure_raw_extract.pdf"
 ) {
   message("Loading file...\n")
-  if (is.null(input)) {
-    data(concentration_afc, envir = environment())
-    prepared <- concentration_afc
-  } else {
-    prepared <- tidytable::fread(input)
-  }
+  prepared <- load_dataset_or_file(input, "concentration_afc")
 
-  counted <- prepared |>
-    tidytable::mutate(correct_percent = afc_correct / afc_total) |>
-    tidytable::group_by(concentration, taste) |>
-    tidytable::add_count() |>
-    tidytable::mutate(
-      value = value |>
-        mean()
-    ) |>
-    tidytable::mutate(m = n * value) |>
-    tidytable::distinct(concentration, jury, value, n, m, .keep_all = TRUE) |>
-    tidytable::filter(!is.na(value)) |>
-    tidytable::group_by(jury, concentration) |>
-    tidytable::arrange(m, n) |>
-    tidytable::distinct() |>
-    tidytable::ungroup()
+  prepared$correct_percent <- prepared$afc_correct / prepared$afc_total
+  ct_key <- paste(prepared$concentration, prepared$taste, sep = "\r")
+  prepared$n <- stats::ave(prepared$value, ct_key, FUN = length)
+  prepared$value <- stats::ave(prepared$value, ct_key, FUN = mean)
+  prepared$m <- prepared$n * prepared$value
+
+  dedup_key <- paste(
+    prepared$concentration,
+    prepared$jury,
+    prepared$value,
+    prepared$n,
+    prepared$m,
+    sep = "\r"
+  )
+  counted <- prepared[
+    !duplicated(dedup_key) & !is.na(prepared$value),
+    ,
+    drop = FALSE
+  ]
+  counted <- unique(counted[order(counted$m, counted$n), , drop = FALSE])
 
   message("visualizing ... \n")
   message("... intensity and p-value per concentration \n")
   boxes <- counted |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = concentration |> as.numeric(),
+        x = as.numeric(concentration),
         y = value,
-        color = concentration |> as.numeric(),
-        group = concentration |> as.numeric()
+        color = as.numeric(concentration),
+        group = as.numeric(concentration)
       )
     ) +
     ggplot2::geom_violin() +
@@ -56,7 +67,6 @@ plot_concentration <- function(
       mid = "#74c476",
       high = "#00441b"
     ) +
-    ggplot2::theme_bw() +
     ggplot2::theme_minimal() +
     ggplot2::xlab(label = "Concentration [mg/L]") +
     ggplot2::ylab(label = "Intensity") +
@@ -69,9 +79,9 @@ plot_concentration <- function(
   scurve <- counted |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = concentration |> as.numeric(),
+        x = as.numeric(concentration),
         y = correct_percent,
-        color = concentration |> as.numeric()
+        color = as.numeric(concentration)
       )
     ) +
     ggplot2::geom_point() +
@@ -79,8 +89,8 @@ plot_concentration <- function(
     geom_sigmoid(
       data = counted,
       mapping = ggplot2::aes(
-        x = min(concentration |> as.numeric()),
-        xend = max(concentration |> as.numeric()),
+        x = min(as.numeric(concentration)),
+        xend = max(as.numeric(concentration)),
         y = min(correct_percent),
         yend = max(correct_percent)
       )
@@ -93,7 +103,6 @@ plot_concentration <- function(
     ggplot2::xlab(label = "Concentration [mg/L]") +
     ggplot2::ylab("Correct answers [%]") +
     ggplot2::ylim(c(0, 1)) +
-    ggplot2::theme_bw() +
     ggplot2::theme_minimal() +
     ggplot2::geom_hline(
       yintercept = 0.5,
@@ -126,8 +135,8 @@ plot_concentration <- function(
     ggplot2::geom_point(
       mapping = ggplot2::aes(
         x = taste,
-        y = n,
-        color = concentration |> as.numeric()
+        color = as.numeric(concentration),
+        y = n
       ),
       size = 3
     ) +
@@ -137,20 +146,26 @@ plot_concentration <- function(
       high = "#00441b"
     ) +
     ggplot2::coord_flip() +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.position = "none",
-      panel.spacing = ggplot2::unit(0.1, "lines"),
-      strip.text.x = ggplot2::element_text(size = 8)
-    ) +
     ggplot2::xlab("") +
     ggplot2::ylab("Count") +
     ggplot2::facet_wrap(
-      facets = ~concentration,
+      facets = ~ paste(
+        concentration |>
+          round(digits = 2) |>
+          format(nsmall = 2),
+        "[mg/L]"
+      ),
       ncol = 1,
       scales = "free_y"
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      legend.position = "none",
+      text = ggplot2::element_text(face = "bold"),
+      panel.spacing = ggplot2::unit(0.2, "lines"),
+      strip.text.x = ggplot2::element_text(size = 10),
+      strip.background = ggplot2::element_rect(fill = "white")
     )
-
   dots
 
   message("... terms multiplied by mean intensity per concentration \n")
@@ -168,7 +183,7 @@ plot_concentration <- function(
     ggplot2::geom_point(
       mapping = ggplot2::aes(
         x = taste,
-        color = concentration |> as.numeric(),
+        color = as.numeric(concentration),
         y = m
       ),
       size = 3
@@ -183,10 +198,9 @@ plot_concentration <- function(
     ggplot2::ylab("Value") +
     ggplot2::facet_wrap(
       facets = ~ paste(
-        format(
-          round(x = concentration |> as.numeric(), digits = 2),
-          nsmall = 2
-        ),
+        concentration |>
+          round(digits = 2) |>
+          format(nsmall = 2),
         "[mg/L]"
       ),
       ncol = 1,

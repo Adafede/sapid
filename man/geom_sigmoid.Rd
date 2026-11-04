@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_sigmoid.R
 \name{geom_sigmoid}
 \alias{geom_sigmoid}
-\title{geom_sigmoid}
+\title{Smooth sigmoid curve layer for ggplot2}
 \usage{
 geom_sigmoid(
   mapping = NULL,
@@ -18,29 +18,36 @@ geom_sigmoid(
 )
 }
 \arguments{
-\item{mapping}{provide you own mapping. both x, xend, y and yend need to be numeric.}
+\item{mapping}{Aesthetic mapping (\code{x}, \code{xend}, \code{y}, and \code{yend} must be numeric).}
 
-\item{data}{provide you own data}
+\item{data}{Layer data frame.}
 
-\item{geom}{xhange geom}
+\item{geom}{Geom to use (default \code{"line"}).}
 
-\item{position}{change position}
+\item{position}{Position adjustment (default \code{"identity"}).}
 
-\item{na.rm}{remove missing values}
+\item{na.rm}{Logical; remove missing values if \code{TRUE}.}
 
-\item{show.legend}{show legend in plot}
+\item{show.legend}{Logical; include layer in legend.}
 
-\item{smooth}{how much smooth should the curve have? More means steeper curve.}
+\item{smooth}{Numeric steepness parameter for the sigmoid curve (default \code{8}).}
 
-\item{direction}{the character x or y depending of smoothing direction}
+\item{direction}{Character smoothing direction: \code{"x"} or \code{"y"}.}
 
-\item{inherit.aes}{should the geom inherits aestethics}
+\item{inherit.aes}{Logical; inherit aesthetics from the parent plot.}
 
-\item{...}{other arguments to be passed to the geom}
+\item{...}{Additional arguments passed to the layer.}
 }
 \value{
-ggplot layer
+A \code{ggplot2} layer.
 }
 \description{
-geom_sigmoid
+Smooth sigmoid curve layer for ggplot2
 }
+\examples{
+df <- data.frame(x = 1, xend = 5, y = 0, yend = 1)
+ggplot2::ggplot(df) +
+  geom_sigmoid(ggplot2::aes(x = x, xend = xend, y = y, yend = yend))
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}

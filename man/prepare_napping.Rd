@@ -2,39 +2,48 @@
 % Please edit documentation in R/prepare_napping.R
 \name{prepare_napping}
 \alias{prepare_napping}
-\title{Prepare napping}
+\title{Prepare napping coordinates and harmonized descriptors datasets}
 \usage{
 prepare_napping(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
-  dictionary_generic_path = system.file("extdata", "dictionary_generic.tsv", package =
-    "sapid"),
-  dictionary_napping_path = system.file("extdata", "dictionary_napping.tsv", package =
-    "sapid"),
-  dictionary_specific_path = system.file("extdata", "dictionary_specific.tsv", package =
-    "sapid"),
+  dictionary_generic_path = NULL,
+  dictionary_napping_path = NULL,
+  dictionary_specific_path = NULL,
   sessions = seq(1, 8),
   output_coordinates = "inst/extdata/napping_coordinates.tsv",
   output_descriptors = "inst/extdata/napping_descriptors.tsv"
 )
 }
 \arguments{
-\item{input_dir}{Input directory}
+\item{input_dir}{Path to the raw sensory sessions directory.}
 
-\item{dictionary_generic_path}{Dictionary generic path}
+\item{dictionary_generic_path}{Optional path or \code{data.frame} for generic
+dictionary (defaults to built-in \link{dictionary_generic}).}
 
-\item{dictionary_napping_path}{Dictionary napping path}
+\item{dictionary_napping_path}{Optional path or \code{data.frame} for napping
+dictionary (defaults to built-in \link{dictionary_napping}).}
 
-\item{dictionary_specific_path}{Dictionary specific path}
+\item{dictionary_specific_path}{Optional path or \code{data.frame} for specific
+dictionary (defaults to built-in \link{dictionary_specific}).}
 
-\item{sessions}{Sessions}
+\item{sessions}{Integer vector of session numbers (default \code{1:8}).}
 
-\item{output_coordinates}{Output coordinates}
+\item{output_coordinates}{Output TSV path for napping coordinates.}
 
-\item{output_descriptors}{Output descriptors}
+\item{output_descriptors}{Output TSV path for napping descriptors.}
+}
+\value{
+Named list with elements \code{coordinates} and \code{descriptors}.
 }
 \description{
-Prepare napping
+Load and harmonize napping coordinates and panelist descriptor tables across
+all sensory sessions, exporting both tables as TSV files.
 }
 \examples{
-NULL
+\dontrun{
+prepare_napping()
 }
+}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
+\concept{EDAM:topic_3370 Analytical chemistry}

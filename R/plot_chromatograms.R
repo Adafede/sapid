@@ -1,15 +1,26 @@
-#' Plot chromatograms
+#' Plot raw extract and fraction chromatograms
 #'
-#' @param input_dir Input dir
-#' @param input_groups Input groups
-#' @param raw_index Raw index
-#' @param fractions_indices Fractions indices
-#' @param xlim Xlim
-#' @param output Output
+#' Load and baseline-correct `.mzML` chromatograms for the raw plant extract
+#' and its fractions (mirrored along the y-axis), colored by NMR cluster group.
 #'
-#' @return NULL
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:operation_3203 Chromatogram visualisation
+#' @concept EDAM:data_2536 Mass spectrometry data
+#' @concept EDAM:format_3244 mzML
+#' @param input_dir Directory containing `.mzML` files.
+#' @param input_groups Optional path or `data.frame` of sample cluster groups
+#'   (defaults to built-in [groups]).
+#' @param raw_index Integer index of the raw extract file in `input_dir`.
+#' @param fractions_indices Integer vector of fraction file indices in `input_dir`.
+#' @param xlim Numeric length-2 retention time range in minutes (default `c(2, 25)`).
+#' @param output Output PDF file path.
 #'
-#' @examples NULL
+#' @return Output file path (`output`).
+#' @export
+#' @examples
+#' \dontrun{
+#' plot_chromatograms()
+#' }
 plot_chromatograms <- function(
   input_dir = "./data/20210619",
   input_groups = NULL,
@@ -18,72 +29,59 @@ plot_chromatograms <- function(
   xlim = c(2, 25),
   output = "./data/figures/figure_chromatograms.pdf"
 ) {
-  if (is.null(input_groups)) {
-    data(groups, envir = environment())
-    table_groups <- groups
-  } else {
-    table_groups <- tidytable::fread(input_groups)
-  }
+  table_groups <- load_dataset_or_file(input_groups, "groups")
 
-  files <- input_dir |>
-    list.files(
-      path = ,
-      pattern = ".mzML",
-      full.names = TRUE
-    )
+  files <- list.files(
+    path = input_dir,
+    pattern = "\\.mzML$",
+    full.names = TRUE
+  )
 
   # Continue with rest of function using table_groups instead of re-reading
   groups <- table_groups
 
   extract_chromatogram_df <- function(file) {
-    .cascade_preprocess_chromatograms(
-      list = file |>
-        .cascade_load_chromatograms() |>
-        purrr::pluck(3) |>
-        list(),
-      name = file |>
-        .cascade_load_name()
-    )$chromatograms_baselined |>
-      purrr::pluck(1) |>
-      tidytable::distinct(time, intensity) |>
-      tidytable::mutate(id = file)
+    chrom_loaded <- .cascade_load_chromatograms(file)
+    preprocessed <- .cascade_preprocess_chromatograms(
+      list = list(chrom_loaded[[3L]]),
+      name = .cascade_load_name(file)
+    )
+    baselined <- as.data.frame(
+      preprocessed$chromatograms_baselined[[1L]],
+      stringsAsFactors = FALSE
+    )
+    out <- unique(baselined[, c("time", "intensity"), drop = FALSE])
+    out$id <- file
+    out
   }
 
-  data_raw <- files[raw_index] |>
-    purrr::map(.f = extract_chromatogram_df) |>
-    tidytable::bind_rows()
+  data_raw <- do.call(rbind, lapply(files[raw_index], extract_chromatogram_df))
+  data_fractions <- do.call(
+    rbind,
+    lapply(files[fractions_indices], extract_chromatogram_df)
+  )
+  data_fractions$intensity <- -1 * data_fractions$intensity
 
-  data_fractions <- files[fractions_indices] |>
-    purrr::map(.f = extract_chromatogram_df) |>
-    tidytable::bind_rows()
+  data_full <- rbind(data_raw, data_fractions)
+  data_full$id <- gsub("_.*", "", gsub(".*_M_", "", data_full$id))
 
-  data_full <- data_raw |>
-    tidytable::bind_rows(
-      data_fractions |>
-        tidytable::mutate(intensity = -1 * intensity)
-    ) |>
-    tidytable::mutate(
-      id = id |>
-        gsub(pattern = ".*_M_", replacement = "") |>
-        gsub(pattern = "_.*", replacement = "")
-    ) |>
-    tidytable::full_join(
-      groups |>
-        tidytable::mutate(
-          id = rowname |>
-            as.character()
-        ),
-      by = c("id" = "id")
-    )
-  plot <- data_full |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = time, y = intensity, color = id)
-    ) +
-    ggplot2::geom_line(size = 0.2, show.legend = FALSE) +
+  groups_lookup <- data.frame(
+    id = as.character(table_groups$rowname),
+    group = as.character(table_groups$group),
+    stringsAsFactors = FALSE
+  )
+  data_full <- merge(data_full, groups_lookup, by = "id", all = TRUE)
+
+  id_group_pairs <- unique(data_full[, c("id", "group"), drop = FALSE])
+  color_values <- stats::setNames(id_group_pairs$group, id_group_pairs$id)
+
+  plot <- ggplot2::ggplot(
+    data_full,
+    mapping = ggplot2::aes(x = time, y = intensity, color = id)
+  ) +
+    ggplot2::geom_line(linewidth = 0.2, show.legend = FALSE) +
     ggplot2::scale_color_manual(
-      values = data_full |>
-        tidytable::distinct(id, group) |>
-        tidytable::pull(group),
+      values = color_values,
       na.value = "#767676"
     ) +
     ggplot2::xlim(xlim) +
@@ -102,12 +100,12 @@ plot_chromatograms <- function(
       )
     )
 
-  .cascade_check_export_dir(dirname(output_session))
-  plot |>
-    ggplot2::ggsave(
-      filename = output,
-      width = 16,
-      height = 12
-    )
-  return(output)
+  .cascade_check_export_dir(dirname(output))
+  ggplot2::ggsave(
+    filename = output,
+    plot = plot,
+    width = 16,
+    height = 12
+  )
+  output
 }

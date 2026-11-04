@@ -7,9 +7,9 @@
 \format{
 A data frame with 1,146 rows and 6 columns:
 \describe{
-\item{fraction}{Fraction identifier (e.g., "fraction_17")}
-\item{session}{Session identifier (e.g., "session_01")}
-\item{jury}{Juror identifier (e.g., "J1")}
+\item{fraction}{Fraction identifier (e.g., \code{"fraction_17"})}
+\item{session}{Session identifier (e.g., \code{"session_01"})}
+\item{jury}{Juror identifier (e.g., \code{"J1"})}
 \item{taste_original}{Original descriptor as written by juror}
 \item{taste_intermediate}{Intermediate standardization step}
 \item{taste_harmonized}{Final harmonized descriptor}
@@ -36,4 +36,6 @@ data(napping_descriptors)
 head(napping_descriptors)
 unique(napping_descriptors$taste_harmonized)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{datasets}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_chasselas_modulation.R
 \name{plot_chasselas_modulation}
 \alias{plot_chasselas_modulation}
-\title{Plot chasselas modulation}
+\title{Plot Chasselas sensory taste modulation}
 \usage{
 plot_chasselas_modulation(
   input = NULL,
@@ -10,13 +10,25 @@ plot_chasselas_modulation(
 )
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of Chasselas ratings (defaults to
+built-in \link{chasselas}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot chasselas modulation
+Compute before/after rating differences (\code{delta}) for Chasselas sensory
+sessions, evaluate two-sided exact sign tests around median zero, and save
+a 2-panel violin/jitter summary figure.
 }
 \examples{
-NULL
+\donttest{
+out <- tempfile(fileext = ".pdf")
+plot_chasselas_modulation(output = out)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3370 Analytical chemistry}

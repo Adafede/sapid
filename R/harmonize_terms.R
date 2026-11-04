@@ -1,119 +1,92 @@
-#' Clean terms
+#' Harmonize sensory descriptor terms
 #'
-#' Replace terms in a given string using a dictionary, with intelligent matching
-#' and case-insensitive handling.
+#' Replace terms in a character vector using a dictionary, ordering matches by
+#' decreasing pattern length with case-insensitive normalization.
 #'
-#' @param dictionary Path to the dictionary file, a data frame containing
-#'   replacement terms, or NULL to use cached environment dictionaries
-#' @param x Character string to be cleaned
-#' @param mode Replacement mode: 'word' for word boundary matching,
-#'   'substring' for partial matching, 'fixed' for fast fixed-string matching
-#' @param fallback Logical, whether to fall back to original string if
-#'   no replacements occur
+#' @concept EDAM:operation_2428 Validation
+#' @concept EDAM:data_2048 Report
+#' @param dictionary Path to a dictionary TSV/CSV file or a `data.frame`
+#'   containing `original` and `translated` (or `translated_simple`) columns.
+#' @param x Character vector to be harmonized.
+#' @param mode Replacement mode: `"word"` for word-boundary matching,
+#'   `"substring"` for regex partial matching, or `"fixed"` for literal matching.
+#' @param fallback Logical; if `TRUE`, replace `NA` values with the uppercased
+#'   input string.
 #'
 #' @details
 #' For better performance when calling this function repeatedly on many strings,
 #' pass a pre-loaded dictionary data frame instead of a file path. The function
 #' uses base R replacement helpers for all modes to avoid an extra dependency.
 #'
-#' @return Character string with terms replaced
-#'
+#' @return Character vector with harmonized terms.
+#' @export
 #' @examples
-#' \dontrun{
-#' # Using data frame dictionary (faster)
 #' data(dictionary_generic)
-#' harmonize_terms(
-#'   dictionary = dictionary_generic,
-#'   x = "Some text with specific terms"
-#' )
-#'
-#' # Using file path (legacy, slower)
-#' harmonize_terms(
-#'   dictionary = "path/to/dictionary.csv",
-#'   x = "Some text with specific terms"
-#' )
-#' }
-#'
+#' harmonize_terms(dictionary = dictionary_generic, x = "amer")
 harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   # Prepare dictionary: accept data frame or file path
-  prepared_dict <- if (is.character(dictionary)) {
+  dict_df <- if (is.character(dictionary)) {
     # Legacy: load from file path
-    tidytable::fread(dictionary) |>
-      tidytable::mutate(
-        n = original |>
-          as.character() |>
-          nchar()
-      ) |>
-      tidytable::arrange(tidytable::desc(n))
+    data.table::fread(dictionary, data.table = FALSE)
   } else {
-    # Modern: use pre-loaded data frame (already tibble, just ensure sorted by length)
-    dictionary |>
-      as.data.frame(stringsAsFactors = FALSE) |>
-      tidytable::mutate(
-        n = original |>
-          as.character() |>
-          nchar()
-      ) |>
-      tidytable::arrange(tidytable::desc(n))
+    # Modern: use pre-loaded data frame
+    as.data.frame(dictionary, stringsAsFactors = FALSE)
   }
 
+  orig_chr <- as.character(dict_df$original)
+  ord <- order(nchar(orig_chr), decreasing = TRUE)
+  prepared_dict <- dict_df[ord, , drop = FALSE]
+  patterns <- as.character(prepared_dict$original)
+
   replacement <- if ("translated_simple" %in% names(prepared_dict)) {
-    prepared_dict$translated_simple
+    as.character(prepared_dict$translated_simple)
   } else {
-    prepared_dict$translated
+    as.character(prepared_dict$translated)
   }
 
   # Convert to uppercase for consistent matching
   processed_string <- toupper(x)
+  out <- processed_string
 
   # Perform replacements using appropriate method
-  replaced <- if (mode == "fixed") {
+  if (mode == "fixed") {
     # Fast fixed-string replacement for literal matches
-    out <- processed_string
-    for (i in seq_along(prepared_dict$original)) {
+    for (i in seq_along(patterns)) {
       out <- gsub(
-        pattern = prepared_dict$original[[i]],
+        pattern = patterns[[i]],
         replacement = replacement[[i]],
         x = out,
         fixed = TRUE
       )
     }
-    out
   } else if (mode == "word") {
     # Word boundary matching (regex)
-    pattern <- paste0("\\b", prepared_dict$original, "\\b")
-    out <- processed_string
-    for (i in seq_along(pattern)) {
+    word_patterns <- paste0("\\b", patterns, "\\b")
+    for (i in seq_along(word_patterns)) {
       out <- gsub(
-        pattern = pattern[[i]],
+        pattern = word_patterns[[i]],
         replacement = replacement[[i]],
         x = out,
         perl = TRUE
       )
     }
-    out
   } else {
     # Substring matching (regex without word boundaries)
-    out <- processed_string
-    for (i in seq_along(prepared_dict$original)) {
+    for (i in seq_along(patterns)) {
       out <- gsub(
-        pattern = prepared_dict$original[[i]],
+        pattern = patterns[[i]],
         replacement = replacement[[i]],
         x = out,
         perl = TRUE
       )
     }
-    out
   }
 
   # Handle fallback if requested
   if (fallback) {
-    replaced <- tidytable::if_else(
-      condition = !is.na(replaced),
-      true = replaced,
-      false = processed_string
-    )
+    na_idx <- is.na(out)
+    out[na_idx] <- processed_string[na_idx]
   }
 
-  return(replaced)
+  return(out)
 }

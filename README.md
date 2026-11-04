@@ -85,26 +85,23 @@ General: <https://doi.org/10.3389/fpls.2019.01329>
 ## Additional software credits
 
   | Package     | Version    | Citation                                                              |
-  | :---------- | :--------- | :-------------------------------------------------------------------- |
+  | :---        | :---       | :---                                                                  |
   | AlpsNMR     | 4.14.0     | Madrid-Gambin et al. (2020)                                           |
-  | base        | 4.6.1      | R Core Team (2026)                                                    |
+  | base        | 4.6.2      | R Core Team (2026)                                                    |
   | BiocManager | 1.30.27    | Morgan and Ramos (2025)                                               |
   | BiocVersion | 3.23.1     | Morgan (2025)                                                         |
-  | BSDA        | 1.2.2      | Arnholt and Evans (2023)                                              |
   | cascade     | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                               |
+  | data.table  | 1.18.6.1   | Barrett et al. (2026)                                                 |
   | dendextend  | 1.19.1     | Galili (2015)                                                         |
-  | FactoMineR  | 2.16       | Lê et al. (2008)                                                      |
+  | FactoMineR  | 2.18       | Lê et al. (2008)                                                      |
   | ggpubr      | 1.0.0      | Kassambara (2026)                                                     |
   | ggraph      | 2.2.2      | Pedersen (2025)                                                       |
   | ggrepel     | 0.9.8      | Slowikowski (2026)                                                    |
-  | igraph      | 2.3.3      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
-  | khroma      | 1.17.0     | Frerebeau (2025)                                                      |
-  | knitr       | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                    |
-  | rmarkdown   | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)           |
+  | igraph      | 2.3.4      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
+  | knitr       | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                    |
+  | rmarkdown   | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)           |
   | sapid       | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b)                                      |
-  | scales      | 1.4.0      | Wickham et al. (2025)                                                 |
   | SensoMineR  | 1.28       | Husson et al. (2025)                                                  |
-  | tidytable   | 0.11.2     | Fairbanks (2024)                                                      |
   | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                 |
   | tinytest    | 1.4.3      | <span class="nocase">van der Loo</span> (2020)                        |
   | treemapify  | 2.6.1      | Wilkins (2026)                                                        |
@@ -129,10 +126,12 @@ Enables Fast and Robust Network Analysis Across Programming Languages.”
 
 </div>
 
-<div id="ref-BSDA" class="csl-entry">
+<div id="ref-datatable" class="csl-entry">
 
-Arnholt, Alan T., and Ben Evans. 2023. *BSDA: Basic Statistics and Data
-Analysis*. <https://doi.org/10.32614/CRAN.package.BSDA>.
+Barrett, Tyson, Matt Dowle, Arun Srinivasan, et al. 2026.
+*<span class="nocase">data.table</span>: Extension of
+“<span class="nocase">data.frame</span>”*.
+<https://doi.org/10.32614/CRAN.package.data.table>.
 
 </div>
 
@@ -149,22 +148,6 @@ Complex Network Research.” *InterJournal* Complex Systems: 1695.
 Csárdi, Gábor, Tamás Nepusz, Vincent Traag, et al. 2026.
 *<span class="nocase">igraph</span>: Network Analysis and Visualization
 in r*. <https://doi.org/10.5281/zenodo.7682609>.
-
-</div>
-
-<div id="ref-tidytable" class="csl-entry">
-
-Fairbanks, Mark. 2024. *<span class="nocase">tidytable</span>: Tidy
-Interface to “<span class="nocase">data.table</span>”*.
-<https://doi.org/10.32614/CRAN.package.tidytable>.
-
-</div>
-
-<div id="ref-khroma" class="csl-entry">
-
-Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
-for Scientific Data Visualization</span>*. Université Bordeaux
-Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 
 </div>
 
@@ -310,14 +293,6 @@ Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
-<div id="ref-scales" class="csl-entry">
-
-Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
-*<span class="nocase">scales</span>: Scale Functions for Visualization*.
-<https://doi.org/10.32614/CRAN.package.scales>.
-
-</div>
-
 <div id="ref-treemapify" class="csl-entry">
 
 Wilkins, David. 2026. *<span class="nocase">treemapify</span>: Draw
@@ -342,9 +317,9 @@ Hall/CRC. <https://yihui.org/knitr/>.
 
 </div>
 
-<div id="ref-knitr2025" class="csl-entry">
+<div id="ref-knitr2026" class="csl-entry">
 
-Xie, Yihui. 2025. *<span class="nocase">knitr</span>: A General-Purpose
+Xie, Yihui. 2026. *<span class="nocase">knitr</span>: A General-Purpose
 Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 
 </div>
@@ -352,14 +327,16 @@ Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 <div id="ref-rmarkdown2018" class="csl-entry">
 
 Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
-Definitive Guide*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown/>.
+Definitive Guide*. Chapman; Hall/CRC.
+<https://pkg.yihui.org/rmarkdown-book/>.
 
 </div>
 
 <div id="ref-rmarkdown2020" class="csl-entry">
 
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
-Cookbook*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown-cookbook>.
+Cookbook*. Chapman; Hall/CRC.
+<https://pkg.yihui.org/rmarkdown-cookbook/>.
 
 </div>
 

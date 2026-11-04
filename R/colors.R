@@ -24,10 +24,7 @@ microshades <- list(
   brown
 )
 microshades_grey <- list(cvd_gray, gray)
-microshades_colors <- character()
-for (i in seq_len(length(microshades))) {
-  microshades_colors[i] <- microshades[[i]][1]
-}
+microshades_colors <- vapply(microshades, `[`, character(1L), 1L)
 
 ## Qualitative
 paired <- c(
@@ -224,3 +221,65 @@ pink_24 <- c(
   "#2b0614",
   "#1a030c"
 )
+
+batlow <- c(
+  "#011959",
+  "#144D62",
+  "#3C6D56",
+  "#818231",
+  "#D29343",
+  "#FDAC9C",
+  "#FACCFA"
+)
+
+scale_fill_batlow <- function(...) {
+  ggplot2::scale_fill_gradientn(colours = batlow, ...)
+}
+
+scale_color_batlow <- function(...) {
+  ggplot2::scale_color_gradientn(colours = batlow, ...)
+}
+
+label_si_number <- function(x) {
+  vapply(
+    x,
+    function(v) {
+      if (is.na(v)) {
+        return(NA_character_)
+      }
+      av <- abs(v)
+      if (av >= 1e9) {
+        paste0(format(round(v / 1e9, 2), trim = TRUE), "G")
+      } else if (av >= 1e6) {
+        paste0(format(round(v / 1e6, 2), trim = TRUE), "M")
+      } else if (av >= 1e3) {
+        paste0(format(round(v / 1e3, 2), trim = TRUE), "k")
+      } else {
+        format(round(v, 2), trim = TRUE)
+      }
+    },
+    character(1L)
+  )
+}
+
+label_short_scale <- function(x) {
+  vapply(
+    x,
+    function(v) {
+      if (is.na(v)) {
+        return(NA_character_)
+      }
+      av <- abs(v)
+      if (av >= 1e9) {
+        paste0(format(round(v / 1e9, 2), trim = TRUE), "B")
+      } else if (av >= 1e6) {
+        paste0(format(round(v / 1e6, 2), trim = TRUE), "M")
+      } else if (av >= 1e3) {
+        paste0(format(round(v / 1e3, 2), trim = TRUE), "K")
+      } else {
+        format(round(v, 2), trim = TRUE)
+      }
+    },
+    character(1L)
+  )
+}

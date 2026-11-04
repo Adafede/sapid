@@ -1,77 +1,78 @@
-#' Load consistent profiles
+#' Load consistent sensory profiles
 #'
-#' Filter profiles to keep only taste descriptors that are consistently
-#' used across multiple panelists (minimum jury threshold).
+#' Filter sensory profile ratings to retain only taste descriptors used by at
+#' least `min_jury` distinct panelists, and compute per-fraction and per-taste
+#' summed intensities.
 #'
-#' @param input Input data frame or file path to profiles table
-#' @param min_jury Minimum number of jurors who must use a taste descriptor
-#'   for it to be kept. Default: 2.
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:operation_2428 Validation
+#' @concept EDAM:data_2048 Report
+#' @param input Input `data.frame` or file path to a sensory profiles table.
+#' @param min_jury Integer minimum number of distinct jurors required to retain
+#'   a harmonized taste descriptor (default `2L`).
 #'
 #' @details
 #' This function filters sensory data to keep only taste descriptors that appear
 #' consistently across at least `min_jury` panelists. It removes descriptors that
 #' are used by only one panelist (potentially idiosyncratic terms).
 #'
-#' @return Data frame with consistent profiles and grouped statistics
-#'
+#' @return A `data.frame` with consistent sensory profiles and summary columns
+#'   `sum`, `sum_taste`, and `group`.
+#' @export
 #' @examples
-#' \dontrun{
 #' data(profiles)
-#' consistent <- load_consistent_profiles(profiles, min_jury = 2)
-#' nrow(consistent)
-#' }
-#'
+#' consistent <- load_consistent_profiles(profiles, min_jury = 2L)
+#' head(consistent)
 load_consistent_profiles <- function(input, min_jury = 2L) {
   # Load data if file path given, otherwise use data frame
-  profiles <- if (is.character(input)) {
-    tidytable::fread(input)
+  profiles_df <- if (is.character(input)) {
+    data.table::fread(input, data.table = FALSE)
   } else {
-    {
-      input
-    } |>
-      as.data.frame(stringsAsFactors = FALSE) |>
-      tidytable::distinct()
+    unique(as.data.frame(input, stringsAsFactors = FALSE))
   }
 
-  n_panelists <- profiles |>
-    tidytable::distinct(fraction, jury) |>
-    tidytable::group_by(fraction) |>
-    tidytable::count() |>
-    tidytable::ungroup()
+  keep_cols <- c(
+    "fraction",
+    "session",
+    "jury",
+    "taste_original",
+    "taste_harmonized",
+    "value"
+  )
+  profiles_df <- profiles_df[, keep_cols, drop = FALSE]
+  names(profiles_df)[names(profiles_df) == "taste_harmonized"] <- "taste"
 
-  consistent_descriptors <- profiles |>
-    tidytable::distinct(jury, taste = taste_harmonized) |>
-    tidytable::group_by(taste) |>
-    tidytable::count() |>
-    tidytable::filter(n >= min_jury) |>
-    tidytable::filter(!is.na(taste)) |>
-    tidytable::filter(taste != "") |>
-    tidytable::ungroup()
+  valid_taste <- !is.na(profiles_df$taste) & nzchar(profiles_df$taste)
+  jury_taste <- unique(profiles_df[
+    valid_taste,
+    c("jury", "taste"),
+    drop = FALSE
+  ])
+  taste_counts <- table(jury_taste$taste)
+  consistent_tastes <- names(taste_counts)[taste_counts >= min_jury]
 
-  profiles_consistent <- profiles |>
-    tidytable::left_join(n_panelists) |>
-    tidytable::select(
-      fraction,
-      session,
-      jury,
-      taste_original,
-      taste_harmonized,
-      value
-    ) |>
-    tidytable::rename(taste = taste_harmonized) |>
-    tidytable::filter(taste %in% consistent_descriptors$taste) |>
-    tidytable::group_by(fraction, taste) |>
-    tidytable::mutate(
-      sum = value |>
-        sum(na.rm = TRUE)
-    ) |>
-    tidytable::group_by(taste) |>
-    tidytable::mutate(
-      sum_taste = value |>
-        sum(na.rm = TRUE)
-    ) |>
-    tidytable::arrange(tidytable::desc(sum_taste)) |>
-    tidytable::group_by(sum_taste) |>
-    tidytable::mutate(group = tidytable::cur_group_id()) |>
-    tidytable::ungroup()
+  out <- profiles_df[profiles_df$taste %in% consistent_tastes, , drop = FALSE]
+  if (nrow(out) == 0L) {
+    out$sum <- numeric(0)
+    out$sum_taste <- numeric(0)
+    out$group <- integer(0)
+    return(out)
+  }
+
+  frac_taste_key <- paste(out$fraction, out$taste, sep = "\r")
+  out$sum <- stats::ave(
+    out$value,
+    frac_taste_key,
+    FUN = function(x) sum(x, na.rm = TRUE)
+  )
+  out$sum_taste <- stats::ave(
+    out$value,
+    out$taste,
+    FUN = function(x) sum(x, na.rm = TRUE)
+  )
+
+  out <- out[order(out$sum_taste, decreasing = TRUE), , drop = FALSE]
+  out$group <- match(out$sum_taste, unique(out$sum_taste))
+  rownames(out) <- NULL
+  out
 }

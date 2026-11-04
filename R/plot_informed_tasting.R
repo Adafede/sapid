@@ -1,101 +1,142 @@
+#' Plot classical vs. chemically informed tasting treemaps
+#'
+#' Compare relative taste descriptor proportions between classical raw extract
+#' tasting and mass-weighted chemically informed fraction tasting using side-by-side
+#' treemaps.
+#'
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:topic_0092 Data visualisation
+#' @concept EDAM:operation_2942 Treemap visualisation
+#' @concept EDAM:operation_0337 Visualisation
+#' @param file_fractions_mass Optional path or `data.frame` of fraction masses
+#'   (defaults to built-in [fractions]).
+#' @param file_taste_raw Optional path or `data.frame` of concentration AFC data
+#'   (defaults to built-in [concentration_afc]).
+#' @param file_taste_informed Optional path or `data.frame` of fraction sensory
+#'   profiles (defaults to built-in [profiles]).
+#' @param output Output PDF file path.
+#' @param min_panelists Minimum number of distinct jurors required to retain an
+#'   original taste descriptor (default `2`).
+#'
+#' @return Output file path (`output`).
+#' @export
+#' @examples
+#' \donttest{
+#' out <- tempfile(fileext = ".pdf")
+#' plot_informed_tasting(output = out)
+#' }
 plot_informed_tasting <- function(
-  file_fractions_mass = system.file(
-    "extdata",
-    "fractions.tsv",
-    package = "sapid"
-  ),
-  file_taste_raw = system.file(
-    "extdata",
-    "concentration_afc.tsv",
-    package = "sapid"
-  ),
-  file_taste_informed = system.file(
-    "extdata",
-    "profiles.tsv",
-    package = "sapid"
-  ),
+  file_fractions_mass = NULL,
+  file_taste_raw = NULL,
+  file_taste_informed = NULL,
   output = "./data/figures/figure_chemically_informed_tasting.pdf",
   min_panelists = 2
 ) {
-  fraction_masses <- file_fractions_mass |>
-    tidytable::fread() |>
-    tidytable::select(fraction = label, mass = 3) |>
-    tidytable::mutate(
-      fraction = fraction |>
-        gsub(
-          pattern = "M_",
-          replacement = "fraction_",
-          fixed = TRUE
-        ),
-      mass = mass |> as.numeric()
-    )
-  taste_raw <- file_taste_raw |>
-    tidytable::fread() |>
-    tidytable::filter(concentration == 3.10) |>
-    tidytable::group_by(taste) |>
-    tidytable::summarize(value = sum(value)) |>
-    tidytable::mutate(value = value / sum(value)) |>
-    tidytable::ungroup() |>
-    tidytable::mutate(
-      taste = tidytable::case_when(
-        taste == "amer" ~ "BITTER",
-        taste == "astringence moyenne" ~ "ASTRINGENT",
-        taste == "beaucoup de volume au depart" ~ "VOLUME",
-        TRUE ~ taste
-      )
-    )
-  taste_informed <- file_taste_informed |>
-    tidytable::fread() |>
-    tidytable::rename(taste = taste_harmonized) |>
-    tidytable::group_by(taste_original) |>
-    tidytable::mutate(n = tidytable::n_distinct(jury)) |>
-    tidytable::ungroup() |>
-    tidytable::filter(n >= min_panelists) |>
-    tidytable::inner_join(fraction_masses) |>
-    tidytable::group_by(taste) |>
-    tidytable::summarize(value = sum(value * mass)) |>
-    tidytable::mutate(value = value / sum(value)) |>
-    tidytable::ungroup() |>
-    tidytable::arrange(
-      value |>
-        tidytable::desc()
-    )
+  # Extract fraction masses
+  raw_fractions <- load_dataset_or_file(file_fractions_mass, "fractions")
+  fraction_masses <- data.frame(
+    fraction = gsub(
+      "M_",
+      "fraction_",
+      as.character(raw_fractions$label),
+      fixed = TRUE
+    ),
+    mass = as.numeric(raw_fractions[[3L]]),
+    stringsAsFactors = FALSE
+  )
 
-  n <- taste_informed$taste |>
-    unique() |>
-    length()
+  # Extract raw taste descriptors
+  raw_conc <- load_dataset_or_file(file_taste_raw, "concentration_afc")
+  conc_sub <- raw_conc[
+    as.numeric(raw_conc$concentration) == 3.10,
+    ,
+    drop = FALSE
+  ]
+  taste_raw <- stats::aggregate(value ~ taste, data = conc_sub, FUN = sum)
+  taste_raw$value <- taste_raw$value / sum(taste_raw$value)
+  raw_map <- c(
+    "amer" = "BITTER",
+    "astringence moyenne" = "ASTRINGENT",
+    "beaucoup de volume au depart" = "VOLUME"
+  )
+  mapped <- raw_map[taste_raw$taste]
+  taste_raw$taste <- ifelse(!is.na(mapped), unname(mapped), taste_raw$taste)
 
-  colors <- taste_informed |>
-    tidytable::distinct(taste) |>
-    tidytable::bind_cols(discrete_rainbow_14[1:n]) |>
-    tidytable::rename(color = 2)
+  prof_df <- load_dataset_or_file(file_taste_informed, "profiles")
+  names(prof_df)[names(prof_df) == "taste_harmonized"] <- "taste"
 
-  col <- as.character(colors$color)
-  names(col) <- as.character(colors$taste)
+  # Keep consistent panels only
+  jury_counts <- tapply(
+    prof_df$jury,
+    prof_df$taste_original,
+    function(x) length(unique(x))
+  )
+  keep_orig <- names(jury_counts)[jury_counts >= min_panelists]
+  prof_filtered <- prof_df[
+    prof_df$taste_original %in% keep_orig,
+    ,
+    drop = FALSE
+  ]
 
-  plot_raw <- taste_raw |>
-    tidytable::mutate(
-      taste = taste |>
-        forcats::fct_reorder(value, .desc = TRUE)
-    ) |>
-    tidytable::mutate(value = value * 100) |>
+  # Weigh descriptors with fraction mass
+  prof_joined <- merge(
+    prof_filtered,
+    fraction_masses,
+    by = "fraction",
+    all.x = TRUE
+  )
+  prof_joined$weighted <- as.numeric(prof_joined$value) * prof_joined$mass
+  taste_informed <- stats::aggregate(
+    weighted ~ taste,
+    data = prof_joined,
+    FUN = sum
+  )
+  names(taste_informed)[names(taste_informed) == "weighted"] <- "value"
+
+  # Scale to relative overall contributions
+  taste_informed$value <- taste_informed$value / sum(taste_informed$value)
+  taste_informed <- taste_informed[
+    order(taste_informed$value, decreasing = TRUE),
+    ,
+    drop = FALSE
+  ]
+
+  u_tastes <- unique(taste_informed$taste)
+  col <- stats::setNames(
+    discrete_rainbow_14[seq_along(u_tastes)],
+    as.character(u_tastes)
+  )
+
+  taste_raw_plot <- taste_raw
+  taste_raw_plot$value <- taste_raw_plot$value * 100
+  taste_raw_plot$taste <- fct_reorder_base(
+    taste_raw_plot$taste,
+    taste_raw_plot$value,
+    desc = TRUE
+  )
+  taste_raw_plot$label <- sprintf("%0.1f%%", round(taste_raw_plot$value, 2))
+
+  plot_raw <- taste_raw_plot |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         area = value,
         fill = taste,
-        label = value |>
-          round(digits = 2) |>
-          sprintf(fmt = "%0.1f%%")
+        label = label
       )
     ) +
     treemapify::geom_treemap() +
-    # treemapify::geom_treemap_subgroup_border() +
-    treemapify::geom_treemap_text(place = "centre") +
-    ggplot2::scale_fill_manual(values = col, guide = "none") +
-    ggplot2::labs(title = "Classical tasting") +
+    treemapify::geom_treemap_text(
+      place = "centre",
+      grow = TRUE,
+      reflow = TRUE
+    ) +
+    ggplot2::scale_fill_manual(
+      values = col,
+      guide = "none"
+    ) +
+    ggplot2::labs(title = "Classical tasting", fill = "Taste") +
+    ggplot2::theme_void() +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
       legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
@@ -104,29 +145,36 @@ plot_informed_tasting <- function(
       )
     )
 
-  plot_informed <- taste_informed |>
-    tidytable::mutate(
-      taste = taste |>
-        forcats::fct_reorder(value, .desc = TRUE)
-    ) |>
-    tidytable::mutate(value = value * 100) |>
+  taste_informed_plot <- taste_informed
+  taste_informed_plot$value <- taste_informed_plot$value * 100
+  taste_informed_plot$taste <- fct_reorder_base(
+    taste_informed_plot$taste,
+    taste_informed_plot$value,
+    desc = TRUE
+  )
+  taste_informed_plot$label <- sprintf(
+    "%0.1f%%",
+    round(taste_informed_plot$value, 2)
+  )
+
+  plot_informed <- taste_informed_plot |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         area = value,
         fill = taste,
-        label = value |>
-          round(digits = 2) |>
-          sprintf(fmt = "%0.1f%%")
+        label = label
       )
     ) +
     treemapify::geom_treemap() +
-    # treemapify::geom_treemap_subgroup_border() +
-    treemapify::geom_treemap_text(place = "centre") +
-    ggplot2::scale_fill_manual(values = col) +
+    treemapify::geom_treemap_text(
+      place = "centre"
+    ) +
+    ggplot2::scale_fill_manual(
+      values = col
+    ) +
     ggplot2::labs(title = "Chemically informed tasting", fill = "Taste") +
+    ggplot2::theme_void() +
     ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
       legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",

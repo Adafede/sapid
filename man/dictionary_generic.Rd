@@ -24,13 +24,14 @@ terms. Includes original, translated, and simplified versions.
 Designed for generic/widely-used sensory attributes.
 }
 \details{
-Used by data harmonization functions (e.g., \code{harmonize_terms()})
+Used by data harmonization functions (e.g., \code{\link[=harmonize_terms]{harmonize_terms()}})
 to standardize taste terminology across panelists and sessions.
 }
 \examples{
 data(dictionary_generic)
 head(dictionary_generic)
-# Example lookup
-subset(dictionary_generic, original == "BOISÉ")
+subset(dictionary_generic, original == "BOIS\u00c9")
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
 \keyword{datasets}

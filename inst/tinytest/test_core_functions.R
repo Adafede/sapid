@@ -103,3 +103,11 @@ consistent_from_path <- load_consistent_profiles(profiles_path, min_jury = 2L)
 expect_true(is.data.frame(consistent_from_path))
 expect_identical(nrow(consistent_from_path), 3L)
 expect_true(all(consistent_from_path$taste == "BITTER"))
+
+# Golden regression check on built-in profiles ranking
+data(profiles, package = "sapid")
+full_consistent <- load_consistent_profiles(profiles, min_jury = 2L)
+u_ranks <- unique(full_consistent[, c("taste", "sum_taste", "group")])
+expect_identical(u_ranks$taste[1:3], c("BITTER", "FATTY", "ACID"))
+expect_identical(u_ranks$group, seq_len(nrow(u_ranks)))
+expect_equal(u_ranks$sum_taste[1], 1626.6)

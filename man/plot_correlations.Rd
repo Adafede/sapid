@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_correlations.R
 \name{plot_correlations}
 \alias{plot_correlations}
-\title{Plot correlations}
+\title{Plot significant ion-taste correlations and iridoid profiles}
 \usage{
 plot_correlations(
   input_correlations = "./data/correlations.tsv",
@@ -26,43 +26,62 @@ plot_correlations(
 )
 }
 \arguments{
-\item{input_correlations}{Input correlations}
+\item{input_correlations}{Path to the TSV table produced by
+\code{\link[=correlate_ion_taste_intensities]{correlate_ion_taste_intensities()}}.}
 
-\item{input_ions}{Input ions}
+\item{input_ions}{Path to the mzmine feature table CSV.}
 
-\item{input_tastes}{Input tastes}
+\item{input_tastes}{Optional path or \code{data.frame} of sensory profiles
+(defaults to built-in \link{profiles}).}
 
-\item{output_1}{Output 1}
+\item{output_1}{Output PDF path for top positive taste correlations.}
 
-\item{output_2}{Output 2}
+\item{output_2}{Output PDF path for bitter iridoid correlations.}
 
-\item{output_3}{Output 3}
+\item{output_3}{Output PDF path for stacked sensory vs. ion profiles.}
 
-\item{annotation_path_fractions}{Annotation path fractions}
+\item{annotation_path_fractions}{Path to the TIMA fraction annotations TSV.}
 
-\item{imputation_factor}{Imputation factor}
+\item{imputation_factor}{Multiplicative factor for missing value imputation
+(default \code{0.5}).}
 
-\item{max_pval}{Max p value}
+\item{max_pval}{Maximum BH-adjusted p-value threshold (default \code{0.05}).}
 
-\item{min_area_ion}{Minimal area ion}
+\item{min_area_ion}{Minimum feature peak area threshold (default \code{1L}).}
 
-\item{min_confidence}{Minimal confidence}
+\item{min_confidence}{Minimum TIMA final annotation score (default \code{0.45}).}
 
-\item{min_consistency}{Minimal consistency}
+\item{min_consistency}{Minimum chemical class consistency score (default \code{0.9}).}
 
-\item{min_corr}{Minimal correlation}
+\item{min_corr}{Minimum correlation coefficient threshold (default \code{0.95}).}
 
-\item{min_intense_ions_ratio}{Minimal intense ions ratio}
+\item{min_intense_ions_ratio}{Minimum overlap ratio with top-intensity
+fractions (default \code{0.8}).}
 
-\item{min_jury}{Minimal number of jury}
+\item{min_jury}{Minimum number of distinct jurors per taste (default \code{2L}).}
 
-\item{mode}{Mode}
+\item{mode}{Ionization mode (\code{"pos"} or \code{"neg"}, default \code{"pos"}).}
 
-\item{widths}{Widths (of the taste-ion windows)}
+\item{widths}{Integer vector of rolling window widths (default \code{5:9}).}
+}
+\value{
+Named list with elements \code{plot_correlations_1},
+\code{plot_correlations_2}, and \code{plot_correlations_3}.
 }
 \description{
-Plot correlations
+Filter rolling-window ion-taste correlations by FDR-adjusted p-value,
+correlation coefficient, and TIMA annotation confidence, and export three
+publication figures: (1) top positive ion-taste linear regressions per taste,
+(2) bitter iridoid regressions colored by correlation strength, and (3)
+stacked sensory and ion intensity profiles across fractions.
 }
 \examples{
-NULL
+\dontrun{
+plot_correlations()
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:operation_3465 Correlation}
+\concept{EDAM:operation_3803 Natural product identification}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3172 Metabolomics}

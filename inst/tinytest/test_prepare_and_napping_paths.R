@@ -26,8 +26,6 @@ withr::with_tempdir({
     overwrite = TRUE
   ))
 
-  # These preparation functions currently expect richer source sheets than this fixture provides.
-  # We still run them in tests to exercise parsing and preprocessing paths.
   out_chasselas <- file.path(input_dir, "chasselas.tsv")
   expect_error(
     prepare_chasselas(
@@ -71,7 +69,6 @@ withr::with_tempdir({
 })
 
 withr::with_tempdir({
-  # Drive plot_napping through data preparation with explicit TSV inputs.
   data(napping_coordinates, package = "sapid")
   data(napping_descriptors, package = "sapid")
   coords_path <- file.path(getwd(), "coords.tsv")
@@ -90,10 +87,17 @@ withr::with_tempdir({
     row.names = FALSE,
     quote = FALSE
   )
+  plot_napping(
+    input_coordinates = coords_path,
+    input_descriptors = desc_path,
+    sessions = 2L
+  )
+  expect_true(any(grepl("^Rplots", list.files(getwd()))))
+
   expect_error(
     plot_napping(
-      input_coordinates = coords_path,
-      input_descriptors = desc_path,
+      input_coordinates = napping_coordinates[1:2, , drop = FALSE],
+      input_descriptors = napping_descriptors,
       sessions = 2L
     ),
     "differing number of rows"

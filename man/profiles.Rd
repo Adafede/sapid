@@ -7,9 +7,9 @@
 \format{
 A data frame with 1,665 rows and 6 columns:
 \describe{
-\item{fraction}{Fraction identifier (e.g., "fraction_17")}
-\item{session}{Session identifier (e.g., "session_01")}
-\item{jury}{Juror identifier (e.g., "jury_03")}
+\item{fraction}{Fraction identifier (e.g., \code{"fraction_17"})}
+\item{session}{Session identifier (e.g., \code{"session_01"})}
+\item{jury}{Juror identifier (e.g., \code{"jury_03"})}
 \item{taste_original}{Original taste descriptor as entered by panelist}
 \item{taste_harmonized}{Standardized/harmonized taste descriptor}
 \item{value}{Numerical rating or intensity score}
@@ -23,14 +23,14 @@ profiles
 }
 \description{
 The primary sensory panel dataset containing taste profile ratings
-for Swertia chirayita sample fractions. Includes original (as entered
+for \emph{Swertia chirayita} sample fractions. Includes original (as entered
 by panelists) and harmonized (standardized) taste descriptor terms.
 This is the main table for sensory-MS correlation analyses.
 }
 \details{
 Missing or empty harmonized values indicate descriptors that could not
 be consistently mapped across panelists or were deemed non-informative
-(e.g., "RIEN" meaning "nothing").
+(e.g., \code{"RIEN"} meaning \code{"nothing"}).
 Use \code{!is.na(taste_harmonized) & taste_harmonized != ""} to filter
 for valid descriptors in analyses.
 }
@@ -39,4 +39,7 @@ data(profiles)
 head(profiles)
 table(profiles$taste_harmonized)[table(profiles$taste_harmonized) > 10]
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3172 Metabolomics}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{datasets}

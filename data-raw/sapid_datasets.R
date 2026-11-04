@@ -29,6 +29,7 @@ save_dataset <- function(name, object) {
   save(
     list = name,
     file = file.path(data_dir, paste0(name, ".rda")),
+    compress = "bzip2"
   )
 }
 
@@ -39,14 +40,6 @@ validate_saved_dataset <- function(name) {
 
   if (!is.data.frame(object)) {
     stop("Saved .rda does not contain a data.frame: ", name, call. = FALSE)
-  }
-
-  # Optional check: downstream tidytable workflows can wrap the object when needed.
-  if (requireNamespace("tidytable", quietly = TRUE)) {
-    tt <- tidytable::as_tidytable(object)
-    if (!inherits(tt, "tidytable")) {
-      stop("Failed tidytable conversion for dataset: ", name, call. = FALSE)
-    }
   }
 }
 

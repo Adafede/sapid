@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_descriptors_network.R
 \name{plot_descriptors_network}
 \alias{plot_descriptors_network}
-\title{Plot descriptors network}
+\title{Plot sensory descriptors network}
 \usage{
 plot_descriptors_network(
   input = NULL,
@@ -10,14 +10,25 @@ plot_descriptors_network(
 )
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of napping descriptors (defaults
+to built-in \link{napping_descriptors}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot descriptors network
+Construct and render a network connecting sample fractions, original panelist
+taste terms, and harmonized taste descriptors for descriptors used by at
+least two panelists.
 }
 \examples{
-NULL
-
+\donttest{
+out <- tempfile(fileext = ".pdf")
+plot_descriptors_network(output = out)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:operation_3925 Network visualisation}
+\concept{EDAM:topic_0092 Data visualisation}

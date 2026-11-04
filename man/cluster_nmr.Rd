@@ -2,7 +2,7 @@
 % Please edit documentation in R/cluster_nmr.R
 \name{cluster_nmr}
 \alias{cluster_nmr}
-\title{Cluster NMR}
+\title{Cluster proton NMR spectra of fractions}
 \usage{
 cluster_nmr(
   nmr_dir = "./data/10043",
@@ -33,39 +33,53 @@ cluster_nmr(
 )
 }
 \arguments{
-\item{nmr_dir}{NMR directory}
+\item{nmr_dir}{Directory containing Bruker NMR experiment folders.}
 
-\item{output_figure}{Output figure}
+\item{output_figure}{Output path for the PDF figure.}
 
-\item{output_groups}{Output groups}
+\item{output_groups}{Output path for the TSV cluster groups table.}
 
-\item{experiment_raw}{Experiment raw}
+\item{experiment_raw}{Identifier of the raw extract experiment.}
 
-\item{experiment_ref}{Experiment ref}
+\item{experiment_ref}{Identifier of the reference experiment.}
 
-\item{experiments_fractions}{Experiments fractions}
+\item{experiments_fractions}{Character vector of fraction experiment IDs.}
 
-\item{experiments_to_fix}{Experiments to fix}
+\item{experiments_to_fix}{Optional character vector of experiment IDs whose
+ppm axis should be aligned to \code{experiment_ref}.}
 
-\item{k}{Number of clusters}
+\item{k}{Integer number of hierarchical clusters (default \code{7}).}
 
-\item{peak_width_ppm}{Peak width ppm}
+\item{peak_width_ppm}{Numeric integration peak width in ppm (default \code{0.01}).}
 
-\item{ppm_min}{Ppm min}
+\item{ppm_min}{Minimum chemical shift in ppm (default \code{0}).}
 
-\item{ppm_max}{Ppm max}
+\item{ppm_max}{Maximum chemical shift in ppm (default \code{14.85}).}
 
-\item{area_min}{Area min}
+\item{area_min}{Minimum integrated peak area threshold (default \code{0}).}
 
-\item{range_exclude_area}{Range exclude area}
+\item{range_exclude_area}{Numeric length-2 ppm range excluded from clustering.}
 
-\item{range_without_peaks}{Range without peaks}
+\item{range_without_peaks}{Numeric length-2 baseline noise ppm range.}
 
-\item{ylim}{Y lim}
+\item{ylim}{Numeric length-2 y-axis limits for spectral traces.}
+}
+\value{
+Named list with elements \code{figure} and \code{groups}.
 }
 \description{
-Cluster NMR
+Load Bruker 1D proton NMR experiments, autophase, interpolate, integrate
+detected peak positions, cluster fractions by Canberra distance with
+Ward's hierarchical linkage, and export a dendrogram-aligned spectral figure
+and cluster group table.
 }
 \examples{
-NULL
+\dontrun{
+cluster_nmr()
 }
+}
+\concept{EDAM:data_3488 NMR spectrum}
+\concept{EDAM:operation_3214 Spectral analysis}
+\concept{EDAM:operation_3432 Clustering}
+\concept{EDAM:topic_0593 NMR}
+\concept{EDAM:topic_3172 Metabolomics}

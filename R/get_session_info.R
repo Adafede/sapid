@@ -1,13 +1,20 @@
-#' Get session info
+#' Get sensory session metadata
 #'
-#' @param session Session
+#' Retrieve cluster assignment, collection date, and reference product name
+#' for a given sensory panel session number.
 #'
-#' @return NULL
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
+#' @param session Integer or character session identifier (`1` to `8`).
 #'
-#' @examples NULL
+#' @return Named list with elements `cluster`, `date`, and `product_name`.
+#' @export
+#' @examples
+#' get_session_info(1)
 get_session_info <- function(session) {
+  key <- as.character(session)
   cluster <- switch(
-    as.character(session),
+    key,
     "1" = 6,
     "2" = 2,
     "3" = 5,
@@ -19,7 +26,7 @@ get_session_info <- function(session) {
   )
 
   date <- switch(
-    as.character(session),
+    key,
     "1" = 20210412,
     "2" = 20210419,
     "3" = 20210426,
@@ -41,9 +48,9 @@ get_session_info <- function(session) {
     "20210607" = "CHASAVANT"
   )
 
-  return(list(
+  list(
     cluster = cluster,
     date = date,
     product_name = product_name
-  ))
+  )
 }

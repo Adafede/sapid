@@ -7,7 +7,11 @@
 This page documents the built-in datasets in the \code{sapid} package,
 which provide sensory panel data, sample metadata, and reference
 dictionaries for taste-characterization workflows.
-All datasets originate from or are derived from the Swertia chirayita
+All datasets originate from or are derived from the \emph{Swertia chirayita}
 case study published in \doi{10.1016/j.crfs.2025.101043},
-with raw data archived at https://zenodo.org/records/14616396.
+with raw data archived at \url{https://zenodo.org/records/14616396}.
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_0154 Small molecules}
+\concept{EDAM:topic_0780 Plant biology}
+\concept{EDAM:topic_3172 Metabolomics}

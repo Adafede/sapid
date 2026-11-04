@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_chasselas.R
 \name{prepare_chasselas}
 \alias{prepare_chasselas}
-\title{Prepare chasselas}
+\title{Prepare Chasselas sensory panel dataset}
 \usage{
 prepare_chasselas(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
@@ -11,15 +11,25 @@ prepare_chasselas(
 )
 }
 \arguments{
-\item{input_dir}{Input dir}
+\item{input_dir}{Path to the raw sensory sessions directory.}
 
-\item{sessions}{Sessions}
+\item{sessions}{Integer vector of session numbers to process (default \code{1:7}).}
 
-\item{output}{output}
+\item{output}{Output TSV file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Prepare chasselas
+Load and standardize raw Chasselas sensory panel Excel worksheets across
+sessions, mapping French taste attributes to standardized English labels
+and writing the combined TSV dataset.
 }
 \examples{
-NULL
+\dontrun{
+prepare_chasselas()
 }
+}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
+\concept{EDAM:topic_3370 Analytical chemistry}

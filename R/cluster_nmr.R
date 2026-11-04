@@ -1,26 +1,39 @@
-#' Cluster NMR
+#' Cluster proton NMR spectra of fractions
+#'
+#' Load Bruker 1D proton NMR experiments, autophase, interpolate, integrate
+#' detected peak positions, cluster fractions by Canberra distance with
+#' Ward's hierarchical linkage, and export a dendrogram-aligned spectral figure
+#' and cluster group table.
 #'
 #' @include colors.R
+#' @concept EDAM:topic_0593 NMR
+#' @concept EDAM:topic_3172 Metabolomics
+#' @concept EDAM:operation_3214 Spectral analysis
+#' @concept EDAM:operation_3432 Clustering
+#' @concept EDAM:data_3488 NMR spectrum
+#' @param nmr_dir Directory containing Bruker NMR experiment folders.
+#' @param output_figure Output path for the PDF figure.
+#' @param output_groups Output path for the TSV cluster groups table.
+#' @param experiment_raw Identifier of the raw extract experiment.
+#' @param experiment_ref Identifier of the reference experiment.
+#' @param experiments_fractions Character vector of fraction experiment IDs.
+#' @param experiments_to_fix Optional character vector of experiment IDs whose
+#'   ppm axis should be aligned to `experiment_ref`.
+#' @param k Integer number of hierarchical clusters (default `7`).
+#' @param peak_width_ppm Numeric integration peak width in ppm (default `0.01`).
+#' @param ppm_min Minimum chemical shift in ppm (default `0`).
+#' @param ppm_max Maximum chemical shift in ppm (default `14.85`).
+#' @param area_min Minimum integrated peak area threshold (default `0`).
+#' @param range_exclude_area Numeric length-2 ppm range excluded from clustering.
+#' @param range_without_peaks Numeric length-2 baseline noise ppm range.
+#' @param ylim Numeric length-2 y-axis limits for spectral traces.
 #'
-#' @param nmr_dir NMR directory
-#' @param output_figure Output figure
-#' @param output_groups Output groups
-#' @param experiment_raw Experiment raw
-#' @param experiment_ref Experiment ref
-#' @param experiments_fractions Experiments fractions
-#' @param experiments_to_fix Experiments to fix
-#' @param k Number of clusters
-#' @param peak_width_ppm Peak width ppm
-#' @param ppm_min Ppm min
-#' @param ppm_max Ppm max
-#' @param area_min Area min
-#' @param range_exclude_area Range exclude area
-#' @param range_without_peaks Range without peaks
-#' @param ylim Y lim
-#'
-#' @return NULL
-#'
-#' @examples NULL
+#' @return Named list with elements `figure` and `groups`.
+#' @export
+#' @examples
+#' \dontrun{
+#' cluster_nmr()
+#' }
 cluster_nmr <- function(
   nmr_dir = "./data/10043",
   output_figure = "./data/figures/figure_nmr.pdf",
@@ -193,45 +206,32 @@ cluster_nmr <- function(
     )
 
   message("Formatting ...")
-  peak_table_integration_ready <- peak_table_integration |>
-    AlpsNMR::get_integration_with_metadata() |>
-    tibble::column_to_rownames("NMRExperiment")
-  table_integration <- peak_table_integration_ready |>
-    tidytable::tidytable()
-  rownames(table_integration) <- experiments_fractions |>
-    gsub(pattern = "proton_", replacement = "")
+  meta_df <- as.data.frame(
+    AlpsNMR::get_integration_with_metadata(peak_table_integration),
+    stringsAsFactors = FALSE
+  )
+  frac_short <- gsub("proton_", "", experiments_fractions, fixed = TRUE)
+  rownames(meta_df) <- experiments_fractions
 
   message("Filtering ...")
-  table_integration_filtered <- table_integration |>
-    tibble::rownames_to_column() |>
-    tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
-    tidytable::mutate(
-      name = name |>
-        gsub(
-          pattern = "ppm_",
-          replacement = "",
-          fixed = TRUE
-        ) |>
-        gsub(pattern = "\\.\\.\\..*", replacement = "") |>
-        as.numeric()
-    ) |>
-    tidytable::filter(!is.na(name)) |>
-    tidytable::filter(value > area_min) |>
-    tidytable::filter(
-      name < range_exclude_area[1] |
-        name > range_exclude_area[2]
-    ) |>
-    tidytable::group_by(rowname, name) |>
-    tidytable::summarize(
-      value = value |>
-        sqrt()
-    ) |>
-    tidytable::ungroup() |>
-    tidytable::pivot_wider(names_from = name, values_from = value) |>
-    tibble::column_to_rownames()
+  is_num <- vapply(meta_df, is.numeric, logical(1L))
+  num_mat <- as.matrix(meta_df[, is_num, drop = FALSE])
+  ppm_cols <- suppressWarnings(as.numeric(
+    gsub(
+      "\\.\\.\\..*",
+      "",
+      gsub("ppm_", "", colnames(num_mat), fixed = TRUE)
+    )
+  ))
 
-  hclust <-
-    table_integration_filtered |>
+  valid_cols <- !is.na(ppm_cols) &
+    (ppm_cols < range_exclude_area[1L] | ppm_cols > range_exclude_area[2L])
+  num_mat <- num_mat[, valid_cols, drop = FALSE]
+  num_mat[num_mat <= area_min] <- NA_real_
+  table_integration_filtered <- sqrt(num_mat)
+  rownames(table_integration_filtered) <- frac_short
+
+  hclust <- table_integration_filtered |>
     stats::dist(method = "canberra") |>
     stats::hclust(method = "ward.D2")
 
@@ -245,56 +245,34 @@ cluster_nmr <- function(
   dend_attr <- dend |>
     dendextend::get_leaves_attr("nodePar")
 
-  groups <- dend_attr[names(dend_attr) == "lab.col"] |>
-    data.frame() |>
-    tidytable::rename(group = 1) |>
-    tidytable::mutate(
-      group = group |>
-        as.character()
-    )
-  groups$rowname <- experiments_fractions |>
-    gsub(
-      pattern = "proton_",
-      replacement = "",
-      fixed = TRUE
-    )
+  groups <- data.frame(
+    group = as.character(unlist(
+      dend_attr[names(dend_attr) == "lab.col"],
+      use.names = FALSE
+    )),
+    rowname = frac_short,
+    stringsAsFactors = FALSE
+  )
 
-  table_xy <- dataset_fractions$data_1r |>
-    data.frame()
-  colnames(table_xy) <- dataset_fractions$axis
-  rownames(table_xy) <- experiments_fractions
+  # tidytable::slice_sample(n = 100000) |>
+  # tidytable::mutate(max = value |>
+  #                     max()) |>
+  # tidytable::mutate(value = value / max) |>
+  axis_ppm <- round(as.numeric(dataset_fractions$axis), digits = 3L)
+  data_mat <- as.matrix(dataset_fractions$data_1r)
+  summed_mat <- rowsum(t(data_mat), axis_ppm, reorder = TRUE, na.rm = TRUE)
+  ppm_vals <- as.numeric(rownames(summed_mat))
+  n_ppm <- length(ppm_vals)
+  n_fr <- length(frac_short)
 
-  table_xy_ready <- table_xy |>
-    tibble::rownames_to_column() |>
-    tidytable::pivot_longer(cols = tidytable::where(is.numeric))
-
-  table_xy_ready <- table_xy_ready |>
-    # tidytable::slice_sample(n = 100000) |>
-    tidytable::group_by(rowname) |>
-    # tidytable::mutate(max = value |>
-    #                     max()) |>
-    # tidytable::mutate(value = value / max) |>
-    tidytable::ungroup() |>
-    tidytable::mutate(
-      name = name |>
-        as.numeric() |>
-        round(digits = 3)
-    ) |>
-    tidytable::group_by(rowname, name) |>
-    tidytable::summarize(value = sum(value)) |>
-    tidytable::ungroup() |>
-    tidytable::mutate(
-      rowname = rowname |>
-        gsub(
-          pattern = "proton_",
-          replacement = "",
-          fixed = TRUE
-        )
-    ) |>
-    tidytable::inner_join(groups) |>
-    data.frame()
-
-  table_xy_ready$rowname <- forcats::fct_rev(table_xy_ready$rowname)
+  table_xy_ready <- data.frame(
+    rowname = rep(frac_short, each = n_ppm),
+    name = rep(ppm_vals, times = n_fr),
+    value = as.numeric(summed_mat),
+    group = rep(groups$group, each = n_ppm),
+    stringsAsFactors = FALSE
+  )
+  table_xy_ready$rowname <- fct_rev_base(table_xy_ready$rowname)
 
   plot_2 <- table_xy_ready |>
     ggplot2::ggplot(
@@ -366,8 +344,7 @@ cluster_nmr <- function(
       width = 16,
       height = 12
     )
-  groups |>
-    tidytable::fwrite(file = output_groups, sep = "\t")
+  data.table::fwrite(groups, file = output_groups, sep = "\t")
 
-  return(output)
+  return(list(figure = output_figure, groups = output_groups))
 }

@@ -1,81 +1,98 @@
-#' Load session
+#' Load sensory panel session data
 #'
-#' Load and prepare data from a single sensory panel session.
-#' Uses base R string operations.
+#' Load and normalize a specific worksheet from a single sensory panel session
+#' Excel workbook.
 #'
-#' @param input_dir Input directory path
-#' @param session_info Session metadata (date, cluster, product_name)
-#' @param tab Table type to load ('chasselas', 'napping_coord', 'napping_words', 'profiles')
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:data_2048 Report
+#' @param input_dir Path to the base sensory raw-data directory.
+#' @param session_info Named list of session metadata (`date`, `cluster`,
+#'   `product_name`) as returned by [get_session_info()].
+#' @param tab Character worksheet identifier: `"chasselas"`, `"napping_coord"`,
+#'   `"napping_words"`, or `"profiles"`.
 #'
-#' @return Data frame with loaded and processed session data
-#'
-#' @examples NULL
+#' @return A `data.frame` containing the loaded and standardized session data.
+#' @export
+#' @examples
+#' info <- get_session_info(1)
 load_session <- function(input_dir, session_info, tab) {
   sheet <- switch(
     tab,
-    "chasselas" = 1,
-    "napping_coord" = 2,
-    "napping_words" = 3,
-    "profiles" = 4
+    "chasselas" = 1L,
+    "napping_coord" = 2L,
+    "napping_words" = 3L,
+    "profiles" = 4L
   )
-  df <- list.files(
+
+  xlsx_files <- list.files(
     path = file.path(
       input_dir,
       paste0(session_info$date, "_cluster", session_info$cluster),
       "03_files"
     ),
-    pattern = ".xlsx",
+    pattern = "\\.xlsx$",
     full.names = TRUE
-  ) |>
-    readxl::read_xlsx(sheet = sheet)
+  )
+  if (length(xlsx_files) == 0L) {
+    stop("No .xlsx file found in session directory.", call. = FALSE)
+  }
 
-  df <- df |>
-    tidytable::rename_with(
-      .cols = tidytable::starts_with("J"),
-      .fn = function(cols) {
-        gsub("^J(\\d)([A-Z])", "J0\\1\\2", cols, perl = TRUE)
-      }
+  df <- read_xlsx_base(xlsx_files[[1L]], sheet = sheet)
+
+  j_cols <- grep("^J", names(df))
+  if (length(j_cols) > 0L) {
+    names(df)[j_cols] <- gsub(
+      "^J(\\d)([A-Z])",
+      "J0\\1\\2",
+      names(df)[j_cols],
+      perl = TRUE
     )
+  }
 
-  df <- df |>
-    tidytable::mutate(
-      session = paste0(
-        "session_",
-        if (is.numeric(session_info$cluster)) {
-          sprintf("%02d", session_info$cluster)
-        } else {
-          session_info$cluster
-        }
-      )
-    ) |>
-    tidytable::relocate(session, .after = 1)
+  session_val <- paste0(
+    "session_",
+    if (is.numeric(session_info$cluster)) {
+      sprintf("%02d", as.integer(session_info$cluster))
+    } else {
+      session_info$cluster
+    }
+  )
+  df$session <- rep(session_val, nrow(df))
+
+  other_cols <- setdiff(names(df), "session")
+  col_order <- if (length(other_cols) >= 1L) {
+    append(other_cols, "session", after = 1L)
+  } else {
+    "session"
+  }
+  df <- df[, col_order, drop = FALSE]
 
   if (tab == "napping_coord") {
-    df <- df |>
-      tidytable::rename(fraction = Produit)
+    names(df)[names(df) == "Produit"] <- "fraction"
+  } else if (tab == "chasselas") {
+    df$ProductName <- ifelse(
+      df$ProductName == session_info$product_name,
+      "product_1before",
+      "product_2after"
+    )
+  } else if (tab == "profiles") {
+    df$ProductName <- as.character(df$ProductName)
+    is_logi <- vapply(df, is.logical, logical(1L))
+    df <- df[, !is_logi, drop = FALSE]
+
+    is_num <- vapply(df, is.numeric, logical(1L))
+    num_cols <- names(df)[is_num]
+    id_cols <- names(df)[!is_num]
+
+    long_parts <- lapply(num_cols, function(col_nm) {
+      sub_df <- df[, id_cols, drop = FALSE]
+      sub_df$name <- rep(col_nm, nrow(df))
+      sub_df$value <- df[[col_nm]]
+      sub_df[!is.na(sub_df$value), , drop = FALSE]
+    })
+    df <- do.call(rbind, long_parts)
+    rownames(df) <- NULL
   }
 
-  if (tab == "chasselas") {
-    df <- df |>
-      tidytable::mutate(
-        ProductName = tidytable::if_else(
-          condition = ProductName == session_info$product_name,
-          true = "product_1before",
-          false = "product_2after"
-        )
-      )
-  }
-
-  if (tab == "profiles") {
-    df <- df |>
-      tidytable::mutate(
-        ProductName = ProductName |>
-          as.character()
-      ) |>
-      tidytable::select(-tidytable::where(is.logical)) |>
-      tidytable::pivot_longer(cols = tidytable::where(is.numeric)) |>
-      tidytable::filter(!is.na(value))
-  }
-
-  return(df)
+  df
 }

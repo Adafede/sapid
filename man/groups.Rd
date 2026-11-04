@@ -7,8 +7,8 @@
 \format{
 A data frame with 54 rows and 2 columns:
 \describe{
-\item{group}{Group identifier, often a color code (e.g., "#e31a1c")}
-\item{rowname}{Sample or fraction row identifier (e.g., "17")}
+\item{group}{Group identifier, often a color code (e.g., \code{"#e31a1c"})}
+\item{rowname}{Sample or fraction row identifier (e.g., \code{"17"})}
 }
 }
 \source{
@@ -32,4 +32,6 @@ data(groups)
 head(groups)
 unique(groups$group)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_3432 Clustering}
 \keyword{datasets}

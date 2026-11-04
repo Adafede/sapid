@@ -2,28 +2,28 @@
 % Please edit documentation in R/harmonize_terms.R
 \name{harmonize_terms}
 \alias{harmonize_terms}
-\title{Clean terms}
+\title{Harmonize sensory descriptor terms}
 \usage{
 harmonize_terms(dictionary, x, mode = "word", fallback = FALSE)
 }
 \arguments{
-\item{dictionary}{Path to the dictionary file, a data frame containing
-replacement terms, or NULL to use cached environment dictionaries}
+\item{dictionary}{Path to a dictionary TSV/CSV file or a \code{data.frame}
+containing \code{original} and \code{translated} (or \code{translated_simple}) columns.}
 
-\item{x}{Character string to be cleaned}
+\item{x}{Character vector to be harmonized.}
 
-\item{mode}{Replacement mode: 'word' for word boundary matching,
-'substring' for partial matching, 'fixed' for fast fixed-string matching}
+\item{mode}{Replacement mode: \code{"word"} for word-boundary matching,
+\code{"substring"} for regex partial matching, or \code{"fixed"} for literal matching.}
 
-\item{fallback}{Logical, whether to fall back to original string if
-no replacements occur}
+\item{fallback}{Logical; if \code{TRUE}, replace \code{NA} values with the uppercased
+input string.}
 }
 \value{
-Character string with terms replaced
+Character vector with harmonized terms.
 }
 \description{
-Replace terms in a given string using a dictionary, with intelligent matching
-and case-insensitive handling.
+Replace terms in a character vector using a dictionary, ordering matches by
+decreasing pattern length with case-insensitive normalization.
 }
 \details{
 For better performance when calling this function repeatedly on many strings,
@@ -31,19 +31,8 @@ pass a pre-loaded dictionary data frame instead of a file path. The function
 uses base R replacement helpers for all modes to avoid an extra dependency.
 }
 \examples{
-\dontrun{
-# Using data frame dictionary (faster)
 data(dictionary_generic)
-harmonize_terms(
-  dictionary = dictionary_generic,
-  x = "Some text with specific terms"
-)
-
-# Using file path (legacy, slower)
-harmonize_terms(
-  dictionary = "path/to/dictionary.csv",
-  x = "Some text with specific terms"
-)
+harmonize_terms(dictionary = dictionary_generic, x = "amer")
 }
-
-}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}

@@ -2,22 +2,24 @@
 % Please edit documentation in R/load_consistent_profiles.R
 \name{load_consistent_profiles}
 \alias{load_consistent_profiles}
-\title{Load consistent profiles}
+\title{Load consistent sensory profiles}
 \usage{
 load_consistent_profiles(input, min_jury = 2L)
 }
 \arguments{
-\item{input}{Input data frame or file path to profiles table}
+\item{input}{Input \code{data.frame} or file path to a sensory profiles table.}
 
-\item{min_jury}{Minimum number of jurors who must use a taste descriptor
-for it to be kept. Default: 2.}
+\item{min_jury}{Integer minimum number of distinct jurors required to retain
+a harmonized taste descriptor (default \code{2L}).}
 }
 \value{
-Data frame with consistent profiles and grouped statistics
+A \code{data.frame} with consistent sensory profiles and summary columns
+\code{sum}, \code{sum_taste}, and \code{group}.
 }
 \description{
-Filter profiles to keep only taste descriptors that are consistently
-used across multiple panelists (minimum jury threshold).
+Filter sensory profile ratings to retain only taste descriptors used by at
+least \code{min_jury} distinct panelists, and compute per-fraction and per-taste
+summed intensities.
 }
 \details{
 This function filters sensory data to keep only taste descriptors that appear
@@ -25,10 +27,10 @@ consistently across at least \code{min_jury} panelists. It removes descriptors t
 are used by only one panelist (potentially idiosyncratic terms).
 }
 \examples{
-\dontrun{
 data(profiles)
-consistent <- load_consistent_profiles(profiles, min_jury = 2)
-nrow(consistent)
+consistent <- load_consistent_profiles(profiles, min_jury = 2L)
+head(consistent)
 }
-
-}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
+\concept{EDAM:topic_3370 Analytical chemistry}

@@ -2,16 +2,22 @@
 % Please edit documentation in R/get_session_info.R
 \name{get_session_info}
 \alias{get_session_info}
-\title{Get session info}
+\title{Get sensory session metadata}
 \usage{
 get_session_info(session)
 }
 \arguments{
-\item{session}{Session}
+\item{session}{Integer or character session identifier (\code{1} to \code{8}).}
+}
+\value{
+Named list with elements \code{cluster}, \code{date}, and \code{product_name}.
 }
 \description{
-Get session info
+Retrieve cluster assignment, collection date, and reference product name
+for a given sensory panel session number.
 }
 \examples{
-NULL
+get_session_info(1)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3370 Analytical chemistry}

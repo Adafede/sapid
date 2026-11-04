@@ -2,19 +2,18 @@
 % Please edit documentation in R/plot_profiles.R
 \name{plot_profiles}
 \alias{plot_profiles}
-\title{Plot profiles}
+\title{Plot sensory and chemical class profiles across fractions}
 \usage{
 plot_profiles(
   input = NULL,
   output = "./data/figures/figure_profiles.pdf",
-  annotation_path_extract =
-    "~/Git/sapid/data/processed/241026_103144_extract/extract_results.tsv",
+  annotation_path_extract = "./data/processed/241026_103144_extract/extract_results.tsv",
   annotation_path_fractions =
-    "~/Git/sapid/data/processed/241217_130815_fractions/fractions_results.tsv",
-  features_path_extract = "~/Git/sapid/data/extract_mzmine/extract.csv",
-  features_path_fractions = "~/Git/sapid/data/fractions_mzmine/fractions.csv",
-  peaks_dir_extract = "~/Git/sapid/data/interim/peaks/extract",
-  peaks_dir_fractions = "~/Git/sapid/data/interim/peaks/fractions",
+    "./data/processed/241217_130815_fractions/fractions_results.tsv",
+  features_path_extract = "./data/extract_mzmine/extract.csv",
+  features_path_fractions = "./data/fractions_mzmine/fractions.csv",
+  peaks_dir_extract = "./data/interim/peaks/extract",
+  peaks_dir_fractions = "./data/interim/peaks/fractions",
   min_confidence = 0.45,
   min_similarity_prefilter = 0.6,
   min_similarity_filter = 0.8,
@@ -24,37 +23,51 @@ plot_profiles(
 )
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of sensory profiles (defaults to
+built-in \link{profiles}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
 
-\item{annotation_path_extract}{Annotation path extract}
+\item{annotation_path_extract}{Path to TIMA annotations for raw extract.}
 
-\item{annotation_path_fractions}{Annotation path fractions}
+\item{annotation_path_fractions}{Path to TIMA annotations for fractions.}
 
-\item{features_path_extract}{Features path extract}
+\item{features_path_extract}{Path to mzmine feature table for raw extract.}
 
-\item{features_path_fractions}{Annotation path fractions}
+\item{features_path_fractions}{Path to mzmine feature table for fractions.}
 
-\item{peaks_dir_extract}{Peaks dir extract}
+\item{peaks_dir_extract}{Directory of CAD peak comparison tables for extract.}
 
-\item{peaks_dir_fractions}{Peaks dir fractions}
+\item{peaks_dir_fractions}{Directory of CAD peak comparison tables for fractions.}
 
-\item{min_confidence}{Minimal confidence}
+\item{min_confidence}{Minimum TIMA final confidence score (default \code{0.45}).}
 
-\item{min_similarity_prefilter}{Minimal similarity prefilter}
+\item{min_similarity_prefilter}{Minimum peak shape correlation prefilter
+(default \code{0.6}).}
 
-\item{min_similarity_filter}{Minimal similarity filter}
+\item{min_similarity_filter}{Minimum peak shape correlation filter
+(default \code{0.8}).}
 
-\item{mode}{Mode}
+\item{mode}{Ionization mode (\code{"pos"} or \code{"neg"}, default \code{"pos"}).}
 
-\item{detector}{Detector}
+\item{detector}{Detector identifier (default \code{"ms"}).}
 
-\item{type}{Type}
+\item{type}{Hierarchy analysis type (default \code{"analysis"}).}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot profiles
+Generate a 2-panel stacked bar chart comparing panel-consistent sensory
+taste intensity profiles (top) with CAD-informed chemical class profiles
+annotated by TIMA (bottom) across chromatographic fractions.
 }
 \examples{
-NULL
+\dontrun{
+plot_profiles()
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:operation_3803 Natural product identification}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3172 Metabolomics}

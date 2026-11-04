@@ -1,64 +1,69 @@
-#' Plot chasselas variation
+#' Plot Chasselas baseline sensory variation across jurors and sessions
 #'
-#' @param input Input
-#' @param output_jury Output jury
-#' @param output_session Output session
+#' Generate violin/jitter distribution plots of baseline (`before`) Chasselas
+#' ratings stratified by juror and by session.
 #'
-#' @return NULL
+#' @concept EDAM:topic_3370 Analytical chemistry
+#' @concept EDAM:topic_0092 Data visualisation
+#' @concept EDAM:operation_0337 Visualisation
+#' @param input Optional path or `data.frame` of Chasselas ratings (defaults to
+#'   built-in [chasselas]).
+#' @param output_jury Output PDF file path for juror variation plots.
+#' @param output_session Output PDF file path for session variation plots.
 #'
-#' @examples NULL
+#' @return Named list with elements `jury` and `session`.
+#' @export
+#' @examples
+#' \donttest{
+#' out_j <- tempfile(fileext = ".pdf")
+#' out_s <- tempfile(fileext = ".pdf")
+#' plot_chasselas_variation(output_jury = out_j, output_session = out_s)
+#' }
 plot_chasselas_variation <- function(
   input = NULL,
   output_jury = "./data/figures/figure_variation_jury.pdf",
   output_session = "./data/figures/figure_variation_session.pdf"
 ) {
-  if (is.null(input)) {
-    data(chasselas, envir = environment())
-    input_data <- chasselas
-  } else {
-    input_data <- tidytable::fread(input)
-  }
+  input_data <- load_dataset_or_file(input, "chasselas")
 
-  deltas <- input_data |>
-    tidytable::mutate(tidytable::across(tidytable::everything(), function(x) {
-      x |>
-        gsub(pattern = "_", replacement = " ")
-    })) |>
-    tidytable::mutate(
-      value = value |>
-        as.numeric()
-    )
+  deltas <- as.data.frame(
+    lapply(input_data, function(col_v) {
+      gsub("_", " ", as.character(col_v), fixed = TRUE)
+    }),
+    stringsAsFactors = FALSE
+  )
+  deltas$value <- as.numeric(deltas$value)
 
-  deltas_before <- deltas |>
-    tidytable::filter(grepl(pattern = "before", x = product))
+  deltas_before <- deltas[
+    grepl(pattern = "before", x = deltas$product, fixed = TRUE),
+    ,
+    drop = FALSE
+  ]
 
   # deltas_after <- deltas |>
   #   tidytable::filter(grepl(pattern = "after", x = product))
 
-  deltas_1 <- deltas_before |>
-    tidytable::filter(
-      taste %in% c("sourness", "bitterness", "sweetness", "saltiness")
-    )
+  target_tastes <- c(
+    "sourness",
+    "bitterness",
+    "sweetness",
+    "saltiness",
+    "fatness, volume",
+    "balance",
+    "freshness",
+    "persistency",
+    "mouthwatering"
+  )
 
-  deltas_2 <- deltas_before |>
-    tidytable::filter(
-      taste %in%
-        c(
-          "fatness, volume",
-          "balance",
-          "freshness",
-          "persistency",
-          "mouthwatering"
-        )
-    )
+  deltas_3 <- deltas_before[
+    deltas_before$taste %in% target_tastes & !is.na(deltas_before$value),
+    ,
+    drop = FALSE
+  ]
 
-  deltas_3 <- deltas_1 |>
-    tidytable::bind_rows(deltas_2) |>
-    tidytable::filter(!is.na(value)) |>
-    tidytable::group_by(jury, taste) |>
-    tidytable::add_count() |>
-    tidytable::filter(n >= 3) |>
-    tidytable::ungroup()
+  jt_key <- paste(deltas_3$jury, deltas_3$taste, sep = "\r")
+  deltas_3$n <- stats::ave(deltas_3$value, jt_key, FUN = length)
+  deltas_3 <- deltas_3[deltas_3$n >= 3L, , drop = FALSE]
 
   p_1 <- deltas_3 |>
     ggplot2::ggplot(
@@ -120,7 +125,7 @@ plot_chasselas_variation <- function(
     ggplot2::scale_color_manual(
       values = discrete_rainbow_14[rep(
         c(FALSE, TRUE),
-        length = length(discrete_rainbow_14)
+        length.out = length(discrete_rainbow_14)
       )]
     ) +
     ggplot2::geom_violin() +

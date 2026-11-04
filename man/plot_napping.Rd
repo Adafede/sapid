@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_napping.R
 \name{plot_napping}
 \alias{plot_napping}
-\title{Plot napping}
+\title{Plot napping sensory map and descriptor projections}
 \usage{
 plot_napping(
   input_coordinates = system.file("extdata", "napping_coordinates.tsv", package =
@@ -13,15 +13,32 @@ plot_napping(
 )
 }
 \arguments{
-\item{input_coordinates}{Input coordinates}
+\item{input_coordinates}{Optional path or \code{data.frame} of napping coordinates
+(defaults to built-in \link{napping_coordinates}).}
 
-\item{input_descriptors}{Input descriptors}
+\item{input_descriptors}{Optional path or \code{data.frame} of napping descriptors
+(defaults to built-in \link{napping_descriptors}).}
 
-\item{sessions}{Sessions}
+\item{sessions}{Integer session number to analyze (default \code{2}).}
+}
+\value{
+Result of the final \code{\link[FactoMineR:prefpls]{FactoMineR::prefpls()}} call (invisibly).
 }
 \description{
-Plot napping
+Perform multifactorial sensory map analysis on napping coordinates and
+associated descriptor word contingencies for a given session using
+Procrustes Multiple Factor Analysis (\code{\link[SensoMineR:pmfa]{SensoMineR::pmfa()}}), Multiple Factor
+Analysis (\code{\link[FactoMineR:MFA]{FactoMineR::MFA()}}), Hierarchical Clustering on Principal
+Components (\code{\link[FactoMineR:HCPC]{FactoMineR::HCPC()}}), tablecloth plotting
+(\code{\link[SensoMineR:nappeplot]{SensoMineR::nappeplot()}}), Individual Differences Scaling
+(\code{\link[SensoMineR:indscal]{SensoMineR::indscal()}}), and Preference PLS (\code{\link[FactoMineR:prefpls]{FactoMineR::prefpls()}}).
 }
 \examples{
-NULL
+\dontrun{
+plot_napping(sessions = 2)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:operation_3432 Clustering}
+\concept{EDAM:topic_2269 Statistics and probability}
+\concept{EDAM:topic_3370 Analytical chemistry}

@@ -23,7 +23,7 @@ A reference dictionary for specific or less-common taste descriptors,
 including mappings to English translations and simplified forms.
 }
 \details{
-Larger and more specialized than \code{dictionary_generic}.
+Larger and more specialized than \link{dictionary_generic}.
 Used for comprehensive harmonization of all descriptors in the dataset.
 }
 \examples{
@@ -31,4 +31,6 @@ data(dictionary_specific)
 head(dictionary_specific)
 nrow(dictionary_specific)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
 \keyword{datasets}

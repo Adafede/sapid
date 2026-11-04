@@ -23,13 +23,14 @@ mapping napping-specific descriptors to standardized terms.
 }
 \details{
 Napping methods often generate unique terminology or abbreviations
-(e.g., "_LEGER" for "light"). This dictionary maps these to
+(e.g., \code{"_LEGER"} for \code{"light"}). This dictionary maps these to
 harmonized forms used in broader analyses.
 }
 \examples{
 data(dictionary_napping)
 head(dictionary_napping)
-# Find mappings for "LEGER"
 subset(dictionary_napping, grepl("LEGER", original))
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
 \keyword{datasets}

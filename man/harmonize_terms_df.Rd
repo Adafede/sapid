@@ -2,7 +2,7 @@
 % Please edit documentation in R/harmonize_terms_df.R
 \name{harmonize_terms_df}
 \alias{harmonize_terms_df}
-\title{Harmonize terms in a data frame}
+\title{Harmonize sensory terms across a data frame}
 \usage{
 harmonize_terms_df(
   df,
@@ -12,22 +12,38 @@ harmonize_terms_df(
 )
 }
 \arguments{
-\item{df}{Data frame containing taste/descriptor columns}
+\item{df}{Data frame with metadata in columns 1-2 and descriptor columns
+from column 3 onward.}
 
-\item{dictionary_generic_path}{Path to generic dict or data frame object}
+\item{dictionary_generic_path}{Path or \code{data.frame} for generic dictionary.}
 
-\item{dictionary_napping_path}{Path to napping dict or data frame object}
+\item{dictionary_napping_path}{Path or \code{data.frame} for napping dictionary.}
 
-\item{dictionary_specific_path}{Path to specific dict or data frame object}
+\item{dictionary_specific_path}{Path or \code{data.frame} for specific dictionary.}
 }
 \value{
-Data frame with harmonized taste terms
+A \code{data.frame} with harmonized taste terms in long format.
 }
 \description{
-Apply harmonization to multiple taste terms in a data frame using
-provided dictionaries.
+Apply multi-stage dictionary harmonization (specific, napping, generic) to
+panelist descriptor columns in a sensory data frame.
 }
 \examples{
-NULL
-
+data(dictionary_generic)
+data(dictionary_napping)
+data(dictionary_specific)
+df <- data.frame(
+  Produit = "17",
+  session = "session_01",
+  J01 = "amer",
+  stringsAsFactors = FALSE
+)
+harmonize_terms_df(
+  df,
+  dictionary_generic,
+  dictionary_napping,
+  dictionary_specific
+)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}

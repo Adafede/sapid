@@ -8,10 +8,10 @@
 A data frame with 1,314 rows and 6 columns:
 \describe{
 \item{date}{ISO 8601 timestamp of the rating session}
-\item{jury}{Juror identifier (e.g., "jury_01")}
-\item{product}{Product identifier ("product_1before", "product_2after")}
-\item{session}{Session identifier (e.g., "session_06")}
-\item{taste}{Taste attribute or descriptor (e.g., "sourness", "bitterness")}
+\item{jury}{Juror identifier (e.g., \code{"jury_01"})}
+\item{product}{Product identifier (\code{"product_1before"}, \code{"product_2after"})}
+\item{session}{Session identifier (e.g., \code{"session_06"})}
+\item{taste}{Taste attribute or descriptor (e.g., \code{"sourness"}, \code{"bitterness"})}
 \item{value}{Numerical rating value for the attribute}
 }
 }
@@ -30,4 +30,6 @@ data(chasselas)
 head(chasselas)
 table(chasselas$taste)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{datasets}

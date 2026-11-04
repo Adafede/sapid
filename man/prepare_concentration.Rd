@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_concentration.R
 \name{prepare_concentration}
 \alias{prepare_concentration}
-\title{Prepare concentration}
+\title{Prepare Ascending Forced Choice (AFC) concentration dataset}
 \usage{
 prepare_concentration(
   input_xlsx = paste0("~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/",
@@ -11,13 +11,22 @@ prepare_concentration(
 )
 }
 \arguments{
-\item{input_xlsx}{Input xlsx}
+\item{input_xlsx}{Path to the raw concentration \code{.xlsx} file.}
 
-\item{output}{Output}
+\item{output}{Output TSV file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Prepare concentration
+Extract and join intensity ratings, AFC correct/total counts, and qualitative
+taste attributes from the raw concentration determination Excel workbook.
 }
 \examples{
-NULL
+\dontrun{
+prepare_concentration()
 }
+}
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:operation_2428 Validation}
+\concept{EDAM:topic_3370 Analytical chemistry}

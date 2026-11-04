@@ -7,13 +7,13 @@
 \format{
 A data frame with 64 rows and multiple columns:
 \describe{
-\item{fraction}{Fraction identifier (e.g., "fraction_17")}
-\item{session}{Session identifier (e.g., "session_01")}
+\item{fraction}{Fraction identifier (e.g., \code{"fraction_17"})}
+\item{session}{Session identifier (e.g., \code{"session_01"})}
 \item{J01X, J01Y, J02X, J02Y, J03X, J03Y, J04X, J04Y, J05X, J05Y, J06X,
 J06Y, J07X, J07Y, J08X, J08Y, J09X, J09Y, J10X, J10Y, J11X, J11Y, J12X,
 J12Y, J13X, J13Y, J14X, J14Y}{Napping coordinates for each juror;
-column pairs (JxxX, JxxY) represent X and Y positions assigned by
-juror Jxx}
+column pairs (\code{JxxX}, \code{JxxY}) represent X and Y positions assigned by
+juror \code{Jxx}}
 }
 }
 \source{
@@ -37,4 +37,6 @@ data(napping_coordinates)
 head(napping_coordinates)
 colnames(napping_coordinates)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_2269 Statistics and probability}
 \keyword{datasets}

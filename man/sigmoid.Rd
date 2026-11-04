@@ -2,28 +2,33 @@
 % Please edit documentation in R/geom_sigmoid.R
 \name{sigmoid}
 \alias{sigmoid}
-\title{sigmoid}
+\title{Generate coordinates for a smooth sigmoid curve}
 \usage{
 sigmoid(x_from, x_to, y_from, y_to, smooth = 5, n = 100, direction = "x")
 }
 \arguments{
-\item{x_from}{start x value}
+\item{x_from}{Numeric start x coordinate.}
 
-\item{x_to}{end x value}
+\item{x_to}{Numeric end x coordinate.}
 
-\item{y_from}{start y value}
+\item{y_from}{Numeric start y coordinate.}
 
-\item{y_to}{end y values}
+\item{y_to}{Numeric end y coordinate.}
 
-\item{smooth}{smooth parameter. Higher means less smoothing}
+\item{smooth}{Numeric steepness parameter (default \code{5}).}
 
-\item{n}{number of point that should be smoothed}
+\item{n}{Integer number of interpolated points (default \code{100}).}
 
-\item{direction}{the character x or y depending on direction of smoothing}
+\item{direction}{Character smoothing direction: \code{"x"} or \code{"y"}.}
 }
 \value{
-a data frame
+A \code{data.frame} with interpolated \code{x} and \code{y} coordinates.
 }
 \description{
-Creates a longer dataframe with coordinates for a smoothed line.
+Generate coordinates for a smooth sigmoid curve
 }
+\examples{
+head(sigmoid(0, 10, 0, 1))
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}

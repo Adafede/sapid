@@ -8,8 +8,8 @@
 A data frame with 76 rows and 6 columns:
 \describe{
 \item{concentration}{Concentration level of the tested compound}
-\item{jury}{Juror identifier (e.g., "jury_01")}
-\item{taste}{Taste attribute tested (e.g., "amer", "acide")}
+\item{jury}{Juror identifier (e.g., \code{"jury_01"})}
+\item{taste}{Taste attribute tested (e.g., \code{"amer"}, \code{"acide"})}
 \item{value}{Numerical rating or intensity value}
 \item{afc_correct}{Number of correct responses in the AFC trial}
 \item{afc_total}{Total number of trials in the AFC session}
@@ -31,4 +31,7 @@ data(concentration_afc)
 head(concentration_afc)
 summary(concentration_afc)
 }
+\concept{EDAM:data_2048 Report}
+\concept{EDAM:topic_2269 Statistics and probability}
+\concept{EDAM:topic_3370 Analytical chemistry}
 \keyword{datasets}

@@ -1,122 +1,139 @@
-#' Plot descriptors network
+#' Plot sensory descriptors network
 #'
-#' @param input Input
-#' @param output Output
+#' Construct and render a network connecting sample fractions, original panelist
+#' taste terms, and harmonized taste descriptors for descriptors used by at
+#' least two panelists.
 #'
-#' @return NULL
+#' @concept EDAM:topic_0092 Data visualisation
+#' @concept EDAM:operation_3925 Network visualisation
+#' @concept EDAM:operation_0337 Visualisation
+#' @param input Optional path or `data.frame` of napping descriptors (defaults
+#'   to built-in [napping_descriptors]).
+#' @param output Output PDF file path.
 #'
-#' @examples NULL
-#'
+#' @return Output file path (`output`).
+#' @export
+#' @examples
+#' \donttest{
+#' out <- tempfile(fileext = ".pdf")
+#' plot_descriptors_network(output = out)
+#' }
 plot_descriptors_network <- function(
   input = NULL,
   output = "./data/figures/figure_network.pdf"
 ) {
-  if (is.null(input)) {
-    data(napping_descriptors, envir = environment())
-    input_data <- napping_descriptors
-  } else {
-    input_data <- tidytable::fread(input)
-  }
+  input_data <- load_dataset_or_file(input, "napping_descriptors")
 
-  table_descriptors <- input_data |>
-    tidytable::filter(taste_harmonized != "") |>
-    tidytable::distinct(fraction, jury, taste_original, taste_harmonized) |>
-    tidytable::group_by(taste_original) |>
-    tidytable::mutate(count = tidytable::n_distinct(jury)) |>
-    tidytable::ungroup() |>
-    tidytable::filter(count >= 2)
+  non_empty <- input_data[
+    !is.na(input_data$taste_harmonized) & input_data$taste_harmonized != "",
+    c("fraction", "jury", "taste_original", "taste_harmonized"),
+    drop = FALSE
+  ]
+  table_descriptors <- unique(non_empty)
 
-  table_edges_1 <- table_descriptors |>
-    tidytable::select(from = fraction, to = taste_original)
+  jury_per_orig <- tapply(
+    table_descriptors$jury,
+    table_descriptors$taste_original,
+    function(x) length(unique(x))
+  )
+  keep_orig <- names(jury_per_orig)[jury_per_orig >= 2L]
+  table_descriptors <- table_descriptors[
+    table_descriptors$taste_original %in% keep_orig,
+    ,
+    drop = FALSE
+  ]
 
-  table_edges_2 <- table_descriptors |>
-    tidytable::select(from = taste_original, to = taste_harmonized)
-
-  table_edges <- table_edges_1 |>
-    tidytable::bind_rows(table_edges_2)
-
-  table_edges_size <- table_edges |>
-    tidytable::group_by(to) |>
-    tidytable::count(name = "size")
-
-  table_vertices <- table_edges |>
-    tidytable::distinct(name = from) |>
-    tidytable::bind_rows(
-      table_edges_size |>
-        tidytable::distinct(name = to, size)
-    ) |>
-    tidytable::arrange(tidytable::desc(size)) |>
-    tidytable::distinct(name, .keep_all = TRUE) |>
-    tidytable::full_join(
-      tidytable::bind_rows(
-        table_descriptors |>
-          tidytable::distinct(taste = taste_original, color = taste_harmonized),
-        table_descriptors |>
-          tidytable::mutate(taste = taste_harmonized) |>
-          tidytable::distinct(taste, color = taste_harmonized)
-      ) |>
-        tidytable::distinct(taste, color),
-      by = c("name" = "taste")
-    ) |>
-    tidytable::mutate(
-      size = tidytable::if_else(
-        condition = name |>
-          grepl(pattern = "fraction", fixed = TRUE),
-        true = 1,
-        false = size
-      )
-    ) |>
-    tidytable::group_by(color) |>
-    tidytable::mutate(
-      sum = size |>
-        sum()
+  table_edges <- rbind(
+    data.frame(
+      from = table_descriptors$fraction,
+      to = table_descriptors$taste_original,
+      stringsAsFactors = FALSE
+    ),
+    data.frame(
+      from = table_descriptors$taste_original,
+      to = table_descriptors$taste_harmonized,
+      stringsAsFactors = FALSE
     )
+  )
 
-  table_vertices$color <- table_vertices$color |>
-    forcats::fct_reorder(table_vertices$sum, .desc = TRUE)
-  table_vertices$name <- table_vertices$name |>
-    forcats::fct_reorder(table_vertices$sum, .desc = TRUE)
+  to_counts <- table(table_edges$to)
+  table_edges_size <- data.frame(
+    name = names(to_counts),
+    size = as.numeric(to_counts),
+    stringsAsFactors = FALSE
+  )
 
-  graph <- table_edges |>
-    igraph::graph_from_data_frame(directed = FALSE, vertices = table_vertices)
+  from_only <- setdiff(unique(table_edges$from), table_edges_size$name)
+  vertices_raw <- rbind(
+    table_edges_size,
+    data.frame(
+      name = from_only,
+      size = rep(NA_real_, length(from_only)),
+      stringsAsFactors = FALSE
+    )
+  )
+  vertices_raw <- vertices_raw[
+    order(vertices_raw$size, decreasing = TRUE, na.last = TRUE),
+    ,
+    drop = FALSE
+  ]
+  vertices_raw <- vertices_raw[!duplicated(vertices_raw$name), , drop = FALSE]
 
-  igraph::V(graph)$name <- table_vertices$name
-  igraph::V(graph)$color <- table_vertices$color
+  color_map_df <- unique(rbind(
+    data.frame(
+      name = table_descriptors$taste_original,
+      color = table_descriptors$taste_harmonized,
+      stringsAsFactors = FALSE
+    ),
+    data.frame(
+      name = table_descriptors$taste_harmonized,
+      color = table_descriptors$taste_harmonized,
+      stringsAsFactors = FALSE
+    )
+  ))
+  color_map_df <- color_map_df[!duplicated(color_map_df$name), , drop = FALSE]
 
-  plot <- graph |>
-    ggraph::ggraph(layout = "stress") +
-    ggplot2::scale_color_manual(
-      values = discrete_rainbow_14,
-      na.value = "#767676"
-    ) +
-    ggplot2::scale_fill_manual(
-      values = discrete_rainbow_14,
-      na.value = "#767676"
-    ) +
-    ggraph::scale_edge_color_manual(
-      values = discrete_rainbow_14,
-      na.value = "#767676"
-    ) +
-    ggraph::geom_edge_bundle_force(
-      edge_alpha = 0.1,
-      edge_color = "#767676",
-      edge_width = 0.01,
-      n_cycle = 10,
-      threshold = 0.3,
-      show.legend = FALSE
-    ) +
+  table_vertices <- merge(
+    vertices_raw,
+    color_map_df,
+    by = "name",
+    all.x = TRUE,
+    sort = FALSE
+  )
+  is_frac <- grepl("fraction", table_vertices$name, fixed = TRUE)
+  table_vertices$size[is_frac] <- 1
+  table_vertices$sum <- stats::ave(
+    table_vertices$size,
+    ifelse(is.na(table_vertices$color), "__NA__", table_vertices$color),
+    FUN = function(x) sum(x, na.rm = TRUE)
+  )
+  table_vertices$sum[is.na(table_vertices$color)] <- NA_real_
+
+  table_vertices$color <- fct_reorder_base(
+    table_vertices$color,
+    table_vertices$sum,
+    desc = TRUE
+  )
+
+  mygraph <- igraph::graph_from_data_frame(
+    d = table_edges,
+    vertices = table_vertices
+  )
+
+  plot <- ggraph::ggraph(mygraph) +
+    ggraph::geom_edge_arc(strength = 0.2, width = 0.5, alpha = 0.15) +
     ggraph::geom_node_point(
-      mapping = ggplot2::aes(size = size, color = color),
+      ggplot2::aes(size = size, color = color),
       show.legend = FALSE
     ) +
     ggraph::geom_node_text(
-      mapping = ggplot2::aes(
-        label = name,
-        size = size,
-        color = color
-      ),
+      ggplot2::aes(label = name, size = size, color = color),
       repel = TRUE,
       show.legend = FALSE
+    ) +
+    ggplot2::scale_color_manual(
+      values = discrete_rainbow_14,
+      na.value = "#767676"
     ) +
     ggplot2::theme_void()
 
@@ -127,4 +144,5 @@ plot_descriptors_network <- function(
       width = 7,
       height = 7
     )
+  return(output)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_concentration.R
 \name{plot_concentration}
 \alias{plot_concentration}
-\title{Plot concentration}
+\title{Plot concentration-response and Ascending Forced Choice (AFC) results}
 \usage{
 plot_concentration(
   input = NULL,
@@ -10,13 +10,24 @@ plot_concentration(
 )
 }
 \arguments{
-\item{input}{Input}
+\item{input}{Optional path or \code{data.frame} of concentration AFC data
+(defaults to built-in \link{concentration_afc}).}
 
-\item{output}{Output}
+\item{output}{Output PDF file path.}
+}
+\value{
+Output file path (\code{output}).
 }
 \description{
-Plot concentration
+Visualize perceived taste intensity, AFC psychometric detection curve, and
+raw/weighted descriptor counts across tested extract concentrations.
 }
 \examples{
-NULL
+\donttest{
+out <- tempfile(fileext = ".pdf")
+plot_concentration(output = out)
 }
+}
+\concept{EDAM:operation_0337 Visualisation}
+\concept{EDAM:topic_0092 Data visualisation}
+\concept{EDAM:topic_3370 Analytical chemistry}

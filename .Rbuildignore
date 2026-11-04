@@ -9,6 +9,7 @@
 ^README\.Rmd$
 ^README\.qmd$
 ^README_files$
+^TESTING\.md$
 ^[.]?air[.]toml$
 ^[.]agent-scratch
 ^[.]agent[.]md$

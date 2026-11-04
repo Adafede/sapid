@@ -351,8 +351,15 @@ withr::with_tempdir({
 
   nmr_dir <- file.path(getwd(), "nmr_samples")
   dir.create(nmr_dir)
-  scales <- c(1.0, 1.3, 0.7, 2.0, 2.5, 0.4)
-  exps <- paste0("proton_", 17:22)
+  scales <- c(1.0, 1.0, 1.3, 0.7, 2.0, 2.5)
+  exps <- c(
+    "proton_00",
+    "proton_98",
+    "proton_17",
+    "proton_18",
+    "proton_19",
+    "proton_20"
+  )
   for (i in seq_along(exps)) {
     dest <- file.path(nmr_dir, exps[i])
     dir.create(dest)
@@ -378,21 +385,27 @@ withr::with_tempdir({
     nmr_dir = nmr_dir,
     output_figure = out_fig,
     output_groups = out_grp,
+    experiment_raw = "proton_00",
+    experiment_ref = "proton_98",
+    experiments_fractions = c(
+      "proton_17",
+      "proton_18",
+      "proton_19",
+      "proton_20"
+    ),
+    experiments_to_fix = "proton_17",
+    k = 2,
     ppm_min = 1.0,
     ppm_max = 2.0,
-    range_exclude = c(2.4, 2.6),
-    range_exclude_area = c(1.8, 1.9),
-    area_min = 10,
-    bin_width = 0.05,
-    clusters = 2,
-    experiments_fractions = exps,
-    experiments_to_fix = exps[1:2]
+    area_min = 0,
+    range_exclude_area = c(1.5, 1.55),
+    range_without_peaks = c(2.7, 2.9)
   )
   expect_identical(ret_nmr, list(figure = out_fig, groups = out_grp))
   expect_true(file.exists(out_fig) && file.info(out_fig)$size > 0)
   expect_true(file.exists(out_grp))
   grp_df <- utils::read.delim(out_grp, stringsAsFactors = FALSE)
   expect_identical(names(grp_df), c("group", "rowname"))
-  expect_identical(nrow(grp_df), 6L)
-  expect_identical(sort(grp_df$rowname), 17:22)
+  expect_identical(nrow(grp_df), 4L)
+  expect_identical(sort(grp_df$rowname), 17:20)
 })

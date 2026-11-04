@@ -81,8 +81,9 @@ withr::with_tempdir({
     on.exit(unlink(td, recursive = TRUE), add = TRUE)
     for (i in seq_along(sheets_xml)) {
       writeLines(
-        sheets_xml[[i]],
-        file.path(td, "xl", "worksheets", paste0("sheet", i, ".xml"))
+        enc2utf8(sheets_xml[[i]]),
+        file.path(td, "xl", "worksheets", paste0("sheet", i, ".xml")),
+        useBytes = TRUE
       )
     }
     old_wd <- setwd(td)

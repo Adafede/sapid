@@ -565,7 +565,7 @@ withr::with_tempdir({
 
   mzml_dir <- file.path(getwd(), "mzmls")
   dir.create(mzml_dir)
-  writeLines(mzml_txt, file.path(mzml_dir, "sample_M_1_01.mzML"))
+  writeLines(mzml_txt, file.path(mzml_dir, "sample_M_01_01.mzML"))
   writeLines(mzml_txt, file.path(mzml_dir, "sample_M_17_01.mzML"))
 
   feat_df <- data.frame(
@@ -573,13 +573,13 @@ withr::with_tempdir({
     rt = 5.2,
     mz = 150.0,
     area = 500000,
-    `datafile:sample_M_1_01.mzML:feature_state` = "DETECTED",
-    `datafile:sample_M_1_01.mzML:rt_range:min` = 4.8,
-    `datafile:sample_M_1_01.mzML:rt_range:max` = 5.8,
-    `datafile:sample_M_1_01.mzML:mz_range:min` = 149.9,
-    `datafile:sample_M_1_01.mzML:mz_range:max` = 150.1,
-    `datafile:sample_M_1_01.mzML:intensity_range:min` = 1000,
-    `datafile:sample_M_1_01.mzML:intensity_range:max` = 300000,
+    `datafile:sample_M_01_01.mzML:feature_state` = "DETECTED",
+    `datafile:sample_M_01_01.mzML:rt_range:min` = 4.8,
+    `datafile:sample_M_01_01.mzML:rt_range:max` = 5.8,
+    `datafile:sample_M_01_01.mzML:mz_range:min` = 149.9,
+    `datafile:sample_M_01_01.mzML:mz_range:max` = 150.1,
+    `datafile:sample_M_01_01.mzML:intensity_range:min` = 1000,
+    `datafile:sample_M_01_01.mzML:intensity_range:max` = 300000,
     `datafile:sample_M_17_01.mzML:feature_state` = "DETECTED",
     `datafile:sample_M_17_01.mzML:rt_range:min` = 4.8,
     `datafile:sample_M_17_01.mzML:rt_range:max` = 5.8,
@@ -609,11 +609,11 @@ withr::with_tempdir({
   expect_true(is.null(ret_chem))
   expect_true(file.exists(file.path(
     ext_dir,
-    "sample_M_1_01_featuresInformed_cad.tsv"
+    "sample_M_01_01_featuresInformed_cad.tsv"
   )))
   expect_true(file.exists(file.path(
     ext_dir,
-    "sample_M_1_01_featuresNotInformed_cad.tsv"
+    "sample_M_01_01_featuresNotInformed_cad.tsv"
   )))
   expect_true(file.exists(file.path(
     frac_dir,

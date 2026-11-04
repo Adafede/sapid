@@ -311,73 +311,51 @@ withr::with_tempdir({
   utils::unzip(z10, exdir = base_dir)
   src <- file.path(base_dir, "10")
 
-  r_full <- readBin(
-    file.path(src, "pdata", "1", "1r"),
-    what = "int",
-    n = 65536L,
-    size = 4L,
-    endian = "little"
+  ds_orig <- AlpsNMR::nmr_read_samples(
+    src,
+    format = "bruker",
+    all_components = TRUE
   )
-  procs_lines <- readLines(file.path(src, "pdata", "1", "procs"))
-  off <- as.numeric(sub(
-    ".*= ",
-    "",
-    grepv("^##\\$OFFSET=", procs_lines)
-  ))
-  sw_p <- as.numeric(sub(
-    ".*= ",
-    "",
-    grepv("^##\\$SW_p=", procs_lines)
-  ))
-  sf <- as.numeric(sub(
-    ".*= ",
-    "",
-    grepv("^##\\$SF=", procs_lines)
-  ))
-  sw <- sw_p / sf
-  ppm_full <- seq(from = off, to = off - sw, length.out = 65536L)
+  ax <- ds_orig$axis[[1L]][[1L]]
+  idx <- which(ax <= 3.0 & ax >= 1.0)[seq(1L, 8724L, by = 8L)]
 
-  keep_idx <- which(ppm_full <= 3.0 & ppm_full >= 1.0)
-  keep_idx <- keep_idx[seq(1L, length(keep_idx), by = 8L)]
-  n_pts <- length(keep_idx)
-  new_off <- ppm_full[keep_idx[1L]]
-  new_sw_p <- (ppm_full[keep_idx[1L]] - ppm_full[keep_idx[n_pts]]) * sf
-
-  procs_mod <- procs_lines
-  procs_mod[grep("^##\\$SI=", procs_mod)] <- paste0("##$SI= ", n_pts)
-  procs_mod[grep("^##\\$OFFSET=", procs_mod)] <- paste0("##$OFFSET= ", new_off)
-  procs_mod[grep("^##\\$SW_p=", procs_mod)] <- paste0("##$SW_p= ", new_sw_p)
-  writeLines(procs_mod, file.path(src, "pdata", "1", "procs"))
+  make_slice_bruker <- function(src_dir, dst_dir, idx_vec, shift_idx = 0L) {
+    dir.create(dst_dir, recursive = TRUE, showWarnings = FALSE)
+    file.copy(
+      list.files(src_dir, full.names = TRUE),
+      dst_dir,
+      recursive = TRUE
+    )
+    p_dir <- file.path(dst_dir, "pdata", "1")
+    idx_s <- idx_vec + shift_idx
+    for (fn in c("1r", "1i")) {
+      fp <- file.path(p_dir, fn)
+      if (file.exists(fp)) {
+        vals <- readBin(
+          fp,
+          what = "integer",
+          n = 131072L,
+          size = 4L,
+          endian = "little"
+        )
+        writeBin(as.integer(vals[idx_s]), fp, size = 4L, endian = "little")
+      }
+    }
+    procs_fp <- file.path(p_dir, "procs")
+    lines <- readLines(procs_fp)
+    lines <- sub("^##\\$SI=.*", paste0("##$SI= ", length(idx_vec)), lines)
+    lines <- sub("^##\\$OFFSET=.*", "##$OFFSET= 3.0", lines)
+    lines <- sub("^##\\$SW_p=.*", "##$SW_p= 1200.06", lines)
+    writeLines(lines, procs_fp)
+  }
 
   nmr_dir <- file.path(getwd(), "nmr_samples")
   dir.create(nmr_dir)
-  scales <- c(1.0, 1.0, 1.3, 0.7, 2.0, 2.5)
-  exps <- c(
-    "proton_00",
-    "proton_98",
-    "proton_17",
-    "proton_18",
-    "proton_19",
-    "proton_20"
-  )
-  for (i in seq_along(exps)) {
-    dest <- file.path(nmr_dir, exps[i])
-    dir.create(dest)
-    file.copy(
-      list.files(src, full.names = TRUE),
-      dest,
-      recursive = TRUE
-    )
-    r_slice <- as.integer(round(
-      r_full[keep_idx] * scales[i] + (i * 500L) * ((-1L)^i)
-    ))
-    writeBin(
-      r_slice,
-      file.path(dest, "pdata", "1", "1r"),
-      size = 4L,
-      endian = "little"
-    )
-  }
+  make_slice_bruker(src, file.path(nmr_dir, "proton_00"), idx, 0L)
+  make_slice_bruker(src, file.path(nmr_dir, "proton_17"), idx, 0L)
+  make_slice_bruker(src, file.path(nmr_dir, "proton_18"), idx, 100L)
+  make_slice_bruker(src, file.path(nmr_dir, "proton_19"), idx, 200L)
+  make_slice_bruker(src, file.path(nmr_dir, "proton_98"), idx, 0L)
 
   out_fig <- file.path(getwd(), "nmr_fig.pdf")
   out_grp <- file.path(getwd(), "nmr_groups.tsv")
@@ -387,25 +365,20 @@ withr::with_tempdir({
     output_groups = out_grp,
     experiment_raw = "proton_00",
     experiment_ref = "proton_98",
-    experiments_fractions = c(
-      "proton_17",
-      "proton_18",
-      "proton_19",
-      "proton_20"
-    ),
-    experiments_to_fix = "proton_17",
+    experiments_fractions = c("proton_17", "proton_18", "proton_19"),
+    experiments_to_fix = "proton_19",
     k = 2,
     ppm_min = 1.0,
-    ppm_max = 2.0,
+    ppm_max = 2.4,
     area_min = 0,
-    range_exclude_area = c(1.5, 1.55),
-    range_without_peaks = c(2.7, 2.9)
+    range_exclude_area = c(1.5, 1.6),
+    range_without_peaks = c(2.2, 2.4)
   )
   expect_identical(ret_nmr, list(figure = out_fig, groups = out_grp))
   expect_true(file.exists(out_fig) && file.info(out_fig)$size > 0)
   expect_true(file.exists(out_grp))
   grp_df <- utils::read.delim(out_grp, stringsAsFactors = FALSE)
   expect_identical(names(grp_df), c("group", "rowname"))
-  expect_identical(nrow(grp_df), 4L)
-  expect_identical(sort(grp_df$rowname), 17:20)
+  expect_identical(nrow(grp_df), 3L)
+  expect_identical(sort(grp_df$rowname), 17:19)
 })

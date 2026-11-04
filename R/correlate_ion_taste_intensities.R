@@ -95,9 +95,6 @@ correlate_ion_taste_intensities <- function(
   }
 
   pkendall_lut <- function(n) {
-    if (n < 2L) {
-      return(1)
-    }
     max_q <- as.integer(n * (n - 1L) / 2L)
     dp <- 1
     for (k in 2L:n) {
@@ -134,7 +131,11 @@ correlate_ion_taste_intensities <- function(
 
   win_cache <- new.env(parent = emptyenv())
   get_win_info <- function(f_rows, need_shapiro = FALSE) {
-    key <- paste(f_rows, collapse = ",")
+    key <- if (length(f_rows) > 1L && all(diff(f_rows) == 1L)) {
+      paste0(f_rows[1L], ":", f_rows[length(f_rows)])
+    } else {
+      paste(f_rows, collapse = ",")
+    }
     if (!exists(key, envir = win_cache, inherits = FALSE)) {
       sub_mat <- ion_mat[f_rows, , drop = FALSE]
       complete_mask <- colSums(is.na(sub_mat)) == 0L
@@ -221,9 +222,6 @@ correlate_ion_taste_intensities <- function(
       if (n < 2L) {
         sub_mat <- ion_mat[f_rows, , drop = FALSE]
         complete_mask <- colSums(is.na(sub_mat)) == 0L
-        if (!any(complete_mask)) {
-          return(NULL)
-        }
         for (j in seq_len(sum(complete_mask))) {
           warning(
             "Not enough finite observations for correlation. Returning NA."

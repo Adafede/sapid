@@ -224,3 +224,175 @@ withr::with_tempdir({
     "At least one column must be supplied to cols"
   )
 })
+
+# Full happy path for plot_chromatograms with .mzML files
+withr::with_tempdir({
+  data("cascade_chromatograms_positive", package = "cascade")
+  cad <- subset(cascade_chromatograms_positive, chromatogram == "cad")[
+    seq(1, 49468, by = 20),
+  ]
+  enc_f64 <- function(x) {
+    raw_bytes <- writeBin(as.numeric(x), raw(), size = 8L, endian = "little")
+    gsub("[\r\n]", "", jsonlite::base64_enc(raw_bytes))
+  }
+  rt_b64 <- enc_f64(cad$rtime)
+  int_b64 <- enc_f64(cad$intensity)
+  n_pts <- nrow(cad)
+  cids <- c("BasePeak_0", "PDA#1_TotalAbsorbance_0", "UV#1_CAD_1_0")
+  chrom_xml <- paste(
+    vapply(
+      seq_along(cids),
+      function(i) {
+        paste0(
+          "<chromatogram index=\"",
+          i - 1L,
+          "\" id=\"",
+          cids[i],
+          "\" defaultArrayLength=\"",
+          n_pts,
+          "\">",
+          "<binaryDataArrayList count=\"2\">",
+          "<binaryDataArray encodedLength=\"",
+          nchar(rt_b64),
+          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+          "<cvParam cvRef=\"MS\" accession=\"MS:1000595\" name=\"time array\" unitCvRef=\"UO\" unitAccession=\"UO:0000031\" unitName=\"minute\"/>",
+          "<binary>",
+          rt_b64,
+          "</binary></binaryDataArray>",
+          "<binaryDataArray encodedLength=\"",
+          nchar(int_b64),
+          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+          "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/>",
+          "<binary>",
+          int_b64,
+          "</binary></binaryDataArray>",
+          "</binaryDataArrayList></chromatogram>"
+        )
+      },
+      character(1L)
+    ),
+    collapse = "\n"
+  )
+  mzml_txt <- paste0(
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n",
+    "<mzML xmlns=\"http://psi.hupo.org/ms/mzml\" version=\"1.1.0\">\n",
+    "<cvList count=\"1\"><cv id=\"MS\" fullName=\"MS\" version=\"1\" URI=\"\"/></cvList>\n",
+    "<run id=\"run1\">\n",
+    "<chromatogramList count=\"3\" defaultDataProcessingRef=\"dp\">\n",
+    chrom_xml,
+    "\n</chromatogramList>\n</run>\n</mzML>\n"
+  )
+
+  mzml_dir <- file.path(getwd(), "chrom_mzmls")
+  dir.create(mzml_dir)
+  writeLines(mzml_txt, file.path(mzml_dir, "210619_AR_01_M_1_01.mzML"))
+  writeLines(mzml_txt, file.path(mzml_dir, "210619_AR_02_M_17_01.mzML"))
+
+  out_chrom <- file.path(getwd(), "figure_chromatograms.pdf")
+  ret_chrom <- plot_chromatograms(
+    input_dir = mzml_dir,
+    input_groups = NULL,
+    raw_index = 1L,
+    fractions_indices = 2L,
+    xlim = c(2, 25),
+    output = out_chrom
+  )
+  expect_identical(ret_chrom, out_chrom)
+  expect_true(file.exists(out_chrom) && file.info(out_chrom)$size > 0)
+})
+
+# Full happy path for cluster_nmr with Bruker spectra and narrow ppm window
+withr::with_tempdir({
+  z10 <- system.file("dataset-demo", "10.zip", package = "AlpsNMR")
+  base_dir <- file.path(getwd(), "bruker_base")
+  dir.create(base_dir)
+  utils::unzip(z10, exdir = base_dir)
+  src <- file.path(base_dir, "10")
+
+  r_full <- readBin(
+    file.path(src, "pdata", "1", "1r"),
+    what = "int",
+    n = 65536L,
+    size = 4L,
+    endian = "little"
+  )
+  procs_lines <- readLines(file.path(src, "pdata", "1", "procs"))
+  off <- as.numeric(sub(
+    ".*= ",
+    "",
+    grepv("^##\\$OFFSET=", procs_lines)
+  ))
+  sw_p <- as.numeric(sub(
+    ".*= ",
+    "",
+    grepv("^##\\$SW_p=", procs_lines)
+  ))
+  sf <- as.numeric(sub(
+    ".*= ",
+    "",
+    grepv("^##\\$SF=", procs_lines)
+  ))
+  sw <- sw_p / sf
+  ppm_full <- seq(from = off, to = off - sw, length.out = 65536L)
+
+  keep_idx <- which(ppm_full <= 3.0 & ppm_full >= 1.0)
+  keep_idx <- keep_idx[seq(1L, length(keep_idx), by = 8L)]
+  n_pts <- length(keep_idx)
+  new_off <- ppm_full[keep_idx[1L]]
+  new_sw_p <- (ppm_full[keep_idx[1L]] - ppm_full[keep_idx[n_pts]]) * sf
+
+  procs_mod <- procs_lines
+  procs_mod[grep("^##\\$SI=", procs_mod)] <- paste0("##$SI= ", n_pts)
+  procs_mod[grep("^##\\$OFFSET=", procs_mod)] <- paste0("##$OFFSET= ", new_off)
+  procs_mod[grep("^##\\$SW_p=", procs_mod)] <- paste0("##$SW_p= ", new_sw_p)
+  writeLines(procs_mod, file.path(src, "pdata", "1", "procs"))
+
+  nmr_dir <- file.path(getwd(), "nmr_samples")
+  dir.create(nmr_dir)
+  scales <- c(1.0, 1.3, 0.7, 2.0, 2.5, 0.4)
+  exps <- paste0("proton_", 17:22)
+  for (i in seq_along(exps)) {
+    dest <- file.path(nmr_dir, exps[i])
+    dir.create(dest)
+    file.copy(
+      list.files(src, full.names = TRUE),
+      dest,
+      recursive = TRUE
+    )
+    r_slice <- as.integer(round(
+      r_full[keep_idx] * scales[i] + (i * 500L) * ((-1L)^i)
+    ))
+    writeBin(
+      r_slice,
+      file.path(dest, "pdata", "1", "1r"),
+      size = 4L,
+      endian = "little"
+    )
+  }
+
+  out_fig <- file.path(getwd(), "nmr_fig.pdf")
+  out_grp <- file.path(getwd(), "nmr_groups.tsv")
+  ret_nmr <- cluster_nmr(
+    nmr_dir = nmr_dir,
+    output_figure = out_fig,
+    output_groups = out_grp,
+    ppm_min = 1.0,
+    ppm_max = 2.0,
+    range_exclude = c(2.4, 2.6),
+    range_exclude_area = c(1.8, 1.9),
+    area_min = 10,
+    bin_width = 0.05,
+    clusters = 2,
+    experiments_fractions = exps,
+    experiments_to_fix = exps[1:2]
+  )
+  expect_identical(ret_nmr, list(figure = out_fig, groups = out_grp))
+  expect_true(file.exists(out_fig) && file.info(out_fig)$size > 0)
+  expect_true(file.exists(out_grp))
+  grp_df <- utils::read.delim(out_grp, stringsAsFactors = FALSE)
+  expect_identical(names(grp_df), c("group", "rowname"))
+  expect_identical(nrow(grp_df), 6L)
+  expect_identical(sort(grp_df$rowname), 17:22)
+})

@@ -259,8 +259,13 @@ read_xlsx_base <- function(path, sheet = 1L) {
     col_v <- utils::type.convert(body[, j], as.is = TRUE)
     if (is.integer(col_v)) as.numeric(col_v) else col_v
   })
-  names(cols_list) <- hdr
-  as.data.frame(cols_list, stringsAsFactors = FALSE, check.names = FALSE)
+  out_df <- as.data.frame(
+    cols_list,
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
+  names(out_df) <- hdr
+  out_df
 }
 
 load_dataset_or_file <- function(input, dataset_name) {

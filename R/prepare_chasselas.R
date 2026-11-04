@@ -55,21 +55,32 @@ prepare_chasselas <- function(
   })
   long_df <- do.call(rbind, long_list)
 
-  taste_patterns <- c(
-    "acide.*" = "sourness",
-    "amer.*" = "bitterness",
-    "sucr\u00e9.*" = "sweetness",
-    "sal\u00e9.*" = "saltiness",
-    "gras.*" = "fatness, volume",
-    "\u00e9quilibre.*" = "balance",
-    "fraicheur.*" = "freshness",
-    "longueur.*" = "persistency",
-    "salivant.*" = "mouthwatering"
+  taste_pats <- c(
+    "acide.*",
+    "amer.*",
+    "sucr\u00e9.*",
+    "sal\u00e9.*",
+    "gras.*",
+    "\u00e9quilibre.*",
+    "fraicheur.*",
+    "longueur.*",
+    "salivant.*"
   )
-  for (pat in names(taste_patterns)) {
+  taste_repls <- c(
+    "sourness",
+    "bitterness",
+    "sweetness",
+    "saltiness",
+    "fatness, volume",
+    "balance",
+    "freshness",
+    "persistency",
+    "mouthwatering"
+  )
+  for (i in seq_along(taste_pats)) {
     long_df$name <- gsub(
-      pattern = pat,
-      replacement = taste_patterns[[pat]],
+      pattern = taste_pats[[i]],
+      replacement = taste_repls[[i]],
       x = long_df$name
     )
   }

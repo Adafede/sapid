@@ -215,4 +215,35 @@ dir.create(xlsx_dir_all, recursive = TRUE)
 file.copy(fixture, file.path(xlsx_dir_all, "session.xlsx"), overwrite = TRUE)
 loaded_all <- load_session(input_dir, session_info_all, "napping_coord")
 expect_true(all(loaded_all$session == "session_All"))
+
+# Single-column worksheet named 'session' (other_cols has length 0)
+td_s <- tempfile("xlsx_single_")
+dir.create(file.path(td_s, "xl", "worksheets"), recursive = TRUE)
+writeLines(
+  paste0(
+    "<worksheet><sheetData>",
+    "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>session</t></is></c></row>",
+    "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>old</t></is></c></row>",
+    "</sheetData></worksheet>"
+  ),
+  file.path(td_s, "xl", "worksheets", "sheet2.xml")
+)
+xlsx_single_dir <- file.path(input_dir, "20210419_cluster2", "03_files")
+dir.create(xlsx_single_dir, recursive = TRUE)
+old_wd <- setwd(td_s)
+utils::zip(
+  file.path(xlsx_single_dir, "single.xlsx"),
+  files = "xl",
+  flags = "-rq"
+)
+setwd(old_wd)
+unlink(td_s, recursive = TRUE)
+loaded_single <- load_session(
+  input_dir,
+  list(date = 20210419, cluster = 2, product_name = "Chas avant"),
+  "napping_coord"
+)
+expect_identical(names(loaded_single), "session")
+expect_identical(loaded_single$session, "session_02")
+
 unlink(input_dir, recursive = TRUE)

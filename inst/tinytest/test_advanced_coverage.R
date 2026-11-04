@@ -336,19 +336,24 @@ withr::with_tempdir({
 # 3. plot_correlations: full 3-PDF run with iridoid annotation and missing-bitter-iridoid error
 withr::with_tempdir({
   corr <- data.frame(
-    id_ion = 101L,
-    id_taste = "BITTER",
-    fractions = "32 33 34",
-    correlation = 0.99,
-    p_value = 0.001,
-    p_adjusted = 0.01,
-    method = "kendall",
+    id_ion = c(101L, 102L),
+    id_taste = c("BITTER", "SWEET"),
+    fractions = c("32 33 34", "32 33 34"),
+    correlation = c(0.99, 0.98),
+    p_value = c(0.001, 0.002),
+    p_adjusted = c(0.01, 0.02),
+    method = c("kendall", "kendall"),
     stringsAsFactors = FALSE
   )
-  ions <- data.frame(id = 101L, rt = 1.0, mz = 100.0, stringsAsFactors = FALSE)
-  ions[["datafile:210619_AR_12_M_32_01.mzML:area"]] <- 5000
-  ions[["datafile:210619_AR_13_M_33_01.mzML:area"]] <- 6000
-  ions[["datafile:210619_AR_14_M_34_01.mzML:area"]] <- 4000
+  ions <- data.frame(
+    id = c(101L, 102L),
+    rt = c(1.0, 2.0),
+    mz = c(100.0, 200.0),
+    stringsAsFactors = FALSE
+  )
+  ions[["datafile:210619_AR_12_M_32_01.mzML:area"]] <- c(5000, 3000)
+  ions[["datafile:210619_AR_13_M_33_01.mzML:area"]] <- c(6000, 4000)
+  ions[["datafile:210619_AR_14_M_34_01.mzML:area"]] <- c(4000, 2000)
 
   num_cols <- c(
     "feature_mz",

@@ -129,6 +129,20 @@ path_out <- harmonize_terms(
 expect_identical(path_out, "SAVORY")
 unlink(path_dict)
 
+# Empty and all-NA inputs in harmonize_terms preserve length and NA semantics
+expect_identical(
+  harmonize_terms(dict_simple, character(0), mode = "word"),
+  character(0)
+)
+expect_identical(
+  harmonize_terms(
+    dict_simple,
+    c(NA_character_, NA_character_),
+    fallback = TRUE
+  ),
+  c(NA_character_, NA_character_)
+)
+
 
 # 3. load_consistent_profiles: min_jury boundaries, distinct juror counting, deduplication, ranking
 small_profiles <- data.frame(

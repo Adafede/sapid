@@ -329,9 +329,27 @@ withr::with_tempdir({
   plot_napping(
     input_coordinates = coords_path,
     input_descriptors = desc_path,
-    sessions = 2L
+    sessions = "session_02"
   )
   expect_true(any(grepl("^Rplots", list.files(getwd()))))
+
+  coords_all <- as.data.frame(napping_coordinates[
+    napping_coordinates$session == "session_02",
+    ,
+    drop = FALSE
+  ])
+  coords_all$session <- "session_All"
+  desc_all <- as.data.frame(napping_descriptors[
+    napping_descriptors$session == "session_02",
+    ,
+    drop = FALSE
+  ])
+  desc_all$session <- "session_All"
+  plot_napping(
+    input_coordinates = coords_all,
+    input_descriptors = desc_all,
+    sessions = "All"
+  )
 
   expect_error(
     plot_napping(

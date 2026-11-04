@@ -8,11 +8,12 @@ harmonize_terms_df <- get("harmonize_terms_df", envir = ns)
 load_session <- get("load_session", envir = ns)
 
 
-# geom_sigmoid builds a layer and StatSigmoid assigns group IDs per panel
+# 1. geom_sigmoid builds a layer and StatSigmoid assigns group IDs per panel
 layer <- geom_sigmoid(smooth = 5, direction = "y", linewidth = 0.8)
 expect_true(inherits(layer, "LayerInstance"))
 expect_identical(layer$stat_params$smooth, 5)
 expect_identical(layer$stat_params$direction, "y")
+expect_identical(layer$stat_params$na.rm, FALSE)
 
 setup_out <- stat_sigmoid$setup_data(
   data.frame(
@@ -28,50 +29,111 @@ expect_true("group" %in% names(setup_out))
 expect_identical(setup_out$group, c(1L, 2L, 1L))
 
 sigmoid_x <- stat_sigmoid$compute_group(
-  data.frame(x = 1, y = 1, xend = 3, yend = 4),
+  data.frame(x = 1, y = 1, xend = 3, yend = 5),
   list(),
   smooth = 6,
   direction = "x"
 )
-expect_true(all(c("x", "y") %in% names(sigmoid_x)))
-expect_true(nrow(sigmoid_x) > 1)
+expect_identical(names(sigmoid_x), c("x", "y"))
+expect_identical(nrow(sigmoid_x), 100L)
+expect_equal(sigmoid_x$x[1L], 1, tolerance = 1e-12)
+expect_equal(sigmoid_x$x[100L], 3, tolerance = 1e-12)
+expect_equal(
+  sigmoid_x$y[1L],
+  stats::plogis(-6) * 4 + 1,
+  tolerance = 1e-12
+)
+expect_equal(
+  sigmoid_x$y[100L],
+  stats::plogis(6) * 4 + 1,
+  tolerance = 1e-12
+)
 
 sigmoid_y <- stat_sigmoid$compute_group(
-  data.frame(x = 1, y = 1, xend = 3, yend = 4),
+  data.frame(x = 1, y = 1, xend = 3, yend = 5),
   list(),
   smooth = 6,
   direction = "y"
 )
-expect_true(all(c("x", "y") %in% names(sigmoid_y)))
-expect_true(nrow(sigmoid_y) > 1)
+expect_identical(names(sigmoid_y), c("y", "x"))
+expect_identical(nrow(sigmoid_y), 100L)
+expect_equal(sigmoid_y$y[1L], 1, tolerance = 1e-12)
+expect_equal(sigmoid_y$y[100L], 5, tolerance = 1e-12)
 
 
-# harmonize_terms_df applies specific -> napping -> generic harmonization chain
-input_df <- data.frame(
-  fraction = "fraction_1",
-  session = "session_1",
-  jury_1 = "amer agrume",
-  jury_2 = "acide",
-  stringsAsFactors = FALSE
-)
-
+# 2. harmonize_terms_df: error on <3 cols, empty/NA handling, intensity splitting, column ordering
 dictionary_specific <- data.frame(
-  original = c("AMER", "AGRUME", "ACIDE"),
-  translated = c("BITTER", "CITRUS", "ACID"),
-  translated_simple = c("BITTER", "CITRUS", "ACID"),
+  original = c("AMER", "AGRUME", "ACIDE", "DOUX", "VIDE"),
+  translated = c("BITTER", "CITRUS", "ACID", "SWEET", ""),
+  translated_simple = c("BITTER", "CITRUS", "ACID", "SWEET", ""),
   stringsAsFactors = FALSE
 )
 
 dictionary_napping <- data.frame(
-  original = c("BITTER", "CITRUS", "ACID"),
-  translated = c("BITTER_1", "CITRUS_2", "ACID_3"),
+  original = c("BITTER", "CITRUS", "ACID", "SWEET"),
+  translated = c("BITTER_1", "CITRUS_2", "ACID__", "SWEET"),
   stringsAsFactors = FALSE
 )
 
 dictionary_generic <- data.frame(
-  original = c("BITTER", "CITRUS", "ACID"),
-  translated = c("BITTER", "CITRUS", "ACID"),
-  translated_simple = c("BITTER", "CITRUS", "ACID"),
+  original = c("BITTER", "CITRUS", "ACID", "SWEET"),
+  translated = c("BITTER", "CITRUS", "ACID", "SWEET"),
+  translated_simple = c("BITTER", "CITRUS", "ACID", "SWEET"),
+  stringsAsFactors = FALSE
+)
+
+# Boundary: < 3 columns must error with exact column count message
+expect_error(
+  harmonize_terms_df(
+    df = data.frame(a = 1, b = 2),
+    dictionary_generic_path = dictionary_generic,
+    dictionary_napping_path = dictionary_napping,
+    dictionary_specific_path = dictionary_specific
+  ),
+  pattern = "There are only 2 columns in df; at least 3 are required\\."
+)
+
+# All-NA measure columns return empty data.frame()
+expect_identical(
+  harmonize_terms_df(
+    df = data.frame(
+      fraction = "f1",
+      session = "s1",
+      jury_1 = NA_character_,
+      stringsAsFactors = FALSE
+    ),
+    dictionary_generic_path = dictionary_generic,
+    dictionary_napping_path = dictionary_napping,
+    dictionary_specific_path = dictionary_specific
+  ),
+  data.frame()
+)
+
+# Tokens that reduce to empty string after specific harmonization return data.frame()
+expect_identical(
+  harmonize_terms_df(
+    df = data.frame(
+      fraction = "f1",
+      session = "s1",
+      jury_1 = "vide",
+      stringsAsFactors = FALSE
+    ),
+    dictionary_generic_path = dictionary_generic,
+    dictionary_napping_path = dictionary_napping,
+    dictionary_specific_path = dictionary_specific
+  ),
+  data.frame()
+)
+
+# Full pipeline:
+# - "amer agrume" -> "BITTER_1", "CITRUS_2" (with intensities "1", "2")
+# - "acide" -> napping gives "ACID__" -> parts[[2]] is "" -> intensity becomes NA -> taste is "ACID"
+# - "doux" -> napping gives "SWEET" (no underscore) -> intensity is NA -> taste is "SWEET"
+input_df <- data.frame(
+  fraction = "fraction_1",
+  session = "session_1",
+  jury_1 = "amer agrume",
+  jury_2 = "acide doux",
   stringsAsFactors = FALSE
 )
 
@@ -87,14 +149,25 @@ expect_identical(
   which(names(harmonized) == "name") + 1L
 )
 expect_identical(
-  sort(harmonized$taste),
-  sort(c("ACID_3", "BITTER_1", "CITRUS_2"))
+  harmonized$taste,
+  c("BITTER_1", "CITRUS_2", "ACID", "SWEET")
+)
+expect_identical(
+  harmonized$intensity,
+  c("1", "2", NA_character_, NA_character_)
 )
 
 
-# load_session branch behavior is checked with a real multi-sheet xlsx fixture
+# 3. load_session: branch behavior, J-column regex, character cluster, missing file error
 session_info <- list(date = 20210412, cluster = 6, product_name = "CHASAVANT")
 input_dir <- tempfile("sapid-load-session-")
+
+# Missing directory / .xlsx file error
+expect_error(
+  load_session(input_dir, session_info, "chasselas"),
+  pattern = "No \\.xlsx file found in session directory\\."
+)
+
 xlsx_dir <- file.path(input_dir, "20210412_cluster6", "03_files")
 dir.create(xlsx_dir, recursive = TRUE)
 fixture <- file.path("fixtures", "session_fixture.xlsx")
@@ -109,7 +182,7 @@ expect_true(file.copy(
 ))
 
 loaded_chasselas <- load_session(input_dir, session_info, "chasselas")
-expect_true("session" %in% names(loaded_chasselas))
+expect_identical(names(loaded_chasselas)[2L], "session")
 expect_true("J01A" %in% names(loaded_chasselas))
 expect_identical(
   loaded_chasselas$ProductName,
@@ -118,14 +191,28 @@ expect_identical(
 expect_true(all(loaded_chasselas$session == "session_06"))
 
 loaded_napping <- load_session(input_dir, session_info, "napping_coord")
-expect_true("fraction" %in% names(loaded_napping))
+expect_identical(names(loaded_napping)[1:2], c("fraction", "session"))
 expect_false("Produit" %in% names(loaded_napping))
 expect_true(all(loaded_napping$session == "session_06"))
 
+loaded_words <- load_session(input_dir, session_info, "napping_words")
+expect_identical(names(loaded_words)[1:2], c("J01A", "session"))
+expect_true(all(loaded_words$session == "session_06"))
+
 loaded_profiles <- load_session(input_dir, session_info, "profiles")
-expect_true(all(
-  c("session", "ProductName", "name", "value") %in% names(loaded_profiles)
-))
+expect_identical(
+  names(loaded_profiles),
+  c("ProductName", "session", "name", "value")
+)
 expect_false("drop_me" %in% names(loaded_profiles))
 expect_false(anyNA(loaded_profiles$value))
 expect_true(all(loaded_profiles$name %in% c("J01A", "J02B")))
+
+# Character cluster (e.g., session 8 with cluster = "All")
+session_info_all <- list(date = 20210614, cluster = "All", product_name = NULL)
+xlsx_dir_all <- file.path(input_dir, "20210614_clusterAll", "03_files")
+dir.create(xlsx_dir_all, recursive = TRUE)
+file.copy(fixture, file.path(xlsx_dir_all, "session.xlsx"), overwrite = TRUE)
+loaded_all <- load_session(input_dir, session_info_all, "napping_coord")
+expect_true(all(loaded_all$session == "session_All"))
+unlink(input_dir, recursive = TRUE)

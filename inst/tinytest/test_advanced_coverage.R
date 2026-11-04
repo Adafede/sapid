@@ -259,6 +259,78 @@ withr::with_tempdir({
       "method"
     )
   )
+
+  # Complementary missing ions: each ion has run length 2 (passes min_width = 2),
+  # but in window of width 4 no single ion is complete across all 4 fractions
+  ions_comp <- data.frame(
+    id = c(201L, 202L),
+    rt = c(1.0, 2.0),
+    mz = c(100.0, 200.0),
+    `datafile:210619_AR_01_M_1_01.mzML:area` = c(100, NA),
+    `datafile:210619_AR_02_M_2_01.mzML:area` = c(200, NA),
+    `datafile:210619_AR_03_M_3_01.mzML:area` = c(NA, 300),
+    `datafile:210619_AR_04_M_4_01.mzML:area` = c(NA, 400),
+    check.names = FALSE
+  )
+  out_comp <- file.path(getwd(), "corr_comp.tsv")
+  suppressWarnings(correlate_ion_taste_intensities(
+    input_ions = ions_comp,
+    input_tastes = tastes_df[
+      tastes_df$taste_harmonized == "BITTER" &
+        tastes_df$fraction %in% paste0("fraction_", 1:4),
+    ],
+    output = out_comp,
+    min_jury = 2L,
+    min_area_ion = 1L,
+    widths = c(2L, 4L)
+  ))
+  df_comp <- utils::read.delim(out_comp, stringsAsFactors = FALSE)
+  expect_false("1 2 3 4" %in% df_comp$fractions)
+
+  # Sample size n > 5000L defaults to Kendall correlation with warning
+  n_large <- 5001L
+  large_cols <- as.list(as.numeric(seq_len(n_large) + 10L))
+  names(large_cols) <- sprintf(
+    "datafile:210619_AR_01_M_%d_01.mzML:area",
+    seq_len(n_large)
+  )
+  ions_large <- as.data.frame(
+    c(list(id = 301L, rt = 1.0, mz = 150.0), large_cols),
+    check.names = FALSE
+  )
+  tastes_large <- data.frame(
+    fraction = rep(sprintf("fraction_%d", seq_len(n_large)), each = 2L),
+    session = "session_01",
+    jury = rep(c("jury_01", "jury_02"), n_large),
+    taste_original = "AMER",
+    taste_harmonized = "BITTER",
+    value = rep(as.numeric(seq_len(n_large)), each = 2L),
+    stringsAsFactors = FALSE
+  )
+  warn_large <- new.env(parent = emptyenv())
+  warn_large$msgs <- character(0)
+  out_large <- file.path(getwd(), "corr_large.tsv")
+  withCallingHandlers(
+    correlate_ion_taste_intensities(
+      input_ions = ions_large,
+      input_tastes = tastes_large,
+      output = out_large,
+      min_jury = 2L,
+      min_area_ion = 1L,
+      widths = n_large
+    ),
+    warning = function(w) {
+      warn_large$msgs <- c(warn_large$msgs, conditionMessage(w))
+      invokeRestart("muffleWarning")
+    }
+  )
+  expect_true(any(grepl(
+    "Sample size too large for Shapiro-Wilk test",
+    warn_large$msgs
+  )))
+  df_large <- utils::read.delim(out_large, stringsAsFactors = FALSE)
+  expect_identical(df_large$method, "kendall")
+  expect_equal(df_large$correlation, 1.0, tolerance = 1e-12)
 })
 
 # 3. plot_correlations: full 3-PDF run with iridoid annotation and missing-bitter-iridoid error

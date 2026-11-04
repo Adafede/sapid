@@ -50,6 +50,9 @@ plot_chromatograms <- function(
       preprocessed$chromatograms_baselined[[1L]],
       stringsAsFactors = FALSE
     )
+    if ("rtime" %in% names(baselined) && !"time" %in% names(baselined)) {
+      names(baselined)[names(baselined) == "rtime"] <- "time"
+    }
     out <- unique(baselined[, c("time", "intensity"), drop = FALSE])
     out$id <- file
     out

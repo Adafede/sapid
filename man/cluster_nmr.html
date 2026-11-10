@@ -135,6 +135,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
   </li>  
@@ -175,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
   <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  <li><a href="#details" id="toc-details" class="nav-link" data-scroll-target="#details">Details</a></li>
   <li><a href="#value" id="toc-value" class="nav-link" data-scroll-target="#value">Value</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
@@ -191,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="cluster-proton-nmr-spectra-of-fractions">Cluster proton NMR spectra of fractions</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>Load Bruker 1D proton NMR experiments, autophase, interpolate, integrate detected peak positions, cluster fractions by Canberra distance with Ward’s hierarchical linkage, and export a dendrogram-aligned spectral figure and cluster group table.</p>
+<p>Load Bruker 1D proton NMR experiments, autophase, interpolate, exclude solvent/artifact regions before total-area normalization, merge overlapping detected peak positions within <code>peak_width_ppm / 2</code>, integrate peaks, cluster fractions using Hellinger (Euclidean on square-root areas) or Canberra distance with Ward’s minimum-variance hierarchical linkage (<code>ward.D2</code>), and export a dendrogram-aligned spectral figure and cluster group table.</p>
 </section>
 <section id="usage" class="level3">
 <h3 class="anchored" data-anchor-id="usage">Usage</h3>
@@ -220,7 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   area_min = 0,
   range_exclude_area = c(2.5, 2.6),
   range_without_peaks = c(0, 0.4),
-  ylim = c(0, 5e+10)
+  ylim = c(0, 5e+10),
+  dist_method = c("euclidean", "canberra")
 )
 </code></pre>
 </section>
@@ -328,7 +349,7 @@ Minimum integrated peak area threshold (default <code>0</code>).
 <code id="range_exclude_area">range_exclude_area</code>
 </td>
 <td>
-Numeric length-2 ppm range excluded from clustering.
+Numeric length-2 ppm range excluded from normalization and clustering.
 </td>
 </tr>
 <tr>
@@ -347,7 +368,33 @@ Numeric length-2 baseline noise ppm range.
 Numeric length-2 y-axis limits for spectral traces.
 </td>
 </tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="dist_method">dist_method</code>
+</td>
+<td>
+Distance metric on square-root-transformed peak areas: <code>“euclidean”</code> (default, Hellinger distance) or <code>“canberra”</code>.
+</td>
+</tr>
 </tbody></table>
+</section>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<p>Four chemometric refinements are applied:</p>
+<ol>
+<li>
+<p><strong>Pre-normalization solvent exclusion</strong>: <code>range_exclude_area</code> (e.g., residual DMSO-d6 at 2.5–2.6 ppm) is excluded prior to <code>AlpsNMR::nmr_normalize()</code> so that solvent peak fluctuations do not distort total-area normalization across fractions.</p>
+</li>
+<li>
+<p><strong>Non-overlapping peak integration windows</strong>: Detected peak positions closer than <code>peak_width_ppm / 2</code> are merged via single-linkage grouping to their mean chemical shift before integration, preventing double counting of multiplet splittings.</p>
+</li>
+<li>
+<p><strong>Zero-preserving Hellinger/Ward.D2 clustering</strong>: Sub-threshold peak areas (<code style="white-space: pre;">&lt;= area_min</code>) are set to <code>0</code> (not <code>NA</code>) prior to the Hellinger square-root transformation so that absent peaks contribute well-defined zero coordinates compatible with Euclidean/Hellinger and Ward.D2 minimum-variance geometry.</p>
+</li>
+<li>
+<p><strong>Dendrogram leaf-to-fraction alignment</strong>: After sorting the dendrogram (<code>sort(dend)</code>), leaf colors (<code>lab.col</code>) are matched back to <code>frac_short</code> via <code>labels(dend)</code> so each fraction receives its true cluster color.</p>
+</li>
+</ol>
 </section>
 <section id="value" class="level3">
 <h3 class="anchored" data-anchor-id="value">Value</h3>

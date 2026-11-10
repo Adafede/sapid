@@ -135,6 +135,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
   </li>  
@@ -175,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
   <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  <li><a href="#details" id="toc-details" class="nav-link" data-scroll-target="#details">Details</a></li>
   <li><a href="#value" id="toc-value" class="nav-link" data-scroll-target="#value">Value</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
@@ -248,6 +268,10 @@ Output TSV file path.
 </td>
 </tr>
 </tbody></table>
+</section>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<p>Out-of-range FIZZ export values (<code>value &gt; 10</code>) are rescaled by a factor of 10 <em>prior</em> to deduplicating identical rating vectors across repeated export columns (<code>dedup_key</code>), and synonymous descriptors rated by the same panelist on the same sample (<code>ProductName</code>, <code>CJ</code>, <code>newName</code>) are aggregated via <code>max(value, na.rm = TRUE)</code> rather than arbitrary first-column selection.</p>
 </section>
 <section id="value" class="level3">
 <h3 class="anchored" data-anchor-id="value">Value</h3>

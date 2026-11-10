@@ -135,6 +135,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
   </li>  
@@ -192,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="harmonize-sensory-descriptor-terms">Harmonize sensory descriptor terms</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>Replace terms in a character vector using a dictionary, ordering matches by decreasing pattern length with case-insensitive normalization.</p>
+<p>Replace terms in a character vector using a dictionary, ordering matches by decreasing pattern length with case-insensitive normalization and two-pass placeholder protection to prevent cascading overwrites.</p>
 </section>
 <section id="usage" class="level3">
 <h3 class="anchored" data-anchor-id="usage">Usage</h3>
@@ -238,7 +257,7 @@ Logical; if <code>TRUE</code>, replace <code>NA</code> values with the uppercase
 </section>
 <section id="details" class="level3">
 <h3 class="anchored" data-anchor-id="details">Details</h3>
-<p>For better performance when calling this function repeatedly on many strings, pass a pre-loaded dictionary data frame instead of a file path. The function uses base R replacement helpers for all modes to avoid an extra dependency.</p>
+<p>Patterns are sorted in strictly decreasing order of character length so that multi-word expressions (e.g., <code>“MINERAL AMER”</code>) are matched before their constituent single-word tokens (e.g., <code>“AMER”</code>). Matched spans are first replaced by sentinel tokens (<code style="white-space: pre;">&lt;idx&gt;</code>) and expanded in a second pass so that shorter patterns later in the dictionary cannot accidentally match substrings inside already-translated target terms.</p>
 </section>
 <section id="value" class="level3">
 <h3 class="anchored" data-anchor-id="value">Value</h3>

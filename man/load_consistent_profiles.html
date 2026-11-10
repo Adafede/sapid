@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -134,6 +163,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
@@ -192,11 +240,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="load-consistent-sensory-profiles">Load consistent sensory profiles</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>Filter sensory profile ratings to retain only taste descriptors used by at least <code>min_jury</code> distinct panelists, and compute per-fraction and per-taste summed intensities.</p>
+<p>Filter sensory profile ratings to retain only taste descriptors used by at least <code>min_jury</code> distinct panelists, optionally applying root-mean-square (RMS) panelist scale normalization, and compute per-fraction and per-taste summed intensities.</p>
 </section>
 <section id="usage" class="level3">
 <h3 class="anchored" data-anchor-id="usage">Usage</h3>
-<pre><code class="language-R">load_consistent_profiles(input, min_jury = 2L)
+<pre><code class="language-R">load_consistent_profiles(input, min_jury = 2L, normalize_panelists = FALSE)
 </code></pre>
 </section>
 <section id="arguments" class="level3">
@@ -218,11 +266,19 @@ Input <code>data.frame</code> or file path to a sensory profiles table.
 Integer minimum number of distinct jurors required to retain a harmonized taste descriptor (default <code>2L</code>).
 </td>
 </tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="normalize_panelists">normalize_panelists</code>
+</td>
+<td>
+Logical; if <code>TRUE</code>, apply multiplicative RMS scaling per juror (default <code>FALSE</code>).
+</td>
+</tr>
 </tbody></table>
 </section>
 <section id="details" class="level3">
 <h3 class="anchored" data-anchor-id="details">Details</h3>
-<p>This function filters sensory data to keep only taste descriptors that appear consistently across at least <code>min_jury</code> panelists. It removes descriptors that are used by only one panelist (potentially idiosyncratic terms).</p>
+<p>This function filters sensory data to keep only taste descriptors that appear consistently across at least <code>min_jury</code> panelists. It removes descriptors that are used by only one panelist (potentially idiosyncratic terms). When <code>normalize_panelists = TRUE</code>, each juror’s ratings <span class="math inline">\(y_{ij}\)</span> are scaled by <span class="math inline">\(s_{\text{global}} / s_j\)</span>, where <span class="math inline">\(s_j = \sqrt{\frac{1}{N_j}\sum_i y_{ij}^2}\)</span> is the juror’s root-mean-square intensity.</p>
 </section>
 <section id="value" class="level3">
 <h3 class="anchored" data-anchor-id="value">Value</h3>

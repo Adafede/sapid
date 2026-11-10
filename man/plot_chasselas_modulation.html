@@ -135,6 +135,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
   </li>  
@@ -191,13 +210,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="plot-chasselas-sensory-taste-modulation">Plot Chasselas sensory taste modulation</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p>Compute before/after rating differences (<code>delta</code>) for Chasselas sensory sessions, evaluate two-sided exact sign tests around median zero, and save a 2-panel violin/jitter summary figure.</p>
+<p>Compute before/after rating differences (<code>delta</code>) for Chasselas sensory sessions, evaluate two-sided paired tests around median zero using Pratt’s zero-preserving signed-rank test (or exact binomial sign test), and save a 2-panel violin/jitter summary figure.</p>
 </section>
 <section id="usage" class="level3">
 <h3 class="anchored" data-anchor-id="usage">Usage</h3>
 <pre><code class="language-R">plot_chasselas_modulation(
   input = NULL,
-  output = "./data/figures/figure_modulation.pdf"
+  output = "./data/figures/figure_modulation.pdf",
+  test_method = c("pratt", "sign")
 )
 </code></pre>
 </section>
@@ -220,6 +240,14 @@ Optional path or <code>data.frame</code> of Chasselas ratings (defaults to built
 Output PDF file path.
 </td>
 </tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="test_method">test_method</code>
+</td>
+<td>
+Paired test method: <code>“pratt”</code> (default, Pratt’s zero-preserving Wilcoxon signed-rank test) or <code>“sign”</code> (binomial sign test).
+</td>
+</tr>
 </tbody></table>
 </section>
 <section id="value" class="level3">
@@ -235,7 +263,7 @@ Output PDF file path.
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".pdf"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_chasselas_modulation</span>(<span class="at">output =</span> out)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/Rtmpr22nn0/file1faa20da8eac.pdf"</code></pre>
+<pre><code>[1] "/tmp/RtmpfEeTbN/file217b42cb1b79.pdf"</code></pre>
 </div>
 </div>
 

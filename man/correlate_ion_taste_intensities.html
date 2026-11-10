@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -134,6 +163,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../vignettes/sapid.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/I-sensory.html">
+ <span class="dropdown-text">1 Sensory &amp; psychophysics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/articles/II-correlations.html">
+ <span class="dropdown-text">2 Chemical &amp; correlations</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../NEWS.html"> 
 <span class="menu-text">News</span></a>
@@ -202,7 +250,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   min_jury = 2L,
   min_area_ion = 1L,
   imputation_factor = 0.5,
-  widths = 5:9
+  widths = 5:9,
+  complete_grid = TRUE,
+  normalize_panelists = FALSE,
+  greiner_kendall = FALSE,
+  fdr_scope = c("window", "taste", "global")
 )
 </code></pre>
 </section>
@@ -263,6 +315,38 @@ Multiplicative factor applied to the minimum observed intensity when imputing mi
 </td>
 <td>
 Integer vector of rolling fraction window widths (default <code>5:9</code>).
+</td>
+</tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="complete_grid">complete_grid</code>
+</td>
+<td>
+Logical; if <code>TRUE</code> (default), complete the <code style="white-space: pre;">fraction x taste</code> grid across evaluated fractions using baseline imputation (<code>imputation_factor * min_v</code>).
+</td>
+</tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="normalize_panelists">normalize_panelists</code>
+</td>
+<td>
+Logical; if <code>TRUE</code>, apply RMS scale normalization per juror before summing (default <code>FALSE</code>).
+</td>
+</tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="greiner_kendall">greiner_kendall</code>
+</td>
+<td>
+Logical; if <code>TRUE</code>, map Kendall’s <span class="math inline">\(\tau\)</span> to Pearson-equivalent scale via <span class="math inline">\(r = \sin(\frac{\pi}{2}\tau)\)</span> (default <code>FALSE</code>).
+</td>
+</tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="fdr_scope">fdr_scope</code>
+</td>
+<td>
+Scope of Benjamini-Hochberg FDR adjustment: <code>“window”</code> (default), <code>“taste”</code>, or <code>“global”</code>.
 </td>
 </tr>
 </tbody></table>

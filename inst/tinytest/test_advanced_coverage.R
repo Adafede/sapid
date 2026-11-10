@@ -202,6 +202,31 @@ withr::with_tempdir({
     tolerance = 1e-12
   )
 
+  # Verify greiner_kendall = TRUE and fdr_scope = "global"
+  corr_greiner <- file.path(getwd(), "corr_greiner.tsv")
+  suppressWarnings(correlate_ion_taste_intensities(
+    input_ions = ions_df,
+    input_tastes = tastes_df,
+    output = corr_greiner,
+    min_jury = 2L,
+    min_area_ion = 1L,
+    widths = 5L,
+    greiner_kendall = TRUE,
+    fdr_scope = "global"
+  ))
+  res_g <- utils::read.delim(corr_greiner, stringsAsFactors = FALSE)
+  row_102_g <- res_g[res_g$id_ion == 102L & res_g$id_taste == "BITTER", ]
+  expect_equal(
+    row_102_g$correlation,
+    sin(0.5 * pi * unname(ref_102_b$estimate)),
+    tolerance = 1e-12
+  )
+  expect_equal(
+    res_g$p_adjusted,
+    stats::p.adjust(res_g$p_value, method = "BH"),
+    tolerance = 1e-12
+  )
+
   # Edge cases: n == 2L, n == 1L, non-overlapping window, and width > length(fractions)
   tastes_sub <- tastes_df[
     tastes_df$taste_harmonized == "BITTER" &

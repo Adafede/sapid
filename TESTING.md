@@ -13,15 +13,17 @@ lightweight, zero-overhead unit and integration testing.
   - `test_datasets.R`: Schema, dimension, column-type, and domain-invariant
     assertions for all 10 exported datasets.
   - `test_core_functions.R`: Unit and boundary tests for `get_session_info()`,
-    `harmonize_terms()`, and `load_consistent_profiles()`.
+    `harmonize_terms()` (including two-pass sentinel placeholder protection),
+    and `load_consistent_profiles()` (including multiplicative RMS panelist
+    normalization).
   - `test_globals_and_colors.R`: Unit tests for internal helpers in
     `R/globals.R`, `R/colors.R`, and `R/geom_sigmoid.R` (`fct_rev_base()`,
-    `fct_reorder_base()`, `sign_test_pvalue()`, `unescape_xml()`,
-    `read_xlsx_base()`, `load_dataset_or_file()`,
-    `prepare_ion_intensities_df()`, `prepare_taste_intensities_df()`,
-    `.cascade_keep_best_candidates()`, `scale_fill_batlow()`,
-    `scale_color_batlow()`, `label_si_number()`, `label_short_scale()`,
-    `sigmoid()`).
+    `fct_reorder_base()`, `sign_test_pvalue()`, `pratt_wilcox_pvalue()`,
+    `fit_afc_psychometric()`, `unescape_xml()`, `read_xlsx_base()`,
+    `load_dataset_or_file()`, `prepare_ion_intensities_df()`,
+    `prepare_taste_intensities_df()`, `.cascade_keep_best_candidates()`,
+    `scale_fill_batlow()`, `scale_color_batlow()`, `label_si_number()`,
+    `label_short_scale()`, `sigmoid()`).
   - `test_plot_harmonize_session.R`: Unit and boundary tests for
     `geom_sigmoid()` / `StatSigmoid`, `harmonize_terms_df()`, and
     `load_session()`.
@@ -30,9 +32,10 @@ lightweight, zero-overhead unit and integration testing.
     `prepare_napping()`, and `plot_napping()`.
   - `test_advanced_coverage.R`: Mathematical and end-to-end verification of
     `prepare_concentration()`, `correlate_ion_taste_intensities()` (verified
-    against `stats::cor.test()` for Pearson, exact Kendall LUT, and tied Kendall
-    normal approximation), `plot_correlations()`, `plot_profiles()`, and
-    `prepare_chemical_profiles()`.
+    against `stats::cor.test()` for Pearson, exact Kendall LUT, tied Kendall
+    normal approximation, Greiner's Pearson-equivalent transformation, and
+    window/taste/global BH FDR scopes), `plot_correlations()`,
+    `plot_profiles()`, and `prepare_chemical_profiles()`.
   - `test_plots_and_correlations.R`: End-to-end PDF generation and correlation
     pipeline tests (`plot_chasselas_modulation()`, `plot_chasselas_variation()`,
     `plot_concentration()`, `plot_descriptors_network()`,

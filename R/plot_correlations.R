@@ -33,6 +33,13 @@
 #' @param min_jury Minimum number of distinct jurors per taste (default `2L`).
 #' @param mode Ionization mode (`"pos"` or `"neg"`, default `"pos"`).
 #' @param widths Integer vector of rolling window widths (default `5:9`).
+#' @param rt_window Numeric retention-time bin width in minutes for local
+#'   `inchikey_2D` deduplication (default `0.5`).
+#' @param greiner_kendall Logical; if `TRUE` (default), map Kendall's \eqn{\tau}
+#'   to Pearson-equivalent scale via \eqn{r_{\text{eq}} = \sin(\frac{\pi}{2}\tau)}.
+#' @param complete_grid Logical; if `TRUE` (default), complete the
+#'   `fraction x taste` grid across evaluated fractions with baseline
+#'   imputation (`imputation_factor * min_v`).
 #'
 #' @return Named list with elements `plot_correlations_1`,
 #'   `plot_correlations_2`, and `plot_correlations_3`.
@@ -58,7 +65,10 @@ plot_correlations <- function(
   min_intense_ions_ratio = 0.8,
   min_jury = 2L,
   mode = "pos",
-  widths = 5:9
+  widths = 5:9,
+  rt_window = 0.5,
+  greiner_kendall = TRUE,
+  complete_grid = TRUE
 ) {
   min_width <- min(widths)
   min_min_width <- min_width * min_intense_ions_ratio
@@ -68,6 +78,12 @@ plot_correlations <- function(
     data.table = FALSE
   )
   correlations <- data.table::fread(input_correlations, data.table = FALSE)
+  if (greiner_kendall && "method" %in% names(correlations)) {
+    is_k <- !is.na(correlations$method) & correlations$method == "kendall"
+    correlations$correlation[is_k] <- sin(
+      pi / 2 * correlations$correlation[is_k]
+    )
+  }
 
   df_ion_intensities <- prepare_ion_intensities_df(
     input_ions = input_ions,
@@ -101,9 +117,26 @@ plot_correlations <- function(
     by = "feature_id",
     all.x = TRUE
   )
+  rt_col <- if ("rt" %in% names(candidates_confident_fractions)) {
+    as.numeric(candidates_confident_fractions$rt)
+  } else if ("feature_rt" %in% names(candidates_confident_fractions)) {
+    as.numeric(candidates_confident_fractions$feature_rt)
+  } else {
+    rep(0, nrow(candidates_confident_fractions))
+  }
+  rt_bin <- if (is.finite(rt_window) && rt_window > 0) {
+    round(rt_col / rt_window) * rt_window
+  } else {
+    rep(0, nrow(candidates_confident_fractions))
+  }
+  ik_rt_key <- paste(
+    candidates_confident_fractions$inchikey_2D,
+    rt_bin,
+    sep = "\r"
+  )
   max_by_ik <- stats::ave(
     candidates_confident_fractions$intensity_ion,
-    candidates_confident_fractions$inchikey_2D,
+    ik_rt_key,
     FUN = function(x) if (all(is.na(x))) NA_real_ else max(x, na.rm = TRUE)
   )
   candidates_confident_fractions <- candidates_confident_fractions[
@@ -117,7 +150,8 @@ plot_correlations <- function(
   df_taste_intensities <- prepare_taste_intensities_df(
     input_tastes = input_tastes,
     min_jury = min_jury,
-    imputation_factor = imputation_factor
+    imputation_factor = imputation_factor,
+    complete_grid = complete_grid
   )
 
   non_na_ions <- df_ion_intensities[
@@ -199,8 +233,22 @@ plot_correlations <- function(
     by.y = "feature_id",
     all.x = TRUE
   )
-  corr_top$score_mixed <- corr_top$correlation *
-    as.numeric(corr_top$score_final)
+  n_win <- lengths(strsplit(
+    as.character(corr_top$fractions.x),
+    " ",
+    fixed = TRUE
+  ))
+  r_clamped <- pmin(pmax(corr_top$correlation, -0.9999), 0.9999)
+  fisher_z <- atanh(abs(r_clamped)) * sqrt(pmax(1, n_win - 3))
+  s_tima <- as.numeric(corr_top$score_final)
+  s_tima_conf <- ifelse(
+    !is.na(s_tima) & s_tima >= min_confidence,
+    s_tima,
+    0.1 * s_tima
+  )
+  corr_top$score_mixed <- sign(corr_top$correlation) *
+    tanh(fisher_z / 3) *
+    s_tima_conf
   # tidytable::distinct(id_taste,inchikey_2D, .keep_all = TRUE) |>
   corr_top <- unique(
     corr_top[order(corr_top$score_mixed, decreasing = TRUE), , drop = FALSE]
@@ -283,6 +331,24 @@ plot_correlations <- function(
   # df_merged_neg <- df_merged |>
   #   tidytable::inner_join(indices_significant_neg)
 
+  taste_palette <- c(
+    "OTHER" = "grey90",
+    "ACID" = "#882E72",
+    "ASTRINGENT" = "#7BAFDE",
+    "BITTER" = "#D1BBD7",
+    "CARTON" = "#DC050C",
+    "FATTY" = "#AE76A3",
+    "FRESH" = "#5289C7",
+    "METALLIC" = "#E8601C",
+    "MOUTHFILLING" = "#4EB265",
+    "PUNGENT" = "#F1932D",
+    "SALTY" = "#F6C141",
+    "SWEET" = "#90C987",
+    "UMAMI" = "#CAE0AB",
+    "VOLUME" = "#1965B0",
+    "WOODY" = "#F7F056"
+  )
+
   plot_correlations_1 <- df_merged_pos |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
@@ -302,56 +368,8 @@ plot_correlations <- function(
     ggplot2::xlab("Ion intensity") +
     ggplot2::ylab("Taste intensity") +
     ggplot2::scale_x_continuous(labels = label_si_number) +
-    ggplot2::scale_color_manual(
-      values = c(
-        # "#882E72", # acid
-        "#7BAFDE",
-        # astringent
-        "#D1BBD7",
-        # bitter
-        # "#DC050C", # carton
-        "#AE76A3",
-        # fatty
-        "#5289C7",
-        # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        "#F1932D",
-        # pungent
-        # "#F6C141", # salty
-        "#90C987",
-        # sweet
-        # "#CAE0AB", # umami
-        "#1965B0" # volume
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
-    ggplot2::scale_fill_manual(
-      values = c(
-        # "#882E72", # acid
-        "#7BAFDE",
-        # astringent
-        "#D1BBD7",
-        # bitter
-        # "#DC050C", # carton
-        "#AE76A3",
-        # fatty
-        "#5289C7",
-        # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        "#F1932D",
-        # pungent
-        # "#F6C141", # salty
-        "#90C987",
-        # sweet
-        # "#CAE0AB", # umami
-        "#1965B0" # volume
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
+    ggplot2::scale_color_manual(values = taste_palette) +
+    ggplot2::scale_fill_manual(values = taste_palette) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       strip.text = ggplot2::element_text(color = "#767676"),
@@ -634,56 +652,8 @@ plot_correlations <- function(
     ) +
     ggplot2::geom_col() +
     # ggplot2::geom_col(stat = "identity", position = "dodge") +
-    ggplot2::scale_fill_manual(
-      values = c(
-        "grey90",
-        "#D1BBD7",
-        # bitter
-        "#F1932D",
-        # pungent
-        "#90C987",
-        # sweet
-        "#7BAFDE",
-        # astringent
-        "#1965B0",
-        # volume
-        "#AE76A3" # fatty
-        # "#882E72", # acid
-        # "#DC050C", # carton
-        # "#5289C7", # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        # "#F6C141", # salty
-        # "#CAE0AB", # umami
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
-    ggplot2::scale_color_manual(
-      values = c(
-        "grey90",
-        "#D1BBD7",
-        # bitter
-        "#F1932D",
-        # pungent
-        "#90C987",
-        # sweet
-        "#7BAFDE",
-        # astringent
-        "#1965B0",
-        # volume
-        "#AE76A3" # fatty
-        # "#882E72", # acid
-        # "#DC050C", # carton
-        # "#5289C7", # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        # "#F6C141", # salty
-        # "#CAE0AB", # umami
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
+    ggplot2::scale_fill_manual(values = taste_palette) +
+    ggplot2::scale_color_manual(values = taste_palette) +
     ggplot2::labs(fill = "Taste", color = "Taste") +
     ggplot2::theme_bw() +
     ggplot2::theme(
@@ -736,56 +706,8 @@ plot_correlations <- function(
     ) +
     ggplot2::geom_col() +
     # ggplot2::geom_col(stat = "identity", position = "dodge") +
-    ggplot2::scale_fill_manual(
-      values = c(
-        "grey90",
-        "#D1BBD7",
-        # bitter
-        "#F1932D",
-        # pungent
-        "#90C987",
-        # sweet
-        "#7BAFDE",
-        # astringent
-        "#1965B0",
-        # volume
-        "#AE76A3" # fatty
-        # "#882E72", # acid
-        # "#DC050C", # carton
-        # "#5289C7", # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        # "#F6C141", # salty
-        # "#CAE0AB", # umami
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
-    ggplot2::scale_color_manual(
-      values = c(
-        "grey90",
-        "#D1BBD7",
-        # bitter
-        "#F1932D",
-        # pungent
-        "#90C987",
-        # sweet
-        "#7BAFDE",
-        # astringent
-        "#1965B0",
-        # volume
-        "#AE76A3" # fatty
-        # "#882E72", # acid
-        # "#DC050C", # carton
-        # "#5289C7", # fresh
-        # "#E8601C", # metallic
-        # "#4EB265", # mouthfilling
-        # "#F6C141", # salty
-        # "#CAE0AB", # umami
-        # "#F7F056", # woody
-        # "#777777"
-      )
-    ) +
+    ggplot2::scale_fill_manual(values = taste_palette) +
+    ggplot2::scale_color_manual(values = taste_palette) +
     ggplot2::labs(fill = "Taste", color = "Taste") +
     ggplot2::theme_bw() +
     ggplot2::theme(

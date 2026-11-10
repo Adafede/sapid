@@ -35,9 +35,13 @@ Imports:
     treemapify (>= 2.6.1),
     utils
 Suggests:
+    jsonlite (>= 1.9.0),
+    knitr (>= 1.51),
     mzR (>= 2.44.0),
     NMRphasing (>= 1.0.7),
+    quarto (>= 1.5.1),
     R.utils (>= 2.13.0),
+    svglite (>= 2.2.2),
     tinytest (>= 1.4.3),
     withr (>= 3.0.2)
 Remotes:
@@ -78,6 +82,8 @@ Encoding: UTF-8
 Language: en-US
 LazyData: TRUE
 LazyDataCompression: bzip2
+VignetteBuilder:
+    quarto
 biocViews: Metabolomics, MassSpectrometry, Cheminformatics,
     NaturalProducts, Software
 X-schema.org-keywords: computationalMetabolomics, naturalExtracts, taste,

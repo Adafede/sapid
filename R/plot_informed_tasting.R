@@ -15,8 +15,10 @@
 #' @param file_taste_informed Optional path or `data.frame` of fraction sensory
 #'   profiles (defaults to built-in [profiles]).
 #' @param output Output PDF file path.
-#' @param min_panelists Minimum number of distinct jurors required to retain an
-#'   original taste descriptor (default `2`).
+#' @param min_panelists Minimum number of distinct jurors required to retain a
+#'   harmonized taste descriptor (default `2`).
+#' @param normalize_panelists Logical; if `TRUE` (default), apply RMS juror
+#'   scaling and session panel-size weighting before mass reconstitution.
 #'
 #' @return Output file path (`output`).
 #' @export
@@ -30,7 +32,8 @@ plot_informed_tasting <- function(
   file_taste_raw = NULL,
   file_taste_informed = NULL,
   output = "./data/figures/figure_chemically_informed_tasting.pdf",
-  min_panelists = 2
+  min_panelists = 2,
+  normalize_panelists = TRUE
 ) {
   # Extract fraction masses
   raw_fractions <- load_dataset_or_file(file_fractions_mass, "fractions")
@@ -63,20 +66,23 @@ plot_informed_tasting <- function(
   taste_raw$taste <- ifelse(!is.na(mapped), unname(mapped), taste_raw$taste)
 
   prof_df <- load_dataset_or_file(file_taste_informed, "profiles")
-  names(prof_df)[names(prof_df) == "taste_harmonized"] <- "taste"
 
-  # Keep consistent panels only
-  jury_counts <- tapply(
-    prof_df$jury,
-    prof_df$taste_original,
-    function(x) length(unique(x))
+  # Keep consistent harmonized descriptors across panelists
+  prof_filtered <- load_consistent_profiles(
+    prof_df,
+    min_jury = as.integer(min_panelists),
+    normalize_panelists = normalize_panelists
   )
-  keep_orig <- names(jury_counts)[jury_counts >= min_panelists]
-  prof_filtered <- prof_df[
-    prof_df$taste_original %in% keep_orig,
-    ,
-    drop = FALSE
-  ]
+
+  if (normalize_panelists && nrow(prof_filtered) > 0L) {
+    sess_n_jury <- as.numeric(stats::ave(
+      prof_filtered$jury,
+      prof_filtered$session,
+      FUN = function(j) as.numeric(length(unique(j)))
+    ))
+    prof_filtered$value <- as.numeric(prof_filtered$value) /
+      pmax(1, sess_n_jury)
+  }
 
   # Weigh descriptors with fraction mass
   prof_joined <- merge(

@@ -22,7 +22,10 @@ plot_correlations(
   min_intense_ions_ratio = 0.8,
   min_jury = 2L,
   mode = "pos",
-  widths = 5:9
+  widths = 5:9,
+  rt_window = 0.5,
+  greiner_kendall = TRUE,
+  complete_grid = TRUE
 )
 }
 \arguments{
@@ -64,6 +67,16 @@ fractions (default \code{0.8}).}
 \item{mode}{Ionization mode (\code{"pos"} or \code{"neg"}, default \code{"pos"}).}
 
 \item{widths}{Integer vector of rolling window widths (default \code{5:9}).}
+
+\item{rt_window}{Numeric retention-time bin width in minutes for local
+\code{inchikey_2D} deduplication (default \code{0.5}).}
+
+\item{greiner_kendall}{Logical; if \code{TRUE} (default), map Kendall's \eqn{\tau}
+to Pearson-equivalent scale via \eqn{r_{\text{eq}} = \sin(\frac{\pi}{2}\tau)}.}
+
+\item{complete_grid}{Logical; if \code{TRUE} (default), complete the
+\verb{fraction x taste} grid across evaluated fractions with baseline
+imputation (\code{imputation_factor * min_v}).}
 }
 \value{
 Named list with elements \code{plot_correlations_1},

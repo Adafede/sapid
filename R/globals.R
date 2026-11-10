@@ -48,6 +48,7 @@ utils::globalVariables(
     "time",
     "value",
     "values",
+    "weight",
     "word",
     "x",
     "x_from",
@@ -127,6 +128,126 @@ sign_test_pvalue <- function(x, md = 0) {
     return(1)
   }
   stats::binom.test(sum(nz > 0), length(nz), p = 0.5)$p.value
+}
+
+pratt_wilcox_pvalue <- function(x, md = 0) {
+  diffs <- x[!is.na(x)] - md
+  n <- length(diffs)
+  if (n == 0L) {
+    return(1)
+  }
+  n0 <- sum(diffs == 0)
+  if (n0 == n) {
+    return(1)
+  }
+  nz_idx <- which(diffs != 0)
+  abs_nz <- abs(diffs[nz_idx])
+  r_nz <- rank(abs_nz, ties.method = "average") + n0
+  w_plus <- sum(r_nz[diffs[nz_idx] > 0])
+  mu_w <- (n * (n + 1) - n0 * (n0 + 1)) / 4
+  tab_ties <- table(abs_nz)
+  tie_counts <- as.numeric(tab_ties[tab_ties > 1L])
+  tie_corr <- if (length(tie_counts) > 0L) {
+    sum(tie_counts * (tie_counts - 1) * (tie_counts + 1)) / 2
+  } else {
+    0
+  }
+  var_w <- (n *
+    (n + 1) *
+    (2 * n + 1) -
+    n0 * (n0 + 1) * (2 * n0 + 1) -
+    tie_corr) /
+    24
+  if (var_w <= 0) {
+    return(1)
+  }
+  z <- (abs(w_plus - mu_w) - 0.5) / sqrt(var_w)
+  if (z <= 0) {
+    return(1)
+  }
+  2 * stats::pnorm(-z)
+}
+
+fit_afc_psychometric <- function(
+  conc,
+  k,
+  n,
+  m = 3L,
+  lambda = 0.05,
+  n_grid = 200L
+) {
+  valid <- !is.na(conc) & !is.na(k) & !is.na(n) & (conc > 0) & (n > 0)
+  conc <- as.numeric(conc[valid])
+  k <- as.numeric(k[valid])
+  n <- as.numeric(n[valid])
+  gamma <- 1 / as.numeric(m)
+  x <- log10(conc)
+
+  neg_ll <- function(par) {
+    mu <- par[1L]
+    log_slope <- par[2L]
+    slope <- exp(log_slope)
+    p <- gamma + (1 - gamma) * stats::plogis(slope * (x - mu))
+    p <- pmin(pmax(p, 1e-12), 1 - 1e-12)
+    -sum(k * log(p) + (n - k) * log(1 - p)) + 0.5 * lambda * (log_slope^2)
+  }
+
+  opt <- stats::optim(
+    par = c(mean(x), log(2)),
+    fn = neg_ll,
+    method = "BFGS",
+    hessian = TRUE
+  )
+  mu_hat <- opt$par[1L]
+  log_slope_hat <- opt$par[2L]
+  slope_hat <- exp(log_slope_hat)
+
+  cov_mat <- tryCatch(
+    solve(opt$hessian),
+    error = function(e) diag(c(0.05, 0.05))
+  )
+
+  x_grid <- seq(min(x), max(x), length.out = as.integer(n_grid))
+  eta <- slope_hat * (x_grid - mu_hat)
+  # Gradient of eta = exp(log_slope) * (x_grid - mu) w.r.t. (mu, log_slope):
+  d_mu <- -slope_hat
+  d_ls <- eta
+  var_eta <- pmax(
+    0,
+    (d_mu^2) *
+      cov_mat[1L, 1L] +
+      2 * d_mu * d_ls * cov_mat[1L, 2L] +
+      (d_ls^2) * cov_mat[2L, 2L]
+  )
+  se_eta <- sqrt(var_eta)
+
+  y_hat <- gamma + (1 - gamma) * stats::plogis(eta)
+  y_lo <- gamma + (1 - gamma) * stats::plogis(eta - 1.96 * se_eta)
+  y_hi <- gamma + (1 - gamma) * stats::plogis(eta + 1.96 * se_eta)
+
+  ec50 <- 10^mu_hat
+  p_target_50 <- (0.5 - gamma) / (1 - gamma)
+  c_p50 <- if (p_target_50 > 0 && p_target_50 < 1) {
+    10^(mu_hat + stats::qlogis(p_target_50) / slope_hat)
+  } else {
+    ec50
+  }
+
+  list(
+    curve = data.frame(
+      x = 10^x_grid,
+      y = y_hat,
+      ymin = y_lo,
+      ymax = y_hi,
+      stringsAsFactors = FALSE
+    ),
+    mu = mu_hat,
+    slope = slope_hat,
+    ec50 = ec50,
+    c_p50 = c_p50,
+    gamma = gamma,
+    p_threshold = (1 + gamma) / 2
+  )
 }
 
 unescape_xml <- function(x) {
@@ -371,10 +492,16 @@ prepare_ion_intensities_df <- function(
 prepare_taste_intensities_df <- function(
   input_tastes,
   min_jury,
-  imputation_factor
+  imputation_factor,
+  complete_grid = FALSE,
+  normalize_panelists = FALSE
 ) {
   raw_tastes <- load_dataset_or_file(input_tastes, "profiles")
-  prof <- load_consistent_profiles(raw_tastes, min_jury = min_jury)
+  prof <- load_consistent_profiles(
+    raw_tastes,
+    min_jury = min_jury,
+    normalize_panelists = normalize_panelists
+  )
   if (nrow(prof) == 0L) {
     return(data.frame(
       fraction = integer(0),
@@ -387,17 +514,41 @@ prepare_taste_intensities_df <- function(
   val <- as.numeric(prof$value)
   val[val == 0] <- NA_real_
   min_v <- min(val, na.rm = TRUE)
-  val[is.na(val)] <- imputation_factor * min_v
+  baseline_v <- imputation_factor * min_v
+  val[is.na(val)] <- baseline_v
   prof$value <- val
 
   frac_taste_key <- paste(prof$fraction, prof$taste, sep = "\r")
   sum_val <- stats::ave(prof$value, frac_taste_key, FUN = sum)
   out <- unique(data.frame(
-    fraction = prof$fraction,
+    fraction = as.integer(gsub("fraction_", "", prof$fraction, fixed = TRUE)),
     id_taste = as.character(prof$taste),
     intensity_taste = as.numeric(sum_val),
     stringsAsFactors = FALSE
   ))
-  out$fraction <- as.integer(gsub("fraction_", "", out$fraction, fixed = TRUE))
-  out[order(out$fraction), , drop = FALSE]
+
+  if (complete_grid && nrow(out) > 0L) {
+    u_fracs <- sort(unique(out$fraction))
+    u_tastes <- unique(out$id_taste)
+    if (length(u_fracs) > 1L && length(u_tastes) > 1L) {
+      grid_df <- expand.grid(
+        fraction = u_fracs,
+        id_taste = u_tastes,
+        KEEP.OUT.ATTRS = FALSE,
+        stringsAsFactors = FALSE
+      )
+      out <- merge(
+        grid_df,
+        out,
+        by = c("fraction", "id_taste"),
+        all.x = TRUE,
+        sort = FALSE
+      )
+      out$intensity_taste[is.na(out$intensity_taste)] <- baseline_v
+    }
+  }
+
+  out <- out[order(out$fraction), , drop = FALSE]
+  rownames(out) <- NULL
+  out
 }

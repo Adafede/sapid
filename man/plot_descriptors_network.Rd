@@ -23,6 +23,13 @@ Construct and render a network connecting sample fractions, original panelist
 taste terms, and harmonized taste descriptors for descriptors used by at
 least two panelists.
 }
+\details{
+Duplicate parallel edges (when multiple panelists assign the same descriptor
+to the same fraction, or when multiple original terms map to the same
+harmonized taste) are collapsed into a single weighted directed graph
+(\code{weight} attribute) prior to Fruchterman--Reingold layout computation, while
+preserving total vertex in-strength (\code{size}) for node scaling.
+}
 \examples{
 \donttest{
 out <- tempfile(fileext = ".pdf")

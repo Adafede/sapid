@@ -1,7 +1,8 @@
 #' Harmonize sensory descriptor terms
 #'
 #' Replace terms in a character vector using a dictionary, ordering matches by
-#' decreasing pattern length with case-insensitive normalization.
+#' decreasing pattern length with case-insensitive normalization and two-pass
+#' placeholder protection to prevent cascading overwrites.
 #'
 #' @concept EDAM:operation_2428 Validation
 #' @concept EDAM:data_2048 Report
@@ -15,9 +16,12 @@
 #'   input string.
 #'
 #' @details
-#' For better performance when calling this function repeatedly on many strings,
-#' pass a pre-loaded dictionary data frame instead of a file path. The function
-#' uses base R replacement helpers for all modes to avoid an extra dependency.
+#' Patterns are sorted in strictly decreasing order of character length so that
+#' multi-word expressions (e.g., `"MINERAL AMER"`) are matched before their
+#' constituent single-word tokens (e.g., `"AMER"`). Matched spans are first
+#' replaced by sentinel tokens (`\x01<idx>\x02`) and expanded in a second pass
+#' so that shorter patterns later in the dictionary cannot accidentally match
+#' substrings inside already-translated target terms.
 #'
 #' @return Character vector with harmonized terms.
 #' @export
@@ -49,37 +53,50 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   processed_string <- toupper(x)
   u_str <- unique(processed_string)
   u_out <- u_str
+  placeholders <- paste0("\x01", seq_along(patterns), "\x02")
 
-  # Perform replacements using appropriate method
+  # Pass 1: Replace matched spans with protected placeholders
   if (mode == "fixed") {
-    # Fast fixed-string replacement for literal matches
     for (i in seq_along(patterns)) {
       u_out <- gsub(
         pattern = patterns[[i]],
-        replacement = replacement[[i]],
+        replacement = placeholders[[i]],
         x = u_out,
         fixed = TRUE
       )
     }
   } else if (mode == "word") {
-    # Word boundary matching (regex)
     word_patterns <- paste0("\\b", patterns, "\\b")
     for (i in seq_along(word_patterns)) {
       u_out <- gsub(
         pattern = word_patterns[[i]],
-        replacement = replacement[[i]],
+        replacement = placeholders[[i]],
         x = u_out,
         perl = TRUE
       )
     }
   } else {
-    # Substring matching (regex without word boundaries)
     for (i in seq_along(patterns)) {
       u_out <- gsub(
         pattern = patterns[[i]],
-        replacement = replacement[[i]],
+        replacement = placeholders[[i]],
         x = u_out,
         perl = TRUE
+      )
+    }
+  }
+
+  # Pass 2: Expand placeholders to target replacements
+  for (i in seq_along(patterns)) {
+    if (is.na(replacement[[i]])) {
+      has_ph <- !is.na(u_out) & grepl(placeholders[[i]], u_out, fixed = TRUE)
+      u_out[has_ph] <- NA_character_
+    } else {
+      u_out <- gsub(
+        pattern = placeholders[[i]],
+        replacement = replacement[[i]],
+        x = u_out,
+        fixed = TRUE
       )
     }
   }

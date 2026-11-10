@@ -33,6 +33,15 @@ Components (\code{\link[FactoMineR:HCPC]{FactoMineR::HCPC()}}), tablecloth plott
 (\code{\link[SensoMineR:nappeplot]{SensoMineR::nappeplot()}}), Individual Differences Scaling
 (\code{\link[SensoMineR:indscal]{SensoMineR::indscal()}}), and Preference PLS (\code{\link[FactoMineR:prefpls]{FactoMineR::prefpls()}}).
 }
+\details{
+Following standard Napping + Ultra-Flash Profiling methodology (Pagès, 2005),
+the 2D tablecloth coordinates of each panelist are analyzed as active
+unstandardized continuous blocks (\code{type = "c"}), while the descriptor word
+contingency table is projected as a supplementary standardized block
+(\code{type = "s"}, \code{num.group.sup = n_coord_groups + 1L}). Hierarchical
+clustering on principal components (\code{\link[FactoMineR:HCPC]{FactoMineR::HCPC()}}) uses Ward's
+minimum-variance criterion (\code{method = "ward"}) to avoid centroid reversals.
+}
 \examples{
 \dontrun{
 plot_napping(sessions = 2)

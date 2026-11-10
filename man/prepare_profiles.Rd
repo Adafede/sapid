@@ -33,6 +33,13 @@ Load flash profile worksheets across sessions, harmonize French panelist
 taste terms using specific and generic dictionaries, correct out-of-range
 scale export artifacts, and write the combined TSV table.
 }
+\details{
+Out-of-range FIZZ export values (\code{value > 10}) are rescaled by a factor of
+10 \emph{prior} to deduplicating identical rating vectors across repeated export
+columns (\code{dedup_key}), and synonymous descriptors rated by the same panelist
+on the same sample (\code{ProductName}, \code{CJ}, \code{newName}) are aggregated via
+\code{max(value, na.rm = TRUE)} rather than arbitrary first-column selection.
+}
 \examples{
 \dontrun{
 prepare_profiles()

@@ -9,7 +9,8 @@ plot_informed_tasting(
   file_taste_raw = NULL,
   file_taste_informed = NULL,
   output = "./data/figures/figure_chemically_informed_tasting.pdf",
-  min_panelists = 2
+  min_panelists = 2,
+  normalize_panelists = TRUE
 )
 }
 \arguments{
@@ -24,8 +25,11 @@ profiles (defaults to built-in \link{profiles}).}
 
 \item{output}{Output PDF file path.}
 
-\item{min_panelists}{Minimum number of distinct jurors required to retain an
-original taste descriptor (default \code{2}).}
+\item{min_panelists}{Minimum number of distinct jurors required to retain a
+harmonized taste descriptor (default \code{2}).}
+
+\item{normalize_panelists}{Logical; if \code{TRUE} (default), apply RMS juror
+scaling and session panel-size weighting before mass reconstitution.}
 }
 \value{
 Output file path (\code{output}).

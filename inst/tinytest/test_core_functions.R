@@ -143,6 +143,18 @@ expect_identical(
   c(NA_character_, NA_character_)
 )
 
+# Two-pass sentinel placeholder protection: shorter pattern must not overwrite
+# substrings inside an already-translated target string
+dict_cascade <- data.frame(
+  original = c("LONG TERM", "TAR"),
+  translated = c("TARGET_A", "BAD_REPLACE"),
+  stringsAsFactors = FALSE
+)
+expect_identical(
+  harmonize_terms(dict_cascade, x = "long term and tar", mode = "substring"),
+  "TARGET_A AND BAD_REPLACE"
+)
+
 
 # 3. load_consistent_profiles: min_jury boundaries, distinct juror counting, deduplication, ranking
 small_profiles <- data.frame(
@@ -267,3 +279,24 @@ u_ranks <- unique(full_consistent[, c("taste", "sum_taste", "group")])
 expect_identical(u_ranks$taste[1:3], c("BITTER", "FATTY", "ACID"))
 expect_identical(u_ranks$group, seq_len(nrow(u_ranks)))
 expect_equal(u_ranks$sum_taste[1], 1626.6)
+
+# Verify normalize_panelists = TRUE multiplicative RMS juror scaling
+# jury_1 has values c(1, 4) -> rms_1 = sqrt((1 + 16)/2) = sqrt(8.5)
+# jury_2 has values c(2, 10) -> wait: in consistent (min_jury = 2L), only BITTER is kept:
+# jury_1 has values c(1, 4) -> rms_1 = sqrt(8.5); jury_2 has value c(2) -> rms_2 = 2
+# global_rms = sqrt((1 + 4 + 16)/3) = sqrt(7)
+consistent_norm <- load_consistent_profiles(
+  small_profiles,
+  min_jury = 2L,
+  normalize_panelists = TRUE
+)
+rms_global <- sqrt(mean(c(1, 2, 4)^2))
+rms_j1 <- sqrt(mean(c(1, 4)^2))
+rms_j2 <- sqrt(mean(2^2))
+expected_vals <- c(
+  1 * rms_global / rms_j1,
+  2 * rms_global / rms_j2,
+  4 * rms_global / rms_j1
+)
+expect_equal(consistent_norm$value, expected_vals, tolerance = 1e-12)
+expect_equal(sum(consistent_norm$value^2), sum(c(1, 2, 4)^2), tolerance = 1e-12)

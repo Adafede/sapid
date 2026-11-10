@@ -1,0 +1,144 @@
+---
+title: 1 Sensory analysis & psychophysics
+author:
+  name: Adriano Rutz
+  orcid: 0000-0003-0443-9902
+citation:
+  url: https://adafede.github.io/sapid/vignettes/articles/I-sensory.html
+comments:
+  giscus:
+    repo: adafede/sapid
+  hypothesis:
+    showHighlights: always
+creative_commons: CC BY
+date: today
+format:
+  html:
+    smooth-scroll: true
+google-scholar: true
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+lang: en
+license: CC BY
+opengraph:
+  image:
+    src: https://github.com/adafede/sapid/blob/main/man/figures/logo.svg
+    alt: A Strategy to Analyze Plant Extracts Taste In Depth
+vignette: >
+  %\VignetteIndexEntry{1 Sensory analysis & psychophysics}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library("sapid")
+```
+
+This article demonstrates the sensory harmonization, psychophysical threshold
+modeling, paired modulation testing, and chemically informed tasting workflows
+using the built-in *Swertia chirayita* datasets.
+
+## Vocabulary harmonization & panelist scaling
+
+`harmonize_terms()` orders dictionary patterns by decreasing length and applies
+two-pass sentinel token replacement (`\x01<idx>\x02`) so shorter patterns never
+overwrite substrings inside already-translated terms:
+
+```{r}
+#| label: harmonize-terms
+
+data(dictionary_generic)
+harmonize_terms(
+  dictionary = dictionary_generic,
+  x = c("amer", "acidulé", "métallique"),
+  mode = "word"
+)
+```
+
+`load_consistent_profiles()` retains taste descriptors used by at least
+`min_jury` distinct panelists and optionally applies multiplicative
+root-mean-square (RMS) scaling per juror (`normalize_panelists = TRUE`):
+
+```{r}
+#| label: consistent-profiles
+
+data(profiles)
+consistent_raw <- load_consistent_profiles(
+  profiles,
+  min_jury = 2L,
+  normalize_panelists = FALSE
+)
+consistent_rms <- load_consistent_profiles(
+  profiles,
+  min_jury = 2L,
+  normalize_panelists = TRUE
+)
+head(unique(consistent_rms[, c("taste", "sum_taste", "group")]), 10)
+```
+
+## 3-AFC concentration-response & psychometric threshold
+
+`plot_concentration()` fits a guessing-corrected 3-AFC binomial psychometric
+curve ($P(c) = 1/3 + (2/3)\Lambda(\beta(\log_{10} c - \mu))$) with 95%
+delta-method confidence ribbons and marks the 50% true detection threshold
+($\text{EC}_{50}$ at $P = 2/3$):
+
+```{r}
+#| label: plot-concentration
+#| message: false
+#| warning: false
+
+out_conc <- tempfile(fileext = ".pdf")
+plot_concentration(output = out_conc, afc_m = 3L)
+```
+
+## Chasselas taste modulation (Pratt signed-rank test)
+
+`plot_chasselas_modulation()` evaluates paired before/after wine taste ratings
+around median zero using Pratt's (1959) zero-preserving Wilcoxon signed-rank
+test (`test_method = "pratt"`), retaining zero differences during ranking with
+exact zero- and tie-variance corrections:
+
+```{r}
+#| label: plot-modulation
+#| message: false
+#| warning: false
+
+out_mod <- tempfile(fileext = ".pdf")
+plot_chasselas_modulation(output = out_mod, test_method = "pratt")
+```
+
+## Classical vs. chemically informed tasting
+
+`plot_informed_tasting()` compares classical tasting of the raw extract against
+gravimetrically weighted fraction tasting across all 14 consistent harmonized
+descriptors:
+
+```{r}
+#| label: plot-informed
+#| message: false
+#| warning: false
+
+out_inf <- tempfile(fileext = ".pdf")
+plot_informed_tasting(output = out_inf, normalize_panelists = TRUE)
+```
+
+## Sensory descriptors network
+
+`plot_descriptors_network()` collapses parallel edges into edge weights
+(`weight`) before computing the layout while scaling node sizes by total vertex
+in-strength:
+
+```{r}
+#| label: plot-network
+#| message: false
+#| warning: false
+
+out_net <- tempfile(fileext = ".pdf")
+plot_descriptors_network(output = out_net)
+```

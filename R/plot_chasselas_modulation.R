@@ -1,8 +1,9 @@
 #' Plot Chasselas sensory taste modulation
 #'
 #' Compute before/after rating differences (`delta`) for Chasselas sensory
-#' sessions, evaluate two-sided exact sign tests around median zero, and save
-#' a 2-panel violin/jitter summary figure.
+#' sessions, evaluate two-sided paired tests around median zero using Pratt's
+#' zero-preserving signed-rank test (or exact binomial sign test), and save a
+#' 2-panel violin/jitter summary figure.
 #'
 #' @concept EDAM:topic_3370 Analytical chemistry
 #' @concept EDAM:topic_0092 Data visualisation
@@ -10,6 +11,8 @@
 #' @param input Optional path or `data.frame` of Chasselas ratings (defaults to
 #'   built-in [chasselas]).
 #' @param output Output PDF file path.
+#' @param test_method Paired test method: `"pratt"` (default, Pratt's
+#'   zero-preserving Wilcoxon signed-rank test) or `"sign"` (binomial sign test).
 #'
 #' @return Output file path (`output`).
 #' @export
@@ -20,8 +23,10 @@
 #' }
 plot_chasselas_modulation <- function(
   input = NULL,
-  output = "./data/figures/figure_modulation.pdf"
+  output = "./data/figures/figure_modulation.pdf",
+  test_method = c("pratt", "sign")
 ) {
+  test_method <- match.arg(test_method)
   input_data <- load_dataset_or_file(input, "chasselas")
 
   wide <- stats::reshape(
@@ -62,7 +67,17 @@ plot_chasselas_modulation <- function(
   #   tidytable::summarize(p_value_wilcox = wilcox.test(delta, mu = 0)$p.value)
 
   grp_key <- paste(deltas_3$taste, deltas_3$group, sep = "\r")
-  p_vals <- stats::ave(deltas_3$delta, grp_key, FUN = sign_test_pvalue)
+  test_fn <- if (test_method == "pratt") {
+    pratt_wilcox_pvalue
+  } else {
+    sign_test_pvalue
+  }
+  caption_label <- if (test_method == "pratt") {
+    "* = p-value < 0.05 (Pratt signed-rank test)"
+  } else {
+    "* = p-value < 0.05 (Sign test)"
+  }
+  p_vals <- stats::ave(deltas_3$delta, grp_key, FUN = test_fn)
 
   #  p_values_wilcox <- p_values_wilcox |>
   #    tidytable::mutate(
@@ -119,7 +134,7 @@ plot_chasselas_modulation <- function(
       size = 8,
       vjust = 0
     ) +
-    ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
+    ggplot2::labs(caption = caption_label)
   p_1
 
   p_2 <- deltas_4 |>
@@ -154,7 +169,7 @@ plot_chasselas_modulation <- function(
       size = 8,
       vjust = 0
     ) +
-    ggplot2::labs(caption = "* = p-value < 0.05 (Sign test)")
+    ggplot2::labs(caption = caption_label)
   p_2
 
   .cascade_check_export_dir(dirname(output))

@@ -24,12 +24,16 @@ Character vector with harmonized terms.
 }
 \description{
 Replace terms in a character vector using a dictionary, ordering matches by
-decreasing pattern length with case-insensitive normalization.
+decreasing pattern length with case-insensitive normalization and two-pass
+placeholder protection to prevent cascading overwrites.
 }
 \details{
-For better performance when calling this function repeatedly on many strings,
-pass a pre-loaded dictionary data frame instead of a file path. The function
-uses base R replacement helpers for all modes to avoid an extra dependency.
+Patterns are sorted in strictly decreasing order of character length so that
+multi-word expressions (e.g., \code{"MINERAL AMER"}) are matched before their
+constituent single-word tokens (e.g., \code{"AMER"}). Matched spans are first
+replaced by sentinel tokens (\verb{\\x01<idx>\\x02}) and expanded in a second pass
+so that shorter patterns later in the dictionary cannot accidentally match
+substrings inside already-translated target terms.
 }
 \examples{
 data(dictionary_generic)

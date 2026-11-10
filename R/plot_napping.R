@@ -8,6 +8,15 @@
 #' ([SensoMineR::nappeplot()]), Individual Differences Scaling
 #' ([SensoMineR::indscal()]), and Preference PLS ([FactoMineR::prefpls()]).
 #'
+#' @details
+#' Following standard Napping + Ultra-Flash Profiling methodology (Pagès, 2005),
+#' the 2D tablecloth coordinates of each panelist are analyzed as active
+#' unstandardized continuous blocks (`type = "c"`), while the descriptor word
+#' contingency table is projected as a supplementary standardized block
+#' (`type = "s"`, `num.group.sup = n_coord_groups + 1L`). Hierarchical
+#' clustering on principal components ([FactoMineR::HCPC()]) uses Ward's
+#' minimum-variance criterion (`method = "ward"`) to avoid centroid reversals.
+#'
 #' @concept EDAM:topic_3370 Analytical chemistry
 #' @concept EDAM:topic_2269 Statistics and probability
 #' @concept EDAM:operation_3432 Clustering
@@ -179,21 +188,14 @@ plot_napping <- function(
   # )
   ###
 
-  ##### MFA with descriptors assessment   ####
+  ##### MFA with supplementary descriptor word frequencies ####
+  n_coord_groups <- ncol(df_coord) / 2
   close_extra_devs()
   res_nap <- FactoMineR::MFA(
     base = nap_tot,
-    group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
-    type = c(rep("c", ncol(df_coord) / 2), "s"),
-    axes = c(1, 2)
-  )
-
-  ##### MFA with word frequencies   ####
-  close_extra_devs()
-  FactoMineR::MFA(
-    base = nap_tot,
-    group = c(rep(2, ncol(df_coord) / 2), ncol(df_words_cleaned)),
-    type = c(rep("c", ncol(df_coord) / 2), "f"),
+    group = c(rep(2, n_coord_groups), ncol(df_words_cleaned)),
+    type = c(rep("c", n_coord_groups), "s"),
+    num.group.sup = n_coord_groups + 1L,
     ncp = Inf,
     axes = c(1, 2)
   )
@@ -219,7 +221,7 @@ plot_napping <- function(
     consol = TRUE,
     iter.max = 100,
     metric = "euclidean",
-    method = "centroid",
+    method = "ward",
     proba = 0.05
   )
 

@@ -4,6 +4,13 @@
 #' taste terms, and harmonized taste descriptors for descriptors used by at
 #' least two panelists.
 #'
+#' @details
+#' Duplicate parallel edges (when multiple panelists assign the same descriptor
+#' to the same fraction, or when multiple original terms map to the same
+#' harmonized taste) are collapsed into a single weighted directed graph
+#' (`weight` attribute) prior to Fruchterman--Reingold layout computation, while
+#' preserving total vertex in-strength (`size`) for node scaling.
+#'
 #' @concept EDAM:topic_0092 Data visualisation
 #' @concept EDAM:operation_3925 Network visualisation
 #' @concept EDAM:operation_0337 Visualisation
@@ -43,7 +50,7 @@ plot_descriptors_network <- function(
     drop = FALSE
   ]
 
-  table_edges <- rbind(
+  table_edges_raw <- rbind(
     data.frame(
       from = table_descriptors$fraction,
       to = table_descriptors$taste_original,
@@ -56,12 +63,22 @@ plot_descriptors_network <- function(
     )
   )
 
-  to_counts <- table(table_edges$to)
+  to_counts <- table(table_edges_raw$to)
   table_edges_size <- data.frame(
     name = names(to_counts),
     size = as.numeric(to_counts),
     stringsAsFactors = FALSE
   )
+
+  edge_key <- paste(table_edges_raw$from, table_edges_raw$to, sep = "\r")
+  edge_weights <- stats::ave(
+    rep(1, nrow(table_edges_raw)),
+    edge_key,
+    FUN = sum
+  )
+  table_edges <- table_edges_raw[!duplicated(edge_key), , drop = FALSE]
+  table_edges$weight <- as.numeric(edge_weights[!duplicated(edge_key)])
+  rownames(table_edges) <- NULL
 
   from_only <- setdiff(unique(table_edges$from), table_edges_size$name)
   vertices_raw <- rbind(
@@ -121,7 +138,13 @@ plot_descriptors_network <- function(
   )
 
   plot <- ggraph::ggraph(mygraph) +
-    ggraph::geom_edge_arc(strength = 0.2, width = 0.5, alpha = 0.15) +
+    ggraph::geom_edge_arc(
+      ggplot2::aes(edge_alpha = weight),
+      strength = 0.2,
+      width = 0.5,
+      show.legend = FALSE
+    ) +
+    ggraph::scale_edge_alpha(range = c(0.15, 0.7)) +
     ggraph::geom_node_point(
       ggplot2::aes(size = size, color = color),
       show.legend = FALSE

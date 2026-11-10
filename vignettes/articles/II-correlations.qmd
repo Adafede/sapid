@@ -1,0 +1,149 @@
+---
+title: 2 Chemical profiling & ion-taste correlations
+author:
+  name: Adriano Rutz
+  orcid: 0000-0003-0443-9902
+citation:
+  url: https://adafede.github.io/sapid/vignettes/articles/II-correlations.html
+comments:
+  giscus:
+    repo: adafede/sapid
+  hypothesis:
+    showHighlights: always
+creative_commons: CC BY
+date: today
+format:
+  html:
+    smooth-scroll: true
+google-scholar: true
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+lang: en
+license: CC BY
+opengraph:
+  image:
+    src: https://github.com/adafede/sapid/blob/main/man/figures/logo.svg
+    alt: A Strategy to Analyze Plant Extracts Taste In Depth
+vignette: >
+  %\VignetteIndexEntry{2 Chemical profiling & ion-taste correlations}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library("sapid")
+```
+
+This article covers 1D proton NMR spectral clustering, LC-MS/CAD chemical
+profiling, and rolling-window ion-taste correlation analysis.
+
+## 1D proton NMR clustering
+
+`cluster_nmr()` processes Bruker 1D proton NMR spectra across fractions with
+four chemometric steps:
+
+1. **Pre-normalization solvent exclusion**: excludes `range_exclude_area` (e.g.,
+   residual DMSO-$d_6$ at 2.5--2.6 ppm) prior to `AlpsNMR::nmr_normalize()`.
+2. **Peak position merging**: merges detected peak positions closer than
+   `peak_width_ppm / 2` before integration.
+3. **Zero-preserving Hellinger + Ward.D2 clustering**: sets sub-threshold areas
+   (`<= area_min`) to `0`, applies the square-root Hellinger transformation, and
+   clusters with Euclidean distance (`dist_method = "euclidean"`) and `ward.D2`
+   linkage.
+4. **Leaf-to-fraction alignment**: matches sorted dendrogram leaf colors back to
+   fraction labels via `labels(dend)`.
+
+```r
+cluster_nmr(
+  nmr_dir = "./data/10043",
+  output_figure = "./data/figures/figure_nmr.pdf",
+  output_groups = "./inst/extdata/groups.tsv",
+  dist_method = "euclidean"
+)
+```
+
+## Rolling-window ion-taste correlations
+
+`correlate_ion_taste_intensities()` correlates LC-MS feature peak areas with
+sensory taste intensities across contiguous fraction windows (`widths = 5:9`):
+
+- **Complete `fraction x taste` grid (`complete_grid = TRUE`)**: evaluated
+  fractions where a taste was not reported receive the baseline imputed
+  intensity (`imputation_factor * min_v`) rather than dropping out of sliding
+  windows.
+- **Normality-guided correlation**: uses Pearson's $r$ when both vectors pass
+  Shapiro-Wilk normality ($p > 0.05$) and Kendall's $\tau$ otherwise.
+- **Greiner's relation (`greiner_kendall = TRUE`)**: maps Kendall's $\tau$ onto
+  the Pearson-equivalent scale via $r_{\text{eq}} = \sin(\frac{\pi}{2}\tau)$.
+- **Configurable FDR scope (`fdr_scope`)**: applies Benjamini-Hochberg
+  adjustment per `"window"`, per `"taste"`, or `"global"`.
+
+```{r}
+#| label: correlate-synthetic
+#| message: false
+#| warning: false
+
+ions_demo <- data.frame(
+  id = c(101L, 102L),
+  rt = c(4.2, 4.8),
+  mz = c(359.13, 585.20),
+  `datafile:210619_AR_01_M_31_01.mzML:area` = c(1000, 500),
+  `datafile:210619_AR_02_M_32_01.mzML:area` = c(2500, 1200),
+  `datafile:210619_AR_03_M_33_01.mzML:area` = c(5000, 3100),
+  `datafile:210619_AR_04_M_34_01.mzML:area` = c(8200, 6400),
+  `datafile:210619_AR_05_M_35_01.mzML:area` = c(4100, 2900),
+  check.names = FALSE
+)
+
+tastes_demo <- data.frame(
+  fraction = rep(paste0("fraction_", 31:35), each = 2L),
+  session = "session_05",
+  jury = rep(c("jury_01", "jury_02"), 5L),
+  taste_original = "AMER",
+  taste_harmonized = "BITTER",
+  value = c(2, 3, 4, 4, 6, 7, 9, 10, 5, 5),
+  stringsAsFactors = FALSE
+)
+
+corr_file <- tempfile(fileext = ".tsv")
+correlate_ion_taste_intensities(
+  input_ions = ions_demo,
+  input_tastes = tastes_demo,
+  output = corr_file,
+  widths = 5L,
+  greiner_kendall = TRUE,
+  fdr_scope = "window"
+)
+read.delim(corr_file)
+```
+
+## Candidate ranking & isomer preservation (`plot_correlations()`)
+
+`plot_correlations()` combines correlation results with TIMA structural
+annotations:
+
+- **Local RT-window deduplication (`rt_window = 0.5` min)**: collapses
+  co-eluting adducts and in-source fragments sharing a 2D InChIKey within each
+  `0.5` min bin while preserving distinct chromatographic isomers (e.g.,
+  retaining Sweroside `id_ion = 3640` in bitter fractions `34-39`).
+- **Sample-size-adjusted Fisher-$z$ desirability (`score_mixed`)**:
+  $$
+    \text{score\_mixed}
+    = \text{sign}(r_{\text{eff}})\,\tanh\!\left( \frac{1}{3}\,\text{atanh}(|r_{\text{eff}}|)\sqrt{\max(1, n_{\text{win}} - 3)} \right)
+      \cdot S_{\text{TIMA,conf}}
+  $$
+
+```r
+plot_correlations(
+  input_correlations = "./data/correlations.tsv",
+  input_ions = "./data/fractions_mzmine/fractions.csv",
+  annotation_path_fractions = "./data/processed/241217_130815_fractions/fractions_results.tsv",
+  rt_window = 0.5,
+  greiner_kendall = TRUE
+)
+```

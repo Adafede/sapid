@@ -4,6 +4,13 @@
 #' taste terms using specific and generic dictionaries, correct out-of-range
 #' scale export artifacts, and write the combined TSV table.
 #'
+#' @details
+#' Out-of-range FIZZ export values (`value > 10`) are rescaled by a factor of
+#' 10 *prior* to deduplicating identical rating vectors across repeated export
+#' columns (`dedup_key`), and synonymous descriptors rated by the same panelist
+#' on the same sample (`ProductName`, `CJ`, `newName`) are aggregated via
+#' `max(value, na.rm = TRUE)` rather than arbitrary first-column selection.
+#'
 #' @include get_session_info.R
 #' @include load_session.R
 #' @include harmonize_terms.R
@@ -74,14 +81,6 @@ prepare_profiles <- function(
     x = expanded$name_21
   )
 
-  dedup_key <- paste(
-    expanded$ProductName,
-    expanded$CJ,
-    expanded$newName,
-    sep = "\r"
-  )
-  expanded <- expanded[!duplicated(dedup_key), , drop = FALSE]
-
   ## problem due to FIZZ export
   ## replace by the median of correct values or divide by 10
   pn_key <- paste(expanded$ProductName, expanded$name, sep = "\r")
@@ -96,6 +95,21 @@ prepare_profiles <- function(
   scaled_val <- expanded$value / 10
   replacement_val <- ifelse(!is.na(scaled_val), scaled_val, med_fallback)
   expanded$value <- ifelse(expanded$value > 10, replacement_val, expanded$value)
+
+  dedup_key <- paste(
+    expanded$ProductName,
+    expanded$CJ,
+    expanded$newName,
+    sep = "\r"
+  )
+  expanded$value <- stats::ave(
+    expanded$value,
+    dedup_key,
+    FUN = function(v) {
+      if (all(is.na(v))) NA_real_ else max(v, na.rm = TRUE)
+    }
+  )
+  expanded <- expanded[!duplicated(dedup_key), , drop = FALSE]
 
   ## Due to dilutions
   ## Session 03 was diluted 50 times

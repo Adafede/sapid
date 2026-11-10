@@ -6,7 +6,8 @@
 \usage{
 plot_concentration(
   input = NULL,
-  output = "./data/figures/figure_raw_extract.pdf"
+  output = "./data/figures/figure_raw_extract.pdf",
+  afc_m = 3L
 )
 }
 \arguments{
@@ -14,13 +15,19 @@ plot_concentration(
 (defaults to built-in \link{concentration_afc}).}
 
 \item{output}{Output PDF file path.}
+
+\item{afc_m}{Integer number of forced-choice alternatives (default \code{3L} for
+3-AFC, with chance level \eqn{\gamma = 1/3} and threshold at
+\eqn{P = 2/3}).}
 }
 \value{
 Output file path (\code{output}).
 }
 \description{
-Visualize perceived taste intensity, AFC psychometric detection curve, and
-raw/weighted descriptor counts across tested extract concentrations.
+Visualize perceived taste intensity, a guessing-corrected $m$-AFC
+psychometric binomial maximum-likelihood detection curve with 95\% confidence
+interval and estimated detection threshold, and raw/weighted descriptor
+counts across tested extract concentrations.
 }
 \examples{
 \donttest{

@@ -1,7 +1,8 @@
 #' Load consistent sensory profiles
 #'
 #' Filter sensory profile ratings to retain only taste descriptors used by at
-#' least `min_jury` distinct panelists, and compute per-fraction and per-taste
+#' least `min_jury` distinct panelists, optionally applying root-mean-square
+#' (RMS) panelist scale normalization, and compute per-fraction and per-taste
 #' summed intensities.
 #'
 #' @concept EDAM:topic_3370 Analytical chemistry
@@ -10,11 +11,17 @@
 #' @param input Input `data.frame` or file path to a sensory profiles table.
 #' @param min_jury Integer minimum number of distinct jurors required to retain
 #'   a harmonized taste descriptor (default `2L`).
+#' @param normalize_panelists Logical; if `TRUE`, apply multiplicative RMS
+#'   scaling per juror (default `FALSE`).
 #'
 #' @details
 #' This function filters sensory data to keep only taste descriptors that appear
 #' consistently across at least `min_jury` panelists. It removes descriptors
-#' that are used by only one panelist (potentially idiosyncratic terms).
+#' that are used by only one panelist (potentially idiosyncratic terms). When
+#' `normalize_panelists = TRUE`, each juror's ratings \eqn{y_{ij}} are scaled by
+#' \eqn{s_{\text{global}} / s_j}, where
+#' \eqn{s_j = \sqrt{\frac{1}{N_j}\sum_i y_{ij}^2}}
+#' is the juror's root-mean-square intensity.
 #'
 #' @return A `data.frame` with consistent sensory profiles and summary columns
 #'   `sum`, `sum_taste`, and `group`.
@@ -23,7 +30,11 @@
 #' data(profiles)
 #' consistent <- load_consistent_profiles(profiles, min_jury = 2L)
 #' head(consistent)
-load_consistent_profiles <- function(input, min_jury = 2L) {
+load_consistent_profiles <- function(
+  input,
+  min_jury = 2L,
+  normalize_panelists = FALSE
+) {
   # Load data if file path given, otherwise use data frame
   profiles_df <- if (is.character(input)) {
     data.table::fread(input, data.table = FALSE)
@@ -57,6 +68,21 @@ load_consistent_profiles <- function(input, min_jury = 2L) {
     out$sum_taste <- numeric(0)
     out$group <- integer(0)
     return(out)
+  }
+
+  out$value <- as.numeric(out$value)
+  if (normalize_panelists) {
+    pos_vals <- out$value[!is.na(out$value) & out$value > 0]
+    global_rms <- if (length(pos_vals) > 0L) sqrt(mean(pos_vals^2)) else 1
+    jury_rms <- stats::ave(
+      out$value,
+      out$jury,
+      FUN = function(v) {
+        vp <- v[!is.na(v) & v > 0]
+        if (length(vp) == 0L) global_rms else sqrt(mean(vp^2))
+      }
+    )
+    out$value <- out$value * (global_rms / jury_rms)
   }
 
   frac_taste_key <- paste(out$fraction, out$taste, sep = "\r")

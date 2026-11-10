@@ -6,7 +6,8 @@
 \usage{
 plot_chasselas_modulation(
   input = NULL,
-  output = "./data/figures/figure_modulation.pdf"
+  output = "./data/figures/figure_modulation.pdf",
+  test_method = c("pratt", "sign")
 )
 }
 \arguments{
@@ -14,14 +15,18 @@ plot_chasselas_modulation(
 built-in \link{chasselas}).}
 
 \item{output}{Output PDF file path.}
+
+\item{test_method}{Paired test method: \code{"pratt"} (default, Pratt's
+zero-preserving Wilcoxon signed-rank test) or \code{"sign"} (binomial sign test).}
 }
 \value{
 Output file path (\code{output}).
 }
 \description{
 Compute before/after rating differences (\code{delta}) for Chasselas sensory
-sessions, evaluate two-sided exact sign tests around median zero, and save
-a 2-panel violin/jitter summary figure.
+sessions, evaluate two-sided paired tests around median zero using Pratt's
+zero-preserving signed-rank test (or exact binomial sign test), and save a
+2-panel violin/jitter summary figure.
 }
 \examples{
 \donttest{

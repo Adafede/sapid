@@ -11,7 +11,11 @@ correlate_ion_taste_intensities(
   min_jury = 2L,
   min_area_ion = 1L,
   imputation_factor = 0.5,
-  widths = 5:9
+  widths = 5:9,
+  complete_grid = TRUE,
+  normalize_panelists = FALSE,
+  greiner_kendall = FALSE,
+  fdr_scope = c("window", "taste", "global")
 )
 }
 \arguments{
@@ -33,6 +37,20 @@ observed intensity when imputing missing values (default \code{0.5}).}
 
 \item{widths}{Integer vector of rolling fraction window widths
 (default \code{5:9}).}
+
+\item{complete_grid}{Logical; if \code{TRUE} (default), complete the
+\verb{fraction x taste} grid across evaluated fractions using baseline
+imputation (\code{imputation_factor * min_v}).}
+
+\item{normalize_panelists}{Logical; if \code{TRUE}, apply RMS scale normalization
+per juror before summing (default \code{FALSE}).}
+
+\item{greiner_kendall}{Logical; if \code{TRUE}, map Kendall's \eqn{\tau} to
+Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)}
+(default \code{FALSE}).}
+
+\item{fdr_scope}{Scope of Benjamini-Hochberg FDR adjustment: \code{"window"}
+(default), \code{"taste"}, or \code{"global"}.}
 }
 \value{
 Path to the written \code{output} TSV file.

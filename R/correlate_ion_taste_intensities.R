@@ -21,6 +21,16 @@
 #'   observed intensity when imputing missing values (default `0.5`).
 #' @param widths Integer vector of rolling fraction window widths
 #'   (default `5:9`).
+#' @param complete_grid Logical; if `TRUE` (default), complete the
+#'   `fraction x taste` grid across evaluated fractions using baseline
+#'   imputation (`imputation_factor * min_v`).
+#' @param normalize_panelists Logical; if `TRUE`, apply RMS scale normalization
+#'   per juror before summing (default `FALSE`).
+#' @param greiner_kendall Logical; if `TRUE`, map Kendall's \eqn{\tau} to
+#'   Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)}
+#'   (default `FALSE`).
+#' @param fdr_scope Scope of Benjamini-Hochberg FDR adjustment: `"window"`
+#'   (default), `"taste"`, or `"global"`.
 #'
 #' @return Path to the written `output` TSV file.
 #' @export
@@ -48,8 +58,13 @@ correlate_ion_taste_intensities <- function(
   min_jury = 2L,
   min_area_ion = 1L,
   imputation_factor = 0.5,
-  widths = 5:9
+  widths = 5:9,
+  complete_grid = TRUE,
+  normalize_panelists = FALSE,
+  greiner_kendall = FALSE,
+  fdr_scope = c("window", "taste", "global")
 ) {
+  fdr_scope <- match.arg(fdr_scope)
   min_width <- min(widths)
   # max_width <- widths |>
   #   max()
@@ -66,7 +81,9 @@ correlate_ion_taste_intensities <- function(
   df_taste_intensities <- prepare_taste_intensities_df(
     input_tastes = input_tastes,
     min_jury = min_jury,
-    imputation_factor = imputation_factor
+    imputation_factor = imputation_factor,
+    complete_grid = complete_grid,
+    normalize_panelists = normalize_panelists
   )
 
   fractions <- unique(df_ion_intensities$fraction)
@@ -289,7 +306,7 @@ correlate_ion_taste_intensities <- function(
           taste_vec,
           method = "kendall"
         ))
-        cor_v[is_k] <- r_k
+        cor_v[is_k] <- if (greiner_kendall) sin(pi / 2 * r_k) else r_k
         k_idx <- which(is_k)
         y_ts <- tie_stats_vec(taste_vec)
         y_ties <- y_ts[1L] > 0
@@ -334,7 +351,11 @@ correlate_ion_taste_intensities <- function(
         fractions = paste(fractions_list, collapse = " "),
         correlation = cor_v,
         p_value = pval_v,
-        p_adjusted = stats::p.adjust(pval_v, method = "BH"),
+        p_adjusted = if (fdr_scope == "window") {
+          stats::p.adjust(pval_v, method = "BH")
+        } else {
+          pval_v
+        },
         method = meth_v,
         stringsAsFactors = FALSE
       )
@@ -344,10 +365,14 @@ correlate_ion_taste_intensities <- function(
     if (length(non_null) == 0L) {
       return(NULL)
     }
-    as.data.frame(
+    taste_df <- as.data.frame(
       data.table::rbindlist(non_null),
       stringsAsFactors = FALSE
     )
+    if (fdr_scope == "taste") {
+      taste_df$p_adjusted <- stats::p.adjust(taste_df$p_value, method = "BH")
+    }
+    taste_df
   }
 
   all_corrs <- Filter(Negate(is.null), lapply(tastes, correlate_intensities))
@@ -364,6 +389,9 @@ correlate_ion_taste_intensities <- function(
     )
   } else {
     corr_dt <- data.table::rbindlist(all_corrs)
+    if (fdr_scope == "global") {
+      corr_dt$p_adjusted <- stats::p.adjust(corr_dt$p_value, method = "BH")
+    }
     corr_dt <- unique(corr_dt[!is.na(corr_dt$p_adjusted)])
     correlations <- as.data.frame(corr_dt, stringsAsFactors = FALSE)
   }

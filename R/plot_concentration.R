@@ -1,7 +1,9 @@
 #' Plot concentration-response and Ascending Forced Choice (AFC) results
 #'
-#' Visualize perceived taste intensity, AFC psychometric detection curve, and
-#' raw/weighted descriptor counts across tested extract concentrations.
+#' Visualize perceived taste intensity, a guessing-corrected $m$-AFC
+#' psychometric binomial maximum-likelihood detection curve with 95% confidence
+#' interval and estimated detection threshold, and raw/weighted descriptor
+#' counts across tested extract concentrations.
 #'
 #' @concept EDAM:topic_3370 Analytical chemistry
 #' @concept EDAM:topic_0092 Data visualisation
@@ -9,6 +11,9 @@
 #' @param input Optional path or `data.frame` of concentration AFC data
 #'   (defaults to built-in [concentration_afc]).
 #' @param output Output PDF file path.
+#' @param afc_m Integer number of forced-choice alternatives (default `3L` for
+#'   3-AFC, with chance level \eqn{\gamma = 1/3} and threshold at
+#'   \eqn{P = 2/3}).
 #'
 #' @return Output file path (`output`).
 #' @export
@@ -19,20 +24,37 @@
 #' }
 plot_concentration <- function(
   input = NULL,
-  output = "./data/figures/figure_raw_extract.pdf"
+  output = "./data/figures/figure_raw_extract.pdf",
+  afc_m = 3L
 ) {
   message("Loading file...\n")
   prepared <- load_dataset_or_file(input, "concentration_afc")
 
   prepared$correct_percent <- prepared$afc_correct / prepared$afc_total
+  raw_panel_key <- paste(
+    prepared$concentration,
+    prepared$jury,
+    prepared$value,
+    sep = "\r"
+  )
+  panel_ratings <- prepared[
+    !duplicated(raw_panel_key) & !is.na(prepared$value),
+    ,
+    drop = FALSE
+  ]
+
   ct_key <- paste(prepared$concentration, prepared$taste, sep = "\r")
   prepared$n <- stats::ave(prepared$value, ct_key, FUN = length)
-  prepared$value <- stats::ave(prepared$value, ct_key, FUN = mean)
+  prepared$value <- stats::ave(
+    prepared$value,
+    ct_key,
+    FUN = function(v) mean(v, na.rm = TRUE)
+  )
   prepared$m <- prepared$n * prepared$value
 
   dedup_key <- paste(
     prepared$concentration,
-    prepared$jury,
+    prepared$taste,
     prepared$value,
     prepared$n,
     prepared$m,
@@ -45,9 +67,22 @@ plot_concentration <- function(
   ]
   counted <- unique(counted[order(counted$m, counted$n), , drop = FALSE])
 
+  afc_unique <- unique(prepared[,
+    c("concentration", "afc_correct", "afc_total", "correct_percent"),
+    drop = FALSE
+  ])
+  afc_unique$conc_num <- as.numeric(afc_unique$concentration)
+  afc_unique <- afc_unique[order(afc_unique$conc_num), , drop = FALSE]
+  afc_fit <- fit_afc_psychometric(
+    conc = afc_unique$conc_num,
+    k = afc_unique$afc_correct,
+    n = afc_unique$afc_total,
+    m = afc_m
+  )
+
   message("visualizing ... \n")
   message("... intensity and p-value per concentration \n")
-  boxes <- counted |>
+  boxes <- panel_ratings |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = as.numeric(concentration),
@@ -76,25 +111,32 @@ plot_concentration <- function(
     )
   boxes
 
-  scurve <- counted |>
+  scurve <- afc_unique |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = as.numeric(concentration),
-        y = correct_percent,
-        color = as.numeric(concentration)
+        x = conc_num,
+        y = correct_percent
       )
     ) +
-    ggplot2::geom_point() +
+    ggplot2::geom_ribbon(
+      data = afc_fit$curve,
+      mapping = ggplot2::aes(x = x, ymin = ymin, ymax = ymax),
+      inherit.aes = FALSE,
+      fill = "#74c476",
+      alpha = 0.2
+    ) +
+    ggplot2::geom_line(
+      data = afc_fit$curve,
+      mapping = ggplot2::aes(x = x, y = y),
+      inherit.aes = FALSE,
+      color = "#00441b",
+      linewidth = 0.8
+    ) +
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(color = conc_num),
+      size = 2.5
+    ) +
     ggplot2::scale_x_log10() +
-    geom_sigmoid(
-      data = counted,
-      mapping = ggplot2::aes(
-        x = min(as.numeric(concentration)),
-        xend = max(as.numeric(concentration)),
-        y = min(correct_percent),
-        yend = max(correct_percent)
-      )
-    ) +
     ggplot2::scale_color_gradient2(
       low = "#f7fcf5",
       mid = "#74c476",
@@ -105,12 +147,17 @@ plot_concentration <- function(
     ggplot2::ylim(c(0, 1)) +
     ggplot2::theme_minimal() +
     ggplot2::geom_hline(
-      yintercept = 0.5,
+      yintercept = afc_fit$gamma,
+      linetype = "dotted",
+      color = "#767676"
+    ) +
+    ggplot2::geom_hline(
+      yintercept = afc_fit$p_threshold,
       linetype = "dashed",
       color = "#19597e"
     ) +
     ggplot2::geom_vline(
-      xintercept = 0.12,
+      xintercept = afc_fit$ec50,
       linetype = "dashed",
       color = "#19597e"
     ) +

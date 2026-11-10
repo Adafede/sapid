@@ -5,6 +5,8 @@ ns <- asNamespace("sapid")
 fct_rev_base <- get("fct_rev_base", envir = ns)
 fct_reorder_base <- get("fct_reorder_base", envir = ns)
 sign_test_pvalue <- get("sign_test_pvalue", envir = ns)
+pratt_wilcox_pvalue <- get("pratt_wilcox_pvalue", envir = ns)
+fit_afc_psychometric <- get("fit_afc_psychometric", envir = ns)
 unescape_xml <- get("unescape_xml", envir = ns)
 read_xlsx_base <- get("read_xlsx_base", envir = ns)
 load_dataset_or_file <- get("load_dataset_or_file", envir = ns)
@@ -420,3 +422,82 @@ if ("candidate_structure_inchikey_connectivity_layer" %in% names(ann_sub)) {
 kept <- cascade_keep_best(ann_sub)
 expect_true(is.data.frame(kept))
 expect_true(nrow(kept) >= 1L)
+
+# 13. pratt_wilcox_pvalue: Pratt (1959) zero-preserving signed-rank test
+expect_identical(pratt_wilcox_pvalue(c(NA_real_, NA_real_)), 1)
+expect_identical(pratt_wilcox_pvalue(numeric(0)), 1)
+expect_identical(pratt_wilcox_pvalue(c(5, 5, 5), md = 5), 1)
+expect_identical(pratt_wilcox_pvalue(c(0, 0, NA_real_), md = 0), 1)
+
+# Hand-calculated Pratt test with n0 = 2 zeros and 4 non-zero diffs:
+# d = c(0, 0, 1, 2, 2, -4) -> |d| = c(0, 0, 1, 2, 2, 4)
+# Ranks of |d| = c(1.5, 1.5, 3, 4.5, 4.5, 6)
+# Positive ranks: 3 + 4.5 + 4.5 = 12; Negative ranks: 6
+# n = 6, n0 = 2, tie group of size 2 among non-zeros -> tie_term = 2^3 - 2 = 6
+# mu_w = (6*7 - 2*3) / 4 = 9
+# var_w = (6*7*13 - 2*3*5 - 0.5*6) / 24 = (546 - 30 - 3) / 24 = 513 / 24 = 21.375
+# z = (max(|12 - 9| - 0.5, 0)) / sqrt(21.375) = 2.5 / sqrt(21.375)
+d_pratt <- c(0, 0, 1, 2, 2, -4)
+expected_p_pratt <- 2 * stats::pnorm(2.5 / sqrt(513 / 24), lower.tail = FALSE)
+expect_equal(
+  pratt_wilcox_pvalue(d_pratt, md = 0),
+  expected_p_pratt,
+  tolerance = 1e-12
+)
+
+# 14. fit_afc_psychometric: 3-AFC binomial psychometric MLE with guessing asymptote 1/3
+afc_fit <- fit_afc_psychometric(
+  conc = c(0.16, 0.40, 1.00, 2.50, 6.25),
+  k = c(4, 5, 9, 10, 10),
+  n = c(11, 11, 11, 10, 10),
+  m = 3L,
+  lambda = 0.05,
+  n_grid = 50L
+)
+expect_identical(afc_fit$gamma, 1 / 3)
+expect_true(
+  is.finite(afc_fit$ec50) && afc_fit$ec50 > 0.16 && afc_fit$ec50 < 2.50
+)
+expect_true(is.finite(afc_fit$slope) && afc_fit$slope > 0)
+expect_identical(nrow(afc_fit$curve), 50L)
+expect_true(all(afc_fit$curve$y >= 1 / 3 & afc_fit$curve$y <= 1))
+expect_true(all(afc_fit$curve$ymin >= 1 / 3 & afc_fit$curve$ymax <= 1))
+expect_true(all(diff(afc_fit$curve$y) > 0))
+# At x = log10(ec50), prob = (1 + gamma)/2 = 2/3
+p_at_ec50 <- (1 / 3) + (2 / 3) * stats::plogis(0)
+expect_equal(p_at_ec50, 2 / 3, tolerance = 1e-12)
+
+# 15. prepare_taste_intensities_df: complete_grid = TRUE & normalize_panelists = TRUE
+tastes_grid_in <- data.frame(
+  fraction = c("fraction_01", "fraction_01", "fraction_02", "fraction_02"),
+  session = rep("session_01", 4),
+  jury = c("jury_01", "jury_02", "jury_01", "jury_02"),
+  taste_original = c("AMER", "AMER", "ACIDE", "ACIDE"),
+  taste_harmonized = c("BITTER", "BITTER", "ACID", "ACID"),
+  value = c(2, 6, 4, 8),
+  stringsAsFactors = FALSE
+)
+# min_v = 2, baseline = 0.25 * 2 = 0.5
+# Without complete_grid: 2 rows (BITTER in frac 1, ACID in frac 2)
+# With complete_grid: 4 rows (both BITTER and ACID in frac 1 and frac 2, missing imputed to 0.5)
+res_grid <- prepare_taste_intensities_df(
+  tastes_grid_in,
+  min_jury = 2L,
+  imputation_factor = 0.25,
+  complete_grid = TRUE
+)
+expect_identical(nrow(res_grid), 4L)
+expect_equal(
+  res_grid$intensity_taste[
+    res_grid$fraction == 2L & res_grid$id_taste == "BITTER"
+  ],
+  0.5,
+  tolerance = 1e-12
+)
+expect_equal(
+  res_grid$intensity_taste[
+    res_grid$fraction == 1L & res_grid$id_taste == "ACID"
+  ],
+  0.5,
+  tolerance = 1e-12
+)

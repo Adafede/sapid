@@ -1,9 +1,34 @@
 #' Cluster proton NMR spectra of fractions
 #'
-#' Load Bruker 1D proton NMR experiments, autophase, interpolate, integrate
-#' detected peak positions, cluster fractions by Canberra distance with
-#' Ward's hierarchical linkage, and export a dendrogram-aligned spectral figure
-#' and cluster group table.
+#' Load Bruker 1D proton NMR experiments, autophase, interpolate, exclude
+#' solvent/artifact regions before total-area normalization, merge overlapping
+#' detected peak positions within `peak_width_ppm / 2`, integrate peaks,
+#' cluster fractions using Hellinger (Euclidean on square-root areas) or
+#' Canberra distance with Ward's minimum-variance hierarchical linkage
+#' (`ward.D2`), and export a dendrogram-aligned spectral figure and cluster
+#' group table.
+#'
+#' @details
+#' Four chemometric refinements are applied:
+#' \enumerate{
+#'   \item **Pre-normalization solvent exclusion**: `range_exclude_area` (e.g.,
+#'     residual DMSO-d6 at 2.5--2.6 ppm) is excluded prior to
+#'     `AlpsNMR::nmr_normalize()` so that solvent peak fluctuations do not
+#'     distort total-area normalization across fractions.
+#'   \item **Non-overlapping peak integration windows**: Detected peak positions
+#'     closer than `peak_width_ppm / 2` are merged via single-linkage grouping
+#'     to their mean chemical shift before integration, preventing double
+#'     counting of multiplet splittings.
+#'   \item **Zero-preserving Hellinger/Ward.D2 clustering**: Sub-threshold peak
+#'     areas (`<= area_min`) are set to `0` (not `NA`) prior to the Hellinger
+#'     square-root transformation so that absent peaks contribute well-defined
+#'     zero coordinates compatible with Euclidean/Hellinger and Ward.D2
+#'     minimum-variance geometry.
+#'   \item **Dendrogram leaf-to-fraction alignment**: After sorting the
+#'     dendrogram (`sort(dend)`), leaf colors (`lab.col`) are matched back to
+#'     `frac_short` via `labels(dend)` so each fraction receives its true
+#'     cluster color.
+#' }
 #'
 #' @include colors.R
 #' @concept EDAM:topic_0593 NMR
@@ -25,9 +50,11 @@
 #' @param ppm_max Maximum chemical shift in ppm (default `14.85`).
 #' @param area_min Minimum integrated peak area threshold (default `0`).
 #' @param range_exclude_area Numeric length-2 ppm range excluded from
-#'   clustering.
+#'   normalization and clustering.
 #' @param range_without_peaks Numeric length-2 baseline noise ppm range.
 #' @param ylim Numeric length-2 y-axis limits for spectral traces.
+#' @param dist_method Distance metric on square-root-transformed peak areas:
+#'   `"euclidean"` (default, Hellinger distance) or `"canberra"`.
 #'
 #' @return Named list with elements `figure` and `groups`.
 #' @export
@@ -105,8 +132,10 @@ cluster_nmr <- function(
   area_min = 0,
   range_exclude_area = c(2.5, 2.6),
   range_without_peaks = c(0, 0.4),
-  ylim = c(0, 5E10)
+  ylim = c(0, 5E10),
+  dist_method = c("euclidean", "canberra")
 ) {
+  dist_method <- match.arg(dist_method)
   dirnames <- nmr_dir |>
     dir(
       pattern = "proton_\\d",
@@ -115,15 +144,9 @@ cluster_nmr <- function(
       include.dirs = TRUE
     )
   experiments <- c(experiment_raw, experiments_fractions, experiment_ref)
-  # experiments_subset <- c(
-  #   experiment_raw,
-  #   sample(x = experiments_fractions, size = 8),
-  #   experiment_ref
-  # )
   regions_to_exclude <- list(
     lower = c(-Inf, ppm_min),
-    # dmso = c(2.3, 2.6),
-    # water = c(3.23, 3.53),
+    exclude_area = range_exclude_area,
     upper = c(ppm_max, Inf)
   )
 
@@ -197,10 +220,19 @@ cluster_nmr <- function(
     AlpsNMR::filter(NMRExperiment %in% experiments_fractions) |>
     AlpsNMR::nmr_normalize()
 
+  raw_ppm <- sort(unique(as.numeric(peak_list_initial$ppm)))
+  raw_ppm <- raw_ppm[!is.na(raw_ppm)]
+  if (length(raw_ppm) > 1L && peak_width_ppm > 0) {
+    ppm_clusters <- cumsum(c(1L, diff(raw_ppm) > (peak_width_ppm / 2)))
+    merged_ppm <- as.numeric(tapply(raw_ppm, ppm_clusters, mean))
+  } else {
+    merged_ppm <- raw_ppm
+  }
+
   message("Integrating peaks positions")
   peak_table_integration <- dataset_fractions |>
     AlpsNMR::nmr_integrate_peak_positions(
-      peak_pos_ppm = peak_list_initial$ppm,
+      peak_pos_ppm = merged_ppm,
       peak_width_ppm = peak_width_ppm,
       fix_baseline = TRUE,
       set_negative_areas_to_zero = TRUE
@@ -228,12 +260,12 @@ cluster_nmr <- function(
   valid_cols <- !is.na(ppm_cols) &
     (ppm_cols < range_exclude_area[1L] | ppm_cols > range_exclude_area[2L])
   num_mat <- num_mat[, valid_cols, drop = FALSE]
-  num_mat[num_mat <= area_min] <- NA_real_
+  num_mat[is.na(num_mat) | num_mat <= area_min] <- 0
   table_integration_filtered <- sqrt(num_mat)
   rownames(table_integration_filtered) <- frac_short
 
   hclust <- table_integration_filtered |>
-    stats::dist(method = "canberra") |>
+    stats::dist(method = dist_method) |>
     stats::hclust(method = "ward.D2")
 
   dend <- hclust |>
@@ -245,12 +277,15 @@ cluster_nmr <- function(
 
   dend_attr <- dend |>
     dendextend::get_leaves_attr("nodePar")
+  leaf_cols <- as.character(unlist(
+    dend_attr[names(dend_attr) == "lab.col"],
+    use.names = FALSE
+  ))
+  leaf_labels <- as.character(labels(dend))
+  idx_match <- match(frac_short, leaf_labels)
 
   groups <- data.frame(
-    group = as.character(unlist(
-      dend_attr[names(dend_attr) == "lab.col"],
-      use.names = FALSE
-    )),
+    group = leaf_cols[idx_match],
     rowname = frac_short,
     stringsAsFactors = FALSE
   )

@@ -29,7 +29,8 @@ cluster_nmr(
   area_min = 0,
   range_exclude_area = c(2.5, 2.6),
   range_without_peaks = c(0, 0.4),
-  ylim = c(0, 5e+10)
+  ylim = c(0, 5e+10),
+  dist_method = c("euclidean", "canberra")
 )
 }
 \arguments{
@@ -59,20 +60,48 @@ ppm axis should be aligned to \code{experiment_ref}.}
 \item{area_min}{Minimum integrated peak area threshold (default \code{0}).}
 
 \item{range_exclude_area}{Numeric length-2 ppm range excluded from
-clustering.}
+normalization and clustering.}
 
 \item{range_without_peaks}{Numeric length-2 baseline noise ppm range.}
 
 \item{ylim}{Numeric length-2 y-axis limits for spectral traces.}
+
+\item{dist_method}{Distance metric on square-root-transformed peak areas:
+\code{"euclidean"} (default, Hellinger distance) or \code{"canberra"}.}
 }
 \value{
 Named list with elements \code{figure} and \code{groups}.
 }
 \description{
-Load Bruker 1D proton NMR experiments, autophase, interpolate, integrate
-detected peak positions, cluster fractions by Canberra distance with
-Ward's hierarchical linkage, and export a dendrogram-aligned spectral figure
-and cluster group table.
+Load Bruker 1D proton NMR experiments, autophase, interpolate, exclude
+solvent/artifact regions before total-area normalization, merge overlapping
+detected peak positions within \code{peak_width_ppm / 2}, integrate peaks,
+cluster fractions using Hellinger (Euclidean on square-root areas) or
+Canberra distance with Ward's minimum-variance hierarchical linkage
+(\code{ward.D2}), and export a dendrogram-aligned spectral figure and cluster
+group table.
+}
+\details{
+Four chemometric refinements are applied:
+\enumerate{
+\item \strong{Pre-normalization solvent exclusion}: \code{range_exclude_area} (e.g.,
+residual DMSO-d6 at 2.5--2.6 ppm) is excluded prior to
+\code{AlpsNMR::nmr_normalize()} so that solvent peak fluctuations do not
+distort total-area normalization across fractions.
+\item \strong{Non-overlapping peak integration windows}: Detected peak positions
+closer than \code{peak_width_ppm / 2} are merged via single-linkage grouping
+to their mean chemical shift before integration, preventing double
+counting of multiplet splittings.
+\item \strong{Zero-preserving Hellinger/Ward.D2 clustering}: Sub-threshold peak
+areas (\verb{<= area_min}) are set to \code{0} (not \code{NA}) prior to the Hellinger
+square-root transformation so that absent peaks contribute well-defined
+zero coordinates compatible with Euclidean/Hellinger and Ward.D2
+minimum-variance geometry.
+\item \strong{Dendrogram leaf-to-fraction alignment}: After sorting the
+dendrogram (\code{sort(dend)}), leaf colors (\code{lab.col}) are matched back to
+\code{frac_short} via \code{labels(dend)} so each fraction receives its true
+cluster color.
+}
 }
 \examples{
 \dontrun{

@@ -208,9 +208,12 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sapid" id="toc-sapid" class="nav-link active" data-scroll-target="#sapid">SAPID <img src="https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg" align="right" height="139"></a>
+  <li><a href="#sapid" id="toc-sapid" class="nav-link active" data-scroll-target="#sapid">sapid <img src="https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg" align="right" height="139"></a>
   <ul class="collapse">
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a></li>
+  <li><a href="#package-scope-and-data-requirements" id="toc-package-scope-and-data-requirements" class="nav-link" data-scroll-target="#package-scope-and-data-requirements">Package Scope and Data Requirements</a></li>
+  <li><a href="#documentation-and-contributing" id="toc-documentation-and-contributing" class="nav-link" data-scroll-target="#documentation-and-contributing">Documentation and Contributing</a></li>
   <li><a href="#main-citations" id="toc-main-citations" class="nav-link" data-scroll-target="#main-citations">Main Citations</a>
   <ul class="collapse">
   <li><a href="#sapid-1" id="toc-sapid-1" class="nav-link" data-scroll-target="#sapid-1">SAPID</a></li>
@@ -221,7 +224,7 @@ div.csl-indent {
   <li><a href="#tima" id="toc-tima" class="nav-link" data-scroll-target="#tima">TIMA</a></li>
   <li><a href="#others" id="toc-others" class="nav-link" data-scroll-target="#others">Others</a></li>
   </ul></li>
-  <li><a href="#additional-software-credits" id="toc-additional-software-credits" class="nav-link" data-scroll-target="#additional-software-credits">Additional software credits</a></li>
+  <li><a href="#additional-software-credits" id="toc-additional-software-credits" class="nav-link" data-scroll-target="#additional-software-credits">Additional Software Credits</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -234,14 +237,14 @@ div.csl-indent {
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <!-- README.md is generated from README.qmd. Please edit that file -->
 <section id="sapid" class="level1">
-<h1>SAPID <img src="https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg" align="right" height="139"></h1>
+<h1>sapid <img src="https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg" align="right" height="139"></h1>
 <!-- badges: start -->
 <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <a href="https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/adafede/sapid"><img src="https://codecov.io/gh/adafede/sapid/graph/badge.svg" class="img-fluid" alt="Codecov test coverage"></a> <a href="https://adafede.r-universe.dev/sapid"><img src="https://adafede.r-universe.dev/sapid/badges/version?&amp;color=blue&amp;style=classic.png" class="img-fluid" alt="r-universe badge"></a> <a href="https://doi.org/10.5281/zenodo.14616395"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg" class="img-fluid" alt="DOI"></a> <!-- badges: end --></p>
-<p>A <strong>S</strong>trategy to <strong>A</strong>nalyze <strong>P</strong>lant Extracts Taste <strong>I</strong>n <strong>D</strong>epth.</p>
-<p>⚠️ This repository is not maintained and will not be except for extreme interest. It has just been opened for the sake of transparency.</p>
+<p>A Strategy to Analyze Plant Extracts Taste in Depth (SAPID).</p>
+<p><code>sapid</code> integrates sensory panel data (free profiling, projective napping, Chasselas model-wine modulation, and 3-AFC recognition threshold testing) with untargeted LC-MS feature tables, Charged Aerosol Detection (CAD) semi-quantification, taxonomically informed metabolite annotations (TIMA), and 1D proton NMR spectral clustering. It accompanies the study of <em>Swertia chirayita</em> bitter extracts published in <em>Current Research in Food Science</em> (<a href="https://doi.org/10.1016/j.crfs.2025.101043" class="uri">https://doi.org/10.1016/j.crfs.2025.101043</a>).</p>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>As the package is not (yet) available on CRAN, you will need to install with:</p>
+<p>Install <code>sapid</code> and its GitHub and Bioconductor dependencies from R-universe:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sapid"</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(</span>
@@ -252,21 +255,112 @@ div.csl-indent {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="quick-start" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start">Quick Start</h2>
+<p>The bundled datasets let you run descriptor harmonization and panel consistency filtering immediately after installation:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sapid)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Welcome to sapid</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To cite sapid in publications use:  Rutz A (2026). _sapid: A Strategy to Analyze Plant Extracts Taste In</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Depth_. R package, version 0.0.0.9002.  Adriano Rutz; Pascale Deneulin; Ivano Tonutti; Benoit Bach and</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Jean-Luc Wolfender. (5 April 2025). SAPID: a Strategy to Analyze</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Plant Extracts Taste In Depth. Application to the complex taste of</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Swertia chirayita (Roxb.) H.Karst. Current Research in Food Science.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   doi:10.1016/j.crfs.2025.101043.To see these entries in BibTeX format, use 'format(&lt;citation&gt;,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bibtex=TRUE)', or 'toBibtex(.)'.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">harmonize_terms</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dictionary =</span> dictionary_generic,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="st">"amer"</span>, <span class="st">"acidité"</span>, <span class="st">"ferreux"</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"word"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "BITTER"   "ACID"     "METALLIC"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>consistent <span class="ot">&lt;-</span> <span class="fu">load_consistent_profiles</span>(profiles, <span class="at">min_jury =</span> <span class="dv">2</span>L)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  consistent[, <span class="fu">c</span>(<span class="st">"fraction"</span>, <span class="st">"session"</span>, <span class="st">"jury"</span>, <span class="st">"taste_original"</span>, <span class="st">"taste"</span>, <span class="st">"value"</span>)],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6</span>L</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      fraction    session    jury taste_original  taste value</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 fraction_17 session_01 jury_08       AMERTUME BITTER   0.0</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 fraction_17 session_01 jury_11           AMER BITTER   2.5</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 fraction_17 session_01 jury_13   MINERAL AMER BITTER   3.8</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 fraction_17 session_01 jury_16       AMERTUME BITTER   3.3</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 fraction_18 session_01 jury_08       AMERTUME BITTER   4.7</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 fraction_18 session_01 jury_11           AMER BITTER   2.4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="package-scope-and-data-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="package-scope-and-data-requirements">Package Scope and Data Requirements</h2>
+<p><code>sapid</code> includes 10 datasets (<code>chasselas</code>, <code>concentration_afc</code>, <code>dictionary_generic</code>, <code>dictionary_napping</code>, <code>dictionary_specific</code>, <code>fractions</code>, <code>groups</code>, <code>napping_coordinates</code>, <code>napping_descriptors</code>, <code>profiles</code>) and 24 exported functions. End-to-end LC-MS/CAD/NMR ingestion functions require external raw files that are not bundled in the installed package due to file size.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Workflow stage</th>
+<th>Exported functions</th>
+<th>Required input</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Term harmonization and filtering</td>
+<td><code>harmonize_terms()</code>, <code>harmonize_terms_df()</code>, <code>load_consistent_profiles()</code></td>
+<td>Bundled dictionaries and <code>profiles</code> (or user data frames)</td>
+</tr>
+<tr class="even">
+<td>Sensory and psychophysical visualization</td>
+<td><code>plot_profiles()</code> (sensory mode), <code>plot_napping()</code>, <code>plot_chasselas_variation()</code>, <code>plot_chasselas_modulation()</code>, <code>plot_concentration()</code>, <code>plot_descriptors_network()</code>, <code>plot_matrices()</code>, <code>geom_sigmoid()</code>, <code>sigmoid()</code></td>
+<td>Bundled datasets (<code>profiles</code>, <code>napping_*</code>, <code>chasselas</code>, <code>concentration_afc</code>, <code>fractions</code>)</td>
+</tr>
+<tr class="odd">
+<td>Raw sensory spreadsheet import</td>
+<td><code>load_session()</code>, <code>get_session_info()</code>, <code>prepare_profiles()</code>, <code>prepare_napping()</code>, <code>prepare_chasselas()</code>, <code>prepare_concentration()</code>, <code>plot_informed_tasting()</code></td>
+<td>External tasting session <code>.xlsx</code>/TSV exports and fraction mass tables</td>
+</tr>
+<tr class="even">
+<td>LC-MS, CAD, and TIMA correlation</td>
+<td><code>prepare_chemical_profiles()</code>, <code>correlate_ion_taste_intensities()</code>, <code>plot_correlations()</code>, <code>plot_profiles()</code> (chemical/combined modes)</td>
+<td>External MZmine <code>.csv</code>, <code>.mzML</code>, CAD peak lists, and TIMA annotations</td>
+</tr>
+<tr class="odd">
+<td>1D proton NMR clustering</td>
+<td><code>cluster_nmr()</code>, <code>plot_chromatograms()</code></td>
+<td>External 1D NMR directories (<code>AlpsNMR</code>) and chromatographic index tables</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="documentation-and-contributing" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-contributing">Documentation and Contributing</h2>
+<ul>
+<li>Package website: <a href="https://adafede.github.io/sapid/" class="uri">https://adafede.github.io/sapid/</a></li>
+<li>Overview vignette: <a href="./vignettes/sapid.html">Get started</a></li>
+<li>Workflow articles: <a href="./vignettes/articles/I-sensory.html">Sensory and psychophysics</a>, <a href="./vignettes/articles/II-correlations.html">Chemical and correlations</a></li>
+<li>Contributor workflow, local build/test instructions, and PR checks: <a href="CONTRIBUTING.md">CONTRIBUTING.md</a></li>
+</ul>
+</section>
 <section id="main-citations" class="level2">
 <h2 class="anchored" data-anchor-id="main-citations">Main Citations</h2>
+<p>If you use <code>sapid</code> or its upstream metabolomics tools, please cite the relevant publications and specific database versions used in your analysis:</p>
 <section id="sapid-1" class="level3">
 <h3 class="anchored" data-anchor-id="sapid-1">SAPID</h3>
-<p>Article: <a href="https://doi.org/10.1016/j.crfs.2025.101043" class="uri">https://doi.org/10.1016/j.crfs.2025.101043</a></p>
-<p>According to which steps you used, please give credit to the authors of the tools/resources used.</p>
+<ul>
+<li>Article: <a href="https://doi.org/10.1016/j.crfs.2025.101043" class="uri">https://doi.org/10.1016/j.crfs.2025.101043</a></li>
+</ul>
 </section>
 <section id="mzmine" class="level3">
 <h3 class="anchored" data-anchor-id="mzmine">mzmine</h3>
-<p>General: <a href="https://doi.org/10.1038/s41587-023-01690-2" class="uri">https://doi.org/10.1038/s41587-023-01690-2</a></p>
+<ul>
+<li><a href="https://doi.org/10.1038/s41587-023-01690-2" class="uri">https://doi.org/10.1038/s41587-023-01690-2</a></li>
+</ul>
 </section>
 <section id="sirius" class="level3">
 <h3 class="anchored" data-anchor-id="sirius">SIRIUS</h3>
-<p>General: <a href="https://doi.org/10.1038/s41592-019-0344-8" class="uri">https://doi.org/10.1038/s41592-019-0344-8</a></p>
 <ul>
+<li>General: <a href="https://doi.org/10.1038/s41592-019-0344-8" class="uri">https://doi.org/10.1038/s41592-019-0344-8</a></li>
 <li><em>CSI:FingerId</em>: <a href="https://doi.org/10.1073/pnas.1509788112" class="uri">https://doi.org/10.1073/pnas.1509788112</a></li>
 <li><em>ZODIAC</em>: <a href="https://doi.org/10.1038/s42256-020-00234-6" class="uri">https://doi.org/10.1038/s42256-020-00234-6</a></li>
 <li><em>CANOPUS</em>: <a href="https://doi.org/10.1038/s41587-020-0740-8" class="uri">https://doi.org/10.1038/s41587-020-0740-8</a></li>
@@ -275,18 +369,24 @@ div.csl-indent {
 </section>
 <section id="lotus" class="level3">
 <h3 class="anchored" data-anchor-id="lotus">LOTUS</h3>
-<p>General: <a href="https://doi.org/10.7554/eLife.70780" class="uri">https://doi.org/10.7554/eLife.70780</a></p>
-<p>⚠️ Do not forget to cite which version you used: <a href="https://doi.org/10.5281/zenodo.5794106" class="uri">https://doi.org/10.5281/zenodo.5794106</a></p>
+<ul>
+<li>General: <a href="https://doi.org/10.7554/eLife.70780" class="uri">https://doi.org/10.7554/eLife.70780</a></li>
+<li>Dataset record (cite the version used): <a href="https://doi.org/10.5281/zenodo.5794106" class="uri">https://doi.org/10.5281/zenodo.5794106</a></li>
+</ul>
 </section>
 <section id="isdb" class="level3">
 <h3 class="anchored" data-anchor-id="isdb">ISDB</h3>
-<p>General: <a href="https://doi.org/10.1021/acs.analchem.5b04804" class="uri">https://doi.org/10.1021/acs.analchem.5b04804</a></p>
-<p>⚠️ Do not forget to cite which version you used: <a href="https://doi.org/10.5281/zenodo.5607185" class="uri">https://doi.org/10.5281/zenodo.5607185</a></p>
+<ul>
+<li>General: <a href="https://doi.org/10.1021/acs.analchem.5b04804" class="uri">https://doi.org/10.1021/acs.analchem.5b04804</a></li>
+<li>Dataset record (cite the version used): <a href="https://doi.org/10.5281/zenodo.5607185" class="uri">https://doi.org/10.5281/zenodo.5607185</a></li>
+</ul>
 </section>
 <section id="tima" class="level3">
 <h3 class="anchored" data-anchor-id="tima">TIMA</h3>
-<p>General: <a href="https://doi.org/10.3389/fpls.2019.01329" class="uri">https://doi.org/10.3389/fpls.2019.01329</a></p>
-<p>⚠️ Do not forget to cite which version you used: <a href="https://doi.org/10.5281/zenodo.5797920" class="uri">https://doi.org/10.5281/zenodo.5797920</a></p>
+<ul>
+<li>General: <a href="https://doi.org/10.3389/fpls.2019.01329" class="uri">https://doi.org/10.3389/fpls.2019.01329</a></li>
+<li>Dataset record (cite the version used): <a href="https://doi.org/10.5281/zenodo.5797920" class="uri">https://doi.org/10.5281/zenodo.5797920</a></li>
+</ul>
 </section>
 <section id="others" class="level3">
 <h3 class="anchored" data-anchor-id="others">Others</h3>
@@ -296,7 +396,7 @@ div.csl-indent {
 </section>
 </section>
 <section id="additional-software-credits" class="level2">
-<h2 class="anchored" data-anchor-id="additional-software-credits">Additional software credits</h2>
+<h2 class="anchored" data-anchor-id="additional-software-credits">Additional Software Credits</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -333,7 +433,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td style="text-align: left;">cascade</td>
-<td style="text-align: left;">0.0.0.9002</td>
+<td style="text-align: left;">0.0.0.9003</td>
 <td style="text-align: left;">Rutz and Wolfender (2023); Rutz (2026a)</td>
 </tr>
 <tr class="even">

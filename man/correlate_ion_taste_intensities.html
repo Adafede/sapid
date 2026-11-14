@@ -338,7 +338,7 @@ Logical; if <code>TRUE</code>, apply RMS scale normalization per juror before su
 <code id="greiner_kendall">greiner_kendall</code>
 </td>
 <td>
-Logical; if <code>TRUE</code>, map Kendall’s <span class="math inline">\(\tau\)</span> to Pearson-equivalent scale via <span class="math inline">\(r = \sin(\frac{\pi}{2}\tau)\)</span> (default <code>FALSE</code>).
+Logical; if <code>TRUE</code>, map Kendall’s <span class="math inline">\(\tau\)</span> to Pearson-equivalent scale via <span class="math inline">\(r = \sin(\frac{\pi}{2}\tau)\)</span> and mark those rows with <code>method = “kendall_greiner”</code> so downstream functions do not apply the transformation twice (default <code>FALSE</code>).
 </td>
 </tr>
 <tr>

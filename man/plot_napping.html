@@ -216,11 +216,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="usage" class="level3">
 <h3 class="anchored" data-anchor-id="usage">Usage</h3>
 <pre><code class="language-R">plot_napping(
-  input_coordinates = system.file("extdata", "napping_coordinates.tsv", package =
-    "sapid"),
-  input_descriptors = system.file("extdata", "napping_descriptors.tsv", package =
-    "sapid"),
-  sessions = 2
+  input_coordinates = NULL,
+  input_descriptors = NULL,
+  sessions = 2,
+  output = NULL
 )
 </code></pre>
 </section>
@@ -251,6 +250,14 @@ Optional path or <code>data.frame</code> of napping descriptors (defaults to bui
 Integer session number to analyze (default <code>2</code>).
 </td>
 </tr>
+<tr>
+<td style="white-space: collapse; font-family: monospace; vertical-align: top">
+<code id="output">output</code>
+</td>
+<td>
+Optional PDF file path to capture all diagnostic plots. When <code>NULL</code> in non-interactive sessions, plots are rendered to a temporary PDF device that is removed on exit so no stray <code>Rplots*.pdf</code> files are left in the working directory.
+</td>
+</tr>
 </tbody></table>
 </section>
 <section id="details" class="level3">
@@ -259,7 +266,7 @@ Integer session number to analyze (default <code>2</code>).
 </section>
 <section id="value" class="level3">
 <h3 class="anchored" data-anchor-id="value">Value</h3>
-<p>Result of the final <code>FactoMineR::prefpls()</code> call (invisibly).</p>
+<p>Named list with elements <code>pmfa</code>, <code>mfa</code>, <code>hcpc</code>, and <code>indscal</code> (invisibly).</p>
 </section>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Examples</h3>

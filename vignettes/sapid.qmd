@@ -38,13 +38,16 @@ This vignette outlines the workflow and statistical methods implemented in
 ## Installation
 
 ```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager", repos = "https://cloud.r-project.org")
+}
 install.packages(
   "sapid",
   repos = c(
     "https://adafede.r-universe.dev",
     "https://taxonomicallyinformedannotation.r-universe.dev",
-    "https://cran.r-universe.dev",
-    "https://bioc.r-universe.dev"
+    BiocManager::repositories(),
+    "https://cloud.r-project.org"
   )
 )
 ```

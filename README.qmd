@@ -38,16 +38,19 @@ A Strategy to Analyze Plant Extracts Taste in Depth (SAPID).
 
 ## Installation
 
-Install `sapid` and its GitHub and Bioconductor dependencies from R-universe:
+Install `sapid` along with its CRAN, Bioconductor, and R-universe dependencies:
 
 ```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager", repos = "https://cloud.r-project.org")
+}
 install.packages(
   "sapid",
   repos = c(
     "https://adafede.r-universe.dev",
     "https://taxonomicallyinformedannotation.r-universe.dev",
-    "https://cran.r-universe.dev",
-    "https://bioc.r-universe.dev"
+    BiocManager::repositories(),
+    "https://cloud.r-project.org"
   )
 )
 ```

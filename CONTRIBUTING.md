@@ -8,19 +8,19 @@
 - [jarl](https://jarl.etiennebacher.com/) (R linter)
 - Optionally [prek](https://prek.j178.dev/) to run the local hook suite in `prek.toml`
 
-Install package dependencies (CRAN, Bioconductor `AlpsNMR`, and GitHub remotes `adafede/cascade` and `thomasp85/ggraph`) from `r-universe` or via `pak`:
+Install package dependencies (CRAN, Bioconductor `AlpsNMR`, and R-universe packages `cascade` and `ggraph`) or use `pak`:
 
 ```r
 install.packages(
-  c("tinytest", "lintr", "spelling", "roxygen2", "quarto", "grateful"),
+  c("BiocManager", "tinytest", "lintr", "spelling", "roxygen2", "quarto", "grateful"),
   repos = "https://cloud.r-project.org"
 )
 
-options(repos = c(
+options(repos = unique(c(
   adafede = "https://adafede.r-universe.dev",
-  cran = "https://cran.r-universe.dev",
-  bioc = "https://bioc.r-universe.dev"
-))
+  BiocManager::repositories(),
+  CRAN = "https://cloud.r-project.org"
+)))
 ```
 
 Or with `pak` from a source tree containing `DESCRIPTION`:

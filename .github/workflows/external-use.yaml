@@ -18,6 +18,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
@@ -39,16 +40,16 @@ jobs:
         if: contains(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends \
-            libarchive-dev libcurl4-openssl-dev libfontconfig1-dev libfreetype6-dev \
-            libfribidi-dev libharfbuzz-dev libnetcdf-dev libuv1-dev \
+            cmake libarchive-dev libcurl4-openssl-dev libfontconfig1-dev \
+            libfreetype6-dev libfribidi-dev libharfbuzz-dev libjpeg-dev \
+            libnetcdf-dev libpng-dev libtiff-dev libuv1-dev libxml2-dev zlib1g-dev \
           && sudo apt-get clean \
           && sudo rm -rf /var/lib/apt/lists/*
 
       - name: Install dependencies (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew update
-          brew install netcdf
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install netcdf
           GETTEXT_PREFIX="$(brew --prefix gettext)"
           mkdir -p ~/.R
           cat >> ~/.R/Makevars <<EOF
@@ -59,17 +60,28 @@ jobs:
       - name: Install dependencies and package
         shell: Rscript {0}
         run: |
-          repos <- c(
+          options(Ncpus = max(1L, parallel::detectCores()))
+          cran_repos <- getOption("repos")
+          cran_repos <- cran_repos[!is.na(cran_repos) & cran_repos != "@CRAN@"]
+          if (length(cran_repos) == 0L) {
+            cran_repos <- c(CRAN = "https://cloud.r-project.org")
+          }
+          if (!requireNamespace("BiocManager", quietly = TRUE)) {
+            install.packages("BiocManager", repos = cran_repos)
+          }
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            install.packages("remotes", repos = cran_repos)
+          }
+          repos <- unique(c(
             "https://adafede.r-universe.dev",
             "https://taxonomicallyinformedannotation.r-universe.dev",
-            "https://bioc.r-universe.dev",
-            "https://cran.r-universe.dev"
-          )
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            install.packages("remotes", repos = repos)
-          }
+            BiocManager::repositories(),
+            cran_repos,
+            "https://cloud.r-project.org"
+          ))
           remotes::install_deps(".", dependencies = TRUE, repos = repos)
           install.packages(".", repos = NULL, type = "source")
+          stopifnot(requireNamespace("sapid", quietly = TRUE))
 
       - name: Run smoke check and tests
         shell: Rscript {0}

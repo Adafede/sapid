@@ -709,20 +709,38 @@ withr::with_tempdir({
     end_fractions = 2L
   )
   expect_true(is.null(ret_chem))
-  expect_true(file.exists(file.path(
-    ext_dir,
-    "sample_M_01_01_featuresInformed_cad.tsv"
-  )))
-  expect_true(file.exists(file.path(
-    ext_dir,
-    "sample_M_01_01_featuresNotInformed_cad.tsv"
-  )))
-  expect_true(file.exists(file.path(
-    frac_dir,
-    "sample_M_17_01_featuresInformed_cad.tsv"
-  )))
-  expect_true(file.exists(file.path(
-    frac_dir,
-    "sample_M_17_01_featuresNotInformed_cad.tsv"
-  )))
+  expected_cols <- c(
+    "sample",
+    "peak_id",
+    "peak_rt_min",
+    "peak_rt_apex",
+    "peak_rt_max",
+    "peak_area",
+    "feature_id",
+    "feature_rt",
+    "feature_mz",
+    "feature_area",
+    "comparison_score"
+  )
+  informed_tsvs <- c(
+    file.path(ext_dir, "sample_M_01_01_featuresInformed_cad.tsv"),
+    file.path(frac_dir, "sample_M_17_01_featuresInformed_cad.tsv")
+  )
+  not_informed_tsvs <- c(
+    file.path(ext_dir, "sample_M_01_01_featuresNotInformed_cad.tsv"),
+    file.path(frac_dir, "sample_M_17_01_featuresNotInformed_cad.tsv")
+  )
+  for (tsv_path in informed_tsvs) {
+    expect_true(file.exists(tsv_path))
+    tsv_df <- data.table::fread(tsv_path, data.table = FALSE)
+    expect_identical(nrow(tsv_df), 1L)
+    expect_identical(names(tsv_df), expected_cols)
+    expect_identical(as.integer(tsv_df$feature_id), 1L)
+  }
+  for (tsv_path in not_informed_tsvs) {
+    expect_true(file.exists(tsv_path))
+    tsv_df <- data.table::fread(tsv_path, data.table = FALSE)
+    expect_identical(nrow(tsv_df), 0L)
+    expect_identical(names(tsv_df), expected_cols)
+  }
 })

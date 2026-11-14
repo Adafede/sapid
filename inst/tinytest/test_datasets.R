@@ -144,3 +144,37 @@ expect_identical(typeof(dictionary_specific$original), "character")
 expect_identical(typeof(dictionary_specific$translated), "character")
 expect_identical(typeof(dictionary_specific$translated_simple), "character")
 expect_false(anyNA(dictionary_specific$original))
+
+# Domain invariants across bundled datasets
+expect_true(all(
+  !is.na(chasselas$value) & chasselas$value >= 0 & chasselas$value <= 10
+))
+expect_true(all(concentration_afc$concentration > 0))
+expect_true(all(
+  concentration_afc$afc_correct >= 0L &
+    concentration_afc$afc_correct <= concentration_afc$afc_total
+))
+expect_true(all(
+  !is.na(concentration_afc$value) &
+    concentration_afc$value >= 0 &
+    concentration_afc$value <= 10
+))
+expect_true(all(
+  !is.na(profiles$value) & profiles$value >= 0 & profiles$value <= 10
+))
+expect_true(all(!is.na(fractions$mass) & fractions$mass >= 0))
+expect_identical(anyDuplicated(fractions$label), 0L)
+expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", groups$group)))
+expect_identical(anyDuplicated(groups$rowname), 0L)
+expect_true(
+  all(nzchar(dictionary_generic$original)) &&
+    !anyNA(dictionary_generic$translated)
+)
+expect_true(
+  all(nzchar(dictionary_napping$original)) &&
+    !anyNA(dictionary_napping$translated)
+)
+expect_true(
+  all(nzchar(dictionary_specific$original)) &&
+    !anyNA(dictionary_specific$translated)
+)

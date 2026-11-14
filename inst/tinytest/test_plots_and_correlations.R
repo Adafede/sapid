@@ -13,13 +13,19 @@ correlate_ion_taste_intensities <- get(
   envir = ns
 )
 
+expect_valid_pdf <- function(path) {
+  expect_true(file.exists(path))
+  expect_true(file.info(path)$size > 1000)
+  expect_identical(rawToChar(readBin(path, "raw", 4L)), "%PDF")
+}
+
 withr::with_tempdir({
   tmp_dir <- getwd()
 
   out_mod <- file.path(tmp_dir, "modulation.pdf")
   ret_mod <- plot_chasselas_modulation(output = out_mod)
   expect_identical(ret_mod, out_mod)
-  expect_true(file.exists(out_mod))
+  expect_valid_pdf(out_mod)
 
   out_var_jury <- file.path(tmp_dir, "variation_jury.pdf")
   out_var_session <- file.path(tmp_dir, "variation_session.pdf")
@@ -29,27 +35,48 @@ withr::with_tempdir({
   )
   expect_identical(ret_var$jury, out_var_jury)
   expect_identical(ret_var$session, out_var_session)
-  expect_true(file.exists(out_var_jury))
-  expect_true(file.exists(out_var_session))
+  expect_valid_pdf(out_var_jury)
+  expect_valid_pdf(out_var_session)
 
   out_conc <- file.path(tmp_dir, "concentration.pdf")
   ret_conc <- plot_concentration(output = out_conc)
   expect_identical(ret_conc, out_conc)
-  expect_true(file.exists(out_conc))
+  expect_valid_pdf(out_conc)
 
   out_network <- file.path(tmp_dir, "network.pdf")
   ret_network <- plot_descriptors_network(output = out_network)
   expect_true(!is.null(ret_network))
-  expect_true(file.exists(out_network))
+  expect_valid_pdf(out_network)
 
   out_matrices <- file.path(tmp_dir, "matrices.pdf")
   ret_matrices <- plot_matrices(output = out_matrices)
   expect_true(!is.null(ret_matrices))
-  expect_true(file.exists(out_matrices))
+  expect_valid_pdf(out_matrices)
 
   data(fractions, package = "sapid")
   data(concentration_afc, package = "sapid")
   data(profiles, package = "sapid")
+
+  consistent_prof <- get("load_consistent_profiles", envir = ns)(
+    profiles,
+    min_jury = 2L
+  )
+  expect_identical(nrow(consistent_prof), 1535L)
+  expect_identical(
+    names(consistent_prof),
+    c(
+      "fraction",
+      "session",
+      "jury",
+      "taste_original",
+      "taste",
+      "value",
+      "sum",
+      "sum_taste",
+      "group"
+    )
+  )
+  expect_false(anyNA(consistent_prof$taste))
 
   fractions_path <- file.path(tmp_dir, "fractions.tsv")
   concentration_path <- file.path(tmp_dir, "concentration_afc.tsv")
@@ -85,7 +112,7 @@ withr::with_tempdir({
     min_panelists = 2L
   )
   expect_identical(ret_informed, out_informed)
-  expect_true(file.exists(out_informed))
+  expect_valid_pdf(out_informed)
 
   ions <- data.frame(id = c(101L, 102L), rt = c(1, 2), mz = c(100.1, 200.2))
   for (fraction in 32:38) {

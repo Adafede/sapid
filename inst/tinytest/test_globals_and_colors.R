@@ -189,7 +189,7 @@ expect_error(
   pattern = "Only the directions x or y is allowed\\."
 )
 
-# 8. read_xlsx_base: comprehensive XML/ZIP parsing & edge cases
+# 8. read_xlsx_base: XML/ZIP parsing and edge cases
 expect_error(
   read_xlsx_base(tempfile(fileext = ".xlsx")),
   pattern = "File does not exist:"
@@ -463,9 +463,15 @@ expect_identical(nrow(afc_fit$curve), 50L)
 expect_true(all(afc_fit$curve$y >= 1 / 3 & afc_fit$curve$y <= 1))
 expect_true(all(afc_fit$curve$ymin >= 1 / 3 & afc_fit$curve$ymax <= 1))
 expect_true(all(diff(afc_fit$curve$y) > 0))
-# At x = log10(ec50), prob = (1 + gamma)/2 = 2/3
-p_at_ec50 <- (1 / 3) + (2 / 3) * stats::plogis(0)
-expect_equal(p_at_ec50, 2 / 3, tolerance = 1e-12)
+# At x = ec50, psychometric curve prob = (1 + gamma)/2 = 2/3
+p_at_ec50 <- stats::approx(
+  afc_fit$curve$x,
+  afc_fit$curve$y,
+  xout = afc_fit$ec50
+)$y
+expect_equal(p_at_ec50, 2 / 3, tolerance = 1e-3)
+expect_true(all(afc_fit$curve$ymin <= afc_fit$curve$y + 1e-12))
+expect_true(all(afc_fit$curve$y <= afc_fit$curve$ymax + 1e-12))
 
 # 15. prepare_taste_intensities_df: complete_grid = TRUE & normalize_panelists = TRUE
 tastes_grid_in <- data.frame(

@@ -306,6 +306,109 @@ withr::with_tempdir({
   expect_identical(df_nap_d$taste_harmonized, c("BITTER", "ACID"))
 })
 
+# 2b. Numeric CJ protection, FIZZ >100 med_fallback, and distinct NA harmonization keys
+withr::with_tempdir({
+  input_dir <- getwd()
+  xlsx_dir <- file.path(input_dir, "20210412_cluster6", "03_files")
+  dir.create(xlsx_dir, recursive = TRUE)
+
+  td <- tempfile("xlsx_edge_")
+  dir.create(file.path(td, "xl", "worksheets"), recursive = TRUE)
+  writeLines(
+    paste0(
+      "<styleSheet><cellXfs count=\"2\">",
+      "<xf numFmtId=\"0\"/><xf numFmtId=\"14\"/>",
+      "</cellXfs></styleSheet>"
+    ),
+    file.path(td, "xl", "styles.xml")
+  )
+  # Sheet 1 (chasselas) with integer CJ = 1, 2 and serial Date
+  writeLines(
+    paste0(
+      "<worksheet><sheetData>",
+      "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c><c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c><c r=\"C1\" t=\"inlineStr\"><is><t>Date</t></is></c><c r=\"D1\" t=\"inlineStr\"><is><t>amer_1</t></is></c></row>",
+      "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>CHASAVANT</t></is></c><c r=\"B2\"><v>1</v></c><c r=\"C2\" s=\"1\"><v>44298</v></c><c r=\"D2\"><v>3.5</v></c></row>",
+      "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>CHASAPRES</t></is></c><c r=\"B3\"><v>2</v></c><c r=\"C3\" s=\"1\"><v>44298</v></c><c r=\"D3\"><v>6.0</v></c></row>",
+      "</sheetData></worksheet>"
+    ),
+    file.path(td, "xl", "worksheets", "sheet1.xml")
+  )
+  writeLines(
+    "<worksheet><sheetData/></worksheet>",
+    file.path(td, "xl", "worksheets", "sheet2.xml")
+  )
+  writeLines(
+    "<worksheet><sheetData/></worksheet>",
+    file.path(td, "xl", "worksheets", "sheet3.xml")
+  )
+  # Sheet 4 (profiles): integer CJ = 1..2, amer=6 then amer=500 -> med_fallback=6, plus two unharmonized terms
+  writeLines(
+    enc2utf8(paste0(
+      "<worksheet><sheetData>",
+      "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c><c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c><c r=\"C1\" t=\"inlineStr\"><is><t>amer</t></is></c><c r=\"D1\" t=\"inlineStr\"><is><t>sans_gout</t></is></c><c r=\"E1\" t=\"inlineStr\"><is><t>neutre</t></is></c></row>",
+      "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>17</t></is></c><c r=\"B2\"><v>1</v></c><c r=\"C2\"><v>6.0</v></c><c r=\"D2\"><v>2.0</v></c><c r=\"E2\"><v>4.0</v></c></row>",
+      "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>17</t></is></c><c r=\"B3\"><v>2</v></c><c r=\"C3\"><v>500</v></c><c r=\"D3\"/><c r=\"E3\"/></row>",
+      "</sheetData></worksheet>"
+    )),
+    file.path(td, "xl", "worksheets", "sheet4.xml"),
+    useBytes = TRUE
+  )
+  old_wd <- setwd(td)
+  utils::zip(
+    file.path(xlsx_dir, "session.xlsx"),
+    files = "xl",
+    flags = "-rq"
+  )
+  setwd(old_wd)
+  unlink(td, recursive = TRUE)
+
+  # Numeric CJ stays out of 'name'/'taste' in load_session & prepare_chasselas
+  load_session <- get("load_session", envir = ns)
+  loaded_p <- load_session(
+    input_dir,
+    list(cluster = 6, date = 20210412, product_name = "CHASAVANT"),
+    "profiles"
+  )
+  expect_true("CJ" %in% names(loaded_p))
+  expect_false(any(loaded_p$name %in% c("CJ", "Date")))
+
+  out_chas <- file.path(input_dir, "chas_num_cj.tsv")
+  prepare_chasselas(input_dir = input_dir, sessions = 1L, output = out_chas)
+  df_c <- utils::read.delim(out_chas, stringsAsFactors = FALSE)
+  expect_identical(sort(unique(df_c$jury)), c("jury_01", "jury_02"))
+  expect_identical(unique(df_c$taste), "bitterness")
+  expect_identical(unique(df_c$date), "2021-04-12")
+
+  # value = 500 uses med_fallback (6.0), and distinct unharmonized NA terms are both preserved
+  custom_spec <- data.frame(
+    original = c("AMER", "SANS_GOUT", "NEUTRE"),
+    translated = c("BITTER", "SANS_GOUT", "NEUTRE"),
+    translated_simple = c("BITTER", "SANS_GOUT", "NEUTRE"),
+    stringsAsFactors = FALSE
+  )
+  custom_gen <- data.frame(
+    original = c("BITTER", "SANS_GOUT", "NEUTRE"),
+    translated = c("BITTER", NA_character_, NA_character_),
+    translated_simple = c("BITTER", NA_character_, NA_character_),
+    stringsAsFactors = FALSE
+  )
+  out_prof <- file.path(input_dir, "prof_edge.tsv")
+  prepare_profiles(
+    input_dir = input_dir,
+    sessions = 1L,
+    output = out_prof,
+    dictionary_generic_path = custom_gen,
+    dictionary_specific_path = custom_spec
+  )
+  df_p <- utils::read.delim(out_prof, stringsAsFactors = FALSE)
+  expect_equal(df_p$value[df_p$jury == "jury_02"], 6.0, tolerance = 1e-12)
+  na_rows <- df_p[
+    df_p$jury == "jury_01" &
+      df_p$taste_original %in% c("SANS_GOUT", "NEUTRE"),
+  ]
+  expect_identical(nrow(na_rows), 2L)
+})
+
 # 3. plot_napping happy and error paths
 withr::with_tempdir({
   data(napping_coordinates, package = "sapid")

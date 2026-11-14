@@ -43,9 +43,21 @@ prepare_chasselas <- function(
   cj_idx <- match(df$CJ, sort(unique(df$CJ)))
   df$CJ <- paste0("jury_", sprintf("%02d", cj_idx))
 
+  id_protected <- c(
+    "ProductName",
+    "Produit",
+    "session",
+    "CJ",
+    "Date",
+    "Judge",
+    "judge",
+    "jury",
+    "date",
+    "product"
+  )
   is_num <- vapply(df, is.numeric, logical(1L))
-  num_cols <- names(df)[is_num]
-  id_cols <- names(df)[!is_num]
+  num_cols <- setdiff(names(df)[is_num], id_protected)
+  id_cols <- setdiff(names(df), num_cols)
 
   long_list <- lapply(num_cols, function(col_nm) {
     sub_df <- df[, id_cols, drop = FALSE]

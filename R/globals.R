@@ -258,6 +258,208 @@ unescape_xml <- function(x) {
   gsub("&amp;", "&", x, fixed = TRUE)
 }
 
+resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
+  wb_file <- file.path(tmp, "xl", "workbook.xml")
+  rels_file <- file.path(tmp, "xl", "_rels", "workbook.xml.rels")
+  if (file.exists(wb_file) && file.exists(rels_file)) {
+    wb_xml <- paste(
+      readLines(wb_file, warn = FALSE, encoding = "UTF-8"),
+      collapse = ""
+    )
+    rels_xml <- paste(
+      readLines(rels_file, warn = FALSE, encoding = "UTF-8"),
+      collapse = ""
+    )
+    sheet_tags <- regmatches(
+      wb_xml,
+      gregexpr("<sheet\\b[^>]*/?>", wb_xml, perl = TRUE)
+    )[[1L]]
+    if (length(sheet_tags) > 0L) {
+      s_names <- vapply(
+        sheet_tags,
+        function(tag) {
+          if (grepl("\\bname=\"([^\"]*)\"", tag, perl = TRUE)) {
+            unescape_xml(
+              sub(".*\\bname=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
+            )
+          } else {
+            NA_character_
+          }
+        },
+        character(1L),
+        USE.NAMES = FALSE
+      )
+      s_rids <- vapply(
+        sheet_tags,
+        function(tag) {
+          if (grepl("\\br:id=\"([^\"]*)\"", tag, perl = TRUE)) {
+            sub(".*\\br:id=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
+          } else {
+            NA_character_
+          }
+        },
+        character(1L),
+        USE.NAMES = FALSE
+      )
+      rel_tags <- regmatches(
+        rels_xml,
+        gregexpr("<Relationship\\b[^>]*/?>", rels_xml, perl = TRUE)
+      )[[1L]]
+      rel_ids <- vapply(
+        rel_tags,
+        function(tag) {
+          if (grepl("\\bId=\"([^\"]*)\"", tag, perl = TRUE)) {
+            sub(".*\\bId=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
+          } else {
+            NA_character_
+          }
+        },
+        character(1L),
+        USE.NAMES = FALSE
+      )
+      rel_targets <- vapply(
+        rel_tags,
+        function(tag) {
+          if (grepl("\\bTarget=\"([^\"]*)\"", tag, perl = TRUE)) {
+            sub(".*\\bTarget=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
+          } else {
+            NA_character_
+          }
+        },
+        character(1L),
+        USE.NAMES = FALSE
+      )
+      idx <- if (is.character(sheet)) {
+        match(sheet[1L], s_names)
+      } else {
+        s_idx <- as.integer(sheet[1L])
+        if (!is.na(s_idx) && s_idx >= 1L && s_idx <= length(sheet_tags)) {
+          s_idx
+        } else {
+          NA_integer_
+        }
+      }
+      if (is.na(idx)) {
+        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+      }
+      target <- rel_targets[match(s_rids[[idx]], rel_ids)]
+      if (is.na(target) || !nzchar(target)) {
+        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+      }
+      target <- sub("^/+", "", target)
+      if (!grepl("^xl/", target)) {
+        target <- paste0("xl/", target)
+      }
+      sheet_file <- file.path(tmp, target)
+      if (!file.exists(sheet_file)) {
+        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+      }
+      return(sheet_file)
+    }
+  }
+
+  if (!is.numeric(sheet)) {
+    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+  }
+  sheet_file <- file.path(
+    tmp,
+    "xl",
+    "worksheets",
+    paste0("sheet", as.integer(sheet[1L]), ".xml")
+  )
+  if (!file.exists(sheet_file)) {
+    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+  }
+  sheet_file
+}
+
+parse_xlsx_date_styles <- function(tmp) {
+  styles_file <- file.path(tmp, "xl", "styles.xml")
+  if (!file.exists(styles_file)) {
+    return(logical(0))
+  }
+  s_xml <- paste(
+    readLines(styles_file, warn = FALSE, encoding = "UTF-8"),
+    collapse = ""
+  )
+  builtin_date_ids <- c(14:22, 27:36, 45:47, 50:58)
+  custom_date_ids <- integer(0)
+
+  if (grepl("<numFmts[^>]*>", s_xml, perl = TRUE)) {
+    nf_block <- sub(
+      ".*<numFmts[^>]*>([\\s\\S]*?)</numFmts>.*",
+      "\\1",
+      s_xml,
+      perl = TRUE
+    )
+    nf_tags <- regmatches(
+      nf_block,
+      gregexpr("<numFmt\\b[^>]*/?>", nf_block, perl = TRUE)
+    )[[1L]]
+    for (tag in nf_tags) {
+      if (
+        grepl("\\bnumFmtId=\"([0-9]+)\"", tag, perl = TRUE) &&
+          grepl("\\bformatCode=\"([^\"]*)\"", tag, perl = TRUE)
+      ) {
+        nf_id <- as.integer(
+          sub(".*\\bnumFmtId=\"([0-9]+)\".*", "\\1", tag, perl = TRUE)
+        )
+        fmt <- unescape_xml(
+          sub(".*\\bformatCode=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
+        )
+        clean_fmt <- gsub("\"[^\"]*\"", "", fmt, perl = TRUE)
+        clean_fmt <- gsub("\\[[^\\]]*\\]", "", clean_fmt, perl = TRUE)
+        if (
+          !grepl("#", clean_fmt, fixed = TRUE) &&
+            grepl("(y|m|d|h|s)", clean_fmt, ignore.case = TRUE)
+        ) {
+          custom_date_ids <- c(custom_date_ids, nf_id)
+        }
+      }
+    }
+  }
+
+  date_ids <- unique(c(builtin_date_ids, custom_date_ids))
+  if (!grepl("<cellXfs[^>]*>", s_xml, perl = TRUE)) {
+    return(logical(0))
+  }
+  xfs_block <- sub(
+    ".*<cellXfs[^>]*>([\\s\\S]*?)</cellXfs>.*",
+    "\\1",
+    s_xml,
+    perl = TRUE
+  )
+  xf_tags <- regmatches(
+    xfs_block,
+    gregexpr("<xf\\b[^>]*?(?:/>|>[\\s\\S]*?</xf>)", xfs_block, perl = TRUE)
+  )[[1L]]
+  vapply(
+    xf_tags,
+    function(tag) {
+      if (!grepl("\\bnumFmtId=\"([0-9]+)\"", tag, perl = TRUE)) {
+        return(FALSE)
+      }
+      nf_id <- as.integer(
+        sub(".*\\bnumFmtId=\"([0-9]+)\".*", "\\1", tag, perl = TRUE)
+      )
+      nf_id %in% date_ids
+    },
+    logical(1L),
+    USE.NAMES = FALSE
+  )
+}
+
+format_excel_serial_date <- function(num_v) {
+  if (abs(num_v - round(num_v)) < 1e-6) {
+    format(as.Date(round(num_v), origin = "1899-12-30"), "%Y-%m-%d")
+  } else {
+    format(
+      as.POSIXct(num_v * 86400, origin = "1899-12-30", tz = "UTC"),
+      "%Y-%m-%d %H:%M:%S"
+    )
+  }
+}
+
 read_xlsx_base <- function(path, sheet = 1L) {
   if (!file.exists(path)) {
     stop("File does not exist: ", path, call. = FALSE)
@@ -276,17 +478,18 @@ read_xlsx_base <- function(path, sheet = 1L) {
     )
     si_matches <- regmatches(
       ss_xml,
-      gregexpr("<si>.*?</si>", ss_xml, perl = TRUE)
+      gregexpr("<si(?:\\s[^>]*)?>[\\s\\S]*?</si>", ss_xml, perl = TRUE)
     )[[1L]]
     shared <- vapply(
       si_matches,
       function(si) {
+        si_clean <- gsub("<rPh[^>]*>[\\s\\S]*?</rPh>", "", si, perl = TRUE)
         t_m <- regmatches(
-          si,
-          gregexpr("<t[^>]*>(.*?)</t>", si, perl = TRUE)
+          si_clean,
+          gregexpr("<t[^>]*>[\\s\\S]*?</t>", si_clean, perl = TRUE)
         )[[1L]]
         unescape_xml(paste(
-          sub("^<t[^>]*>(.*)</t>$", "\\1", t_m, perl = TRUE),
+          sub("^<t[^>]*>([\\s\\S]*)</t>$", "\\1", t_m, perl = TRUE),
           collapse = ""
         ))
       },
@@ -295,15 +498,8 @@ read_xlsx_base <- function(path, sheet = 1L) {
     )
   }
 
-  sheet_file <- file.path(
-    tmp,
-    "xl",
-    "worksheets",
-    paste0("sheet", as.integer(sheet), ".xml")
-  )
-  if (!file.exists(sheet_file)) {
-    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
-  }
+  sheet_file <- resolve_xlsx_sheet_file(tmp, sheet, path)
+  date_styles <- parse_xlsx_date_styles(tmp)
   xml <- paste(
     readLines(sheet_file, warn = FALSE, encoding = "UTF-8"),
     collapse = ""
@@ -311,7 +507,7 @@ read_xlsx_base <- function(path, sheet = 1L) {
 
   rows_xml <- regmatches(
     xml,
-    gregexpr("<row[^>]*>.*?</row>", xml, perl = TRUE)
+    gregexpr("<row\\b[^>]*?(?:/>|>[\\s\\S]*?</row>)", xml, perl = TRUE)
   )[[1L]]
   if (length(rows_xml) == 0L) {
     return(data.frame())
@@ -325,34 +521,60 @@ read_xlsx_base <- function(path, sheet = 1L) {
   parsed_rows <- lapply(rows_xml, function(r_xml) {
     cells <- regmatches(
       r_xml,
-      gregexpr("<c [^>]*?(?:/>|>.*?</c>)", r_xml, perl = TRUE)
+      gregexpr("<c\\b[^>]*?(?:/>|>[\\s\\S]*?</c>)", r_xml, perl = TRUE)
     )[[1L]]
     if (length(cells) == 0L) {
       return(list(cols = integer(0), vals = character(0)))
     }
     cols <- integer(length(cells))
     vals <- rep(NA_character_, length(cells))
+    col_cursor <- 1L
     for (i in seq_along(cells)) {
       cell <- cells[[i]]
-      ref <- sub(".* r=\"([A-Z]+)[0-9]+\".*", "\\1", cell, perl = TRUE)
-      cols[[i]] <- col_to_int(ref)
-      ctype <- if (grepl(" t=\"([^\"]+)\"", cell, perl = TRUE)) {
-        sub(".* t=\"([^\"]+)\".*", "\\1", cell, perl = TRUE)
+      open_tag <- sub("^([^>]+)>.*$", "\\1", cell, perl = TRUE)
+      if (grepl("\\br=\"([A-Z]+)[0-9]+\"", open_tag, perl = TRUE)) {
+        ref <- sub(".*\\br=\"([A-Z]+)[0-9]+\".*", "\\1", open_tag, perl = TRUE)
+        cols[[i]] <- col_to_int(ref)
+      } else {
+        cols[[i]] <- col_cursor
+      }
+      col_cursor <- cols[[i]] + 1L
+
+      ctype <- if (grepl("\\bt=\"([^\"]+)\"", open_tag, perl = TRUE)) {
+        sub(".*\\bt=\"([^\"]+)\".*", "\\1", open_tag, perl = TRUE)
       } else {
         "n"
       }
+      s_idx <- if (grepl("\\bs=\"([0-9]+)\"", open_tag, perl = TRUE)) {
+        as.integer(sub(".*\\bs=\"([0-9]+)\".*", "\\1", open_tag, perl = TRUE))
+      } else {
+        NA_integer_
+      }
+
       if (ctype == "inlineStr") {
-        if (grepl("<t[^>]*>.*?</t>", cell, perl = TRUE)) {
+        if (grepl("<t[^>]*>[\\s\\S]*?</t>", cell, perl = TRUE)) {
           vals[[i]] <- unescape_xml(
-            sub(".*<t[^>]*>(.*?)</t>.*", "\\1", cell, perl = TRUE)
+            sub(".*<t[^>]*>([\\s\\S]*?)</t>.*", "\\1", cell, perl = TRUE)
           )
         }
-      } else if (grepl("<v>(.*?)</v>", cell, perl = TRUE)) {
-        v <- sub(".*<v>(.*?)</v>.*", "\\1", cell, perl = TRUE)
+      } else if (grepl("<v>([\\s\\S]*?)</v>", cell, perl = TRUE)) {
+        v <- sub(".*<v>([\\s\\S]*?)</v>.*", "\\1", cell, perl = TRUE)
         if (ctype == "s") {
           vals[[i]] <- shared[[as.integer(v) + 1L]]
         } else if (ctype == "b") {
           vals[[i]] <- if (v == "1") "TRUE" else "FALSE"
+        } else if (
+          ctype == "n" &&
+            !is.na(s_idx) &&
+            (s_idx + 1L) <= length(date_styles) &&
+            isTRUE(date_styles[[s_idx + 1L]])
+        ) {
+          num_v <- suppressWarnings(as.numeric(v))
+          vals[[i]] <- if (!is.na(num_v)) {
+            format_excel_serial_date(num_v)
+          } else {
+            unescape_xml(v)
+          }
         } else {
           vals[[i]] <- unescape_xml(v)
         }
@@ -361,7 +583,11 @@ read_xlsx_base <- function(path, sheet = 1L) {
     list(cols = cols, vals = vals)
   })
 
-  max_col <- max(unlist(lapply(parsed_rows, `[[`, "cols")))
+  all_cols <- unlist(lapply(parsed_rows, `[[`, "cols"), use.names = FALSE)
+  max_col <- if (length(all_cols) == 0L) 0L else max(all_cols)
+  if (max_col == 0L) {
+    return(data.frame())
+  }
   mat <- matrix(NA_character_, nrow = length(parsed_rows), ncol = max_col)
   for (r in seq_along(parsed_rows)) {
     pr <- parsed_rows[[r]]

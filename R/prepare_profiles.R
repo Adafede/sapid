@@ -93,13 +93,26 @@ prepare_profiles <- function(
     }
   )
   scaled_val <- expanded$value / 10
-  replacement_val <- ifelse(!is.na(scaled_val), scaled_val, med_fallback)
-  expanded$value <- ifelse(expanded$value > 10, replacement_val, expanded$value)
+  replacement_val <- ifelse(
+    !is.na(scaled_val) & scaled_val <= 10,
+    scaled_val,
+    ifelse(!is.na(med_fallback), med_fallback, scaled_val)
+  )
+  expanded$value <- ifelse(
+    !is.na(expanded$value) & expanded$value > 10,
+    replacement_val,
+    expanded$value
+  )
 
+  term_key <- ifelse(
+    is.na(expanded$newName),
+    paste0("RAW:", expanded$name),
+    paste0("HARM:", expanded$newName)
+  )
   dedup_key <- paste(
     expanded$ProductName,
     expanded$CJ,
-    expanded$newName,
+    term_key,
     sep = "\r"
   )
   expanded$value <- stats::ave(

@@ -507,3 +507,75 @@ expect_equal(
   0.5,
   tolerance = 1e-12
 )
+
+# 16. read_xlsx_base hardening: workbook sheet resolution, styles dates, <rPh>, missing r=, zero-cell rows
+td_adv <- tempfile("xlsx_adv_")
+dir.create(file.path(td_adv, "xl", "worksheets"), recursive = TRUE)
+dir.create(file.path(td_adv, "xl", "_rels"), recursive = TRUE)
+writeLines(
+  paste0(
+    "<workbook><sheets>",
+    "<sheet name=\"Summary\" sheetId=\"1\" r:id=\"rId1\"/>",
+    "<sheet name=\"Sensory\" sheetId=\"2\" r:id=\"rId2\"/>",
+    "</sheets></workbook>"
+  ),
+  file.path(td_adv, "xl", "workbook.xml")
+)
+writeLines(
+  paste0(
+    "<Relationships>",
+    "<Relationship Id=\"rId1\" Target=\"worksheets/sheet2.xml\"/>",
+    "<Relationship Id=\"rId2\" Target=\"/xl/worksheets/sheet1.xml\"/>",
+    "</Relationships>"
+  ),
+  file.path(td_adv, "xl", "_rels", "workbook.xml.rels")
+)
+writeLines(
+  paste0(
+    "<sst>",
+    "<si xml:space=\"preserve\"><t>label</t><rPh sb=\"0\" eb=\"2\"><t>PHON</t></rPh></si>",
+    "</sst>"
+  ),
+  file.path(td_adv, "xl", "sharedStrings.xml")
+)
+writeLines(
+  paste0(
+    "<styleSheet>",
+    "<numFmts count=\"1\"><numFmt numFmtId=\"164\" formatCode=\"yyyy-mm-dd\"/></numFmts>",
+    "<cellXfs count=\"3\">",
+    "<xf numFmtId=\"0\"/>",
+    "<xf numFmtId=\"14\"/>",
+    "<xf numFmtId=\"164\"/>",
+    "</cellXfs>",
+    "</styleSheet>"
+  ),
+  file.path(td_adv, "xl", "styles.xml")
+)
+writeLines(
+  paste0(
+    "<worksheet><sheetData>",
+    "<row r=\"1\"><c t=\"s\"><v>0</v></c><c t=\"inlineStr\"><is><t>dt_builtin</t></is></c><c t=\"inlineStr\"><is><t>dt_custom</t></is></c><c t=\"inlineStr\"><is><t>val</t></is></c></row>",
+    "<row r=\"2\"><c t=\"inlineStr\"><is><t>row1</t></is></c><c s=\"1\"><v>45292</v></c><c s=\"2\"><v>45293.5</v></c><c s=\"0\"><v>12.5</v></c></row>",
+    "</sheetData></worksheet>"
+  ),
+  file.path(td_adv, "xl", "worksheets", "sheet1.xml")
+)
+writeLines(
+  "<worksheet><sheetData><row r=\"1\"/><row r=\"2\"></row></sheetData></worksheet>",
+  file.path(td_adv, "xl", "worksheets", "sheet2.xml")
+)
+xlsx_adv_file <- tempfile(fileext = ".xlsx")
+old_wd_adv <- setwd(td_adv)
+utils::zip(xlsx_adv_file, files = "xl", flags = "-rq")
+setwd(old_wd_adv)
+unlink(td_adv, recursive = TRUE)
+
+by_name <- read_xlsx_base(xlsx_adv_file, sheet = "Sensory")
+expect_identical(names(by_name), c("label", "dt_builtin", "dt_custom", "val"))
+expect_identical(by_name$label, "row1")
+expect_identical(by_name$dt_builtin, "2024-01-01")
+expect_identical(by_name$dt_custom, "2024-01-02 12:00:00")
+expect_identical(by_name$val, 12.5)
+expect_identical(read_xlsx_base(xlsx_adv_file, sheet = 1L), data.frame())
+expect_error(read_xlsx_base(xlsx_adv_file, sheet = "Missing"), "not found")
+unlink(xlsx_adv_file)

@@ -41,8 +41,10 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends \
             cmake libarchive-dev libcurl4-openssl-dev libfontconfig1-dev \
-            libfreetype6-dev libfribidi-dev libharfbuzz-dev libjpeg-dev \
-            libnetcdf-dev libpng-dev libtiff-dev libuv1-dev libxml2-dev zlib1g-dev \
+            libfreetype6-dev libfribidi-dev libgl1-mesa-dev libglpk-dev \
+            libglu1-mesa-dev libharfbuzz-dev libicu-dev libjpeg-dev \
+            libnetcdf-dev libnode-dev libpng-dev libssl-dev libtiff-dev \
+            libuv1-dev libxml2-dev make zlib1g-dev \
           && sudo apt-get clean \
           && sudo rm -rf /var/lib/apt/lists/*
 
@@ -60,7 +62,11 @@ jobs:
       - name: Install dependencies and package
         shell: Rscript {0}
         run: |
-          options(Ncpus = max(1L, parallel::detectCores()))
+          ncores <- max(1L, parallel::detectCores())
+          options(Ncpus = ncores)
+          if (.Platform$OS.type == "unix") {
+            Sys.setenv(MAKEFLAGS = paste0("-j", ncores))
+          }
           cran_repos <- getOption("repos")
           cran_repos <- cran_repos[!is.na(cran_repos) & cran_repos != "@CRAN@"]
           if (length(cran_repos) == 0L) {

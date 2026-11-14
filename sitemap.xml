@@ -2,170 +2,170 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://adafede.github.io/sapid/LICENSE.html</loc>
-    <lastmod>2026-11-14T11:17:09.327Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.216Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/sapid-data.html</loc>
-    <lastmod>2026-11-14T11:17:28.059Z</lastmod>
+    <lastmod>2026-11-14T11:44:40.962Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/dictionary_generic.html</loc>
-    <lastmod>2026-11-14T11:17:11.493Z</lastmod>
+    <lastmod>2026-11-14T11:44:19.976Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/cluster_nmr.html</loc>
-    <lastmod>2026-11-14T11:17:09.677Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.691Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/prepare_concentration.html</loc>
-    <lastmod>2026-11-14T11:17:25.717Z</lastmod>
+    <lastmod>2026-11-14T11:44:38.033Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/prepare_napping.html</loc>
-    <lastmod>2026-11-14T11:17:26.602Z</lastmod>
+    <lastmod>2026-11-14T11:44:38.983Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/load_session.html</loc>
-    <lastmod>2026-11-14T11:17:15.398Z</lastmod>
+    <lastmod>2026-11-14T11:44:25.950Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_napping.html</loc>
-    <lastmod>2026-11-14T11:17:22.618Z</lastmod>
+    <lastmod>2026-11-14T11:44:34.305Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/geom_sigmoid.html</loc>
-    <lastmod>2026-11-14T11:17:11.587Z</lastmod>
+    <lastmod>2026-11-14T11:44:20.130Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_descriptors_network.html</loc>
-    <lastmod>2026-11-14T11:17:20.208Z</lastmod>
+    <lastmod>2026-11-14T11:44:31.519Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/load_consistent_profiles.html</loc>
-    <lastmod>2026-11-14T11:17:14.620Z</lastmod>
+    <lastmod>2026-11-14T11:44:24.623Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/prepare_chemical_profiles.html</loc>
-    <lastmod>2026-11-14T11:17:24.983Z</lastmod>
+    <lastmod>2026-11-14T11:44:37.105Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_chasselas_variation.html</loc>
-    <lastmod>2026-11-14T11:17:17.064Z</lastmod>
+    <lastmod>2026-11-14T11:44:27.819Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_profiles.html</loc>
-    <lastmod>2026-11-14T11:17:23.476Z</lastmod>
+    <lastmod>2026-11-14T11:44:35.243Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_matrices.html</loc>
-    <lastmod>2026-11-14T11:17:21.876Z</lastmod>
+    <lastmod>2026-11-14T11:44:33.445Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/get_session_info.html</loc>
-    <lastmod>2026-11-14T11:17:12.319Z</lastmod>
+    <lastmod>2026-11-14T11:44:21.075Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_concentration.html</loc>
-    <lastmod>2026-11-14T11:17:18.501Z</lastmod>
+    <lastmod>2026-11-14T11:44:29.593Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_correlations.html</loc>
-    <lastmod>2026-11-14T11:17:19.357Z</lastmod>
+    <lastmod>2026-11-14T11:44:30.563Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/NEWS.html</loc>
-    <lastmod>2026-11-14T11:17:09.321Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.205Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/CITATION.html</loc>
-    <lastmod>2026-11-14T11:17:09.356Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.265Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/vignettes/articles/II-correlations.html</loc>
-    <lastmod>2026-11-14T11:17:28.761Z</lastmod>
+    <lastmod>2026-11-14T11:44:41.426Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/vignettes/articles/I-sensory.html</loc>
-    <lastmod>2026-11-14T11:17:28.761Z</lastmod>
+    <lastmod>2026-11-14T11:44:41.426Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/vignettes/sapid.html</loc>
-    <lastmod>2026-11-14T11:17:28.761Z</lastmod>
+    <lastmod>2026-11-14T11:44:41.426Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/index.html</loc>
-    <lastmod>2026-11-14T11:17:09.335Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.230Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/harmonize_terms.html</loc>
-    <lastmod>2026-11-14T11:17:13.878Z</lastmod>
+    <lastmod>2026-11-14T11:44:23.693Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/prepare_chasselas.html</loc>
-    <lastmod>2026-11-14T11:17:24.323Z</lastmod>
+    <lastmod>2026-11-14T11:44:36.292Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/fractions.html</loc>
-    <lastmod>2026-11-14T11:17:11.563Z</lastmod>
+    <lastmod>2026-11-14T11:44:20.090Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/correlate_ion_taste_intensities.html</loc>
-    <lastmod>2026-11-14T11:17:10.657Z</lastmod>
+    <lastmod>2026-11-14T11:44:19.010Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/chasselas.html</loc>
-    <lastmod>2026-11-14T11:17:09.411Z</lastmod>
+    <lastmod>2026-11-14T11:44:17.361Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/sigmoid.html</loc>
-    <lastmod>2026-11-14T11:17:28.132Z</lastmod>
+    <lastmod>2026-11-14T11:44:41.024Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/dictionary_napping.html</loc>
-    <lastmod>2026-11-14T11:17:11.515Z</lastmod>
+    <lastmod>2026-11-14T11:44:20.012Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_informed_tasting.html</loc>
-    <lastmod>2026-11-14T11:17:20.998Z</lastmod>
+    <lastmod>2026-11-14T11:44:32.499Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/concentration_afc.html</loc>
-    <lastmod>2026-11-14T11:17:10.632Z</lastmod>
+    <lastmod>2026-11-14T11:44:18.965Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/profiles.html</loc>
-    <lastmod>2026-11-14T11:17:28.033Z</lastmod>
+    <lastmod>2026-11-14T11:44:40.928Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/napping_coordinates.html</loc>
-    <lastmod>2026-11-14T11:17:16.151Z</lastmod>
+    <lastmod>2026-11-14T11:44:26.893Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/groups.html</loc>
-    <lastmod>2026-11-14T11:17:13.073Z</lastmod>
+    <lastmod>2026-11-14T11:44:22.030Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/prepare_profiles.html</loc>
-    <lastmod>2026-11-14T11:17:27.286Z</lastmod>
+    <lastmod>2026-11-14T11:44:39.970Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/harmonize_terms_df.html</loc>
-    <lastmod>2026-11-14T11:17:13.100Z</lastmod>
+    <lastmod>2026-11-14T11:44:22.075Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/napping_descriptors.html</loc>
-    <lastmod>2026-11-14T11:17:16.179Z</lastmod>
+    <lastmod>2026-11-14T11:44:26.937Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_chromatograms.html</loc>
-    <lastmod>2026-11-14T11:17:17.823Z</lastmod>
+    <lastmod>2026-11-14T11:44:28.754Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/plot_chasselas_modulation.html</loc>
-    <lastmod>2026-11-14T11:17:16.202Z</lastmod>
+    <lastmod>2026-11-14T11:44:26.974Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/sapid/man/dictionary_specific.html</loc>
-    <lastmod>2026-11-14T11:17:11.541Z</lastmod>
+    <lastmod>2026-11-14T11:44:20.054Z</lastmod>
   </url>
 </urlset>

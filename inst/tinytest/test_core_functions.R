@@ -300,3 +300,14 @@ expected_vals <- c(
 )
 expect_equal(consistent_norm$value, expected_vals, tolerance = 1e-12)
 expect_equal(sum(consistent_norm$value^2), sum(c(1, 2, 4)^2), tolerance = 1e-12)
+
+# .onAttach: safe citation lookup with lib.loc and missing-package guard
+on_attach <- get(".onAttach", envir = ns)
+expect_message(
+  on_attach(tempdir(), "nonexistent_sapid_pkg"),
+  pattern = "Welcome to nonexistent_sapid_pkg"
+)
+expect_message(
+  on_attach(dirname(find.package("sapid")), "sapid"),
+  pattern = "Welcome to sapid"
+)

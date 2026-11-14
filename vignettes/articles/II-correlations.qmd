@@ -24,7 +24,7 @@ lang: en
 license: CC BY
 opengraph:
   image:
-    src: https://github.com/adafede/sapid/blob/main/man/figures/logo.svg
+    src: https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg
     alt: A Strategy to Analyze Plant Extracts Taste In Depth
 vignette: >
   %\VignetteIndexEntry{2 Chemical profiling & ion-taste correlations}
@@ -62,7 +62,7 @@ four chemometric steps:
 cluster_nmr(
   nmr_dir = "./data/10043",
   output_figure = "./data/figures/figure_nmr.pdf",
-  output_groups = "./inst/extdata/groups.tsv",
+  output_groups = "./data/groups.tsv",
   dist_method = "euclidean"
 )
 ```

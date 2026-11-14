@@ -1,6 +1,8 @@
+
+
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# SAPID <img src='https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg' align="right" height="139" />
+# sapid <img src="https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg" align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -14,16 +16,23 @@ badge](https://adafede.r-universe.dev/sapid/badges/version?&color=blue&style=cla
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14616395.svg)](https://doi.org/10.5281/zenodo.14616395)
 <!-- badges: end -->
 
-A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth.
+A Strategy to Analyze Plant Extracts Taste in Depth (SAPID).
 
-⚠️ This repository is not maintained and will not be except for extreme
-interest. It has just been opened for the sake of transparency.
+`sapid` integrates sensory panel data (free profiling, projective
+napping, Chasselas model-wine modulation, and 3-AFC recognition
+threshold testing) with untargeted LC-MS feature tables, Charged Aerosol
+Detection (CAD) semi-quantification, taxonomically informed metabolite
+annotations (TIMA), and 1D proton NMR spectral clustering. It
+accompanies the study of *Swertia chirayita* bitter extracts published
+in *Current Research in Food Science*
+(<https://doi.org/10.1016/j.crfs.2025.101043>).
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install with:
+Install `sapid` and its GitHub and Bioconductor dependencies from
+R-universe:
 
-```r
+``` r
 install.packages(
   "sapid",
   repos = c(
@@ -35,23 +44,87 @@ install.packages(
 )
 ```
 
+## Quick Start
+
+The bundled datasets let you run descriptor harmonization and panel
+consistency filtering immediately after installation:
+
+``` r
+library(sapid)
+#> Welcome to sapid
+#> To cite sapid in publications use:  Rutz A (2026). _sapid: A Strategy to Analyze Plant Extracts Taste In
+#>   Depth_. R package, version 0.0.0.9002.  Adriano Rutz; Pascale Deneulin; Ivano Tonutti; Benoit Bach and
+#>   Jean-Luc Wolfender. (5 April 2025). SAPID: a Strategy to Analyze
+#>   Plant Extracts Taste In Depth. Application to the complex taste of
+#>   Swertia chirayita (Roxb.) H.Karst. Current Research in Food Science.
+#>   doi:10.1016/j.crfs.2025.101043.To see these entries in BibTeX format, use 'format(<citation>,
+#> bibtex=TRUE)', or 'toBibtex(.)'.
+
+harmonize_terms(
+  dictionary = dictionary_generic,
+  x = c("amer", "acidité", "ferreux"),
+  mode = "word"
+)
+#> [1] "BITTER"   "ACID"     "METALLIC"
+
+consistent <- load_consistent_profiles(profiles, min_jury = 2L)
+head(
+  consistent[, c("fraction", "session", "jury", "taste_original", "taste", "value")],
+  6L
+)
+#>      fraction    session    jury taste_original  taste value
+#> 1 fraction_17 session_01 jury_08       AMERTUME BITTER   0.0
+#> 2 fraction_17 session_01 jury_11           AMER BITTER   2.5
+#> 3 fraction_17 session_01 jury_13   MINERAL AMER BITTER   3.8
+#> 4 fraction_17 session_01 jury_16       AMERTUME BITTER   3.3
+#> 5 fraction_18 session_01 jury_08       AMERTUME BITTER   4.7
+#> 6 fraction_18 session_01 jury_11           AMER BITTER   2.4
+```
+
+## Package Scope and Data Requirements
+
+`sapid` includes 10 datasets (`chasselas`, `concentration_afc`,
+`dictionary_generic`, `dictionary_napping`, `dictionary_specific`,
+`fractions`, `groups`, `napping_coordinates`, `napping_descriptors`,
+`profiles`) and 24 exported functions. End-to-end LC-MS/CAD/NMR
+ingestion functions require external raw files that are not bundled in
+the installed package due to file size.
+
+| Workflow stage | Exported functions | Required input |
+|----|----|----|
+| Term harmonization and filtering | `harmonize_terms()`, `harmonize_terms_df()`, `load_consistent_profiles()` | Bundled dictionaries and `profiles` (or user data frames) |
+| Sensory and psychophysical visualization | `plot_profiles()` (sensory mode), `plot_napping()`, `plot_chasselas_variation()`, `plot_chasselas_modulation()`, `plot_concentration()`, `plot_descriptors_network()`, `plot_matrices()`, `geom_sigmoid()`, `sigmoid()` | Bundled datasets (`profiles`, `napping_*`, `chasselas`, `concentration_afc`, `fractions`) |
+| Raw sensory spreadsheet import | `load_session()`, `get_session_info()`, `prepare_profiles()`, `prepare_napping()`, `prepare_chasselas()`, `prepare_concentration()`, `plot_informed_tasting()` | External tasting session `.xlsx`/TSV exports and fraction mass tables |
+| LC-MS, CAD, and TIMA correlation | `prepare_chemical_profiles()`, `correlate_ion_taste_intensities()`, `plot_correlations()`, `plot_profiles()` (chemical/combined modes) | External MZmine `.csv`, `.mzML`, CAD peak lists, and TIMA annotations |
+| 1D proton NMR clustering | `cluster_nmr()`, `plot_chromatograms()` | External 1D NMR directories (`AlpsNMR`) and chromatographic index tables |
+
+## Documentation and Contributing
+
+- Package website: <https://adafede.github.io/sapid/>
+- Overview vignette: [Get started](vignettes/sapid.qmd)
+- Workflow articles: [Sensory and
+  psychophysics](vignettes/articles/I-sensory.qmd), [Chemical and
+  correlations](vignettes/articles/II-correlations.qmd)
+- Contributor workflow, local build/test instructions, and PR checks:
+  [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Main Citations
+
+If you use `sapid` or its upstream metabolomics tools, please cite the
+relevant publications and specific database versions used in your
+analysis:
 
 ### SAPID
 
-Article: <https://doi.org/10.1016/j.crfs.2025.101043>
-
-According to which steps you used, please give credit to the authors of the
-tools/resources used.
+- Article: <https://doi.org/10.1016/j.crfs.2025.101043>
 
 ### mzmine
 
-General: <https://doi.org/10.1038/s41587-023-01690-2>
+- <https://doi.org/10.1038/s41587-023-01690-2>
 
 ### SIRIUS
 
-General: <https://doi.org/10.1038/s41592-019-0344-8>
-
+- General: <https://doi.org/10.1038/s41592-019-0344-8>
 - *CSI:FingerId*: <https://doi.org/10.1073/pnas.1509788112>
 - *ZODIAC*: <https://doi.org/10.1038/s42256-020-00234-6>
 - *CANOPUS*: <https://doi.org/10.1038/s41587-020-0740-8>
@@ -59,53 +132,50 @@ General: <https://doi.org/10.1038/s41592-019-0344-8>
 
 ### LOTUS
 
-General: <https://doi.org/10.7554/eLife.70780>
-
-⚠️ Do not forget to cite which version you used:
-<https://doi.org/10.5281/zenodo.5794106>
+- General: <https://doi.org/10.7554/eLife.70780>
+- Dataset record (cite the version used):
+  <https://doi.org/10.5281/zenodo.5794106>
 
 ### ISDB
 
-General: <https://doi.org/10.1021/acs.analchem.5b04804>
-
-⚠️ Do not forget to cite which version you used:
-<https://doi.org/10.5281/zenodo.5607185>
+- General: <https://doi.org/10.1021/acs.analchem.5b04804>
+- Dataset record (cite the version used):
+  <https://doi.org/10.5281/zenodo.5607185>
 
 ### TIMA
 
-General: <https://doi.org/10.3389/fpls.2019.01329>
-
-⚠️ Do not forget to cite which version you used:
-<https://doi.org/10.5281/zenodo.5797920>
+- General: <https://doi.org/10.3389/fpls.2019.01329>
+- Dataset record (cite the version used):
+  <https://doi.org/10.5281/zenodo.5797920>
 
 ### Others
 
 - NPClassifier: <https://doi.org/10.1021/acs.jnatprod.1c00399>
 
-## Additional software credits
+## Additional Software Credits
 
-  | Package     | Version    | Citation                                                              |
-  | :---        | :---       | :---                                                                  |
-  | AlpsNMR     | 4.14.0     | Madrid-Gambin et al. (2020)                                           |
-  | base        | 4.6.2      | R Core Team (2026)                                                    |
-  | BiocManager | 1.30.27    | Morgan and Ramos (2025)                                               |
-  | BiocVersion | 3.23.1     | Morgan (2025)                                                         |
-  | cascade     | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                               |
-  | data.table  | 1.18.6.1   | Barrett et al. (2026)                                                 |
-  | dendextend  | 1.19.1     | Galili (2015)                                                         |
-  | FactoMineR  | 2.18       | Lê et al. (2008)                                                      |
-  | ggpubr      | 1.0.0      | Kassambara (2026)                                                     |
-  | ggraph      | 2.2.2      | Pedersen (2025)                                                       |
-  | ggrepel     | 0.9.8      | Slowikowski (2026)                                                    |
-  | igraph      | 2.3.4      | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
-  | knitr       | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                    |
-  | rmarkdown   | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)           |
-  | sapid       | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b)                                      |
-  | SensoMineR  | 1.28       | Husson et al. (2025)                                                  |
-  | tidyverse   | 2.0.0      | Wickham et al. (2019)                                                 |
-  | tinytest    | 1.4.3      | <span class="nocase">van der Loo</span> (2020)                        |
-  | treemapify  | 2.6.1      | Wilkins (2026)                                                        |
-  | withr       | 3.0.3      | Hester et al. (2026)                                                  |
+| Package | Version | Citation |
+|:---|:---|:---|
+| AlpsNMR | 4.14.0 | Madrid-Gambin et al. (2020) |
+| base | 4.6.2 | R Core Team (2026) |
+| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
+| BiocVersion | 3.23.1 | Morgan (2025) |
+| cascade | 0.0.0.9003 | Rutz and Wolfender (2023); Rutz (2026a) |
+| data.table | 1.18.6.1 | Barrett et al. (2026) |
+| dendextend | 1.19.1 | Galili (2015) |
+| FactoMineR | 2.18 | Lê et al. (2008) |
+| ggpubr | 1.0.0 | Kassambara (2026) |
+| ggraph | 2.2.2 | Pedersen (2025) |
+| ggrepel | 0.9.8 | Slowikowski (2026) |
+| igraph | 2.3.4 | Csárdi and Nepusz (2006); Antonov et al. (2023); Csárdi et al. (2026) |
+| knitr | 1.52 | Xie (2014); Xie (2015); Xie (2026) |
+| rmarkdown | 2.32 | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026) |
+| sapid | 0.0.0.9002 | Rutz et al. (2025); Rutz (2026b) |
+| SensoMineR | 1.28 | Husson et al. (2025) |
+| tidyverse | 2.0.0 | Wickham et al. (2019) |
+| tinytest | 1.4.3 | <span class="nocase">van der Loo</span> (2020) |
+| treemapify | 2.6.1 | Wilkins (2026) |
+| withr | 3.0.3 | Hester et al. (2026) |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

@@ -24,7 +24,7 @@ lang: en
 license: CC BY
 opengraph:
   image:
-    src: https://github.com/adafede/sapid/blob/main/man/figures/logo.svg
+    src: https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg
     alt: A Strategy to Analyze Plant Extracts Taste In Depth
 vignette: >
   %\VignetteIndexEntry{General comments about the use of SAPID}
@@ -33,7 +33,7 @@ vignette: >
 ---
 
 This vignette outlines the workflow and statistical methods implemented in
-`sapid` (**S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth).
+`sapid` (Strategy to Analyze Plant Extracts Taste in Depth).
 
 ## Installation
 

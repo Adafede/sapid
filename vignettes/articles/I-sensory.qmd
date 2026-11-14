@@ -24,7 +24,7 @@ lang: en
 license: CC BY
 opengraph:
   image:
-    src: https://github.com/adafede/sapid/blob/main/man/figures/logo.svg
+    src: https://raw.githubusercontent.com/adafede/sapid/main/man/figures/logo.svg
     alt: A Strategy to Analyze Plant Extracts Taste In Depth
 vignette: >
   %\VignetteIndexEntry{1 Sensory analysis & psychophysics}
@@ -55,7 +55,7 @@ overwrite substrings inside already-translated terms:
 data(dictionary_generic)
 harmonize_terms(
   dictionary = dictionary_generic,
-  x = c("amer", "acidulé", "métallique"),
+  x = c("amer", "acidité", "ferreux"),
   mode = "word"
 )
 ```

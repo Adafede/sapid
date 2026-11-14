@@ -55,9 +55,14 @@ data/fractions_mzmine
 data/interim
 data/processed
 
-# MacOS
+# MacOS & editors
 .DS_Store
-docs
+.idea/
+.vscode/
+
+# Local agent tracking (never commit)
+.agent-work/
+
 altdoc/freeze.rds
 _quarto/*
 !_quarto/_freeze/

@@ -1,9 +1,11 @@
+(^|/)\.DS_Store$
 ^.*\.Rproj$
 ^.*\.iml$
 ^.*\.log$
 ^AGENTS[.]md$
 ^CITATION\.cff$
 ^CLAUDE[.]md$
+^CONTRIBUTING\.md$
 ^GEMINI[.]md$
 ^LICENSE\.md$
 ^README\.Rmd$
@@ -17,11 +19,10 @@
 ^[.]cursor[.]md$
 ^[.]kb/
 ^[.]mcp[.]json$
-^[.]obsidian[.]md$
-^\.DS_Store$
 ^\.Rdata$
 ^\.Rhistory$
 ^\.Rproj\.user$
+^\.agent-work$
 ^\.agents$
 ^\.claude$
 ^\.claudeignore$
@@ -34,6 +35,7 @@
 ^\.idea$
 ^\.kb$
 ^\.lintr$
+^\.obsidian[.]md$
 ^\.opencode$
 ^\.poolside$
 ^\.quarto$
@@ -65,10 +67,8 @@
 ^prek[.]toml$
 ^renv$
 ^renv\.lock$
-^tests/testthat/_snaps$
-^tests/testthat/_snaps/
 ^vignettes/\.quarto$
 ^vignettes/articles$
-^vignettes/articles/*_files$
+^vignettes/articles/.*_files$
 ^vignettes/articles/\.quarto$
 _\.new\.png$

@@ -337,7 +337,8 @@ ions_df <- data.frame(
   stringsAsFactors = FALSE
 )
 # Ion 10: non-NA run of length 3 across all 3 cols; values are 1000, 999, 1500.
-#   With min_width = 3, min_area_ion = 1000: col 1 (frac 3, 1000) and col 3 (frac 2, 1500) pass; col 2 (999 < 1000) fails!
+#   With min_width = 3, min_area_ion = 1000:
+#   col 1 (frac 3, 1000) and col 3 (frac 2, 1500) pass; col 2 (999 < 1000) fails!
 # Ion 20: non-NA run of length 2 in cols 1-2, then NA in col 3.
 #   With min_width = 3: run_counts = c(2, 2, 0) < 3 -> all fail!
 #   With min_width = 2: cols 1-2 pass!
@@ -430,13 +431,9 @@ expect_identical(pratt_wilcox_pvalue(c(5, 5, 5), md = 5), 1)
 expect_identical(pratt_wilcox_pvalue(c(0, 0, NA_real_), md = 0), 1)
 
 # Hand-calculated Pratt test with n0 = 2 zeros and 4 non-zero diffs:
-# d = c(0, 0, 1, 2, 2, -4) -> |d| = c(0, 0, 1, 2, 2, 4)
-# Ranks of |d| = c(1.5, 1.5, 3, 4.5, 4.5, 6)
-# Positive ranks: 3 + 4.5 + 4.5 = 12; Negative ranks: 6
-# n = 6, n0 = 2, tie group of size 2 among non-zeros -> tie_term = 2^3 - 2 = 6
-# mu_w = (6*7 - 2*3) / 4 = 9
-# var_w = (6*7*13 - 2*3*5 - 0.5*6) / 24 = (546 - 30 - 3) / 24 = 513 / 24 = 21.375
-# z = (max(|12 - 9| - 0.5, 0)) / sqrt(21.375) = 2.5 / sqrt(21.375)
+# Expected Pratt (1959) test for c(0, 0, 1, 2, 2, -4):
+# |d| ranks (1.5, 1.5, 3, 4.5, 4.5, 6), positive rank sum 12, mean 9,
+# zero/tie-corrected variance 513/24, continuity-corrected z of 2.5 / sqrt(513/24).
 d_pratt <- c(0, 0, 1, 2, 2, -4)
 expected_p_pratt <- 2 * stats::pnorm(2.5 / sqrt(513 / 24), lower.tail = FALSE)
 expect_equal(
@@ -554,8 +551,17 @@ writeLines(
 writeLines(
   paste0(
     "<worksheet><sheetData>",
-    "<row r=\"1\"><c t=\"s\"><v>0</v></c><c t=\"inlineStr\"><is><t>dt_builtin</t></is></c><c t=\"inlineStr\"><is><t>dt_custom</t></is></c><c t=\"inlineStr\"><is><t>val</t></is></c></row>",
-    "<row r=\"2\"><c t=\"inlineStr\"><is><t>row1</t></is></c><c s=\"1\"><v>45292</v></c><c s=\"2\"><v>45293.5</v></c><c s=\"0\"><v>12.5</v></c></row>",
+    paste0(
+      "<row r=\"1\"><c t=\"s\"><v>0</v></c>",
+      "<c t=\"inlineStr\"><is><t>dt_builtin</t></is></c>",
+      "<c t=\"inlineStr\"><is><t>dt_custom</t></is></c>",
+      "<c t=\"inlineStr\"><is><t>val</t></is></c></row>"
+    ),
+    paste0(
+      "<row r=\"2\"><c t=\"inlineStr\"><is><t>row1</t></is></c>",
+      "<c s=\"1\"><v>45292</v></c><c s=\"2\"><v>45293.5</v></c>",
+      "<c s=\"0\"><v>12.5</v></c></row>"
+    ),
     "</sheetData></worksheet>"
   ),
   file.path(td_adv, "xl", "worksheets", "sheet1.xml")

@@ -284,7 +284,8 @@ expect_identical(consistent$sum, c(3, 3, 4))
 expect_identical(consistent$sum_taste, c(7, 7, 7))
 expect_identical(consistent$group, c(1L, 1L, 1L))
 
-# Boundary: min_jury = 1L keeps SWEET (sum_taste = 10, group = 1), ACID (sum_taste = 8, group = 2), BITTER (sum_taste = 7, group = 3)
+# Boundary: min_jury = 1L keeps SWEET (sum_taste = 10, group = 1),
+# ACID (sum_taste = 8, group = 2), BITTER (sum_taste = 7, group = 3)
 consistent_1 <- load_consistent_profiles(small_profiles, min_jury = 1L)
 expect_identical(nrow(consistent_1), 6L)
 u_1 <- unique(consistent_1[, c("taste", "sum_taste", "group")])
@@ -333,11 +334,9 @@ expect_identical(u_ranks$taste[1:3], c("BITTER", "FATTY", "ACID"))
 expect_identical(u_ranks$group, seq_len(nrow(u_ranks)))
 expect_equal(u_ranks$sum_taste[1], 1626.6)
 
-# Verify normalize_panelists = TRUE multiplicative RMS juror scaling
-# jury_1 has values c(1, 4) -> rms_1 = sqrt((1 + 16)/2) = sqrt(8.5)
-# jury_2 has values c(2, 10) -> wait: in consistent (min_jury = 2L), only BITTER is kept:
-# jury_1 has values c(1, 4) -> rms_1 = sqrt(8.5); jury_2 has value c(2) -> rms_2 = 2
-# global_rms = sqrt((1 + 4 + 16)/3) = sqrt(7)
+# Verify multiplicative RMS juror scaling on consistent BITTER entries:
+# jury_1 values (1, 4) yield RMS sqrt(8.5); jury_2 value (2) yields RMS 2;
+# pooled RMS across all 3 consistent entries equals sqrt(7).
 consistent_norm <- load_consistent_profiles(
   small_profiles,
   min_jury = 2L,

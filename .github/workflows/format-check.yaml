@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
 
 name: format-check.yaml
@@ -18,8 +18,42 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install
+      - name: Install Air
         uses: posit-dev/setup-air@fd20dd239848b9d807848a7ab92265cf197de694
 
-      - name: Check
+      - name: Check Air formatting
         run: air format . --check
+
+      - name: Install Jarl
+        run: |
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Check Jarl lints
+        run: jarl check .
+
+  lintr:
+    name: lintr
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+        with:
+          extra-packages: any::lintr
+          needs: check
+
+      - name: Check lintr
+        shell: Rscript {0}
+        run: |
+          install.packages(".", repos = NULL, type = "source")
+          lints <- lintr::lint_package(".")
+          print(lints)
+          if (length(lints) > 0L) stop("Lint errors found")

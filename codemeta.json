@@ -36,6 +36,32 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "jsonlite",
+      "name": "jsonlite",
+      "version": ">= 1.9.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "version": ">= 1.51",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "mzR",
       "name": "mzR",
       "version": ">= 2.44.0",
@@ -62,6 +88,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "quarto",
+      "name": "quarto",
+      "version": ">= 1.5.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=quarto"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "R.utils",
       "name": "R.utils",
       "version": ">= 2.13.0",
@@ -72,6 +111,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=R.utils"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "svglite",
+      "name": "svglite",
+      "version": ">= 2.2.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=svglite"
     },
     {
       "@type": "SoftwareApplication",
@@ -100,14 +152,14 @@
       "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
-  "softwareRequirements": {
-    "1": {
+  "softwareRequirements": [
+    {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 4.5.0"
     },
-    "2": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "AlpsNMR",
       "name": "AlpsNMR",
@@ -120,14 +172,14 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/AlpsNMR.html"
     },
-    "3": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
       "version": ">= 0.0.0.9002",
       "sameAs": "https://github.com/adafede/cascade"
     },
-    "4": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "data.table",
       "name": "data.table",
@@ -140,7 +192,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=data.table"
     },
-    "5": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "dendextend",
       "name": "dendextend",
@@ -153,7 +205,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dendextend"
     },
-    "6": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
@@ -166,7 +218,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "7": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -179,7 +231,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "8": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "ggpubr",
       "name": "ggpubr",
@@ -192,7 +244,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggpubr"
     },
-    "9": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "ggraph",
       "name": "ggraph",
@@ -205,7 +257,7 @@
       },
       "sameAs": "https://github.com/thomasp85/ggraph"
     },
-    "10": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "ggrepel",
       "name": "ggrepel",
@@ -218,12 +270,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggrepel"
     },
-    "11": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "grDevices",
       "name": "grDevices"
     },
-    "12": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "igraph",
       "name": "igraph",
@@ -236,7 +288,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=igraph"
     },
-    "13": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "SensoMineR",
       "name": "SensoMineR",
@@ -249,12 +301,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=SensoMineR"
     },
-    "14": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "15": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "treemapify",
       "name": "treemapify",
@@ -267,14 +319,49 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=treemapify"
     },
-    "16": {
+    {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
-    },
-    "SystemRequirements": null
-  },
-  "keywords": ["computationalMetabolomics", "naturalExtracts", "taste", "sensoryAnalysis", "massSpectrometry", "nmrSpectroscopy", "EDAM:topic_3172", "EDAM:topic_0154", "EDAM:topic_3370", "EDAM:topic_2258", "EDAM:topic_0780", "EDAM:topic_0593", "EDAM:topic_0092", "EDAM:topic_2269", "EDAM:operation_3803", "EDAM:operation_3214", "EDAM:operation_3215", "EDAM:operation_3432", "EDAM:operation_3465", "EDAM:operation_2428", "EDAM:operation_0337", "EDAM:operation_3203", "EDAM:operation_2942", "EDAM:operation_3925", "EDAM:data_2536", "EDAM:data_3488", "EDAM:data_2048", "EDAM:format_3244", "EDAM:format_3475", "EDAM:format_3752", "EDAM:format_3508", "lc-msms", "metabolomics", "natural-extracts", "r"],
+    }
+  ],
+  "keywords": [
+    "computationalMetabolomics",
+    "naturalExtracts",
+    "taste",
+    "sensoryAnalysis",
+    "massSpectrometry",
+    "nmrSpectroscopy",
+    "EDAM:topic_3172",
+    "EDAM:topic_0154",
+    "EDAM:topic_3370",
+    "EDAM:topic_2258",
+    "EDAM:topic_0780",
+    "EDAM:topic_0593",
+    "EDAM:topic_0092",
+    "EDAM:topic_2269",
+    "EDAM:operation_3803",
+    "EDAM:operation_3214",
+    "EDAM:operation_3215",
+    "EDAM:operation_3432",
+    "EDAM:operation_3465",
+    "EDAM:operation_2428",
+    "EDAM:operation_0337",
+    "EDAM:operation_3203",
+    "EDAM:operation_2942",
+    "EDAM:operation_3925",
+    "EDAM:data_2536",
+    "EDAM:data_3488",
+    "EDAM:data_2048",
+    "EDAM:format_3244",
+    "EDAM:format_3475",
+    "EDAM:format_3752",
+    "EDAM:format_3508",
+    "lc-msms",
+    "metabolomics",
+    "natural-extracts",
+    "r"
+  ],
   "fileSize": "3322.194KB",
   "citation": [
     {
@@ -290,7 +377,7 @@
         }
       ],
       "name": "sapid: A Strategy to Analyze Plant Extracts Taste In Depth",
-      "description": "R package, version 0.0.9002"
+      "description": "R package, version 0.0.0.9002"
     },
     {
       "@type": "ScholarlyArticle",
@@ -335,14 +422,20 @@
         "@type": "PublicationIssue",
         "datePublished": "2025",
         "isPartOf": {
-          "@type": ["PublicationVolume", "Periodical"],
+          "@type": [
+            "PublicationVolume",
+            "Periodical"
+          ],
           "name": "Current Research in Food Science"
         }
       }
     }
   ],
   "releaseNotes": "https://github.com/adafede/sapid/blob/main/NEWS.md",
-  "readme": "https://github.com/Adafede/sapid/blob/main/README.md",
-  "contIntegration": ["https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/adafede/sapid"],
+  "readme": "https://github.com/adafede/sapid/blob/main/README.md",
+  "contIntegration": [
+    "https://github.com/adafede/sapid/actions/workflows/R-CMD-check.yaml",
+    "https://app.codecov.io/gh/adafede/sapid"
+  ],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

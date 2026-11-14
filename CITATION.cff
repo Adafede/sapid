@@ -28,8 +28,8 @@ preferred-citation:
     email: adafede@gmail.com
     orcid: https://orcid.org/0000-0003-0443-9902
   year: '2026'
-  notes: R package, version 0.0.9002
-repository: https://bioconductor.org/
+  notes: R package, version 0.0.0.9002
+repository: https://github.com/adafede/sapid
 repository-code: https://github.com/adafede/sapid
 url: https://adafede.github.io/sapid
 contact:

@@ -256,7 +256,11 @@ withr::with_tempdir({
           nchar(rt_b64),
           "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
           "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000595\" name=\"time array\" unitCvRef=\"UO\" unitAccession=\"UO:0000031\" unitName=\"minute\"/>",
+          paste0(
+            "<cvParam cvRef=\"MS\" accession=\"MS:1000595\"",
+            " name=\"time array\" unitCvRef=\"UO\"",
+            " unitAccession=\"UO:0000031\" unitName=\"minute\"/>"
+          ),
           "<binary>",
           rt_b64,
           "</binary></binaryDataArray>",

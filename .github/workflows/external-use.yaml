@@ -23,13 +23,14 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-          - ubuntu-26.04-arm
-          # - macos-26-intel
-          # - windows-11-vs2026-arm
     defaults:
       run:
         shell: bash
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
         with:
           use-public-rspm: true
@@ -55,24 +56,29 @@ jobs:
           LDFLAGS  += -L${GETTEXT_PREFIX}/lib -lintl
           EOF
 
-      - name: Install dependencies (Windows)
-        if: contains(matrix.os, 'windows')
-        run: true
-
-      - name: Install
-        run: >
-          install.packages(
-          "sapid",
-          repos = c(
-          "https://adafede.r-universe.dev",
-          "https://taxonomicallyinformedannotation.r-universe.dev",
-          "https://cran.r-universe.dev",
-          "https://bioc.r-universe.dev"
-          )
-          )
+      - name: Install dependencies and package
         shell: Rscript {0}
-
-      - name: Run pipeline
         run: |
-          sapid:::.packageName
+          repos <- c(
+            "https://adafede.r-universe.dev",
+            "https://taxonomicallyinformedannotation.r-universe.dev",
+            "https://bioc.r-universe.dev",
+            "https://cran.r-universe.dev"
+          )
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            install.packages("remotes", repos = repos)
+          }
+          remotes::install_deps(".", dependencies = TRUE, repos = repos)
+          install.packages(".", repos = NULL, type = "source")
+
+      - name: Run smoke check and tests
         shell: Rscript {0}
+        run: |
+          library(sapid)
+          stopifnot(identical(
+            harmonize_terms(dictionary_generic, c("amer", "boisé")),
+            c("BITTER", "WOODY")
+          ))
+          res <- tinytest::test_package("sapid")
+          print(summary(res))
+          stopifnot(all(as.logical(res)))

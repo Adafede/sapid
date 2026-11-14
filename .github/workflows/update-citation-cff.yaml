@@ -8,7 +8,7 @@ on:
   release:
     types: [published]
   push:
-    branches: [master, main]
+    branches: [main]
     paths:
       - DESCRIPTION
       - inst/CITATION
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          persist-credentials: false
+          persist-credentials: true
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
         with:
@@ -36,17 +36,8 @@ jobs:
 
       - name: Update CITATION.cff
         run: |
-
           library(cffr)
-
-          # Customize with your own code
-          # See https://docs.ropensci.org/cffr/articles/cffr.html
-
-          # Write your own keys
-          mykeys <- list()
-
-          # Create your CITATION.cff file
-          cff_write(keys = mykeys)
+          cff_write(keys = list(repository = "https://github.com/adafede/sapid"))
 
         shell: Rscript {0}
 

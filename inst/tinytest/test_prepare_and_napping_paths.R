@@ -326,9 +326,22 @@ withr::with_tempdir({
   writeLines(
     paste0(
       "<worksheet><sheetData>",
-      "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c><c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c><c r=\"C1\" t=\"inlineStr\"><is><t>Date</t></is></c><c r=\"D1\" t=\"inlineStr\"><is><t>amer_1</t></is></c></row>",
-      "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>CHASAVANT</t></is></c><c r=\"B2\"><v>1</v></c><c r=\"C2\" s=\"1\"><v>44298</v></c><c r=\"D2\"><v>3.5</v></c></row>",
-      "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>CHASAPRES</t></is></c><c r=\"B3\"><v>2</v></c><c r=\"C3\" s=\"1\"><v>44298</v></c><c r=\"D3\"><v>6.0</v></c></row>",
+      paste0(
+        "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
+        "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
+        "<c r=\"C1\" t=\"inlineStr\"><is><t>Date</t></is></c>",
+        "<c r=\"D1\" t=\"inlineStr\"><is><t>amer_1</t></is></c></row>"
+      ),
+      paste0(
+        "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>CHASAVANT</t></is></c>",
+        "<c r=\"B2\"><v>1</v></c><c r=\"C2\" s=\"1\"><v>44298</v></c>",
+        "<c r=\"D2\"><v>3.5</v></c></row>"
+      ),
+      paste0(
+        "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>CHASAPRES</t></is></c>",
+        "<c r=\"B3\"><v>2</v></c><c r=\"C3\" s=\"1\"><v>44298</v></c>",
+        "<c r=\"D3\"><v>6.0</v></c></row>"
+      ),
       "</sheetData></worksheet>"
     ),
     file.path(td, "xl", "worksheets", "sheet1.xml")
@@ -341,13 +354,27 @@ withr::with_tempdir({
     "<worksheet><sheetData/></worksheet>",
     file.path(td, "xl", "worksheets", "sheet3.xml")
   )
-  # Sheet 4 (profiles): integer CJ = 1..2, amer=6 then amer=500 -> med_fallback=6, plus two unharmonized terms
+  # Sheet 4 (profiles): integer CJ = 1..2, amer=6 then amer=500 -> med_fallback=6
   writeLines(
     enc2utf8(paste0(
       "<worksheet><sheetData>",
-      "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c><c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c><c r=\"C1\" t=\"inlineStr\"><is><t>amer</t></is></c><c r=\"D1\" t=\"inlineStr\"><is><t>sans_gout</t></is></c><c r=\"E1\" t=\"inlineStr\"><is><t>neutre</t></is></c></row>",
-      "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>17</t></is></c><c r=\"B2\"><v>1</v></c><c r=\"C2\"><v>6.0</v></c><c r=\"D2\"><v>2.0</v></c><c r=\"E2\"><v>4.0</v></c></row>",
-      "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>17</t></is></c><c r=\"B3\"><v>2</v></c><c r=\"C3\"><v>500</v></c><c r=\"D3\"/><c r=\"E3\"/></row>",
+      paste0(
+        "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
+        "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
+        "<c r=\"C1\" t=\"inlineStr\"><is><t>amer</t></is></c>",
+        "<c r=\"D1\" t=\"inlineStr\"><is><t>sans_gout</t></is></c>",
+        "<c r=\"E1\" t=\"inlineStr\"><is><t>neutre</t></is></c></row>"
+      ),
+      paste0(
+        "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>17</t></is></c>",
+        "<c r=\"B2\"><v>1</v></c><c r=\"C2\"><v>6.0</v></c>",
+        "<c r=\"D2\"><v>2.0</v></c><c r=\"E2\"><v>4.0</v></c></row>"
+      ),
+      paste0(
+        "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>17</t></is></c>",
+        "<c r=\"B3\"><v>2</v></c><c r=\"C3\"><v>500</v></c>",
+        "<c r=\"D3\"/><c r=\"E3\"/></row>"
+      ),
       "</sheetData></worksheet>"
     )),
     file.path(td, "xl", "worksheets", "sheet4.xml"),

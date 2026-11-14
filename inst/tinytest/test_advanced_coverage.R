@@ -1,7 +1,10 @@
 library(tinytest)
 
 message(
-  "Advanced coverage: prepare_concentration, correlate edge cases, plot_correlations, plot_profiles, prepare_chemical_profiles"
+  paste0(
+    "Advanced coverage: prepare_concentration, correlate edge cases, ",
+    "plot_correlations, plot_profiles, prepare_chemical_profiles"
+  )
 )
 ns <- asNamespace("sapid")
 correlate_ion_taste_intensities <- get(
@@ -665,7 +668,11 @@ withr::with_tempdir({
           nchar(rt_b64),
           "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
           "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000595\" name=\"time array\" unitCvRef=\"UO\" unitAccession=\"UO:0000031\" unitName=\"minute\"/>",
+          paste0(
+            "<cvParam cvRef=\"MS\" accession=\"MS:1000595\"",
+            " name=\"time array\" unitCvRef=\"UO\"",
+            " unitAccession=\"UO:0000031\" unitName=\"minute\"/>"
+          ),
           "<binary>",
           rt_b64,
           "</binary></binaryDataArray>",
@@ -693,31 +700,57 @@ withr::with_tempdir({
     "<spectrumList count=\"2\" defaultDataProcessingRef=\"dp\">\n",
     "<spectrum index=\"0\" id=\"scan=1\" defaultArrayLength=\"2\">",
     "<cvParam cvRef=\"MS\" accession=\"MS:1000511\" name=\"ms level\" value=\"1\"/>",
-    "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\" accession=\"MS:1000016\" name=\"scan start time\" value=\"5.0\" unitCvRef=\"UO\" unitAccession=\"UO:0000031\" unitName=\"minute\"/></scan></scanList>",
+    paste0(
+      "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\"",
+      " accession=\"MS:1000016\" name=\"scan start time\" value=\"5.0\"",
+      " unitCvRef=\"UO\" unitAccession=\"UO:0000031\"",
+      " unitName=\"minute\"/></scan></scanList>"
+    ),
     "<binaryDataArrayList count=\"2\">",
     "<binaryDataArray encodedLength=\"",
     nchar(mz_b64),
-    "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/><cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/><cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>",
+    paste0(
+      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>"
+    ),
     mz_b64,
     "</binary></binaryDataArray>",
     "<binaryDataArray encodedLength=\"",
     nchar(sp_int_b64),
-    "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/><cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/><cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>",
+    paste0(
+      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>"
+    ),
     sp_int_b64,
     "</binary></binaryDataArray>",
     "</binaryDataArrayList></spectrum>\n",
     "<spectrum index=\"1\" id=\"scan=2\" defaultArrayLength=\"2\">",
     "<cvParam cvRef=\"MS\" accession=\"MS:1000511\" name=\"ms level\" value=\"1\"/>",
-    "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\" accession=\"MS:1000016\" name=\"scan start time\" value=\"5.5\" unitCvRef=\"UO\" unitAccession=\"UO:0000031\" unitName=\"minute\"/></scan></scanList>",
+    paste0(
+      "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\"",
+      " accession=\"MS:1000016\" name=\"scan start time\" value=\"5.5\"",
+      " unitCvRef=\"UO\" unitAccession=\"UO:0000031\"",
+      " unitName=\"minute\"/></scan></scanList>"
+    ),
     "<binaryDataArrayList count=\"2\">",
     "<binaryDataArray encodedLength=\"",
     nchar(mz_b64),
-    "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/><cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/><cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>",
+    paste0(
+      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>"
+    ),
     mz_b64,
     "</binary></binaryDataArray>",
     "<binaryDataArray encodedLength=\"",
     nchar(sp_int_b64),
-    "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/><cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/><cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>",
+    paste0(
+      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
+      "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>"
+    ),
     sp_int_b64,
     "</binary></binaryDataArray>",
     "</binaryDataArrayList></spectrum>\n",

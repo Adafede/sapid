@@ -36,7 +36,7 @@ prepare_profiles <- function(
   dictionary_generic_path = NULL,
   dictionary_specific_path = NULL,
   sessions = seq(1, 7),
-  output = "inst/extdata/profiles.tsv"
+  output = "data/processed/profiles.tsv"
 ) {
   dict_gen <- load_dataset_or_file(
     dictionary_generic_path,

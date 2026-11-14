@@ -7,7 +7,7 @@
 cluster_nmr(
   nmr_dir = "./data/10043",
   output_figure = "./data/figures/figure_nmr.pdf",
-  output_groups = "./inst/extdata/groups.tsv",
+  output_groups = "./data/groups.tsv",
   experiment_raw = "proton_00",
   experiment_ref = "proton_98",
   experiments_fractions = c("proton_17", "proton_18", "proton_19", "proton_20",
@@ -16,7 +16,7 @@ cluster_nmr(
     "proton_33", "proton_34", "proton_35", "proton_36", "proton_37", "proton_38",
     "proton_39", "proton_40", "proton_41", "proton_42", "proton_43", "proton_44",
     "proton_45", "proton_46", "proton_47", "proton_48", "proton_50", "proton_51",
-    "proton_52", "proton_53", "proton_54", "proton_55", "proton_56",
+    "proton_52", "proton_53", "proton_54", "proton_55", "proton_56", 
      "proton_57",
     "proton_58", "proton_59", "proton_60", "proton_61", "proton_62", "proton_63",
     "proton_64", "proton_65", "proton_66", "proton_67", "proton_68", "proton_69",

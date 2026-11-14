@@ -9,7 +9,7 @@ prepare_profiles(
   dictionary_generic_path = NULL,
   dictionary_specific_path = NULL,
   sessions = seq(1, 7),
-  output = "inst/extdata/profiles.tsv"
+  output = "data/processed/profiles.tsv"
 )
 }
 \arguments{

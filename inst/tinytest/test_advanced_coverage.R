@@ -216,6 +216,7 @@ withr::with_tempdir({
   ))
   res_g <- utils::read.delim(corr_greiner, stringsAsFactors = FALSE)
   row_102_g <- res_g[res_g$id_ion == 102L & res_g$id_taste == "BITTER", ]
+  expect_identical(row_102_g$method, "kendall_greiner")
   expect_equal(
     row_102_g$correlation,
     sin(0.5 * pi * unname(ref_102_b$estimate)),
@@ -495,6 +496,67 @@ withr::with_tempdir({
   expect_true(file.exists(c1) && file.info(c1)$size > 0)
   expect_true(file.exists(c2) && file.info(c2)$size > 0)
   expect_true(file.exists(c3) && file.info(c3)$size > 0)
+
+  # Single Greiner transform only: kendall (0.75 -> sin(pi*0.75/2)=0.924 >= 0.80)
+  # passes min_corr = 0.80, whereas already-transformed kendall_greiner (0.75 < 0.80) does not.
+  corr_k_only <- corr
+  corr_k_only$correlation <- c(0.75, 0.75)
+  corr_k_only$method <- c("kendall", "kendall")
+  corr_k_only_path <- file.path(getwd(), "corr_k_only.tsv")
+  utils::write.table(
+    corr_k_only,
+    corr_k_only_path,
+    sep = "\t",
+    row.names = FALSE,
+    quote = FALSE
+  )
+  ret_k <- plot_correlations(
+    input_correlations = corr_k_only_path,
+    input_ions = ions_path,
+    annotation_path_fractions = ann_path,
+    output_1 = file.path(getwd(), "ck1.pdf"),
+    output_2 = file.path(getwd(), "ck2.pdf"),
+    output_3 = file.path(getwd(), "ck3.pdf"),
+    widths = 2:3,
+    min_corr = 0.80,
+    max_pval = 1.0,
+    min_intense_ions_ratio = 0.01,
+    min_jury = 1L,
+    min_area_ion = 1L,
+    min_consistency = 0.9,
+    greiner_kendall = TRUE
+  )
+  expect_true(file.exists(ret_k$plot_correlations_1))
+
+  corr_kg <- corr_k_only
+  corr_kg$method <- c("kendall_greiner", "kendall_greiner")
+  corr_kg_path <- file.path(getwd(), "corr_kg.tsv")
+  utils::write.table(
+    corr_kg,
+    corr_kg_path,
+    sep = "\t",
+    row.names = FALSE,
+    quote = FALSE
+  )
+  expect_error(
+    plot_correlations(
+      input_correlations = corr_kg_path,
+      input_ions = ions_path,
+      annotation_path_fractions = ann_path,
+      output_1 = file.path(getwd(), "ckg1.pdf"),
+      output_2 = file.path(getwd(), "ckg2.pdf"),
+      output_3 = file.path(getwd(), "ckg3.pdf"),
+      widths = 2:3,
+      min_corr = 0.80,
+      max_pval = 1.0,
+      min_intense_ions_ratio = 0.01,
+      min_jury = 1L,
+      min_area_ion = 1L,
+      min_consistency = 0.9,
+      greiner_kendall = TRUE
+    )
+  )
+  expect_false(any(grepl("^Rplots", list.files(getwd()))))
 
   # Error path: confident iridoids exist (for ACID), but no BITTER correlation matches
   corr_acid <- corr

@@ -20,7 +20,7 @@ prepare_concentration <- function(
     "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory/",
     "20210329_raw-extract/03_files/20210329_raw-extract.xlsx"
   ),
-  output = "inst/extdata/concentration_afc.tsv"
+  output = "data/processed/concentration_afc.tsv"
 ) {
   fmt_conc <- function(df) {
     if (!"concentration" %in% names(df)) {

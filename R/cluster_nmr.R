@@ -65,7 +65,7 @@
 cluster_nmr <- function(
   nmr_dir = "./data/10043",
   output_figure = "./data/figures/figure_nmr.pdf",
-  output_groups = "./inst/extdata/groups.tsv",
+  output_groups = "./data/groups.tsv",
   experiment_raw = "proton_00",
   experiment_ref = "proton_98",
   experiments_fractions = c(
@@ -268,10 +268,11 @@ cluster_nmr <- function(
     stats::dist(method = dist_method) |>
     stats::hclust(method = "ward.D2")
 
+  paired_k <- paired[seq_len(min(k, length(paired)))]
   dend <- hclust |>
     stats::as.dendrogram() |>
-    dendextend::set("branches_k_color", k = k, value = paired) |>
-    dendextend::set("labels_colors", k = k, value = paired) |>
+    dendextend::set("branches_k_color", k = k, value = paired_k) |>
+    dendextend::set("labels_colors", k = k, value = paired_k) |>
     dendextend::set("labels_cex", 1) |>
     sort()
 
@@ -356,8 +357,6 @@ cluster_nmr <- function(
       )
     )
 
-  plot_2
-
   plot_1 <- dend |>
     dendextend::as.ggdend() |>
     ggplot2::ggplot(horiz = TRUE, mapping = ggplot2::aes(size = 0.5)) +
@@ -370,7 +369,6 @@ cluster_nmr <- function(
         "pt"
       )
     )
-  plot_1
 
   .cascade_check_export_dir(dirname(output_figure))
   .cascade_check_export_dir(dirname(output_groups))

@@ -83,6 +83,7 @@ plot_correlations <- function(
     correlations$correlation[is_k] <- sin(
       pi / 2 * correlations$correlation[is_k]
     )
+    correlations$method[is_k] <- "kendall_greiner"
   }
 
   df_ion_intensities <- prepare_ion_intensities_df(
@@ -201,8 +202,6 @@ plot_correlations <- function(
     !is.na(r_win) &
     overlap_mat[cbind(r_ion, r_win)]
   correlations_significant <- corr_sig[keep_sig, , drop = FALSE]
-
-  nrow(correlations_significant) / nrow(correlations)
 
   # ggplot2::ggplot(
   #   correlations_significant,
@@ -355,15 +354,16 @@ plot_correlations <- function(
         x = intensity_ion,
         y = intensity_taste,
         color = id_taste,
-        label = fraction |>
-          as.character(),
         fill = id_taste
       )
     ) +
     ggplot2::facet_wrap("id_taste", scales = "free", ncol = 3) +
     ggplot2::geom_point(size = 2) +
     ggplot2::geom_smooth(linewidth = 0.5, method = "lm", formula = y ~ x) +
-    ggrepel::geom_text_repel(size = 5) +
+    ggrepel::geom_text_repel(
+      mapping = ggplot2::aes(label = as.character(fraction)),
+      size = 5
+    ) +
     # ggplot2::scale_x_log10() +
     ggplot2::xlab("Ion intensity") +
     ggplot2::ylab("Taste intensity") +
@@ -504,7 +504,6 @@ plot_correlations <- function(
         x = intensity_ion,
         y = intensity_taste,
         color = correlation,
-        label = fraction,
         fill = correlation
       )
     ) +
@@ -516,7 +515,10 @@ plot_correlations <- function(
     ) +
     ggplot2::geom_point(size = 2) +
     ggplot2::geom_smooth(linewidth = 0.5, method = "lm", formula = y ~ x) +
-    ggrepel::geom_text_repel(size = 5) +
+    ggrepel::geom_text_repel(
+      mapping = ggplot2::aes(label = as.character(fraction)),
+      size = 5
+    ) +
     # ggplot2::scale_x_log10() +
     ggplot2::ylim(c(0, 100)) +
     ggplot2::xlab("Ion intensity") +
@@ -629,7 +631,7 @@ plot_correlations <- function(
     FUN = sum
   )
   profile_full$sum[profile_full$taste == "OTHER"] <- Inf
-  profile_full$fraction <- as.character(profile_full$fraction)
+  profile_full$fraction <- order_numeric_labels(profile_full$fraction)
   profile_full$taste <- fct_reorder_base(
     profile_full$taste,
     profile_full$sum,
@@ -678,7 +680,6 @@ plot_correlations <- function(
         size = 20
       )
     )
-  profiles_correlation_1
 
   prof_sub_2 <- profile_full[
     profile_full$name == "intensity_ion",
@@ -734,7 +735,6 @@ plot_correlations <- function(
         size = 20
       )
     )
-  profiles_correlation_2
 
   selected_profiles <- ggpubr::ggarrange(
     profiles_correlation_1,

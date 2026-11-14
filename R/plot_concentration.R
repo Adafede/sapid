@@ -44,7 +44,11 @@ plot_concentration <- function(
   ]
 
   ct_key <- paste(prepared$concentration, prepared$taste, sep = "\r")
-  prepared$n <- stats::ave(prepared$value, ct_key, FUN = length)
+  prepared$n <- stats::ave(
+    prepared$value,
+    ct_key,
+    FUN = function(v) sum(!is.na(v))
+  )
   prepared$value <- stats::ave(
     prepared$value,
     ct_key,
@@ -109,7 +113,6 @@ plot_concentration <- function(
       legend.position = "none",
       text = ggplot2::element_text(face = "bold")
     )
-  boxes
 
   scurve <- afc_unique |>
     ggplot2::ggplot(
@@ -144,7 +147,10 @@ plot_concentration <- function(
     ) +
     ggplot2::xlab(label = "Concentration [mg/L]") +
     ggplot2::ylab("Correct answers [%]") +
-    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 1),
+      labels = function(x) paste0(round(x * 100), "%")
+    ) +
     ggplot2::theme_minimal() +
     ggplot2::geom_hline(
       yintercept = afc_fit$gamma,
@@ -165,55 +171,13 @@ plot_concentration <- function(
       legend.position = "none",
       text = ggplot2::element_text(face = "bold")
     )
-  scurve
 
-  message("... terms per concentration \n")
-  dots <- counted |>
-    ggplot2::ggplot() +
-    ggplot2::geom_segment(
-      mapping = ggplot2::aes(
-        x = taste,
-        xend = taste,
-        y = 0,
-        yend = n
-      ),
-      color = "#19597e"
-    ) +
-    ggplot2::geom_point(
-      mapping = ggplot2::aes(
-        x = taste,
-        color = as.numeric(concentration),
-        y = n
-      ),
-      size = 3
-    ) +
-    ggplot2::scale_color_gradient2(
-      low = "#f7fcf5",
-      mid = "#74c476",
-      high = "#00441b"
-    ) +
-    ggplot2::coord_flip() +
-    ggplot2::xlab("") +
-    ggplot2::ylab("Count") +
-    ggplot2::facet_wrap(
-      facets = ~ paste(
-        concentration |>
-          round(digits = 2) |>
-          format(nsmall = 2),
-        "[mg/L]"
-      ),
-      ncol = 1,
-      scales = "free_y"
-    ) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.position = "none",
-      text = ggplot2::element_text(face = "bold"),
-      panel.spacing = ggplot2::unit(0.2, "lines"),
-      strip.text.x = ggplot2::element_text(size = 10),
-      strip.background = ggplot2::element_rect(fill = "white")
-    )
-  dots
+  conc_num_vec <- as.numeric(counted$concentration)
+  counted$conc_facet <- fct_reorder_base(
+    paste(format(round(conc_num_vec, digits = 2), nsmall = 2), "[mg/L]"),
+    conc_num_vec,
+    fun = min
+  )
 
   message("... terms multiplied by mean intensity per concentration \n")
   dots_corrected <- counted |>
@@ -244,12 +208,7 @@ plot_concentration <- function(
     ggplot2::xlab("") +
     ggplot2::ylab("Value") +
     ggplot2::facet_wrap(
-      facets = ~ paste(
-        concentration |>
-          round(digits = 2) |>
-          format(nsmall = 2),
-        "[mg/L]"
-      ),
+      facets = ~conc_facet,
       ncol = 1,
       scales = "free_y"
     ) +
@@ -261,7 +220,6 @@ plot_concentration <- function(
       strip.text.x = ggplot2::element_text(size = 10),
       strip.background = ggplot2::element_rect(fill = "white")
     )
-  dots_corrected
 
   .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(

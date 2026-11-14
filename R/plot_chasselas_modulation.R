@@ -135,7 +135,6 @@ plot_chasselas_modulation <- function(
       vjust = 0
     ) +
     ggplot2::labs(caption = caption_label)
-  p_1
 
   p_2 <- deltas_4 |>
     ggplot2::ggplot(
@@ -170,7 +169,6 @@ plot_chasselas_modulation <- function(
       vjust = 0
     ) +
     ggplot2::labs(caption = caption_label)
-  p_2
 
   .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>

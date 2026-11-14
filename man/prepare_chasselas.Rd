@@ -7,7 +7,7 @@
 prepare_chasselas(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
   sessions = seq(1, 7),
-  output = "inst/extdata/chasselas.tsv"
+  output = "data/processed/chasselas.tsv"
 )
 }
 \arguments{

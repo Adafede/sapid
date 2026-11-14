@@ -22,7 +22,7 @@
 prepare_chasselas <- function(
   input_dir = "~/switchdrive/SAPERE/02_raw-data/inhouse/02_sensory",
   sessions = seq(1, 7),
-  output = "inst/extdata/chasselas.tsv"
+  output = "data/processed/chasselas.tsv"
 ) {
   session_infos <- lapply(sessions, get_session_info)
   session_dfs <- lapply(

@@ -89,7 +89,6 @@ plot_chasselas_variation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     )
-  p_1
 
   p_2 <- deltas_3 |>
     ggplot2::ggplot(
@@ -115,7 +114,6 @@ plot_chasselas_variation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     )
-  p_2
 
   p_3 <- deltas_3 |>
     ggplot2::ggplot(
@@ -146,7 +144,6 @@ plot_chasselas_variation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     )
-  p_3
 
   p_4 <- deltas_3 |>
     ggplot2::ggplot(
@@ -172,7 +169,6 @@ plot_chasselas_variation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     )
-  p_4
 
   .cascade_check_export_dir(dirname(output_jury))
   .cascade_check_export_dir(dirname(output_session))

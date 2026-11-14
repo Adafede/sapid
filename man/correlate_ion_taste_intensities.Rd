@@ -46,8 +46,9 @@ imputation (\code{imputation_factor * min_v}).}
 per juror before summing (default \code{FALSE}).}
 
 \item{greiner_kendall}{Logical; if \code{TRUE}, map Kendall's \eqn{\tau} to
-Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)}
-(default \code{FALSE}).}
+Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)} and mark
+those rows with \code{method = "kendall_greiner"} so downstream functions do not
+apply the transformation twice (default \code{FALSE}).}
 
 \item{fdr_scope}{Scope of Benjamini-Hochberg FDR adjustment: \code{"window"}
 (default), \code{"taste"}, or \code{"global"}.}

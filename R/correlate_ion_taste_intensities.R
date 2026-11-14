@@ -27,8 +27,9 @@
 #' @param normalize_panelists Logical; if `TRUE`, apply RMS scale normalization
 #'   per juror before summing (default `FALSE`).
 #' @param greiner_kendall Logical; if `TRUE`, map Kendall's \eqn{\tau} to
-#'   Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)}
-#'   (default `FALSE`).
+#'   Pearson-equivalent scale via \eqn{r = \sin(\frac{\pi}{2}\tau)} and mark
+#'   those rows with `method = "kendall_greiner"` so downstream functions do not
+#'   apply the transformation twice (default `FALSE`).
 #' @param fdr_scope Scope of Benjamini-Hochberg FDR adjustment: `"window"`
 #'   (default), `"taste"`, or `"global"`.
 #'
@@ -307,6 +308,9 @@ correlate_ion_taste_intensities <- function(
           method = "kendall"
         ))
         cor_v[is_k] <- if (greiner_kendall) sin(pi / 2 * r_k) else r_k
+        if (greiner_kendall) {
+          meth_v[is_k] <- "kendall_greiner"
+        }
         k_idx <- which(is_k)
         y_ts <- tie_stats_vec(taste_vec)
         y_ties <- y_ts[1L] > 0

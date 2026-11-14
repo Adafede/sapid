@@ -52,7 +52,7 @@ plot_profiles <- function(
   raw_profiles <- load_dataset_or_file(input, "profiles")
   profiles_consistent <- load_consistent_profiles(raw_profiles)
 
-  profiles_consistent$fraction <- as.character(
+  profiles_consistent$fraction <- order_numeric_labels(
     gsub("fraction_", "", profiles_consistent$fraction, fixed = TRUE)
   )
   profiles_consistent$sum_name <- stats::ave(
@@ -121,7 +121,6 @@ plot_profiles <- function(
         size = 20
       )
     )
-  profile_sensorial
 
   # profile_sensorial_facets <- profile_sensorial +
   #   ggplot2::facet_wrap(~taste)
@@ -286,14 +285,15 @@ plot_profiles <- function(
   ]
   chemicals_informed_fractions <- .cascade_prepare_plot(hier)
   chem_df <- as.data.frame(chemicals_informed_fractions)
+  chem_df$fraction <- order_numeric_labels(
+    gsub("_.*", "", gsub(".*M_", "", as.character(chem_df$sample)))
+  )
   chem_colors <- levels(chemicals_informed_fractions$color)
 
   profile_chemical <- chem_df |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = sample |>
-          gsub(pattern = ".*M_", replacement = "") |>
-          gsub(pattern = "_.*", replacement = ""),
+        x = fraction,
         y = values,
         fill = ids,
         color = ids
@@ -327,7 +327,6 @@ plot_profiles <- function(
         size = 20
       )
     )
-  profile_chemical
 
   profiles <- ggpubr::ggarrange(
     profile_sensorial,

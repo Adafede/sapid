@@ -103,7 +103,15 @@ sigmoid <- function(
   direction = "x"
 ) {
   if (!direction %in% c("x", "y")) {
-    stop("Only the directions x or y is allowed.")
+    stop("Only the directions x or y is allowed.", call. = FALSE)
+  }
+  if (
+    !is.numeric(smooth) || length(smooth) != 1L || is.na(smooth) || smooth <= 0
+  ) {
+    stop("'smooth' must be a positive number.", call. = FALSE)
+  }
+  if (!is.numeric(n) || length(n) != 1L || is.na(n) || n < 2) {
+    stop("'n' must be an integer >= 2.", call. = FALSE)
   }
 
   t_seq <- seq(-smooth, smooth, length.out = n)

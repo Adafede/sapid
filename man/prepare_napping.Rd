@@ -10,8 +10,8 @@ prepare_napping(
   dictionary_napping_path = NULL,
   dictionary_specific_path = NULL,
   sessions = seq(1, 8),
-  output_coordinates = "inst/extdata/napping_coordinates.tsv",
-  output_descriptors = "inst/extdata/napping_descriptors.tsv"
+  output_coordinates = "data/processed/napping_coordinates.tsv",
+  output_descriptors = "data/processed/napping_descriptors.tsv"
 )
 }
 \arguments{

@@ -5,6 +5,7 @@ utils::globalVariables(
     "cluster",
     "col",
     "color",
+    "conc_facet",
     "conc_num",
     "concentration",
     "concentration_afc",
@@ -168,6 +169,18 @@ pratt_wilcox_pvalue <- function(x, md = 0) {
   2 * stats::pnorm(-z)
 }
 
+order_numeric_labels <- function(x) {
+  chr <- as.character(x)
+  num <- suppressWarnings(as.numeric(chr))
+  if (length(chr) > 0L && !anyNA(num)) {
+    u_idx <- !duplicated(chr)
+    ord_lvls <- chr[u_idx][order(num[u_idx])]
+    factor(chr, levels = ord_lvls)
+  } else {
+    chr
+  }
+}
+
 fit_afc_psychometric <- function(
   conc,
   k,
@@ -176,10 +189,25 @@ fit_afc_psychometric <- function(
   lambda = 0.05,
   n_grid = 200L
 ) {
+  if (length(conc) != length(k) || length(conc) != length(n)) {
+    stop("'conc', 'k', and 'n' must have the same length.", call. = FALSE)
+  }
+  if (!is.numeric(m) || length(m) != 1L || is.na(m) || m < 2) {
+    stop("'m' must be a single numeric value >= 2.", call. = FALSE)
+  }
   valid <- !is.na(conc) & !is.na(k) & !is.na(n) & (conc > 0) & (n > 0)
   conc <- as.numeric(conc[valid])
   k <- as.numeric(k[valid])
   n <- as.numeric(n[valid])
+  if (length(conc) == 0L) {
+    stop(
+      "At least one valid positive concentration with n > 0 is required.",
+      call. = FALSE
+    )
+  }
+  if (any(k < 0 | k > n)) {
+    stop("'k' must satisfy 0 <= k <= n.", call. = FALSE)
+  }
   gamma <- 1 / as.numeric(m)
   x <- log10(conc)
 
@@ -642,7 +670,7 @@ prepare_ion_intensities_df <- function(
   input_ions,
   min_width,
   min_area_ion,
-  imputation_factor
+  imputation_factor = NULL
 ) {
   raw_ions <- if (is.data.frame(input_ions)) {
     as.data.frame(input_ions, stringsAsFactors = FALSE)
@@ -666,17 +694,13 @@ prepare_ion_intensities_df <- function(
   ))
   sub_ions <- unique(raw_ions[, keep_cols, drop = FALSE])
 
-  frac_names <- gsub(
-    pattern = "datafile:210619_AR_[0-9]{2}_M_",
-    replacement = "fraction_",
-    x = gsub(
-      pattern = "_01.mzML:area",
-      replacement = "",
-      x = area_cols,
-      fixed = TRUE
-    )
+  has_m_tag <- grepl("_M_[0-9]+", area_cols)
+  frac_chr <- ifelse(
+    has_m_tag,
+    sub("^.*_M_([0-9]+).*$", "\\1", area_cols),
+    gsub("[^0-9]+", "", area_cols)
   )
-  frac_nums <- as.integer(gsub("fraction_", "", frac_names, fixed = TRUE))
+  frac_nums <- suppressWarnings(as.integer(frac_chr))
 
   n_ions <- nrow(sub_ions)
   n_fracs <- length(area_cols)

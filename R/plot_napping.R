@@ -21,30 +21,29 @@
 #' @concept EDAM:topic_2269 Statistics and probability
 #' @concept EDAM:operation_3432 Clustering
 #' @concept EDAM:operation_0337 Visualisation
+#' @encoding UTF-8
 #' @param input_coordinates Optional path or `data.frame` of napping coordinates
 #'   (defaults to built-in [napping_coordinates]).
 #' @param input_descriptors Optional path or `data.frame` of napping descriptors
 #'   (defaults to built-in [napping_descriptors]).
 #' @param sessions Integer session number to analyze (default `2`).
+#' @param output Optional PDF file path to capture all diagnostic plots. When
+#'   `NULL` in non-interactive sessions, plots are rendered to a temporary PDF
+#'   device that is removed on exit so no stray `Rplots*.pdf` files are left
+#'   in the working directory.
 #'
-#' @return Result of the final [FactoMineR::prefpls()] call (invisibly).
+#' @return Named list with elements `pmfa`, `mfa`, `hcpc`, and `indscal`
+#'   (invisibly).
 #' @export
 #' @examples
 #' \dontrun{
 #' plot_napping(sessions = 2)
 #' }
 plot_napping <- function(
-  input_coordinates = system.file(
-    "extdata",
-    "napping_coordinates.tsv",
-    package = "sapid"
-  ),
-  input_descriptors = system.file(
-    "extdata",
-    "napping_descriptors.tsv",
-    package = "sapid"
-  ),
-  sessions = 2
+  input_coordinates = NULL,
+  input_descriptors = NULL,
+  sessions = 2,
+  output = NULL
 ) {
   session_tag <- if (
     is.character(sessions) && grepl("^session_", sessions[1L])
@@ -55,11 +54,32 @@ plot_napping <- function(
   } else {
     paste0("session_", sprintf("%02d", as.integer(sessions[1L])))
   }
-  base_dev <- grDevices::dev.cur()
-  close_extra_devs <- function() {
-    while (grDevices::dev.cur() > max(1L, base_dev)) {
-      grDevices::dev.off()
-    }
+  devs_before <- grDevices::dev.list()
+  tmp_pdf <- NULL
+  use_sink_pdf <- !is.null(output) || !interactive()
+  if (use_sink_pdf) {
+    old_dev_opt <- options(device = function(...) invisible(NULL))
+    on.exit(options(old_dev_opt), add = TRUE)
+  }
+  on.exit(
+    {
+      devs_now <- grDevices::dev.list()
+      extra_devs <- rev(setdiff(devs_now, devs_before))
+      for (d in extra_devs) {
+        try(grDevices::dev.off(d), silent = TRUE)
+      }
+      if (!is.null(tmp_pdf) && file.exists(tmp_pdf)) {
+        unlink(tmp_pdf)
+      }
+    },
+    add = TRUE
+  )
+  if (!is.null(output)) {
+    .cascade_check_export_dir(dirname(output))
+    grDevices::pdf(file = output, width = 10, height = 8)
+  } else if (!interactive()) {
+    tmp_pdf <- tempfile(fileext = ".pdf")
+    grDevices::pdf(file = tmp_pdf, width = 10, height = 8)
   }
 
   raw_coord <- load_dataset_or_file(input_coordinates, "napping_coordinates")
@@ -155,7 +175,7 @@ plot_napping <- function(
   nap_tot <- cbind(df_coord, df_words_cleaned)
 
   ##### PMFA (Procuste Multiple Factor Analysis to obtain individual tableclothes  ####
-  SensoMineR::pmfa(
+  res_pmfa <- SensoMineR::pmfa(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,
     graph.mfa = FALSE
@@ -190,7 +210,6 @@ plot_napping <- function(
 
   ##### MFA with supplementary descriptor word frequencies ####
   n_coord_groups <- ncol(df_coord) / 2
-  close_extra_devs()
   res_nap <- FactoMineR::MFA(
     base = nap_tot,
     group = c(rep(2, n_coord_groups), ncol(df_words_cleaned)),
@@ -214,8 +233,7 @@ plot_napping <- function(
 
   ####   Clustering analysis based on coordinates of products ####
 
-  close_extra_devs()
-  FactoMineR::HCPC(
+  res_hcpc <- FactoMineR::HCPC(
     res = res_nap,
     nb.clust = -1,
     consol = TRUE,
@@ -227,7 +245,6 @@ plot_napping <- function(
 
   ## later
   # write.infile(res.HCPC, file.path(exportDir, "res_hcpc.csv"),  sep = ";")
-  close_extra_devs()
   SensoMineR::nappeplot(
     donnee = df_coord,
     numr = 3,
@@ -238,24 +255,25 @@ plot_napping <- function(
   #                     matrice.illu = df_words_raw,
   #                     maxit = 100)
 
-  close_extra_devs()
-  res <- SensoMineR::indscal(
+  res_indscal <- SensoMineR::indscal(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,
     maxit = 100
   )
 
-  close_extra_devs()
   FactoMineR::prefpls(
-    donnee = cbind.data.frame(res$points, df_coord),
+    donnee = cbind.data.frame(res_indscal$points, df_coord),
     choix = "ind"
   )
 
-  close_extra_devs()
-  out <- FactoMineR::prefpls(
-    donnee = cbind.data.frame(res$points, df_words_cleaned),
+  FactoMineR::prefpls(
+    donnee = cbind.data.frame(res_indscal$points, df_words_cleaned),
     choix = "var"
   )
-  close_extra_devs()
-  invisible(out)
+  invisible(list(
+    pmfa = res_pmfa,
+    mfa = res_nap,
+    hcpc = res_hcpc,
+    indscal = res_indscal
+  ))
 }

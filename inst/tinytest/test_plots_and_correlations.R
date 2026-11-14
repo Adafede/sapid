@@ -43,6 +43,17 @@ withr::with_tempdir({
   expect_identical(ret_conc, out_conc)
   expect_valid_pdf(out_conc)
 
+  # Regression check: character concentrations + NA values + no leaked Rplots.pdf
+  data(concentration_afc, package = "sapid")
+  conc_char <- as.data.frame(concentration_afc)
+  conc_char$concentration <- as.character(conc_char$concentration)
+  conc_char$value[1:2] <- NA_real_
+  out_conc_char <- file.path(tmp_dir, "concentration_char.pdf")
+  ret_conc_char <- plot_concentration(input = conc_char, output = out_conc_char)
+  expect_identical(ret_conc_char, out_conc_char)
+  expect_valid_pdf(out_conc_char)
+  expect_false(any(grepl("^Rplots", list.files(tmp_dir))))
+
   out_network <- file.path(tmp_dir, "network.pdf")
   ret_network <- plot_descriptors_network(output = out_network)
   expect_true(!is.null(ret_network))
@@ -158,4 +169,5 @@ withr::with_tempdir({
     )
   )
   expect_true(all(corr$method %in% c("kendall", "pearson")))
+  expect_false(any(grepl("^Rplots", list.files(tmp_dir))))
 })

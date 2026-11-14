@@ -429,12 +429,31 @@ withr::with_tempdir({
     row.names = FALSE,
     quote = FALSE
   )
-  plot_napping(
+  res_nap_out <- plot_napping(
     input_coordinates = coords_path,
     input_descriptors = desc_path,
     sessions = "session_02"
   )
-  expect_true(any(grepl("^Rplots", list.files(getwd()))))
+  expect_false(any(grepl("^Rplots", list.files(getwd()))))
+  expect_true(is.list(res_nap_out))
+  expect_identical(
+    names(res_nap_out),
+    c("pmfa", "mfa", "hcpc", "indscal")
+  )
+  expect_true(!is.null(res_nap_out$mfa$eig))
+
+  nap_pdf <- file.path(getwd(), "napping_out.pdf")
+  res_nap_pdf <- plot_napping(
+    input_coordinates = coords_path,
+    input_descriptors = desc_path,
+    sessions = 2,
+    output = nap_pdf
+  )
+  expect_false(any(grepl("^Rplots", list.files(getwd()))))
+  expect_true(file.exists(nap_pdf))
+  expect_true(file.info(nap_pdf)$size > 1000)
+  expect_identical(rawToChar(readBin(nap_pdf, "raw", 4L)), "%PDF")
+  expect_true(is.list(res_nap_pdf))
 
   coords_all <- as.data.frame(napping_coordinates[
     napping_coordinates$session == "session_02",

@@ -579,3 +579,41 @@ expect_identical(by_name$val, 12.5)
 expect_identical(read_xlsx_base(xlsx_adv_file, sheet = 1L), data.frame())
 expect_error(read_xlsx_base(xlsx_adv_file, sheet = "Missing"), "not found")
 unlink(xlsx_adv_file)
+
+# 17. fit_afc_psychometric and sigmoid validation + generic _M_ ion column parsing
+expect_error(
+  fit_afc_psychometric(c(1, 2), c(1), c(2, 2)),
+  "same length"
+)
+expect_error(
+  fit_afc_psychometric(c(1, 2), c(1, 2), c(5, 5), m = 1),
+  ">= 2"
+)
+expect_error(
+  fit_afc_psychometric(c(1, 2), c(6, 2), c(5, 5), m = 3L),
+  "0 <= k <= n"
+)
+expect_error(
+  fit_afc_psychometric(c(0, -1), c(0, 0), c(5, 5), m = 3L),
+  "At least one valid positive concentration"
+)
+
+expect_error(sigmoid(0, 10, 0, 1, smooth = 0), "positive number")
+expect_error(sigmoid(0, 10, 0, 1, n = 1), ">= 2")
+
+generic_ions <- data.frame(
+  id = c(1L, 2L),
+  rt = c(1.0, 2.0),
+  mz = c(100.0, 200.0),
+  `datafile:sample_M_17_run2.mzML:area` = c(500, 10),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+res_gen_ions <- prepare_ion_intensities_df(
+  generic_ions,
+  min_width = 1L,
+  min_area_ion = 100
+)
+expect_identical(res_gen_ions$fraction, 17L)
+expect_identical(res_gen_ions$id_ion, 1L)
+expect_identical(res_gen_ions$intensity_ion, 500)

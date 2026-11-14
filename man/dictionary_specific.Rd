@@ -25,7 +25,7 @@ including mappings to English translations and simplified forms.
 }
 \details{
 Larger and more specialized than \link{dictionary_generic}.
-Used for comprehensive harmonization of all descriptors in the dataset.
+Used for full harmonization of all descriptors in the dataset.
 }
 \examples{
 data(dictionary_specific)

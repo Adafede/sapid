@@ -155,6 +155,59 @@ expect_identical(
   "TARGET_A AND BAD_REPLACE"
 )
 
+# Unicode accented words, leading hyphens, regex metacharacters, and NA/empty dictionary rows
+data(dictionary_generic, package = "sapid")
+data(dictionary_specific, package = "sapid")
+expect_identical(
+  harmonize_terms(
+    dictionary_generic,
+    x = c("amer", "boisé", "salé", "fruité", "acidité"),
+    mode = "word"
+  ),
+  c("BITTER", "WOODY", "SALTY", "FRUITY", "ACID")
+)
+expect_identical(
+  harmonize_terms(
+    dictionary_generic,
+    x = c("emboisé", "boisé_fort"),
+    mode = "word"
+  ),
+  c("EMBOISÉ", "BOISÉ_FORT")
+)
+expect_identical(
+  harmonize_terms(
+    dictionary_specific,
+    x = "-un-peu-plus-soutenue",
+    mode = "word"
+  ),
+  ""
+)
+expect_identical(
+  harmonize_terms(
+    mini_dict,
+    x = c("test a+b end", "test aab end"),
+    mode = "word"
+  ),
+  c("TEST PLUS END", "TEST AAB END")
+)
+dirty_dict <- data.frame(
+  original = c(NA_character_, "", "AMER"),
+  translated = c("BAD", "BAD2", "BITTER"),
+  stringsAsFactors = FALSE
+)
+expect_identical(
+  harmonize_terms(dirty_dict, x = c("amer", NA_character_), mode = "word"),
+  c("BITTER", NA_character_)
+)
+expect_identical(
+  harmonize_terms(
+    dirty_dict[1:2, , drop = FALSE],
+    x = c("amer", NA_character_),
+    mode = "word"
+  ),
+  c("AMER", NA_character_)
+)
+
 
 # 3. load_consistent_profiles: min_jury boundaries, distinct juror counting, deduplication, ranking
 small_profiles <- data.frame(

@@ -178,3 +178,48 @@ expect_true(
   all(nzchar(dictionary_specific$original)) &&
     !anyNA(dictionary_specific$translated)
 )
+
+# Mojibake check across character/factor columns of all bundled datasets
+bad_char_pat <- "[^\\x09\\x0A\\x0D\\x20-\\x7E\\x{00C0}-\\x{017F}’'–—µ°±×]"
+for (ds_obj in list(
+  chasselas,
+  concentration_afc,
+  profiles,
+  napping_coordinates,
+  napping_descriptors,
+  fractions,
+  groups,
+  dictionary_generic,
+  dictionary_napping,
+  dictionary_specific
+)) {
+  for (col_v in ds_obj) {
+    if (is.character(col_v) || is.factor(col_v)) {
+      expect_false(any(grepl(bad_char_pat, as.character(col_v), perl = TRUE)))
+    }
+  }
+}
+
+# Every unique original dictionary entry self-harmonizes in mode = "word"
+harm_fn <- get("harmonize_terms", envir = asNamespace("sapid"))
+for (dict_obj in list(
+  dictionary_generic,
+  dictionary_napping,
+  dictionary_specific
+)) {
+  tgt_col <- if ("translated_simple" %in% names(dict_obj)) {
+    "translated_simple"
+  } else {
+    "translated"
+  }
+  ds_ord <- dict_obj[
+    order(nchar(dict_obj$original), decreasing = TRUE),
+    ,
+    drop = FALSE
+  ]
+  ds_uniq <- ds_ord[!duplicated(toupper(ds_ord$original)), , drop = FALSE]
+  expect_identical(
+    harm_fn(dict_obj, ds_uniq$original, mode = "word"),
+    as.character(ds_uniq[[tgt_col]])
+  )
+}

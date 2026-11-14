@@ -303,7 +303,7 @@ NULL
 #'
 #' @details
 #' Larger and more specialized than [dictionary_generic].
-#' Used for comprehensive harmonization of all descriptors in the dataset.
+#' Used for full harmonization of all descriptors in the dataset.
 #'
 #' @source \doi{10.1016/j.crfs.2025.101043};
 #'   Zenodo \url{https://zenodo.org/records/14616396}

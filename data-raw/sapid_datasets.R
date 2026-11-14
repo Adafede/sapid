@@ -1,8 +1,21 @@
 # Load all sapid datasets from inst/extdata and generate .rda files.
 # This script keeps dependencies minimal (base R only for data generation).
 
-extdata_dir <- file.path("inst", "extdata")
+extdata_dir <- Sys.getenv(
+  "SAPID_EXTDATA_DIR",
+  unset = file.path("inst", "extdata")
+)
 data_dir <- "data"
+
+if (!dir.exists(extdata_dir)) {
+  stop(
+    "Raw TSV directory not found at '",
+    extdata_dir,
+    "'. Packaged datasets are stored in data/*.rda; ",
+    "set SAPID_EXTDATA_DIR to rebuild from raw TSV exports.",
+    call. = FALSE
+  )
+}
 
 load_tsv <- function(filename, strings_as_factors = FALSE) {
   path <- file.path(extdata_dir, filename)
@@ -10,7 +23,7 @@ load_tsv <- function(filename, strings_as_factors = FALSE) {
     stop("Missing input file: ", path, call. = FALSE)
   }
 
-  utils::read.delim(
+  df <- utils::read.delim(
     file = path,
     sep = "\t",
     header = TRUE,
@@ -18,6 +31,14 @@ load_tsv <- function(filename, strings_as_factors = FALSE) {
     stringsAsFactors = strings_as_factors,
     check.names = FALSE
   )
+  chr_cols <- vapply(df, is.character, logical(1L))
+  for (col in names(df)[chr_cols]) {
+    vals <- gsub("\uff89", "\u00c9", df[[col]], fixed = TRUE)
+    vals <- gsub("\uff8e", "\u00ce", vals, fixed = TRUE)
+    Encoding(vals) <- "UTF-8"
+    df[[col]] <- vals
+  }
+  df
 }
 
 save_dataset <- function(name, object) {
@@ -29,7 +50,8 @@ save_dataset <- function(name, object) {
   save(
     list = name,
     file = file.path(data_dir, paste0(name, ".rda")),
-    compress = "bzip2"
+    compress = "xz",
+    version = 3L
   )
 }
 

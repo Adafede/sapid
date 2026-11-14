@@ -29,6 +29,8 @@
 #' data(dictionary_generic)
 #' harmonize_terms(dictionary = dictionary_generic, x = "amer")
 harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
+  mode <- match.arg(mode, c("word", "substring", "fixed"))
+
   # Prepare dictionary: accept data frame or file path
   dict_df <- if (is.character(dictionary)) {
     # Legacy: load from file path
@@ -36,6 +38,16 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   } else {
     # Modern: use pre-loaded data frame
     as.data.frame(dictionary, stringsAsFactors = FALSE)
+  }
+
+  valid_rows <- !is.na(dict_df$original) &
+    nzchar(as.character(dict_df$original))
+  dict_df <- dict_df[valid_rows, , drop = FALSE]
+
+  # Convert to uppercase for consistent matching
+  processed_string <- toupper(x)
+  if (length(x) == 0L || nrow(dict_df) == 0L) {
+    return(processed_string)
   }
 
   orig_chr <- as.character(dict_df$original)
@@ -49,8 +61,6 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     as.character(prepared_dict$translated)
   }
 
-  # Convert to uppercase for consistent matching
-  processed_string <- toupper(x)
   u_str <- unique(processed_string)
   u_out <- u_str
   placeholders <- paste0("\x01", seq_along(patterns), "\x02")
@@ -66,7 +76,17 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
       )
     }
   } else if (mode == "word") {
-    word_patterns <- paste0("\\b", patterns, "\\b")
+    escaped <- gsub(
+      pattern = "([][{}()+*^$|\\\\?.])",
+      replacement = "\\\\\\1",
+      x = patterns,
+      perl = TRUE
+    )
+    word_patterns <- paste0(
+      "(*UCP)(?<=^|[^\\p{L}\\p{N}_])",
+      escaped,
+      "(?=$|[^\\p{L}\\p{N}_])"
+    )
     for (i in seq_along(word_patterns)) {
       u_out <- gsub(
         pattern = word_patterns[[i]],

@@ -28,15 +28,18 @@ built-in \link{profiles}).}
 
 \item{output}{Output PDF file path.}
 
-\item{annotation_path_extract}{Path to TIMA annotations for raw extract.}
+\item{annotation_path_extract}{Path to TIMA annotations for raw extract.
+Retained for backward compatibility; currently unused.}
 
 \item{annotation_path_fractions}{Path to TIMA annotations for fractions.}
 
-\item{features_path_extract}{Path to mzmine feature table for raw extract.}
+\item{features_path_extract}{Path to mzmine feature table for raw extract.
+Retained for backward compatibility; currently unused.}
 
 \item{features_path_fractions}{Path to mzmine feature table for fractions.}
 
-\item{peaks_dir_extract}{Directory of CAD peak comparison tables for extract.}
+\item{peaks_dir_extract}{Directory of CAD peak comparison tables for extract.
+Retained for backward compatibility; currently unused.}
 
 \item{peaks_dir_fractions}{Directory of CAD peak comparison tables for
 fractions.}

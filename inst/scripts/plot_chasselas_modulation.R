@@ -2,12 +2,11 @@ start <- Sys.time()
 
 message("This program plots chasselas taste modulation.")
 message("Authors: \n", "AR")
-message("Contributors: \n", "...")
 
 if (!requireNamespace("sapid", quietly = TRUE)) {
   stop("Package 'sapid' must be installed to run this script.", call. = FALSE)
 }
-get("plot_chasselas_modulation", envir = asNamespace("sapid"))()
+sapid::plot_chasselas_modulation()
 
 end <- Sys.time()
 

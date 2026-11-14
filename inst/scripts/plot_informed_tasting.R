@@ -4,12 +4,11 @@ message(
   "This program plots a comparison between classical and chemically informed analysis."
 )
 message("Authors: \n", "AR")
-message("Contributors: \n", "...")
 
 if (!requireNamespace("sapid", quietly = TRUE)) {
   stop("Package 'sapid' must be installed to run this script.", call. = FALSE)
 }
-get("plot_informed_tasting", envir = asNamespace("sapid"))()
+sapid::plot_informed_tasting()
 
 end <- Sys.time()
 

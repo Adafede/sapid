@@ -62,10 +62,6 @@ plot_chasselas_modulation <- function(
   date_keys <- substr(as.character(deltas_3$date), 1L, 10L)
   deltas_3$group <- unname(date_map[date_keys])
 
-  # p_values_wilcox <- deltas_3 |>
-  #  tidytable::group_by(taste, group) |>
-  #   tidytable::summarize(p_value_wilcox = wilcox.test(delta, mu = 0)$p.value)
-
   grp_key <- paste(deltas_3$taste, deltas_3$group, sep = "\r")
   test_fn <- if (test_method == "pratt") {
     pratt_wilcox_pvalue
@@ -78,16 +74,6 @@ plot_chasselas_modulation <- function(
     "* = p-value < 0.05 (Sign test)"
   }
   p_vals <- stats::ave(deltas_3$delta, grp_key, FUN = test_fn)
-
-  #  p_values_wilcox <- p_values_wilcox |>
-  #    tidytable::mutate(
-  #      stars_wilcox = tidytable::case_when(
-  #        p_value_wilcox < 0.001 ~ "***",
-  #        p_value_wilcox < 0.01 ~ "**",
-  #        p_value_wilcox < 0.05 ~ "*",
-  #        TRUE ~ ""
-  #      )
-  #    )
 
   deltas_4 <- deltas_3
   deltas_4$p_value_sign <- p_vals
@@ -126,8 +112,6 @@ plot_chasselas_modulation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     ) +
-    # ggplot2::geom_text(aes(x = group, y = 5, label = stars_wilcox),
-    #                    color = "red", size = 8, vjust = -0.5) +
     ggplot2::geom_text(
       ggplot2::aes(x = group, y = 5, label = stars),
       color = "black",
@@ -160,8 +144,6 @@ plot_chasselas_modulation <- function(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
     ) +
-    # ggplot2::geom_text(aes(x = name, y = 5, label = stars_wilcox),
-    #                    color = "red", size = 8, vjust = -0.5) +
     ggplot2::geom_text(
       ggplot2::aes(x = taste, y = 5, label = stars),
       color = "black",

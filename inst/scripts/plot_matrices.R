@@ -2,12 +2,11 @@ start <- Sys.time()
 
 message("This program plots matrices before and after vocabulary curation.")
 message("Authors: \n", "AR")
-message("Contributors: \n", "...")
 
 if (!requireNamespace("sapid", quietly = TRUE)) {
   stop("Package 'sapid' must be installed to run this script.", call. = FALSE)
 }
-get("plot_matrices", envir = asNamespace("sapid"))()
+sapid::plot_matrices()
 
 end <- Sys.time()
 

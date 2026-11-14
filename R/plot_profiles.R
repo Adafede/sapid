@@ -12,10 +12,13 @@
 #'   built-in [profiles]).
 #' @param output Output PDF file path.
 #' @param annotation_path_extract Path to TIMA annotations for raw extract.
+#'   Retained for backward compatibility; currently unused.
 #' @param annotation_path_fractions Path to TIMA annotations for fractions.
 #' @param features_path_extract Path to mzmine feature table for raw extract.
+#'   Retained for backward compatibility; currently unused.
 #' @param features_path_fractions Path to mzmine feature table for fractions.
 #' @param peaks_dir_extract Directory of CAD peak comparison tables for extract.
+#'   Retained for backward compatibility; currently unused.
 #' @param peaks_dir_fractions Directory of CAD peak comparison tables for
 #'   fractions.
 #' @param min_confidence Minimum TIMA final confidence score (default `0.45`).
@@ -105,11 +108,6 @@ plot_profiles <- function(
       axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
     ) +
     ggplot2::xlab("Fraction") +
-    # ggbreak::scale_y_cut(
-    #   breaks = c(10, 30),
-    #   which = c(1, 3),
-    #   scales = c(0, 1)
-    # ) +
     ggplot2::ylab("Taste intensity") +
     ggplot2::theme(
       axis.text = ggplot2::element_text(color = "#767676"),
@@ -121,11 +119,6 @@ plot_profiles <- function(
         size = 20
       )
     )
-
-  # profile_sensorial_facets <- profile_sensorial +
-  #   ggplot2::facet_wrap(~taste)
-  #
-  # profile_sensorial_facets
 
   prepare_comparison_list <- function(
     x,
@@ -148,10 +141,6 @@ plot_profiles <- function(
     compared_peaks_list_fractions$peaks_maj_precor
   }
 
-  # features_informed_extract <- peaks_dir_extract |>
-  #   list.files(pattern = "featuresInformed_cad.tsv", full.names = TRUE)
-  # features_not_informed_extract <- peaks_dir_extract |>
-  #   list.files(pattern = "featuresNotInformed_cad.tsv", full.names = TRUE)
   features_informed_fractions <- list.files(
     peaks_dir_fractions,
     pattern = "featuresInformed_cad\\.tsv$",
@@ -163,16 +152,6 @@ plot_profiles <- function(
     full.names = TRUE
   )
 
-  # features_extract <- features_path_extract |>
-  #   tidytable::fread() |>
-  #   tidytable::select(id, tidytable::contains(":area")) |>
-  #   tidytable::pivot_longer(tidytable::contains(":area"), names_prefix = "datafile:") |>
-  #   tidytable::mutate(name = name |> gsub(pattern = ":area", replacement = "")) |>
-  #   tidytable::select(
-  #     feature_id = id,
-  #     sample = name,
-  #     intensity_new = value
-  #   )
   raw_feat_frac <- data.table::fread(
     features_path_fractions,
     data.table = FALSE
@@ -198,17 +177,8 @@ plot_profiles <- function(
   })
   features_fractions <- data.table::as.data.table(do.call(rbind, feat_list))
 
-  # annotation_table_extract <- annotation_path_extract |>
-  #   tidytable::fread()
   ann_dt <- data.table::fread(annotation_path_fractions)
 
-  # candidates_confident_extract <- annotation_table_extract |>
-  #   tidytable::mutate(mode = mode) |>
-  #   .cascade_keep_best_candidates() |>
-  #   tidytable::mutate(species = "Swertia chirayita") |>
-  #   tidytable::mutate(feature_id = feature_id |>
-  #     as.numeric()) |>
-  #   .cascade_make_confident(score = min_confidence)
   ann_dt[, mode := mode]
   best_cand <- .cascade_keep_best_candidates(ann_dt)
   best_cand[, `:=`(
@@ -220,28 +190,6 @@ plot_profiles <- function(
     score = min_confidence
   )
 
-  # chemicals_informed_extract <- seq_along(features_informed_extract) |>
-  #   purrr::map(
-  #     .f = prepare_comparison_list,
-  #     features_informed = features_informed_extract,
-  #     features_not_informed = features_not_informed_extract,
-  #     candidates_confident = candidates_confident_extract,
-  #     min_similarity_prefilter = min_similarity_prefilter,
-  #     min_similarity_filter = min_similarity_filter,
-  #     mode = mode
-  #   ) |>
-  #   tidytable::bind_rows() |>
-  #   tidytable::inner_join(features_extract) |>
-  #   tidytable::mutate(intensity = intensity_new) |>
-  #   .cascade_make_other() |>
-  #   .cascade_no_other() |>
-  #   .cascade_prepare_hierarchy(type = type, detector = detector) |>
-  #   tidytable::filter(!ids |>
-  #     grepl(pattern = "$", fixed = TRUE)) |>
-  #   tidytable::mutate(ids = ids |>
-  #     gsub(pattern = "-", replacement = "- \n ")) |>
-  #   .cascade_prepare_plot() |>
-  #   tidytable::distinct(sample, values, ids, color)
   chemicals_informed_fractions_list <- lapply(
     seq_along(features_informed_fractions),
     prepare_comparison_list,

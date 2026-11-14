@@ -2,12 +2,11 @@ start <- Sys.time()
 
 message("This program plots napping data.")
 message("Authors: \n", "AR")
-message("Contributors: \n", "...")
 
 if (!requireNamespace("sapid", quietly = TRUE)) {
   stop("Package 'sapid' must be installed to run this script.", call. = FALSE)
 }
-get("plot_napping", envir = asNamespace("sapid"))()
+sapid::plot_napping(output = "./data/figures/figure_napping.pdf")
 
 end <- Sys.time()
 

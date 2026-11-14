@@ -194,14 +194,6 @@ cluster_nmr <- function(
   dataset_excluded <- dataset_interpolated |>
     AlpsNMR::nmr_exclude_region(exclude = regions_to_exclude)
 
-  # message("Baselining experiments")
-  # dataset_baselined <- dataset_excluded |>
-  #   AlpsNMR::nmr_baseline_estimation()
-  #
-  # message("Estimating threshold")
-  # baselineThresh <- dataset_baselined |>
-  #   AlpsNMR::nmr_baseline_threshold(range_without_peaks = range_without_peaks, method = "median3mad")
-
   message("Detecting peaks")
   peak_list_initial <- dataset_excluded |>
     AlpsNMR::nmr_detect_peaks(
@@ -210,10 +202,6 @@ cluster_nmr <- function(
       SNR.Th = -1,
       fit_lorentzians = TRUE
     )
-
-  # message("Plotting detected peaks overview")
-  # peak_list_initial |>
-  #   AlpsNMR::nmr_detect_peaks_plot_overview()
 
   message("Normalizing fractions")
   dataset_fractions <- dataset_excluded |>
@@ -291,10 +279,6 @@ cluster_nmr <- function(
     stringsAsFactors = FALSE
   )
 
-  # tidytable::slice_sample(n = 100000) |>
-  # tidytable::mutate(max = value |>
-  #                     max()) |>
-  # tidytable::mutate(value = value / max) |>
   axis_ppm <- round(as.numeric(dataset_fractions$axis), digits = 3L)
   data_mat <- as.matrix(dataset_fractions$data_1r)
   summed_mat <- rowsum(t(data_mat), axis_ppm, reorder = TRUE, na.rm = TRUE)
@@ -332,7 +316,6 @@ cluster_nmr <- function(
     ggplot2::scale_color_identity() +
     ggplot2::theme_minimal() +
     ggplot2::xlab("ppm") +
-    # ggplot2::ylab("Intensity") +
     ggplot2::theme(
       axis.text = ggplot2::element_text(color = "#767676"),
       axis.text.y = ggplot2::element_blank(),

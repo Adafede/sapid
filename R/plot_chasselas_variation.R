@@ -40,9 +40,6 @@ plot_chasselas_variation <- function(
     drop = FALSE
   ]
 
-  # deltas_after <- deltas |>
-  #   tidytable::filter(grepl(pattern = "after", x = product))
-
   target_tastes <- c(
     "sourness",
     "bitterness",

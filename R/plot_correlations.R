@@ -147,7 +147,6 @@ plot_correlations <- function(
     drop = FALSE
   ]
 
-  # tidytable::filter(taste %in% tastes) |>
   df_taste_intensities <- prepare_taste_intensities_df(
     input_tastes = input_tastes,
     min_jury = min_jury,
@@ -203,28 +202,13 @@ plot_correlations <- function(
     overlap_mat[cbind(r_ion, r_win)]
   correlations_significant <- corr_sig[keep_sig, , drop = FALSE]
 
-  # ggplot2::ggplot(
-  #   correlations_significant,
-  #   ggplot2::aes(x = correlation, y = id_taste, fill = id_taste)
-  # ) +
-  #   ggplot2::scale_fill_manual(values = discrete_rainbow_14) +
-  #   ggridges::geom_density_ridges(stat = "binline", bins = 100) +
-  #   ggplot2::theme_minimal() +
-  #   ggplot2::theme(legend.position = "none")
+  # Top hit per feature-taste pair, then per fraction window-taste pair
 
   corr_top <- correlations_significant[
     abs(correlations_significant$correlation) >= min_corr,
     ,
     drop = FALSE
   ]
-  # tidytable::group_by(id_ion, id_taste) |>
-  # tidytable::mutate(min = min(p_adjusted, na.rm = TRUE)) |>
-  # tidytable::ungroup() |>
-  # tidytable::filter(p_adjusted == min) |>
-  # tidytable::group_by(fractions.x, id_taste) |>
-  # tidytable::mutate(min_2 = min(p_adjusted, na.rm = TRUE)) |>
-  # tidytable::ungroup() |>
-  # tidytable::filter(p_adjusted == min_2) |>
   corr_top <- merge(
     corr_top,
     candidates_confident_fractions,
@@ -248,7 +232,6 @@ plot_correlations <- function(
   corr_top$score_mixed <- sign(corr_top$correlation) *
     tanh(fisher_z / 3) *
     s_tima_conf
-  # tidytable::distinct(id_taste,inchikey_2D, .keep_all = TRUE) |>
   corr_top <- unique(
     corr_top[order(corr_top$score_mixed, decreasing = TRUE), , drop = FALSE]
   )
@@ -279,19 +262,9 @@ plot_correlations <- function(
       nc <- nchar(s$fractions.x)
       s <- s[nc == max(nc, na.rm = TRUE), , drop = FALSE]
     }
-    # tidytable::distinct(id_taste, .keep_all = TRUE) |>
     s
   })
   correlations_significant_filtered_pos <- do.call(rbind, pos_filtered_list)
-
-  # correlations_significant_filtered_neg <- correlations_significant_top |>
-  #   tidytable::group_by(id_taste) |>
-  #   tidytable::filter(correlation < -1 * min_corr) |>
-  #   tidytable::filter(score_mixed == min(score_mixed, na.rm = TRUE)) |>
-  #   tidytable::filter(p_adjusted == min(p_adjusted, na.rm = TRUE)) |>
-  #   tidytable::filter(nchar(fractions.x) == max(nchar(fractions.x), na.rm = TRUE)) |>
-  #   # tidytable::distinct(id_taste, .keep_all = TRUE) |>
-  #   tidytable::ungroup()
 
   pos_pairs <- unique(
     correlations_significant_filtered_pos[,
@@ -311,24 +284,12 @@ plot_correlations <- function(
     stringsAsFactors = FALSE
   )
 
-  # indices_significant_neg <- correlations_significant_filtered_neg |>
-  #   tidytable::distinct(id_ion, id_taste, fractions.x) |>
-  #   tidytable::mutate(id_ion = id_ion |>
-  #     as.integer()) |>
-  #   tidytable::separate_longer_delim(cols = fractions.x, delim = " ") |>
-  #   tidytable::rename(fraction = fractions.x) |>
-  #   tidytable::mutate(fraction = fraction |>
-  #     as.integer())
-
   df_merged <- merge(df_taste_intensities, df_ion_intensities, by = "fraction")
   df_merged_pos <- merge(
     df_merged,
     indices_significant_pos,
     by = c("fraction", "id_ion", "id_taste")
   )
-
-  # df_merged_neg <- df_merged |>
-  #   tidytable::inner_join(indices_significant_neg)
 
   taste_palette <- c(
     "OTHER" = "grey90",
@@ -364,7 +325,6 @@ plot_correlations <- function(
       mapping = ggplot2::aes(label = as.character(fraction)),
       size = 5
     ) +
-    # ggplot2::scale_x_log10() +
     ggplot2::xlab("Ion intensity") +
     ggplot2::ylab("Taste intensity") +
     ggplot2::scale_x_continuous(labels = label_si_number) +
@@ -509,7 +469,6 @@ plot_correlations <- function(
     ) +
     ggplot2::facet_wrap(
       facets = "id_ion",
-      # facets = c("id_ion", "p_adjusted"),
       scales = "free_x",
       ncol = 2
     ) +
@@ -519,7 +478,6 @@ plot_correlations <- function(
       mapping = ggplot2::aes(label = as.character(fraction)),
       size = 5
     ) +
-    # ggplot2::scale_x_log10() +
     ggplot2::ylim(c(0, 100)) +
     ggplot2::xlab("Ion intensity") +
     ggplot2::ylab("Bitter intensity") +
@@ -540,7 +498,6 @@ plot_correlations <- function(
         r = 125
       ),
       legend.position = "bottom",
-      # legend.position = c(0.75, 0.1),
       legend.text = ggplot2::element_text(color = "#767676"),
       text = ggplot2::element_text(
         face = "bold",
@@ -653,7 +610,6 @@ plot_correlations <- function(
       )
     ) +
     ggplot2::geom_col() +
-    # ggplot2::geom_col(stat = "identity", position = "dodge") +
     ggplot2::scale_fill_manual(values = taste_palette) +
     ggplot2::scale_color_manual(values = taste_palette) +
     ggplot2::labs(fill = "Taste", color = "Taste") +
@@ -663,12 +619,6 @@ plot_correlations <- function(
       axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
     ) +
     ggplot2::xlab("") +
-    # ggforce::facet_zoom(ylim = c(0, 20)) +
-    # ggbreak::scale_y_cut(
-    #   breaks = c(10, 30),
-    #   which = c(1, 3),
-    #   scales = c(0, 1)
-    # ) +
     ggplot2::ylab("Taste intensity") +
     ggplot2::theme(
       axis.text = ggplot2::element_text(color = "#767676"),
@@ -706,7 +656,6 @@ plot_correlations <- function(
       )
     ) +
     ggplot2::geom_col() +
-    # ggplot2::geom_col(stat = "identity", position = "dodge") +
     ggplot2::scale_fill_manual(values = taste_palette) +
     ggplot2::scale_color_manual(values = taste_palette) +
     ggplot2::labs(fill = "Taste", color = "Taste") +
@@ -716,14 +665,6 @@ plot_correlations <- function(
       axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
     ) +
     ggplot2::xlab("Fraction") +
-    # ggforce::facet_zoom(ylim = c(1E4, 2E5)) +
-    # ggplot2::scale_y_continuous(transform = "log10") +
-    # ggplot2::ylim(c(1E2,1E10)) +
-    # ggbreak::scale_y_cut(
-    #   breaks = c(2E5, 5E5),
-    #   which = c(1, 2,3),
-    #   scales = c( 1,0,1)
-    # ) +
     ggplot2::ylab("Feature intensity") +
     ggplot2::theme(
       axis.text = ggplot2::element_text(color = "#767676"),

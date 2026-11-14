@@ -124,19 +124,6 @@ prepare_profiles <- function(
   )
   expanded <- expanded[!duplicated(dedup_key), , drop = FALSE]
 
-  ## Due to dilutions
-  ## Session 03 was diluted 50 times
-  ## Session 07 was concentrated 2 times
-  # tidytable::mutate(value = tidytable::if_else(
-  #   condition = session == "session_03",
-  #   true = 50 * value,
-  #   false = value
-  # )) |>
-  # tidytable::mutate(value = tidytable::if_else(
-  #   condition = session == "session_07",
-  #   true = 0.5 * value,
-  #   false = value
-  # )) |>
   out <- unique(data.frame(
     fraction = paste0("fraction_", expanded$ProductName),
     session = expanded$session,

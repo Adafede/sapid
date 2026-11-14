@@ -43,19 +43,6 @@ correlate_ion_taste_intensities <- function(
   input_ions = "./data/fractions_mzmine/fractions.csv",
   input_tastes = NULL,
   output = "./data/correlations.tsv",
-  # tastes = c(
-  #   "BITTER",
-  #   "FATTY",
-  #   "ACID",
-  #   "VOLUME",
-  #   "FRESH",
-  #   "ASTRINGENT",
-  #   "MOUTHFILLING",
-  #   "UMAMI",
-  #   "SALTY",
-  #   "SWEET",
-  #   "PUNGENT"
-  # ),
   min_jury = 2L,
   min_area_ion = 1L,
   imputation_factor = 0.5,
@@ -67,10 +54,7 @@ correlate_ion_taste_intensities <- function(
 ) {
   fdr_scope <- match.arg(fdr_scope)
   min_width <- min(widths)
-  # max_width <- widths |>
-  #   max()
 
-  # tidytable::slice_max(order_by = value, n = max_width, with_ties = FALSE) |>
   df_ion_intensities <- prepare_ion_intensities_df(
     input_ions = input_ions,
     min_width = min_width,
@@ -78,7 +62,6 @@ correlate_ion_taste_intensities <- function(
     imputation_factor = imputation_factor
   )
 
-  # tidytable::filter(taste %in% tastes) |>
   df_taste_intensities <- prepare_taste_intensities_df(
     input_tastes = input_tastes,
     min_jury = min_jury,
@@ -210,10 +193,6 @@ correlate_ion_taste_intensities <- function(
     lapply(widths, function(w) generate_rolling_windows(fractions, w)),
     recursive = FALSE
   )
-
-  # fractions_lists <- list(seq(32, 39))
-  # fractions_lists <- fractions_lists[160:170]
-  # tastes <- c("BITTER", "VOLUME", "SWEET")
 
   correlate_intensities <- function(taste) {
     taste_sub <- df_taste_intensities[

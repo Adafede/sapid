@@ -119,8 +119,7 @@ plot_napping <- function(
     fixed = TRUE
   )
 
-  # file_text_raw <- table_words_prepared |>
-  #   tidytable::distinct(fraction, session, jury, taste_original)
+  # Clean descriptor contingency block
 
   words_cleaned <- FactoMineR::textual(
     tab = file_text_cleaned,
@@ -132,33 +131,6 @@ plot_napping <- function(
   df_words_cleaned <- words_cleaned$cont.table |>
     data.frame()
 
-  # words_raw <- FactoMineR::textual(
-  #   tab = file_text_raw,
-  #   maj.in.min = TRUE,
-  #   sep.word = " ",
-  #   num.text = 4,
-  #   contingence.by = 1
-  # )
-  # df_words_raw <- words_raw$cont.table |>
-  #   data.frame()
-
-  # if (sessions == 8) {
-  #   df_coord <- df_coord |>
-  #     tidytable::filter(rownames(df_coord) != 23 &
-  #       rownames(df_coord) != 32) |>
-  #     as.data.frame()
-  #
-  #   df_words_cleaned <- df_words_cleaned |>
-  #     tidytable::filter(rownames(df_words_cleaned) != 23 &
-  #       rownames(df_words_cleaned) != 32) |>
-  #     data.frame()
-  #
-  #   df_words_raw <- df_words_raw |>
-  #     tidytable::filter(rownames(df_words_raw) != 23 &
-  #       rownames(df_words_raw) != 32) |>
-  #     data.frame()
-  # }
-
   df_coord <- df_coord[,
     colSums(is.na(df_coord)) < nrow(df_coord),
     drop = FALSE
@@ -169,46 +141,16 @@ plot_napping <- function(
     drop = FALSE
   ]
 
-  # df_words_raw <-
-  #   df_words_raw[, colSums(df_words_raw) != 0]
-
   nap_tot <- cbind(df_coord, df_words_cleaned)
 
-  ##### PMFA (Procuste Multiple Factor Analysis to obtain individual tableclothes  ####
+  # PMFA
   res_pmfa <- SensoMineR::pmfa(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,
     graph.mfa = FALSE
   )
 
-  ###
-  ## decide to use this part or not
-  # single.nap_high <- single.nap |>
-  #   data.frame() |>
-  #   tidytable::filter(RV.coeff >= min_rv_coeff)
-  #
-  # nappes_ok <-
-  #   gsub(
-  #     pattern = "Y",
-  #     replacement = "",
-  #     x = rownames(single.nap_high)
-  #   )
-  #
-  # df_coord_clean <- df_coord |>
-  #   select(contains(match = nappes_ok))
-  #
-  # clean.nap <- SensoMineR::pmfa(
-  #   matrice = df_coord_clean,
-  #   matrice.illu = df_words_cleaned,
-  #   mean.conf = NULL,
-  #   dilat = TRUE,
-  #   graph.ind = TRUE,
-  #   graph.mfa = TRUE,
-  #   coord = c(1, 2)
-  # )
-  ###
-
-  ##### MFA with supplementary descriptor word frequencies ####
+  # MFA with supplementary descriptor frequencies
   n_coord_groups <- ncol(df_coord) / 2
   res_nap <- FactoMineR::MFA(
     base = nap_tot,
@@ -219,20 +161,7 @@ plot_napping <- function(
     axes = c(1, 2)
   )
 
-  ## later
-  # write.infile(res.Nap, file.path(exportDir, "res_Nap.csv"),  sep = ";")
-
-  # to obtain better graphes
-  # plot(res.nap, choix = "ind", title = "Napping - ...")
-  #
-  # plot(res.nap,
-  #   choix = "var",
-  #   invisible = "ind.sup",
-  #   title = "Napping - ..."
-  # )
-
-  ####   Clustering analysis based on coordinates of products ####
-
+  # HCPC on product coordinates
   res_hcpc <- FactoMineR::HCPC(
     res = res_nap,
     nb.clust = -1,
@@ -243,17 +172,11 @@ plot_napping <- function(
     proba = 0.05
   )
 
-  ## later
-  # write.infile(res.HCPC, file.path(exportDir, "res_hcpc.csv"),  sep = ";")
   SensoMineR::nappeplot(
     donnee = df_coord,
     numr = 3,
     numc = 4
   )
-
-  # SensoMineR::indscal(matrice = df_coord,
-  #                     matrice.illu = df_words_raw,
-  #                     maxit = 100)
 
   res_indscal <- SensoMineR::indscal(
     matrice = df_coord,

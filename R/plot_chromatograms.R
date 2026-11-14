@@ -39,8 +39,6 @@ plot_chromatograms <- function(
     full.names = TRUE
   )
 
-  # Continue with rest of function using table_groups instead of re-reading
-
   extract_chromatogram_df <- function(file) {
     chrom_loaded <- .cascade_load_chromatograms(file)
     preprocessed <- .cascade_preprocess_chromatograms(

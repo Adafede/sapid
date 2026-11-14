@@ -23,16 +23,6 @@ plot_matrices <- function(
 ) {
   input_data <- load_dataset_or_file(input, "profiles")
 
-  # tidytable::mutate(value = tidytable::if_else(
-  #   condition = session == "session_03",
-  #   true = value / 500,
-  #   false = value
-  # )) |>
-  # tidytable::mutate(value = tidytable::if_else(
-  #   condition = session == "session_03",
-  #   true = value / 500,
-  #   false = value
-  # )) |>
   table_profiles <- unique(input_data)
 
   extract_matrix_df <- function(col_name, target_val) {

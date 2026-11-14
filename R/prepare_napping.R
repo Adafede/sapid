@@ -90,7 +90,6 @@ prepare_napping <- function(
     fraction = paste0("fraction_", words_df$Produit),
     session = words_df$session,
     jury = words_df$name,
-    # taste_original = value,
     taste_original = words_df$value_2,
     taste_intermediate = words_df$taste,
     taste_harmonized = words_df$newValue,

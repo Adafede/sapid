@@ -35,7 +35,6 @@ load_consistent_profiles <- function(
   min_jury = 2L,
   normalize_panelists = FALSE
 ) {
-  # Load data if file path given, otherwise use data frame
   profiles_df <- if (is.character(input)) {
     data.table::fread(input, data.table = FALSE)
   } else {

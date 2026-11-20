@@ -113,27 +113,6 @@ plot_profiles <- function(
       )
     )
 
-  prepare_comparison_list <- function(
-    x,
-    features_informed,
-    features_not_informed,
-    candidates_confident,
-    min_similarity_prefilter,
-    min_similarity_filter,
-    mode
-  ) {
-    compared_peaks_list_fractions <- .cascade_prepare_comparison(
-      features_informed = features_informed[[x]],
-      features_not_informed = features_not_informed[[x]],
-      candidates_confident = candidates_confident,
-      min_similarity_prefilter = min_similarity_prefilter,
-      min_similarity_filter = min_similarity_filter,
-      mode = mode
-    )
-
-    compared_peaks_list_fractions$peaks_maj_precor
-  }
-
   features_informed_fractions <- list.files(
     peaks_dir_fractions,
     pattern = "featuresInformed_cad\\.tsv$",
@@ -185,13 +164,16 @@ plot_profiles <- function(
 
   chemicals_informed_fractions_list <- lapply(
     seq_along(features_informed_fractions),
-    prepare_comparison_list,
-    features_informed = features_informed_fractions,
-    features_not_informed = features_not_informed_fractions,
-    candidates_confident = candidates_confident_fractions,
-    min_similarity_prefilter = min_similarity_prefilter,
-    min_similarity_filter = min_similarity_filter,
-    mode = mode
+    function(x) {
+      .cascade_prepare_comparison(
+        features_informed = features_informed_fractions[[x]],
+        features_not_informed = features_not_informed_fractions[[x]],
+        candidates_confident = candidates_confident_fractions,
+        min_similarity_prefilter = min_similarity_prefilter,
+        min_similarity_filter = min_similarity_filter,
+        mode = mode
+      )$peaks_maj_precor
+    }
   )
 
   bound_peaks <- data.table::rbindlist(

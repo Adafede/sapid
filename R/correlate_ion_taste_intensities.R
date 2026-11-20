@@ -87,14 +87,6 @@ correlate_ion_taste_intensities <- function(
   }
   row_has_any_ion <- rowSums(!is.na(ion_mat)) > 0L
 
-  generate_rolling_windows <- function(fractions, window_size) {
-    n_win <- length(fractions) - window_size + 1L
-    if (n_win < 1L) {
-      return(list())
-    }
-    lapply(seq_len(n_win), function(i) fractions[i:(i + window_size - 1L)])
-  }
-
   pkendall_lut <- function(n) {
     max_q <- as.integer(n * (n - 1L) / 2L)
     dp <- 1
@@ -190,7 +182,14 @@ correlate_ion_taste_intensities <- function(
   }
 
   fractions_lists <- unlist(
-    lapply(widths, function(w) generate_rolling_windows(fractions, w)),
+    lapply(widths, function(w) {
+      n_win <- length(fractions) - w + 1L
+      if (n_win < 1L) {
+        list()
+      } else {
+        lapply(seq_len(n_win), function(i) fractions[i:(i + w - 1L)])
+      }
+    }),
     recursive = FALSE
   )
 

@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message("Low-coverage function path checks")
 ns <- asNamespace("sapid")
@@ -42,59 +50,7 @@ withr::with_tempdir({
   ions[["datafile:210619_AR_13_M_33_01.mzML:area"]] <- 6000
   ions[["datafile:210619_AR_14_M_34_01.mzML:area"]] <- 4000
 
-  num_cols <- c(
-    "feature_mz",
-    "feature_rt",
-    "score_input",
-    "candidate_count_similarity_peaks_matched",
-    "candidate_score_similarity",
-    "score_initial",
-    "score_biological",
-    "score_chemical",
-    "score_final",
-    "feature_pred_tax_npc_01pat_score",
-    "feature_pred_tax_npc_02sup_score",
-    "feature_pred_tax_npc_03cla_score"
-  )
-  all_cols <- c(
-    "feature_id",
-    "feature_mz",
-    "feature_rt",
-    "score_input",
-    "candidate_structure_inchikey_connectivity_layer",
-    "candidate_structure_smiles_no_stereo",
-    "candidate_structure_molecular_formula",
-    "candidate_structure_tax_npc_01pat",
-    "candidate_structure_tax_npc_02sup",
-    "candidate_structure_tax_npc_03cla",
-    "candidate_structure_organism_occurrence_closest",
-    "candidate_count_similarity_peaks_matched",
-    "candidate_score_similarity",
-    "score_initial",
-    "score_biological",
-    "score_chemical",
-    "score_final",
-    "feature_pred_tax_npc_01pat_val",
-    "feature_pred_tax_npc_02sup_val",
-    "feature_pred_tax_npc_03cla_val",
-    "feature_pred_tax_npc_01pat_score",
-    "feature_pred_tax_npc_02sup_score",
-    "feature_pred_tax_npc_03cla_score",
-    "mode"
-  )
-  ann <- as.data.frame(setNames(
-    lapply(all_cols, function(x) {
-      if (x == "feature_id") {
-        101L
-      } else if (x %in% num_cols) {
-        0.5
-      } else {
-        NA_character_
-      }
-    }),
-    all_cols
-  ))
-  ann$mode <- "pos"
+  ann <- make_minimal_annotation_df(num_val = 0.5)
 
   corr_path <- file.path(getwd(), "corr.tsv")
   ions_path <- file.path(getwd(), "ions.csv")
@@ -141,10 +97,7 @@ withr::with_tempdir({
   expect_true(file.exists(file.path(getwd(), "c1.pdf")))
 })
 
-fixture <- file.path("fixtures", "session_fixture.xlsx")
-if (!file.exists(fixture)) {
-  fixture <- file.path("inst", "tinytest", "fixtures", "session_fixture.xlsx")
-}
+fixture <- fixture_path("session_fixture.xlsx")
 expect_true(file.exists(fixture))
 expect_error(
   prepare_concentration(
@@ -227,67 +180,7 @@ withr::with_tempdir({
 
 # Full happy path for plot_chromatograms with .mzML files
 withr::with_tempdir({
-  data("cascade_chromatograms_positive", package = "cascade")
-  cad <- subset(cascade_chromatograms_positive, chromatogram == "cad")[
-    seq(1, 49468, by = 20),
-  ]
-  enc_f64 <- function(x) {
-    raw_bytes <- writeBin(as.numeric(x), raw(), size = 8L, endian = "little")
-    gsub("[\r\n]", "", jsonlite::base64_enc(raw_bytes))
-  }
-  rt_b64 <- enc_f64(cad$rtime)
-  int_b64 <- enc_f64(cad$intensity)
-  n_pts <- nrow(cad)
-  cids <- c("BasePeak_0", "PDA#1_TotalAbsorbance_0", "UV#1_CAD_1_0")
-  chrom_xml <- paste(
-    vapply(
-      seq_along(cids),
-      function(i) {
-        paste0(
-          "<chromatogram index=\"",
-          i - 1L,
-          "\" id=\"",
-          cids[i],
-          "\" defaultArrayLength=\"",
-          n_pts,
-          "\">",
-          "<binaryDataArrayList count=\"2\">",
-          "<binaryDataArray encodedLength=\"",
-          nchar(rt_b64),
-          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          paste0(
-            "<cvParam cvRef=\"MS\" accession=\"MS:1000595\"",
-            " name=\"time array\" unitCvRef=\"UO\"",
-            " unitAccession=\"UO:0000031\" unitName=\"minute\"/>"
-          ),
-          "<binary>",
-          rt_b64,
-          "</binary></binaryDataArray>",
-          "<binaryDataArray encodedLength=\"",
-          nchar(int_b64),
-          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/>",
-          "<binary>",
-          int_b64,
-          "</binary></binaryDataArray>",
-          "</binaryDataArrayList></chromatogram>"
-        )
-      },
-      character(1L)
-    ),
-    collapse = "\n"
-  )
-  mzml_txt <- paste0(
-    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n",
-    "<mzML xmlns=\"http://psi.hupo.org/ms/mzml\" version=\"1.1.0\">\n",
-    "<cvList count=\"1\"><cv id=\"MS\" fullName=\"MS\" version=\"1\" URI=\"\"/></cvList>\n",
-    "<run id=\"run1\">\n",
-    "<chromatogramList count=\"3\" defaultDataProcessingRef=\"dp\">\n",
-    chrom_xml,
-    "\n</chromatogramList>\n</run>\n</mzML>\n"
-  )
+  mzml_txt <- make_synthetic_mzml(include_spectra = FALSE)
 
   mzml_dir <- file.path(getwd(), "chrom_mzmls")
   dir.create(mzml_dir)

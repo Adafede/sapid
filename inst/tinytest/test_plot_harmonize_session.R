@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message("Plot, harmonization, and session loader checks")
 ns <- asNamespace("sapid")
@@ -170,10 +178,7 @@ expect_error(
 
 xlsx_dir <- file.path(input_dir, "20210412_cluster6", "03_files")
 dir.create(xlsx_dir, recursive = TRUE)
-fixture <- file.path("fixtures", "session_fixture.xlsx")
-if (!file.exists(fixture)) {
-  fixture <- file.path("inst", "tinytest", "fixtures", "session_fixture.xlsx")
-}
+fixture <- fixture_path("session_fixture.xlsx")
 expect_true(file.exists(fixture))
 expect_true(file.copy(
   fixture,
@@ -217,27 +222,19 @@ loaded_all <- load_session(input_dir, session_info_all, "napping_coord")
 expect_true(all(loaded_all$session == "session_All"))
 
 # Single-column worksheet named 'session' (other_cols has length 0)
-td_s <- tempfile("xlsx_single_")
-dir.create(file.path(td_s, "xl", "worksheets"), recursive = TRUE)
-writeLines(
-  paste0(
-    "<worksheet><sheetData>",
-    "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>session</t></is></c></row>",
-    "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>old</t></is></c></row>",
-    "</sheetData></worksheet>"
-  ),
-  file.path(td_s, "xl", "worksheets", "sheet2.xml")
-)
 xlsx_single_dir <- file.path(input_dir, "20210419_cluster2", "03_files")
 dir.create(xlsx_single_dir, recursive = TRUE)
-old_wd <- setwd(td_s)
-utils::zip(
-  file.path(xlsx_single_dir, "single.xlsx"),
-  files = "xl",
-  flags = "-rq"
+build_test_xlsx(
+  extra_xml = list(
+    "xl/worksheets/sheet2.xml" = paste0(
+      "<worksheet><sheetData>",
+      "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>session</t></is></c></row>",
+      "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>old</t></is></c></row>",
+      "</sheetData></worksheet>"
+    )
+  ),
+  out_zip = file.path(xlsx_single_dir, "single.xlsx")
 )
-setwd(old_wd)
-unlink(td_s, recursive = TRUE)
 loaded_single <- load_session(
   input_dir,
   list(date = 20210419, cluster = 2, product_name = "Chas avant"),

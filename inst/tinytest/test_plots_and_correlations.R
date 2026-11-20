@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message("Plot and correlation coverage checks")
 ns <- asNamespace("sapid")
@@ -12,12 +20,6 @@ correlate_ion_taste_intensities <- get(
   "correlate_ion_taste_intensities",
   envir = ns
 )
-
-expect_valid_pdf <- function(path) {
-  expect_true(file.exists(path))
-  expect_true(file.info(path)$size > 1000)
-  expect_identical(rawToChar(readBin(path, "raw", 4L)), "%PDF")
-}
 
 withr::with_tempdir({
   tmp_dir <- getwd()

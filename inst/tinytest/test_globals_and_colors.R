@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message("Globals and colors helper checks")
 ns <- asNamespace("sapid")
@@ -195,33 +203,6 @@ expect_error(
   pattern = "File does not exist:"
 )
 
-make_custom_xlsx <- function(sheets_xml, shared_strings_xml = NULL) {
-  td <- tempfile("xlsx_build_")
-  dir.create(file.path(td, "xl", "worksheets"), recursive = TRUE)
-  on.exit(unlink(td, recursive = TRUE), add = TRUE)
-  if (!is.null(shared_strings_xml)) {
-    writeLines(shared_strings_xml, file.path(td, "xl", "sharedStrings.xml"))
-  }
-  for (i in seq_along(sheets_xml)) {
-    writeLines(
-      sheets_xml[[i]],
-      file.path(td, "xl", "worksheets", paste0("sheet", i, ".xml"))
-    )
-  }
-  out_zip <- tempfile(fileext = ".xlsx")
-  old_wd <- setwd(td)
-  on.exit(setwd(old_wd), add = TRUE)
-  utils::zip(out_zip, files = "xl", flags = "-rq")
-  out_zip
-}
-
-ss_xml <- paste0(
-  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-  "<sst><si><t>col_a</t></si>",
-  "<si><r><t xml:space=\"preserve\">multi </t></r><r><t>&amp; part</t></r></si>",
-  "<si><t>col_aa</t></si></sst>"
-)
-
 # Sheet 1: normal with sharedStrings, inlineStr, booleans (1 and 0), numbers,
 # empty cells, empty row, and multi-letter column D (col 4)
 sheet1_xml <- paste0(
@@ -260,9 +241,16 @@ sheet3_xml <- paste0(
   "</sheetData></worksheet>"
 )
 
-xlsx_test_file <- make_custom_xlsx(
+ss_xml <- paste0(
+  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+  "<sst><si><t>col_a</t></si>",
+  "<si><r><t xml:space=\"preserve\">multi </t></r><r><t>&amp; part</t></r></si>",
+  "<si><t>col_aa</t></si></sst>"
+)
+
+xlsx_test_file <- build_test_xlsx(
   list(sheet1_xml, sheet2_xml, sheet3_xml),
-  shared_strings_xml = ss_xml
+  extra_xml = list("xl/sharedStrings.xml" = ss_xml)
 )
 
 parsed_s1 <- read_xlsx_base(xlsx_test_file, sheet = 1L)
@@ -506,75 +494,55 @@ expect_equal(
 )
 
 # 16. read_xlsx_base hardening: workbook sheet resolution, styles dates, <rPh>, missing r=, zero-cell rows
-td_adv <- tempfile("xlsx_adv_")
-dir.create(file.path(td_adv, "xl", "worksheets"), recursive = TRUE)
-dir.create(file.path(td_adv, "xl", "_rels"), recursive = TRUE)
-writeLines(
-  paste0(
-    "<workbook><sheets>",
-    "<sheet name=\"Summary\" sheetId=\"1\" r:id=\"rId1\"/>",
-    "<sheet name=\"Sensory\" sheetId=\"2\" r:id=\"rId2\"/>",
-    "</sheets></workbook>"
-  ),
-  file.path(td_adv, "xl", "workbook.xml")
-)
-writeLines(
-  paste0(
-    "<Relationships>",
-    "<Relationship Id=\"rId1\" Target=\"worksheets/sheet2.xml\"/>",
-    "<Relationship Id=\"rId2\" Target=\"/xl/worksheets/sheet1.xml\"/>",
-    "</Relationships>"
-  ),
-  file.path(td_adv, "xl", "_rels", "workbook.xml.rels")
-)
-writeLines(
-  paste0(
-    "<sst>",
-    "<si xml:space=\"preserve\"><t>label</t><rPh sb=\"0\" eb=\"2\"><t>PHON</t></rPh></si>",
-    "</sst>"
-  ),
-  file.path(td_adv, "xl", "sharedStrings.xml")
-)
-writeLines(
-  paste0(
-    "<styleSheet>",
-    "<numFmts count=\"1\"><numFmt numFmtId=\"164\" formatCode=\"yyyy-mm-dd\"/></numFmts>",
-    "<cellXfs count=\"3\">",
-    "<xf numFmtId=\"0\"/>",
-    "<xf numFmtId=\"14\"/>",
-    "<xf numFmtId=\"164\"/>",
-    "</cellXfs>",
-    "</styleSheet>"
-  ),
-  file.path(td_adv, "xl", "styles.xml")
-)
-writeLines(
-  paste0(
-    "<worksheet><sheetData>",
+xlsx_adv_file <- build_test_xlsx(
+  sheets_xml = list(
     paste0(
-      "<row r=\"1\"><c t=\"s\"><v>0</v></c>",
-      "<c t=\"inlineStr\"><is><t>dt_builtin</t></is></c>",
-      "<c t=\"inlineStr\"><is><t>dt_custom</t></is></c>",
-      "<c t=\"inlineStr\"><is><t>val</t></is></c></row>"
+      "<worksheet><sheetData>",
+      paste0(
+        "<row r=\"1\"><c t=\"s\"><v>0</v></c>",
+        "<c t=\"inlineStr\"><is><t>dt_builtin</t></is></c>",
+        "<c t=\"inlineStr\"><is><t>dt_custom</t></is></c>",
+        "<c t=\"inlineStr\"><is><t>val</t></is></c></row>"
+      ),
+      paste0(
+        "<row r=\"2\"><c t=\"inlineStr\"><is><t>row1</t></is></c>",
+        "<c s=\"1\"><v>45292</v></c><c s=\"2\"><v>45293.5</v></c>",
+        "<c s=\"0\"><v>12.5</v></c></row>"
+      ),
+      "</sheetData></worksheet>"
     ),
-    paste0(
-      "<row r=\"2\"><c t=\"inlineStr\"><is><t>row1</t></is></c>",
-      "<c s=\"1\"><v>45292</v></c><c s=\"2\"><v>45293.5</v></c>",
-      "<c s=\"0\"><v>12.5</v></c></row>"
-    ),
-    "</sheetData></worksheet>"
+    "<worksheet><sheetData><row r=\"1\"/><row r=\"2\"></row></sheetData></worksheet>"
   ),
-  file.path(td_adv, "xl", "worksheets", "sheet1.xml")
+  extra_xml = list(
+    "xl/workbook.xml" = paste0(
+      "<workbook><sheets>",
+      "<sheet name=\"Summary\" sheetId=\"1\" r:id=\"rId1\"/>",
+      "<sheet name=\"Sensory\" sheetId=\"2\" r:id=\"rId2\"/>",
+      "</sheets></workbook>"
+    ),
+    "xl/_rels/workbook.xml.rels" = paste0(
+      "<Relationships>",
+      "<Relationship Id=\"rId1\" Target=\"worksheets/sheet2.xml\"/>",
+      "<Relationship Id=\"rId2\" Target=\"/xl/worksheets/sheet1.xml\"/>",
+      "</Relationships>"
+    ),
+    "xl/sharedStrings.xml" = paste0(
+      "<sst>",
+      "<si xml:space=\"preserve\"><t>label</t><rPh sb=\"0\" eb=\"2\"><t>PHON</t></rPh></si>",
+      "</sst>"
+    ),
+    "xl/styles.xml" = paste0(
+      "<styleSheet>",
+      "<numFmts count=\"1\"><numFmt numFmtId=\"164\" formatCode=\"yyyy-mm-dd\"/></numFmts>",
+      "<cellXfs count=\"3\">",
+      "<xf numFmtId=\"0\"/>",
+      "<xf numFmtId=\"14\"/>",
+      "<xf numFmtId=\"164\"/>",
+      "</cellXfs>",
+      "</styleSheet>"
+    )
+  )
 )
-writeLines(
-  "<worksheet><sheetData><row r=\"1\"/><row r=\"2\"></row></sheetData></worksheet>",
-  file.path(td_adv, "xl", "worksheets", "sheet2.xml")
-)
-xlsx_adv_file <- tempfile(fileext = ".xlsx")
-old_wd_adv <- setwd(td_adv)
-utils::zip(xlsx_adv_file, files = "xl", flags = "-rq")
-setwd(old_wd_adv)
-unlink(td_adv, recursive = TRUE)
 
 by_name <- read_xlsx_base(xlsx_adv_file, sheet = "Sensory")
 expect_identical(names(by_name), c("label", "dt_builtin", "dt_custom", "val"))

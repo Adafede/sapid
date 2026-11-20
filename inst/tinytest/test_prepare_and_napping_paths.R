@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message("Preparation and napping path checks")
 ns <- asNamespace("sapid")
@@ -7,12 +15,7 @@ prepare_profiles <- get("prepare_profiles", envir = ns)
 prepare_napping <- get("prepare_napping", envir = ns)
 plot_napping <- get("plot_napping", envir = ns)
 
-orig_dir <- getwd()
-fixture_candidates <- c(
-  file.path(orig_dir, "fixtures", "session_fixture.xlsx"),
-  file.path(orig_dir, "inst", "tinytest", "fixtures", "session_fixture.xlsx")
-)
-fixture <- fixture_candidates[file.exists(fixture_candidates)][1]
+fixture <- fixture_path("session_fixture.xlsx")
 
 # 1. Error paths when required columns (e.g. 'CJ' or >=3 napping_words cols) are missing
 withr::with_tempdir({
@@ -74,22 +77,6 @@ withr::with_tempdir({
   input_dir <- getwd()
   xlsx_dir <- file.path(input_dir, "20210412_cluster6", "03_files")
   dir.create(xlsx_dir, recursive = TRUE)
-
-  build_xlsx <- function(sheets_xml, dest) {
-    td <- tempfile("xlsx_prep_")
-    dir.create(file.path(td, "xl", "worksheets"), recursive = TRUE)
-    on.exit(unlink(td, recursive = TRUE), add = TRUE)
-    for (i in seq_along(sheets_xml)) {
-      writeLines(
-        enc2utf8(sheets_xml[[i]]),
-        file.path(td, "xl", "worksheets", paste0("sheet", i, ".xml")),
-        useBytes = TRUE
-      )
-    }
-    old_wd <- setwd(td)
-    on.exit(setwd(old_wd), add = TRUE)
-    utils::zip(dest, files = "xl", flags = "-rq")
-  }
 
   # Sheet 1 (chasselas): ProductName, CJ, Date + all 9 French taste attributes
   sheet1 <- paste0(
@@ -196,9 +183,9 @@ withr::with_tempdir({
     "</sheetData></worksheet>"
   )
 
-  build_xlsx(
+  build_test_xlsx(
     list(sheet1, sheet2, sheet3, sheet4),
-    file.path(xlsx_dir, "session.xlsx")
+    out_zip = file.path(xlsx_dir, "session.xlsx")
   )
 
   # Verify prepare_chasselas happy path
@@ -312,82 +299,61 @@ withr::with_tempdir({
   xlsx_dir <- file.path(input_dir, "20210412_cluster6", "03_files")
   dir.create(xlsx_dir, recursive = TRUE)
 
-  td <- tempfile("xlsx_edge_")
-  dir.create(file.path(td, "xl", "worksheets"), recursive = TRUE)
-  writeLines(
-    paste0(
-      "<styleSheet><cellXfs count=\"2\">",
-      "<xf numFmtId=\"0\"/><xf numFmtId=\"14\"/>",
-      "</cellXfs></styleSheet>"
+  build_test_xlsx(
+    sheets_xml = list(
+      paste0(
+        "<worksheet><sheetData>",
+        paste0(
+          "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
+          "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
+          "<c r=\"C1\" t=\"inlineStr\"><is><t>Date</t></is></c>",
+          "<c r=\"D1\" t=\"inlineStr\"><is><t>amer_1</t></is></c></row>"
+        ),
+        paste0(
+          "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>CHASAVANT</t></is></c>",
+          "<c r=\"B2\"><v>1</v></c><c r=\"C2\" s=\"1\"><v>44298</v></c>",
+          "<c r=\"D2\"><v>3.5</v></c></row>"
+        ),
+        paste0(
+          "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>CHASAPRES</t></is></c>",
+          "<c r=\"B3\"><v>2</v></c><c r=\"C3\" s=\"1\"><v>44298</v></c>",
+          "<c r=\"D3\"><v>6.0</v></c></row>"
+        ),
+        "</sheetData></worksheet>"
+      ),
+      "<worksheet><sheetData/></worksheet>",
+      "<worksheet><sheetData/></worksheet>",
+      paste0(
+        "<worksheet><sheetData>",
+        paste0(
+          "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
+          "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
+          "<c r=\"C1\" t=\"inlineStr\"><is><t>amer</t></is></c>",
+          "<c r=\"D1\" t=\"inlineStr\"><is><t>sans_gout</t></is></c>",
+          "<c r=\"E1\" t=\"inlineStr\"><is><t>neutre</t></is></c></row>"
+        ),
+        paste0(
+          "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>17</t></is></c>",
+          "<c r=\"B2\"><v>1</v></c><c r=\"C2\"><v>6.0</v></c>",
+          "<c r=\"D2\"><v>2.0</v></c><c r=\"E2\"><v>4.0</v></c></row>"
+        ),
+        paste0(
+          "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>17</t></is></c>",
+          "<c r=\"B3\"><v>2</v></c><c r=\"C3\"><v>500</v></c>",
+          "<c r=\"D3\"/><c r=\"E3\"/></row>"
+        ),
+        "</sheetData></worksheet>"
+      )
     ),
-    file.path(td, "xl", "styles.xml")
-  )
-  # Sheet 1 (chasselas) with integer CJ = 1, 2 and serial Date
-  writeLines(
-    paste0(
-      "<worksheet><sheetData>",
-      paste0(
-        "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
-        "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
-        "<c r=\"C1\" t=\"inlineStr\"><is><t>Date</t></is></c>",
-        "<c r=\"D1\" t=\"inlineStr\"><is><t>amer_1</t></is></c></row>"
-      ),
-      paste0(
-        "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>CHASAVANT</t></is></c>",
-        "<c r=\"B2\"><v>1</v></c><c r=\"C2\" s=\"1\"><v>44298</v></c>",
-        "<c r=\"D2\"><v>3.5</v></c></row>"
-      ),
-      paste0(
-        "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>CHASAPRES</t></is></c>",
-        "<c r=\"B3\"><v>2</v></c><c r=\"C3\" s=\"1\"><v>44298</v></c>",
-        "<c r=\"D3\"><v>6.0</v></c></row>"
-      ),
-      "</sheetData></worksheet>"
+    extra_xml = list(
+      "xl/styles.xml" = paste0(
+        "<styleSheet><cellXfs count=\"2\">",
+        "<xf numFmtId=\"0\"/><xf numFmtId=\"14\"/>",
+        "</cellXfs></styleSheet>"
+      )
     ),
-    file.path(td, "xl", "worksheets", "sheet1.xml")
+    out_zip = file.path(xlsx_dir, "session.xlsx")
   )
-  writeLines(
-    "<worksheet><sheetData/></worksheet>",
-    file.path(td, "xl", "worksheets", "sheet2.xml")
-  )
-  writeLines(
-    "<worksheet><sheetData/></worksheet>",
-    file.path(td, "xl", "worksheets", "sheet3.xml")
-  )
-  # Sheet 4 (profiles): integer CJ = 1..2, amer=6 then amer=500 -> med_fallback=6
-  writeLines(
-    enc2utf8(paste0(
-      "<worksheet><sheetData>",
-      paste0(
-        "<row r=\"1\"><c r=\"A1\" t=\"inlineStr\"><is><t>ProductName</t></is></c>",
-        "<c r=\"B1\" t=\"inlineStr\"><is><t>CJ</t></is></c>",
-        "<c r=\"C1\" t=\"inlineStr\"><is><t>amer</t></is></c>",
-        "<c r=\"D1\" t=\"inlineStr\"><is><t>sans_gout</t></is></c>",
-        "<c r=\"E1\" t=\"inlineStr\"><is><t>neutre</t></is></c></row>"
-      ),
-      paste0(
-        "<row r=\"2\"><c r=\"A2\" t=\"inlineStr\"><is><t>17</t></is></c>",
-        "<c r=\"B2\"><v>1</v></c><c r=\"C2\"><v>6.0</v></c>",
-        "<c r=\"D2\"><v>2.0</v></c><c r=\"E2\"><v>4.0</v></c></row>"
-      ),
-      paste0(
-        "<row r=\"3\"><c r=\"A3\" t=\"inlineStr\"><is><t>17</t></is></c>",
-        "<c r=\"B3\"><v>2</v></c><c r=\"C3\"><v>500</v></c>",
-        "<c r=\"D3\"/><c r=\"E3\"/></row>"
-      ),
-      "</sheetData></worksheet>"
-    )),
-    file.path(td, "xl", "worksheets", "sheet4.xml"),
-    useBytes = TRUE
-  )
-  old_wd <- setwd(td)
-  utils::zip(
-    file.path(xlsx_dir, "session.xlsx"),
-    files = "xl",
-    flags = "-rq"
-  )
-  setwd(old_wd)
-  unlink(td, recursive = TRUE)
 
   # Numeric CJ stays out of 'name'/'taste' in load_session & prepare_chasselas
   load_session <- get("load_session", envir = ns)
@@ -477,9 +443,7 @@ withr::with_tempdir({
     output = nap_pdf
   )
   expect_false(any(grepl("^Rplots", list.files(getwd()))))
-  expect_true(file.exists(nap_pdf))
-  expect_true(file.info(nap_pdf)$size > 1000)
-  expect_identical(rawToChar(readBin(nap_pdf, "raw", 4L)), "%PDF")
+  expect_valid_pdf(nap_pdf)
   expect_true(is.list(res_nap_pdf))
 
   coords_all <- as.data.frame(napping_coordinates[

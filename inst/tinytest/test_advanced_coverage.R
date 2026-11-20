@@ -1,4 +1,12 @@
 library(tinytest)
+source(
+  if (file.exists("helpers.R")) {
+    "helpers.R"
+  } else {
+    file.path("inst", "tinytest", "helpers.R")
+  },
+  local = TRUE
+)
 
 message(
   paste0(
@@ -16,17 +24,7 @@ plot_correlations <- get("plot_correlations", envir = ns)
 plot_profiles <- get("plot_profiles", envir = ns)
 prepare_chemical_profiles <- get("prepare_chemical_profiles", envir = ns)
 
-orig_dir <- getwd()
-conc_fixture <- file.path(orig_dir, "fixtures", "concentration_fixture.xlsx")
-if (!file.exists(conc_fixture)) {
-  conc_fixture <- file.path(
-    orig_dir,
-    "inst",
-    "tinytest",
-    "fixtures",
-    "concentration_fixture.xlsx"
-  )
-}
+conc_fixture <- fixture_path("concentration_fixture.xlsx")
 
 # 1. prepare_concentration: full happy path with exact value assertions
 withr::with_tempdir({
@@ -111,9 +109,7 @@ withr::with_tempdir({
   )
 
   corr_out <- file.path(getwd(), "corr_exact.tsv")
-  warn_env <- new.env(parent = emptyenv())
-  warn_env$msgs <- character(0)
-  ret_c <- withCallingHandlers(
+  res_c <- capture_warnings(
     correlate_ion_taste_intensities(
       input_ions = ions_df,
       input_tastes = tastes_df,
@@ -121,17 +117,13 @@ withr::with_tempdir({
       min_jury = 2L,
       min_area_ion = 1L,
       widths = 5L
-    ),
-    warning = function(w) {
-      warn_env$msgs <- c(warn_env$msgs, conditionMessage(w))
-      invokeRestart("muffleWarning")
-    }
+    )
   )
-  expect_identical(ret_c, corr_out)
-  expect_true(any(grepl("All values in x or y are identical", warn_env$msgs)))
+  expect_identical(res_c$value, corr_out)
+  expect_true(any(grepl("All values in x or y are identical", res_c$warnings)))
   expect_true(any(grepl(
     "cannot compute exact p-value with ties",
-    warn_env$msgs
+    res_c$warnings
   )))
 
   res_c <- utils::read.delim(corr_out, stringsAsFactors = FALSE)
@@ -236,10 +228,8 @@ withr::with_tempdir({
     tastes_df$taste_harmonized == "BITTER" &
       tastes_df$fraction %in% c("fraction_1", "fraction_2"),
   ]
-  warn_env2 <- new.env(parent = emptyenv())
-  warn_env2$msgs <- character(0)
   out_w2 <- file.path(getwd(), "corr_w2.tsv")
-  withCallingHandlers(
+  res_w2 <- capture_warnings(
     correlate_ion_taste_intensities(
       input_ions = ions_df[1:2, ],
       input_tastes = tastes_sub,
@@ -247,22 +237,18 @@ withr::with_tempdir({
       min_jury = 2L,
       min_area_ion = 1L,
       widths = 2L
-    ),
-    warning = function(w) {
-      warn_env2$msgs <- c(warn_env2$msgs, conditionMessage(w))
-      invokeRestart("muffleWarning")
-    }
+    )
   )
   # Window 1:2 has n == 2; Window 2:3 has n == 1; Windows 3:4 & 4:5 have 0 valid fractions
   expect_true(any(grepl(
     "Sample size too small for Shapiro-Wilk test",
-    warn_env2$msgs
+    res_w2$warnings
   )))
   expect_true(any(grepl(
     "Not enough finite observations for correlation",
-    warn_env2$msgs
+    res_w2$warnings
   )))
-  expect_true(any(grepl("No data found for fractions_list:", warn_env2$msgs)))
+  expect_true(any(grepl("No data found for fractions_list:", res_w2$warnings)))
 
   # Window width > number of fractions -> empty 0-row TSV
   out_empty <- file.path(getwd(), "corr_empty.tsv")
@@ -336,10 +322,8 @@ withr::with_tempdir({
     value = rep(as.numeric(seq_len(n_large)), each = 2L),
     stringsAsFactors = FALSE
   )
-  warn_large <- new.env(parent = emptyenv())
-  warn_large$msgs <- character(0)
   out_large <- file.path(getwd(), "corr_large.tsv")
-  withCallingHandlers(
+  res_large <- capture_warnings(
     correlate_ion_taste_intensities(
       input_ions = ions_large,
       input_tastes = tastes_large,
@@ -347,15 +331,11 @@ withr::with_tempdir({
       min_jury = 2L,
       min_area_ion = 1L,
       widths = n_large
-    ),
-    warning = function(w) {
-      warn_large$msgs <- c(warn_large$msgs, conditionMessage(w))
-      invokeRestart("muffleWarning")
-    }
+    )
   )
   expect_true(any(grepl(
     "Sample size too large for Shapiro-Wilk test",
-    warn_large$msgs
+    res_large$warnings
   )))
   df_large <- utils::read.delim(out_large, stringsAsFactors = FALSE)
   expect_identical(df_large$method, "kendall")
@@ -384,59 +364,7 @@ withr::with_tempdir({
   ions[["datafile:210619_AR_13_M_33_01.mzML:area"]] <- c(6000, 4000)
   ions[["datafile:210619_AR_14_M_34_01.mzML:area"]] <- c(4000, 2000)
 
-  num_cols <- c(
-    "feature_mz",
-    "feature_rt",
-    "score_input",
-    "candidate_count_similarity_peaks_matched",
-    "candidate_score_similarity",
-    "score_initial",
-    "score_biological",
-    "score_chemical",
-    "score_final",
-    "feature_pred_tax_npc_01pat_score",
-    "feature_pred_tax_npc_02sup_score",
-    "feature_pred_tax_npc_03cla_score"
-  )
-  all_cols <- c(
-    "feature_id",
-    "feature_mz",
-    "feature_rt",
-    "score_input",
-    "candidate_structure_inchikey_connectivity_layer",
-    "candidate_structure_smiles_no_stereo",
-    "candidate_structure_molecular_formula",
-    "candidate_structure_tax_npc_01pat",
-    "candidate_structure_tax_npc_02sup",
-    "candidate_structure_tax_npc_03cla",
-    "candidate_structure_organism_occurrence_closest",
-    "candidate_count_similarity_peaks_matched",
-    "candidate_score_similarity",
-    "score_initial",
-    "score_biological",
-    "score_chemical",
-    "score_final",
-    "feature_pred_tax_npc_01pat_val",
-    "feature_pred_tax_npc_02sup_val",
-    "feature_pred_tax_npc_03cla_val",
-    "feature_pred_tax_npc_01pat_score",
-    "feature_pred_tax_npc_02sup_score",
-    "feature_pred_tax_npc_03cla_score",
-    "mode"
-  )
-  ann <- as.data.frame(setNames(
-    lapply(all_cols, function(x) {
-      if (x == "feature_id") {
-        101L
-      } else if (x %in% num_cols) {
-        0.95
-      } else {
-        NA_character_
-      }
-    }),
-    all_cols
-  ))
-  ann$mode <- "pos"
+  ann <- make_minimal_annotation_df(num_val = 0.95)
   ann$candidate_structure_tax_npc_03cla <- "Iridoids"
   ann$feature_pred_tax_npc_03cla_val <- "Iridoids"
   ann$candidate_structure_inchikey_connectivity_layer <- "AAABBBCCCDDDEEE"
@@ -636,129 +564,7 @@ withr::with_tempdir({
 
 # 5. prepare_chemical_profiles: full happy path with synthetic .mzML and features
 withr::with_tempdir({
-  data("cascade_chromatograms_positive", package = "cascade")
-  cad <- subset(cascade_chromatograms_positive, chromatogram == "cad")[
-    seq(1, 49468, by = 20),
-  ]
-  enc_f64 <- function(x) {
-    raw_bytes <- writeBin(as.numeric(x), raw(), size = 8L, endian = "little")
-    gsub("[\r\n]", "", jsonlite::base64_enc(raw_bytes))
-  }
-  rt_b64 <- enc_f64(cad$rtime)
-  int_b64 <- enc_f64(cad$intensity)
-  n_pts <- nrow(cad)
-  mz_b64 <- enc_f64(c(150.0, 250.0))
-  sp_int_b64 <- enc_f64(c(200000.0, 300000.0))
-
-  cids <- c("BasePeak_0", "PDA#1_TotalAbsorbance_0", "UV#1_CAD_1_0")
-  chrom_xml <- paste(
-    vapply(
-      seq_along(cids),
-      function(i) {
-        paste0(
-          "<chromatogram index=\"",
-          i - 1L,
-          "\" id=\"",
-          cids[i],
-          "\" defaultArrayLength=\"",
-          n_pts,
-          "\">",
-          "<binaryDataArrayList count=\"2\">",
-          "<binaryDataArray encodedLength=\"",
-          nchar(rt_b64),
-          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          paste0(
-            "<cvParam cvRef=\"MS\" accession=\"MS:1000595\"",
-            " name=\"time array\" unitCvRef=\"UO\"",
-            " unitAccession=\"UO:0000031\" unitName=\"minute\"/>"
-          ),
-          "<binary>",
-          rt_b64,
-          "</binary></binaryDataArray>",
-          "<binaryDataArray encodedLength=\"",
-          nchar(int_b64),
-          "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-          "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/>",
-          "<binary>",
-          int_b64,
-          "</binary></binaryDataArray>",
-          "</binaryDataArrayList></chromatogram>"
-        )
-      },
-      character(1L)
-    ),
-    collapse = "\n"
-  )
-
-  mzml_txt <- paste0(
-    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n",
-    "<mzML xmlns=\"http://psi.hupo.org/ms/mzml\" version=\"1.1.0\">\n",
-    "<cvList count=\"1\"><cv id=\"MS\" fullName=\"MS\" version=\"1\" URI=\"\"/></cvList>\n",
-    "<run id=\"run1\">\n",
-    "<spectrumList count=\"2\" defaultDataProcessingRef=\"dp\">\n",
-    "<spectrum index=\"0\" id=\"scan=1\" defaultArrayLength=\"2\">",
-    "<cvParam cvRef=\"MS\" accession=\"MS:1000511\" name=\"ms level\" value=\"1\"/>",
-    paste0(
-      "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\"",
-      " accession=\"MS:1000016\" name=\"scan start time\" value=\"5.0\"",
-      " unitCvRef=\"UO\" unitAccession=\"UO:0000031\"",
-      " unitName=\"minute\"/></scan></scanList>"
-    ),
-    "<binaryDataArrayList count=\"2\">",
-    "<binaryDataArray encodedLength=\"",
-    nchar(mz_b64),
-    paste0(
-      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>"
-    ),
-    mz_b64,
-    "</binary></binaryDataArray>",
-    "<binaryDataArray encodedLength=\"",
-    nchar(sp_int_b64),
-    paste0(
-      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>"
-    ),
-    sp_int_b64,
-    "</binary></binaryDataArray>",
-    "</binaryDataArrayList></spectrum>\n",
-    "<spectrum index=\"1\" id=\"scan=2\" defaultArrayLength=\"2\">",
-    "<cvParam cvRef=\"MS\" accession=\"MS:1000511\" name=\"ms level\" value=\"1\"/>",
-    paste0(
-      "<scanList count=\"1\"><scan><cvParam cvRef=\"MS\"",
-      " accession=\"MS:1000016\" name=\"scan start time\" value=\"5.5\"",
-      " unitCvRef=\"UO\" unitAccession=\"UO:0000031\"",
-      " unitName=\"minute\"/></scan></scanList>"
-    ),
-    "<binaryDataArrayList count=\"2\">",
-    "<binaryDataArray encodedLength=\"",
-    nchar(mz_b64),
-    paste0(
-      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000514\" name=\"m/z array\"/><binary>"
-    ),
-    mz_b64,
-    "</binary></binaryDataArray>",
-    "<binaryDataArray encodedLength=\"",
-    nchar(sp_int_b64),
-    paste0(
-      "\"><cvParam cvRef=\"MS\" accession=\"MS:1000523\" name=\"64-bit float\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000576\" name=\"no compression\"/>",
-      "<cvParam cvRef=\"MS\" accession=\"MS:1000515\" name=\"intensity array\"/><binary>"
-    ),
-    sp_int_b64,
-    "</binary></binaryDataArray>",
-    "</binaryDataArrayList></spectrum>\n",
-    "</spectrumList>\n",
-    "<chromatogramList count=\"3\" defaultDataProcessingRef=\"dp\">\n",
-    chrom_xml,
-    "\n</chromatogramList>\n</run>\n</mzML>\n"
-  )
+  mzml_txt <- make_synthetic_mzml(include_spectra = TRUE)
 
   mzml_dir <- file.path(getwd(), "mzmls")
   dir.create(mzml_dir)

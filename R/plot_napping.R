@@ -83,10 +83,7 @@ plot_napping <- function(
   }
 
   raw_coord <- load_dataset_or_file(input_coordinates, "napping_coordinates")
-  df_coord <- as.data.frame(
-    raw_coord[raw_coord$session == session_tag, , drop = FALSE],
-    stringsAsFactors = FALSE
-  )
+  df_coord <- raw_coord[raw_coord$session == session_tag, , drop = FALSE]
   rownames(df_coord) <- gsub(
     "fraction_",
     "",
@@ -104,13 +101,10 @@ plot_napping <- function(
   ]
 
   file_text_cleaned <- unique(
-    as.data.frame(
-      table_words_prepared[,
-        c("fraction", "session", "jury", "taste_intermediate"),
-        drop = FALSE
-      ],
-      stringsAsFactors = FALSE
-    )
+    table_words_prepared[,
+      c("fraction", "session", "jury", "taste_intermediate"),
+      drop = FALSE
+    ]
   )
   file_text_cleaned$fraction <- gsub(
     "fraction_",

@@ -571,14 +571,6 @@ load_dataset_or_file <- function(input, dataset_name) {
   if (is.data.frame(input)) {
     return(as.data.frame(input, stringsAsFactors = FALSE))
   }
-  if (
-    is.character(input) &&
-      length(input) == 1L &&
-      nzchar(input) &&
-      file.exists(input)
-  ) {
-    return(data.table::fread(input, data.table = FALSE))
-  }
   if (is.null(input) || (is.character(input) && !nzchar(input))) {
     env <- new.env(parent = emptyenv())
     utils::data(list = dataset_name, package = "sapid", envir = env)

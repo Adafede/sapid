@@ -69,7 +69,7 @@ plot_concentration <- function(
     ,
     drop = FALSE
   ]
-  counted <- unique(counted[order(counted$m, counted$n), , drop = FALSE])
+  counted <- counted[order(counted$m, counted$n), , drop = FALSE]
 
   afc_unique <- unique(prepared[,
     c("concentration", "afc_correct", "afc_total", "correct_percent"),

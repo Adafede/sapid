@@ -145,17 +145,11 @@ plot_correlations <- function(
     complete_grid = complete_grid
   )
 
-  non_na_ions <- df_ion_intensities[
-    !is.na(df_ion_intensities$intensity_ion),
-    ,
-    drop = FALSE
-  ]
-  ion_splits <- split(non_na_ions, non_na_ions$id_ion)
+  ion_splits <- split(df_ion_intensities, df_ion_intensities$id_ion)
   top_fracs_map <- lapply(ion_splits, function(sub_df) {
     ord <- order(sub_df$intensity_ion, decreasing = TRUE)
     top_n <- sub_df[ord[seq_len(min(nrow(sub_df), min_width))], , drop = FALSE]
-    frac_chr <- gsub("_.*", "", gsub(".*M_", "", as.character(top_n$fraction)))
-    sort(frac_chr)
+    sort(as.character(top_n$fraction))
   })
 
   ion_ids_int <- as.integer(names(top_fracs_map))
@@ -183,9 +177,7 @@ plot_correlations <- function(
     df$fractions.x <- as.character(df$fractions)
     ion_idx <- match(df$id_ion, ion_ids_int)
     win_idx <- match(df$fractions.x, u_wins)
-    keep <- !is.na(ion_idx) &
-      !is.na(win_idx) &
-      overlap_mat[cbind(ion_idx, win_idx)]
+    keep <- !is.na(ion_idx) & overlap_mat[cbind(ion_idx, win_idx)]
     df[keep, , drop = FALSE]
   }
 
@@ -199,39 +191,37 @@ plot_correlations <- function(
 
   # Top hit per feature-taste pair, then per fraction window-taste pair
 
-  corr_top <- correlations_significant[
-    abs(correlations_significant$correlation) >= min_corr,
+  pos_sub <- correlations_significant[
+    correlations_significant$correlation > min_corr,
     ,
     drop = FALSE
   ]
-  corr_top <- merge(
-    corr_top,
+  pos_sub <- merge(
+    pos_sub,
     candidates_confident_fractions,
     by.x = "id_ion",
     by.y = "feature_id",
     all.x = TRUE
   )
   n_win <- lengths(strsplit(
-    as.character(corr_top$fractions.x),
+    as.character(pos_sub$fractions.x),
     " ",
     fixed = TRUE
   ))
-  r_clamped <- pmin(pmax(corr_top$correlation, -0.9999), 0.9999)
+  r_clamped <- pmin(pmax(pos_sub$correlation, -0.9999), 0.9999)
   fisher_z <- atanh(abs(r_clamped)) * sqrt(pmax(1, n_win - 3))
-  s_tima <- as.numeric(corr_top$score_final)
+  s_tima <- as.numeric(pos_sub$score_final)
   s_tima_conf <- ifelse(
     !is.na(s_tima) & s_tima >= min_confidence,
     s_tima,
     0.1 * s_tima
   )
-  corr_top$score_mixed <- sign(corr_top$correlation) *
+  pos_sub$score_mixed <- sign(pos_sub$correlation) *
     tanh(fisher_z / 3) *
     s_tima_conf
-  corr_top <- unique(
-    corr_top[order(corr_top$score_mixed, decreasing = TRUE), , drop = FALSE]
+  pos_sub <- unique(
+    pos_sub[order(pos_sub$score_mixed, decreasing = TRUE), , drop = FALSE]
   )
-
-  pos_sub <- corr_top[corr_top$correlation > min_corr, , drop = FALSE]
   has_any_score <- !all(is.na(pos_sub$score_mixed))
   pos_splits <- split(pos_sub, pos_sub$id_taste)
   pos_filtered_list <- lapply(pos_splits, function(s) {
@@ -246,18 +236,15 @@ plot_correlations <- function(
         drop = FALSE
       ]
     }
-    if (nrow(s) > 0L && !all(is.na(s$p_adjusted))) {
+    if (!all(is.na(s$p_adjusted))) {
       s <- s[
         !is.na(s$p_adjusted) & s$p_adjusted == min(s$p_adjusted, na.rm = TRUE),
         ,
         drop = FALSE
       ]
     }
-    if (nrow(s) > 0L) {
-      nc <- nchar(s$fractions.x)
-      s <- s[nc == max(nc, na.rm = TRUE), , drop = FALSE]
-    }
-    s
+    nc <- nchar(s$fractions.x)
+    s[nc == max(nc, na.rm = TRUE), , drop = FALSE]
   })
   correlations_significant_filtered_pos <- do.call(rbind, pos_filtered_list)
 

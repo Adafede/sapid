@@ -78,10 +78,9 @@ plot_informed_tasting <- function(
     sess_n_jury <- as.numeric(stats::ave(
       prof_filtered$jury,
       prof_filtered$session,
-      FUN = function(j) as.numeric(length(unique(j)))
+      FUN = function(j) length(unique(j))
     ))
-    prof_filtered$value <- as.numeric(prof_filtered$value) /
-      pmax(1, sess_n_jury)
+    prof_filtered$value <- prof_filtered$value / pmax(1, sess_n_jury)
   }
 
   # Weigh descriptors with fraction mass
@@ -91,7 +90,7 @@ plot_informed_tasting <- function(
     by = "fraction",
     all.x = TRUE
   )
-  prof_joined$weighted <- as.numeric(prof_joined$value) * prof_joined$mass
+  prof_joined$weighted <- prof_joined$value * prof_joined$mass
   taste_informed <- stats::aggregate(
     weighted ~ taste,
     data = prof_joined,

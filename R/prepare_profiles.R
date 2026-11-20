@@ -76,18 +76,18 @@ prepare_profiles <- function(
     expanded$value,
     pn_key,
     FUN = function(v) {
-      valid_v <- v[!is.na(v) & v <= 10]
+      valid_v <- v[v <= 10]
       if (length(valid_v) == 0L) NA_real_ else stats::median(valid_v)
     }
   )
   scaled_val <- expanded$value / 10
   replacement_val <- ifelse(
-    !is.na(scaled_val) & scaled_val <= 10,
+    scaled_val <= 10,
     scaled_val,
     ifelse(!is.na(med_fallback), med_fallback, scaled_val)
   )
   expanded$value <- ifelse(
-    !is.na(expanded$value) & expanded$value > 10,
+    expanded$value > 10,
     replacement_val,
     expanded$value
   )
@@ -106,9 +106,7 @@ prepare_profiles <- function(
   expanded$value <- stats::ave(
     expanded$value,
     dedup_key,
-    FUN = function(v) {
-      if (all(is.na(v))) NA_real_ else max(v, na.rm = TRUE)
-    }
+    FUN = max
   )
   expanded <- expanded[!duplicated(dedup_key), , drop = FALSE]
 

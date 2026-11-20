@@ -94,7 +94,6 @@ plot_descriptors_network <- function(
     ,
     drop = FALSE
   ]
-  vertices_raw <- vertices_raw[!duplicated(vertices_raw$name), , drop = FALSE]
 
   color_map_df <- unique(rbind(
     data.frame(

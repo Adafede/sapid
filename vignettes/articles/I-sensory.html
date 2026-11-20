@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Adriano Rutz">
-<meta name="dcterms.date" content="2026-11-14">
+<meta name="dcterms.date" content="2026-11-20">
 
 <title>1 Sensory analysis &amp; psychophysics – sapid</title>
 <style>
@@ -124,6 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<style>.analytics-pixel{position:absolute;inset-block-start:0;inset-inline-start:0;inline-size:1px;block-size:1px;opacity:0;pointer-events:none;}</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -157,10 +158,10 @@ window.Quarto = {
 
 <meta name="citation_title" content="1 Sensory analysis &amp; psychophysics">
 <meta name="citation_author" content="Adriano Rutz">
-<meta name="citation_publication_date" content="2026-11-14">
-<meta name="citation_cover_date" content="2026-11-14">
+<meta name="citation_publication_date" content="2026-11-20">
+<meta name="citation_cover_date" content="2026-11-20">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-11-14">
+<meta name="citation_online_date" content="2026-11-20">
 <meta name="citation_fulltext_html_url" content="https://adafede.github.io/sapid/vignettes/articles/I-sensory.html">
 <meta name="citation_language" content="en">
 </head>
@@ -270,7 +271,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 14, 2026</p>
+      <p class="date">November 20, 2026</p>
     </div>
   </div>
   
@@ -281,7 +282,7 @@ window.Quarto = {
 
 </header>
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
 <p>This article demonstrates the sensory harmonization, psychophysical threshold modeling, paired modulation testing, and chemically informed tasting workflows using the built-in <em>Swertia chirayita</em> datasets.</p>
 <section id="vocabulary-harmonization-panelist-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="vocabulary-harmonization-panelist-scaling">Vocabulary harmonization &amp; panelist scaling</h2>
@@ -328,7 +329,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>out_conc <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".pdf"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_concentration</span>(<span class="at">output =</span> out_conc, <span class="at">afc_m =</span> <span class="dv">3</span>L)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpRPLdIv/file1cda7205565.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpUIHm9y/file1c644f8c10f5.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="chasselas-taste-modulation-pratt-signed-rank-test" class="level2">
@@ -337,7 +338,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>out_mod <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".pdf"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_chasselas_modulation</span>(<span class="at">output =</span> out_mod, <span class="at">test_method =</span> <span class="st">"pratt"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpRPLdIv/file1cda22a84485.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpUIHm9y/file1c64466f0ac3.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="classical-vs.-chemically-informed-tasting" class="level2">
@@ -346,7 +347,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>out_inf <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".pdf"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_informed_tasting</span>(<span class="at">output =</span> out_inf, <span class="at">normalize_panelists =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpRPLdIv/file1cda56919ba1.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpUIHm9y/file1c642ec83e6a.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="sensory-descriptors-network" class="level2">
@@ -355,7 +356,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>out_net <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".pdf"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_descriptors_network</span>(<span class="at">output =</span> out_net)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpRPLdIv/file1cda35598f44.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "/tmp/RtmpUIHm9y/file1c6447be19ba.pdf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -364,13 +365,13 @@ window.Quarto = {
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><div class="code-copy-outer-scaffold"><pre class="sourceCode quarto-appendix-bibtex code-with-copy"><code class="sourceCode bibtex">@online{rutz2026,
   author = {Rutz, Adriano},
   title = {1 {Sensory} Analysis \&amp; Psychophysics},
-  date = {2026-11-14},
+  date = {2026-11-20},
   url = {https://adafede.github.io/sapid/vignettes/articles/I-sensory.html},
   langid = {en}
 }
 </code></pre><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-rutz2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Rutz, Adriano. 2026. <span>“1 Sensory Analysis &amp;
-Psychophysics.”</span> November 14. <a href="https://adafede.github.io/sapid/vignettes/articles/I-sensory.html">https://adafede.github.io/sapid/vignettes/articles/I-sensory.html</a>.
+Psychophysics.”</span> November 20. <a href="https://adafede.github.io/sapid/vignettes/articles/I-sensory.html">https://adafede.github.io/sapid/vignettes/articles/I-sensory.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -893,6 +894,7 @@ Psychophysics.”</span> November 14. <a href="https://adafede.github.io/sapid/v
     </div>
   </div>
 </footer>
+<img src="https://queue.simpleanalyticscdn.com/noscript.gif?hostname=adafede.github.io" alt="" width="1" height="1" referrerpolicy="no-referrer-when-downgrade" decoding="async" fetchpriority="low" aria-hidden="true" class="analytics-pixel">
 
 
 

@@ -67,7 +67,6 @@ plot_informed_tasting <- function(
 
   prof_df <- load_dataset_or_file(file_taste_informed, "profiles")
 
-  # Keep consistent harmonized descriptors across panelists
   prof_filtered <- load_consistent_profiles(
     prof_df,
     min_jury = as.integer(min_panelists),

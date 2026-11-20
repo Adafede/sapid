@@ -198,8 +198,6 @@ plot_correlations <- function(
   ]
   correlations_significant <- filter_overlapping_windows(corr_sig)
 
-  # Top hit per feature-taste pair, then per fraction window-taste pair
-
   pos_sub <- correlations_significant[
     correlations_significant$correlation > min_corr,
     ,

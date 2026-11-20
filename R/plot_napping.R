@@ -137,7 +137,6 @@ plot_napping <- function(
 
   nap_tot <- cbind(df_coord, df_words_cleaned)
 
-  # PMFA
   res_pmfa <- SensoMineR::pmfa(
     matrice = df_coord,
     matrice.illu = df_words_cleaned,

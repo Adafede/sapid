@@ -31,7 +31,6 @@
 harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   mode <- match.arg(mode, c("word", "substring", "fixed"))
 
-  # Prepare dictionary: accept data frame or file path
   dict_df <- if (is.character(dictionary)) {
     # Legacy: load from file path
     data.table::fread(dictionary, data.table = FALSE)
@@ -44,7 +43,6 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
     nzchar(as.character(dict_df$original))
   dict_df <- dict_df[valid_rows, , drop = FALSE]
 
-  # Convert to uppercase for consistent matching
   processed_string <- toupper(x)
   if (length(x) == 0L || nrow(dict_df) == 0L) {
     return(processed_string)
@@ -108,7 +106,6 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   }
   out <- u_out[match(processed_string, u_str)]
 
-  # Handle fallback if requested
   if (fallback) {
     na_idx <- is.na(out)
     out[na_idx] <- processed_string[na_idx]

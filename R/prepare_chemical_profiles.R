@@ -41,7 +41,6 @@ prepare_chemical_profiles <- function(
   run_peak_range <- function(start_idx, end_idx, export_dir, features_path) {
     if (start_idx <= end_idx) {
       for (idx in seq.int(start_idx, end_idx)) {
-        message(idx)
         cascade::process_compare_peaks(
           export_dir = export_dir,
           file = mzmls[idx],

@@ -1,6 +1,5 @@
 library(tinytest)
 
-message("Core function checks")
 ns <- asNamespace("sapid")
 get_session_info <- get("get_session_info", envir = ns)
 harmonize_terms <- get("harmonize_terms", envir = ns)

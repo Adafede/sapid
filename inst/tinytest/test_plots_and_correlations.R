@@ -8,7 +8,6 @@ source(
   local = TRUE
 )
 
-message("Plot and correlation coverage checks")
 ns <- asNamespace("sapid")
 plot_chasselas_modulation <- get("plot_chasselas_modulation", envir = ns)
 plot_chasselas_variation <- get("plot_chasselas_variation", envir = ns)

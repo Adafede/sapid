@@ -8,7 +8,6 @@ source(
   local = TRUE
 )
 
-message("Preparation and napping path checks")
 ns <- asNamespace("sapid")
 prepare_chasselas <- get("prepare_chasselas", envir = ns)
 prepare_profiles <- get("prepare_profiles", envir = ns)

@@ -8,7 +8,6 @@ source(
   local = TRUE
 )
 
-message("Globals and colors helper checks")
 ns <- asNamespace("sapid")
 fct_rev_base <- get("fct_rev_base", envir = ns)
 fct_reorder_base <- get("fct_reorder_base", envir = ns)

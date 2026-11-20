@@ -8,7 +8,6 @@ source(
   local = TRUE
 )
 
-message("Plot, harmonization, and session loader checks")
 ns <- asNamespace("sapid")
 geom_sigmoid <- get("geom_sigmoid", envir = ns)
 stat_sigmoid <- get("StatSigmoid", envir = ns)

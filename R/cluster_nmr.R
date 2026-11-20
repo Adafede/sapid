@@ -179,10 +179,9 @@ cluster_nmr <- function(
     "The ppm resolution of the experiments is: ",
     format(ppm_res, digits = 2),
     " ppm. \n",
-    "Using it for interplation ..."
+    "Using it for interpolation ..."
   )
 
-  message("Interpolating experiments")
   dataset_interpolated <- dataset_autophased |>
     AlpsNMR::nmr_interpolate_1D(
       axis = c(min = ppm_min, max = ppm_max, by = ppm_res)
@@ -224,7 +223,6 @@ cluster_nmr <- function(
       set_negative_areas_to_zero = TRUE
     )
 
-  message("Formatting ...")
   meta_df <- as.data.frame(
     AlpsNMR::get_integration_with_metadata(peak_table_integration),
     stringsAsFactors = FALSE
@@ -232,7 +230,6 @@ cluster_nmr <- function(
   frac_short <- gsub("proton_", "", experiments_fractions, fixed = TRUE)
   rownames(meta_df) <- experiments_fractions
 
-  message("Filtering ...")
   is_num <- vapply(meta_df, is.numeric, logical(1L))
   num_mat <- as.matrix(meta_df[, is_num, drop = FALSE])
   ppm_cols <- suppressWarnings(as.numeric(

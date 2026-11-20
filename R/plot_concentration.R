@@ -27,7 +27,6 @@ plot_concentration <- function(
   output = "./data/figures/figure_raw_extract.pdf",
   afc_m = 3L
 ) {
-  message("Loading file...\n")
   prepared <- load_dataset_or_file(input, "concentration_afc")
 
   prepared$correct_percent <- prepared$afc_correct / prepared$afc_total
@@ -92,8 +91,6 @@ plot_concentration <- function(
     )
   }
 
-  message("visualizing ... \n")
-  message("... intensity and p-value per concentration \n")
   boxes <- panel_ratings |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(
@@ -179,7 +176,6 @@ plot_concentration <- function(
     fun = min
   )
 
-  message("... terms multiplied by mean intensity per concentration \n")
   dots_corrected <- counted |>
     ggplot2::ggplot() +
     ggplot2::geom_segment(

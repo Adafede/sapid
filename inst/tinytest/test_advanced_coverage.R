@@ -8,12 +8,6 @@ source(
   local = TRUE
 )
 
-message(
-  paste0(
-    "Advanced coverage: prepare_concentration, correlate edge cases, ",
-    "plot_correlations, plot_profiles, prepare_chemical_profiles"
-  )
-)
 ns <- asNamespace("sapid")
 correlate_ion_taste_intensities <- get(
   "correlate_ion_taste_intensities",

@@ -8,7 +8,6 @@ source(
   local = TRUE
 )
 
-message("Low-coverage function path checks")
 ns <- asNamespace("sapid")
 cluster_nmr <- get("cluster_nmr", envir = ns)
 plot_chromatograms <- get("plot_chromatograms", envir = ns)

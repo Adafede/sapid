@@ -42,46 +42,26 @@ plot_matrices <- function(
     ))
   }
 
-  tables_profiles_original <- extract_matrix_df("taste_original", "AMER")
-  tables_profiles_curated <- extract_matrix_df("taste_harmonized", "BITTER")
+  build_matrix_plot <- function(df) {
+    df |>
+      ggplot2::ggplot(mapping = ggplot2::aes(fraction, jury, fill = value)) +
+      ggplot2::geom_tile() +
+      scale_fill_batlow() +
+      ggplot2::labs(fill = "Intensity") +
+      ggplot2::xlab("Fraction") +
+      ggplot2::ylab("Jury") +
+      ggplot2::theme_minimal() +
+      theme_sapid_bold()
+  }
 
-  matrix_original <- tables_profiles_original |>
-    ggplot2::ggplot(mapping = ggplot2::aes(fraction, jury, fill = value)) +
-    ggplot2::geom_tile() +
-    scale_fill_batlow() +
-    ggplot2::labs(fill = "Intensity") +
-    ggplot2::xlab("Fraction") +
-    ggplot2::ylab("Jury") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
-
-  matrix_curated <- tables_profiles_curated |>
-    ggplot2::ggplot(mapping = ggplot2::aes(fraction, jury, fill = value)) +
-    ggplot2::geom_tile() +
-    scale_fill_batlow() +
-    ggplot2::labs(fill = "Intensity") +
-    ggplot2::xlab("Fraction") +
-    ggplot2::ylab("Jury") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
+  matrix_original <- build_matrix_plot(extract_matrix_df(
+    "taste_original",
+    "AMER"
+  ))
+  matrix_curated <- build_matrix_plot(extract_matrix_df(
+    "taste_harmonized",
+    "BITTER"
+  ))
 
   .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(

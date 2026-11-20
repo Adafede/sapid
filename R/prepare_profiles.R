@@ -47,17 +47,7 @@ prepare_profiles <- function(
     "dictionary_specific"
   )
 
-  session_infos <- lapply(sessions, get_session_info)
-  session_dfs <- lapply(
-    session_infos,
-    load_session,
-    input_dir = input_dir,
-    tab = "profiles"
-  )
-  df <- as.data.frame(
-    data.table::rbindlist(session_dfs, use.names = TRUE, fill = TRUE),
-    stringsAsFactors = FALSE
-  )
+  df <- load_sessions_df(sessions, input_dir, "profiles")
   if (!"CJ" %in% names(df)) {
     stop("Column 'CJ' not found in session data.", call. = FALSE)
   }
@@ -66,9 +56,7 @@ prepare_profiles <- function(
   df$name <- toupper(as.character(df$name))
   df <- df[!is.na(df$value), , drop = FALSE]
   df <- df[order(df$CJ), , drop = FALSE]
-
-  cj_idx <- match(df$CJ, sort(unique(df$CJ)))
-  df$CJ <- paste0("jury_", sprintf("%02d", cj_idx))
+  df$CJ <- recode_jury_ids(df$CJ)
   df <- df[, c("ProductName", "session", "CJ", "name", "value"), drop = FALSE]
 
   df$name_2 <- harmonize_terms(dictionary = dict_spec, x = df$name)

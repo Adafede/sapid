@@ -40,20 +40,8 @@ plot_chasselas_variation <- function(
     drop = FALSE
   ]
 
-  target_tastes <- c(
-    "sourness",
-    "bitterness",
-    "sweetness",
-    "saltiness",
-    "fatness, volume",
-    "balance",
-    "freshness",
-    "persistency",
-    "mouthwatering"
-  )
-
   deltas_3 <- deltas_before[
-    deltas_before$taste %in% target_tastes & !is.na(deltas_before$value),
+    deltas_before$taste %in% chasselas_tastes & !is.na(deltas_before$value),
     ,
     drop = FALSE
   ]
@@ -62,126 +50,68 @@ plot_chasselas_variation <- function(
   deltas_3$n <- stats::ave(deltas_3$value, jt_key, FUN = length)
   deltas_3 <- deltas_3[deltas_3$n >= 3L, , drop = FALSE]
 
-  p_1 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = jury, y = value, colour = jury)
-    ) +
-    ggplot2::scale_x_discrete() +
-    ggplot2::scale_color_manual(values = discrete_rainbow_14) +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity") +
-    ggplot2::ylim(c(0, 10)) +
-    ggplot2::labs(colour = "Jury") +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    )
+  build_variation_panel <- function(
+    mapping,
+    facet_formula,
+    colour_label,
+    color_scale
+  ) {
+    deltas_3 |>
+      ggplot2::ggplot(mapping = mapping) +
+      ggplot2::scale_x_discrete() +
+      color_scale +
+      ggplot2::geom_violin() +
+      ggplot2::geom_jitter(
+        position = ggplot2::position_jitter(width = 0.05),
+        alpha = 0.5
+      ) +
+      ggplot2::facet_wrap(facets = facet_formula, ncol = 3) +
+      ggplot2::theme_minimal() +
+      ggplot2::ylab(label = "Intensity") +
+      ggplot2::ylim(c(0, 10)) +
+      ggplot2::labs(colour = colour_label) +
+      ggplot2::theme(
+        legend.position = "right",
+        title = ggplot2::element_text(face = "bold"),
+        strip.text = ggplot2::element_text(face = "bold"),
+        axis.title.x = ggplot2::element_blank(),
+        axis.text.x = ggplot2::element_blank(),
+        axis.ticks = ggplot2::element_blank()
+      )
+  }
 
-  p_2 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = taste, y = value, colour = taste)
-    ) +
-    ggplot2::scale_x_discrete() +
-    ggplot2::scale_color_brewer(palette = "Paired") +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~ as.character(jury), ncol = 3) +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity") +
-    ggplot2::ylim(c(0, 10)) +
-    ggplot2::labs(colour = "Taste") +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    )
+  p_1 <- build_variation_panel(
+    mapping = ggplot2::aes(x = jury, y = value, colour = jury),
+    facet_formula = ~ as.character(taste),
+    colour_label = "Jury",
+    color_scale = ggplot2::scale_color_manual(values = discrete_rainbow_14)
+  )
+  p_2 <- build_variation_panel(
+    mapping = ggplot2::aes(x = taste, y = value, colour = taste),
+    facet_formula = ~ as.character(jury),
+    colour_label = "Taste",
+    color_scale = ggplot2::scale_color_brewer(palette = "Paired")
+  )
+  p_3 <- build_variation_panel(
+    mapping = ggplot2::aes(x = session, y = value, colour = session),
+    facet_formula = ~ as.character(taste),
+    colour_label = "Session",
+    color_scale = ggplot2::scale_color_manual(values = discrete_rainbow_7)
+  )
+  p_4 <- build_variation_panel(
+    mapping = ggplot2::aes(x = taste, y = value, colour = taste),
+    facet_formula = ~ as.character(session),
+    colour_label = "Taste",
+    color_scale = ggplot2::scale_color_brewer(palette = "Paired")
+  )
 
-  p_3 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = session, y = value, colour = session)
-    ) +
-    ggplot2::scale_x_discrete() +
-    ggplot2::scale_color_manual(
-      values = discrete_rainbow_14[rep(
-        c(FALSE, TRUE),
-        length.out = length(discrete_rainbow_14)
-      )]
-    ) +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~ as.character(taste), ncol = 3) +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity") +
-    ggplot2::ylim(c(0, 10)) +
-    ggplot2::labs(colour = "Session") +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    )
-
-  p_4 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = taste, y = value, colour = taste)
-    ) +
-    ggplot2::scale_x_discrete() +
-    ggplot2::scale_color_brewer(palette = "Paired") +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~ as.character(session), ncol = 3) +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity") +
-    ggplot2::ylim(c(0, 10)) +
-    ggplot2::labs(colour = "Taste") +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    )
-
-  .cascade_check_export_dir(dirname(output_jury))
-  .cascade_check_export_dir(dirname(output_session))
-  ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>
-    ggplot2::ggsave(
-      filename = output_jury,
-      width = 9,
-      height = 12
-    )
-
-  ggpubr::ggarrange(p_3, p_4, nrow = 2, labels = "AUTO", align = "hv") |>
-    ggplot2::ggsave(
-      filename = output_session,
-      width = 9,
-      height = 12
-    )
+  save_variation_pair <- function(p_a, p_b, out_path) {
+    .cascade_check_export_dir(dirname(out_path))
+    ggpubr::ggarrange(p_a, p_b, nrow = 2, labels = "AUTO", align = "hv") |>
+      ggplot2::ggsave(filename = out_path, width = 9, height = 12)
+  }
+  save_variation_pair(p_1, p_2, output_jury)
+  save_variation_pair(p_3, p_4, output_session)
 
   list(jury = output_jury, session = output_session)
 }

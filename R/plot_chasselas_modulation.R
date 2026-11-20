@@ -37,18 +37,7 @@ plot_chasselas_modulation <- function(
   )
   wide$delta <- wide$value.product_2after - wide$value.product_1before
 
-  target_tastes <- c(
-    "sourness",
-    "bitterness",
-    "sweetness",
-    "saltiness",
-    "fatness, volume",
-    "balance",
-    "freshness",
-    "persistency",
-    "mouthwatering"
-  )
-  deltas_3 <- wide[wide$taste %in% target_tastes, , drop = FALSE]
+  deltas_3 <- wide[wide$taste %in% chasselas_tastes, , drop = FALSE]
 
   date_map <- c(
     "2021-06-07" = "Fractions 17-21",
@@ -63,16 +52,12 @@ plot_chasselas_modulation <- function(
   deltas_3$group <- unname(date_map[date_keys])
 
   grp_key <- paste(deltas_3$taste, deltas_3$group, sep = "\r")
-  test_fn <- if (test_method == "pratt") {
-    pratt_wilcox_pvalue
-  } else {
-    sign_test_pvalue
-  }
-  caption_label <- if (test_method == "pratt") {
-    "* = p-value < 0.05 (Pratt signed-rank test)"
-  } else {
-    "* = p-value < 0.05 (Sign test)"
-  }
+  is_pratt <- test_method == "pratt"
+  test_fn <- if (is_pratt) pratt_wilcox_pvalue else sign_test_pvalue
+  caption_label <- sprintf(
+    "* = p-value < 0.05 (%s)",
+    if (is_pratt) "Pratt signed-rank test" else "Sign test"
+  )
   p_vals <- stats::ave(deltas_3$delta, grp_key, FUN = test_fn)
 
   deltas_3$stars <- ifelse(
@@ -81,74 +66,57 @@ plot_chasselas_modulation <- function(
     ifelse(p_vals < 0.01, "**", ifelse(p_vals < 0.05, "*", ""))
   )
 
-  p_1 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = group, y = delta, colour = group)
-    ) +
-    ggplot2::scale_color_manual(
-      values = discrete_rainbow_14[rep(
-        c(FALSE, TRUE),
-        length.out = length(discrete_rainbow_14)
-      )]
-    ) +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~taste, scales = "free") +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity difference") +
-    ggplot2::labs(colour = "Group") +
-    ggplot2::ylim(-8, 8) +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      plot.caption = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = group, y = 5, label = stars),
-      color = "black",
-      size = 8,
-      vjust = 0
-    ) +
-    ggplot2::labs(caption = caption_label)
+  build_modulation_panel <- function(
+    mapping,
+    text_mapping,
+    facet_formula,
+    colour_label,
+    color_scale
+  ) {
+    deltas_3 |>
+      ggplot2::ggplot(mapping = mapping) +
+      color_scale +
+      ggplot2::geom_violin() +
+      ggplot2::geom_jitter(
+        position = ggplot2::position_jitter(width = 0.05),
+        alpha = 0.5
+      ) +
+      ggplot2::facet_wrap(facets = facet_formula, scales = "free") +
+      ggplot2::theme_minimal() +
+      ggplot2::ylab(label = "Intensity difference") +
+      ggplot2::labs(colour = colour_label, caption = caption_label) +
+      ggplot2::ylim(-8, 8) +
+      ggplot2::theme(
+        legend.position = "right",
+        title = ggplot2::element_text(face = "bold"),
+        strip.text = ggplot2::element_text(face = "bold"),
+        plot.caption = ggplot2::element_text(face = "bold"),
+        axis.title.x = ggplot2::element_blank(),
+        axis.text.x = ggplot2::element_blank(),
+        axis.ticks = ggplot2::element_blank()
+      ) +
+      ggplot2::geom_text(
+        text_mapping,
+        color = "black",
+        size = 8,
+        vjust = 0
+      )
+  }
 
-  p_2 <- deltas_3 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(x = taste, y = delta, colour = taste)
-    ) +
-    ggplot2::scale_color_brewer(palette = "Paired") +
-    ggplot2::geom_violin() +
-    ggplot2::geom_jitter(
-      position = ggplot2::position_jitter(width = 0.05),
-      alpha = 0.5
-    ) +
-    ggplot2::facet_wrap(facets = ~group, scales = "free") +
-    ggplot2::theme_minimal() +
-    ggplot2::ylab(label = "Intensity difference") +
-    ggplot2::labs(colour = "Taste") +
-    ggplot2::ylim(-8, 8) +
-    ggplot2::theme(
-      legend.position = "right",
-      title = ggplot2::element_text(face = "bold"),
-      strip.text = ggplot2::element_text(face = "bold"),
-      plot.caption = ggplot2::element_text(face = "bold"),
-      axis.title.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
-    ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = taste, y = 5, label = stars),
-      color = "black",
-      size = 8,
-      vjust = 0
-    ) +
-    ggplot2::labs(caption = caption_label)
+  p_1 <- build_modulation_panel(
+    mapping = ggplot2::aes(x = group, y = delta, colour = group),
+    text_mapping = ggplot2::aes(x = group, y = 5, label = stars),
+    facet_formula = ~taste,
+    colour_label = "Group",
+    color_scale = ggplot2::scale_color_manual(values = discrete_rainbow_7)
+  )
+  p_2 <- build_modulation_panel(
+    mapping = ggplot2::aes(x = taste, y = delta, colour = taste),
+    text_mapping = ggplot2::aes(x = taste, y = 5, label = stars),
+    facet_formula = ~group,
+    colour_label = "Taste",
+    color_scale = ggplot2::scale_color_brewer(palette = "Paired")
+  )
 
   .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(p_1, p_2, nrow = 2, labels = "AUTO", align = "hv") |>

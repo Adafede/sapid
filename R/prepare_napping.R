@@ -48,18 +48,7 @@ prepare_napping <- function(
     "dictionary_specific"
   )
 
-  session_infos <- lapply(sessions, get_session_info)
-
-  coord_list <- lapply(
-    session_infos,
-    load_session,
-    input_dir = input_dir,
-    tab = "napping_coord"
-  )
-  coords_df <- as.data.frame(
-    data.table::rbindlist(coord_list, use.names = TRUE, fill = TRUE),
-    stringsAsFactors = FALSE
-  )
+  coords_df <- load_sessions_df(sessions, input_dir, "napping_coord")
   coords_df <- coords_df[
     order(coords_df$session, coords_df$fraction),
     ,
@@ -68,6 +57,7 @@ prepare_napping <- function(
   .cascade_check_export_dir(dirname(output_coordinates))
   data.table::fwrite(coords_df, file = output_coordinates, sep = "\t")
 
+  session_infos <- lapply(sessions, get_session_info)
   words_raw_list <- lapply(
     session_infos,
     load_session,

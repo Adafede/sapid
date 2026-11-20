@@ -58,12 +58,13 @@ prepare_concentration <- function(
 
   attr_cols <- grepv("attribut", names(cleaned), fixed = TRUE)
   id_cols <- setdiff(names(cleaned), attr_cols)
-  long_parts <- lapply(attr_cols, function(col_nm) {
-    sub_df <- cleaned[, id_cols, drop = FALSE]
-    sub_df$value <- gsub("_.*$", "", as.character(cleaned[[col_nm]]))
-    sub_df[!is.na(sub_df$value), , drop = FALSE]
-  })
-  cleaned_long <- do.call(rbind, long_parts)
+  cleaned_long <- pivot_cols_long(
+    cleaned,
+    id_cols,
+    attr_cols,
+    value_fn = function(v) gsub("_.*$", "", as.character(v)),
+    include_name = FALSE
+  )
 
   full_df <- merge(
     cleaned_long,
@@ -81,8 +82,7 @@ prepare_concentration <- function(
     stringsAsFactors = FALSE
   )
   out <- out[order(out$jury), , drop = FALSE]
-  jury_idx <- match(out$jury, sort(unique(out$jury)))
-  out$jury <- paste0("jury_", sprintf("%02d", jury_idx))
+  out$jury <- recode_jury_ids(out$jury)
 
   .cascade_check_export_dir(dirname(output))
   data.table::fwrite(out, file = output, sep = "\t")

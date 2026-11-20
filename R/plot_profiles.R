@@ -96,21 +96,11 @@ plot_profiles <- function(
     ) +
     ggplot2::labs(fill = "Taste", color = "Taste") +
     ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.title = ggplot2::element_text(face = "bold"),
-      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
-    ) +
     ggplot2::xlab("Fraction") +
     ggplot2::ylab("Taste intensity") +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
+    theme_sapid_bold(
+      legend.title = ggplot2::element_text(face = "bold"),
+      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
     )
 
   features_informed_fractions <- list.files(
@@ -149,17 +139,11 @@ plot_profiles <- function(
   })
   features_fractions <- data.table::as.data.table(do.call(rbind, feat_list))
 
-  ann_dt <- data.table::fread(annotation_path_fractions)
-
-  ann_dt[, mode := mode]
-  best_cand <- .cascade_keep_best_candidates(ann_dt)
-  best_cand[, `:=`(
-    species = "Swertia chirayita",
-    feature_id = as.numeric(feature_id)
-  )]
-  candidates_confident_fractions <- .cascade_make_confident(
-    best_cand,
-    score = min_confidence
+  candidates_confident_fractions <- load_confident_candidates(
+    annotation_path_fractions,
+    mode = mode,
+    min_confidence = min_confidence,
+    as_df = FALSE
   )
 
   chemicals_informed_fractions_list <- lapply(
@@ -233,22 +217,12 @@ plot_profiles <- function(
     ) +
     ggplot2::labs(color = "Chemical class", fill = "Chemical class") +
     ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.title = ggplot2::element_text(face = "bold"),
-      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
-    ) +
     ggplot2::xlab("Fraction") +
     ggplot2::ylab("Feature intensity") +
     ggplot2::scale_y_continuous(labels = label_short_scale) +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
+    theme_sapid_bold(
+      legend.title = ggplot2::element_text(face = "bold"),
+      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
     )
 
   profiles <- ggpubr::ggarrange(

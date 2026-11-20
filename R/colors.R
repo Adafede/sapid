@@ -31,6 +31,21 @@ discrete_rainbow_14 <- c(
   "#777777"
 )
 
+discrete_rainbow_7 <- discrete_rainbow_14[rep(
+  c(FALSE, TRUE),
+  length.out = length(discrete_rainbow_14)
+)]
+
+theme_sapid_bold <- function(...) {
+  ggplot2::theme(
+    axis.text = ggplot2::element_text(color = "#767676"),
+    axis.title = ggplot2::element_text(color = "#767676"),
+    legend.text = ggplot2::element_text(color = "#767676"),
+    text = ggplot2::element_text(face = "bold", color = "#767676", size = 20),
+    ...
+  )
+}
+
 batlow <- c(
   "#011959",
   "#144D62",
@@ -49,7 +64,7 @@ scale_color_batlow <- function(...) {
   ggplot2::scale_color_gradientn(colours = batlow, ...)
 }
 
-label_si_number <- function(x) {
+format_scaled_number <- function(x, suffixes) {
   vapply(
     x,
     function(v) {
@@ -58,11 +73,11 @@ label_si_number <- function(x) {
       }
       av <- abs(v)
       if (av >= 1e9) {
-        paste0(format(round(v / 1e9, 2), trim = TRUE), "G")
+        paste0(format(round(v / 1e9, 2), trim = TRUE), suffixes[[3L]])
       } else if (av >= 1e6) {
-        paste0(format(round(v / 1e6, 2), trim = TRUE), "M")
+        paste0(format(round(v / 1e6, 2), trim = TRUE), suffixes[[2L]])
       } else if (av >= 1e3) {
-        paste0(format(round(v / 1e3, 2), trim = TRUE), "k")
+        paste0(format(round(v / 1e3, 2), trim = TRUE), suffixes[[1L]])
       } else {
         format(round(v, 2), trim = TRUE)
       }
@@ -71,24 +86,10 @@ label_si_number <- function(x) {
   )
 }
 
+label_si_number <- function(x) {
+  format_scaled_number(x, c("k", "M", "G"))
+}
+
 label_short_scale <- function(x) {
-  vapply(
-    x,
-    function(v) {
-      if (is.na(v)) {
-        return(NA_character_)
-      }
-      av <- abs(v)
-      if (av >= 1e9) {
-        paste0(format(round(v / 1e9, 2), trim = TRUE), "B")
-      } else if (av >= 1e6) {
-        paste0(format(round(v / 1e6, 2), trim = TRUE), "M")
-      } else if (av >= 1e3) {
-        paste0(format(round(v / 1e3, 2), trim = TRUE), "K")
-      } else {
-        format(round(v, 2), trim = TRUE)
-      }
-    },
-    character(1L)
-  )
+  format_scaled_number(x, c("K", "M", "B"))
 }

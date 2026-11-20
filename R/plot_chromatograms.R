@@ -91,16 +91,7 @@ plot_chromatograms <- function(
     ggplot2::xlab("Time [min]") +
     ggplot2::ylab("Intensity") +
     ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
+    theme_sapid_bold()
 
   .cascade_check_export_dir(dirname(output))
   ggplot2::ggsave(

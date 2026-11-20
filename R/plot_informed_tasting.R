@@ -113,81 +113,47 @@ plot_informed_tasting <- function(
     as.character(u_tastes)
   )
 
-  taste_raw_plot <- taste_raw
-  taste_raw_plot$value <- taste_raw_plot$value * 100
-  taste_raw_plot$taste <- fct_reorder_base(
-    taste_raw_plot$taste,
-    taste_raw_plot$value,
-    desc = TRUE
-  )
-  taste_raw_plot$label <- sprintf("%0.1f%%", round(taste_raw_plot$value, 2))
+  build_treemap_panel <- function(df, title, grow = FALSE, show_guide = TRUE) {
+    df$value <- df$value * 100
+    df$taste <- fct_reorder_base(df$taste, df$value, desc = TRUE)
+    df$label <- sprintf("%0.1f%%", round(df$value, 2))
 
-  plot_raw <- taste_raw_plot |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        area = value,
-        fill = taste,
-        label = label
+    df |>
+      ggplot2::ggplot(
+        mapping = ggplot2::aes(area = value, fill = taste, label = label)
+      ) +
+      treemapify::geom_treemap() +
+      treemapify::geom_treemap_text(
+        place = "centre",
+        grow = grow,
+        reflow = grow
+      ) +
+      ggplot2::scale_fill_manual(
+        values = col,
+        guide = if (show_guide) "legend" else "none"
+      ) +
+      ggplot2::labs(title = title, fill = "Taste") +
+      ggplot2::theme_void() +
+      ggplot2::theme(
+        legend.text = ggplot2::element_text(color = "#767676"),
+        text = ggplot2::element_text(
+          face = "bold",
+          color = "#767676",
+          size = 20
+        )
       )
-    ) +
-    treemapify::geom_treemap() +
-    treemapify::geom_treemap_text(
-      place = "centre",
-      grow = TRUE,
-      reflow = TRUE
-    ) +
-    ggplot2::scale_fill_manual(
-      values = col,
-      guide = "none"
-    ) +
-    ggplot2::labs(title = "Classical tasting", fill = "Taste") +
-    ggplot2::theme_void() +
-    ggplot2::theme(
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
+  }
 
-  taste_informed_plot <- taste_informed
-  taste_informed_plot$value <- taste_informed_plot$value * 100
-  taste_informed_plot$taste <- fct_reorder_base(
-    taste_informed_plot$taste,
-    taste_informed_plot$value,
-    desc = TRUE
+  plot_raw <- build_treemap_panel(
+    taste_raw,
+    "Classical tasting",
+    grow = TRUE,
+    show_guide = FALSE
   )
-  taste_informed_plot$label <- sprintf(
-    "%0.1f%%",
-    round(taste_informed_plot$value, 2)
+  plot_informed <- build_treemap_panel(
+    taste_informed,
+    "Chemically informed tasting"
   )
-
-  plot_informed <- taste_informed_plot |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        area = value,
-        fill = taste,
-        label = label
-      )
-    ) +
-    treemapify::geom_treemap() +
-    treemapify::geom_treemap_text(
-      place = "centre"
-    ) +
-    ggplot2::scale_fill_manual(
-      values = col
-    ) +
-    ggplot2::labs(title = "Chemically informed tasting", fill = "Taste") +
-    ggplot2::theme_void() +
-    ggplot2::theme(
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
 
   .cascade_check_export_dir(dirname(output))
   ggpubr::ggarrange(

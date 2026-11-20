@@ -73,10 +73,6 @@ plot_correlations <- function(
   min_width <- min(widths)
   min_min_width <- min_width * min_intense_ions_ratio
 
-  annotation_table_fractions <- data.table::fread(
-    annotation_path_fractions,
-    data.table = FALSE
-  )
   correlations <- data.table::fread(input_correlations, data.table = FALSE)
   if (greiner_kendall && "method" %in% names(correlations)) {
     is_k <- !is.na(correlations$method) & correlations$method == "kendall"
@@ -93,16 +89,11 @@ plot_correlations <- function(
     imputation_factor = imputation_factor
   )
 
-  ann_dt <- data.table::as.data.table(annotation_table_fractions)
-  ann_dt[, mode := mode]
-  best_cand <- .cascade_keep_best_candidates(ann_dt)
-  best_cand[, `:=`(
-    species = "Swertia chirayita",
-    feature_id = as.numeric(feature_id)
-  )]
-  conf_cand <- as.data.frame(
-    .cascade_make_confident(best_cand, score = min_confidence),
-    stringsAsFactors = FALSE
+  conf_cand <- load_confident_candidates(
+    annotation_path_fractions,
+    mode = mode,
+    min_confidence = min_confidence,
+    as_df = TRUE
   )
 
   ion_sums <- stats::aggregate(
@@ -188,19 +179,23 @@ plot_correlations <- function(
   }
   overlap_mat <- (m_ion %*% m_win) >= min_min_width
 
+  filter_overlapping_windows <- function(df) {
+    df$fractions.x <- as.character(df$fractions)
+    ion_idx <- match(df$id_ion, ion_ids_int)
+    win_idx <- match(df$fractions.x, u_wins)
+    keep <- !is.na(ion_idx) &
+      !is.na(win_idx) &
+      overlap_mat[cbind(ion_idx, win_idx)]
+    df[keep, , drop = FALSE]
+  }
+
   corr_sig <- correlations[
     abs(correlations$p_adjusted) < max_pval &
       correlations$id_ion %in% ion_ids_int,
     ,
     drop = FALSE
   ]
-  corr_sig$fractions.x <- as.character(corr_sig$fractions)
-  r_ion <- match(corr_sig$id_ion, ion_ids_int)
-  r_win <- match(corr_sig$fractions.x, u_wins)
-  keep_sig <- !is.na(r_ion) &
-    !is.na(r_win) &
-    overlap_mat[cbind(r_ion, r_win)]
-  correlations_significant <- corr_sig[keep_sig, , drop = FALSE]
+  correlations_significant <- filter_overlapping_windows(corr_sig)
 
   # Top hit per feature-taste pair, then per fraction window-taste pair
 
@@ -331,23 +326,15 @@ plot_correlations <- function(
     ggplot2::scale_color_manual(values = taste_palette) +
     ggplot2::scale_fill_manual(values = taste_palette) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(
+    theme_sapid_bold(
       strip.text = ggplot2::element_text(color = "#767676"),
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
       plot.margin = ggplot2::margin(
         l = 5,
         t = 5,
         b = 5,
         r = 20
       ),
-      legend.position = "none",
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
+      legend.position = "none"
     )
   .cascade_check_export_dir(dirname(output_1))
   plot_correlations_1 |>
@@ -393,13 +380,7 @@ plot_correlations <- function(
     stop("No bitter iridoid correlations found for fractions.x.", call. = FALSE)
   }
 
-  bitter_irid$fractions.x <- as.character(bitter_irid$fractions)
-  b_ion_idx <- match(bitter_irid$id_ion, ion_ids_int)
-  b_win_idx <- match(bitter_irid$fractions.x, u_wins)
-  keep_b <- !is.na(b_ion_idx) &
-    !is.na(b_win_idx) &
-    overlap_mat[cbind(b_ion_idx, b_win_idx)]
-  bitter_irid <- bitter_irid[keep_b, , drop = FALSE]
+  bitter_irid <- filter_overlapping_windows(bitter_irid)
 
   max_corr_ik <- stats::ave(
     bitter_irid$correlation,
@@ -482,10 +463,8 @@ plot_correlations <- function(
     scale_color_batlow() +
     scale_fill_batlow() +
     ggplot2::theme_minimal() +
-    ggplot2::theme(
+    theme_sapid_bold(
       strip.text = ggplot2::element_text(color = "#767676"),
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
       panel.spacing.x = ggplot2::unit(10, "lines"),
       plot.margin = ggplot2::margin(
         l = 5,
@@ -493,13 +472,7 @@ plot_correlations <- function(
         b = 5,
         r = 125
       ),
-      legend.position = "bottom",
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
+      legend.position = "bottom"
     )
   .cascade_check_export_dir(dirname(output_2))
   plot_correlations_2 |>
@@ -591,41 +564,39 @@ plot_correlations <- function(
     desc = TRUE
   )
 
+  build_profile_bar <- function(df, xlab_txt, ylab_txt) {
+    df |>
+      ggplot2::ggplot(
+        mapping = ggplot2::aes(
+          x = fraction,
+          y = median,
+          fill = taste,
+          color = taste
+        )
+      ) +
+      ggplot2::geom_col() +
+      ggplot2::scale_fill_manual(values = taste_palette) +
+      ggplot2::scale_color_manual(values = taste_palette) +
+      ggplot2::labs(fill = "Taste", color = "Taste") +
+      ggplot2::theme_bw() +
+      ggplot2::xlab(xlab_txt) +
+      ggplot2::ylab(ylab_txt) +
+      theme_sapid_bold(
+        legend.title = ggplot2::element_text(face = "bold"),
+        axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
+      )
+  }
+
   prof_sub_1 <- profile_full[
     profile_full$name == "intensity_taste",
     ,
     drop = FALSE
   ]
-  profiles_correlation_1 <- prof_sub_1 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        x = fraction,
-        y = median,
-        fill = taste,
-        color = taste
-      )
-    ) +
-    ggplot2::geom_col() +
-    ggplot2::scale_fill_manual(values = taste_palette) +
-    ggplot2::scale_color_manual(values = taste_palette) +
-    ggplot2::labs(fill = "Taste", color = "Taste") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.title = ggplot2::element_text(face = "bold"),
-      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
-    ) +
-    ggplot2::xlab("") +
-    ggplot2::ylab("Taste intensity") +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
+  profiles_correlation_1 <- build_profile_bar(
+    prof_sub_1,
+    "",
+    "Taste intensity"
+  )
 
   prof_sub_2 <- profile_full[
     profile_full$name == "intensity_ion",
@@ -642,36 +613,11 @@ plot_correlations <- function(
     )
   )
 
-  profiles_correlation_2 <- prof_sub_2 |>
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        x = fraction,
-        y = median,
-        fill = taste,
-        color = taste
-      )
-    ) +
-    ggplot2::geom_col() +
-    ggplot2::scale_fill_manual(values = taste_palette) +
-    ggplot2::scale_color_manual(values = taste_palette) +
-    ggplot2::labs(fill = "Taste", color = "Taste") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      legend.title = ggplot2::element_text(face = "bold"),
-      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)
-    ) +
-    ggplot2::xlab("Fraction") +
-    ggplot2::ylab("Feature intensity") +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
-      axis.title = ggplot2::element_text(color = "#767676"),
-      legend.text = ggplot2::element_text(color = "#767676"),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
-    )
+  profiles_correlation_2 <- build_profile_bar(
+    prof_sub_2,
+    "Fraction",
+    "Feature intensity"
+  )
 
   selected_profiles <- ggpubr::ggarrange(
     profiles_correlation_1,

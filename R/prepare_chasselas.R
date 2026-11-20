@@ -24,48 +24,15 @@ prepare_chasselas <- function(
   sessions = seq(1, 7),
   output = "data/processed/chasselas.tsv"
 ) {
-  session_infos <- lapply(sessions, get_session_info)
-  session_dfs <- lapply(
-    session_infos,
-    load_session,
-    input_dir = input_dir,
-    tab = "chasselas"
-  )
-  df <- as.data.frame(
-    data.table::rbindlist(session_dfs, use.names = TRUE, fill = TRUE),
-    stringsAsFactors = FALSE
-  )
+  df <- load_sessions_df(sessions, input_dir, "chasselas")
   if (!"CJ" %in% names(df)) {
     stop("Column 'CJ' not found in session data.", call. = FALSE)
   }
 
   df <- df[order(df$CJ), , drop = FALSE]
-  cj_idx <- match(df$CJ, sort(unique(df$CJ)))
-  df$CJ <- paste0("jury_", sprintf("%02d", cj_idx))
+  df$CJ <- recode_jury_ids(df$CJ)
 
-  id_protected <- c(
-    "ProductName",
-    "Produit",
-    "session",
-    "CJ",
-    "Date",
-    "Judge",
-    "judge",
-    "jury",
-    "date",
-    "product"
-  )
-  is_num <- vapply(df, is.numeric, logical(1L))
-  num_cols <- setdiff(names(df)[is_num], id_protected)
-  id_cols <- setdiff(names(df), num_cols)
-
-  long_list <- lapply(num_cols, function(col_nm) {
-    sub_df <- df[, id_cols, drop = FALSE]
-    sub_df$name <- rep(col_nm, nrow(df))
-    sub_df$value <- df[[col_nm]]
-    sub_df[!is.na(sub_df$value), , drop = FALSE]
-  })
-  long_df <- do.call(rbind, long_list)
+  long_df <- pivot_numeric_descriptors_long(df)
 
   taste_pats <- c(
     "acide.*",
@@ -78,21 +45,10 @@ prepare_chasselas <- function(
     "longueur.*",
     "salivant.*"
   )
-  taste_repls <- c(
-    "sourness",
-    "bitterness",
-    "sweetness",
-    "saltiness",
-    "fatness, volume",
-    "balance",
-    "freshness",
-    "persistency",
-    "mouthwatering"
-  )
   for (i in seq_along(taste_pats)) {
     long_df$name <- gsub(
       pattern = taste_pats[[i]],
-      replacement = taste_repls[[i]],
+      replacement = chasselas_tastes[[i]],
       x = long_df$name
     )
   }

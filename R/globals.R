@@ -259,6 +259,9 @@ unescape_xml <- function(x) {
 }
 
 resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
+  sheet_not_found <- function() {
+    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+  }
   wb_file <- file.path(tmp, "xl", "workbook.xml")
   rels_file <- file.path(tmp, "xl", "_rels", "workbook.xml.rels")
   if (file.exists(wb_file) && file.exists(rels_file)) {
@@ -275,60 +278,14 @@ resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
       gregexpr("<sheet\\b[^>]*/?>", wb_xml, perl = TRUE)
     )[[1L]]
     if (length(sheet_tags) > 0L) {
-      s_names <- vapply(
-        sheet_tags,
-        function(tag) {
-          if (grepl("\\bname=\"([^\"]*)\"", tag, perl = TRUE)) {
-            unescape_xml(
-              sub(".*\\bname=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
-            )
-          } else {
-            NA_character_
-          }
-        },
-        character(1L),
-        USE.NAMES = FALSE
-      )
-      s_rids <- vapply(
-        sheet_tags,
-        function(tag) {
-          if (grepl("\\br:id=\"([^\"]*)\"", tag, perl = TRUE)) {
-            sub(".*\\br:id=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
-          } else {
-            NA_character_
-          }
-        },
-        character(1L),
-        USE.NAMES = FALSE
-      )
+      s_names <- extract_xml_attr(sheet_tags, "name", unescape = TRUE)
+      s_rids <- extract_xml_attr(sheet_tags, "r:id")
       rel_tags <- regmatches(
         rels_xml,
         gregexpr("<Relationship\\b[^>]*/?>", rels_xml, perl = TRUE)
       )[[1L]]
-      rel_ids <- vapply(
-        rel_tags,
-        function(tag) {
-          if (grepl("\\bId=\"([^\"]*)\"", tag, perl = TRUE)) {
-            sub(".*\\bId=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
-          } else {
-            NA_character_
-          }
-        },
-        character(1L),
-        USE.NAMES = FALSE
-      )
-      rel_targets <- vapply(
-        rel_tags,
-        function(tag) {
-          if (grepl("\\bTarget=\"([^\"]*)\"", tag, perl = TRUE)) {
-            sub(".*\\bTarget=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
-          } else {
-            NA_character_
-          }
-        },
-        character(1L),
-        USE.NAMES = FALSE
-      )
+      rel_ids <- extract_xml_attr(rel_tags, "Id")
+      rel_targets <- extract_xml_attr(rel_tags, "Target")
       idx <- if (is.character(sheet)) {
         match(sheet[1L], s_names)
       } else {
@@ -340,11 +297,11 @@ resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
         }
       }
       if (is.na(idx)) {
-        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+        sheet_not_found()
       }
       target <- rel_targets[match(s_rids[[idx]], rel_ids)]
       if (is.na(target) || !nzchar(target)) {
-        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+        sheet_not_found()
       }
       target <- sub("^/+", "", target)
       if (!grepl("^xl/", target)) {
@@ -352,14 +309,14 @@ resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
       }
       sheet_file <- file.path(tmp, target)
       if (!file.exists(sheet_file)) {
-        stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+        sheet_not_found()
       }
       return(sheet_file)
     }
   }
 
   if (!is.numeric(sheet)) {
-    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+    sheet_not_found()
   }
   sheet_file <- file.path(
     tmp,
@@ -368,7 +325,7 @@ resolve_xlsx_sheet_file <- function(tmp, sheet, path) {
     paste0("sheet", as.integer(sheet[1L]), ".xml")
   )
   if (!file.exists(sheet_file)) {
-    stop("Sheet ", sheet, " not found in ", path, call. = FALSE)
+    sheet_not_found()
   }
   sheet_file
 }
@@ -433,20 +390,20 @@ parse_xlsx_date_styles <- function(tmp) {
     xfs_block,
     gregexpr("<xf\\b[^>]*?(?:/>|>[\\s\\S]*?</xf>)", xfs_block, perl = TRUE)
   )[[1L]]
-  vapply(
-    xf_tags,
-    function(tag) {
-      if (!grepl("\\bnumFmtId=\"([0-9]+)\"", tag, perl = TRUE)) {
-        return(FALSE)
-      }
-      nf_id <- as.integer(
-        sub(".*\\bnumFmtId=\"([0-9]+)\".*", "\\1", tag, perl = TRUE)
-      )
-      nf_id %in% date_ids
-    },
-    logical(1L),
-    USE.NAMES = FALSE
-  )
+  as.integer(extract_xml_attr(xf_tags, "numFmtId")) %in% date_ids
+}
+
+extract_xml_attr <- function(tags, attr, unescape = FALSE) {
+  pat <- paste0("\\b", attr, "=\"([^\"]*)\"")
+  has <- grepl(pat, tags, perl = TRUE)
+  out <- rep(NA_character_, length(tags))
+  if (any(has)) {
+    out[has] <- sub(paste0(".*", pat, ".*"), "\\1", tags[has], perl = TRUE)
+    if (unescape) {
+      out[has] <- unescape_xml(out[has])
+    }
+  }
+  out
 }
 
 format_excel_serial_date <- function(num_v) {
@@ -540,16 +497,11 @@ read_xlsx_base <- function(path, sheet = 1L) {
       }
       col_cursor <- cols[[i]] + 1L
 
-      ctype <- if (grepl("\\bt=\"([^\"]+)\"", open_tag, perl = TRUE)) {
-        sub(".*\\bt=\"([^\"]+)\".*", "\\1", open_tag, perl = TRUE)
-      } else {
-        "n"
+      ctype <- extract_xml_attr(open_tag, "t")
+      if (is.na(ctype)) {
+        ctype <- "n"
       }
-      s_idx <- if (grepl("\\bs=\"([0-9]+)\"", open_tag, perl = TRUE)) {
-        as.integer(sub(".*\\bs=\"([0-9]+)\".*", "\\1", open_tag, perl = TRUE))
-      } else {
-        NA_integer_
-      }
+      s_idx <- as.integer(extract_xml_attr(open_tag, "s"))
 
       if (ctype == "inlineStr") {
         if (grepl("<t[^>]*>[\\s\\S]*?</t>", cell, perl = TRUE)) {
@@ -773,4 +725,98 @@ prepare_taste_intensities_df <- function(
   out <- out[order(out$fraction), , drop = FALSE]
   rownames(out) <- NULL
   out
+}
+
+chasselas_tastes <- c(
+  "sourness",
+  "bitterness",
+  "sweetness",
+  "saltiness",
+  "fatness, volume",
+  "balance",
+  "freshness",
+  "persistency",
+  "mouthwatering"
+)
+
+id_protected_cols <- c(
+  "ProductName",
+  "Produit",
+  "session",
+  "CJ",
+  "Date",
+  "Judge",
+  "judge",
+  "jury",
+  "date",
+  "product"
+)
+
+pivot_cols_long <- function(
+  df,
+  id_cols,
+  measure_cols,
+  value_fn = identity,
+  include_name = TRUE
+) {
+  n_rows <- nrow(df)
+  parts <- lapply(measure_cols, function(col_nm) {
+    sub_df <- df[, id_cols, drop = FALSE]
+    if (include_name) {
+      sub_df$name <- rep(col_nm, n_rows)
+    }
+    sub_df$value <- value_fn(df[[col_nm]])
+    sub_df[!is.na(sub_df$value), , drop = FALSE]
+  })
+  do.call(rbind, parts)
+}
+
+pivot_numeric_descriptors_long <- function(df) {
+  is_num <- vapply(df, is.numeric, logical(1L))
+  num_cols <- setdiff(names(df)[is_num], id_protected_cols)
+  id_cols <- setdiff(names(df), num_cols)
+  out <- pivot_cols_long(df, id_cols, num_cols)
+  if (!is.null(out)) {
+    rownames(out) <- NULL
+  }
+  out
+}
+
+load_sessions_df <- function(sessions, input_dir, tab) {
+  session_infos <- lapply(sessions, get_session_info)
+  session_dfs <- lapply(
+    session_infos,
+    load_session,
+    input_dir = input_dir,
+    tab = tab
+  )
+  as.data.frame(
+    data.table::rbindlist(session_dfs, use.names = TRUE, fill = TRUE),
+    stringsAsFactors = FALSE
+  )
+}
+
+recode_jury_ids <- function(x) {
+  sprintf("jury_%02d", match(x, sort(unique(x))))
+}
+
+load_confident_candidates <- function(
+  annotation_path,
+  mode,
+  min_confidence,
+  as_df = FALSE
+) {
+  ann_dt <- data.table::fread(annotation_path)
+  ann_dt[, mode := mode]
+  best_cand <- .cascade_keep_best_candidates(ann_dt)
+  best_cand[, `:=`(
+    species = "Swertia chirayita",
+    feature_id = as.numeric(feature_id)
+  )]
+  out <- .cascade_make_confident(best_cand, score = min_confidence)
+  if (as_df) {
+    as.data.frame(out, stringsAsFactors = FALSE)
+  } else {
+    out
+  }
 }

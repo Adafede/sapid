@@ -38,31 +38,33 @@ prepare_chemical_profiles <- function(
 ) {
   mzmls <- list.files(mzmls_dir, pattern = "\\.mzML$", full.names = TRUE)
 
-  if (start_extract <= end_extract) {
-    for (idx in seq.int(start_extract, end_extract)) {
-      message(idx)
-      cascade::process_compare_peaks(
-        export_dir = peaks_dir_extract,
-        file = mzmls[idx],
-        features = features_path_extract,
-        min_intensity = min_intensity
-      )
-      gc()
+  run_peak_range <- function(start_idx, end_idx, export_dir, features_path) {
+    if (start_idx <= end_idx) {
+      for (idx in seq.int(start_idx, end_idx)) {
+        message(idx)
+        cascade::process_compare_peaks(
+          export_dir = export_dir,
+          file = mzmls[idx],
+          features = features_path,
+          min_intensity = min_intensity
+        )
+        gc()
+      }
     }
   }
 
-  if (start_fractions <= end_fractions) {
-    for (idx in seq.int(start_fractions, end_fractions)) {
-      message(idx)
-      cascade::process_compare_peaks(
-        export_dir = peaks_dir_fractions,
-        file = mzmls[idx],
-        features = features_path_fractions,
-        min_intensity = min_intensity
-      )
-      gc()
-    }
-  }
+  run_peak_range(
+    start_extract,
+    end_extract,
+    peaks_dir_extract,
+    features_path_extract
+  )
+  run_peak_range(
+    start_fractions,
+    end_fractions,
+    peaks_dir_fractions,
+    features_path_fractions
+  )
 
   invisible(NULL)
 }

@@ -66,44 +66,30 @@ harmonize_terms <- function(dictionary, x, mode = "word", fallback = FALSE) {
   placeholders <- paste0("\x01", seq_along(patterns), "\x02")
 
   # Pass 1: Replace matched spans with protected placeholders
-  if (mode == "fixed") {
-    for (i in seq_along(patterns)) {
-      u_out <- gsub(
-        pattern = patterns[[i]],
-        replacement = placeholders[[i]],
-        x = u_out,
-        fixed = TRUE
-      )
-    }
-  } else if (mode == "word") {
+  match_patterns <- if (mode == "word") {
     escaped <- gsub(
       pattern = "([][{}()+*^$|\\\\?.])",
       replacement = "\\\\\\1",
       x = patterns,
       perl = TRUE
     )
-    word_patterns <- paste0(
+    paste0(
       "(*UCP)(?<=^|[^\\p{L}\\p{N}_])",
       escaped,
       "(?=$|[^\\p{L}\\p{N}_])"
     )
-    for (i in seq_along(word_patterns)) {
-      u_out <- gsub(
-        pattern = word_patterns[[i]],
-        replacement = placeholders[[i]],
-        x = u_out,
-        perl = TRUE
-      )
-    }
   } else {
-    for (i in seq_along(patterns)) {
-      u_out <- gsub(
-        pattern = patterns[[i]],
-        replacement = placeholders[[i]],
-        x = u_out,
-        perl = TRUE
-      )
-    }
+    patterns
+  }
+  use_fixed <- mode == "fixed"
+  for (i in seq_along(match_patterns)) {
+    u_out <- gsub(
+      pattern = match_patterns[[i]],
+      replacement = placeholders[[i]],
+      x = u_out,
+      fixed = use_fixed,
+      perl = !use_fixed
+    )
   }
 
   # Pass 2: Expand placeholders to target replacements

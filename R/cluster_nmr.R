@@ -314,14 +314,11 @@ cluster_nmr <- function(
     ggplot2::scale_color_identity() +
     ggplot2::theme_minimal() +
     ggplot2::xlab("ppm") +
-    ggplot2::theme(
-      axis.text = ggplot2::element_text(color = "#767676"),
+    theme_sapid_bold(
       axis.text.y = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
-      axis.title = ggplot2::element_text(color = "#767676"),
       axis.title.y = ggplot2::element_blank(),
       legend.position = "none",
-      legend.text = ggplot2::element_text(color = "#767676"),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.y = ggplot2::element_blank(),
       panel.spacing.y = ggplot2::unit(x = -100, units = "pt"),
@@ -329,12 +326,7 @@ cluster_nmr <- function(
       plot.subtitle = ggplot2::element_blank(),
       plot.caption = ggplot2::element_blank(),
       strip.text = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      text = ggplot2::element_text(
-        face = "bold",
-        color = "#767676",
-        size = 20
-      )
+      strip.background = ggplot2::element_blank()
     )
 
   plot_1 <- dend |>

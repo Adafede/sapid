@@ -84,6 +84,14 @@ plot_concentration <- function(
     m = afc_m
   )
 
+  conc_color_scale <- function() {
+    ggplot2::scale_color_gradient2(
+      low = "#f7fcf5",
+      mid = "#74c476",
+      high = "#00441b"
+    )
+  }
+
   message("visualizing ... \n")
   message("... intensity and p-value per concentration \n")
   boxes <- panel_ratings |>
@@ -101,11 +109,7 @@ plot_concentration <- function(
       position = ggplot2::position_jitter(width = 0.05),
       alpha = 0.5
     ) +
-    ggplot2::scale_color_gradient2(
-      low = "#f7fcf5",
-      mid = "#74c476",
-      high = "#00441b"
-    ) +
+    conc_color_scale() +
     ggplot2::theme_minimal() +
     ggplot2::xlab(label = "Concentration [mg/L]") +
     ggplot2::ylab(label = "Intensity") +
@@ -140,11 +144,7 @@ plot_concentration <- function(
       size = 2.5
     ) +
     ggplot2::scale_x_log10() +
-    ggplot2::scale_color_gradient2(
-      low = "#f7fcf5",
-      mid = "#74c476",
-      high = "#00441b"
-    ) +
+    conc_color_scale() +
     ggplot2::xlab(label = "Concentration [mg/L]") +
     ggplot2::ylab("Correct answers [%]") +
     ggplot2::scale_y_continuous(
@@ -199,11 +199,7 @@ plot_concentration <- function(
       ),
       size = 3
     ) +
-    ggplot2::scale_color_gradient2(
-      low = "#f7fcf5",
-      mid = "#74c476",
-      high = "#00441b"
-    ) +
+    conc_color_scale() +
     ggplot2::coord_flip() +
     ggplot2::xlab("") +
     ggplot2::ylab("Value") +

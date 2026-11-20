@@ -79,31 +79,7 @@ load_session <- function(input_dir, session_info, tab) {
     df$ProductName <- as.character(df$ProductName)
     is_logi <- vapply(df, is.logical, logical(1L))
     df <- df[, !is_logi, drop = FALSE]
-
-    id_protected <- c(
-      "ProductName",
-      "Produit",
-      "session",
-      "CJ",
-      "Date",
-      "Judge",
-      "judge",
-      "jury",
-      "date",
-      "product"
-    )
-    is_num <- vapply(df, is.numeric, logical(1L))
-    num_cols <- setdiff(names(df)[is_num], id_protected)
-    id_cols <- setdiff(names(df), num_cols)
-
-    long_parts <- lapply(num_cols, function(col_nm) {
-      sub_df <- df[, id_cols, drop = FALSE]
-      sub_df$name <- rep(col_nm, nrow(df))
-      sub_df$value <- df[[col_nm]]
-      sub_df[!is.na(sub_df$value), , drop = FALSE]
-    })
-    df <- do.call(rbind, long_parts)
-    rownames(df) <- NULL
+    df <- pivot_numeric_descriptors_long(df)
   }
 
   df

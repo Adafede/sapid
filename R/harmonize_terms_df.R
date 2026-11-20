@@ -47,15 +47,8 @@ harmonize_terms_df <- function(
 
   id_cols <- names(df)[1:2]
   measure_cols <- names(df)[3:ncol(df)]
-  n_rows <- nrow(df)
 
-  long_list <- lapply(measure_cols, function(col_nm) {
-    res <- df[, id_cols, drop = FALSE]
-    res$name <- rep(col_nm, n_rows)
-    res$value <- as.character(df[[col_nm]])
-    res[!is.na(res$value), , drop = FALSE]
-  })
-  long_df <- do.call(rbind, long_list)
+  long_df <- pivot_cols_long(df, id_cols, measure_cols, value_fn = as.character)
   if (is.null(long_df) || nrow(long_df) == 0L) {
     return(data.frame())
   }

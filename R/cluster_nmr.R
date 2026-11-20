@@ -301,9 +301,7 @@ cluster_nmr <- function(
         x = name,
         y = value,
         group = group,
-        color = group,
-        fill = group,
-        label = rowname
+        color = group
       )
     ) +
     ggplot2::geom_line(linewidth = 0.5) +
@@ -331,7 +329,6 @@ cluster_nmr <- function(
       plot.subtitle = ggplot2::element_blank(),
       plot.caption = ggplot2::element_blank(),
       strip.text = ggplot2::element_blank(),
-      strip.text.y = ggplot2::element_blank(),
       strip.background = ggplot2::element_blank(),
       text = ggplot2::element_text(
         face = "bold",

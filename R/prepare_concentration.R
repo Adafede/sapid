@@ -60,7 +60,6 @@ prepare_concentration <- function(
   id_cols <- setdiff(names(cleaned), attr_cols)
   long_parts <- lapply(attr_cols, function(col_nm) {
     sub_df <- cleaned[, id_cols, drop = FALSE]
-    sub_df$name <- rep(col_nm, nrow(cleaned))
     sub_df$value <- gsub("_.*$", "", as.character(cleaned[[col_nm]]))
     sub_df[!is.na(sub_df$value), , drop = FALSE]
   })

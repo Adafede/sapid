@@ -453,10 +453,6 @@ plot_correlations <- function(
     df_merged_bitter_iridoids$correlation,
     desc = TRUE
   )
-  df_merged_bitter_iridoids$p_adjusted <- paste(
-    "Adjusted p-value",
-    format(round(df_merged_bitter_iridoids$p_adjusted, digits = 2), nsmall = 2)
-  )
 
   plot_correlations_2 <- df_merged_bitter_iridoids |>
     ggplot2::ggplot(

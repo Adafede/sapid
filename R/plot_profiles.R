@@ -58,14 +58,7 @@ plot_profiles <- function(
   profiles_consistent$fraction <- order_numeric_labels(
     gsub("fraction_", "", profiles_consistent$fraction, fixed = TRUE)
   )
-  profiles_consistent$sum_name <- stats::ave(
-    profiles_consistent$value,
-    profiles_consistent$fraction,
-    FUN = function(x) sum(x, na.rm = TRUE)
-  )
   profiles_consistent$color <- discrete_rainbow_14[profiles_consistent$group]
-  profiles_consistent$relative <- profiles_consistent$value /
-    profiles_consistent$sum_name
 
   profiles_consistent$taste <- fct_reorder_base(
     profiles_consistent$taste,

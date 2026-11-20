@@ -75,15 +75,13 @@ plot_chasselas_modulation <- function(
   }
   p_vals <- stats::ave(deltas_3$delta, grp_key, FUN = test_fn)
 
-  deltas_4 <- deltas_3
-  deltas_4$p_value_sign <- p_vals
-  deltas_4$stars <- ifelse(
+  deltas_3$stars <- ifelse(
     p_vals < 0.001,
     "***",
     ifelse(p_vals < 0.01, "**", ifelse(p_vals < 0.05, "*", ""))
   )
 
-  p_1 <- deltas_4 |>
+  p_1 <- deltas_3 |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(x = group, y = delta, colour = group)
     ) +
@@ -120,7 +118,7 @@ plot_chasselas_modulation <- function(
     ) +
     ggplot2::labs(caption = caption_label)
 
-  p_2 <- deltas_4 |>
+  p_2 <- deltas_3 |>
     ggplot2::ggplot(
       mapping = ggplot2::aes(x = taste, y = delta, colour = taste)
     ) +

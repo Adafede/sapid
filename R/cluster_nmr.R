@@ -158,10 +158,8 @@ cluster_nmr <- function(
   )
 
   message("Filtering desired experiments")
-  dataset_filtered <- dataset |>
+  dataset_corrected <- dataset |>
     AlpsNMR::filter(NMRExperiment %in% experiments)
-
-  dataset_corrected <- dataset_filtered
 
   if (!is.null(experiments_to_fix)) {
     message("Correcting experiments to fix")

@@ -137,7 +137,7 @@ plot_profiles <- function(
       stringsAsFactors = FALSE
     )
   })
-  features_fractions <- data.table::as.data.table(do.call(rbind, feat_list))
+  features_fractions <- data.table::rbindlist(feat_list)
 
   candidates_confident_fractions <- load_confident_candidates(
     annotation_path_fractions,

@@ -353,26 +353,15 @@ parse_xlsx_date_styles <- function(tmp) {
       nf_block,
       gregexpr("<numFmt\\b[^>]*/?>", nf_block, perl = TRUE)
     )[[1L]]
-    for (tag in nf_tags) {
-      if (
-        grepl("\\bnumFmtId=\"([0-9]+)\"", tag, perl = TRUE) &&
-          grepl("\\bformatCode=\"([^\"]*)\"", tag, perl = TRUE)
-      ) {
-        nf_id <- as.integer(
-          sub(".*\\bnumFmtId=\"([0-9]+)\".*", "\\1", tag, perl = TRUE)
-        )
-        fmt <- unescape_xml(
-          sub(".*\\bformatCode=\"([^\"]*)\".*", "\\1", tag, perl = TRUE)
-        )
-        clean_fmt <- gsub("\"[^\"]*\"", "", fmt, perl = TRUE)
-        clean_fmt <- gsub("\\[[^\\]]*\\]", "", clean_fmt, perl = TRUE)
-        if (
-          !grepl("#", clean_fmt, fixed = TRUE) &&
-            grepl("(y|m|d|h|s)", clean_fmt, ignore.case = TRUE)
-        ) {
-          custom_date_ids <- c(custom_date_ids, nf_id)
-        }
-      }
+    nf_ids <- extract_xml_attr(nf_tags, "numFmtId")
+    fmts <- extract_xml_attr(nf_tags, "formatCode", unescape = TRUE)
+    valid_nf <- grepl("^[0-9]+$", nf_ids) & !is.na(fmts)
+    if (any(valid_nf)) {
+      clean_fmt <- gsub("\"[^\"]*\"", "", fmts[valid_nf], perl = TRUE)
+      clean_fmt <- gsub("\\[[^\\]]*\\]", "", clean_fmt, perl = TRUE)
+      is_date <- !grepl("#", clean_fmt, fixed = TRUE) &
+        grepl("(y|m|d|h|s)", clean_fmt, ignore.case = TRUE)
+      custom_date_ids <- as.integer(nf_ids[valid_nf][is_date])
     }
   }
 
@@ -535,18 +524,18 @@ read_xlsx_base <- function(path, sheet = 1L) {
     list(cols = cols, vals = vals)
   })
 
-  all_cols <- unlist(lapply(parsed_rows, `[[`, "cols"), use.names = FALSE)
+  row_cols <- lapply(parsed_rows, `[[`, "cols")
+  all_cols <- unlist(row_cols, use.names = FALSE)
   max_col <- if (length(all_cols) == 0L) 0L else max(all_cols)
   if (max_col == 0L) {
     return(data.frame())
   }
   mat <- matrix(NA_character_, nrow = length(parsed_rows), ncol = max_col)
-  for (r in seq_along(parsed_rows)) {
-    pr <- parsed_rows[[r]]
-    if (length(pr$cols) > 0L) {
-      mat[r, pr$cols] <- pr$vals
-    }
-  }
+  row_idx <- rep(seq_along(parsed_rows), lengths(row_cols))
+  mat[cbind(row_idx, all_cols)] <- unlist(
+    lapply(parsed_rows, `[[`, "vals"),
+    use.names = FALSE
+  )
 
   hdr <- mat[1L, ]
   body <- if (nrow(mat) > 1L) {

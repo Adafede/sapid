@@ -155,21 +155,30 @@ plot_correlations <- function(
   ion_ids_int <- as.integer(names(top_fracs_map))
   u_wins <- unique(as.character(correlations$fractions))
   win_splits <- strsplit(u_wins, " ", fixed = TRUE)
-  all_frac_tokens <- unique(c(
-    unlist(top_fracs_map, use.names = FALSE),
-    unlist(win_splits, use.names = FALSE)
-  ))
+  ion_tokens <- unlist(top_fracs_map, use.names = FALSE)
+  win_tokens <- unlist(win_splits, use.names = FALSE)
+  all_frac_tokens <- unique(c(ion_tokens, win_tokens))
   m_ion <- matrix(
     0,
     nrow = length(top_fracs_map),
     ncol = length(all_frac_tokens)
   )
-  for (i in seq_along(top_fracs_map)) {
-    m_ion[i, match(top_fracs_map[[i]], all_frac_tokens)] <- 1
+  if (length(ion_tokens) > 0L) {
+    m_ion[
+      cbind(
+        rep(seq_along(top_fracs_map), lengths(top_fracs_map)),
+        match(ion_tokens, all_frac_tokens)
+      )
+    ] <- 1
   }
   m_win <- matrix(0, nrow = length(all_frac_tokens), ncol = length(u_wins))
-  for (w in seq_along(win_splits)) {
-    m_win[match(win_splits[[w]], all_frac_tokens), w] <- 1
+  if (length(win_tokens) > 0L) {
+    m_win[
+      cbind(
+        match(win_tokens, all_frac_tokens),
+        rep(seq_along(win_splits), lengths(win_splits))
+      )
+    ] <- 1
   }
   overlap_mat <- (m_ion %*% m_win) >= min_min_width
 
@@ -606,17 +615,15 @@ plot_correlations <- function(
     "Feature intensity"
   )
 
-  selected_profiles <- ggpubr::ggarrange(
+  .cascade_check_export_dir(dirname(output_3))
+  ggpubr::ggarrange(
     profiles_correlation_1,
     profiles_correlation_2,
     nrow = 2,
     align = "hv",
     common.legend = TRUE,
     legend = "right"
-  )
-
-  .cascade_check_export_dir(dirname(output_3))
-  selected_profiles |>
+  ) |>
     ggplot2::ggsave(
       filename = output_3,
       width = 15,

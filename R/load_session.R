@@ -49,14 +49,11 @@ load_session <- function(input_dir, session_info, tab) {
     )
   }
 
-  session_val <- paste0(
-    "session_",
-    if (is.numeric(session_info$cluster)) {
-      sprintf("%02d", as.integer(session_info$cluster))
-    } else {
-      session_info$cluster
-    }
-  )
+  session_val <- if (is.numeric(session_info$cluster)) {
+    sprintf("session_%02d", as.integer(session_info$cluster))
+  } else {
+    paste0("session_", session_info$cluster)
+  }
   df$session <- rep(session_val, nrow(df))
 
   other_cols <- setdiff(names(df), "session")

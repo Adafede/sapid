@@ -52,7 +52,7 @@ plot_napping <- function(
   } else if (identical(sessions, "All")) {
     "session_All"
   } else {
-    paste0("session_", sprintf("%02d", as.integer(sessions[1L])))
+    sprintf("session_%02d", as.integer(sessions[1L]))
   }
   devs_before <- grDevices::dev.list()
   tmp_pdf <- NULL

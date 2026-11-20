@@ -31,12 +31,11 @@ plot_descriptors_network <- function(
 ) {
   input_data <- load_dataset_or_file(input, "napping_descriptors")
 
-  non_empty <- input_data[
+  table_descriptors <- unique(input_data[
     !is.na(input_data$taste_harmonized) & input_data$taste_harmonized != "",
     c("fraction", "jury", "taste_original", "taste_harmonized"),
     drop = FALSE
-  ]
-  table_descriptors <- unique(non_empty)
+  ])
 
   jury_per_orig <- tapply(
     table_descriptors$jury,

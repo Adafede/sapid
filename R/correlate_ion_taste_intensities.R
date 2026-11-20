@@ -171,9 +171,11 @@ correlate_ion_taste_intensities <- function(
       xn <- rep(FALSE, n_c)
       if (n >= 3L && n <= 5000L) {
         non_c <- which(!info$x_const)
-        for (j in non_c) {
-          xn[[j]] <- stats::shapiro.test(info$comp_mat[, j])$p.value > 0.05
-        }
+        xn[non_c] <- vapply(
+          non_c,
+          function(j) stats::shapiro.test(info$comp_mat[, j])$p.value > 0.05,
+          logical(1L)
+        )
       }
       info$x_norm <- xn
       assign(key, info, envir = win_cache)
@@ -305,9 +307,8 @@ correlate_ion_taste_intensities <- function(
           if (n < 50L) {
             warning("cannot compute exact p-value with ties")
           }
-          t_sub <- has_ties
-          kt_idx <- k_idx[t_sub]
-          r_t <- r_k[t_sub]
+          kt_idx <- k_idx[has_ties]
+          r_t <- r_k[has_ties]
           t0 <- n * (n - 1) / 2
           t1 <- info$x_s1[kt_idx] / 2
           t2 <- y_ts[2L] / 2
